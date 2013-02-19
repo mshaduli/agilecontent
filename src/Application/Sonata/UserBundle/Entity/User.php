@@ -27,6 +27,13 @@ class User extends BaseUser
      * @var integer $id
      */
     protected $id;
+    
+    /**
+     *
+     * @var type int
+     */
+    protected $site;
+    
 
     /**
      * Get id
@@ -37,4 +44,21 @@ class User extends BaseUser
     {
         return $this->id;
     }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function setSite($site)
+    {
+        $this->site = $site;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSite()
+    {
+        return $this->site;
+    }
+
 }

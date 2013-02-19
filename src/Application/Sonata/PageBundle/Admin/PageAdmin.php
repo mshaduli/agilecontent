@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\PageBundle\Admin;
+namespace Application\Sonata\PageBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Admin\AdminInterface;
@@ -50,6 +50,19 @@ class PageAdmin extends Admin
      * @var CacheManagerInterface
      */
     protected $cacheManager;
+    
+    public function createQuery($context = 'list') 
+    { 
+         /* @var \Symfony\Component\Security\Core\TokenInterface $token */
+ 
+        
+        $query = parent::createQuery($context); 
+
+        
+//        $query->where($query->expr->eq('site', ':site')); 
+//        $query->setParameter('site', $user->getSite());
+        return $query; 
+    } 
 
     /**
      * {@inheritdoc}

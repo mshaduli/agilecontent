@@ -1,2 +1,5 @@
 parameters:
-    sonata.page.admin.site.class: Application\Sonata\PageBundle\Admin\SiteAdmin
+    sonata.page.admin.site.class:      Application\Sonata\PageBundle\Admin\SiteAdmin
+    sonata.page.admin.page.class:      Application\Sonata\PageBundle\Admin\PageAdmin
+#    sonata.page.admin.page.controller: Application\Sonata\PageBundle\Controller\PageAdminController
+    sonata.user.admin.user.class:      Application\Sonata\UserBundle\Admin\Entity\UserAdmin
