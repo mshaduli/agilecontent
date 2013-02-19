@@ -45,16 +45,19 @@ class AppKernel extends Kernel
             new Application\Sonata\PageBundle\ApplicationSonataPageBundle(),
 
             // NEWS
-            new Sonata\MarkItUpBundle\SonataMarkItUpBundle(),
-            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
-            new Sonata\NewsBundle\SonataNewsBundle(),
-            new Application\Sonata\NewsBundle\ApplicationSonataNewsBundle(),
+//            new Sonata\MarkItUpBundle\SonataMarkItUpBundle(),
+//            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+//            new Sonata\NewsBundle\SonataNewsBundle(),
+//            new Application\Sonata\NewsBundle\ApplicationSonataNewsBundle(),
 
             // MEDIA
             new Sonata\MediaBundle\SonataMediaBundle(),
             new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
             // new Liip\ImagineBundle\LiipImagineBundle(),
 
+            //ADMIN
+            new Application\Sonata\AdminBundle\ApplicationSonataAdminBundle(),
+            
             // SONATA CORE & HELPER BUNDLES
             new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
             new Sonata\jQueryBundle\SonatajQueryBundle(),
@@ -71,7 +74,7 @@ class AppKernel extends Kernel
             new Symfony\Cmf\Bundle\RoutingExtraBundle\SymfonyCmfRoutingExtraBundle(),
 
             // DEMO
-            new Sonata\Bundle\DemoBundle\SonataDemoBundle(),
+//            new Sonata\Bundle\DemoBundle\SonataDemoBundle(),
 
             // Enable this if you want to audit backend action
             new SimpleThings\EntityAudit\SimpleThingsEntityAuditBundle(),

@@ -2,9 +2,9 @@
 #_internal:
 #   resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
 #   prefix:   /_internal
-
-sonata_demo:
-    resource: "@SonataDemoBundle/Resources/config/routing/demo.xml"
+#
+#sonata_demo:
+#    resource: "@SonataDemoBundle/Resources/config/routing/demo.xml"
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
@@ -53,9 +53,9 @@ sonata_media_pixlr:
 #    resource: .
 #    type:     imagine
 
-blog:
-    resource: '@SonataNewsBundle/Resources/config/routing/news.xml'
-    prefix: /blog
+#blog:
+#    resource: '@SonataNewsBundle/Resources/config/routing/news.xml'
+#    prefix: /blog
 
 admin:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
