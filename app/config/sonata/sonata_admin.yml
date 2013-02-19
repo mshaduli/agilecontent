@@ -19,6 +19,7 @@ sonata_admin:
         list:    SonataAdminBundle:CRUD:list.html.twig
         show:    SonataAdminBundle:CRUD:show.html.twig
         edit:    SonataAdminBundle:CRUD:edit.html.twig
+        user_block: ApplicationSonataUserBundle::Admin/Core/user_block.html.twig
 
     dashboard:
         blocks:
