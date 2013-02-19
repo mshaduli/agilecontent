@@ -54,6 +54,7 @@ class LoadPageData extends AbstractFixture implements ContainerAwareInterface, O
         $site->setHost('localhost');
         $site->setEnabled(true);
         $site->setName('localhost');
+        $site->setContext('global');
         $site->setEnabledFrom(new \DateTime('now'));
         $site->setEnabledTo(new \DateTime('+10 years'));
         $site->setRelativePath("");

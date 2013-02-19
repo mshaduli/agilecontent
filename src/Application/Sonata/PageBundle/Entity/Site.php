@@ -27,6 +27,12 @@ class Site extends BaseSite
      * @var integer $id
      */
     protected $id;
+    
+    /**
+     *
+     * @var type string
+     */
+    private $context;
 
     /**
      * Get id
@@ -37,4 +43,15 @@ class Site extends BaseSite
     {
         return $this->id;
     }
+    
+    public function getContext()
+    {
+        return $this->context;
+    }
+    
+    public function setContext($context)
+    {
+        $this->context = $context;
+    }
+    
 }

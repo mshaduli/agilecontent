@@ -1,0 +1,2 @@
+parameters:
+    sonata.page.admin.site.class: Application\Sonata\PageBundle\Admin\SiteAdmin
