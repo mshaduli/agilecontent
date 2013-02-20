@@ -279,17 +279,7 @@ class PageAdmin extends Admin
             $this->trans('sidemenu.link_edit_page'),
             array('uri' => $admin->generateUrl('edit', array('id' => $id)))
         );
-
-        $menu->addChild(
-            $this->trans('sidemenu.link_list_blocks'),
-            array('uri' => $admin->generateUrl('sonata.page.admin.block.list', array('id' => $id)))
-        );
-
-        $menu->addChild(
-            $this->trans('sidemenu.link_list_snapshots'),
-            array('uri' => $admin->generateUrl('sonata.page.admin.snapshot.list', array('id' => $id)))
-        );
-
+        
         if (!$this->getSubject()->isHybrid()) {
 
             try {
@@ -301,7 +291,18 @@ class PageAdmin extends Admin
                 // avoid crashing the admin if the route is not setup correctly
 //                throw $e;
             }
-        }
+        }        
+
+        $menu->addChild(
+            $this->trans('sidemenu.link_list_blocks'),
+            array('uri' => $admin->generateUrl('sonata.page.admin.block.list', array('id' => $id)))
+        );
+
+        $menu->addChild(
+            $this->trans('sidemenu.link_list_snapshots'),
+            array('uri' => $admin->generateUrl('sonata.page.admin.snapshot.list', array('id' => $id)))
+        );
+
     }
 
     /**
