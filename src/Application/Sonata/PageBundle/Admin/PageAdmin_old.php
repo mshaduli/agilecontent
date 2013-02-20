@@ -78,6 +78,7 @@ class PageAdmin extends Admin
     public function setUserSite($siteId){
         $this->userSite = $siteId;
     }
+
     
     /**
      * Set page type filter as CMS by default
@@ -94,8 +95,8 @@ class PageAdmin extends Admin
 
         );
         return parent::getFilterParameters();
-    }    
-
+    }
+    
     /**
      * {@inheritdoc}
      */
@@ -133,6 +134,10 @@ class PageAdmin extends Admin
                     'delete' => array('template' => 'SonataAdminBundle:CRUD:list__action_delete.html.twig')                    
                 )
             ));
+ 
+//            ->add('decorate', null, array('editable' => true))
+//            ->add('enabled', null, array('editable' => true))
+//            ->add('edited', null, array('editable' => true))
     }
 
     /**
@@ -171,43 +176,30 @@ class PageAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+
+
         $formMapper
             ->with($this->trans('form_page.group_main_label'))
                 ->add('name')
                 ->add('templateCode', 'sonata_page_template', array('required' => true))
+                ->add('site', null, array('required' => true))
             ->end();
-        
+
         if (!$this->getSubject() || (!$this->getSubject()->isInternal() && !$this->getSubject()->isError())) {
             $formMapper
                 ->with($this->trans('form_page.group_advanced_label'))
                     ->add('url', 'text', array('attr' => array('readonly' => 'readonly')))
                 ->end()
             ;
-        }
-
-
+        }        
+        
         if ($this->hasSubject() && !$this->getSubject()->isInternal()) {
             $formMapper
-                ->with($this->trans('form_page.group_advanced_label'))
+                ->with($this->trans('form_page.group_main_label'))
                     ->add('type', 'sonata_page_type_choice', array('required' => false))
                 ->end()
             ;
         }
-
-        $formMapper
-            ->with($this->trans('form_page.group_advanced_label')) 
-                ->add('site', null, array('required' => true))
-                ->add('parent', 'sonata_page_selector', array(
-                    'page'          => $this->getSubject() ?: null,
-                    'site'          => $this->getSubject() ? $this->getSubject()->getSite() : null,
-                    'model_manager' => $this->getModelManager(),
-                    'class'         => $this->getClass(),
-                    'required'      => false
-                ))                                
-                ->add('enabled', null, array('required' => false))
-                ->add('position')
-            ->end()
-        ;
 
         if (!$this->getSubject() || !$this->getSubject()->isDynamic()) {
             $formMapper
@@ -221,6 +213,15 @@ class PageAdmin extends Admin
                         'filter_choice' => array('request_method' => 'all'),
                         'required'      => false
                     ))
+                ->add('parent', 'sonata_page_selector', array(
+                    'page'          => $this->getSubject() ?: null,
+                    'site'          => $this->getSubject() ? $this->getSubject()->getSite() : null,
+                    'model_manager' => $this->getModelManager(),
+                    'class'         => $this->getClass(),
+                    'required'      => false
+                ))                    
+                ->add('position')
+                ->add('enabled', null, array('required' => false))                    
                 ->end()
             ;
         }
@@ -360,7 +361,7 @@ class PageAdmin extends Admin
             return $instance;
         }
 
-        if ($site = $this->getSite()) {
+        if ($site = $this->getUserSite()) {
             $instance->setSite($site);
         }
 
@@ -384,6 +385,10 @@ class PageAdmin extends Admin
         }
 
         return $instance;
+    }
+    
+    public function getUserSite(){
+        $this->siteManager->findOneBy(array('id' => $this->userSite));
     }
 
     /**

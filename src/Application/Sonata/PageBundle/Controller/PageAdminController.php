@@ -23,6 +23,11 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class PageAdminController extends Controller
 {
     
+    /**
+     * Provide current user's site id to Admin class
+     * @return type
+     * @throws AccessDeniedException
+     */
     public function listAction()
     {
         if (false === $this->admin->isGranted('LIST')) {
@@ -46,7 +51,9 @@ class PageAdminController extends Controller
             'form'     => $formView,
             'datagrid' => $datagrid
         ));
-    }    
+    }
+
+        
     
     /**
      * @param mixed $query
@@ -72,6 +79,8 @@ class PageAdminController extends Controller
     }
 
     /**
+     * Limit site selection to regional admin and take site admins directly to create screen
+     * 
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      *
      * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
@@ -83,24 +92,36 @@ class PageAdminController extends Controller
         }
 
         if ($this->getRequest()->getMethod() == 'GET' && !$this->getRequest()->get('siteId')) {
-            $sites = $this->get('sonata.page.manager.site')->findBy();
+            
+            $userSite = $this->get('security.context')->getToken()->getUser()->getSite();
+            
+            if($userSite && !$userSite->getIsDefault())
+            {
+                //var_dump($this->admin->generateUrl('create', array('siteId' => $this->get('security.context')->getToken()->getUser()->getSite()->getId())));
+                return $this->redirect($this->admin->generateUrl('create', array('siteId' => $this->get('security.context')->getToken()->getUser()->getSite()->getId())));
+            }    
+            else 
+            {
+                
+               $sites = $this->get('sonata.page.manager.site')->findBy();
 
-            if (count($sites) == 1) {
-                return $this->redirect($this->admin->generateUrl('create', array('siteId' => $sites[0]->getId())));
+                if (count($sites) == 1) {
+                    return $this->redirect($this->admin->generateUrl('create', array('siteId' => $sites[0]->getId())));
+                }
+
+                try {
+                    $current = $this->get('sonata.page.site.selector')->retrieve();
+                } catch (\RuntimeException $e) {
+                    $current = false;
+                }
+
+                return $this->render('SonataPageBundle:PageAdmin:select_site.html.twig', array(
+                    'sites'   => $sites,
+                    'current' => $current,
+                ));
             }
-
-            try {
-                $current = $this->get('sonata.page.site.selector')->retrieve();
-            } catch (\RuntimeException $e) {
-                $current = false;
-            }
-
-            return $this->render('SonataPageBundle:PageAdmin:select_site.html.twig', array(
-                'sites'   => $sites,
-                'current' => $current,
-            ));
         }
-
+        
         return parent::createAction();
     }
 }

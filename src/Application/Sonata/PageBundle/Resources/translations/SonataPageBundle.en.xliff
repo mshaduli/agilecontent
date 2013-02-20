@@ -620,8 +620,28 @@
       <trans-unit id="152" resname="form.label_context">
           <source>form.label_context</source>
           <target>Destination</target>
+      </trans-unit>   
+      
+      <trans-unit id="153" resname="list.label_template_code">
+          <source>list.label_template_code</source>
+          <target>Template</target>
       </trans-unit>        
-           
+
+      <trans-unit id="154" resname="list.label__action">
+          <source>list.label__action</source>
+          <target>Actions</target>
+      </trans-unit>   
+      
+      <trans-unit id="155" resname="message_create_page">
+          <source>message_create_page</source>
+          <target>Create Page</target>
+      </trans-unit>   
+      
+      <trans-unit id="156" resname="title_select_site">
+          <source>title_select_site</source>
+          <target>Choose Site</target>
+      </trans-unit>       
+         
     </body>
   </file>
 </xliff>
