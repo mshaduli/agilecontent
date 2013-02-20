@@ -1,4 +1,9 @@
 parameters:
+    #Site Admin Controller
     sonata.page.admin.site.class:      Application\Sonata\PageBundle\Admin\SiteAdmin
+    #Page Admin Class
     sonata.page.admin.page.class:      Application\Sonata\PageBundle\Admin\PageAdmin
+    #Page Admin Controller
     sonata.page.admin.page.controller: ApplicationSonataPageBundle:PageAdmin
+    #Template rendering service for default type pages
+    sonata.page.service.default.class: Application\Sonata\PageBundle\Page\Service\DefaultPageService

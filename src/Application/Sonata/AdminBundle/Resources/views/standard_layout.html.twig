@@ -32,7 +32,7 @@ file that was distributed with this source code.
             <link rel="stylesheet" href="{{ asset('bundles/sonataadmin/bootstrap/css/bootstrap-responsive.min.css') }}" type="text/css" media="all" />
 
             <!-- base application asset -->
-            <link rel="stylesheet" href="{{ asset('bundles/sonataadmin/css/layout.css') }}" type="text/css" media="all" />
+            <link rel="stylesheet" href="{{ asset('bundles/applicationsonataadmin/css/layout.css') }}" type="text/css" media="all" />
             <link rel="stylesheet" href="{{ asset('bundles/sonataadmin/css/colors.css') }}" type="text/css" media="all" />
         {% endblock %}
 
@@ -84,7 +84,11 @@ file that was distributed with this source code.
                         {% block logo %}
                             <a href="{{ url('sonata_admin_dashboard') }}" class="brand">
                                 <img src="{{ asset(admin_pool.titlelogo) }}"  alt="{{ admin_pool.title }}" />
+                                {% if app.security.token and is_granted('ROLE_SONATA_ADMIN') %}
+                                {{ app.user.site.host }}
+                                {% else %}
                                 {{ admin_pool.title }}
+                                {% endif %}
                             </a>
                         {% endblock %}
 
@@ -158,7 +162,7 @@ file that was distributed with this source code.
 
             {% if _title is not empty or action is defined %}
                 <div class="page-header">
-                    <h1>
+                    <h2>
                         {% if _title is not empty %}
                             {{ _title|raw }}
                         {% elseif action is defined %}
@@ -168,7 +172,7 @@ file that was distributed with this source code.
                                 {% endif %}
                             {% endfor %}
                         {% endif%}
-                    </h1>
+                    </h2>
                 </div>
             {% endif%}
 

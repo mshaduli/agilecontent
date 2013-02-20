@@ -365,24 +365,32 @@ class PageAdmin extends Admin
             $instance->setSite($site);
         }
 
-        if ($site && $this->getRequest()->get('url')) {
-            $slugs = explode('/', $this->getRequest()->get('url'));
-            $slug  = array_pop($slugs);
+        if ($site) {
+            //Existing page
+            if($this->getRequest()->get('url')) {
+                $slugs = explode('/', $this->getRequest()->get('url'));
+                $slug  = array_pop($slugs);
 
-            try {
-                $parent = $this->pageManager->getPageByUrl($site, implode('/', $slugs));
-            } catch (PageNotFoundException $e) {
                 try {
-                    $parent = $this->pageManager->getPageByUrl($site, '/');
+                    $parent = $this->pageManager->getPageByUrl($site, implode('/', $slugs));
                 } catch (PageNotFoundException $e) {
-                    throw new InternalErrorException('Unable to find the root url, please create a route with url = /');
+                    try {
+                        $parent = $this->pageManager->getPageByUrl($site, '/');
+                    } catch (PageNotFoundException $e) {
+                        throw new InternalErrorException('Unable to find the root url, please create a route with url = /');
+                    }
                 }
-            }
 
-            $instance->setSlug(urldecode($slug));
-            $instance->setParent($parent ?: null);
-            $instance->setName(urldecode($slug));
+                $instance->setSlug(urldecode($slug));
+                $instance->setParent($parent ?: null);
+                $instance->setName(urldecode($slug));   
+            }
+            else {
+                $instance->setParent($this->pageManager->getPageByUrl($site, '/'));
+            }
         }
+        $instance->setType('sonata.page.service.default');
+        $instance->setEnabled(true);
 
         return $instance;
     }
