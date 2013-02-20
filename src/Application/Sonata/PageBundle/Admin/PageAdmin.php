@@ -51,18 +51,29 @@ class PageAdmin extends Admin
      */
     protected $cacheManager;
     
+    /**
+     *
+     * @var type int
+     */
+    protected $userSite = null;
+
+
     public function createQuery($context = 'list') 
     { 
-         /* @var \Symfony\Component\Security\Core\TokenInterface $token */
- 
-        
         $query = parent::createQuery($context); 
-
         
-//        $query->where($query->expr->eq('site', ':site')); 
-//        $query->setParameter('site', $user->getSite());
-        return $query; 
+        if(null != $this->userSite)
+        {        
+            $query->andWhere('o.site = :userSite');
+            $query->setParameter('userSite', $this->userSite);
+        }
+        
+        return $query;         
     } 
+    
+    public function setUserSite($siteId){
+        $this->userSite = $siteId;
+    }
 
     /**
      * {@inheritdoc}

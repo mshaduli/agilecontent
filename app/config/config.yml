@@ -16,6 +16,7 @@ imports:
     - { resource: sonata/sonata_user.yml }
     
     - { resource: '@ApplicationSonataPageBundle/Resources/config/services.yml' }
+    - { resource: '@ApplicationSonataUserBundle/Resources/config/services.yml' }
 
 framework:
     #esi:             ~
