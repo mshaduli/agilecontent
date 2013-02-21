@@ -84,7 +84,7 @@
       </trans-unit>
       <trans-unit id="20" resname="btn_save_position">
         <source>btn_save_position</source>
-        <target>Save Position</target>
+        <target>Save Changes</target>
       </trans-unit>
       <trans-unit id="21" resname="button_create_snapshot">
         <source>button_create_snapshot</source>
@@ -244,7 +244,7 @@
       </trans-unit>
       <trans-unit id="60" resname="header.edit_page">
         <source>header.edit_page</source>
-        <target>Edit Page</target>
+        <target>Settings</target>
       </trans-unit>
       <trans-unit id="61" resname="header.page_is_disabled">
         <source>header.page_is_disabled</source>
@@ -252,7 +252,7 @@
       </trans-unit>
       <trans-unit id="62" resname="header.show_zone">
         <source>header.show_zone</source>
-        <target>Show Zone</target>
+        <target>Layout</target>
       </trans-unit>
       <trans-unit id="63" resname="header.view_all_exceptions">
         <source>header.view_all_exceptions</source>
@@ -400,7 +400,7 @@
       </trans-unit>
       <trans-unit id="99" resname="header.sonata_admin_dashboard">
           <source>header.sonata_admin_dashboard</source>
-          <target>Dashboard</target>
+          <target>Close</target>
       </trans-unit>
       <trans-unit id="100" resname="list.label_is_default">
           <source>list.label_is_default</source>

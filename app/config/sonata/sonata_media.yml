@@ -44,7 +44,7 @@ sonata_media:
 
     pixlr:
         enabled:  true
-        referrer: Demo - Sonata Project
+        referrer: Agile Content
 
     resizer:
         simple:
