@@ -109,6 +109,15 @@ file that was distributed with this source code.
                                                 </ul>
                                             </li>
                                         {% endfor %}
+                                            <!-- Add Permissions for below dropdowns -->
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Publishing <span class="caret"></span></a>
+                                                <ul class="dropdown-menu">
+                                                   <li><a href="/app_dev.php/admin/sonata/page/site/{{app.user.site.id}}/snapshots">Publishing Everyting</a></li>
+                                                   <li><a href="">Smart Publishing</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="/app_dev.php/admin/sonata/page/site/{{app.user.site.id}}/edit">Settings</a></li>
                                     {% endif %}
                                 {% endblock %}
                                 {% block top_bar_after_nav %} {% endblock %}

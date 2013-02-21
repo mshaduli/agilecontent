@@ -437,7 +437,7 @@ class PageAdmin extends Admin
 
         $actions['snapshot'] = array(
             'label'            => $this->trans('create_snapshot'),
-            'ask_confirmation' => true
+            'ask_confirmation' => false
         );
 
         return $actions;
@@ -465,5 +465,10 @@ class PageAdmin extends Admin
     public function setCacheManager(CacheManagerInterface $cacheManager)
     {
         $this->cacheManager = $cacheManager;
+    }
+    
+    public function postPersist($object) {
+        
+        parent::postPersist($object);
     }
 }
