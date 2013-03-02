@@ -642,6 +642,10 @@
           <target>Choose Site</target>
       </trans-unit>    
 
+      <trans-unit id="157" resname="form.label_tags">
+          <source>form.label_tags</source>
+          <target>Tags</target>
+      </trans-unit>    
                   
     </body>
   </file>
