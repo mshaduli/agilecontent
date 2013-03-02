@@ -650,7 +650,12 @@
       <trans-unit id="158" resname="list.label_tags">
           <source>list.label_tags</source>
           <target>Tags</target>
-      </trans-unit>              
+      </trans-unit>
+      
+      <trans-unit id="159" resname="form.label_body_copy">
+          <source>form.label_body_copy</source>
+          <target>Body Copy</target>
+      </trans-unit>                                  
       
                   
     </body>

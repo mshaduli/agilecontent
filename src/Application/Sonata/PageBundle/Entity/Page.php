@@ -33,6 +33,12 @@ class Page extends BasePage
      * @var type ArrayCollection
      */
     protected $tags;
+    
+    /**
+     *
+     * @var type bodyCopy
+     */
+    protected $bodyCopy;
 
     /**
      * Get id
@@ -49,8 +55,20 @@ class Page extends BasePage
         return $this->tags;
     }
     
+    
     public function setTags($tags)
     {
         $this->tags = $tags;
     }
+    
+    public function getBodyCopy()
+    {
+        return $this->bodyCopy;
+    }    
+    
+    public function setBodyCopy($bodyCopy)
+    {
+        $this->bodyCopy = $bodyCopy;
+    }
+        
 }

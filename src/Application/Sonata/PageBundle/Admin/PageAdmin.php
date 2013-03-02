@@ -176,6 +176,13 @@ class PageAdmin extends Admin
                 ->add('name')
                 ->add('templateCode', 'sonata_page_template', array('required' => true))
                 ->add('tags')
+                ->add('bodyCopy', 'textarea', array(
+                        'attr' => array(
+                            'class' => 'tinymce',
+                            'data-theme' => 'advanced' // simple, advanced, bbcode
+                        ),
+                        'required' => false
+                    ))                
             ->end();
         
         if (!$this->getSubject() || (!$this->getSubject()->isInternal() && !$this->getSubject()->isError())) {

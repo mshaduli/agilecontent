@@ -39,7 +39,9 @@
         "simplethings/entity-audit-bundle": "dev-master",
 
         "willdurand/faker-bundle": "dev-master",
-        "videlalvaro/php-amqplib": "dev-master"
+        "videlalvaro/php-amqplib": "dev-master",
+        
+        "stfalcon/tinymce-bundle": "dev-master"
     },
 
     "require-dev": {
