@@ -355,3 +355,9 @@ legend.sonata-ba-fieldset-collapsed-description + .sonata-ba-collapsed-fields {
 .sonata-bc .pagination {
     margin: 0px;
 }
+
+
+.sonata-bc ul, .sonata-bc ol {
+    padding: 0;
+    margin: 0;
+}
