@@ -175,6 +175,7 @@ class PageAdmin extends Admin
             ->with($this->trans('form_page.group_main_label'))
                 ->add('name')
                 ->add('templateCode', 'sonata_page_template', array('required' => true))
+                ->add('tags')
             ->end();
         
         if (!$this->getSubject() || (!$this->getSubject()->isInternal() && !$this->getSubject()->isError())) {
