@@ -23,6 +23,11 @@ class Tag
      * @var array
      */
     private $pages;
+    
+        /**
+     * @var array
+     */
+    private $media;
 
 
     /**
@@ -64,7 +69,7 @@ class Tag
      * @param array $pages
      * @return Tag
      */
-    public function setPagea($pages)
+    public function setPages($pages)
     {
         $this->pages = $pages;
     
@@ -80,6 +85,30 @@ class Tag
     {
         return $this->pages;
     }
+    
+    
+    /**
+     * Set media
+     *
+     * @param array $media
+     * @return Tag
+     */
+    public function setMedia($media)
+    {
+        $this->media = $media;
+    
+        return $this;
+    }
+
+    /**
+     * Get media
+     *
+     * @return array 
+     */
+    public function getMedia()
+    {
+        return $this->media;
+    }    
     
     public function __toString() {
         return $this->getName();

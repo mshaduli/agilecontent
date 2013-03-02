@@ -336,6 +336,17 @@
                 <source>sonata_media</source>
                 <target>Media Library</target>
             </trans-unit>
+            
+            <trans-unit id="form.label_tags">
+                <source>form.label_tags</source>
+                <target>Tags</target>
+            </trans-unit>
+            
+            <trans-unit id="list.label_tags">
+                <source>list.label_tags</source>
+                <target>Tags</target>
+            </trans-unit>                                                
+            
         </body>
     </file>
 </xliff>

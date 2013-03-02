@@ -27,6 +27,12 @@ class Media extends BaseMedia
      * @var integer $id
      */
     protected $id;
+    
+    /**
+     *
+     * @var type ArrayCollection
+     */
+    protected $tags;
 
     /**
      * Get id
@@ -36,5 +42,15 @@ class Media extends BaseMedia
     public function getId()
     {
         return $this->id;
+    }
+    
+    public function getTags()
+    {
+        return $this->tags;
+    }
+    
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
     }
 }

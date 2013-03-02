@@ -15,9 +15,11 @@ imports:
     - { resource: sonata/sonata_notification.yml }
     - { resource: sonata/sonata_user.yml }
     
-    - { resource: '@ApplicationSonataPageBundle/Resources/config/services.yml' }
-    - { resource: '@ApplicationSonataPageBundle/Resources/config/tag.xml' }
+    - { resource: '@ApplicationSonataPageBundle/Resources/config/services.yml' }    
     - { resource: '@ApplicationSonataUserBundle/Resources/config/services.yml' }
+    - { resource: '@ApplicationSonataMediaBundle/Resources/config/services.yml' }
+    
+    - { resource: '@ApplicationSonataPageBundle/Resources/config/tag.xml' }
     
 
 framework:
