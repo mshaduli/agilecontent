@@ -124,7 +124,7 @@ class PageAdmin extends Admin
             ->add('hybrid', 'text', array('template' => 'SonataPageBundle:PageAdmin:field_hybrid.html.twig'))
             ->addIdentifier('name')
             ->add('templateCode')
-            ->add('type')
+            ->add('tags')
             ->add('site')
             ->add('_action', 'actions', array(
                 'actions' => array(

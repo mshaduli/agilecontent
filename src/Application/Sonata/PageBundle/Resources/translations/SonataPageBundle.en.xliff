@@ -646,6 +646,12 @@
           <source>form.label_tags</source>
           <target>Tags</target>
       </trans-unit>    
+
+      <trans-unit id="158" resname="list.label_tags">
+          <source>list.label_tags</source>
+          <target>Tags</target>
+      </trans-unit>              
+      
                   
     </body>
   </file>
