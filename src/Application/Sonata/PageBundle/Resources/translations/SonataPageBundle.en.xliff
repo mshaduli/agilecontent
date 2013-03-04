@@ -388,7 +388,7 @@
       </trans-unit>
       <trans-unit id="96" resname="view_page">
         <source>view_page</source>
-        <target>Content</target>
+        <target>Preview</target>
       </trans-unit>
       <trans-unit id="97" resname="header.switch_user_exit">
           <source>header.switch_user_exit</source>

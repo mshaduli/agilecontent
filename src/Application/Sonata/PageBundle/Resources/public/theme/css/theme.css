@@ -30,7 +30,7 @@ header {
     background: rgba(0,0,0,.6) !important;
 }
 .navbar.navbar-static-top {
-    margin-bottom: 35px;
+/*    margin-bottom: 35px;*/
 }
 .navbar.transparent.navbar-inverse .navbar-inner {
     background: rgba(0,0,0,0.4);
