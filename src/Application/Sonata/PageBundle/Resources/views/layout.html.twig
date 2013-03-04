@@ -19,6 +19,70 @@ file that was distributed with this source code.
 {% block page_javascripts %}
     {{ parent() }}
     <script src="{{ asset('bundles/applicationsonatapage/theme/js/flexslider.js') }}" type="text/javascript"></script>
+                              <!-- load the jQuery and require.js libraries -->
+              <script type="text/javascript" src="http://cdn.aloha-editor.org/latest/lib/require.js"></script>
+
+ 
+              <!-- load the Aloha Editor core and some plugins -->
+              <script src="http://cdn.aloha-editor.org/latest/lib/aloha.js"
+                                   data-aloha-plugins="common/ui,
+                                                        common/format,
+                                                        common/list,
+                                                        common/link,
+                                                        common/highlighteditables">
+              </script>
+               
+              <!-- load the Aloha Editor CSS styles -->
+              <link href="http://cdn.aloha-editor.org/latest/css/aloha.css" rel="stylesheet" type="text/css" />
+ 
+              <!-- make all elements with class="editable" editable with Aloha Editor -->
+              <script type="text/javascript">
+                     Aloha.ready( function() {
+                            //var $ = Aloha.jQuery;
+                            $('.editable').aloha();                            
+                     });
+                     
+                     Aloha.ready(function() {
+                    Aloha.require( ['aloha', 'aloha/jquery'], function( Aloha, jQuery) {
+
+                                    // save all changes after leaving an editable
+                                                  Aloha.bind('aloha-editable-deactivated', function(){
+                                                                var content = Aloha.activeEditable.getContents();
+                                                                var contentId = Aloha.activeEditable.obj[0].id;
+                                                                var pageId = '{{ page.id }}';
+
+                                                                // textarea handling -- html id is "xy" and will be "xy-aloha" for the aloha editable
+                                                                if ( contentId.match(/-aloha$/gi) ) {
+                                                                        contentId = contentId.replace( /-aloha/gi, '' );
+                                                                }
+
+                                                                var request = jQuery.ajax({
+                                                                        url: '{{ path('admin_sonata_page_page_aloha', {id: page.id}) }}',
+                                                                        type: "POST",
+                                                                        data: {
+                                                                                content : content,
+                                                                                contentId : contentId,
+                                                                                id : pageId
+                                                                        },
+                                                                        dataType: "html"
+                                                                });
+
+                                                                request.done(function(msg) {
+                                                                    console.log('Changes Saved');
+                                                                        //jQuery("#log").html( msg ).show().delay(800).fadeOut();
+                                                                        return true;
+                                                                });
+
+                                                                request.error(function(jqXHR, textStatus) {
+                                                                        console.log( "Request failed: " + textStatus );
+                                                                        return true;
+                                                                });
+                                                                return true;
+                                                        });
+
+                                                });
+});
+              </script>    
 {% endblock %}    
     
 {% block page_container %}
