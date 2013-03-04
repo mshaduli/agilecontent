@@ -10,6 +10,16 @@ file that was distributed with this source code.
 #}
 {% extends 'ApplicationSonataPageBundle::base_layout.html.twig' %}
 
+{% block page_stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/applicationsonatapage/theme/css/index.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block page_javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/applicationsonatapage/theme/js/index-slider.js') }}" type="text/javascript"></script>
+{% endblock %}
+    
 {% block page_container %}
 
     <div class="container">

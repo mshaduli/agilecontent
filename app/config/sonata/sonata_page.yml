@@ -43,7 +43,7 @@ sonata_page:
         home: { path: 'ApplicationSonataPageBundle::home_layout.html.twig', name: 'home' }
 
     page_defaults:
-        homepage: {decorate: false, enabled: true}
+        homepage: {decorate: true, enabled: true}
 
     caches:
         esi:

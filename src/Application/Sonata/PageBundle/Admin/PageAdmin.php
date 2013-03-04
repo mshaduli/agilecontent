@@ -129,7 +129,6 @@ class PageAdmin extends Admin
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'edit' => array('template' => 'SonataAdminBundle:CRUD:list__action_edit.html.twig'),
-                    'publications' => array('template' => 'ApplicationSonataPageBundle:CRUD:list__action_publications.html.twig'),
                     'delete' => array('template' => 'SonataAdminBundle:CRUD:list__action_delete.html.twig')                    
                 )
             ));
