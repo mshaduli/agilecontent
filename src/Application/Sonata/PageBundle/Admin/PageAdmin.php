@@ -27,6 +27,8 @@ use Sonata\PageBundle\Model\SiteManagerInterface;
 
 use Sonata\CacheBundle\Cache\CacheManagerInterface;
 
+use Sonata\AdminBundle\Route\RouteCollection;
+
 use Knp\Menu\ItemInterface as MenuItemInterface;
 
 /**
@@ -94,6 +96,11 @@ class PageAdmin extends Admin
 
         );
         return parent::getFilterParameters();
+    }    
+    
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->add('aloha', $this->getRouterIdParameter().'/aloha'); 
     }    
 
     /**
