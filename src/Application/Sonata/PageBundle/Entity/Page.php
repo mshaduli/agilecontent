@@ -70,5 +70,16 @@ class Page extends BasePage
     {
         $this->bodyCopy = $bodyCopy;
     }
-        
+    
+    public function getTaggedMedia()
+    {
+        $taggedMedia = array();
+        foreach ($this->getTags() as $tag){
+            //$taggedMedia [] = $tag->getMedia();
+            //array_merge($taggedMedia, $tag->getMediaList());
+            //$taggedMedia [] = $tag->getMedia()->toArray();
+            $taggedMedia = array_merge($taggedMedia, $tag->getMedia()->toArray());
+        }
+        return array_unique($taggedMedia);
+    }
 }

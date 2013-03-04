@@ -109,7 +109,8 @@ class Tag
     {
         return $this->media;
     }    
-    
+
+
     public function __toString() {
         return $this->getName();
     }

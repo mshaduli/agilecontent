@@ -82,7 +82,7 @@
 /* Custom styles for each slide */
 
 /* Slide 1 */
-.slide#showcasing .info {
+.slide .info {
     position: absolute;
     top: 160px;
     left: 13%;
