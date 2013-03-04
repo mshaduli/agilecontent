@@ -1,0 +1,142 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+{% extends 'ApplicationSonataPageBundle::base_layout.html.twig' %}
+
+{% block page_stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/applicationsonatapage/theme/css/portfolio.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ asset('bundles/applicationsonatapage/theme/css/lib/isotope.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block page_javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/applicationsonatapage/theme/js/jquery.isotope.min.js') }}" type="text/javascript"></script>
+{% endblock %}
+    
+{% block page_container %}
+    <div class="navbar navbar-inverse navbar-static-top">
+      <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="index.html">
+                <strong>CLEAN CANVAS</strong>
+            </a>
+            <div class="nav-collapse collapse">
+                <ul class="nav pull-right">
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="about-us.html">ABOUT US</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle active" data-toggle="dropdown">
+                            PAGES
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="features.html">Features</a></li>
+                            <li><a href="services.html">Services</a></li>
+                            <li><a href="portfolio.html">Portfolio</a></li>
+                            <li><a href="portfolio-item.html">Portfolio Item</a></li>
+                            <li><a href="coming-soon.html">Coming Soon</a></li>
+                            <li><a href="sign-in.html">Sign in</a></li>
+                            <li><a href="sign-up.html">Sign up</a></li>
+                            <li><a href="backgrounds.html">Backgrounds</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="pricing.html">PRICING</a></li>
+                    <li><a href="contact.html">CONTACT US</a></li>
+                    <li><a href="blog.html">BLOG</a></li>
+                    <li><a class="btn-header" href="sign-up.html">Sign up</a></li>
+                    <li><a class="btn-header" href="sign-in.html">Sign in</a></li>
+                </ul>
+            </div>
+        </div>
+      </div>
+    </div>
+    
+
+      
+      
+      
+       <div id="portfolio">
+        <div class="container">
+            <div class="section_header">
+                <h3>Media Gallery</h3>
+            </div>
+
+            <div class="row">
+                <div class="span12">
+                    <div id="filters_container">
+                        <ul id="filters">
+                            
+                            <li><a href="#" data-filter="*" class="active">All</a></li>
+                            <li class="separator">/</li>
+                            
+                            {% for tag in page.tags %}
+                            <li><a href="#" data-filter=".{{tag.id}}">{{tag.name}}</a></li>
+                            <li class="separator">/</li>                            
+                            {% endfor %}
+       
+                        </ul>
+                    </div>
+                </div>
+            </div>            
+            <div class="row">
+                <div class="span12">
+                    <div id="gallery_container">
+                        {% for media in page.taggedMedia %}
+                        <div class="photo {{ media.tagIds }}">
+                            <img src="{% path media, 'big' %}" />
+                            <a href="#" class="mask">
+                    {% for tag in media.tagLinks %}
+                        <span class="label label-inverse">{{ tag }}</span>
+                    {% endfor %}
+                                <div class="more">+</div>
+                            </a>
+                        </div>
+                         {% endfor %}            
+                    </div>
+                </div>
+            </div>            
+        </div>
+    </div>
+      
+    <script type="text/javascript">
+        $(function(){
+
+            var $container = $('#gallery_container'),
+                  $filters = $("#filters a");
+        
+            $container.imagesLoaded( function(){
+                $container.isotope({
+                    itemSelector : '.photo',
+                    masonry: {
+                        columnWidth: 102
+                    }
+                });
+            });
+
+            // filter items when filter link is clicked
+            $filters.click(function() {
+                $filters.removeClass("active");
+                $(this).addClass("active");
+                var selector = $(this).data('filter');
+                $container.isotope({ filter: selector });
+                return false;
+            });
+        
+        
+        });
+    </script>
+  
+{% endblock %}

@@ -29,13 +29,13 @@ file that was distributed with this source code.
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="index.html">
+            <a class="brand" href="/">
                 <strong>CLEAN CANVAS</strong>
             </a>
             <div class="nav-collapse collapse">
                 <ul class="nav pull-right">
-                    <li><a href="index.html" class="active">HOME</a></li>
-                    <li><a href="about-us.html">ABOUT US</a></li>
+                    <li><a href="/" class="active">HOME</a></li>
+                    <li><a href="about">ABOUT US</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             PAGES
@@ -95,56 +95,4 @@ file that was distributed with this source code.
     </section>    
       <!-- @todo: Convert to Slideshow Block -->
 
-    <div class="container">
-        <div class="content">
-            <div class="page-header">
-                <div class="pull-left">
-                    {{ sonata_page_render_container('title', 'global') }}
-                </div>
-
-                <div class="pull-right navigation">
-                    {{ sonata_page_render_container('header', 'global') }}
-                </div>
-
-                <div style="clear: both"></div>
-            </div>
-
-            {% if page is defined %}
-                <div class="row">
-                    <h1>Home Template</h1>
-                    {% if page.name != 'global'%}
-                        {{ sonata_page_render_container('content_top', 'global') }}
-                    {% endif %}
-                    {{ sonata_page_render_container('content_top', page) }}
-                </div>
-            {% endif %}
-
-            <div class="row">
-                {% if content is defined %}
-                    {{ content|raw }}
-                {% else %}
-                    {% set content = block('content') %}
-                    {% if content|length > 0 %}
-                        {{ content|raw }}
-                    {% elseif page is defined %}
-                        {{ sonata_page_render_container('content', page) }}
-                    {% endif %}
-                {% endif %}
-            </div>
-
-            {% if page is defined %}
-                <div>
-                    {{ sonata_page_render_container('content_bottom', page) }}
-
-                    {% if page.name != 'global'%}
-                        {{ sonata_page_render_container('content_bottom', 'global') }}
-                    {% endif %}
-                </div>
-            {% endif %}
-        </div>
-
-        <footer>
-            {{ sonata_page_render_container('footer', 'global') }}
-        </footer>
-    </div>
 {% endblock %}

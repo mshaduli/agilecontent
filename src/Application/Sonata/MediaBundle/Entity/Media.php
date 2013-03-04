@@ -63,4 +63,14 @@ class Media extends BaseMedia
         }
         return $tagLinks;
     }
+    
+    public function getTagIds()
+    {
+        $tagIds = array();
+        foreach($this->getTags() as $tag)
+        {
+            $tagIds[]=$tag->getId();
+        }
+        return implode(' ', $tagIds);
+    }
 }
