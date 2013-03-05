@@ -200,7 +200,7 @@ class PageAdminController extends Controller
         $page = $pageManager->findOneBy(array('id' => $this->getRequest()->get('id')));
         $page->setBodyCopy($this->getRequest()->get('content'));
         $pageManager->save($page);
-        $this->createPageSnapshot($page);
+//        $this->createPageSnapshot($page);
         return new \Symfony\Component\HttpFoundation\Response('success'); 
     }
 }
