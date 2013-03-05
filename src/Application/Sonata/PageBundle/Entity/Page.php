@@ -82,4 +82,5 @@ class Page extends BasePage
         }
         return array_unique($taggedMedia);
     }
+      
 }

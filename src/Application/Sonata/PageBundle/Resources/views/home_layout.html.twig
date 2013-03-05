@@ -85,6 +85,7 @@ file that was distributed with this source code.
 {% endblock %}
     
 {% block page_container %}
+{% if app.security.token and app.security.isGranted('ROLE_SONATA_PAGE_ADMIN_PAGE_EDIT') %}
    {{ sonata_page_render_container('content_top', page) }}
 
       <!-- @todo: Convert to Slideshow Block -->
@@ -126,5 +127,10 @@ file that was distributed with this source code.
               </div>
           </div>
       </div>
-
+{% else %}
+              <br/>
+              <br/>
+              <br/>
+              <center><span class="label label-success"><h2> Public access to this page has not been enabled. <br/> Please login to preview content</h2></span></center>       
+{% endif%}
 {% endblock %}
