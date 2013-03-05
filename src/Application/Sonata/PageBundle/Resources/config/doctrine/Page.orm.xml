@@ -17,7 +17,7 @@
             <generator strategy="AUTO"/>
         </id>
         
-        <field name="bodyCopy" type="text" column="body_copy"/>
+        <field name="bodyCopy" type="text" column="body_copy" nullable="true"/>
         
         
         <many-to-many field="tags" inversed-by="pages" target-entity="Tag">
