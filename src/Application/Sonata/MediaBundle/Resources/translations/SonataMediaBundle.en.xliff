@@ -164,7 +164,7 @@
             </trans-unit>
             <trans-unit id="sonata.media.provider.dailymotion">
                 <source>sonata.media.provider.dailymotion</source>
-                <target>DailyMotion</target>
+                <target>ATDW</target>
             </trans-unit>
             <trans-unit id="sonata.media.provider.youtube">
                 <source>sonata.media.provider.youtube</source>
