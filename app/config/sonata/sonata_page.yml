@@ -41,9 +41,10 @@ sonata_page:
     templates:
         default: { path: 'ApplicationSonataPageBundle::layout.html.twig', name: 'default' }
         home: { path: 'ApplicationSonataPageBundle::home_layout.html.twig', name: 'home' }
+        gallery: { path: 'ApplicationSonataPageBundle::gallery_layout.html.twig', name: 'gallery' }
 
     page_defaults:
-        homepage: {decorate: false, enabled: true}
+        homepage: {decorate: true, enabled: true}
 
     caches:
         esi:

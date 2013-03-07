@@ -27,6 +27,8 @@ use Sonata\PageBundle\Model\SiteManagerInterface;
 
 use Sonata\CacheBundle\Cache\CacheManagerInterface;
 
+use Sonata\AdminBundle\Route\RouteCollection;
+
 use Knp\Menu\ItemInterface as MenuItemInterface;
 
 /**
@@ -95,6 +97,11 @@ class PageAdmin extends Admin
         );
         return parent::getFilterParameters();
     }    
+    
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->add('aloha', $this->getRouterIdParameter().'/aloha'); 
+    }    
 
     /**
      * {@inheritdoc}
@@ -124,12 +131,11 @@ class PageAdmin extends Admin
             ->add('hybrid', 'text', array('template' => 'SonataPageBundle:PageAdmin:field_hybrid.html.twig'))
             ->addIdentifier('name')
             ->add('templateCode')
-            ->add('type')
+            ->add('tags')
             ->add('site')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'edit' => array('template' => 'SonataAdminBundle:CRUD:list__action_edit.html.twig'),
-                    'publications' => array('template' => 'ApplicationSonataPageBundle:CRUD:list__action_publications.html.twig'),
                     'delete' => array('template' => 'SonataAdminBundle:CRUD:list__action_delete.html.twig')                    
                 )
             ));
@@ -175,7 +181,14 @@ class PageAdmin extends Admin
             ->with($this->trans('form_page.group_main_label'))
                 ->add('name')
                 ->add('templateCode', 'sonata_page_template', array('required' => true))
-                ->add('tags')
+                ->add('tags') //, null, array('expanded'=>true)
+                ->add('bodyCopy', 'textarea', array(
+                        'attr' => array(
+                            'class' => 'tinymce',
+                            'data-theme' => 'advanced' // simple, advanced, bbcode
+                        ),
+                        'required' => false
+                    ))                
             ->end();
         
         if (!$this->getSubject() || (!$this->getSubject()->isInternal() && !$this->getSubject()->isError())) {

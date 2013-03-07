@@ -493,3 +493,18 @@ Sonata.Page = {
         }
     }
 }
+
+// @todo: Move below code into a seperate JS file
+
+function toggleSidebar () {
+    $('#sidebar').toggle('slide', { direction: 'left' }, 500, function () {
+	    if($("#sidebar").is(":visible"))
+	    {
+//
+	    }
+	    else {
+//
+	    }
+    });
+    $('#sidebarbtn').toggle('slide', { direction: 'left' }, 500);   
+}

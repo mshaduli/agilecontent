@@ -1,0 +1,99 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+{% extends 'ApplicationSonataPageBundle::base_layout.html.twig' %}
+
+{% block page_stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/applicationsonatapage/theme/css/portfolio.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ asset('bundles/applicationsonatapage/theme/css/lib/isotope.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block page_javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/applicationsonatapage/theme/js/jquery.isotope.min.js') }}" type="text/javascript"></script>
+{% endblock %}
+    
+{% block page_container %}
+   {{ sonata_page_render_container('content_top', page) }}
+      
+      
+       <div id="portfolio">
+        <div class="container">
+            <div class="section_header">
+                <h3>Media Gallery</h3>
+            </div>
+
+            <div class="row">
+                <div class="span12">
+                    <div id="filters_container">
+                        <ul id="filters">
+                            
+                            <li><a href="#" data-filter="*" class="active">All</a></li>
+                            <li class="separator">/</li>
+                            
+                            {% for tag in page.tags %}
+                            <li><a href="#" data-filter=".{{tag.id}}">{{tag.name}}</a></li>
+                            <li class="separator">/</li>                            
+                            {% endfor %}
+       
+                        </ul>
+                    </div>
+                </div>
+            </div>            
+            <div class="row">
+                <div class="span12">
+                    <div id="gallery_container">
+                        {% for media in page.taggedMedia %}
+                        <div class="photo {{ media.tagIds }}">
+                            <img src="{% path media, 'big' %}" />
+                            <a href="#" class="mask">
+                    {% for tag in media.tagLinks %}
+                        <span class="label label-inverse">{{ tag }}</span>
+                    {% endfor %}
+                                <div class="more">+</div>
+                            </a>
+                        </div>
+                         {% endfor %}            
+                    </div>
+                </div>
+            </div>            
+        </div>
+    </div>
+      
+    <script type="text/javascript">
+        $(function(){
+
+            var $container = $('#gallery_container'),
+                  $filters = $("#filters a");
+        
+            $container.imagesLoaded( function(){
+                $container.isotope({
+                    itemSelector : '.photo',
+                    masonry: {
+                        columnWidth: 102
+                    }
+                });
+            });
+
+            // filter items when filter link is clicked
+            $filters.click(function() {
+                $filters.removeClass("active");
+                $(this).addClass("active");
+                var selector = $(this).data('filter');
+                $container.isotope({ filter: selector });
+                return false;
+            });
+        
+        
+        });
+    </script>
+  
+{% endblock %}

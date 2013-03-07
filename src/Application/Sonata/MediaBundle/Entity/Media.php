@@ -27,6 +27,12 @@ class Media extends BaseMedia
      * @var integer $id
      */
     protected $id;
+    
+    /**
+     *
+     * @var type ArrayCollection
+     */
+    protected $tags;
 
     /**
      * Get id
@@ -36,5 +42,35 @@ class Media extends BaseMedia
     public function getId()
     {
         return $this->id;
+    }
+    
+    public function getTags()
+    {
+        return $this->tags;
+    }
+    
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+    }
+    
+    public function getTagLinks()
+    {
+        $tagLinks = array();
+        foreach($this->getTags() as $tag)
+        {
+            $tagLinks[]=$tag->getName();
+        }
+        return $tagLinks;
+    }
+    
+    public function getTagIds()
+    {
+        $tagIds = array();
+        foreach($this->getTags() as $tag)
+        {
+            $tagIds[]=$tag->getId();
+        }
+        return implode(' ', $tagIds);
     }
 }

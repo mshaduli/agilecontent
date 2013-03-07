@@ -388,7 +388,7 @@
       </trans-unit>
       <trans-unit id="96" resname="view_page">
         <source>view_page</source>
-        <target>Content</target>
+        <target>Preview</target>
       </trans-unit>
       <trans-unit id="97" resname="header.switch_user_exit">
           <source>header.switch_user_exit</source>
@@ -642,6 +642,21 @@
           <target>Choose Site</target>
       </trans-unit>    
 
+      <trans-unit id="157" resname="form.label_tags">
+          <source>form.label_tags</source>
+          <target>Tags</target>
+      </trans-unit>    
+
+      <trans-unit id="158" resname="list.label_tags">
+          <source>list.label_tags</source>
+          <target>Tags</target>
+      </trans-unit>
+      
+      <trans-unit id="159" resname="form.label_body_copy">
+          <source>form.label_body_copy</source>
+          <target>Body Copy</target>
+      </trans-unit>                                  
+      
                   
     </body>
   </file>

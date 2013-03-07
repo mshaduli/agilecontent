@@ -1,0 +1,3 @@
+parameters:
+    #Media Admin Class
+    sonata.media.admin.media.class: Application\Sonata\MediaBundle\Admin\ORM\MediaAdmin
