@@ -27,7 +27,7 @@ class Tag
     /**
      * @var array
      */
-    private $snapshots;    
+    private $snapshot;    
     
         /**
      * @var array
@@ -121,25 +121,25 @@ class Tag
     }
     
     /**
-     * Set snapshots
+     * Set snapshot
      *
-     * @param array $snapshots
+     * @param array $snapshot
      * @return Tag
      */
-    public function setSnapshots($snapshots)
+    public function setSnapshot($snapshot)
     {
-        $this->snapshots = $snapshots;
+        $this->snapshot = $snapshot;
     
         return $this;
     }
 
     /**
-     * Get snapshots
+     * Get snapshot
      *
      * @return array 
      */
-    public function getSnapshots()
+    public function getSnapshot()
     {
-        return $this->snapshots;
+        return $this->snapshot;
     }
 }

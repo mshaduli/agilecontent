@@ -20,8 +20,11 @@
         <field name="bodyCopy" type="text" column="body_copy" nullable="true"/>
         
         
-        <many-to-many field="tags" inversed-by="snapshots" target-entity="Tag">
-            <join-table name="page__snapshots_tags">
+        <many-to-many field="tags" inversed-by="snapshot" target-entity="Application\Sonata\PageBundle\Entity\Tag">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+            <join-table name="page__snapshot_tags">
                 <join-columns>
                     <join-column name="snapshot_id" referenced-column-name="id" />
                 </join-columns>
