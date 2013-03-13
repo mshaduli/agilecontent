@@ -60,7 +60,7 @@ class SnapshotAdmin extends Admin
             ->add('enabled', null, array('required' => false))
             ->add('publicationDateStart')
             ->add('publicationDateEnd')
-//            ->add('content')
+            ->add('tags')
         ;
     }
 

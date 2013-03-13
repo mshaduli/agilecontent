@@ -10,4 +10,4 @@ parameters:
     #snapshot manager
     sonata.page.manager.snapshot.class: Application\Sonata\PageBundle\Entity\SnapshotManager
     #snapshot proxy
-    sonata.page.snapshot_page_proxy.class: Application\Sonata\PageBundle\Model\SnapshotPageProxy
+#    sonata.page.snapshot_page_proxy.class: Application\Sonata\PageBundle\Model\SnapshotPageProxy

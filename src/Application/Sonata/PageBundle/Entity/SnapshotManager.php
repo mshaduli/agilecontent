@@ -347,7 +347,7 @@ class SnapshotManager extends BaseManager
         }
 
         $snapshot->setContent($content);
-
+//echo count($page->getTags());
         return $snapshot;
     }
 

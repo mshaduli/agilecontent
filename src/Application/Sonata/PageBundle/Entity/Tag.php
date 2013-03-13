@@ -24,6 +24,11 @@ class Tag
      */
     private $pages;
     
+    /**
+     * @var array
+     */
+    private $snapshots;    
+    
         /**
      * @var array
      */
@@ -113,5 +118,28 @@ class Tag
 
     public function __toString() {
         return $this->getName();
+    }
+    
+    /**
+     * Set snapshots
+     *
+     * @param array $snapshots
+     * @return Tag
+     */
+    public function setSnapshots($snapshots)
+    {
+        $this->snapshots = $snapshots;
+    
+        return $this;
+    }
+
+    /**
+     * Get snapshots
+     *
+     * @return array 
+     */
+    public function getSnapshots()
+    {
+        return $this->snapshots;
     }
 }
