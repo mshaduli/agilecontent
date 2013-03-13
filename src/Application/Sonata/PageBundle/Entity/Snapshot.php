@@ -29,6 +29,18 @@ class Snapshot extends BaseSnapshot
     protected $id;
 
     /**
+     *
+     * @var type ArrayCollection
+     */
+    protected $tags;
+    
+    /**
+     *
+     * @var type bodyCopy
+     */
+    protected $bodyCopy;
+    
+    /**
      * Get id
      *
      * @return integer $id
@@ -37,4 +49,37 @@ class Snapshot extends BaseSnapshot
     {
         return $this->id;
     }
+    
+    public function getTags()
+    {
+        return $this->tags;
+    }
+    
+    
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+    }
+    
+    public function getBodyCopy()
+    {
+        return $this->bodyCopy;
+    }    
+    
+    public function setBodyCopy($bodyCopy)
+    {
+        $this->bodyCopy = $bodyCopy;
+    }
+    
+    public function getTaggedMedia()
+    {
+        $taggedMedia = array();
+        foreach ($this->getTags() as $tag){
+            //$taggedMedia [] = $tag->getMedia();
+            //array_merge($taggedMedia, $tag->getMediaList());
+            //$taggedMedia [] = $tag->getMedia()->toArray();
+            $taggedMedia = array_merge($taggedMedia, $tag->getMedia()->toArray());
+        }
+        return array_unique($taggedMedia);
+    }    
 }

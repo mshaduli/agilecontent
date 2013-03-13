@@ -45,6 +45,7 @@ class SnapshotPageProxy implements PageInterface, Serializable
      */
     public function __construct(SnapshotManagerInterface $manager, SnapshotInterface $snapshot)
     {
+        echo "IN Proxy Extend"; exit;
         $this->manager  = $manager;
         $this->snapshot = $snapshot;
     }
@@ -688,4 +689,9 @@ class SnapshotPageProxy implements PageInterface, Serializable
     {
         // TODO: Implement unserialize() method.
     }
+    public function getBodyCopy()
+    {
+        echo $this->getPage()->getId(); exit;
+        return $this->getPage()->getBodyCopy();
+    } 
 }

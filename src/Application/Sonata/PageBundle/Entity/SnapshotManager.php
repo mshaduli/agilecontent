@@ -19,7 +19,7 @@ use Sonata\PageBundle\Model\Template;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\NoResultException;
-
+use Sonata\PageBundle\Entity\SnapshotManager as BaseManager;
 use Sonata\PageBundle\Model\SnapshotPageProxy;
 
 /**
@@ -27,7 +27,7 @@ use Sonata\PageBundle\Model\SnapshotPageProxy;
  *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-class SnapshotManager implements SnapshotManagerInterface
+class SnapshotManager extends BaseManager
 {
     protected $entityManager;
 
@@ -94,19 +94,23 @@ class SnapshotManager implements SnapshotManagerInterface
         }
 
         $now = new \DateTime;
+        $diff = new \DateTime;
         $pageIds = $snapshotIds = array();
         foreach ($snapshots as $snapshot) {
             $pageIds[] = $snapshot->getPage()->getId();
             $snapshotIds[] = $snapshot->getId();
 
             $snapshot->setPublicationDateStart($now);
-            $snapshot->setPublicationDateEnd(null);
+            
+            $endDate = $diff->add(new \DateInterval('P1Y'));
+
+            $snapshot->setPublicationDateEnd($endDate);
 
             $this->entityManager->persist($snapshot);
         }
-
+        
         $this->entityManager->flush();
-        //@todo: strange sql and low-level pdo usage: use dql or qb
+        
         $sql = sprintf("UPDATE %s SET publication_date_end = '%s' WHERE id NOT IN(%s) AND page_id IN (%s) AND publication_date_end IS NULL",
             $this->entityManager->getClassMetadata($this->class)->table['name'],
             $now->format('Y-m-d H:i:s'),
@@ -197,7 +201,8 @@ class SnapshotManager implements SnapshotManagerInterface
         $page->setDecorate($snapshot->getDecorate());
         $page->setSite($snapshot->getSite());
         $page->setEnabled($snapshot->getEnabled());
-
+        $page->setBodyCopy($snapshot->getBodyCopy());
+        $page->setTags($snapshot->getTags());
         $content = $this->fixPageContent($snapshot->getContent());
 
         $page->setId($content['id']);
@@ -302,7 +307,9 @@ class SnapshotManager implements SnapshotManagerInterface
         $snapshot->setName($page->getName());
         $snapshot->setPosition($page->getPosition());
         $snapshot->setDecorate($page->getDecorate());
-
+        $snapshot->setBodyCopy($page->getBodyCopy());
+        $snapshot->setTags($page->getTags());
+        
         if (!$page->getSite()) {
             throw new \RuntimeException(sprintf('No site linked to the page.id=%s', $page->getId()));
         }
