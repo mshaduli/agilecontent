@@ -82,4 +82,28 @@ class Snapshot extends BaseSnapshot
         }
         return array_unique($taggedMedia);
     }    
+    
+    /**
+     * Add tags
+     *
+     * @param \Application\Sonata\PageBundle\Entity\Tag $tags
+     * @return Snapshot
+     */
+    public function addTag(\Application\Sonata\PageBundle\Entity\Tag $tags)
+    {
+        $this->tags[] = $tags;
+    
+        return $this;
+    }
+
+    /**
+     * Remove tags
+     *
+     * @param \Application\Sonata\PageBundle\Entity\Tag $tags
+     */
+    public function removeTag(\Application\Sonata\PageBundle\Entity\Tag $tags)
+    {
+        $this->tags->removeElement($tags);
+    }
+
 }

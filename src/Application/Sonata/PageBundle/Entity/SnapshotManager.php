@@ -311,9 +311,8 @@ class SnapshotManager extends BaseManager
         foreach($page->getTags() as $tag)
         {
             
-            $snapshot->setTags($tag);
+            $snapshot->addTag($tag);
         }
-//        $snapshot->setTags();
         
         if (!$page->getSite()) {
             throw new \RuntimeException(sprintf('No site linked to the page.id=%s', $page->getId()));
