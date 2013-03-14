@@ -297,7 +297,7 @@ class SnapshotManager extends BaseManager
     public function create(PageInterface $page)
     {
         $snapshot = new $this->class;
-
+        
         $snapshot->setPage($page);
         $snapshot->setUrl($page->getUrl());
         $snapshot->setEnabled($page->getEnabled());
@@ -308,7 +308,12 @@ class SnapshotManager extends BaseManager
         $snapshot->setPosition($page->getPosition());
         $snapshot->setDecorate($page->getDecorate());
         $snapshot->setBodyCopy($page->getBodyCopy());
-        $snapshot->setTags($page->getTags());
+        foreach($page->getTags() as $tag)
+        {
+            
+            $snapshot->setTags($tag);
+        }
+//        $snapshot->setTags();
         
         if (!$page->getSite()) {
             throw new \RuntimeException(sprintf('No site linked to the page.id=%s', $page->getId()));
