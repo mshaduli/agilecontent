@@ -20,7 +20,7 @@ use Sonata\PageBundle\Model\Template;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\NoResultException;
 use Sonata\PageBundle\Entity\SnapshotManager as BaseManager;
-use Sonata\PageBundle\Model\SnapshotPageProxy;
+use Application\Sonata\PageBundle\Model\SnapshotPageProxy;
 
 /**
  * This class manages SnapshotInterface persistency with the Doctrine ORM
