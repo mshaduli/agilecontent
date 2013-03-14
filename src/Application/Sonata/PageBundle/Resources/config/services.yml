@@ -11,5 +11,3 @@ parameters:
     sonata.page.manager.snapshot.class: Application\Sonata\PageBundle\Entity\SnapshotManager
     #CMS Snapshot Manager
     sonata.page.cms_manager.snapshot.class: Application\Sonata\PageBundle\CmsManager\CmsSnapshotManager
-    #snapshot proxy
-#    sonata.page.snapshot.proxy.class: Application\Sonata\PageBundle\Model\SnapshotPageProxy

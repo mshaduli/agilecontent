@@ -20,7 +20,7 @@ class SnapshotPageProxy extends BaseProxy
     public function getTaggedMedia()
     {
         $taggedMedia = array();
-        foreach ($this->getTags() as $tag){
+        foreach ($this->getPage()->getTags() as $tag){
             //$taggedMedia [] = $tag->getMedia();
             //array_merge($taggedMedia, $tag->getMediaList());
             //$taggedMedia [] = $tag->getMedia()->toArray();
