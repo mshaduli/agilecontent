@@ -140,7 +140,7 @@ class CmsSnapshotManager extends BaseCmsPageManager
                 $this->pages[$id] = $page;
             }
         }
-
+        
         return $this->pages[$id];
     }
 

@@ -141,6 +141,7 @@ class SnapshotManager extends BaseManager
         );
         $query = $this->getRepository()
             ->createQueryBuilder('s')
+            ->where('s.enabled = 1')
             ->andWhere('s.publicationDateStart <= :publicationDateStart AND ( s.publicationDateEnd IS NULL OR s.publicationDateEnd >= :publicationDateEnd )');
 
         if (isset($criteria['site'])) {
@@ -201,7 +202,6 @@ class SnapshotManager extends BaseManager
         $page->setDecorate($snapshot->getDecorate());
         $page->setSite($snapshot->getSite());
         $page->setEnabled($snapshot->getEnabled());
-        $page->setBodyCopy($snapshot->getBodyCopy());
         $page->setTags($snapshot->getTags());
         $content = $this->fixPageContent($snapshot->getContent());
 
@@ -213,6 +213,7 @@ class SnapshotManager extends BaseManager
         $page->setMetaDescription($content['meta_description']);
         $page->setMetaKeyword($content['meta_keyword']);
         $page->setName($content['name']);
+        $page->setBodyCopy($content['body_copy']);
         $page->setSlug($content['slug']);
         $page->setTemplateCode($content['template_code']);
         $page->setRequestMethod($content['request_method']);
@@ -296,8 +297,15 @@ class SnapshotManager extends BaseManager
      */
     public function create(PageInterface $page)
     {
-        $snapshot = new $this->class;
+        $snapshots = $this->entityManager->getRepository($this->class)->findByPage($page->getId());
+        foreach ($snapshots as $snapshotItem)
+        {
+            $snapshotItem->setEnabled(0);
+            $this->entityManager->persist($snapshotItem);
+            $this->entityManager->flush();
+        }
         
+        $snapshot = new $this->class;        
         $snapshot->setPage($page);
         $snapshot->setUrl($page->getUrl());
         $snapshot->setEnabled($page->getEnabled());
@@ -339,6 +347,7 @@ class SnapshotManager extends BaseManager
         $content['meta_keyword']     = $page->getMetaKeyword();
         $content['template_code']    = $page->getTemplateCode();
         $content['request_method']   = $page->getRequestMethod();
+        $content['body_copy']        = $page->getBodyCopy();
         $content['created_at']       = $page->getCreatedAt()->format('U');
         $content['updated_at']       = $page->getUpdatedAt()->format('U');
         $content['slug']             = $page->getSlug();
