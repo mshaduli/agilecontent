@@ -315,7 +315,7 @@ class SnapshotManager extends BaseManager
         $snapshot->setName($page->getName());
         $snapshot->setPosition($page->getPosition());
         $snapshot->setDecorate($page->getDecorate());
-        $snapshot->setBodyCopy($page->getBodyCopy());
+//        $snapshot->setBodyCopy($page->getBodyCopy());
         foreach($page->getTags() as $tag)
         {
             

@@ -17,8 +17,6 @@
             <generator strategy="AUTO"/>
         </id>
         
-        <field name="bodyCopy" type="text" column="body_copy" nullable="true"/>
-        
         
         <many-to-many field="tags" inversed-by="snapshot" target-entity="Application\Sonata\PageBundle\Entity\Tag">
             <cascade>
