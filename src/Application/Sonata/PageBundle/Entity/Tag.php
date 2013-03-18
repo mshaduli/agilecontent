@@ -24,10 +24,15 @@ class Tag
      */
     private $pages;
     
-        /**
+    /**
      * @var array
      */
     private $media;
+    
+    /**
+     * @var array
+     */
+    private $accommodation;    
 
 
     /**
@@ -108,6 +113,20 @@ class Tag
     public function getMedia()
     {
         return $this->media;
+    }    
+
+    
+    public function setAccommodation($accommodation)
+    {
+        $this->accommodation = $accommodation;
+    
+        return $this;
+    }
+
+
+    public function getAccommodation()
+    {
+        return $this->accommodation;
     }    
 
 

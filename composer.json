@@ -41,7 +41,8 @@
         "willdurand/faker-bundle": "dev-master",
         "videlalvaro/php-amqplib": "dev-master",
         
-        "stfalcon/tinymce-bundle": "dev-master"
+        "stfalcon/tinymce-bundle": "dev-master",
+        "vich/geographical-bundle": "*"
     },
 
     "require-dev": {

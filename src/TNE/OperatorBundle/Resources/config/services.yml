@@ -1,0 +1,7 @@
+services:
+  tneoperator.form.type.map:
+      class: TNE\OperatorBundle\Form\Type\MapType
+  #    arguments:
+  #        - "%genders%"
+      tags:
+          - { name: form.type, alias: map }
