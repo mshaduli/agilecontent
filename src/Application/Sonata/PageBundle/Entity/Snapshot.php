@@ -60,17 +60,7 @@ class Snapshot extends BaseSnapshot
     {
         $this->tags = $tags;
     }
-    
-//    public function getBodyCopy()
-//    {
-//        return $this->bodyCopy;
-//    }    
-//    
-//    public function setBodyCopy($bodyCopy)
-//    {
-//        $this->bodyCopy = $bodyCopy;
-//    }
-    
+        
     public function getTaggedMedia()
     {
         $taggedMedia = array();
