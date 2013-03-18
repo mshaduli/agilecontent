@@ -16,11 +16,21 @@ class AccommodationAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('name')
-            ->add('site')
-            ->add('description')
-            ->add('address')
-            ->add('tags')
+            ->with('Details')
+                ->add('name')
+                ->add('site')
+                ->add('description')
+                ->add('address')
+                ->add('tags')
+            ->end()
+            ->with('Media')
+            ->end()
+            ->with('Rooms')
+            ->end()
+            ->with('TXA Settings')
+            ->end()                
+            ->with('Top 5 Recommended Operators')
+            ->end()                                            
         ;
     }
 

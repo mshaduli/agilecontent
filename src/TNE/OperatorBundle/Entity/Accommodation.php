@@ -31,11 +31,10 @@ class Accommodation
      */
     private $address;
     
-
     protected $latitude;
-
     
     protected $longitude;
+    
     
     /**
      *
