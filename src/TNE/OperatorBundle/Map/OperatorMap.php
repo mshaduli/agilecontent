@@ -9,20 +9,15 @@ use Vich\GeographicalBundle\Map\Map;
  *
  * @author zuhairnaqvi
  */
-class AccommodationOperatorMap extends Map {
+class OperatorMap extends Map {
 
     public function __construct()
     {
         parent::__construct();
 
-        // configure your map in the constructor 
-        // by setting the options
-
         $this->setAutoZoom(true);
         $this->setContainerId('map_canvas');
-        $this->setWidth(500);
+        $this->setWidth("100%");
         $this->setHeight(350);
     }
 }
-
-?>

@@ -6,8 +6,9 @@
 
     <services>
 
-        <service id="tne.map.operator.accommodation" class="TNE\OperatorBundle\Map\AccommodationOperatorMap">
+        <service id="tne.map.operator.accommodation" class="TNE\OperatorBundle\Map\OperatorMap">
             <tag name="vichgeo.map" alias="operator" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
     </services>

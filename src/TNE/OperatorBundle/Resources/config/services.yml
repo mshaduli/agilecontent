@@ -1,3 +1,7 @@
+parameters:
+    #Custom map renderer
+    vich_geographical.map_renderer.google: TNE\OperatorBundle\Map\Renderer\GoogleMapRenderer
+
 services:
   tneoperator.form.type.map:
       class: TNE\OperatorBundle\Form\Type\MapType
