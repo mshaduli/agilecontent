@@ -5,7 +5,7 @@
       <generator strategy="AUTO"/>
     </id>
     <field name="atdwId" type="integer" column="atdw_id" />
-    <field name="alias" type="string" column="alias" length="255"/>
+    <field name="name" type="string" column="name" length="255"/>
     <field name="latitude" type="decimal" column="latitude" scale="7"/>
     <field name="longitude" type="decimal" column="longitude" scale="7"/>
     

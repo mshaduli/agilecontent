@@ -33,7 +33,10 @@ class PopulateOperatorsCommand extends ContainerAwareCommand {
         
         $atdwProcessor->populate($accommodation);
         
-        \Doctrine\Common\Util\Debug::dump($accommodation);
+        //\Doctrine\Common\Util\Debug::dump($accommodation);
+        $em->persist($accommodation);
+        $em->flush();
+        
         
         $output->writeln("processed");
     }

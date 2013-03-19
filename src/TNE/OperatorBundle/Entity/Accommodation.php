@@ -27,12 +27,7 @@ class Accommodation
      * @var integer
      * @ATDW\ProductName
      */       
-    private $name = 'test';
-
-    /**
-     * @var string
-     */
-    private $alias;
+    private $name;
     
     /**
      * @var decimal
@@ -77,12 +72,12 @@ class Accommodation
     /**
      * Set alias
      *
-     * @param string $alias
+     * @param string $name
      * @return Accommodation
      */
-    public function setAlias($alias)
+    public function setName($name)
     {
-        $this->alias = $alias;
+        $this->name = $name;
     
         return $this;
     }
@@ -92,9 +87,9 @@ class Accommodation
      *
      * @return string 
      */
-    public function getAlias()
+    public function getName()
     {
-        return $this->alias;
+        return $this->name;
     }
 
  
