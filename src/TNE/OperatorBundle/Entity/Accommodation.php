@@ -4,6 +4,7 @@ namespace TNE\OperatorBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Vich\GeographicalBundle\Annotation as Vich;
+use TNE\OperatorBundle\Annotation\ATDW as ATDW;
 
 /**
  * @Vich\Geographical(lat="latitude", lng="longitude")
@@ -17,31 +18,36 @@ class Accommodation
     private $id;
 
     /**
-     * @var string
-     */
-    private $name;
-
-    /**
-     * @var string
-     */
-    private $description;
-
-    /**
-     * @var string
-     */
-    private $address;
+     * @var integer
+     * @ATDW\ProductAttrId
+     */    
+    private $atdwId;
     
+    /**
+     * @var integer
+     * @ATDW\ProductName
+     */       
+    private $name = 'test';
+
+    /**
+     * @var string
+     */
+    private $alias;
+    
+    /**
+     * @var decimal
+     */    
     protected $latitude;
     
-    protected $longitude;
-    
-    
     /**
-     *
+     * @var decimal
+     */    
+    protected $longitude;
+        
+    /**
      * @var type ArrayCollection
      */
     protected $tags;
-
 
     /**
      *
@@ -58,16 +64,25 @@ class Accommodation
     {
         return $this->id;
     }
+    
+    public function getAtdwId(){
+        return $this->atdwId;
+    }
+    
+    public function setAtdwId($atdwId){
+        $this->atdwId = $atdwId;
+        return $this;
+    }
 
     /**
-     * Set name
+     * Set alias
      *
-     * @param string $name
+     * @param string $alias
      * @return Accommodation
      */
-    public function setName($name)
+    public function setAlias($alias)
     {
-        $this->name = $name;
+        $this->alias = $alias;
     
         return $this;
     }
@@ -77,47 +92,12 @@ class Accommodation
      *
      * @return string 
      */
-    public function getName()
+    public function getAlias()
     {
-        return $this->name;
+        return $this->alias;
     }
 
-    /**
-     * Set description
-     *
-     * @param string $description
-     * @return Accommodation
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-    
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string 
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * Set address
-     *
-     * @param string $address
-     * @return Accommodation
-     */
-    public function setAddress($address)
-    {
-        $this->address = $address;
-    
-        return $this;
-    }
-
+ 
     /**
      * Get address
      * @Vich\GeographicalQuery
@@ -126,7 +106,7 @@ class Accommodation
      */
     public function getAddress()
     {
-        return $this->address;
+        return 'Surrey Ln, Beechworth VIC 3747';
     }
     
 
@@ -150,17 +130,12 @@ class Accommodation
         return $this->longitude;
     }
     
-    /**
-     * {@inheritdoc}
-     */
+
     public function setSite($site)
     {
         $this->site = $site;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSite()
     {
         return $this->site;
@@ -178,7 +153,7 @@ class Accommodation
     }    
     
     public function __toString() {
-        return $this->getName();
+        return $this->getAlias();
     }
     
     public function getMap()
