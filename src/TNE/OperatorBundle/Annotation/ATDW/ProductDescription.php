@@ -9,9 +9,9 @@ namespace TNE\OperatorBundle\Annotation\ATDW;
  * 
  * @Annotation
  */
-class ProductName {    
+class ProductDescription {    
     public static function getAtdwKey(){
-        return '/atdw_data_results/product_distribution/product_record/product_name';
+        return '/atdw_data_results/product_distribution/product_record/product_description';
     }
 }
 

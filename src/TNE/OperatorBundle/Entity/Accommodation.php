@@ -24,11 +24,38 @@ class Accommodation
     private $atdwId;
     
     /**
-     * @var integer
      * @ATDW\ProductName
      */       
     private $name;
     
+    /**
+     *ATDW\rateFrom
+     */
+    private $atdwRateFrom;
+    
+    /**
+     *ATDW\productDescription
+     */
+    private $description;
+    
+    /**
+     *ATDW\starRating
+     */
+    private $atdwStarRating;
+
+    
+    /**
+     *ATDW\cityName
+     */    
+    private $destination;
+
+            
+    /**
+     *ATDW\address
+     */    
+    private $address;
+
+
     /**
      * @var decimal
      */    
@@ -92,6 +119,12 @@ class Accommodation
         return $this->name;
     }
 
+    
+    public function setAddress($address)
+    {
+        $this->address = $address;
+        return $this;
+    }
  
     /**
      * Get address
@@ -101,7 +134,7 @@ class Accommodation
      */
     public function getAddress()
     {
-        return 'Surrey Ln, Beechworth VIC 3747';
+        return $this->address;
     }
     
 
@@ -136,6 +169,29 @@ class Accommodation
         return $this->site;
     }
     
+    public function setDestination($destination)
+    {
+        $this->destination = $destination;
+        return $this;
+    }
+
+    public function getDestination()
+    {
+        return $this->destination;
+    }    
+    
+    
+    public function setDescription($description)
+    {
+        $this->description = $description;
+        return $this;
+    }
+
+    public function getDescription()
+    {
+        return $this->description;
+    }        
+    
     public function getTags()
     {
         return $this->tags;
@@ -148,7 +204,7 @@ class Accommodation
     }    
     
     public function __toString() {
-        return $this->getAlias();
+        return $this->getName();
     }
     
     public function getMap()

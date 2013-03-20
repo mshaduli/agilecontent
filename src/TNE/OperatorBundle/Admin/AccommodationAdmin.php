@@ -38,6 +38,8 @@ class AccommodationAdmin extends Admin
     {
         $datagridMapper
             ->add('name')
+            ->add('destination')
+            ->add('tags')
         ;
     }
 
@@ -45,8 +47,10 @@ class AccommodationAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('name')
-            ->add('tags')
-            ->add('site')
+            ->add('destination')
+            ->add('tags')                
+            ->add('latitude')
+            ->add('longitude')
         ;
     }
 }

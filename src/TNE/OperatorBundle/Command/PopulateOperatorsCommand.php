@@ -19,6 +19,8 @@ class PopulateOperatorsCommand extends ContainerAwareCommand {
     {
         $this
             ->setName('tne:operators:load')
+            ->addArgument('id', InputArgument::OPTIONAL, 'Choose accommodation recored to repopulate')                
+            ->addOption('all', null, InputOption::VALUE_NONE, 'If set, will batch import products')                
             ->setDescription('Load operators from ATDW')
         ;
     }
@@ -28,14 +30,20 @@ class PopulateOperatorsCommand extends ContainerAwareCommand {
         $atdwProcessor = $this->getContainer()->get('tne_annotation.atdw_processor');
         
         $em = $this->getContainer()->get('doctrine')->getEntityManager();
-                
-        $accommodation = $em->find('TNE\OperatorBundle\Entity\Accommodation', 2);
         
-        $atdwProcessor->populate($accommodation);
-        
-        //\Doctrine\Common\Util\Debug::dump($accommodation);
-        $em->persist($accommodation);
-        $em->flush();
+        if($input->getOption('all'))
+        {
+            $atdwProcessor->import($em);
+        }
+            
+        else 
+        {             
+            $accommodation = $em->find('TNE\OperatorBundle\Entity\Accommodation', $input->getArgument('id'));
+            $atdwProcessor->populate($accommodation);
+            //\Doctrine\Common\Util\Debug::dump($accommodation);
+            $em->persist($accommodation);
+            $em->flush();
+       }
         
         
         $output->writeln("processed");
