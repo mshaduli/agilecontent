@@ -61,23 +61,38 @@ class ATDWAnnotationProcessor {
         $result = $client->CommandHandler($param);
 
         $xmlUf8 = preg_replace('/(<\?xml[^?]+?)utf-16/i', '$1utf-8', $result->CommandHandlerResult);
+        
+//        echo $xmlUf8;
+        
         $xmlObj = simplexml_load_string($xmlUf8);
+        
+        $test = $xmlObj->xpath('/atdw_data_results/product_distribution[1]/product_record/product_name');
+        print($test[0]);
+        
+        
+//        foreach ($crawler as $domElement) {
+//            print $domElement->nodeName;
+//        }
+        
+//        var_dump($crawler->filterXPath('descendant-or-self::/product_record/product_name')->text());
+        
+//        $xmlObj = simplexml_load_string($xmlUf8);
 
-        foreach ($xmlObj as $result)
-        {
-            echo $result->product_record->product_id . " : ". $result->product_record->product_name . " : ". $result->product_address->row->address_line_1 . " : ". $result->product_address->row->city_name;
-            $accommodation = new Accommodation();
-            $accommodation->setAtdwId($result->product_record->product_id);
-            $accommodation->setName($result->product_record->product_name);
-            $accommodation->setDescription($result->product_record->product_description);
-            $accommodation->setAddress($result->product_address->row->address_line_1 . ", ". $result->product_address->row->city_name . ", " . $result->product_address->row->state_name . ", ". $result->product_address->row->address_postal_code);
-            $accommodation->setDestination($result->product_address->row->city_name);
-            $em->persist($accommodation);
-            $em->flush();
-            
-//            var_dump($this->getProduct($result->product_record->product_id)->product_attribute);
-            echo "\n\n\n\n\n-------------------------------------------------------------------------------------\n\n\n\n\n";
-        }
+//        foreach ($xmlObj as $result)
+//        {
+//            echo $result->product_record->product_id . " : ". $result->product_record->product_name . " : ". $result->product_address->row->address_line_1 . " : ". $result->product_address->row->city_name;
+//            $accommodation = new Accommodation();
+//            $accommodation->setAtdwId($result->product_record->product_id);
+//            $accommodation->setName($result->product_record->product_name);
+//            $accommodation->setDescription($result->product_record->product_description);
+//            $accommodation->setAddress($result->product_address->row->address_line_1 . ", ". $result->product_address->row->city_name . ", " . $result->product_address->row->state_name . ", ". $result->product_address->row->address_postal_code);
+//            $accommodation->setDestination($result->product_address->row->city_name);
+//            $em->persist($accommodation);
+//            $em->flush();
+//            
+////            var_dump($this->getProduct($result->product_record->product_id)->product_attribute);
+//            echo "\n\n\n\n\n-------------------------------------------------------------------------------------\n\n\n\n\n";
+//        }
         
     }
     
