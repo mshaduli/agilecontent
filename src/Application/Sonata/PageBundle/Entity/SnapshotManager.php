@@ -202,7 +202,7 @@ class SnapshotManager extends BaseManager
         $page->setDecorate($snapshot->getDecorate());
         $page->setSite($snapshot->getSite());
         $page->setEnabled($snapshot->getEnabled());
-        $page->setTags($snapshot->getTags());
+//        $page->setTags($snapshot->getTags());
         $content = $this->fixPageContent($snapshot->getContent());
 
         $page->setId($content['id']);
@@ -217,7 +217,7 @@ class SnapshotManager extends BaseManager
         $page->setSlug($content['slug']);
         $page->setTemplateCode($content['template_code']);
         $page->setRequestMethod($content['request_method']);
-
+        $page->setTags($content['tags']);
         $createdAt = new \DateTime;
         $createdAt->setTimestamp($content['created_at']);
         $page->setCreatedAt($createdAt);
@@ -317,7 +317,7 @@ class SnapshotManager extends BaseManager
         $snapshot->setDecorate($page->getDecorate());
         foreach($page->getTags() as $tag)
         {
-            
+        
             $snapshot->addTag($tag);
         }
         
@@ -357,6 +357,12 @@ class SnapshotManager extends BaseManager
         foreach ($page->getBlocks() as $block) {
             $content['blocks'][] = $this->createBlocks($block);
         }
+        
+        foreach($page->getTags() as $tag)
+        {
+            $content['tags'][] = $this->createTags($tag);
+//            $snapshot->addTag($tag);
+        }
 
         $snapshot->setContent($content);
 //echo count($page->getTags());
@@ -386,6 +392,38 @@ class SnapshotManager extends BaseManager
         }
 
         return $content;
+    }
+    
+    
+    public function createTags($tag)
+    {
+        $content = array();
+        $content['id']     = $tag->getId();
+        $content['name']  = $tag->getName();
+
+        return $content;
+    }
+    
+
+    public function getTaggedMediaSnaps($tagIds,$snapshot,$page)
+    {
+         $taggedMedia = $this->entityManager->createQueryBuilder()
+                        ->select('s,t,m')
+                        ->from($this->class, 's')
+                        ->leftJoin('s.tags', 't')
+                        ->leftJoin('t.media', 'm')
+                        ->where('s.id = :snapshotid')
+                        ->andWhere('t.id IN (:ids)')
+                        ->setParameters(array(
+                            'snapshotid' => $snapshot->getId(),
+                            'ids' => $tagIds
+                        ))
+                        ->andWhere('m.createdAt <= s.createdAt')
+                        ->getQuery()
+                        ->execute();
+//                        ->getArrayResult();
+         
+          return $taggedMedia;
     }
 
     /**

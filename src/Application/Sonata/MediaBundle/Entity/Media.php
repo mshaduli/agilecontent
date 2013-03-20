@@ -73,4 +73,8 @@ class Media extends BaseMedia
         }
         return implode(' ', $tagIds);
     }
+    
+    public function getCreatedAt() {
+        parent::getCreatedAt();
+    }
 }
