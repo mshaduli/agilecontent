@@ -315,11 +315,6 @@ class SnapshotManager extends BaseManager
         $snapshot->setName($page->getName());
         $snapshot->setPosition($page->getPosition());
         $snapshot->setDecorate($page->getDecorate());
-        foreach($page->getTags() as $tag)
-        {
-        
-            $snapshot->addTag($tag);
-        }
         
         if (!$page->getSite()) {
             throw new \RuntimeException(sprintf('No site linked to the page.id=%s', $page->getId()));
@@ -400,32 +395,44 @@ class SnapshotManager extends BaseManager
         $content = array();
         $content['id']     = $tag->getId();
         $content['name']  = $tag->getName();
-
+        
+        
+        foreach($tag->getMedia() as $media)
+        {
+            $content['media'][] = $this->createMediaTags($media);
+        }
+            
         return $content;
     }
     
-
-    public function getTaggedMediaSnaps($tagIds,$snapshot,$page)
+    public function createMediaTags($media)
     {
-         $taggedMedia = $this->entityManager->createQueryBuilder()
-                        ->select('s,t,m')
-                        ->from($this->class, 's')
-                        ->leftJoin('s.tags', 't')
-                        ->leftJoin('t.media', 'm')
-                        ->where('s.id = :snapshotid')
-                        ->andWhere('t.id IN (:ids)')
-                        ->setParameters(array(
-                            'snapshotid' => $snapshot->getId(),
-                            'ids' => $tagIds
-                        ))
-                        ->andWhere('m.createdAt <= s.createdAt')
-                        ->getQuery()
-                        ->execute();
-//                        ->getArrayResult();
-         
-          return $taggedMedia;
+        $mediaContent = array();
+        $mediaContent['id'] = $media->getId();
+        $mediaContent['name'] = $media->getName();
+        $mediaContent['description'] = $media->getDescription();
+        $mediaContent['enabled'] = $media->getEnabled();
+        $mediaContent['provider_name'] = $media->getProviderName();
+        $mediaContent['provider_status'] = $media->getProviderStatus();
+        $mediaContent['provider_reference'] = $media->getProviderReference();
+        $mediaContent['provider_metadata'] = $media->getProviderMetadata();
+        $mediaContent['width'] = $media->getWidth();
+        $mediaContent['height'] = $media->getHeight();
+        $mediaContent['length'] = $media->getLength();
+        $mediaContent['content_type'] = $media->getContentType();
+        $mediaContent['tagIds'] = $media->getTagIds();
+        $mediaContent['copyright'] = $media->getCopyright();
+        $mediaContent['author_name'] = $media->getAuthorName();
+        $mediaContent['context'] = $media->getContext();
+        $mediaContent['cdn_is_flushable'] = $media->getCdnIsFlushable();
+        $mediaContent['cdn_status'] = $media->getCdnStatus();
+        $mediaContent['cdn_flush_at'] = $media->getCdnFlushAt();
+        $mediaContent['updated_at'] = $media->getUpdatedAt();
+        $mediaContent['created_at'] = $media->getCreatedAt();
+        
+        return $mediaContent;
     }
-
+    
     /**
      * return a page with the given routeName
      *

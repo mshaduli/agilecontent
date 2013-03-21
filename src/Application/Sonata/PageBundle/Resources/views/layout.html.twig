@@ -100,14 +100,17 @@ file that was distributed with this source code.
                 </div>
                 <div class="span6 flexslider">
                       <ul class="slides">
-                        {% for media in page.taggedMedia %}
+                       {% for tag in page.taggedMedia %}
+        
+                            {% for media in tag['media'] %}
                       
-                        <li>
-                          <img src="{% path media, 'small' %}" />
-                        </li>
-                      
+                            <li>
+                              <img src="{% path media['id'], 'big' %}" />
+                            </li>
+
+                            {% endfor %}
                         {% endfor %}
-                        </ul>
+                      </ul>
                 </div>
             </div>
         </div>

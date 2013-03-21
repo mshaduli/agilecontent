@@ -18,32 +18,17 @@ class SnapshotPageProxy extends BaseProxy
     } 
     
     public function getTaggedMedia()
-    {        
-        $snapshot = $this->manager->findEnableSnapshot(array('pageId'=>$this->getPage()->getId()));
-        $tagIds = array();
-        $MediaItem = array();
+    {
+        $tagItem = array();
         
         if($this->getTags())
         {
             foreach ($this->getTags() as $tag)
-            {   
-                $tagIds[] = $tag['id'];
-            }
-            
-            $taggedMedia =  $this->manager->getTaggedMediaSnaps($tagIds, $snapshot, $this->getPage());
-            
-            foreach($taggedMedia as $snapshots)
             {
-                foreach($snapshots->getTags() as $tagItem)
-                {
-                    foreach($tagItem->getMedia() as $media)
-                    {
-                        $MediaItem[] = $media;
-                    }
-                }
+                $tagItem[] = $tag;
             }
             
-            return $MediaItem;
+            return $tagItem;
         }
     }
     

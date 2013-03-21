@@ -52,16 +52,18 @@ file that was distributed with this source code.
             <div class="row">
                 <div class="span12">
                     <div id="gallery_container">
-                        {% for media in page.taggedMedia %}
-                        <div class="photo {{ media.tagIds }}">
-                            <img src="{% path media, 'big' %}" />
-                            <a href="#" class="mask">
-                    {% for tag in media.tagLinks %}
-                        <span class="label label-inverse">{{ tag }}</span>
-                    {% endfor %}
-                                <div class="more">+</div>
-                            </a>
-                        </div>
+                        {% for tag in page.taggedMedia %}
+                            {% for media in tag['media'] %}
+                                <div class="photo {{ media['tagIds'] }}">
+                                    <img src="{% path media['id'], 'big' %}" />
+                                    <a href="#" class="mask">
+                                   
+                                        <span class="label label-inverse">{{ tag['name'] }}</span>
+                                    
+                                        <div class="more">+</div>
+                                    </a>
+                                </div>
+                            {% endfor %}
                          {% endfor %}            
                     </div>
                 </div>
