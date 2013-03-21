@@ -1,5 +1,10 @@
 <?php
 
+/**
+ *  @todo Pull config out of code
+ *  @todo Externalise atdw WSDL service
+ */
+
 namespace TNE\OperatorBundle\Data;
 
 use Metadata\MetadataFactoryInterface;
@@ -13,44 +18,35 @@ use TNE\OperatorBundle\Entity\Accommodation;
 class ATDWAnnotationProcessor {
     private $metadataFactory;
     
+    private $driver;
+
     private $distributorKey = '201212040953';
+    
+    private $atdwCategoryList;
+    
+    private $atdwResults;
 
 
-    public function __construct(MetadataFactoryInterface $metadataFactory)
+    public function __construct(MetadataFactoryInterface $metadataFactory, $driver)
     {
         $this->metadataFactory = $metadataFactory;
-    }
- 
-    public function populate($object)
-    {
-        if (!method_exists($object, 'getAtdwId')) {
-            throw new \InvalidArgumentException('Not an ATDW compatible object');
-        }
-        
-        
-
-        $productRecord = $this->getProduct($object->getAtdwId())->product_record;
-         
-        $classMetadata = $this->metadataFactory->getMetadataForClass(get_class($object));
-        
- 
-        foreach ($classMetadata->propertyMetadata as $propertyMetadata) {
-            if (isset($propertyMetadata->atdwKey)) {
-                $atdwKey = $propertyMetadata->atdwKey;
-                $propertyMetadata->setValue($object, (string) $productRecord->$atdwKey);
-            }
-        }
- 
-        return $object;
+        $this->driver = $driver;
     }
     
-    public function import($em)
+    public function bootstrap($className)
+    {
+        $entityAnnotation = $this->driver->getReader()->getClassAnnotation($className, 'TNE\\OperatorBundle\\Annotation\\ATDW\\Entity');
+        
+        $this->loadXml(array("category"=>$entityAnnotation->getType()));
+    }
+
+    public function loadXml($options)
     {
         $strWSDL = 'http://national.atdw.com.au/soap/AustralianTourismWebService.asmx?WSDL';
         $client = new \SoapClient($strWSDL);
         $strCommandName = "QueryProducts";
         $strCommandParameter = "<parameters>";
-        $strCommandParameter .= "<row><param>PRODUCT_CATEGORY_LIST</param><value>ACCOMM</value></row>";
+        $strCommandParameter .= "<row><param>PRODUCT_CATEGORY_LIST</param><value>$options[category]</value></row>";
         $strCommandParameter .= "<row><param>RESULTS_PER_PAGE</param><value>1000</value></row>";
         $strCommandParameter .= "<row><param>DOMESTIC</param><value>Victoria's High Country</value></row>";
         $strCommandParameter .= "<row><param>ADDRESS_RETURN</param><value>YES</value></row>";        
@@ -61,41 +57,34 @@ class ATDWAnnotationProcessor {
         $result = $client->CommandHandler($param);
 
         $xmlUf8 = preg_replace('/(<\?xml[^?]+?)utf-16/i', '$1utf-8', $result->CommandHandlerResult);
-        
-//        echo $xmlUf8;
-        
-        $xmlObj = simplexml_load_string($xmlUf8);
-        
-        $test = $xmlObj->xpath('/atdw_data_results/product_distribution[1]/product_record/product_name');
-        print($test[0]);
-        
-        
-//        foreach ($crawler as $domElement) {
-//            print $domElement->nodeName;
-//        }
-        
-//        var_dump($crawler->filterXPath('descendant-or-self::/product_record/product_name')->text());
-        
-//        $xmlObj = simplexml_load_string($xmlUf8);
+        $this->atdwResults = simplexml_load_string($xmlUf8);        
+    }
 
-//        foreach ($xmlObj as $result)
-//        {
-//            echo $result->product_record->product_id . " : ". $result->product_record->product_name . " : ". $result->product_address->row->address_line_1 . " : ". $result->product_address->row->city_name;
-//            $accommodation = new Accommodation();
-//            $accommodation->setAtdwId($result->product_record->product_id);
-//            $accommodation->setName($result->product_record->product_name);
-//            $accommodation->setDescription($result->product_record->product_description);
-//            $accommodation->setAddress($result->product_address->row->address_line_1 . ", ". $result->product_address->row->city_name . ", " . $result->product_address->row->state_name . ", ". $result->product_address->row->address_postal_code);
-//            $accommodation->setDestination($result->product_address->row->city_name);
-//            $em->persist($accommodation);
-//            $em->flush();
-//            
-////            var_dump($this->getProduct($result->product_record->product_id)->product_attribute);
-//            echo "\n\n\n\n\n-------------------------------------------------------------------------------------\n\n\n\n\n";
-//        }
-        
+    public function populate($object, $index=1)
+    {         
+        $classMetadata = $this->metadataFactory->getMetadataForClass(get_class($object));
+         
+        foreach ($classMetadata->propertyMetadata as $propertyMetadata) {
+            if (isset($propertyMetadata->xpathString)) {                
+                $atdwValue = $this->getAtdwResults()->xpath(str_replace('$index', $index, $propertyMetadata->xpathString));                
+                $propertyMetadata->setValue($object, $atdwValue[0]);
+            }
+        }
+ 
+        return $object;
     }
     
+    public function getAtdwResults()
+    {
+        return $this->atdwResults;
+    }
+    
+    public function getProductCount()
+    {
+        return count($this->getAtdwResults()->xpath('/atdw_data_results/product_distribution'));
+    }
+
+
     public function getProduct($productId)
     {
         $strWSDL = 'http://national.atdw.com.au/soap/AustralianTourismWebService.asmx?WSDL';

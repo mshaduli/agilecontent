@@ -9,9 +9,9 @@ namespace TNE\OperatorBundle\Annotation\ATDW;
  * 
  * @Annotation
  */
-class StarRating {    
+class Longitude {    
     public static function getXpathString(){
-        return '/atdw_data_results/product_distribution/product_record/product_name';
+        return '/atdw_data_results/product_distribution[$index]/product_address/row/geocode_gda_longitude';
     }
 }
 

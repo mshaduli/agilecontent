@@ -21,13 +21,14 @@ class AnnotationDriver implements DriverInterface
         $classMetadata = new MergeableClassMetadata($class->getName());
  
         foreach ($class->getProperties() as $reflectionProperty) {
+            
            $propertyMetadata = new PropertyMetadata($class->getName(), $reflectionProperty->getName());
             
-            foreach ($this->reader->getPropertyAnnotations($reflectionProperty) as $annotation) {
+            foreach ($this->reader->getPropertyAnnotations($reflectionProperty) as $annotation) {                
                 
-                
-                if(method_exists($annotation, 'getAtdwKey'))               {
-                    $propertyMetadata->atdwKey = $annotation::getAtdwKey();
+                if(method_exists($annotation, 'getXpathString'))
+                {
+                    $propertyMetadata->xpathString = $annotation::getXpathString();
                     $classMetadata->addPropertyMetadata($propertyMetadata);
                 }
             }           
@@ -35,4 +36,10 @@ class AnnotationDriver implements DriverInterface
  
         return $classMetadata;
     }
+    
+    public function getReader()
+    {
+        return $this->reader;
+    }
+    
 }

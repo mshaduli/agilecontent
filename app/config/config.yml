@@ -168,7 +168,7 @@ stfalcon_tinymce:
                 
 vich_geographical:
     db_driver: orm
-    query_service: vich_geographical.query_service.default
+    query_service: tne_annotation.query_service
     map_renderer: vich_geographical.map_renderer.google
     icon_generator: vich_geographical.icon_generator.default
 

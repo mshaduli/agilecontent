@@ -28,19 +28,30 @@ class PopulateOperatorsCommand extends ContainerAwareCommand {
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $atdwProcessor = $this->getContainer()->get('tne_annotation.atdw_processor');
+        $atdwProcessor->bootstrap(new \ReflectionClass('\TNE\OperatorBundle\Entity\Accommodation'));
         
         $em = $this->getContainer()->get('doctrine')->getEntityManager();
         
         if($input->getOption('all'))
         {
-            $atdwProcessor->import($em);
+            for($i=1;$i<=$atdwProcessor->getProductCount();$i++)
+            {
+                $newAccommodation = new Accommodation();
+                $atdwProcessor->populate($newAccommodation, $i);
+                $em->persist($newAccommodation);
+            }
+            $em->flush();
         }
             
         else 
-        {             
-            $accommodation = $em->find('TNE\OperatorBundle\Entity\Accommodation', $input->getArgument('id'));
-            $atdwProcessor->populate($accommodation);
-            //\Doctrine\Common\Util\Debug::dump($accommodation);
+        {   
+            
+            $accommodation = $em->find('TNE\OperatorBundle\Entity\Accommodation', $input->getArgument('id'));            
+                        
+            $atdwProcessor->populate($accommodation, $input->getArgument('id'));
+            
+            \Doctrine\Common\Util\Debug::dump($accommodation);
+            
             $em->persist($accommodation);
             $em->flush();
        }

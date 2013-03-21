@@ -9,11 +9,10 @@ namespace TNE\OperatorBundle\Annotation\ATDW;
  * 
  * @Annotation
  */
-class ProductAttrId {
-    
-//    public static function getAtdwKey(){
-//        return 'product_attr_id';
-//    }
+class ProductAttrId {    
+    public static function getXpathString(){
+        return '/atdw_data_results/product_distribution[$index]/product_record/product_id';
+    }
     
 }
 

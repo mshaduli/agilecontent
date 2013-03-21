@@ -9,9 +9,9 @@ namespace TNE\OperatorBundle\Annotation\ATDW;
  * 
  * @Annotation
  */
-class StarRating {    
+class CityName {    
     public static function getXpathString(){
-        return '/atdw_data_results/product_distribution/product_record/product_name';
+        return '/atdw_data_results/product_distribution[$index]/product_address/row/city_name';
     }
 }
 

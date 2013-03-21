@@ -10,8 +10,8 @@ namespace TNE\OperatorBundle\Annotation\ATDW;
  * @Annotation
  */
 class ProductName {    
-    public static function getAtdwKey(){
-        return '/atdw_data_results/product_distribution/product_record/product_name';
+    public static function getXpathString(){
+        return '/atdw_data_results/product_distribution[$index]/product_record/product_name';
     }
 }
 

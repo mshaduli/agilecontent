@@ -9,6 +9,9 @@ use TNE\OperatorBundle\Annotation\ATDW as ATDW;
 /**
  * @Vich\Geographical(lat="latitude", lng="longitude")
  * @Vich\Geographical(on="update")
+ * 
+ * @ATDW\Entity(type="ACCOMM")
+ * 
  */
 class Accommodation
 {
@@ -34,7 +37,7 @@ class Accommodation
     private $atdwRateFrom;
     
     /**
-     *ATDW\productDescription
+     *@ATDW\ProductDescription
      */
     private $description;
     
@@ -45,7 +48,7 @@ class Accommodation
 
     
     /**
-     *ATDW\cityName
+     *@ATDW\CityName
      */    
     private $destination;
 
@@ -57,12 +60,12 @@ class Accommodation
 
 
     /**
-     * @var decimal
+     * @ATDW\Latitude
      */    
     protected $latitude;
     
     /**
-     * @var decimal
+     * @ATDW\Longitude
      */    
     protected $longitude;
         
@@ -76,6 +79,8 @@ class Accommodation
      * @var type int
      */
     protected $site;
+    
+    protected $tripadvisorId;
 
     /**
      * Get id
@@ -128,7 +133,6 @@ class Accommodation
  
     /**
      * Get address
-     * @Vich\GeographicalQuery
      *
      * @return string 
      */
@@ -156,6 +160,14 @@ class Accommodation
     public function getLongitude()
     {
         return $this->longitude;
+    }
+    
+    /**
+     * @Vich\GeographicalQuery
+     */
+    public function getCoordinates()
+    {
+        return array($this->getLatitude(),$this->getLongitude());
     }
     
 
