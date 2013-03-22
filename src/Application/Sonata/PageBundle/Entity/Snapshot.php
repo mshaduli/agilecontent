@@ -50,50 +50,5 @@ class Snapshot extends BaseSnapshot
         return $this->id;
     }
     
-    public function getTags()
-    {
-        return $this->tags;
-    }
-    
-    
-    public function setTags($tags)
-    {
-        $this->tags = $tags;
-    }
-        
-    public function getTaggedMedia()
-    {
-        $taggedMedia = array();
-        foreach ($this->getTags() as $tag){
-            //$taggedMedia [] = $tag->getMedia();
-            //array_merge($taggedMedia, $tag->getMediaList());
-            //$taggedMedia [] = $tag->getMedia()->toArray();
-            $taggedMedia = array_merge($taggedMedia, $tag->getMedia()->toArray());
-        }
-        return array_unique($taggedMedia);
-    }    
-    
-    /**
-     * Add tags
-     *
-     * @param \Application\Sonata\PageBundle\Entity\Tag $tags
-     * @return Snapshot
-     */
-    public function addTag(\Application\Sonata\PageBundle\Entity\Tag $tags)
-    {
-        $this->tags[] = $tags;
-    
-        return $this;
-    }
-
-    /**
-     * Remove tags
-     *
-     * @param \Application\Sonata\PageBundle\Entity\Tag $tags
-     */
-    public function removeTag(\Application\Sonata\PageBundle\Entity\Tag $tags)
-    {
-        $this->tags->removeElement($tags);
-    }
 
 }

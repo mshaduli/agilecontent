@@ -120,26 +120,4 @@ class Tag
         return $this->getName();
     }
     
-    /**
-     * Set snapshot
-     *
-     * @param array $snapshot
-     * @return Tag
-     */
-    public function setSnapshot($snapshot)
-    {
-        $this->snapshot = $snapshot;
-    
-        return $this;
-    }
-
-    /**
-     * Get snapshot
-     *
-     * @return array 
-     */
-    public function getSnapshot()
-    {
-        return $this->snapshot;
-    }
 }
