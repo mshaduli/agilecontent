@@ -5,7 +5,6 @@
     <parameters>
         <parameter key="tne_annotation.metadata_factory.class">Metadata\MetadataFactory</parameter>
         <parameter key="tne_annotation.metadata.annotation_driver.class">TNE\OperatorBundle\Metadata\AnnotationDriver</parameter>
-        <parameter key="tne_annotation.query_service.class">TNE\OperatorBundle\QueryService\MockQueryService</parameter>
     </parameters>
  
     <services>
@@ -22,10 +21,6 @@
             <argument type="service" id="tne_annotation.metadata_factory" />
             <argument type="service" id="tne_annotation.metadata.annotation_driver" />
         </service>
-        
-        <service id="tne_annotation.query_service" class="%tne_annotation.query_service.class%" public="false">
-            <argument type="service" id="annotation_reader" />
-        </service>        
         
     </services>
 </container>

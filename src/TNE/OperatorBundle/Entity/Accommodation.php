@@ -54,7 +54,7 @@ class Accommodation
 
             
     /**
-     *ATDW\address
+     *@ATDW\PhysicalAddress
      */    
     private $address;
 
@@ -227,6 +227,6 @@ class Accommodation
     public function setMap()
     {
         
-    }
+    }    
     
 }

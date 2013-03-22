@@ -4,17 +4,21 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <!--
+    
     <parameters>
-        <parameter key="tne_operator.example.class">TNE\OperatorBundle\Example</parameter>
+        <parameter key="tne_annotation.query_service.class">TNE\OperatorBundle\QueryService\MockQueryService</parameter>
+        <parameter key="tne.utility.siteresolver.class">TNE\OperatorBundle\Utility</parameter>
+        
     </parameters>
 
     <services>
-        <service id="tne_operator.example" class="%tne_operator.example.class%">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
-        </service>
+        <service id="tne_annotation.query_service" class="%tne_annotation.query_service.class%" public="false">
+            <argument type="service" id="annotation_reader" />
+        </service>     
+        <service id="tne.operator_site_listener" class="TNE\OperatorBundle\EventListener\SiteListener">
+            <tag name="doctrine.event_listener" event="prePersist" />
+            <argument type="service" id="tne_annotation.metadata.annotation_driver" />
+        </service>          
     </services>
-    -->
+   
 </container>

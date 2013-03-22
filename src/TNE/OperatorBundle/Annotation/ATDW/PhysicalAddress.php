@@ -9,9 +9,9 @@ namespace TNE\OperatorBundle\Annotation\ATDW;
  * 
  * @Annotation
  */
-class Longitude {    
+class PhysicalAddress {    
     public static function getXpathString(){
-        return '/atdw_data_results/product_distribution[$index]/product_address/row/geocode_gda_longitude';
+        return '/atdw_data_results/product_distribution[$index]/product_address/row/address_line_1';
     }
 }
 

@@ -19,11 +19,13 @@ imports:
     - { resource: '@ApplicationSonataUserBundle/Resources/config/services.yml' }
     - { resource: '@ApplicationSonataMediaBundle/Resources/config/services.yml' }
     - { resource: '@TNEOperatorBundle/Resources/config/services.yml' }
+    - { resource: '@TNEOperatorBundle/Resources/config/services.xml' }
     
     - { resource: '@ApplicationSonataPageBundle/Resources/config/tag.xml' }
     - { resource: '@TNEOperatorBundle/Resources/config/accommodation.xml' }    
     - { resource: '@TNEOperatorBundle/Resources/config/map.xml' }
-    - { resource: '@TNEOperatorBundle/Resources/config/annotations.xml' }    
+    - { resource: '@TNEOperatorBundle/Resources/config/annotations.xml' }
+    
 
 framework:
     #esi:             ~

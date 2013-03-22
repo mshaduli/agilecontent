@@ -6,9 +6,9 @@ use Vich\GeographicalBundle\QueryService\QueryServiceInterface;
 use Vich\GeographicalBundle\QueryService\QueryResult;
 
 /**
- * GoogleQueryService.
+ * MockQueryService.
  * 
- * @author Dustin Dobervich <ddobervich@gmail.com>
+ * @author zuhairnaqvi
  */
 class MockQueryService implements QueryServiceInterface
 {
@@ -22,7 +22,6 @@ class MockQueryService implements QueryServiceInterface
         $result = new QueryResult();
         $result->setLatitude($query[0]);
         $result->setLongitude($query[1]);
-
         
         return $result;
     }
