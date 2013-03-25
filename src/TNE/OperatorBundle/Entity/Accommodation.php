@@ -117,6 +117,9 @@ class Accommodation
      */
     protected $atdwContactUrl;
     
+    protected $rooms;
+
+
     /**
      * Get id
      *
@@ -292,6 +295,25 @@ class Accommodation
         $this->atdwContactUrl = $atdwContactUrl;
     }        
     
+    public function getRooms()
+    {
+        return $this->rooms;
+    }
+    
+    public function setRooms($rooms)
+    {
+        $this->rooms = $rooms;
+    }    
+    
+    public function addRoom($room){
+        $room->setAccommodation($this);
+        $this->rooms->add($room);
+    }
+    
+    public function removeRoom($room){
+        $this->rooms->remove($room);
+    }    
+
     public function __toString() {
         return $this->getName();
     }

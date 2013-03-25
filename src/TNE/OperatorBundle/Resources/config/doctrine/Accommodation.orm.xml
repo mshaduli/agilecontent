@@ -26,7 +26,14 @@
         <join-column name="site_id" referenced-column-name="id" />
     </many-to-one>
     
-    
+    <one-to-many field="rooms" target-entity="AccommodationRoom" mapped-by="accommodation">
+        <cascade>
+            <cascade-persist />
+            <cascade-refresh />
+            <cascade-remove />
+        </cascade>        
+    </one-to-many>
+        
     <many-to-many field="tags" inversed-by="accommodation" target-entity="Application\Sonata\PageBundle\Entity\Tag">
         <join-table name="accommodation_tags">
             <join-columns>

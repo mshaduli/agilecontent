@@ -33,6 +33,18 @@ class AccommodationAdmin extends Admin
             ->with('Media')                
             ->end()
             ->with('Rooms')
+                ->add('rooms', 'sonata_type_collection', array(
+                        'required' => false,
+                        'by_reference' => false,
+                        'label' => 'Rooms List'
+                    ), array(
+                        'edit' => 'inline',
+                        'inline' => 'table',
+//                        'sortable'  => 'position',
+//                        'link_parameters' => array('context' => 'default'),
+//                        'help' => 'Optionally add or select media items for the story text.'
+                    )
+                )
             ->end()
             ->with('TXA Settings')
             ->end()                

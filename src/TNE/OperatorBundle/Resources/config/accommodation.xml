@@ -13,5 +13,15 @@
               <argument>TNEOperatorBundle</argument>
           </call>
       </service>
+      
+       <service id="sonata.admin.accommodation.room" class="TNE\OperatorBundle\Admin\AccommodationRoomAdmin">
+          <tag name="sonata.admin" manager_type="orm"/>
+          <argument />
+          <argument>TNE\OperatorBundle\Entity\AccommodationRoom</argument>
+          <argument>SonataAdminBundle:CRUD</argument>
+          <call method="setTranslationDomain">
+              <argument>TNEOperatorBundle</argument>
+          </call>
+      </service>      
    </services>
 </container>
