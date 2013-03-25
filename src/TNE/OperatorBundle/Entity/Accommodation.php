@@ -398,4 +398,14 @@ class Accommodation
         return false;
     }
     
+    public function getTagLinks()
+    {
+        $tagLinks = array();
+        foreach($this->getTags() as $tag)
+        {
+            $tagLinks[]=$tag->getName();
+        }
+        return $tagLinks;
+    }    
+    
 }
