@@ -43,7 +43,7 @@ class Accommodation
     private $description;
     
     /**
-     *@ATDW\starRating
+     *@ATDW\StarRating
      */
     private $atdwStarRating;
 
