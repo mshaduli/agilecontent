@@ -16,24 +16,29 @@ class AccommodationAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('Details')
+            ->with('General')
                 ->add('name')
                 ->add('site')
-                ->add('description')
+                ->add('description', 'textarea', array(
+                        'attr' => array(
+                            'class' => 'tinymce span6',
+                            'data-theme' => 'advanced'
+                        )
+                    ))
                 ->add('address')
                 ->add('tags')
                 ->add('atdwStarRating', null, array('label'=>'Star Rating'))
             ->end()
-            ->with('Contact')
+            ->with('Contact', array('collapsed' => true))
                 ->add('atdwContactEmail', null, array('label'=>'Email'))
                 ->add('atdwContactPhone', null, array('label'=>'Phone'))
                 ->add('atdwContactMobile', null, array('label'=>'Mobile'))
                 ->add('atdwContactUrl', null, array('label'=>'URL'))
             ->end()
-            ->with('Media')
+            ->with('Media', array('collapsed' => true))
                  ->add('gallery', 'sonata_type_model_list', array('required' => false), array('link_parameters' => array('context' => 'default')))
             ->end()
-            ->with('Rooms')
+            ->with('Rooms', array('collapsed' => true))
                 ->add('rooms', 'sonata_type_collection', array(
                         'required' => false,
                         'by_reference' => false,
@@ -47,12 +52,12 @@ class AccommodationAdmin extends Admin
                     )
                 )
             ->end()                
-            ->with('Social Media')
+            ->with('Social Media', array('collapsed' => true))
                 ->add('facebookUrl')
                 ->add('twitterUrl')
                 ->add('tripadvisorUrl')
             ->end()                
-            ->with('TXA Settings')
+            ->with('TXA Settings', array('collapsed' => true))
             ->end()                               
         ;
     }

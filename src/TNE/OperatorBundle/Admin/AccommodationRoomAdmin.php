@@ -16,17 +16,16 @@ class AccommodationRoomAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-                ->add('name')
+                ->add('name', 'text', array('attr'=>array('class'=>'span12')))
                 ->add('description', 'textarea', array(
                         'attr' => array(
                             'class' => 'tinymce',
-                            'data-theme' => 'simple', // simple, advanced, bbcode
-                            'width' => '100%'
+                            'data-theme' => 'advanced'
                         ),
                         'required' => false
-                    ))   
-                ->add('rateFrom')
-                ->add('rateTo')
+                    ))
+                ->add('rateFrom', 'text', array('attr'=>array('class'=>'span5')))
+                ->add('rateTo', 'text', array('attr'=>array('class'=>'span5')))
         ;
     }
 
