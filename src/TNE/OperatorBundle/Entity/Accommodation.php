@@ -335,6 +335,38 @@ class Accommodation
         $this->gallery = $gallery;
     }    
     
+    public function getFacebookUrl()
+    {
+        return $this->facebookUrl;
+    }
+    
+    public function setFacebookUrl($facebookUrl)
+    {
+        $this->facebookUrl = $facebookUrl;
+    } 
+    
+    public function getTwitterUrl()
+    {
+        return $this->twitterUrl;
+    }    
+    
+    public function setTwitterUrl($twitterUrl)
+    {
+        $this->twitterUrl = $twitterUrl;
+    }     
+    
+    
+    public function getTripadvisorUrl()
+    {
+        return $this->tripadvisorUrl;
+    }    
+    
+    public function setTripadvisorUrl($tripadvisorUrl)
+    {
+        $this->tripadvisorUrl = $tripadvisorUrl;
+    }     
+        
+    
     public function getRoomCount()
     {
         return $this->getRooms()->count();
@@ -353,5 +385,17 @@ class Accommodation
     {
         
     }    
+    
+    public function getHeroImage()
+    {
+        $gallery = $this->getGallery();
+        if($gallery)
+        {
+            $images = $gallery->getGalleryHasMedias();
+            if(count($images) > 0) return $images[0];
+        }
+        
+        return false;
+    }
     
 }

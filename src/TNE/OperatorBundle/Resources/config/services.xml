@@ -19,6 +19,9 @@
             <tag name="doctrine.event_listener" event="prePersist" />
             <argument type="service" id="tne_annotation.metadata.annotation_driver" />
         </service>          
+        <service id="tne.map_renderer.google" class="TNE\OperatorBundle\Map\Renderer\GoogleMapRenderer" public="false">
+            <argument>%vich_geographical.map_renderer.options%</argument>
+        </service>        
     </services>
    
 </container>

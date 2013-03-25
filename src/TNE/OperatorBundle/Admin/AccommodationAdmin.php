@@ -31,7 +31,7 @@ class AccommodationAdmin extends Admin
                 ->add('atdwContactUrl', null, array('label'=>'URL'))
             ->end()
             ->with('Media')
-                 ->add('gallery', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'default')))
+                 ->add('gallery', 'sonata_type_model_list', array('required' => false), array('link_parameters' => array('context' => 'default')))
             ->end()
             ->with('Rooms')
                 ->add('rooms', 'sonata_type_collection', array(
@@ -46,11 +46,14 @@ class AccommodationAdmin extends Admin
 //                        'help' => 'Optionally add or select media items for the story text.'
                     )
                 )
-            ->end()
-            ->with('TXA Settings')
             ->end()                
-            ->with('Top 5 Recommended Operators')
-            ->end()                                            
+            ->with('Social Media')
+                ->add('facebookUrl')
+                ->add('twitterUrl')
+                ->add('tripadvisorUrl')
+            ->end()                
+            ->with('TXA Settings')
+            ->end()                               
         ;
     }
 

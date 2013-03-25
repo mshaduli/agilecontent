@@ -18,6 +18,8 @@ class OperatorMap extends Map {
         $this->setAutoZoom(true);
         $this->setContainerId('map_canvas');
         $this->setWidth("100%");
-        $this->setHeight(350);
+        $this->setHeight(500);
+        $this->setShowZoomControl(true);
+        $this->setShowInfoWindowsForMarkers(true);
     }
 }

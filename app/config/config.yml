@@ -171,7 +171,7 @@ stfalcon_tinymce:
 vich_geographical:
     db_driver: orm
     query_service: tne_annotation.query_service
-    map_renderer: vich_geographical.map_renderer.google
+    map_renderer: tne.map_renderer.google
     icon_generator: vich_geographical.icon_generator.default
 
     # jQuery aware google map renderer available
@@ -185,7 +185,7 @@ vich_geographical:
 
     templating:
         engine: twig # or php
-        info_window: VichGeographicalBundle:InfoWindow:default.html.twig
+        info_window: TNEOperatorBundle:InfoWindow:default.html.twig
 
     # if you specify the Leaflet map renderer then add your api key as follows
     leaflet:

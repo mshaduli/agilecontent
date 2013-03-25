@@ -29,10 +29,10 @@
     
     <many-to-one
     field="gallery"
-    target-entity="Application\Sonata\MediaBundle\Entity\Gallery"
-    >
+    target-entity="Application\Sonata\MediaBundle\Entity\Gallery">
     <cascade>
         <cascade-all/>
+        <join-column name="gallery_id" referenced-column-name="id" nullable="true"/>
     </cascade>
     </many-to-one>
     
