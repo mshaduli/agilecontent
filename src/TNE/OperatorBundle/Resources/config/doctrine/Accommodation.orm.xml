@@ -11,6 +11,10 @@
     <field name="atdwStarRating" type="string" column="atdw_star_rating" length="255" nullable="true"/>
     <field name="address" type="string" column="address" length="255" nullable="true"/>
     <field name="destination" type="string" column="atdw_city_name" length="255"/>
+    <field name="atdwContactEmail" type="string" column="atdw_contact_email" length="255" nullable="true"/>    
+    <field name="atdwContactPhone" type="string" column="atdw_contact_phone" length="255" nullable="true"/>    
+    <field name="atdwContactMobile" type="string" column="atdw_contact_mobile" length="255" nullable="true"/>    
+    <field name="atdwContactUrl" type="string" column="atdw_contact_url" length="255" nullable="true"/>    
     <field name="twitterUrl" type="string" column="atdw_twitter_url" length="255" nullable="true"/>
     <field name="facebookUrl" type="string" column="atdw_facebook_url" length="255" nullable="true"/>
     <field name="tripadvisorUrl" type="string" column="atdw_tripadvisor_url" length="255" nullable="true"/>

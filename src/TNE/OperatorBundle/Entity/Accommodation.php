@@ -96,7 +96,27 @@ class Accommodation
      *@ATDW\TripAdvisor
      */
     protected $tripadvisorUrl;
-
+    
+    /**
+     *@ATDW\ContactEmail
+     */
+    protected $atdwContactEmail;
+    
+    /**
+     *@ATDW\ContactPhone
+     */
+    protected $atdwContactPhone;    
+    
+    /**
+     *@ATDW\ContactMobile
+     */
+    protected $atdwContactMobile;    
+    
+    /**
+     *@ATDW\ContactUrl
+     */
+    protected $atdwContactUrl;
+    
     /**
      * Get id
      *
@@ -238,7 +258,39 @@ class Accommodation
     public function setTags($tags)
     {
         $this->tags = $tags;
+    }       
+    
+    public function getAtdwContactEmail(){
+        return $this->atdwContactEmail;
+    }
+    
+    public function getAtdwContactPhone(){
+        return $this->atdwContactPhone;
     }    
+
+    public function getAtdwContactMobile(){
+        return $this->atdwContactMobile;
+    }    
+    
+    public function getAtdwContactUrl(){
+        return $this->atdwContactUrl;
+    }
+    
+    public function setAtdwContactEmail($atdwContactEmail){
+        $this->atdwContactEmail = $atdwContactEmail;
+    }
+    
+    public function setAtdwContactPhone($atdwContactPhone){
+        $this->atdwContactPhone = $atdwContactPhone;
+    }    
+
+    public function setAtdwContactMobile($atdwContactMobile){
+        $this->atdwContactMobile = $atdwContactMobile;
+    }    
+    
+    public function setAtdwContactUrl($atdwContactUrl){
+        $this->atdwContactUrl = $atdwContactUrl;
+    }        
     
     public function __toString() {
         return $this->getName();
