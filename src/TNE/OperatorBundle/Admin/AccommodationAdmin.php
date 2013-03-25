@@ -30,7 +30,8 @@ class AccommodationAdmin extends Admin
                 ->add('atdwContactMobile', null, array('label'=>'Mobile'))
                 ->add('atdwContactUrl', null, array('label'=>'URL'))
             ->end()
-            ->with('Media')                
+            ->with('Media')
+                 ->add('gallery', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'default')))
             ->end()
             ->with('Rooms')
                 ->add('rooms', 'sonata_type_collection', array(
@@ -68,6 +69,8 @@ class AccommodationAdmin extends Admin
             ->addIdentifier('name')
             ->add('destination')
             ->add('tags')                
+            ->add('atdwStarRating', null, array('label'=>'Star Rating'))
+            ->add('roomCount', null, array('label'=>'Rooms'))
             ->add('latitude')
             ->add('longitude')
         ;

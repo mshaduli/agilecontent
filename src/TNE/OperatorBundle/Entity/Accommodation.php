@@ -124,6 +124,9 @@ class Accommodation
      */
     protected $rooms;
     
+    protected $gallery;
+
+
     public function __construct() {
         $this->rooms = new ArrayCollection();
     }
@@ -321,6 +324,21 @@ class Accommodation
     public function removeRoom($room){
         $this->rooms->remove($room);
     }    
+    
+    public function getGallery()
+    {
+        return $this->gallery;
+    }
+    
+    public function setGallery($gallery)
+    {
+        $this->gallery = $gallery;
+    }    
+    
+    public function getRoomCount()
+    {
+        return $this->getRooms()->count();
+    }
 
     public function __toString() {
         return $this->getName();
