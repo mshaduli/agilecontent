@@ -17,7 +17,14 @@ class AccommodationRoomAdmin extends Admin
     {
         $formMapper
                 ->add('name')
-                ->add('description')
+                ->add('description', 'textarea', array(
+                        'attr' => array(
+                            'class' => 'tinymce',
+                            'data-theme' => 'simple', // simple, advanced, bbcode
+                            'width' => '100%'
+                        ),
+                        'required' => false
+                    ))   
                 ->add('rateFrom')
                 ->add('rateTo')
         ;

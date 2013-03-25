@@ -78,7 +78,21 @@ class ATDWAnnotationProcessor {
                 else
                 {
                     $atdwValue = $this->getProductXml($object->getAtdwId())->xpath($propertyMetadata->xpathString);
-                    if(isset($atdwValue[0])) $propertyMetadata->setValue($object, $atdwValue[0]);
+                    
+                    if(property_exists($propertyMetadata, 'addMethod'))
+                    {
+                        $addMethod = $propertyMetadata->addMethod;
+                        foreach($atdwValue as $row)
+                        {
+                            $objectClassName = $propertyMetadata->objectClassName;
+                            $subObject = $this->fillObject(new $objectClassName(), $row);
+                            $object->$addMethod($subObject);                            
+                        }
+                    }
+                    else
+                    {
+                        if(isset($atdwValue[0])) $propertyMetadata->setValue($object, $atdwValue[0]);
+                    }
                 }
             }
         }
@@ -86,6 +100,16 @@ class ATDWAnnotationProcessor {
         return $object;
     }
     
+    public function fillObject($object, $xpathNode)
+    {
+        foreach ($xpathNode as $key => $value)
+        {
+            $object->setField($key, $value);
+        }
+        return $object;
+    }
+
+
     public function getAtdwResults()
     {
         return $this->atdwResults;
@@ -114,8 +138,8 @@ class ATDWAnnotationProcessor {
             $result = $client->CommandHandler($param);
 
             $xmlUf8 = preg_replace('/(<\?xml[^?]+?)utf-16/i', '$1utf-8', $result->CommandHandlerResult);
-            echo $xmlUf8;
-            echo "\n\n\n\n\_______________________________________________________________________________________________________\n\n\n\n\n";
+//            echo $xmlUf8;
+//            echo "\n\n\n\n\_______________________________________________________________________________________________________\n\n\n\n\n";
 
             $this->productXml[$productKey] = simplexml_load_string($xmlUf8);        
         }

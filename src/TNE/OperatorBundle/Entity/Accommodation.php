@@ -5,6 +5,7 @@ namespace TNE\OperatorBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Vich\GeographicalBundle\Annotation as Vich;
 use TNE\OperatorBundle\Annotation\ATDW as ATDW;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @Vich\Geographical(lat="latitude", lng="longitude")
@@ -117,8 +118,15 @@ class Accommodation
      */
     protected $atdwContactUrl;
     
+    
+    /**
+     *@ATDW\Rooms
+     */
     protected $rooms;
-
+    
+    public function __construct() {
+        $this->rooms = new ArrayCollection();
+    }
 
     /**
      * Get id

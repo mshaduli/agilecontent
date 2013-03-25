@@ -150,27 +150,25 @@ class AccommodationRoom
         return $this->rateTo;
     }
 
-    /**
-     * Set photos
-     *
-     * @param array $photos
-     * @return AccommodationRoom
-     */
-    public function setPhotos($photos)
+    public function setField($key, $value)
     {
-        $this->photos = $photos;
-    
-        return $this;
+        switch($key)
+        {
+            case 'service_name':
+                $this->setName($value);
+                break;
+            case 'service_description':
+                $this->setDescription($value);
+                break;
+            case 'rate_from':
+                $this->setRateFrom($value);
+                break;
+            case 'rate_to':
+                $this->setRateTo($value);
+                break;
+            default:
+                // Do nothing
+        }
     }
-
-    /**
-     * Get photos
-     *
-     * @return array 
-     */
-    public function getPhotos()
-    {
-        return $this->photos;
-    }
-    
+            
 }

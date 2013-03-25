@@ -4,10 +4,10 @@
     <id name="id" type="integer" column="id">
       <generator strategy="AUTO"/>
     </id>
-    <field name="name" type="string" column="name" length="255"/>
-    <field name="description" type="text" column="description"/>
-    <field name="rateFrom" type="decimal" column="rate_from"/>
-    <field name="rateTo" type="decimal" column="rate_to"/>
+    <field name="name" type="string" column="name" length="255" nullable="true"/>
+    <field name="description" type="text" column="description" nullable="true"/>
+    <field name="rateFrom" type="decimal" column="rate_from" nullable="true"/>
+    <field name="rateTo" type="decimal" column="rate_to" nullable="true"/>
     
     <many-to-one field="accommodation" target-entity="Accommodation" inversed-by="rooms">
         <join-column name="accommodation_id" referenced-column-name="id" />
