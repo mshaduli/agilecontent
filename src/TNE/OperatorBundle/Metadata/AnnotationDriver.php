@@ -29,6 +29,7 @@ class AnnotationDriver implements DriverInterface
                 if(method_exists($annotation, 'getXpathString'))
                 {
                     $propertyMetadata->xpathString = $annotation::getXpathString();
+                    $propertyMetadata->commandType = $annotation::getCommandType();
                     $classMetadata->addPropertyMetadata($propertyMetadata);
                 }
             }           

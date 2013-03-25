@@ -13,5 +13,9 @@ class CityName {
     public static function getXpathString(){
         return '/atdw_data_results/product_distribution[$index]/product_address/row/city_name';
     }
+
+    public static function getCommandType(){
+        return 'set1';
+    }    
 }
 

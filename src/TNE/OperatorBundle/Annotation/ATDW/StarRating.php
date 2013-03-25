@@ -9,9 +9,13 @@ namespace TNE\OperatorBundle\Annotation\ATDW;
  * 
  * @Annotation
  */
-class StarRating {    
+class StarRating {
+    
     public static function getXpathString(){
-        return '/atdw_data_results/product_distribution/product_record/product_name';
+        return '/atdw_data_results/product_distribution/product_attribute/row[attribute_type_id="RATING AAA"]/attribute_id_description';
+    }
+    
+    public static function getCommandType(){
+        return 'set2';
     }
 }
-

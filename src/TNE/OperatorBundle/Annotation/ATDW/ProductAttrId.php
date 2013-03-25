@@ -14,5 +14,8 @@ class ProductAttrId {
         return '/atdw_data_results/product_distribution[$index]/product_record/product_id';
     }
     
+    public static function getCommandType(){
+        return 'set1';
+    }    
 }
 
