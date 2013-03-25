@@ -78,7 +78,7 @@ class ATDWAnnotationProcessor {
                 else
                 {
                     $atdwValue = $this->getProductXml($object->getAtdwId())->xpath($propertyMetadata->xpathString);
-                    $propertyMetadata->setValue($object, $atdwValue[0]);
+                    if(isset($atdwValue[0])) $propertyMetadata->setValue($object, $atdwValue[0]);
                 }
             }
         }
@@ -114,8 +114,8 @@ class ATDWAnnotationProcessor {
             $result = $client->CommandHandler($param);
 
             $xmlUf8 = preg_replace('/(<\?xml[^?]+?)utf-16/i', '$1utf-8', $result->CommandHandlerResult);
-//            echo $xmlUf8;
-//            echo "\n\n\n\n\_______________________________________________________________________________________________________\n\n\n\n\n";
+            echo $xmlUf8;
+            echo "\n\n\n\n\_______________________________________________________________________________________________________\n\n\n\n\n";
 
             $this->productXml[$productKey] = simplexml_load_string($xmlUf8);        
         }

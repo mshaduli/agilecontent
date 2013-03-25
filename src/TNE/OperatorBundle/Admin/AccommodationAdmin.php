@@ -22,6 +22,7 @@ class AccommodationAdmin extends Admin
                 ->add('description')
                 ->add('address')
                 ->add('tags')
+                ->add('atdwStarRating', null, array('label'=>'Star Rating'))
             ->end()
             ->with('Media')
             ->end()

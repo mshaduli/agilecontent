@@ -80,7 +80,22 @@ class Accommodation
      */
     protected $site;
     
-    protected $tripadvisorId;
+    /**
+     *@ATDW\Twitter
+     */
+    protected $twitterUrl;
+
+
+    /**
+     *@ATDW\Facebook
+     */
+    protected $facebookUrl;
+
+
+    /**
+     *@ATDW\TripAdvisor
+     */
+    protected $tripadvisorUrl;
 
     /**
      * Get id
@@ -209,7 +224,17 @@ class Accommodation
         return $this->tags;
     }
     
-    
+    public function getAtdwStarRating()
+    {
+        return $this->atdwStarRating;
+    }
+
+    public function setAtdwStarRating($atdwStarRating)
+    {
+        $this->atdwStarRating = $atdwStarRating;
+        return $this;
+    }    
+
     public function setTags($tags)
     {
         $this->tags = $tags;
