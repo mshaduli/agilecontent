@@ -22,6 +22,16 @@
           <call method="setTranslationDomain">
               <argument>TNEOperatorBundle</argument>
           </call>
-      </service>      
+      </service>  
+      
+       <service id="sonata.admin.accommodation.media" class="TNE\OperatorBundle\Admin\AccommodationMediaAdmin">
+          <tag name="sonata.admin" manager_type="orm" show_in_dashboard="false"/>
+          <argument />
+          <argument>TNE\OperatorBundle\Entity\OperatorMedia</argument>
+          <argument>SonataAdminBundle:CRUD</argument>
+          <call method="setTranslationDomain">
+              <argument>TNEOperatorBundle</argument>
+          </call>
+      </service>                
    </services>
 </container>

@@ -67,7 +67,7 @@ class ATDWAnnotationProcessor {
     public function populate($object, $index=1)
     {         
         $classMetadata = $this->metadataFactory->getMetadataForClass(get_class($object));
-         
+        echo "\n----------------------------------------------------------------------------------------------------\n Importing: " . $object->getName() . " \n\n";
         foreach ($classMetadata->propertyMetadata as $propertyMetadata) {
             if (isset($propertyMetadata->xpathString)) {
                 if(($propertyMetadata->commandType == 'set1'))
@@ -76,7 +76,7 @@ class ATDWAnnotationProcessor {
                     $propertyMetadata->setValue($object, $atdwValue[0]);
                 }
                 else
-                {
+                {                    
                     $atdwValue = $this->getProductXml($object->getAtdwId())->xpath($propertyMetadata->xpathString);
                     
                     if(property_exists($propertyMetadata, 'addMethod'))
@@ -86,7 +86,8 @@ class ATDWAnnotationProcessor {
                         {
                             $objectClassName = $propertyMetadata->objectClassName;
                             $subObject = $this->fillObject(new $objectClassName(), $row);
-                            $object->$addMethod($subObject);                            
+                            //\Doctrine\Common\Util\Debug::dump($subObject);
+                            $object->$addMethod($subObject);
                         }
                     }
                     else
@@ -104,7 +105,7 @@ class ATDWAnnotationProcessor {
     {
         foreach ($xpathNode as $key => $value)
         {
-            $object->setField($key, $value);
+            $object->setField($key, (string) $value);
         }
         return $object;
     }

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity repository-class="TNE\OperatorBundle\Entity\OperatorMediaRepository" name="TNE\OperatorBundle\Entity\OperatorMedia">
+    <id name="id" type="integer" column="id">
+      <generator strategy="AUTO"/>
+    </id>
+    <field name="multimedia_id" type="integer" column="multimedia_id"/>
+    <field name="authored_date" type="string" column="authored_date" length="255"/>
+    <field name="remote_path" type="string" column="remote_path" length="255"/>
+    <field name="local_path" type="string" column="local_path" length="255" nullable="true"/>
+    <field name="media_type" type="string" column="media_type" length="255"/>
+    <field name="media_orientation" type="string" column="media_orientation" length="255"/>
+    <field name="alt_text" type="string" column="alt_text" length="255" nullable="true"/>
+    <field name="height" type="integer" column="height" nullable="true"/>
+    <field name="width" type="integer" column="width" nullable="true"/>
+    
+    <many-to-one field="accommodation" target-entity="Accommodation" inversed-by="rooms">
+        <join-column name="accommodation_id" referenced-column-name="id" />
+    </many-to-one>
+
+    <one-to-one field="mediaItem" target-entity="Application\Sonata\MediaBundle\Entity\Media">
+        <cascade>
+            <cascade-all/>
+        </cascade>
+    </one-to-one>    
+            
+  </entity>
+</doctrine-mapping>
