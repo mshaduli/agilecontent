@@ -10,6 +10,8 @@
         <many-to-many field="snapshot" mapped-by="tags" target-entity="Application\Sonata\PageBundle\Entity\Snapshot"/>        
         
         <many-to-many field="media" mapped-by="tags" target-entity="Application\Sonata\MediaBundle\Entity\Media"/>
+        
+        <many-to-many field="accommodation" mapped-by="tags" target-entity="TNE\OperatorBundle\Entity\Accommodation"/>
     
   </entity>
 </doctrine-mapping>

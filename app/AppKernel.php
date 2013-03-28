@@ -81,6 +81,8 @@ class AppKernel extends Kernel
             
             // TinyMCE
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
+            new TNE\OperatorBundle\TNEOperatorBundle(),
+            new Vich\GeographicalBundle\VichGeographicalBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

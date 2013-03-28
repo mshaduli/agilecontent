@@ -42,6 +42,7 @@ sonata_page:
         default: { path: 'ApplicationSonataPageBundle::layout.html.twig', name: 'default' }
         home: { path: 'ApplicationSonataPageBundle::home_layout.html.twig', name: 'home' }
         gallery: { path: 'ApplicationSonataPageBundle::gallery_layout.html.twig', name: 'gallery' }
+        map: { path: 'ApplicationSonataPageBundle::layout_map.html.twig', name: 'map' }
 
     page_defaults:
         homepage: {decorate: true, enabled: true}

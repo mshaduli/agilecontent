@@ -19,8 +19,13 @@ imports:
     - { resource: '@ApplicationSonataPageBundle/Resources/config/services.yml' }    
     - { resource: '@ApplicationSonataUserBundle/Resources/config/services.yml' }
     - { resource: '@ApplicationSonataMediaBundle/Resources/config/services.yml' }
+    - { resource: '@TNEOperatorBundle/Resources/config/services.yml' }
+    - { resource: '@TNEOperatorBundle/Resources/config/services.xml' }
     
     - { resource: '@ApplicationSonataPageBundle/Resources/config/tag.xml' }
+    - { resource: '@TNEOperatorBundle/Resources/config/accommodation.xml' }    
+    - { resource: '@TNEOperatorBundle/Resources/config/map.xml' }
+    - { resource: '@TNEOperatorBundle/Resources/config/annotations.xml' }
     
 
 framework:
@@ -44,6 +49,7 @@ twig:
         resources:
             - 'SonataAdminBundle:Form:silex_form_div_layout.html.twig'
             - 'SonataFormatterBundle:Form:formatter.html.twig'
+            - 'TNEOperatorBundle:Form:fields.html.twig'
 
 # Assetic Configuration
 assetic:
@@ -162,3 +168,30 @@ stfalcon_tinymce:
                 remove_linebreaks: false
                 inline_styles: false
                 convert_fonts_to_spans: false
+                
+vich_geographical:
+    db_driver: orm
+    query_service: tne_annotation.query_service
+    map_renderer: tne.map_renderer.google
+    icon_generator: vich_geographical.icon_generator.default
+
+    # jQuery aware google map renderer available
+    # map_renderer: vich_geographical.map_renderer.jquery_google
+
+    # Bing map renderer available
+    # map_renderer: vich_geographical.map_renderer.bing
+
+    # Leaflet map renderer available
+    # map_renderer: vich_geographical.map_renderer.leaflet
+
+    templating:
+        engine: twig # or php
+        info_window: TNEOperatorBundle:InfoWindow:default.html.twig
+
+    # if you specify the Leaflet map renderer then add your api key as follows
+    leaflet:
+        api_key: my_api_key
+
+    # if you specify the Bing map renderer then add your api key as follows
+    bing:
+        api_key: my_api_key

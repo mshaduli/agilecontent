@@ -131,5 +131,13 @@ class Page extends BasePage
         
         return $mediaContent;
     }
-      
+    
+    public function getTaggedOperators()
+    {
+        $taggedOperators = array();
+        foreach ($this->getTags() as $tag){
+            $taggedOperators = array_merge($taggedOperators, $tag->getAccommodation()->toArray());
+        }
+        return array_unique($taggedOperators);
+    }
 }

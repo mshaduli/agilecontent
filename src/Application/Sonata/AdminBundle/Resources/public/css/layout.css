@@ -361,3 +361,8 @@ legend.sonata-ba-fieldset-collapsed-description + .sonata-ba-collapsed-fields {
     padding: 0;
     margin: 0;
 }
+
+.sonata-ba-field-inline-table .table {
+width: 70%;
+margin-bottom: 20px;
+}

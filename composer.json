@@ -41,7 +41,13 @@
         "willdurand/faker-bundle": "dev-master",
         "videlalvaro/php-amqplib": "dev-master",
         
-        "stfalcon/tinymce-bundle": "dev-master"
+        "stfalcon/tinymce-bundle": "dev-master",
+        "vich/geographical-bundle": "*",
+        
+        "besimple/soap-bundle": "dev-master",
+        "besimple/soap-common": "dev-master",
+        "ass/xmlsecurity":      "dev-master",
+        "besimple/soap-client": "dev-master"
     },
 
     "require-dev": {
