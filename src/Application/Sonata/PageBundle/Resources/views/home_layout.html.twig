@@ -107,21 +107,21 @@ file that was distributed with this source code.
         -->
         {% for tag in page.taggedMedia %}
         
-            {% for media in tag['media'] %}
+                {% for media in tag['media'] %}
         
-                <article class="slide" id="{{media['id']}}" style="background: url('{{  asset('bundles/applicationsonatapage/theme/img/backgrounds/landscape.png') }} repeat-x top center;">
-                    <img class="asset left-30 sp600 t120 z1" src="{% path media['id'], 'big' %}" style="border: 20x solid #666"/>
-                    
-                    <div class="info">
-                        <h2 style="color: #fff">{{ media['description'] }}</h2>
+                    <article class="slide" id="{{media['id']}}" style="background: url('{{  asset('bundles/applicationsonatapage/theme/img/backgrounds/landscape.png') }} repeat-x top center;">
+                        <img class="asset left-30 sp600 t120 z1" src="{% path media['id'], 'big' %}" style="border: 20x solid #666"/>
 
-                            <span class="label label-info">{{ tag['name'] }}</span>
-                        
-                    </div>
+                        <div class="info">
+                            <h2 style="color: #fff">{{ media['description'] }}</h2>
 
-                </article>
+                                <span class="label label-info">{{ tag['name'] }}</span>
+
+                        </div>
+
+                    </article>
+                {% endfor %}
             {% endfor %}
-        {% endfor %}
     </section>    
       <!-- @todo: Convert to Slideshow Block -->
       

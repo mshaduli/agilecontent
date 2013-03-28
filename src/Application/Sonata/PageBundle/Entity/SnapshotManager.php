@@ -396,10 +396,15 @@ class SnapshotManager extends BaseManager
         $content['id']     = $tag->getId();
         $content['name']  = $tag->getName();
         
-        
-        foreach($tag->getMedia() as $media)
+        if(count($tag->getMedia()) > 0)
         {
-            $content['media'][] = $this->createMediaTags($media);
+            foreach($tag->getMedia() as $media)
+            {
+                $content['media'][] = $this->createMediaTags($media);
+            }
+        }else
+        {
+            $content['media'] = array();
         }
             
         return $content;
