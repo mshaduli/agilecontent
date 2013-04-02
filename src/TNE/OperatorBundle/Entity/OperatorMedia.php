@@ -3,7 +3,6 @@
 namespace TNE\OperatorBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * OperatorMedia
  */
@@ -12,53 +11,55 @@ class OperatorMedia
     /**
      * @var integer
      */
-    private $id;
+    protected $id;
 
     /**
      * @var integer
      */
-    private $multimedia_id;
+    protected $multimedia_id;
     
     /**
      * @var integer
      */
-    private $accommodation;
+    protected $accommodation;
 
     /**
      * @var \DateTime
      */
-    private $authored_date;
+    protected $authored_date;
 
     /**
      * @var string
      */
-    private $remote_path;
+    protected $remote_path;
 
     /**
      * @var string
      */
-    private $local_path;
+    protected $local_path;
 
     /**
      * @var string
      */
-    private $media_type;
+    protected $media_type;
 
     /**
      * @var string
      */
-    private $media_orientation;
+    protected $media_orientation;
 
     /**
      * @var string
      */
-    private $alt_text;
+    protected $alt_text;
     
-    private $width;
     
-    private $height;
+    protected $mediaItem;
     
-    private $mediaItem;
+    
+    protected $height;
+    
+    protected $width;
 
     /**
      * Get id
@@ -254,14 +255,14 @@ class OperatorMedia
         return $this->alt_text;
     }
     
-    public function getWidth() {
-        return $this->width;
+    public function getMediaItem() {
+        return $this->mediaItem;
     }
 
-    public function setWidth($width) {
-        $this->width = $width;
+    public function setMediaItem($mediaItem) {
+        $this->mediaItem = $mediaItem;
     }
-
+    
     public function getHeight() {
         return $this->height;
     }
@@ -270,15 +271,15 @@ class OperatorMedia
         $this->height = $height;
     }
 
-    public function getMediaItem() {
-        return $this->mediaItem;
+    public function getWidth() {
+        return $this->width;
     }
 
-    public function setMediaItem($mediaItem) {
-        $this->mediaItem = $mediaItem;
+    public function setWidth($width) {
+        $this->width = $width;
     }
 
-        
+            
     public function setField($key, $value)
     {
         switch($key)
