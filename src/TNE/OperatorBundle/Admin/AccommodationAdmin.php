@@ -57,10 +57,7 @@ class AccommodationAdmin extends Admin
                         'label' => 'Rooms List'
                     ), array(
                         'edit' => 'inline',
-                        'inline' => 'table',
-//                        'sortable'  => 'position',
-//                        'link_parameters' => array('context' => 'default'),
-//                        'help' => 'Optionally add or select media items for the story text.'
+                        'inline' => 'table'
                     )
                 )
             ->end()                

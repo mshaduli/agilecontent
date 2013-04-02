@@ -15,10 +15,13 @@ class AccommodationMediaAdmin extends Admin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
+        //Write transformer for accommodation field
         $formMapper
-                ->add('mediaItem','sonata_media_type', array('provider' => 'sonata.media.provider.image', 'context'  => 'default'), array('label'=>'Image'))
-                ->add('alt_text', 'textarea', array('label'=>'Description'))
-                ->add('authored_date', 'text', array('label'=>'Authored Date', 'attr'=>array('disabled'=>'disabled')))
+           ->add('accommodation')
+           ->add('mediaItem', 'sonata_type_model_list', array('required' => false), array(
+                'link_parameters' => array('provider' => 'sonata.media.provider.image', 'context'  => 'default')
+            ))
         ;
     }
+    
 }

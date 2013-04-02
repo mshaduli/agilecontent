@@ -345,7 +345,7 @@ class Accommodation
     
     public function addMedia($media){
         $media->setAccommodation($this);
-        $this->media->add($media);
+        $this->media->add($media);        
     }
     
     public function removeMedia($media){
