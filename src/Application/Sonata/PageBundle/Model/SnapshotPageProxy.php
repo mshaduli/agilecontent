@@ -32,6 +32,21 @@ class SnapshotPageProxy extends BaseProxy
         }
     }
     
+    public function getTaggedOperators()
+    {
+        $tagItem = array();
+        
+        if($this->getTags())
+        {
+            foreach ($this->getTags() as $tag)
+            {
+                $tagItem[] = $tag;
+            }
+            
+            return $tagItem;
+        }
+    }    
+    
     public function getTags()
     {
         return $this->getPage()->getTags();

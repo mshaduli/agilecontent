@@ -406,6 +406,17 @@ class SnapshotManager extends BaseManager
         {
             $content['media'] = array();
         }
+        
+        if(count($tag->getAccommodation()) > 0)
+        {
+            foreach($tag->getAccommodation() as $accommodation)
+            {
+                $content['accommodation'][] = $this->createAccommodationTags($accommodation);
+            }
+        }else
+        {
+            $content['accommodation'] = array();
+        }
             
         return $content;
     }
@@ -437,6 +448,18 @@ class SnapshotManager extends BaseManager
         
         return $mediaContent;
     }
+    
+    public function createAccommodationTags($accommodation)
+    {
+        $accommodationData = array();
+        $accommodationData['id'] = $accommodation->getId();
+        $accommodationData['name'] = $accommodation->getName();
+        $accommodationData['description'] = $accommodation->getDescription();
+        $accommodationData['atdwStarRating'] = $accommodation->getAtdwStarRating();
+        $accommodationData['heroImage'] = $accommodation->getHeroImage();
+        
+        return $accommodationData;
+    }    
     
     /**
      * return a page with the given routeName

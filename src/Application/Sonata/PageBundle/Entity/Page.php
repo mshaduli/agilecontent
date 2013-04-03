@@ -100,7 +100,7 @@ class Page extends BasePage
         {
             $content['media'] = array();
         }
-            
+        
         return $content;
     }
     
@@ -134,10 +134,51 @@ class Page extends BasePage
     
     public function getTaggedOperators()
     {
+//        $content = array();
+//        
+//        foreach($this->getTags() as $tag)
+//        {
+//            $content[] = $this->createAccommodationTags($tag);
+//        }
+//        
+//        return $content;
+        
         $taggedOperators = array();
         foreach ($this->getTags() as $tag){
             $taggedOperators = array_merge($taggedOperators, $tag->getAccommodation()->toArray());
         }
         return array_unique($taggedOperators);
     }
+    
+    public function createAccommodationTags($tag)
+    {
+        $content = array();
+        $content['id']     = $tag->getId();
+        $content['name']  = $tag->getName();
+        
+        if(count($tag->getAccommodation()) > 0)
+        {
+            foreach($tag->getAccommodation() as $accommodation)
+            {
+                $content['accommodation'][] = $this->createAccommodationDataTags($accommodation);
+            }
+        }else
+        {
+            $content['accommodation'] = array();
+        }
+        
+        return $content;
+    }
+
+    public function createAccommodationDataTags($accommodation)
+    {
+        $accommodationData = array();
+        $accommodationData['id'] = $accommodation->getId();
+        $accommodationData['name'] = $accommodation->getName();
+        $accommodationData['description'] = $accommodation->getDescription();
+        $accommodationData['atdwStarRating'] = $accommodation->getAtdwStarRating();
+        $accommodationData['heroImage'] = $accommodation->getHeroImage();
+        
+        return $accommodationData;
+    }    
 }

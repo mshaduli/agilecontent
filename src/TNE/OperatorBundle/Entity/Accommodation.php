@@ -118,7 +118,7 @@ class Accommodation
      */
     protected $atdwContactUrl;
     
-    
+            
     /**
      *@ATDW\Rooms
      */
@@ -127,6 +127,11 @@ class Accommodation
     protected $gallery;
 
 
+    /**
+     *@ATDW\State
+     */
+    protected $state;
+    
     public function __construct() {
         $this->rooms = new ArrayCollection();
     }
@@ -384,7 +389,17 @@ class Accommodation
     public function setMap()
     {
         
-    }    
+    }
+    
+    public function getState()
+    {
+        return $this->state;
+    }
+    
+    public function setState($state)
+    {
+        $this->state = $state;
+    }
     
     public function getHeroImage()
     {
