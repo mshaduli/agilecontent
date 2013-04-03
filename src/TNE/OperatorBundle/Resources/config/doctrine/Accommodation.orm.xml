@@ -43,6 +43,14 @@
             <cascade-remove />
         </cascade>        
     </one-to-many>
+    
+    <one-to-many field="media" target-entity="OperatorMedia" mapped-by="accommodation">
+        <cascade>
+            <cascade-persist />
+            <cascade-refresh />
+            <cascade-remove />
+        </cascade>        
+    </one-to-many>    
         
     <many-to-many field="tags" inversed-by="accommodation" target-entity="Application\Sonata\PageBundle\Entity\Tag">
         <join-table name="accommodation_tags">

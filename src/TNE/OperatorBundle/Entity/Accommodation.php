@@ -124,6 +124,12 @@ class Accommodation
      */
     protected $rooms;
     
+    /**
+     *@ATDW\Media
+     */
+    protected $media;
+
+
     protected $gallery;
 
 
@@ -134,6 +140,7 @@ class Accommodation
     
     public function __construct() {
         $this->rooms = new ArrayCollection();
+        $this->media = new ArrayCollection();
     }
 
     /**
@@ -329,6 +336,26 @@ class Accommodation
     public function removeRoom($room){
         $this->rooms->remove($room);
     }    
+    
+    
+    public function getMedia()
+    {
+        return $this->media;
+    }
+    
+    public function setMedia($media)
+    {
+        $this->media = $media;
+    }    
+    
+    public function addMedia($media){
+        $media->setAccommodation($this);
+        $this->media->add($media);        
+    }
+    
+    public function removeMedia($media){
+        $this->media->remove($media);
+    }       
     
     public function getGallery()
     {

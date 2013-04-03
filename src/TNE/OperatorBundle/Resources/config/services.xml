@@ -18,7 +18,22 @@
         <service id="tne.operator_site_listener" class="TNE\OperatorBundle\EventListener\SiteListener">
             <tag name="doctrine.event_listener" event="prePersist" />
             <argument type="service" id="tne_annotation.metadata.annotation_driver" />
-        </service>          
+        </service> 
+        
+        <service id="tne.operator_media_listener_pre" class="TNE\OperatorBundle\EventListener\MediaListener">
+            <tag name="doctrine.event_listener" event="prePersist" />
+            <call method="setServices">
+                 <argument type="service" id="tne_annotation.metadata.annotation_driver" />
+                 <argument type="service" id="kernel" />
+            </call>
+        </service>         
+        
+        <service id="tne.operator_media_listener_post" class="TNE\OperatorBundle\EventListener\MediaThumbnailListener">
+            <tag name="doctrine.event_listener" event="postPersist" />     
+            <argument type="service" id="tne_annotation.metadata.annotation_driver" />
+            <argument type="service" id="sonata.media.provider.image" />
+        </service>      
+                          
         <service id="tne.map_renderer.google" class="TNE\OperatorBundle\Map\Renderer\GoogleMapRenderer" public="false">
             <argument>%vich_geographical.map_renderer.options%</argument>
         </service>        

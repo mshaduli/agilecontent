@@ -36,7 +36,19 @@ class AccommodationAdmin extends Admin
                 ->add('atdwContactUrl', null, array('label'=>'URL'))
             ->end()
             ->with('Media', array('collapsed' => true))
-                 ->add('gallery', 'sonata_type_model_list', array('required' => false), array('link_parameters' => array('context' => 'default')))
+                 //->add('gallery', 'sonata_type_model_list', array('required' => false), array('link_parameters' => array('context' => 'default')))
+                ->add('media', 'sonata_type_collection', array(
+                        'required' => false,
+                        'by_reference' => false,
+                        'label' => 'Media List'
+                    ), array(
+                        'edit' => 'inline',
+                        'inline' => 'table',
+//                        'sortable'  => 'position',
+//                        'link_parameters' => array('context' => 'default'),
+//                        'help' => 'Optionally add or select media items for the story text.'
+                    )
+                )
             ->end()
             ->with('Rooms', array('collapsed' => true))
                 ->add('rooms', 'sonata_type_collection', array(
@@ -45,10 +57,7 @@ class AccommodationAdmin extends Admin
                         'label' => 'Rooms List'
                     ), array(
                         'edit' => 'inline',
-                        'inline' => 'table',
-//                        'sortable'  => 'position',
-//                        'link_parameters' => array('context' => 'default'),
-//                        'help' => 'Optionally add or select media items for the story text.'
+                        'inline' => 'table'
                     )
                 )
             ->end()                
