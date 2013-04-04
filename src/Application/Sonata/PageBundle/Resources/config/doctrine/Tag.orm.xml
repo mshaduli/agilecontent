@@ -4,13 +4,22 @@
     <id name="id" type="integer" column="id">
       <generator strategy="AUTO"/>
     </id>
-    <field name="name" type="string" column="name" length="255"/>
-        <!--    Move Tag Entity to into a seperate Bundle (AgileTagBundle)    -->
+    
+    <!--    Move Tag Entity to into a seperate Bundle (AgileTagBundle)    -->
+    
+        <field name="name" type="string" column="name" length="255"/>
+        
+        <field name="position" type="integer" column="position" nullable="true"/>
+        
+        <field name="hidden" type="boolean" column="hidden" />
+                
         <many-to-many field="pages" mapped-by="tags" target-entity="Page"/>        
         
         <many-to-many field="media" mapped-by="tags" target-entity="Application\Sonata\MediaBundle\Entity\Media"/>
         
-        <many-to-many field="accommodation" mapped-by="tags" target-entity="TNE\OperatorBundle\Entity\Accommodation"/>
+        <many-to-many field="accommodation" mapped-by="tags" target-entity="TNE\OperatorBundle\Entity\Accommodation"/>                
+        
+        <one-to-one field="parent" target-entity="Tag" />
     
   </entity>
 </doctrine-mapping>

@@ -29,6 +29,13 @@ class Tag
      */
     private $media;
     
+    private $parent;
+    
+    private $position;    
+    
+    private $hidden;        
+
+
     /**
      * @var array
      */
@@ -128,8 +135,33 @@ class Tag
     {
         return $this->accommodation;
     }    
+    
+    
+    public function getParent() {
+        return $this->parent;
+    }
 
+    public function setParent($parent) {
+        $this->parent = $parent;
+    }
 
+    public function getPosition() {
+        return $this->position;
+    }
+
+    public function setPosition($position) {
+        $this->position = $position;
+    }
+
+    public function getHidden() {
+        return $this->hidden;
+    }
+
+    public function setHidden($hidden) {
+        $this->hidden = $hidden;
+    }
+
+    
     public function __toString() {
         return $this->getName();
     }
