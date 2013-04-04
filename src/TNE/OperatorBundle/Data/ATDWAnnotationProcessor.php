@@ -61,6 +61,9 @@ class ATDWAnnotationProcessor {
         $result = $client->CommandHandler($param);
 
         $xmlUf8 = preg_replace('/(<\?xml[^?]+?)utf-16/i', '$1utf-8', $result->CommandHandlerResult);
+        
+        echo $xmlUf8;
+        
         $this->atdwResults = simplexml_load_string($xmlUf8);        
     }
 
@@ -72,8 +75,11 @@ class ATDWAnnotationProcessor {
             if (isset($propertyMetadata->xpathString)) {
                 if(($propertyMetadata->commandType == 'set1'))
                 {
-                    $atdwValue = $this->getAtdwResults()->xpath(str_replace('$index', $index, $propertyMetadata->xpathString));
-                    $propertyMetadata->setValue($object, $atdwValue[0]);
+                    $atdwValue = $this->getAtdwResults()->xpath(str_replace('$index', $index, $propertyMetadata->xpathString));    
+                    if(isset($atdwValue[0]))
+                    {
+                        $propertyMetadata->setValue($object, $atdwValue[0]);
+                    }
                 }
                 else
                 {                    

@@ -8,6 +8,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use TNE\OperatorBundle\Entity\Accommodation;
+use TNE\OperatorBundle\Entity\Event;
 
 /**
  * Description of PopulateOperatorsCommand
@@ -20,20 +21,20 @@ class PopulateOperatorsCommand extends ContainerAwareCommand {
         $this
             ->setName('tne:operators:load')
             ->addArgument('id', InputArgument::OPTIONAL, 'Choose accommodation recored to repopulate')                
-            ->addOption('all', null, InputOption::VALUE_NONE, 'If set, will batch import products')                
+            ->addOption('type', null, InputOption::VALUE_NONE, 'If set, will batch import products')                
             ->setDescription('Load operators from ATDW')
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $atdwProcessor = $this->getContainer()->get('tne_annotation.atdw_processor');
-        $atdwProcessor->bootstrap(new \ReflectionClass('\TNE\OperatorBundle\Entity\Accommodation'));
+        $atdwProcessor = $this->getContainer()->get('tne_annotation.atdw_processor');        
         
         $em = $this->getContainer()->get('doctrine')->getEntityManager();
         
-        if($input->getOption('all'))
+        if($input->getOption('type')=='accomm')
         {
+            $atdwProcessor->bootstrap(new \ReflectionClass('\TNE\OperatorBundle\Entity\Accommodation'));
             for($i=1;$i<=$atdwProcessor->getProductCount();$i++)
             {
                 $newAccommodation = new Accommodation();
@@ -43,17 +44,18 @@ class PopulateOperatorsCommand extends ContainerAwareCommand {
             $em->flush();
         }
             
-        else 
+        else if ($input->getOption('type')=='event')
         {   
             
-            $accommodation = $em->find('TNE\OperatorBundle\Entity\Accommodation', $input->getArgument('id'));            
-                        
-            $atdwProcessor->populate($accommodation, $input->getArgument('id'));
-            
-            \Doctrine\Common\Util\Debug::dump($accommodation);
-            
-            $em->persist($accommodation);
+            $atdwProcessor->bootstrap(new \ReflectionClass('\TNE\OperatorBundle\Entity\Event'));
+            for($i=1;$i<=$atdwProcessor->getProductCount();$i++)
+            {
+                $newEvent = new Event();
+                $atdwProcessor->populate($newEvent, $i);
+                $em->persist($newEvent);
+            }
             $em->flush();
+
        }
         
         
