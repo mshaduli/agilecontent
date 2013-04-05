@@ -9,6 +9,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use TNE\OperatorBundle\Entity\Accommodation;
 use TNE\OperatorBundle\Entity\Event;
+use TNE\OperatorBundle\Entity\Attraction;
 
 /**
  * Description of PopulateOperatorsCommand
@@ -57,6 +58,20 @@ class PopulateOperatorsCommand extends ContainerAwareCommand {
             $em->flush();
 
        }
+       
+        else if ($input->getOption('type')=='attr')
+        {   
+            
+            $atdwProcessor->bootstrap(new \ReflectionClass('\TNE\OperatorBundle\Entity\Attraction'));
+            for($i=1;$i<=$atdwProcessor->getProductCount();$i++)
+            {
+                $newAttraction = new Attraction();
+                $atdwProcessor->populate($newAttraction, $i);
+                $em->persist($newAttraction);
+            }
+            $em->flush();
+
+       }       
         
         
         $output->writeln("processed");

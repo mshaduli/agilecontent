@@ -116,8 +116,7 @@ class Accommodation
     /**
      *@ATDW\ContactUrl
      */
-    protected $atdwContactUrl;
-    
+    protected $atdwContactUrl;    
     
     /**
      *@ATDW\Rooms
