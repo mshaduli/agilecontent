@@ -10,6 +10,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 use TNE\OperatorBundle\Entity\Accommodation;
 use TNE\OperatorBundle\Entity\Event;
 use TNE\OperatorBundle\Entity\Attraction;
+use TNE\OperatorBundle\Entity\Tour;
+use TNE\OperatorBundle\Entity\Hire;
 
 /**
  * Description of PopulateOperatorsCommand
@@ -33,48 +35,38 @@ class PopulateOperatorsCommand extends ContainerAwareCommand {
         
         $em = $this->getContainer()->get('doctrine')->getEntityManager();
         
-        if($input->getOption('type')=='accomm')
-        {
-            $atdwProcessor->bootstrap(new \ReflectionClass('\TNE\OperatorBundle\Entity\Accommodation'));
-            for($i=1;$i<=$atdwProcessor->getProductCount();$i++)
-            {
-                $newAccommodation = new Accommodation();
-                $atdwProcessor->populate($newAccommodation, $i);
-                $em->persist($newAccommodation);
-            }
-            $em->flush();
-        }
-            
-        else if ($input->getOption('type')=='event')
-        {   
-            
-            $atdwProcessor->bootstrap(new \ReflectionClass('\TNE\OperatorBundle\Entity\Event'));
-            for($i=1;$i<=$atdwProcessor->getProductCount();$i++)
-            {
-                $newEvent = new Event();
-                $atdwProcessor->populate($newEvent, $i);
-                $em->persist($newEvent);
-            }
-            $em->flush();
-
-       }
-       
-        else if ($input->getOption('type')=='attr')
-        {   
-            
-            $atdwProcessor->bootstrap(new \ReflectionClass('\TNE\OperatorBundle\Entity\Attraction'));
-            for($i=1;$i<=$atdwProcessor->getProductCount();$i++)
-            {
-                $newAttraction = new Attraction();
-                $atdwProcessor->populate($newAttraction, $i);
-                $em->persist($newAttraction);
-            }
-            $em->flush();
-
-       }       
-        
+        switch ($input->getOption('type')) {
+            case 'accomm':
+                $this->populate('Accommodation', $atdwProcessor, $em);
+                break;
+            case 'event':
+                $this->populate('Event', $atdwProcessor, $em);
+                break;
+            case 'attr':
+                $this->populate('Attraction', $atdwProcessor, $em);
+                break;
+            case 'tour':
+                $this->populate('Tour', $atdwProcessor, $em);
+                break;            
+            case 'hire':
+                $this->populate('Hire', $atdwProcessor, $em);
+                break;
+        }        
         
         $output->writeln("processed");
+    }
+    
+    public function populate($entityName, $atdwProcessor, $em)
+    {
+        $className = '\\TNE\\OperatorBundle\\Entity\\'.$entityName;
+        $atdwProcessor->bootstrap(new \ReflectionClass($className));
+        for($i=1;$i<=$atdwProcessor->getProductCount();$i++)
+        {
+            $newRecord = new $className();
+            $atdwProcessor->populate($newRecord, $i);
+            $em->persist($newRecord);
+        }
+        $em->flush();        
     }
 }
 
