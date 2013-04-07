@@ -426,13 +426,12 @@ class Accommodation
     
     public function getHeroImage()
     {
-        $gallery = $this->getGallery();
-        if($gallery)
+        foreach ($this->getMedia() as $media)
         {
-            $images = $gallery->getGalleryHasMedias();
-            if(count($images) > 0) return $images[0];
+            //if($media->getMediaItem()->hasTag('hero')) return $media->getMediaItem();
+            return $media->getMediaItem();
         }
-        
+ 
         return false;
     }
     
@@ -441,7 +440,10 @@ class Accommodation
         $tagLinks = array();
         foreach($this->getTags() as $tag)
         {
-            $tagLinks[]=$tag->getName();
+            if(!$tag->getHidden())
+            {
+                $tagLinks[]=$tag->getName();
+            }
         }
         return $tagLinks;
     }    

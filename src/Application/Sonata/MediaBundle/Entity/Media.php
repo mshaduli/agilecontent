@@ -73,4 +73,14 @@ class Media extends BaseMedia
         }
         return implode(' ', $tagIds);
     }
+    
+    public function hasTag($tagName)
+    {
+        foreach($this->getTags() as $tag)
+        {
+            if($tag->getTagName() == $tagName) return true;
+        }
+        
+        return false;
+    }
 }
