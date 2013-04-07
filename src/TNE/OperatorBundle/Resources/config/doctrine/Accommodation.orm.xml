@@ -7,6 +7,7 @@
     <field name="atdwId" type="integer" column="atdw_id" />
     <field name="name" type="string" column="name" length="255"/>
     <field name="description" type="text" column="atdw_product_description"/>
+    <field name="hiddenSecret" type="text" column="hidden_secret" nullable="true"/>
     <field name="atdwRateFrom" type="string" column="atdw_rate_from" length="255" nullable="true"/>
     <field name="atdwStarRating" type="string" column="atdw_star_rating" length="255" nullable="true"/>
     <field name="address" type="string" column="address" length="255" nullable="true"/>

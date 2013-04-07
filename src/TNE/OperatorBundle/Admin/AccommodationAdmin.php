@@ -26,8 +26,15 @@ class AccommodationAdmin extends Admin
                         )
                     ))
                 ->add('address')
-                ->add('tags')
+                ->add('tags', null, array('required' => false))
                 ->add('atdwStarRating', null, array('label'=>'Star Rating'))
+                ->add('hiddenSecret', 'textarea', array(
+                        'required' => false,
+                        'attr' => array(
+                            'class' => 'tinymce span6',
+                            'data-theme' => 'advanced'
+                        )
+                    ))                
             ->end()
             ->with('Contact', array('collapsed' => true))
                 ->add('atdwContactEmail', null, array('label'=>'Email'))

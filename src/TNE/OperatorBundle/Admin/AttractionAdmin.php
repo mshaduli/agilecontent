@@ -24,7 +24,20 @@ class AttractionAdmin extends Admin
                             'data-theme' => 'advanced'
                         )
                     ))
-            ->end()                        
+                ->add('destination')
+            ->end()      
+            ->with('Media', array('collapsed' => true))
+                 //->add('gallery', 'sonata_type_model_list', array('required' => false), array('link_parameters' => array('context' => 'default')))
+                ->add('media', 'sonata_type_collection', array(
+                        'required' => false,
+                        'by_reference' => false,
+                        'label' => 'Media List'
+                    ), array(
+                        'edit' => 'inline',
+                        'inline' => 'table'
+                    )
+                )
+            ->end()                    
         ;
     }
 
@@ -32,6 +45,7 @@ class AttractionAdmin extends Admin
     {
         $datagridMapper
             ->add('name')
+            ->add('destination')
         ;
     }
 
@@ -39,6 +53,7 @@ class AttractionAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('name')
+            ->add('destination')
         ;
     }
 }

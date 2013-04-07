@@ -34,6 +34,11 @@ class OperatorMediaAdmin extends Admin
         {
             $formMapper->add('event');
         }        
+        
+        if(null != $object->getAttraction())
+        {
+            $formMapper->add('attraction');
+        }                
     }
     
 }

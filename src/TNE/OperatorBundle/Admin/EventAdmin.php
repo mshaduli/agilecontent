@@ -24,6 +24,7 @@ class EventAdmin extends Admin
                             'data-theme' => 'advanced'
                         )
                     ))
+                ->add('destination')
                 ->add('startDate')
                 ->add('endDate')
                 ->add('frequency')
@@ -36,10 +37,7 @@ class EventAdmin extends Admin
                         'label' => 'Media List'
                     ), array(
                         'edit' => 'inline',
-                        'inline' => 'table',
-//                        'sortable'  => 'position',
-//                        'link_parameters' => array('context' => 'default'),
-//                        'help' => 'Optionally add or select media items for the story text.'
+                        'inline' => 'table'
                     )
                 )
             ->end()                
@@ -50,6 +48,7 @@ class EventAdmin extends Admin
     {
         $datagridMapper
             ->add('name')
+            ->add('destination')
             ->add('frequency')
             ->add('startDate')
             ->add('endDate')           
@@ -60,6 +59,7 @@ class EventAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('name')
+            ->add('destination')
             ->add('frequency')
             ->add('startDate')
             ->add('endDate')                

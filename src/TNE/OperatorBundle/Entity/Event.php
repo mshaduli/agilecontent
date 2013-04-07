@@ -72,6 +72,12 @@ class Event
     private $address;
     
     /**
+     *@ATDW\CityName
+     */    
+    private $destination;   
+    
+    
+    /**
      *@ATDW\Media
      */
     protected $media;    
@@ -252,6 +258,14 @@ class Event
 
     public function setEndDate($endDate) {
         $this->endDate = $endDate;
+    }
+
+    public function getDestination() {
+        return $this->destination;
+    }
+
+    public function setDestination($destination) {
+        $this->destination = $destination;
     }
 
 

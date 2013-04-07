@@ -127,6 +127,9 @@ class Accommodation
      *@ATDW\Media
      */
     protected $media;
+    
+    
+    protected $hiddenSecret;
 
 
     protected $gallery;
@@ -397,7 +400,16 @@ class Accommodation
     {
         return $this->getRooms()->count();
     }
+    
+    public function getHiddenSecret() {
+        return $this->hiddenSecret;
+    }
 
+    public function setHiddenSecret($hiddenSecret) {
+        $this->hiddenSecret = $hiddenSecret;
+    }
+
+    
     public function __toString() {
         return $this->getName();
     }

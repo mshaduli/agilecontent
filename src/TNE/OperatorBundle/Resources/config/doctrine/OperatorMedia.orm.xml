@@ -14,11 +14,25 @@
     
     <many-to-one field="accommodation" target-entity="Accommodation" inversed-by="media">
         <join-column name="accommodation_id" referenced-column-name="id" nullable="true" />
+        <cascade>
+            <cascade-all/>
+        </cascade>        
     </many-to-one>
     
     <many-to-one field="event" target-entity="Event" inversed-by="media">
         <join-column name="event_id" referenced-column-name="id" nullable="true" />
+        <cascade>
+            <cascade-all/>
+        </cascade>        
     </many-to-one>    
+
+    <many-to-one field="attraction" target-entity="Attraction" inversed-by="media">
+        <join-column name="attraction_id" referenced-column-name="id" nullable="true" />
+        <cascade>
+            <cascade-all/>
+        </cascade>        
+    </many-to-one>    
+
 
     <many-to-one field="mediaItem" target-entity="Application\Sonata\MediaBundle\Entity\Media">
         <cascade>

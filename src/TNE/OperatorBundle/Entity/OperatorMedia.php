@@ -27,6 +27,12 @@ class OperatorMedia
      * @var integer
      */
     protected $event;    
+    
+    
+    /**
+     * @var integer
+     */
+    protected $attraction;        
 
     /**
      * @var \DateTime
@@ -293,7 +299,14 @@ class OperatorMedia
         $this->event = $event;
     }
 
-                
+    public function getAttraction() {
+        return $this->attraction;
+    }
+
+    public function setAttraction($attraction) {
+        $this->attraction = $attraction;
+    }    
+    
     public function setField($key, $value)
     {
         switch($key)
