@@ -22,6 +22,11 @@ class OperatorMedia
      * @var integer
      */
     protected $accommodation;
+    
+    /**
+     * @var integer
+     */
+    protected $event;    
 
     /**
      * @var \DateTime
@@ -279,7 +284,16 @@ class OperatorMedia
         $this->width = $width;
     }
 
-            
+    
+    public function getEvent() {
+        return $this->event;
+    }
+
+    public function setEvent($event) {
+        $this->event = $event;
+    }
+
+                
     public function setField($key, $value)
     {
         switch($key)

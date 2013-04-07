@@ -11,17 +11,29 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-class AccommodationMediaAdmin extends Admin
+class OperatorMediaAdmin extends Admin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
         //Write transformer for accommodation field
+        
+        $object = $this->getSubject();
+        
         $formMapper
-           ->add('accommodation')
            ->add('mediaItem', 'sonata_type_model_list', array('required' => false), array(
                 'link_parameters' => array('provider' => 'sonata.media.provider.image', 'context'  => 'default')
             ))
         ;
+        
+        if(null != $object->getAccommodation())
+        {
+            $formMapper->add('accommodation');
+        }
+        
+        if(null != $object->getEvent())
+        {
+            $formMapper->add('event');
+        }        
     }
     
 }

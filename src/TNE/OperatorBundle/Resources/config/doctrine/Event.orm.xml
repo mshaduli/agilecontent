@@ -1,12 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
   <entity repository-class="TNE\OperatorBundle\Entity\EventRepository" name="TNE\OperatorBundle\Entity\Event">
+    
     <id name="id" type="integer" column="id">
       <generator strategy="AUTO"/>
     </id>
+    
     <field name="name" type="string" column="name" length="255" nullable="true"/>
     <field name="description" type="text" column="description" nullable="true"/>
     <field name="address" type="string" column="address" length="255" nullable="true"/>
     <field name="frequency" type="string" column="frequency" length="255" nullable="true"/>
+    <field name="startDate" type="string" column="start_date" length="255" nullable="true"/>
+    <field name="endDate" type="string" column="end_date" length="255" nullable="true"/>
+    <field name="latitude" type="decimal" column="latitude" scale="7"/>
+    <field name="longitude" type="decimal" column="longitude" scale="7"/>
+
+    <one-to-many field="media" target-entity="OperatorMedia" mapped-by="event">
+        <cascade>
+            <cascade-persist />
+            <cascade-refresh />
+            <cascade-remove />
+        </cascade>        
+    </one-to-many>        
+    
   </entity>
 </doctrine-mapping>

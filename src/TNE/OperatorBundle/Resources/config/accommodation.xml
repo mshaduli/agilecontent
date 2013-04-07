@@ -24,7 +24,7 @@
           </call>
       </service>  
       
-       <service id="sonata.admin.accommodation.media" class="TNE\OperatorBundle\Admin\AccommodationMediaAdmin">
+       <service id="sonata.admin.accommodation.media" class="TNE\OperatorBundle\Admin\OperatorMediaAdmin">
           <tag name="sonata.admin" manager_type="orm" show_in_dashboard="false"/>
           <argument />
           <argument>TNE\OperatorBundle\Entity\OperatorMedia</argument>

@@ -24,8 +24,25 @@ class EventAdmin extends Admin
                             'data-theme' => 'advanced'
                         )
                     ))
+                ->add('startDate')
+                ->add('endDate')
                 ->add('frequency')
-            ->end()                        
+            ->end()
+            ->with('Media', array('collapsed' => true))
+                 //->add('gallery', 'sonata_type_model_list', array('required' => false), array('link_parameters' => array('context' => 'default')))
+                ->add('media', 'sonata_type_collection', array(
+                        'required' => false,
+                        'by_reference' => false,
+                        'label' => 'Media List'
+                    ), array(
+                        'edit' => 'inline',
+                        'inline' => 'table',
+//                        'sortable'  => 'position',
+//                        'link_parameters' => array('context' => 'default'),
+//                        'help' => 'Optionally add or select media items for the story text.'
+                    )
+                )
+            ->end()                
         ;
     }
 
@@ -33,7 +50,9 @@ class EventAdmin extends Admin
     {
         $datagridMapper
             ->add('name')
-            ->add('frequency')                
+            ->add('frequency')
+            ->add('startDate')
+            ->add('endDate')           
         ;
     }
 
@@ -42,6 +61,8 @@ class EventAdmin extends Admin
         $listMapper
             ->addIdentifier('name')
             ->add('frequency')
+            ->add('startDate')
+            ->add('endDate')                
         ;
     }
 }

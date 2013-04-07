@@ -78,7 +78,8 @@ class ATDWAnnotationProcessor {
                     $atdwValue = $this->getAtdwResults()->xpath(str_replace('$index', $index, $propertyMetadata->xpathString));    
                     if(isset($atdwValue[0]))
                     {
-                        $propertyMetadata->setValue($object, $atdwValue[0]);
+                        // Handle date type
+                        $propertyMetadata->setValue($object, (string) $atdwValue[0]);
                     }
                 }
                 else
@@ -98,7 +99,7 @@ class ATDWAnnotationProcessor {
                     }
                     else
                     {
-                        if(isset($atdwValue[0])) $propertyMetadata->setValue($object, $atdwValue[0]);
+                        if(isset($atdwValue[0])) $propertyMetadata->setValue($object, (string) $atdwValue[0]);
                     }
                 }
             }

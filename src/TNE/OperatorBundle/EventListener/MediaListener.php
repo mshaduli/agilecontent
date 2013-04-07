@@ -35,7 +35,7 @@ class MediaListener
                 $remotePath = parse_url($operatorMedia->getRemotePath());
                 $remotePathInfo = pathinfo($remotePath['path']);
 
-                TryAgain:
+//                TryAgain:
                     
                 echo "\n ";
                 
@@ -48,10 +48,11 @@ class MediaListener
                     copy($operatorMedia->getRemotePath(), $localFile);
                 
                 }
-                catch (Exception $e)
+                catch (\Exception $e)
                 {
                     echo 'Download failed with message: ' . $e->getMessage() . '. Trying again...';
-                    goto TryAgain;
+//                    goto TryAgain;
+                    continue;
                 }
                 
                 $mediaItem = new Media();
