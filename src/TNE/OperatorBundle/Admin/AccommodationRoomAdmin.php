@@ -10,6 +10,7 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use TNE\OperatorBundle\Form\Type\RoomCalendarType;
 
 class AccommodationRoomAdmin extends Admin
 {
@@ -25,7 +26,8 @@ class AccommodationRoomAdmin extends Admin
                         'required' => false
                     ))
                 ->add('rateFrom', 'text', array('attr'=>array('class'=>'span5')))
-                ->add('rateTo', 'text', array('attr'=>array('class'=>'span5')))
+                ->add('rateTo', 'text', array('attr'=>array('class'=>'span5')))                                   
+                ->add('dates', new RoomCalendarType(), array('label'=>'Rates & Availability'))
         ;
     }
 

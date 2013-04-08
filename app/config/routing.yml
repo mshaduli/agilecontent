@@ -73,3 +73,9 @@ _sonata_admin:
 soanata_user:
     resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
     prefix: /admin
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"    
+    
+adesigns_calendar:
+  resource: "@ADesignsCalendarBundle/Resources/config/routing.xml"    

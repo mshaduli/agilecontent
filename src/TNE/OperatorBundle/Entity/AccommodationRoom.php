@@ -3,6 +3,7 @@
 namespace TNE\OperatorBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * AccommodationRoom
@@ -36,9 +37,13 @@ class AccommodationRoom
      */
     private $rateTo;
     
+    private $dates;
+    
+    public function __construct() {
+        $this->dates = new ArrayCollection();
+    }    
 
-
-    /**
+     /**
      * Get id
      *
      * @return integer 
@@ -139,8 +144,28 @@ class AccommodationRoom
     
         return $this;
     }
+    
+    
+    public function getDates() {
+        return $this->dates;
+    }
 
-    /**
+    public function setDates($dates) {
+        $this->dates = $dates;
+    }
+
+    public function addDate($date)
+    {
+        $date->setRoom($this);
+        $this->dates->add($date);
+    }
+    
+    public function removeDate($date)
+    {
+        $this->dates->remove($date);
+    }
+
+        /**
      * Get rate_to
      *
      * @return float 

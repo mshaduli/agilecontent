@@ -47,7 +47,9 @@
         "besimple/soap-bundle": "dev-master",
         "besimple/soap-common": "dev-master",
         "ass/xmlsecurity":      "dev-master",
-        "besimple/soap-client": "dev-master"
+        "besimple/soap-client": "dev-master",
+        "adesigns/calendar-bundle": "dev-master",
+        "friendsofsymfony/jsrouting-bundle": "~1.1"
     },
 
     "require-dev": {

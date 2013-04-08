@@ -39,6 +39,8 @@ file that was distributed with this source code.
             <link rel="stylesheet" href="{{ asset('bundles/sonataadmin/css/colors.css') }}" type="text/css" media="all" />
             
             <link rel="stylesheet" href="{{ asset('bundles/applicationsonataadmin/select2.css') }}" type="text/css" media="all" />
+            
+            <link rel="stylesheet" href="{{ asset('bundles/adesignscalendar/css/fullcalendar/fullcalendar.css') }}" />
         {% endblock %}
 
         {% block javascripts %}
@@ -51,7 +53,12 @@ file that was distributed with this source code.
             <script src="{{ asset('bundles/sonataadmin/qtip/jquery.qtip-1.0.0-rc3.min.js') }}" type="text/javascript"></script>
             <script src="{{ asset('bundles/sonataadmin/jquery/jquery.form.js') }}" type="text/javascript"></script>
             <script src="{{ asset('bundles/applicationsonataadmin/select2.min.js') }}" type="text/javascript"></script>
-            <script src="{{ asset('bundles/sonataadmin/base.js') }}" type="text/javascript"></script>
+            
+            <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+            <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/adesignscalendar/js/fullcalendar/jquery.fullcalendar.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/tneoperator/js/calendar-settings.js') }}"></script>
+            <script src="{{ asset('bundles/applicationsonataadmin/js/base.js') }}" type="text/javascript"></script>
         {% endblock %}
 
         <title>
@@ -242,7 +249,7 @@ file that was distributed with this source code.
         {{ tinymce_init() }}            
         
         <script>
-            $("select").select2({width: 'resolve'});
+            $("select").select2({width: 'resolve'});        
         </script>
     </body>
 </html>

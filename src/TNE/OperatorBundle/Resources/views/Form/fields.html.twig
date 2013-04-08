@@ -1,3 +1,10 @@
 {% block map_widget %}
 <iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com.au/maps?hl=en&safe=off&q={{value}}" style="color:#0000FF;text-align:left"></iframe>
 {% endblock %}
+
+{% block room_calendar_type_widget %}
+    {% spaceless %}
+        <div class="calendar_holder">
+        </div>
+    {% endspaceless %}
+{% endblock %}
