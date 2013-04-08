@@ -21,7 +21,7 @@ $(function () {
             dayRender: function( date, cell ) {
 //                cell.append($('<input type="checkbox" checked/ style="padding:5px">'));
 //                cell.append($('<input type="text" placeholder="500" style="width:60%;"/>'));
-                  cell.find($("div")).html(cell.find($("div")).html() + '<center><br/> Available <input type="checkbox" checked style="padding:5px"> <br/> <br/> <input class="span3" type="text" value="295"></center>');
+                  cell.find($("div")).html(cell.find($("div")).html() + '<center><br/> Available <input type="checkbox" checked style="padding:5px"> <br/> <br/> <input class="span6" type="text" value="295"></center>');
             },
             dayClick: function (date, allDay, jsEvent, view) {  
                 console.log(view);

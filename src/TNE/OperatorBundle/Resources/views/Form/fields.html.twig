@@ -4,15 +4,8 @@
 
 {% block room_calendar_type_widget %}
     {% spaceless %}
-<script>
-    var roomDates = [];
-        {% for date in form.get('value') %}
-            {% set dateStr = date.json %}
-            roomDates.push({{dateStr | raw}});
-        {% endfor %}
             
-</script>
-        <div class="calendar_holder" data-room="">
+        <div class="calendar_holder" data-room="{{ form.get('value') }}">
         </div>
     {% endspaceless %}
 {% endblock %}

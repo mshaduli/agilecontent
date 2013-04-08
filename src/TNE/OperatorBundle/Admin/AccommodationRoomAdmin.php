@@ -27,7 +27,7 @@ class AccommodationRoomAdmin extends Admin
                     ))
 //                ->add('rateFrom', 'text', array('attr'=>array('class'=>'span5')))
 //                ->add('rateTo', 'text', array('attr'=>array('class'=>'span5')))                                   
-                ->add('dates', new RoomCalendarType(), array('label'=>'Rates & Availability'))
+                ->add('id', new RoomCalendarType(), array('label'=>'Rates & Availability'))
         ;
     }
 
