@@ -102,5 +102,10 @@ class AccommodationRoomCalendar
     public function __toString() {
         return 'Manage';
     }
+    
+    public function json()
+    {
+        return \json_encode(array('id'=>$this->getId(),'room_id'=>  $this->getRoom()->getId(), 'rate'=>  $this->getRate(), 'available'=>  $this->getAvailable()));
+    }
 
 }
