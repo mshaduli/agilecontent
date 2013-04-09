@@ -11,7 +11,7 @@
         
         <field name="position" type="integer" column="position" nullable="true"/>
         
-        <field name="hidden" type="boolean" column="hidden" />
+        <field name="hidden" type="boolean" column="hidden" nullable="true" />
                 
         <many-to-many field="pages" mapped-by="tags" target-entity="Page"/>        
         
@@ -19,7 +19,7 @@
         
         <many-to-many field="accommodation" mapped-by="tags" target-entity="TNE\OperatorBundle\Entity\Accommodation"/>                
         
-        <one-to-one field="parent" target-entity="Tag" />
+        <many-to-one field="parent" target-entity="Tag" />
     
   </entity>
 </doctrine-mapping>
