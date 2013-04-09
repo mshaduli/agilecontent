@@ -44,7 +44,10 @@
           </call>
       </service>                
       
-      
+        <service id="sonata.admin.form.type.operator_media_list" class="TNE\OperatorBundle\Form\Type\OperatorMediaType">
+            <tag name="form.type" alias="operator_media_list" />
+        </service>
+            
     <service id="sonata.admin.accommodation.calendar" class="TNE\OperatorBundle\EventListener\CalendarEventListener">
         <argument type="service" id="doctrine.orm.entity_manager" />
         <tag name="kernel.event_listener" event="calendar.load_events" method="loadEvents" />
