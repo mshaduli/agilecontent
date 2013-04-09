@@ -20,7 +20,7 @@ class OperatorMediaAdmin extends Admin
         $object = $this->getSubject();
         
         $formMapper
-           ->add('mediaItem', 'operator_media_list', array('required' => false, 'model_manager' => $this->getModelManager()), array(
+           ->add('mediaItem', 'operator_media_list', array('required' => false, 'model_manager' => $this->getModelManager(), 'class' => 'Application\Sonata\MediaBundle\Entity\Media',), array(
                 'link_parameters' => array('provider' => 'sonata.media.provider.image', 'context'  => 'default')
             ))
         ;
