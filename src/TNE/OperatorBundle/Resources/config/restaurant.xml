@@ -5,7 +5,7 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
        <service id="sonata.admin.restaurant" class="TNE\OperatorBundle\Admin\RestaurantAdmin">
-          <tag name="sonata.admin" manager_type="orm" group="Operators" label="Restaurant"/>
+          <tag name="sonata.admin" manager_type="orm" group="Operators" label="Restaurants"/>
           <argument />
           <argument>TNE\OperatorBundle\Entity\Restaurant</argument>
           <argument>SonataAdminBundle:CRUD</argument>
