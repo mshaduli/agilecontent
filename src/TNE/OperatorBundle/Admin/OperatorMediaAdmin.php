@@ -25,17 +25,17 @@ class OperatorMediaAdmin extends Admin
             ))
         ;
         
-        if(null != $object->getAccommodation())
+        if(method_exists($object, 'getAccommodation') && null != $object->getAccommodation())
         {
             $formMapper->add('accommodation');
         }
         
-        if(null != $object->getEvent())
+        if(method_exists($object, 'getEvent') && null != $object->getEvent())
         {
             $formMapper->add('event');
         }        
         
-        if(null != $object->getAttraction())
+        if(method_exists($object, 'getAttraction') && null != $object->getAttraction())
         {
             $formMapper->add('attraction');
         }                
