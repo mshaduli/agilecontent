@@ -12,8 +12,8 @@
     <field name="frequency" type="string" column="frequency" length="255" nullable="true"/>
     <field name="startDate" type="string" column="start_date" length="255" nullable="true"/>
     <field name="endDate" type="string" column="end_date" length="255" nullable="true"/>
-    <field name="latitude" type="decimal" column="latitude" scale="7"/>
-    <field name="longitude" type="decimal" column="longitude" scale="7"/>
+    <field name="latitude" type="decimal" column="latitude" scale="7" nullable="true"/>
+    <field name="longitude" type="decimal" column="longitude" scale="7" nullable="true"/>
     <field name="destination" type="string" column="city_name" length="255" nullable="true"/>
     
 

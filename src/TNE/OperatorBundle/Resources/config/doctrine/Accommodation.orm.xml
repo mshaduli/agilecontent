@@ -19,8 +19,8 @@
     <field name="twitterUrl" type="string" column="atdw_twitter_url" length="255" nullable="true"/>
     <field name="facebookUrl" type="string" column="atdw_facebook_url" length="255" nullable="true"/>
     <field name="tripadvisorUrl" type="string" column="atdw_tripadvisor_url" length="255" nullable="true"/>
-    <field name="latitude" type="decimal" column="latitude" scale="7"/>
-    <field name="longitude" type="decimal" column="longitude" scale="7"/>
+    <field name="latitude" type="decimal" column="latitude" scale="7" nullable="true"/>
+    <field name="longitude" type="decimal" column="longitude" scale="7" nullable="true"/>
     
             
     <many-to-one field="site" target-entity="Application\Sonata\PageBundle\Entity\Site">
