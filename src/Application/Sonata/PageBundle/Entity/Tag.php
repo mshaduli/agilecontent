@@ -40,7 +40,10 @@ class Tag
      * @var array
      */
     private $accommodation;    
-
+    
+    private $attraction;
+    
+    private $event;
 
     /**
      * Get id
@@ -165,4 +168,22 @@ class Tag
     public function __toString() {
         return $this->getName();
     }
+    
+    public function getAttraction() {
+        return $this->attraction;
+    }
+
+    public function setAttraction($attraction) {
+        $this->attraction = $attraction;
+    }
+
+    public function getEvent() {
+        return $this->event;
+    }
+
+    public function setEvent($event) {
+        $this->event = $event;
+    }
+
+
 }

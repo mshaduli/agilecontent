@@ -81,6 +81,8 @@ class Event
      *@ATDW\Media
      */
     protected $media;    
+    
+    protected $tags;
 
     public function __construct() {
          $this->media = new ArrayCollection();
@@ -266,6 +268,14 @@ class Event
 
     public function setDestination($destination) {
         $this->destination = $destination;
+    }
+
+    public function getTags() {
+        return $this->tags;
+    }
+
+    public function setTags($tags) {
+        $this->tags = $tags;
     }
 
 

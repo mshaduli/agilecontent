@@ -19,5 +19,16 @@
         </cascade>        
     </one-to-many>    
     
+    <many-to-many field="tags" inversed-by="attraction" target-entity="Application\Sonata\PageBundle\Entity\Tag">
+        <join-table name="attraction_tags">
+            <join-columns>
+                <join-column name="attraction_id" referenced-column-name="id" nullable="true"/>
+            </join-columns>
+            <inverse-join-columns>
+                <join-column name="tag_id" referenced-column-name="id"  nullable="true"/>
+            </inverse-join-columns>
+        </join-table>
+    </many-to-many>       
+    
   </entity>
 </doctrine-mapping>

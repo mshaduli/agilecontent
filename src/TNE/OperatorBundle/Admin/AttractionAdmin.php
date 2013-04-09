@@ -18,6 +18,7 @@ class AttractionAdmin extends Admin
         $formMapper
             ->with('General')
                 ->add('name')
+                ->add('tags', null, array('required' => false))
                 ->add('description', 'textarea', array(
                         'attr' => array(
                             'class' => 'tinymce span6',
@@ -46,6 +47,7 @@ class AttractionAdmin extends Admin
         $datagridMapper
             ->add('name')
             ->add('destination')
+            ->add('tags')                
         ;
     }
 
@@ -54,6 +56,7 @@ class AttractionAdmin extends Admin
         $listMapper
             ->addIdentifier('name')
             ->add('destination')
+            ->add('tags')
         ;
     }
 }

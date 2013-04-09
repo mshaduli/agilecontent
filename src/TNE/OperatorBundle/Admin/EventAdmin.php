@@ -18,6 +18,7 @@ class EventAdmin extends Admin
         $formMapper
             ->with('General')
                 ->add('name')
+                ->add('tags', null, array('required' => false))
                 ->add('description', 'textarea', array(
                         'attr' => array(
                             'class' => 'tinymce span6',
@@ -51,7 +52,8 @@ class EventAdmin extends Admin
             ->add('destination')
             ->add('frequency')
             ->add('startDate')
-            ->add('endDate')           
+            ->add('endDate')    
+            ->add('tags')
         ;
     }
 
@@ -62,7 +64,8 @@ class EventAdmin extends Admin
             ->add('destination')
             ->add('frequency')
             ->add('startDate')
-            ->add('endDate')                
+            ->add('endDate')
+            ->add('tags')
         ;
     }
 }
