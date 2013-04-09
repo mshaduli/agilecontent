@@ -32,6 +32,13 @@
             <cascade-all/>
         </cascade>        
     </many-to-one>    
+    
+    <many-to-one field="restaurant" target-entity="Restaurant" inversed-by="media">
+        <join-column name="restaurant_id" referenced-column-name="id" nullable="true" />
+        <cascade>
+            <cascade-all/>
+        </cascade>        
+    </many-to-one>        
 
 
     <many-to-one field="mediaItem" target-entity="Application\Sonata\MediaBundle\Entity\Media">

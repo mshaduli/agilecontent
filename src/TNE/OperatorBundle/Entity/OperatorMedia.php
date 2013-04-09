@@ -32,7 +32,12 @@ class OperatorMedia
     /**
      * @var integer
      */
-    protected $attraction;        
+    protected $attraction;   
+    
+    /**
+     * @var integer
+     */
+    protected $restaurant;       
 
     /**
      * @var \DateTime
@@ -307,6 +312,15 @@ class OperatorMedia
         $this->attraction = $attraction;
     }    
     
+    public function getRestaurant() {
+        return $this->restaurant;
+    }
+
+    public function setRestaurant($restaurant) {
+        $this->restaurant = $restaurant;
+    }
+
+        
     public function setField($key, $value)
     {
         switch($key)

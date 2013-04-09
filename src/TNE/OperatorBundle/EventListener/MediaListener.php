@@ -26,9 +26,14 @@ class MediaListener
     {
         $entity = $args->getEntity();
         
+        
+        
         if (null != $this->driver->getReader()->getClassAnnotation(new \ReflectionClass(get_class($entity)), 'TNE\\OperatorBundle\\Annotation\\ATDW\\Entity') && method_exists($entity, 'addMedia')) {
             
+            
             $newMedia = $entity->getMedia();
+            
+            \Doctrine\Common\Util\Debug::dump($entity);
             
             foreach($newMedia as &$operatorMedia){
                 

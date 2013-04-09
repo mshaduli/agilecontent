@@ -44,6 +44,8 @@ class Tag
     private $attraction;
     
     private $event;
+    
+    private $restaurant;
 
     /**
      * Get id

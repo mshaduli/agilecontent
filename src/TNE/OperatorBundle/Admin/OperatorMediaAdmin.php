@@ -25,6 +25,8 @@ class OperatorMediaAdmin extends Admin
             ))
         ;
         
+        // Debug this
+        
         if(method_exists($object, 'getAccommodation') && null != $object->getAccommodation())
         {
             $formMapper->add('accommodation');

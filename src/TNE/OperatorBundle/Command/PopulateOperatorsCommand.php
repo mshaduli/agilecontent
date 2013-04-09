@@ -12,6 +12,7 @@ use TNE\OperatorBundle\Entity\Event;
 use TNE\OperatorBundle\Entity\Attraction;
 use TNE\OperatorBundle\Entity\Tour;
 use TNE\OperatorBundle\Entity\Hire;
+use TNE\OperatorBundle\Entity\Restaurant;
 
 /**
  * Description of PopulateOperatorsCommand
@@ -51,6 +52,9 @@ class PopulateOperatorsCommand extends ContainerAwareCommand {
             case 'hire':
                 $this->populate('Hire', $atdwProcessor, $em);
                 break;
+            case 'restaurant':
+                $this->populate('Restaurant', $atdwProcessor, $em);
+                break;            
         }        
         
         $output->writeln("processed");
