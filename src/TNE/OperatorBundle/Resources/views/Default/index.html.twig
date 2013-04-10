@@ -1,1 +1,254 @@
-Hello {{ name }}!
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+{% extends 'ApplicationSonataPageBundle::base_func_layout.html.twig' %}
+
+{% block page_stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block page_javascripts %}
+    {{ parent() }}
+    {{ vichgeo_include_js() }}              
+{% endblock %}    
+    
+{% block content %}
+
+<div class="container">
+    <div class="row12">
+        <div class="navbar">
+          <div class="navbar-inner">
+            <div class="container">
+
+              <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+              <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </a>
+
+              <!-- Be sure to leave the brand out there if you want it shown -->
+              <a class="brand" href="#">Operators </a>
+
+
+              <!-- Everything you want hidden at 940px or less, place within here -->
+              <div class="nav-collapse collapse">
+                <!-- .nav, .navbar-search, .navbar-form, etc -->
+              </div>
+
+            </div>
+          </div>
+        </div>        
+    </div>
+        <div class="row">
+            
+            <div class="span4 pull-left">
+                Showing 31 listings for
+            </div>
+            <div class="span4">
+                 <select id="sort">
+                     <option>Sort by</option>
+                     <option>Distance</option>
+                     <option>Price</option>
+                 </select>
+
+            </div>
+            <div class="span4 pull-right">
+                
+             <div id="tab" class="btn-group pull-right" data-toggle="buttons-radio">
+                <a id="list-btn" href="#list" class="btn active" data-toggle="tab"><i class="icon-list"></i>List</a>
+                <a id="map-btn" href="#map" class="btn" data-toggle="tab"><i class="icon-map-marker"></i>Map</a>
+                <a id="grid-btn" href="#grid" class="btn" data-toggle="tab"><i class="icon-th"></i>Grid</a>
+              </div>
+
+            </div>                
+        </div>        
+    <div class="row">
+        <br/>
+        <br/>
+        <div id="main-pane" class="span9">
+<div id="listview" class="tabbable">
+  <ul class="nav nav-pills">
+    <li class="active"><a href="#pane1" data-toggle="tab">Accommodation</a></li>
+    <li><a href="#pane2" data-toggle="tab">Food & Wine</a></li>
+    <li><a href="#pane3" data-toggle="tab">Events</a></li>
+    <li><a href="#pane4" data-toggle="tab">Attractions</a></li>
+  </ul>
+  <div class="tab-content">
+    <div id="pane1" class="tab-pane active">
+          
+            <ul class="thumbnails">                
+                {% for i in 1..12 %}
+                <li>
+                  <div class="thumbnail">
+                    <img src="http://placehold.it/250x150">                    
+                    <b>Hotel</b>                 
+                    <div class="truncate">Description</div>
+                    <div class="star" data-score="4"></div>
+                  </div>
+                </li>
+                {% endfor %}
+
+             </ul>
+         
+        
+    </div>
+    <div id="pane2" class="tab-pane">
+            <ul class="thumbnails">                
+                {% for i in 1..6 %}
+                <li>
+                  <div class="thumbnail">
+                    <img src="http://placehold.it/250x150">                    
+                    <b>Restaurant</b>                 
+                    <div class="truncate">Description</div>
+                    <div class="star" data-score="4"></div>
+                  </div>
+                </li>
+                {% endfor %}
+
+             </ul>
+    </div>
+    <div id="pane3" class="tab-pane">
+            <ul class="thumbnails">                
+                {% for i in 1..9 %}
+                <li>
+                  <div class="thumbnail">
+                    <img src="http://placehold.it/250x150">                    
+                    <b>Event</b>                 
+                    <div class="truncate">Description</div>
+                    <div class="star" data-score="4"></div>
+                  </div>
+                </li>
+                {% endfor %}
+
+             </ul>
+    </div>
+    <div id="pane4" class="tab-pane">
+            <ul class="thumbnails">                
+                {% for i in 1..12 %}
+                <li>
+                  <div class="thumbnail">
+                    <img src="http://placehold.it/250x150">                    
+                    <b>Attraction</b>                 
+                    <div class="truncate">Description</div>
+                    <div class="star" data-score="4"></div>
+                  </div>
+                </li>
+                {% endfor %}
+
+             </ul>
+    </div>
+  </div><!-- /.tab-content -->
+</div><!-- /.tabbable -->
+        </div>
+        <div class="span3">
+          <ul class="nav nav-list">
+            <li class="nav-header">Accommodation Type</li>
+            <li>
+                <label class="checkbox">
+                    <input type="checkbox" checked> Hotel
+                </label>                   
+            </li>       
+            <li>
+                <label class="checkbox">
+                    <input type="checkbox"> Motel
+                </label>             
+            </li>
+            <li>
+                <label class="checkbox">
+                    <input type="checkbox"> Bed & Breakfast
+                </label>             
+            </li>
+            <li>
+                <label class="checkbox">
+                    <input type="checkbox"> Camp Site
+                </label>             
+            </li>
+            <li>
+                <label class="checkbox">
+                    <input type="checkbox"> Hostel
+                </label>             
+            </li>
+            <li class="nav-header">Distance from</li>
+            <li style="text-align: center"><h4>70km</h4><div id="distance-slider"></li>
+            <li class="nav-header">Filter by tags</li>
+            <li>
+                <select multiple="true" style="height:100px; width: 100%">
+                    <option>One</option>
+                    <option>Two</option>
+                    <option>Three</option>
+                </select>
+            </li>
+            <li class="nav-header">Max. price</li>
+            <li style="text-align: center"><h4>$250</h4><div id="price-slider"></li>        
+            <li class="nav-header">Min. rating</li>
+            <li><div class="star" data-score="4"></div></li>                    
+            <li class="nav-header">Facilities</li>
+            <li>
+                <label class="checkbox">
+                    <input type="checkbox"> Wifi
+                </label>                   
+            </li>       
+            <li>
+                <label class="checkbox">
+                    <input type="checkbox"> Kitchen facilities
+                </label>             
+            </li>
+            <li>
+                <label class="checkbox">
+                    <input type="checkbox"> Dryer
+                </label>             
+            </li>
+            <li>
+                <label class="checkbox">
+                    <input type="checkbox"> Iron
+                </label>             
+            </li>
+          </ul>
+        </div>            
+    </div>
+</div>
+        
+        <script>
+$(document).ready(function(){
+    $('#distance-slider').slider({
+        range: false
+    });    
+
+    $('#price-slider').slider({
+        range: false
+    });
+    
+    
+    $('.star').raty({
+      path: '/bundles/applicationsonataadmin/img',        
+      score: function() {
+        return $(this).attr('data-score');
+      }
+    });
+
+    $('#list-btn').click(function(){
+        //console.log($(this));
+        $('#main-pane').html("Listing");
+    });
+
+    $('#map-btn').click(function(){
+        //console.log($(this));
+        $('#main-pane').html('<div class="Flexible-container"><iframe width="100%" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.ch/maps?f=q&amp;source=s_q&amp;hl=de&amp;geocode=&amp;q=Bern&amp;aq=&amp;sll=46.813187,8.22421&amp;sspn=3.379772,8.453979&amp;ie=UTF8&amp;hq=&amp;hnear=Bern&amp;t=m&amp;z=12&amp;ll=46.947922,7.444608&amp;output=embed&amp;iwloc=near"></iframe></div>');
+    });
+    
+        $('#grid-btn').click(function(){
+        //console.log($(this));
+        $('#main-pane').html("Grid");
+    });
+    
+});        
+            </script>
+{% endblock %}
