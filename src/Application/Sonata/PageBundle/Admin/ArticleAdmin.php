@@ -20,6 +20,7 @@ class ArticleAdmin extends Admin
                 ->add('name')
                 ->add('title')
                 ->add('author', 'sonata_type_model_list')
+                ->add('showAuthor')
                 ->add('tags', null, array('required' => false))
                 ->add('body', 'textarea', array(
                         'attr' => array(
@@ -27,6 +28,7 @@ class ArticleAdmin extends Admin
                             'data-theme' => 'advanced'
                         )
                     ))
+                ->add('sources', 'textarea', array('required' => false, 'attr'=>array('class'=>'span6')))
                 ->add('notes', 'textarea', array('required' => false, 'attr'=>array('class'=>'alert span6')))
             ->end();
         

@@ -45,8 +45,11 @@ class Article
      * @var string
      */
     private $author;
-
     
+    private $showAuthor = true;
+
+
+
     /**
      *
      * @var type ArrayCollection
@@ -259,5 +262,13 @@ class Article
         $this->media->remove($media);
     }             
     
+    public function getShowAuthor() {
+        return $this->showAuthor;
+    }
+
+    public function setShowAuthor($showAuthor) {
+        $this->showAuthor = $showAuthor;
+    }
+
 
 }

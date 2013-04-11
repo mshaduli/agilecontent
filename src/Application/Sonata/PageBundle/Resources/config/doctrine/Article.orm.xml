@@ -11,6 +11,7 @@
     <field name="notes" type="string" column="notes" length="255" nullable="true"/>
     <field name="publishDate" type="date" column="publish_date" nullable="true"/>
     <field name="expiryDate" type="date" column="expiry_date" nullable="true"/>
+    <field name="showAuthor" type="boolean" column="show_author" nullable="true" />
         
     <one-to-many field="media" target-entity="Application\Sonata\PageBundle\Entity\ArticleMedia" mapped-by="article">
         <order-by>
