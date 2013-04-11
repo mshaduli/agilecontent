@@ -25,7 +25,7 @@ class Event
      * @var integer
      * @ATDW\ProductAttrId
      */    
-    private $atdwId;
+    private $atdwId = 0;
         
     /**
      * @ATDW\ProductName
