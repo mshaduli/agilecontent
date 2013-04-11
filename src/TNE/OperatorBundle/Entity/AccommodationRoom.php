@@ -165,7 +165,7 @@ class AccommodationRoom
         $this->dates->remove($date);
     }
 
-        /**
+    /**
      * Get rate_to
      *
      * @return float 
@@ -194,6 +194,10 @@ class AccommodationRoom
             default:
                 // Do nothing
         }
+    }
+    
+    public function setId($id) {
+        $this->id = $id;
     }
             
 }

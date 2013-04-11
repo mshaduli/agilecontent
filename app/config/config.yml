@@ -22,6 +22,7 @@ imports:
     - { resource: '@TNEOperatorBundle/Resources/config/services.xml' }
     
     - { resource: '@ApplicationSonataPageBundle/Resources/config/tag.xml' }
+    - { resource: '@ApplicationSonataPageBundle/Resources/config/article.xml' }
     - { resource: '@TNEOperatorBundle/Resources/config/accommodation.xml' }    
     - { resource: '@TNEOperatorBundle/Resources/config/event.xml' }        
     - { resource: '@TNEOperatorBundle/Resources/config/attraction.xml' }

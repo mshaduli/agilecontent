@@ -46,6 +46,8 @@ class Tag
     private $event;
     
     private $restaurant;
+    
+    private $article;
 
     /**
      * Get id
@@ -185,6 +187,22 @@ class Tag
 
     public function setEvent($event) {
         $this->event = $event;
+    }
+
+    public function getRestaurant() {
+        return $this->restaurant;
+    }
+
+    public function setRestaurant($restaurant) {
+        $this->restaurant = $restaurant;
+    }
+
+    public function getArticle() {
+        return $this->article;
+    }
+
+    public function setArticle($article) {
+        $this->article = $article;
     }
 
 
