@@ -19,7 +19,7 @@ class ArticleAdmin extends Admin
             ->with('General')
                 ->add('name')
                 ->add('title')
-                ->add('author')
+                ->add('author', null, array('empty_value' => false))
                 ->add('showAuthor')
                 ->add('tags', null, array('required' => false))
                 ->add('body', 'textarea', array(
@@ -86,6 +86,5 @@ class ArticleAdmin extends Admin
     
     public function getNewInstance() {
         return parent::getNewInstance();  
-        
     }
 }
