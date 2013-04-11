@@ -25,7 +25,7 @@ class Accommodation
      * @var integer
      * @ATDW\ProductAttrId
      */    
-    private $atdwId;
+    private $atdwId = 1;
     
     /**
      * @ATDW\ProductName

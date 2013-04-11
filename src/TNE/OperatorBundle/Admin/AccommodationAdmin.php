@@ -18,6 +18,7 @@ class AccommodationAdmin extends Admin
         $formMapper
             ->with('General')
                 ->add('name')
+                ->add('destination')
                 ->add('site')
                 ->add('description', 'textarea', array(
                         'attr' => array(
@@ -26,6 +27,8 @@ class AccommodationAdmin extends Admin
                         )
                     ))
                 ->add('address')
+                ->add('latitude')
+                ->add('longitude')
                 ->add('tags', null, array('required' => false))
                 ->add('atdwStarRating', null, array('label'=>'Star Rating'))
                 ->add('hiddenSecret', 'textarea', array(
