@@ -19,7 +19,7 @@ class ArticleAdmin extends Admin
             ->with('General')
                 ->add('name')
                 ->add('title')
-                ->add('author', 'sonata_type_model_list')
+                ->add('author')
                 ->add('showAuthor')
                 ->add('tags', null, array('required' => false))
                 ->add('body', 'textarea', array(
@@ -85,6 +85,7 @@ class ArticleAdmin extends Admin
     }
     
     public function getNewInstance() {
-        return parent::getNewInstance();        
+        return parent::getNewInstance();  
+        
     }
 }
