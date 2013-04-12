@@ -27,7 +27,8 @@ sonata_page:
         - sonata_cache_js_async
         - sonata_cache_js_sync
         - sonata_cache_apc
-        - tne_operator_listing
+        - tne_operator_listing_index
+        - tne_operator_listing_list
 
     ignore_uri_patterns:
         - admin(.*)         # ignore admin route, ie route containing 'admin'

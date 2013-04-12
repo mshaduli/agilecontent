@@ -429,6 +429,7 @@ class Accommodation
         foreach ($this->getMedia() as $media)
         {
             //if($media->getMediaItem()->hasTag('hero')) return $media->getMediaItem();
+ 
             return $media->getMediaItem();
         }
  

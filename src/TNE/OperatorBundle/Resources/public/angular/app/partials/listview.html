@@ -1,0 +1,36 @@
+<div id="listview" class="tabbable">
+  <ul class="nav nav-pills">
+    <li class="active"><a href="#pane1" data-toggle="tab">Accommodation</a></li>
+    <li><a href="#pane2" data-toggle="tab">Food & Wine</a></li>
+    <li><a href="#pane3" data-toggle="tab">Events</a></li>
+    <li><a href="#pane4" data-toggle="tab">Attractions</a></li>
+  </ul>
+  <div class="tab-content">
+    <div id="pane1" class="tab-pane active">
+          
+            <ul class="thumbnails">                
+                
+                <li ng-repeat="accomm in accomms">
+                  <div class="thumbnail">
+                    <img ng-src="{{accomm.image}}"/>                    
+                    <b>{{accomm.name}}</b>                 
+                    <div class="truncate">{{accomm.description | truncate:30 }}</div>
+                    <div class="star" data-score="4"></div>
+                  </div>
+                </li>
+
+             </ul>
+         
+        
+    </div>
+    <div id="pane2" class="tab-pane">
+
+    </div>
+    <div id="pane3" class="tab-pane">
+
+    </div>
+    <div id="pane4" class="tab-pane">
+
+    </div>
+  </div>
+</div>
