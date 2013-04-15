@@ -35,7 +35,7 @@ class DefaultController extends Controller
     private function imageName($media, $provider){
         
         if(!$media) return 'none.jpg';
-        $format = $provider->getFormatName($media, 'bog');
+        $format = $provider->getFormatName($media, 'big');
       
         return $this->get('sonata.media.twig.extension')->path($media, $format);
               
