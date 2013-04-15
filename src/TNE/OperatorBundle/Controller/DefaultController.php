@@ -8,12 +8,12 @@ use \Doctrine\ORM\Query;
 
 class DefaultController extends Controller
 {
-    public function indexAction()
+    public function searchAction()
     {
         return $this->render('TNEOperatorBundle:Default:index.html.twig', array('name' => 'test'));
     }
     
-    public function listAction()
+    public function indexAction()
     {
         $accArray = array();
         $em = $this->get('doctrine.orm.entity_manager');
@@ -24,15 +24,10 @@ class DefaultController extends Controller
         
         $imageProvider = $this->get('sonata.media.provider.image');
         
-       
-        
-        foreach ($acc as $a) {
-            
-            $accArray []= array('name'=> $a->getName(), 'description' => $a->getDescription(), 'image' => $this->imageName($a->getHeroImage(), $imageProvider));
-           
+
+        foreach ($acc as $a) {            
+            $accArray []= array('name'=> $a->getName(), 'description' => $a->getDescription(), 'image' => $this->imageName($a->getHeroImage(), $imageProvider));           
         }
-        
-        
 
         return new JsonResponse($accArray);
     }

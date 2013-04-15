@@ -18,6 +18,7 @@ file that was distributed with this source code.
     {{ parent() }}
     {{ vichgeo_include_js() }}   
         <script src="{{ asset('bundles/tneoperator/angular/app/lib/angular/angular.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/tneoperator/angular/app/lib/angular/angular-resource.js') }}"></script>
         <script src="{{ asset('bundles/tneoperator/angular/app/js/app.js') }}"></script>
         <script src="{{ asset('bundles/tneoperator/angular/app/js/services.js') }}"></script>
         <script src="{{ asset('bundles/tneoperator/angular/app/js/controllers.js') }}"></script>
@@ -84,49 +85,49 @@ file that was distributed with this source code.
         </div>
         
         <div class="span3">
-          <ul class="nav nav-list">
+          <ul class="nav nav-list" ng-controller="FilterCtrl">
             <li class="nav-header">Accommodation Type</li>
             <li>
                 <label class="checkbox">
-                    <input type="checkbox" checked> Hotel
+                    <input type="checkbox" ng-model="type_hotel" ng-change="change()" id="typehotel" checked> Hotel
                 </label>                   
             </li>       
             <li>
                 <label class="checkbox">
-                    <input type="checkbox"> Motel
+                    <input type="checkbox" ng-model="type_motel" ng-change="change()" id="typemotel"> Motel
                 </label>             
             </li>
             <li>
                 <label class="checkbox">
-                    <input type="checkbox"> Bed & Breakfast
+                    <input type="checkbox" ng-model="type_bnb" ng-change="change()" id="typebnb"> Bed & Breakfast
                 </label>             
             </li>
             <li>
                 <label class="checkbox">
-                    <input type="checkbox"> Camp Site
+                    <input type="checkbox" ng-model="type_camp" ng-change="change()" id="typecamp"> Camp Site
                 </label>             
             </li>
             <li>
                 <label class="checkbox">
-                    <input type="checkbox"> Hostel
+                    <input type="checkbox" ng-model="type_hostel" ng-change="change()" id="typehostel"> Hostel
                 </label>             
             </li>
             <li class="nav-header"><br/>Distance from</li>
             <li style="text-align: center">
-                <input type="text" id="distance-slider-val" style="border: 0; color: #333; font-weight: bold; text-align: center" /><br/>
+                <input type="text" id="distance-slider-val" style="border: 0; color: #333; font-weight: bold; text-align: center" ng-model="distance" ng-change="change()" /><br/>
                 <div id="distance-slider"></div>
             </li>
-            <li class="nav-header"><br/>Filter by tags</li>
+<!--            <li class="nav-header"><br/>Filter by tags</li>
             <li>
                 <select id="tags" name="tags" multiple="true" style="height:100px; width: 100%">
                     <option>One</option>
                     <option>Two</option>
                     <option>Three</option>
                 </select>
-            </li>
+            </li> -->
             <li class="nav-header"><br/>Price</li>
             <li style="text-align: center">
-                <input type="text" id="price-slider-amt" style="border: 0; color: #333; font-weight: bold; text-align: center" /><br/>
+                <input type="text" id="price-slider-amt" style="border: 0; color: #333; font-weight: bold; text-align: center" ng-model="price" ng-change="change()" /><br/>
                 <div id="price-slider"></div>
             </li>        
             <li class="nav-header"><br/>Min. rating</li>

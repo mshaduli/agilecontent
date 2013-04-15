@@ -3,12 +3,12 @@
 <routes xmlns="http://symfony.com/schema/routing"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
-
-    <route id="tne_operator_listing_index" pattern="/operators">
+    
+    <route id="tne_operator_listing_list" pattern="/operators">
         <default key="_controller">TNEOperatorBundle:Default:index</default>
     </route>
     
-    <route id="tne_operator_listing_list" pattern="/operators/list">
-        <default key="_controller">TNEOperatorBundle:Default:list</default>
-    </route>
+    <route id="tne_operator_listing_search" pattern="/operators/search">
+        <default key="_controller">TNEOperatorBundle:Default:search</default>
+    </route>    
 </routes>
