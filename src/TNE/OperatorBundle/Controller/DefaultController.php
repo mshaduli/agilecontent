@@ -16,10 +16,11 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $accArray = array();
+        $town = $this->getRequest()->get('town')?$this->getRequest()->get('town'):'Falls Creek';
         $em = $this->get('doctrine.orm.entity_manager');
         $acc = $em->createQuery(
             'SELECT a FROM TNEOperatorBundle:Accommodation a WHERE a.destination = :destination'
-        )->setParameter('destination', 'Beechworth')
+        )->setParameter('destination', $town)
         ->getResult();
         
         $imageProvider = $this->get('sonata.media.provider.image');

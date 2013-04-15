@@ -1,33 +1,19 @@
 'use strict';
 
-/* Controllers */
 
-//angular.module('OperatorListApp.controllers', []).
-//  controller('MyCtrl1', ['$scope', 'operators', function($scope, $http, operators) {      
-//    $scope.accomms = operators();
-//  }])
-//  .controller('Filters',['$scope', 'operators', function($scope, operators){
-//    $scope.change = function () {
-//        $scope.accomms = operators();
-//        console.log('change');
-//    }
-//  }])
-//  .controller('MyCtrl2', [function() {
-//
-//  }]);
-
-
-function ListCtrl($scope, Operator)
+function ListCtrl($scope, operatorService)
 {
-    $scope.accomms = Operator.query({});
+    operatorService.setViewScope($scope);
+    operatorService.filter({});
 }
 
-function MapCtrl($scope, Operator)
+function MapCtrl($scope, operatorService)
 {
-    $scope.accomms = Operator.query({});
+    operatorService.setViewScope($scope);
+    $operatorService.filter({});
 }
 
-function FilterCtrl($scope, Operator)
+function FilterCtrl($scope, operatorService)
 {    
     $scope.type_hotel = true;
     $scope.type_motel = true;
@@ -41,9 +27,11 @@ function FilterCtrl($scope, Operator)
     //Implement filters
     $scope.price = [ 120, 350 ];
     
+    $scope.town = 'Falls Creek';
+    
     $scope.change = function()
     {
-        $scope.accomms = Operator.query({
+        operatorService.filter({
             hotel:$scope.type_hotel,
             motel:$scope.type_motel,
             bnb:$scope.type_bnb,
@@ -51,6 +39,7 @@ function FilterCtrl($scope, Operator)
             hostel:$scope.type_hostel,
             distance:$scope.distance,
             price:$scope.price,
+            town:$scope.town
         });
     }
 }

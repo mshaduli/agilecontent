@@ -112,9 +112,21 @@ file that was distributed with this source code.
                 </label>             
             </li>
             <li class="nav-header"><br/>Distance from</li>
-            <li style="text-align: center">
+            <li>
+                <center>
                 <input type="text" id="distance-slider-val" style="border: 0; color: #333; font-weight: bold; text-align: center" ng-model="distance" ng-change="change()" /><br/>
                 <div id="distance-slider"></div>
+                <br/>
+                </center>
+                <label class="radio">
+                    <input type="radio" ng-model="town" value="Falls Creek" ng-change="change()"> Falls Creek <br/>
+                </label>                     
+                <label class="radio">
+                  <input type="radio" ng-model="town" value="Rutherglen" ng-change="change()"> Rutherglen <br/>
+                </label>
+                <label class="radio">
+                    <input type="radio" ng-model="town" value="Beechworth" ng-change="change()"> Beechworth <br/>
+               </label>
             </li>
 <!--            <li class="nav-header"><br/>Filter by tags</li>
             <li>
