@@ -57,7 +57,6 @@ file that was distributed with this source code.
         <div class="row">
             
             <div class="span4 pull-left">
-                Showing 31 listings for
             </div>
             <div class="span4">
                  <select id="sort">
@@ -89,7 +88,7 @@ file that was distributed with this source code.
             <li class="nav-header">Accommodation Type</li>
             <li>
                 <label class="checkbox">
-                    <input type="checkbox" ng-model="type_hotel" ng-change="change()" id="typehotel" checked> Hotel
+                    <input type="checkbox" ng-model="type_hotel" ng-change="change()" id="typehotel"> Hotel
                 </label>                   
             </li>       
             <li>
@@ -167,7 +166,11 @@ $(document).ready(function(){
       step: 50,
       value: 50,
       slide: function( event, ui ) {
-        $( "#distance-slider-val" ).val( ui.value + " km");
+       var distance =  ui.value + "km";
+       var scope = angular.element('#distance-slider-val').scope();
+        scope.distance = distance;
+        scope.change();
+        $( "#distance-slider-val" ).val(distance);
       }
     });    
 
@@ -180,7 +183,12 @@ $( "#price-slider" ).slider({
       step: 50,
       values: [ 120, 350 ],
       slide: function( event, ui ) {
-        $( "#price-slider-amt" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+        var price = "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ];
+        var scope = angular.element('#price-slider-amt').scope();
+        scope.price = price;
+        scope.change();          
+        $( "#price-slider-amt" ).val(price);
+        
       }
     });
     

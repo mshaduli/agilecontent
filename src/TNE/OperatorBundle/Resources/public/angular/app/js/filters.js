@@ -19,4 +19,7 @@ angular.module('OperatorListApp.filters', []).
             }
 
         }
-    });
+    })
+    .filter('distance', function(){})
+    .filter('price', function(){})
+    ;

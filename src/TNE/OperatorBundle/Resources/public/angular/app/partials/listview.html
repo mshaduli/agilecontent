@@ -10,11 +10,11 @@
           
             <ul class="thumbnails">                
                 
-                <li ng-repeat="accomm in accomms">
+                <li class="span3" ng-repeat="accomm in accomms">
                   <div class="thumbnail">
                     <img ng-src="{{accomm.image}}"/>                    
                     <b>{{accomm.name}}</b>                 
-                    <div class="truncate">{{accomm.description | truncate:30 }}</div>
+                    <div class="truncate">{{accomm.description | truncate:120 }}</div>
                     <div class="star" data-score="4"></div>
                   </div>
                 </li>
