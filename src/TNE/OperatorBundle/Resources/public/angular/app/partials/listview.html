@@ -13,6 +13,7 @@
                 
                 <li class="span3" ng-repeat="operator in accommodation">
                   <div class="thumbnail">
+                    <legend>Distance {{ operator.distance | number:2}}km</legend>
                     <img ng-src="{{operator.image}}"/>                    
                     <b>{{operator.name}}</b>                 
                     <div class="truncate">{{operator.description | truncate:120 }}</div>
@@ -33,6 +34,7 @@
                 
                 <li class="span3" ng-repeat="operator in events">
                   <div class="thumbnail">
+                    <legend>Distance {{ operator.distance | number:2}}km</legend>
                     <img ng-src="{{operator.image}}"/>                    
                     <b>{{operator.name}}</b>                 
                     <div class="truncate">{{operator.description | truncate:120 }}</div>
@@ -48,6 +50,7 @@
                 
                 <li class="span3" ng-repeat="operator in attractions">
                   <div class="thumbnail">
+                    <legend>Distance {{ operator.distance | number:2}}km</legend>
                     <img ng-src="{{operator.image}}"/>                    
                     <b>{{operator.name}}</b>                 
                     <div class="truncate">{{operator.description | truncate:120 }}</div>
