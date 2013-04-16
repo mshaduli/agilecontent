@@ -6,6 +6,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use \Doctrine\ORM\Query;
 
+/**
+ * fixme - Reduce code duplication
+ */
+
 class DefaultController extends Controller
 {
     public function searchAction()
@@ -17,7 +21,8 @@ class DefaultController extends Controller
      * 
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      * @abstract
-     * For all types
+     * 
+     * For all types in one query
      * $distanceQueryAll =<<<EOD
         SELECT * FROM 
         (
@@ -36,6 +41,8 @@ class DefaultController extends Controller
     
     public function indexAction()
     {     
+        $operators = array();
+        
         $em = $this->get('doctrine.orm.entity_manager');
         $filters = $this->fromRequestOrDb($this->getRequest()->query->all(), $em);        
                 
@@ -46,7 +53,7 @@ class DefaultController extends Controller
         $distanceQueryAccomm  =<<<EOD
         SELECT * FROM 
         (
-        SELECT 'accommodation' as `type`, `ac`.`name` as `name`,  `ac`.`atdw_product_description` as `description`, `ac`.`latitude` as `latitude`, `ac`.`longitude` as `longitude`, (((acos(sin(($destination[latitude]*pi()/180)) * sin((`latitude`*pi()/180))+cos(($destination[latitude]*pi()/180)) * cos((`latitude`*pi()/180)) * cos((($destination[longitude] - `longitude`)*pi()/180))))*180/pi())*60*1.1515) AS `distance` FROM `Accommodation` ac
+        SELECT `ac`.`id` as `id`, `ac`.`name` as `name`,  `ac`.`atdw_product_description` as `description`, `ac`.`latitude` as `latitude`, `ac`.`longitude` as `longitude`, (((acos(sin(($destination[latitude]*pi()/180)) * sin((`latitude`*pi()/180))+cos(($destination[latitude]*pi()/180)) * cos((`latitude`*pi()/180)) * cos((($destination[longitude] - `longitude`)*pi()/180))))*180/pi())*60*1.1515) AS `distance` FROM `Accommodation` ac
         ) as op 
         HAVING distance < $distanceValue
         ORDER BY distance ASC
@@ -55,13 +62,22 @@ EOD;
         $accStmt = $em->getConnection()->prepare($distanceQueryAccomm);
         
         $accStmt->execute();
+        
+        $results = $accStmt->fetchAll();
+        
+        foreach ($results as $result)
+        {
+            $operatorMedia =  $em->getRepository('TNEOperatorBundle:Accommodation')->find($result['id'])->getMedia()->first();
+            $result['image'] = $this->getOperatorImage($operatorMedia);
+            $operators []= $result;
+        }
   
-        return new JsonResponse($accStmt->fetchAll());
+        return new JsonResponse($operators);
     }
     
     public function attractionsAction()
     {
-        
+        $operators = array();
         $em = $this->get('doctrine.orm.entity_manager');
         $filters = $this->fromRequestOrDb($this->getRequest()->query->all(), $em);        
                 
@@ -73,21 +89,30 @@ EOD;
         $distanceQueryAttr  =<<<EOD
         SELECT * FROM 
         (
-        SELECT 'attraction' as `type`, `att`.`name` as `name`,  `att`.`description` as `description`, `att`.`latitude` as `latitude`, `att`.`longitude` as `longitude`, (((acos(sin(($destination[latitude]*pi()/180)) * sin((`latitude`*pi()/180))+cos(($destination[latitude]*pi()/180)) * cos((`latitude`*pi()/180)) * cos((($destination[longitude] - `longitude`)*pi()/180))))*180/pi())*60*1.1515) AS `distance` FROM `Attraction` att
+        SELECT `att`.`id` as `id`, `att`.`name` as `name`,  `att`.`description` as `description`, `att`.`latitude` as `latitude`, `att`.`longitude` as `longitude`, (((acos(sin(($destination[latitude]*pi()/180)) * sin((`latitude`*pi()/180))+cos(($destination[latitude]*pi()/180)) * cos((`latitude`*pi()/180)) * cos((($destination[longitude] - `longitude`)*pi()/180))))*180/pi())*60*1.1515) AS `distance` FROM `Attraction` att
         ) as op 
         HAVING distance < $distanceValue
         ORDER BY distance ASC
 EOD;
         
         $attStmt = $em->getConnection()->prepare($distanceQueryAttr);
-        $attStmt->execute();
+        $attStmt->execute();        
         
-        return new JsonResponse($attStmt->fetchAll());
+        $results = $attStmt->fetchAll();
+        
+        foreach ($results as $result)
+        {
+            $operatorMedia =  $em->getRepository('TNEOperatorBundle:Attraction')->find($result['id'])->getMedia()->first();
+            $result['image'] = $this->getOperatorImage($operatorMedia);
+            $operators []= $result;
+        }
+  
+        return new JsonResponse($operators);
     }
     
     public function eventsAction()
     {
-        
+        $operators = array();
         $em = $this->get('doctrine.orm.entity_manager');
         $filters = $this->fromRequestOrDb($this->getRequest()->query->all(), $em);        
                 
@@ -99,7 +124,7 @@ EOD;
         $distanceQueryEvent  =<<<EOD
         SELECT * FROM 
         (
-        SELECT 'event' as `type`, `ev`.`name` as `name`,  `ev`.`description` as `description`, `ev`.`latitude` as `latitude`, `ev`.`longitude` as `longitude`, (((acos(sin(($destination[latitude]*pi()/180)) * sin((`latitude`*pi()/180))+cos(($destination[latitude]*pi()/180)) * cos((`latitude`*pi()/180)) * cos((($destination[longitude] - `longitude`)*pi()/180))))*180/pi())*60*1.1515) AS `distance` FROM `Event` ev
+        SELECT `ev`.`id` as `id`, `ev`.`name` as `name`,  `ev`.`description` as `description`, `ev`.`latitude` as `latitude`, `ev`.`longitude` as `longitude`, (((acos(sin(($destination[latitude]*pi()/180)) * sin((`latitude`*pi()/180))+cos(($destination[latitude]*pi()/180)) * cos((`latitude`*pi()/180)) * cos((($destination[longitude] - `longitude`)*pi()/180))))*180/pi())*60*1.1515) AS `distance` FROM `Event` ev
         ) as op 
         HAVING distance < $distanceValue
         ORDER BY distance ASC
@@ -108,18 +133,25 @@ EOD;
         $evStmt = $em->getConnection()->prepare($distanceQueryEvent);
         $evStmt->execute();
         
-        return new JsonResponse($evStmt->fetchAll());
+        $results = $evStmt->fetchAll();
+        
+        foreach ($results as $result)
+        {
+            $operatorMedia =  $em->getRepository('TNEOperatorBundle:Attraction')->find($result['id'])->getMedia()->first();
+            $result['image'] = $this->getOperatorImage($operatorMedia);
+            $operators []= $result;
+        }
+  
+        return new JsonResponse($operators);
     }    
     
-    private function operatorImageAction(){
-        
-        $imageProvider = $this->get('sonata.media.provider.image');
-        
-        if(!$media) return 'none.jpg';
-        $format = $provider->getFormatName($media, 'big');
-      
-        return $this->get('sonata.media.twig.extension')->path($media, $format);
-              
+    private function getOperatorImage($media)
+    {
+        if(!$media) return 'none.jpg';        
+        $mediaItem = $media->getMediaItem();        
+        $imageProvider = $this->get('sonata.media.provider.image');                
+        $format = $imageProvider->getFormatName($mediaItem, 'big');      
+        return $this->get('sonata.media.twig.extension')->path($mediaItem, $format);              
     }
     
     private function fromRequestOrDb($filters, $em)
