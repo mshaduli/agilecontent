@@ -118,15 +118,8 @@ file that was distributed with this source code.
                 <div id="distance-slider"></div>
                 <br/>
                 </center>
-                <label class="radio">
-                    <input type="radio" ng-model="town" value="Falls Creek" ng-change="change()"> Falls Creek <br/>
-                </label>                     
-                <label class="radio">
-                  <input type="radio" ng-model="town" value="Rutherglen" ng-change="change()"> Rutherglen <br/>
-                </label>
-                <label class="radio">
-                    <input type="radio" ng-model="town" value="Beechworth" ng-change="change()"> Beechworth <br/>
-               </label>
+            <div id="destinations-list" ng-include src="destinationsTemplate">
+            </div>
             </li>
 <!--            <li class="nav-header"><br/>Filter by tags</li>
             <li>
@@ -174,9 +167,9 @@ $(document).ready(function(){
     $('#distance-slider').slider({
       range: false,
       min: 0,
-      max: 500,
-      step: 50,
-      value: 50,
+      max: 200,
+      step: 10,
+      value: 10,
       slide: function( event, ui ) {
        var distance =  ui.value + "km";
        var scope = angular.element('#distance-slider-val').scope();

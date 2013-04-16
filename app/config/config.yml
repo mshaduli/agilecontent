@@ -29,6 +29,7 @@ imports:
     - { resource: '@TNEOperatorBundle/Resources/config/restaurant.xml' }
     - { resource: '@TNEOperatorBundle/Resources/config/tour.xml' }
     - { resource: '@TNEOperatorBundle/Resources/config/hire.xml' }
+    - { resource: '@TNEOperatorBundle/Resources/config/destination.xml' }
     - { resource: '@TNEOperatorBundle/Resources/config/map.xml' }
     - { resource: '@TNEOperatorBundle/Resources/config/annotations.xml' }
     

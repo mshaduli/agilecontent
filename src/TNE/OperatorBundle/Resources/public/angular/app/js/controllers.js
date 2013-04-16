@@ -13,7 +13,7 @@ function MapCtrl($scope, operatorService)
     $operatorService.filter({});
 }
 
-function FilterCtrl($scope, operatorService)
+function FilterCtrl($scope, operatorService, Destination)
 {    
     $scope.type_hotel = true;
     $scope.type_motel = true;
@@ -22,15 +22,16 @@ function FilterCtrl($scope, operatorService)
     $scope.type_hostel = true;
     
     //Implement filters
-    $scope.distance = '50km';
+    $scope.distance = '10km';
     
     //Implement filters
     $scope.price = [ 120, 350 ];
-    
-    $scope.town = 'Falls Creek';
-    
-    $scope.change = function()
-    {
+        
+    // Methods
+    $scope.change = function(options)
+    {        
+        if(typeof options == 'object') $scope.town = options.town;        
+        
         operatorService.filter({
             hotel:$scope.type_hotel,
             motel:$scope.type_motel,
@@ -41,5 +42,14 @@ function FilterCtrl($scope, operatorService)
             price:$scope.price,
             town:$scope.town
         });
-    }
+    }         
+    
+    // Controls
+    $scope.destinations = Destination.query(function(){
+        $scope.town = $scope.destinations[0].id;
+    }); 
+    
+    // Templates
+    $scope.destinationsTemplate = '/bundles/tneoperator/angular/app/partials/destinations.html';
+    
 }

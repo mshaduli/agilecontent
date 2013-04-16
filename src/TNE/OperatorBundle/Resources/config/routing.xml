@@ -10,5 +10,17 @@
     
     <route id="tne_operator_listing_search" pattern="/operators/search">
         <default key="_controller">TNEOperatorBundle:Default:search</default>
-    </route>    
+    </route>  
+    
+    <route id="tne_operator_listing_destinations_list" pattern="/operators/destinations">
+        <default key="_controller">TNEOperatorBundle:Default:destinations</default>
+    </route>     
+    
+    <route id="tne_operator_listing_attractions_list" pattern="/operators/attractions">
+        <default key="_controller">TNEOperatorBundle:Default:attractions</default>
+    </route>         
+    
+    <route id="tne_operator_listing_events_list" pattern="/operators/events">
+        <default key="_controller">TNEOperatorBundle:Default:events</default>
+    </route>                   
 </routes>
