@@ -147,7 +147,7 @@ EOD;
     
     private function getOperatorImage($media)
     {
-        if(!$media) return 'none.jpg';        
+        if(!$media) return '/uploads/media/default/0001/01/thumb_91_default_big.jpeg';        
         $mediaItem = $media->getMediaItem();        
         $imageProvider = $this->get('sonata.media.provider.image');                
         $format = $imageProvider->getFormatName($mediaItem, 'big');      
