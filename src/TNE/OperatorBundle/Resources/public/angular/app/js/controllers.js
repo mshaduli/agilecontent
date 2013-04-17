@@ -8,17 +8,14 @@ function ListCtrl($scope, operatorService, $rootScope)
     $scope.$on('accommodationLoaded', function(){ 
         console.log(operatorService.get('accommodation'));
         $scope.accommodation = operatorService.get('accommodation'); 
-        $rootScope.$apply();
     });
     $scope.$on('attractionsLoaded', function(){ 
         console.log(operatorService.get('attractions'));
         $scope.attractions = operatorService.get('attractions'); 
-        $rootScope.$apply();
     });
     $scope.$on('eventsLoaded', function(){ 
         console.log(operatorService.get('events'));
         $scope.events = operatorService.get('events'); 
-        $rootScope.$apply();
     });
        
 }
