@@ -79,13 +79,13 @@ class Tag
      */
     public function getName()
     {
-        if($this->getParentName()) return $this->name . ' ( ' . $this->getParentName() . ' ) ';
+        if($this->getParentName()) return $this->name . ' \ ' . $this->getParentName();
         return $this->name;
     }
     
     public function getParentName()
     {
-        if(null != $this->getParent() && method_exists($this->getParent(), 'getName')) return $this->getParent()->getName();
+        if(null != $this->getParent()) return $this->getParent()->getName();
         return false;
     }
 
