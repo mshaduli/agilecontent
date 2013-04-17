@@ -18,8 +18,8 @@ sonata_media:
             formats:
                 small: { width: 100, quality: 100}
                 big:   { width: 820 , quality: 100}
-
-        region:  # the default context is mandatory
+                
+        ATDW:  # the default context is mandatory
             download:
                 mode: http # X-Sendfile | http
             providers:
@@ -32,18 +32,7 @@ sonata_media:
             formats:
                 small: { width: 100, quality: 100}
                 big:   { width: 820 , quality: 100}
-
-        destination:
-            providers:
-                - sonata.media.provider.image
-                - sonata.media.provider.file                
-                - sonata.media.provider.youtube                                
-                - sonata.media.provider.vimeo
-                - sonata.media.provider.dailymotion
-
-            formats:
-                abtract: { width: 100, quality: 100}
-                wide:    { width: 820 , quality: 100}
+                
 
     cdn:
         # define the public base url for the uploaded media

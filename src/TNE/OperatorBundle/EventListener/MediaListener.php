@@ -67,8 +67,8 @@ class MediaListener
 
                 $mediaItem->setName($operatorMedia->getMultimediaId());
                 $mediaItem->setDescription($operatorMedia->getAltText());
-                $mediaItem->setAuthorName('ATDW');
-                $mediaItem->setContext('default');
+                $mediaItem->setAuthorName(get_class($entity));
+                $mediaItem->setContext('ATDW');
                 
                 if(null === $operatorMedia->getHeight()){
                     $height = $operatorMedia->getMediaOrientation()=='LARGELAND'?600:800;

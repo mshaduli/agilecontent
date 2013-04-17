@@ -20,7 +20,6 @@ function FilterCtrl($scope, operatorService, Destination)
     $scope.type_bnb = true;
     $scope.type_camp = true;
     $scope.type_hostel = true;
-    $scope.town = 1;
     
     //Implement filters
     $scope.distance = '10km';
@@ -45,10 +44,11 @@ function FilterCtrl($scope, operatorService, Destination)
         });
     }         
     
+    
     // Controls
-//    $scope.destinations = Destination.query(function(){
-//        $scope.town = $scope.destinations[0].id;
-//    }); 
+    $scope.destinations = Destination.query(function(){
+        $scope.town = $scope.destinations[0].id;
+    }); 
     
     // Templates
     $scope.destinationsTemplate = '/bundles/tneoperator/angular/app/partials/destinations.html';

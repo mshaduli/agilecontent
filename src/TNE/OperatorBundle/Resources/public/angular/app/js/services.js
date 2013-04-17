@@ -15,9 +15,15 @@ angular.module('OperatorListApp.services', [])
         },
         filter:function (params) {
             console.log('filtering');
-            viewScope.accommodation = Accommodation.query(params);
-            viewScope.attractions = Attraction.query(params);
-            viewScope.events = Event.query(params);
+            viewScope.accommodation = Accommodation.query(params, function(){
+                console.log(viewScope.accommodation);
+            });
+            viewScope.attractions = Attraction.query(params, function(){
+                console.log(viewScope.attractions);
+            });
+            viewScope.events = Event.query(params, function(){
+                console.log(viewScope.events);
+            });
         }
     };
 });

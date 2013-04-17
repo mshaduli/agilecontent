@@ -135,9 +135,10 @@ EOD;
         
         $results = $evStmt->fetchAll();
         
+        
         foreach ($results as $result)
         {
-            $operatorMedia =  $em->getRepository('TNEOperatorBundle:Attraction')->find($result['id'])->getMedia()->first();
+            $operatorMedia =  $em->getRepository('TNEOperatorBundle:Event')->find($result['id'])->getMedia()->first();
             $result['image'] = $this->getOperatorImage($operatorMedia);
             $operators []= $result;
         }
