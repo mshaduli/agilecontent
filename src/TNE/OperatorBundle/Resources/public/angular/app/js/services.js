@@ -6,23 +6,32 @@
 // Demonstrate how to register services
 // In this case it is a simple value service.
 angular.module('OperatorListApp.services', [])
-.service('operatorService', function (Accommodation, Attraction, Event) {
+.service('operatorService', function ($rootScope, Accommodation, Attraction, Event) {
     var viewScope;
+    var accommodation;
+    var attractions;
+    var events;
 
     return {
         setViewScope:function(viewScopeRef){
             viewScope = viewScopeRef;
         },
+        get: function (type){
+            if (type == 'accommodation') return accommodation;
+            else if (type == 'attractions') return attractions;
+            else if (type == 'events') return events;
+            return false;
+        },
         filter:function (params) {
             console.log('filtering');
-            viewScope.accommodation = Accommodation.query(params, function(){
-                console.log(viewScope.accommodation);
+            accommodation = Accommodation.query(params, function(){
+                $rootScope.$broadcast('accommodationLoaded');
             });
-            viewScope.attractions = Attraction.query(params, function(){
-                console.log(viewScope.attractions);
+            attractions = Attraction.query(params, function(){
+                $rootScope.$broadcast('attractionsLoaded');
             });
-            viewScope.events = Event.query(params, function(){
-                console.log(viewScope.events);
+            events = Event.query(params, function(){
+                $rootScope.$broadcast('eventsLoaded');
             });
         }
     };

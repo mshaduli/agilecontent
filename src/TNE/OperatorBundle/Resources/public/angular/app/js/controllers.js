@@ -2,15 +2,30 @@
 
 
 function ListCtrl($scope, operatorService)
-{
-    operatorService.setViewScope($scope);
+{    
     operatorService.filter({});
+    
+    $scope.$on('accommodationLoaded', function(){ 
+        console.log(operatorService.get('accommodation'));
+        $scope.accommodation = operatorService.get('accommodation'); 
+    });
+    $scope.$on('attractionsLoaded', function(){ 
+        console.log(operatorService.get('attractions'));
+        $scope.attractions = operatorService.get('attractions'); 
+    });
+    $scope.$on('eventsLoaded', function(){ 
+        console.log(operatorService.get('events'));
+        $scope.events = operatorService.get('events'); 
+    });
+       
 }
 
 function MapCtrl($scope, operatorService)
 {
-    operatorService.setViewScope($scope);
     $operatorService.filter({});
+    $scope.accommodation = operatorService.get('accommodation');
+    $scope.attractions = operatorService.get('attractions');
+    $scope.events = operatorService.get('events');    
 }
 
 function FilterCtrl($scope, operatorService, Destination)

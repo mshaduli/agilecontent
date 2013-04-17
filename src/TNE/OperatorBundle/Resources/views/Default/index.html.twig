@@ -172,10 +172,11 @@ $(document).ready(function(){
       value: 10,
       slide: function( event, ui ) {
        var distance =  ui.value + "km";
+       $( "#distance-slider-val" ).val(distance);
        var scope = angular.element('#distance-slider-val').scope();
         scope.distance = distance;
-        scope.change();
-        $( "#distance-slider-val" ).val(distance);
+        scope.change();                
+        scope.$apply();
       }
     });    
 
