@@ -28,7 +28,7 @@ function MapCtrl($scope, operatorService)
     $scope.events = operatorService.get('events');    
 }
 
-function FilterCtrl($scope, operatorService, Destination)
+function FilterCtrl($scope, operatorService, Destination, $templateCache)
 {    
     $scope.type_hotel = true;
     $scope.type_motel = true;
@@ -45,6 +45,8 @@ function FilterCtrl($scope, operatorService, Destination)
     // Methods
     $scope.change = function(options)
     {        
+        $templateCache.removeAll();
+        
         if(typeof options == 'object') $scope.town = options.town;        
         
         operatorService.filter({
