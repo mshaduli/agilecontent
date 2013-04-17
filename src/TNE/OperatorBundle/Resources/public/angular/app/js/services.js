@@ -31,7 +31,7 @@ angular.module('OperatorListApp.services', [])
                 $rootScope.$broadcast('attractionsLoaded');
             });
             events = Event.query(params, function(){
-                $rootScope.$broadcast('eventsLoaded');
+                $rootScope.$broadcast('eventsLoaded');                
             });
         }
     };
