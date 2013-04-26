@@ -25,7 +25,7 @@ file that was distributed with this source code.
     
 {% block content %}
 
-<div class="container" ng-app="OperatorListApp">
+<div class="container" ng-app="OperatorListApp" id="maincontroller" ng-controller="AppController">
     <div class="row12">
         <div class="navbar">
           <div class="navbar-inner">
@@ -54,7 +54,7 @@ file that was distributed with this source code.
         <div class="row">
             
             <div class="span4 pull-left">
-                Showing 31 listings for
+                
             </div>
             <div class="span4">
                  <select id="sort">
@@ -66,87 +66,94 @@ file that was distributed with this source code.
             </div>
             <div class="span4 pull-right">
                 
-             <div id="tab" class="btn-group pull-right" data-toggle="buttons-radio">
+<!--             <div id="tab" class="btn-group pull-right" data-toggle="buttons-radio">
                 <a id="list-btn" href="#/list" class="btn active"><i class="icon-list"></i>List</a>
                 <a id="map-btn" href="#/map" class="btn" ><i class="icon-map-marker"></i>Map</a>
                 <a id="grid-btn" href="#/grid" class="btn" ><i class="icon-th"></i>Grid</a>
-              </div>
+              </div> -->
+                
+             <buttons-radio class="btn-group" data-toggle="buttons-radio" model='UIView' options='UIViewOptions' classes="span2"></buttons-radio>                
 
             </div>                
-        </div>        
-    <div class="row" id="maincontroller" ng-controller="ListController">
-        <br/>
-        <br/>
-        <div id="main-pane" class="span9">
-            
-            <div id="listview">
-<div id="listview" class="tabbable">
-  <ul class="nav nav-pills">
-    <li class="active"><a href="#pane1" data-toggle="tab">Accommodation</a></li>
-    <li><a href="#pane3" data-toggle="tab">Events</a></li>
-    <li><a href="#pane4" data-toggle="tab">Attractions</a></li>
-  </ul>
-  <div class="tab-content">
-    <div id="pane1" class="tab-pane active">
-          <p>Showing {[{ accommodation.length }]} listings </p>
-
-            <ul class="thumbnails">                
-                
-                <li class="span3" ng-repeat="operator in accommodation">
-                  <div class="thumbnail">
-                    <legend>Distance {[{ operator.distance | number:2}]}km</legend>
-                    <img class="opimg" ng-src="{[{operator.image}]}"/>                    
-                    <b>{[{operator.name}]}</b>                 
-                    <div class="truncate">{[{operator.description | truncate:120 }]}</div>
-                    <div class="star" score="{[{ operator.rating }]}" rating></div>
-                    test
-                  </div>
-                </li>
-
-             </ul>        
-    </div>
-    <div id="pane3" class="tab-pane">
-          <p>Showing {[{ events.length }]} listings </p>
-
-            <ul class="thumbnails">                
-                
-                <li class="span3" ng-repeat="operator in events">
-                  <div class="thumbnail">
-                    <legend>Distance {[{ operator.distance | number:2}]}km</legend>
-                    <img class="opimg" ng-src="{[{operator.image}]}"/>                    
-                    <b>{[{operator.name}]}</b>                 
-                    <div class="truncate">{[{operator.description | truncate:120 }]}</div>
-                    <div class="star" score="{[{ operator.rating }]}" rating></div>
-                  </div>
-                </li>
-
-             </ul>  
-    </div>
-    <div id="pane4" class="tab-pane">
-          <p>Showing {[{ attractions.length }]} listings </p>
-
-            <ul class="thumbnails">                
-                
-                <li class="span3" ng-repeat="operator in attractions">
-                  <div class="thumbnail">
-                    <legend>Distance {[{ operator.distance | number:2}]}km</legend>
-                    <img class="opimg" ng-src="{[{operator.image}]}"/>                    
-                    <b>{[{operator.name}]}</b>                 
-                    <div class="truncate">{[{operator.description | truncate:120 }]}</div>
-                    <div class="star" score="{[{ operator.rating }]}" rating></div>
-                    
-                  </div>
-                </li>
-
-             </ul>  
-    </div>
-  </div>
-</div>                
-            </div>
-            
         </div>
+
+    <div class="row">
+
+        <div id="main-pane" class="span9" >
+        <br/>                    
+        <br/>
+        <buttons-radio class="btn-group" data-toggle="buttons-radio" model='operatorView' options='operatorViewOptions' classes="span3"></buttons-radio>
+        <br/>                    
+        <br/>            
+        <div id="accommodation-list-view" ng-show="operatorView=='Accommodation'">
+
+                  <p>Showing {[{ accommodation.length }]} listings </p>
+
+                    <ul class="thumbnails">                
+
+                        <li class="span3" ng-repeat="operator in accommodation">
+                          <div class="thumbnail">
+                            <legend>Distance {[{ operator.distance | number:2}]}km</legend>
+                            <img class="opimg" ng-src="{[{operator.image}]}"/>                    
+                            <b>{[{operator.name}]}</b>                 
+                            <div class="truncate">{[{operator.description | truncate:120 }]}</div>
+                            <div class="star" score="{[{ operator.rating }]}" rating></div>
+                            test
+                          </div>
+                        </li>
+
+                     </ul>        
+
+          </div>
+            
+        <div id="event-list-view" ng-show="operatorView=='Events'">
+
+                  <p>Showing {[{ events.length }]} listings </p>
+
+                    <ul class="thumbnails">                
+
+                        <li class="span3" ng-repeat="operator in events">
+                          <div class="thumbnail">
+                            <legend>Distance {[{ operator.distance | number:2}]}km</legend>
+                            <img class="opimg" ng-src="{[{operator.image}]}"/>                    
+                            <b>{[{operator.name}]}</b>                 
+                            <div class="truncate">{[{operator.description | truncate:120 }]}</div>
+                            <div class="star" score="{[{ operator.rating }]}" rating></div>
+                            test
+                          </div>
+                        </li>
+
+                     </ul>        
+
+          </div> 
+            
+         <div id="sttraction-list-view" ng-show="operatorView=='Attractions'">
+
+                  <p>Showing {[{ attractions.length }]} listings </p>
+
+                    <ul class="thumbnails">                
+
+                        <li class="span3" ng-repeat="operator in attractions">
+                          <div class="thumbnail">
+                            <legend>Distance {[{ operator.distance | number:2}]}km</legend>
+                            <img class="opimg" ng-src="{[{operator.image}]}"/>                    
+                            <b>{[{operator.name}]}</b>                 
+                            <div class="truncate">{[{operator.description | truncate:120 }]}</div>
+                            <div class="star" score="{[{ operator.rating }]}" rating></div>
+                            test
+                          </div>
+                        </li>
+
+                     </ul>        
+
+          </div>
+            
+        </div>                
+
         
         <div class="span3">
+        <br/>                    
+        <br/>            
           <ul class="nav nav-list">
             <li class="nav-header">Accommodation Type</li>
             <li>
@@ -184,6 +191,7 @@ file that was distributed with this source code.
                 <label class="radio" ng-repeat="destination in destinations">
                     <input type="radio"  ng-model="filters.destination" value="{[{ destination.id }]}" ng-change="update()"> {[{ destination.name }]} <br/>
                 </label>
+                
             </li>
             <li class="nav-header"><br/>Filter by tags</li>
             <li>
@@ -224,6 +232,7 @@ file that was distributed with this source code.
           </ul>
         </div>            
     </div>
+   
 </div>
         
         <script>

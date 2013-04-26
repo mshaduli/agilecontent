@@ -111,6 +111,24 @@ OperatorListApp.directive('rating', function(){
     }
 });
 
+OperatorListApp.directive('buttonsRadio', function() {
+        return {
+            restrict: 'E',
+            scope: { model: '=', options:'=', classes:'@'},
+            controller: function($scope){
+                $scope.activate = function(option){
+                    $scope.model = option;
+                };      
+            },
+            template: "<button type='button' class='btn {[{classes}]}' "+
+                        "ng-class='{active: option == model}'"+
+                        "ng-repeat='option in options' "+
+                        "ng-click='activate(option)'>{[{option}]} "+
+                      "</button>"
+        };
+    });
+
+
 angular.module('OperatorListApp.filters', []).
     filter('truncate', function () {
         return function (text, length, end) {
@@ -132,7 +150,7 @@ angular.module('OperatorListApp.filters', []).
     ;
 
     
-function ListController($scope, OperatorService, DestinationService)
+function AppController($scope, OperatorService, DestinationService)
 {
     $scope.filters = {
         destination: 1,
@@ -143,6 +161,12 @@ function ListController($scope, OperatorService, DestinationService)
         camp: false,
         hostel: false
     }    
+    
+    $scope.UIViewOptions = ['List','Map'];
+    $scope.UIView = 'List';
+    
+    $scope.operatorViewOptions = ['Accommodation','Events', 'Attractions'];
+    $scope.operatorView = 'Accommodation';    
         
     DestinationService.get().then(function(data){
         $scope.destinations = data;
