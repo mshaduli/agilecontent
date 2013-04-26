@@ -12,6 +12,7 @@ file that was distributed with this source code.
 
 {% block page_stylesheets %}
     {{ parent() }}
+<link rel="stylesheet" href="{{ asset('bundles/tneoperator/angular/app/css/app.css') }}" type="text/css" media="all" />
 {% endblock %}
 
 {% block page_javascripts %}
@@ -73,11 +74,76 @@ file that was distributed with this source code.
 
             </div>                
         </div>        
-    <div class="row" ng-controller="ListController">
+    <div class="row" id="maincontroller" ng-controller="ListController">
         <br/>
         <br/>
         <div id="main-pane" class="span9">
-            <div id="operators" ng-include="listViewUrl"></div>
+            
+            <div id="listview">
+<div id="listview" class="tabbable">
+  <ul class="nav nav-pills">
+    <li class="active"><a href="#pane1" data-toggle="tab">Accommodation</a></li>
+    <li><a href="#pane3" data-toggle="tab">Events</a></li>
+    <li><a href="#pane4" data-toggle="tab">Attractions</a></li>
+  </ul>
+  <div class="tab-content">
+    <div id="pane1" class="tab-pane active">
+          <p>Showing {[{ accommodation.length }]} listings </p>
+
+            <ul class="thumbnails">                
+                
+                <li class="span3" ng-repeat="operator in accommodation">
+                  <div class="thumbnail">
+                    <legend>Distance {[{ operator.distance | number:2}]}km</legend>
+                    <img class="opimg" ng-src="{[{operator.image}]}"/>                    
+                    <b>{[{operator.name}]}</b>                 
+                    <div class="truncate">{[{operator.description | truncate:120 }]}</div>
+                    <div class="star" score="{[{ operator.rating }]}" rating></div>
+                    test
+                  </div>
+                </li>
+
+             </ul>        
+    </div>
+    <div id="pane3" class="tab-pane">
+          <p>Showing {[{ events.length }]} listings </p>
+
+            <ul class="thumbnails">                
+                
+                <li class="span3" ng-repeat="operator in events">
+                  <div class="thumbnail">
+                    <legend>Distance {[{ operator.distance | number:2}]}km</legend>
+                    <img class="opimg" ng-src="{[{operator.image}]}"/>                    
+                    <b>{[{operator.name}]}</b>                 
+                    <div class="truncate">{[{operator.description | truncate:120 }]}</div>
+                    <div class="star" score="{[{ operator.rating }]}" rating></div>
+                  </div>
+                </li>
+
+             </ul>  
+    </div>
+    <div id="pane4" class="tab-pane">
+          <p>Showing {[{ attractions.length }]} listings </p>
+
+            <ul class="thumbnails">                
+                
+                <li class="span3" ng-repeat="operator in attractions">
+                  <div class="thumbnail">
+                    <legend>Distance {[{ operator.distance | number:2}]}km</legend>
+                    <img class="opimg" ng-src="{[{operator.image}]}"/>                    
+                    <b>{[{operator.name}]}</b>                 
+                    <div class="truncate">{[{operator.description | truncate:120 }]}</div>
+                    <div class="star" score="{[{ operator.rating }]}" rating></div>
+                    
+                  </div>
+                </li>
+
+             </ul>  
+    </div>
+  </div>
+</div>                
+            </div>
+            
         </div>
         
         <div class="span3">
@@ -85,37 +151,39 @@ file that was distributed with this source code.
             <li class="nav-header">Accommodation Type</li>
             <li>
                 <label class="checkbox">
-                    <input type="checkbox" checked> Hotel
+                    <input type="checkbox" ng-model="filters.hotel" ng-change="update()"> Hotel
                 </label>                   
             </li>       
             <li>
                 <label class="checkbox">
-                    <input type="checkbox"> Motel
+                    <input type="checkbox" ng-model="filters.motel" ng-change="update()"> Motel
                 </label>             
             </li>
             <li>
                 <label class="checkbox">
-                    <input type="checkbox"> Bed & Breakfast
+                    <input type="checkbox" ng-model="filters.bnb" ng-change="update()"> Bed & Breakfast
                 </label>             
             </li>
             <li>
                 <label class="checkbox">
-                    <input type="checkbox"> Camp Site
+                    <input type="checkbox" ng-model="filters.camp" ng-change="update()"> Camp Site
                 </label>             
             </li>
             <li>
                 <label class="checkbox">
-                    <input type="checkbox"> Hostel
+                    <input type="checkbox" ng-model="filters.hostel" ng-change="update()"> Hostel
                 </label>             
             </li>
             <li class="nav-header"><br/>Distance from</li>
             <li>
                 <center>
-                <input type="text" id="distance-slider-val" style="border: 0; color: #333; font-weight: bold; text-align: center" ng-model="filters.distance" ng-change="filter()"/><br/>
-                <div id="distance-slider"></div>
+                <input type="text" id="distance-slider-val" style="border: 0; color: #333; font-weight: bold; text-align: center" ng-model="filters.distance" ng-change="update()"/><br/>
+                <div slider id="distance-slider"></div>
                 <br/>
-                </center>
-                <div id="destinations" ng-include="destinationsUrl"></div>
+                </center>            
+                <label class="radio" ng-repeat="destination in destinations">
+                    <input type="radio"  ng-model="filters.destination" value="{[{ destination.id }]}" ng-change="update()"> {[{ destination.name }]} <br/>
+                </label>
             </li>
             <li class="nav-header"><br/>Filter by tags</li>
             <li>
@@ -159,22 +227,7 @@ file that was distributed with this source code.
 </div>
         
         <script>
-$(document).ready(function(){
-    $('#distance-slider').slider({
-      range: false,
-      min: 0,
-      max: 300,
-      step: 10,
-      value: 10,
-      slide: function( event, ui ) {
-        var distance =  ui.value + "km";
-        $( "#distance-slider-val" ).val(distance);
-        var scope = angular.element('#distance-slider-val').scope();
-         scope.filters.distance = distance;
-         scope.filter();                
-         scope.$apply();
-      }
-    });    
+$(document).ready(function(){ 
 
 $( "#price-slider" ).slider({
       range: true,

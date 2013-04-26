@@ -30,7 +30,8 @@ class AccommodationAdmin extends Admin
                 ->add('latitude')
                 ->add('longitude')
                 ->add('tags', null, array('required' => false))
-                ->add('atdwStarRating', null, array('label'=>'Star Rating'))
+                ->add('selfRating', null, array('label'=>'Self Rating'))
+                ->add('starRating', null, array('label'=>'Star Rating'))
                 ->add('hiddenSecret', 'textarea', array(
                         'required' => false,
                         'attr' => array(

@@ -9,6 +9,8 @@
     <field name="description" type="text" column="atdw_product_description"/>
     <field name="hiddenSecret" type="text" column="hidden_secret" nullable="true"/>
     <field name="atdwRateFrom" type="string" column="atdw_rate_from" length="255" nullable="true"/>
+    <field name="selfRating" type="decimal" column="self_rating" nullable="true" scale="2"/>
+    <field name="starRating" type="decimal" column="star_rating" nullable="true" scale="2"/>
     <field name="atdwStarRating" type="string" column="atdw_star_rating" length="255" nullable="true"/>
     <field name="address" type="string" column="address" length="255" nullable="true"/>
     <field name="destination" type="string" column="atdw_city_name" length="255"/>
@@ -63,6 +65,10 @@
             </inverse-join-columns>
         </join-table>
     </many-to-many>   
+    
+    <lifecycle-callbacks>
+        <lifecycle-callback type="prePersist" method="computeStarRating" />
+    </lifecycle-callbacks>    
     
   </entity>
 </doctrine-mapping>

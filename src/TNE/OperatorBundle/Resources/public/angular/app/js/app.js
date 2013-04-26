@@ -2,6 +2,115 @@
 
 var OperatorListApp = angular.module('OperatorListApp', ['OperatorListApp.filters']);
 
+OperatorListApp.config(function($interpolateProvider){
+        $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
+    }
+);
+
+OperatorListApp.factory('DestinationService', function($http, $q){
+   return {
+     get: function() {
+       //create our deferred object.
+       var deferred = $q.defer();
+
+       $http.get('/app_dev.php/operators/destinations').success(function(data) {
+          deferred.resolve(data);
+       }).error(function(){
+          deferred.reject();
+       });
+
+       return deferred.promise;
+     }
+   }
+});
+
+
+OperatorListApp.factory('OperatorService', function($http, $q){
+   return {
+     getAccommodation: function(filters) {
+       //create our deferred object.
+       var deferred = $q.defer();
+
+       $http.get('/app_dev.php/operators'+queryString(filters)).success(function(data) {
+          deferred.resolve(data);                     
+       }).error(function(){
+          deferred.reject();
+       });
+
+       return deferred.promise;
+     },
+     getEvents: function(filters) {
+       //create our deferred object.
+       var deferred = $q.defer();
+
+       $http.get('/app_dev.php/operators/events'+queryString(filters)).success(function(data) {
+          deferred.resolve(data);                     
+       }).error(function(){
+          deferred.reject();
+       });
+
+       return deferred.promise;
+     },
+     getAttractions: function(filters) {
+       //create our deferred object.
+       var deferred = $q.defer();
+
+       $http.get('/app_dev.php/operators/attractions'+queryString(filters)).success(function(data) {
+          deferred.resolve(data);                     
+       }).error(function(){
+          deferred.reject();
+       });
+
+       return deferred.promise;
+     }     
+   }
+});
+
+OperatorListApp.directive('slider', function() {
+    return {
+        restrict:'A',
+        link:function(scope,element,attrs){
+           element.slider({
+                range: false,
+                min: 0,
+                max: 300,
+                step: 10,
+                value: 10,
+                slide: function( event, ui ) {                                   
+                    scope.$apply(function(){
+                        scope.filters.distance = ui.value + 'km';
+                    });
+                }
+            });
+        }
+    };
+});
+
+OperatorListApp.directive('rating', function(){
+    return {
+        restrict:'A',
+        scope: {
+            score: '@'
+        },
+        link: function(scope,element,attrs)
+        {
+            scope.$watch("score", function () {
+                if (scope.score != 'undefined')
+                {
+                    element.raty({
+                            path: '/bundles/applicationsonataadmin/img',        
+                            score: function() {
+                                console.log(scope.score);
+                                return scope.score;
+                            }
+                          });
+                }
+            });            
+
+        }
+    }
+});
+
 angular.module('OperatorListApp.filters', []).
     filter('truncate', function () {
         return function (text, length, end) {
@@ -20,81 +129,52 @@ angular.module('OperatorListApp.filters', []).
 
         }
     })
-    .filter('distance', function(){})
-    .filter('price', function(){})
     ;
 
     
-function ListController($scope, $http, $templateCache)
+function ListController($scope, OperatorService, DestinationService)
 {
     $scope.filters = {
-        destination: '1',
-        distance: '10km'
-    };
+        destination: 1,
+        distance: '10km',
+        hotel: true,
+        motel: false,
+        bnb: false,
+        camp: false,
+        hostel: false
+    }    
+        
+    DestinationService.get().then(function(data){
+        $scope.destinations = data;
+    });
     
-    $http({
-       method : 'GET',
-       url : '/app_dev.php/operators/destinations'
-    }).
-    success(function(data, status, headers, config) {
-      $scope.destinations = data;
-    }).
-    error(function(data, status, headers, config) {
-      console.log(data);
-      return false;
-    });    
-
-    $scope.listViewUrl     = '/bundles/tneoperator/angular/app/partials/listview.html';
-    $scope.destinationsUrl = '/bundles/tneoperator/angular/app/partials/destinations.html';
-   
-    
-    $scope.filter = function(){
-        
-        console.log('filter');
-        
-        $templateCache.removeAll();                
-        
-        $http({
-           method : 'GET',
-           url : '/app_dev.php/operators?town='+$scope.filters.destination+'&distance='+$scope.filters.distance
-        }).
-        success(function(data, status, headers, config) {
-          $scope.accommodation = data;
-          $scope.$$phase || $scope.$apply();
-        }).
-        error(function(data, status, headers, config) {
-          console.log(data);
-          return false;
-        });  
-
-        $http({
-           method : 'GET',
-           url : '/app_dev.php/operators/events?town='+$scope.filters.destination+'&distance='+$scope.filters.distance
-        }).
-        success(function(data, status, headers, config) {
-          $scope.events = data;
-          $scope.$$phase || $scope.$apply();
-        }).
-        error(function(data, status, headers, config) {
-          console.log(data);
-          return false;
-        });  
-
-        $http({
-           method : 'GET',
-           url : '/app_dev.php/operators/attractions?town='+$scope.filters.destination+'&distance='+$scope.filters.distance
-        }).
-        success(function(data, status, headers, config) {
-          $scope.attractions = data;
-        }).
-        error(function(data, status, headers, config) {
-          console.log(data);
-          $scope.$$phase || $scope.$apply();
-          return false;
-        });    
-        
+    $scope.update = function(){
+        console.log('updating');
+        OperatorService.getAccommodation($scope.filters).then(function(data){                        
+            $scope.accommodation = data;
+        });            
+        OperatorService.getEvents($scope.filters).then(function(data){                        
+            $scope.events = data;
+        });
+        OperatorService.getAttractions($scope.filters).then(function(data){                        
+            $scope.attractions = data;
+        });        
     }
     
     
-    $scope.filter();    
+    $scope.$watch('filters', function(){
+        console.log('filtering');
+        $scope.update();
+    }, true);
+    
+}
+
+function queryString(filters)
+{
+    var str = '?';
+    for(var key in filters)
+    {
+        str += key+'='+filters[key]+'&';
+    }
+    return str;
 }

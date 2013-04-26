@@ -6,16 +6,16 @@
   </ul>
   <div class="tab-content">
     <div id="pane1" class="tab-pane active">
-          <p>Showing {{ accommodation.length }} listings </p>
+          <p>Showing {[{ accommodation.length }]} listings </p>
 
             <ul class="thumbnails">                
                 
                 <li class="span3" ng-repeat="operator in accommodation">
                   <div class="thumbnail">
-                    <legend>Distance {{ operator.distance | number:2}}km</legend>
-                    <img ng-src="{{operator.image}}"/>                    
-                    <b>{{operator.name}}</b>                 
-                    <div class="truncate">{{operator.description | truncate:120 }}</div>
+                    <legend>Distance {[{ operator.distance | number:2}]}km</legend>
+                    <img ng-src="{[{operator.image}]}"/>                    
+                    <b>{[{operator.name}]}</b>                 
+                    <div class="truncate">{[{operator.description | truncate:120 }]}</div>
                     <div class="star" data-score="4"></div>
                   </div>
                 </li>
@@ -23,16 +23,16 @@
              </ul>        
     </div>
     <div id="pane3" class="tab-pane">
-          <p>Showing {{ events.length }} listings </p>
+          <p>Showing {[{ events.length }]} listings </p>
 
             <ul class="thumbnails">                
                 
                 <li class="span3" ng-repeat="operator in events">
                   <div class="thumbnail">
-                    <legend>Distance {{ operator.distance | number:2}}km</legend>
-                    <img ng-src="{{operator.image}}"/>                    
-                    <b>{{operator.name}}</b>                 
-                    <div class="truncate">{{operator.description | truncate:120 }}</div>
+                    <legend>Distance {[{ operator.distance | number:2}]}km</legend>
+                    <img ng-src="{[{operator.image}]}"/>                    
+                    <b>{[{operator.name}]}</b>                 
+                    <div class="truncate">{[{operator.description | truncate:120 }]}</div>
                     <div class="star" data-score="4"></div>
                   </div>
                 </li>
@@ -40,16 +40,16 @@
              </ul>  
     </div>
     <div id="pane4" class="tab-pane">
-          <p>Showing {{ attractions.length }} listings </p>
+          <p>Showing {[{ attractions.length }]} listings </p>
 
             <ul class="thumbnails">                
                 
                 <li class="span3" ng-repeat="operator in attractions">
                   <div class="thumbnail">
-                    <legend>Distance {{ operator.distance | number:2}}km</legend>
-                    <img ng-src="{{operator.image}}"/>                    
-                    <b>{{operator.name}}</b>                 
-                    <div class="truncate">{{operator.description | truncate:120 }}</div>
+                    <legend>Distance {[{ operator.distance | number:2}]}km</legend>
+                    <img ng-src="{[{operator.image}]}"/>                    
+                    <b>{[{operator.name}]}</b>                 
+                    <div class="truncate">{[{operator.description | truncate:120 }]}</div>
                     <div class="star" data-score="4"></div>
                   </div>
                 </li>

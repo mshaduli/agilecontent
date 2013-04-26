@@ -91,6 +91,11 @@ class Tag
         if(null != $this->getParent()) return $this->getParent()->getName();
         return false;
     }
+    
+    public function getSingleName()
+    {
+        return $this->name;
+    }
 
     /**
      * Set pages

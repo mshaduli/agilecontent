@@ -46,14 +46,15 @@ class DefaultController extends Controller
         $em = $this->get('doctrine.orm.entity_manager');
         $filters = $this->fromRequestOrDb($this->getRequest()->query->all(), $em);        
                 
-        $destination = $em->createQuery('SELECT d FROM TNEOperatorBundle:Destination d WHERE d.id = :town')->setParameter('town', $filters['town'])->getSingleResult(Query::HYDRATE_ARRAY);   
+        $destination = $em->createQuery('SELECT d FROM TNEOperatorBundle:Destination d WHERE d.id = :destination')->setParameter('destination', $filters['destination'])->getSingleResult(Query::HYDRATE_ARRAY);   
         
         $distanceValue = \str_replace('km', '', $filters['distance']);
         
         $distanceQueryAccomm  =<<<EOD
         SELECT * FROM 
         (
-        SELECT `ac`.`id` as `id`, `ac`.`name` as `name`,  `ac`.`atdw_product_description` as `description`, `ac`.`latitude` as `latitude`, `ac`.`longitude` as `longitude`, (((acos(sin(($destination[latitude]*pi()/180)) * sin((`latitude`*pi()/180))+cos(($destination[latitude]*pi()/180)) * cos((`latitude`*pi()/180)) * cos((($destination[longitude] - `longitude`)*pi()/180))))*180/pi())*60*1.1515) AS `distance` FROM `Accommodation` ac
+        SELECT `ac`.`id` as `id`, `ac`.`name` as `name`,  `ac`.`atdw_product_description` as `description`, `ac`.`latitude` as `latitude`, `ac`.`longitude` as `longitude`, 
+        (((acos(sin(($destination[latitude]*pi()/180)) * sin((`latitude`*pi()/180))+cos(($destination[latitude]*pi()/180)) * cos((`latitude`*pi()/180)) * cos((($destination[longitude] - `longitude`)*pi()/180))))*180/pi())*60*1.1515) AS `distance` FROM `Accommodation` ac        
         ) as op 
         HAVING distance < $distanceValue
         ORDER BY distance ASC
@@ -67,8 +68,15 @@ EOD;
         
         foreach ($results as $result)
         {
-            $operatorMedia =  $em->getRepository('TNEOperatorBundle:Accommodation')->find($result['id'])->getMedia()->first();
+            $operator = $em->getRepository('TNEOperatorBundle:Accommodation')->find($result['id']);
+            $operatorMedia = $operator->getMedia()->first();
             $result['image'] = $this->getOperatorImage($operatorMedia);
+            $result['rating'] = $operator->getRating();
+            $result['tags'] = [];
+            foreach($operator->getTags() as $tag)
+            {
+                $result['tags'] []= $tag->getSingleName();
+            }
             $operators []= $result;
         }
   

@@ -46,8 +46,11 @@ class Accommodation
      *@ATDW\StarRating
      */
     private $atdwStarRating;
-
     
+    private $selfRating = 0;
+
+    private $starRating = 0;
+
     /**
      *@ATDW\CityName
      */    
@@ -448,5 +451,51 @@ class Accommodation
         }
         return $tagLinks;
     }    
+    
+    public function getSelfRating() {
+        return $this->selfRating;
+    }
+
+    public function setSelfRating($selfRating) {
+        $this->selfRating = $selfRating;
+    }
+    
+    public function getRating()
+    {
+        return $this->getStarRating() == 0 ? $this->getSelfRating() : $this->getStarRating();
+    }
+    
+    public function computeStarRating()
+    {        
+        if ($this->getAtdwStarRating() == 'Not Available' ) $this->setStarRating(0); 
+        else $this->setStarRating($this->fractionToDec($this->getAtdwStarRating()));
+    }
+    
+    public function fractionToDec($input)
+    {
+        $rating = explode(' ', \str_replace(' Stars', '', $input));
+        $result = 0;
+        $fraction = array('whole'=>0);
+        if(count($rating)>1)
+        {
+            $fraction['whole'] = $rating[0];
+            $part = explode('/', $rating[1]);
+            $fraction['n'] = $part[0];
+            $fraction['d'] = $part[1];
+            $result = $fraction['whole'] + $fraction['n'] / $fraction['d'];
+        }
+        return $result;
+    }
+
+
+    public function getStarRating() {
+        return $this->starRating;
+    }
+
+    public function setStarRating($starRating) {
+        $this->starRating = $starRating;
+    }
+
+
     
 }
