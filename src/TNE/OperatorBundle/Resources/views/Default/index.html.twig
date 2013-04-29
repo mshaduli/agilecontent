@@ -18,8 +18,9 @@ file that was distributed with this source code.
 {% block page_javascripts %}
     {{ parent() }}
     {{ vichgeo_include_js() }}   
-        <script src="{{ asset('bundles/tneoperator/angular/app/lib/angular/angular.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/tneoperator/angular/app/lib/angular/angular.js') }}" type="text/javascript"></script>
         <script src="{{ asset('bundles/tneoperator/angular/app/lib/angular/angular-resource.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/tneoperator/angular/app/js/map.js') }}"></script>
         <script src="{{ asset('bundles/tneoperator/angular/app/js/app.js') }}"></script>
 {% endblock %}    
     
@@ -86,25 +87,34 @@ file that was distributed with this source code.
         <br/>                    
         <br/>            
         <div id="accommodation-list-view" ng-show="operatorView=='Accommodation'">
-
+            <div ng-show="UIView=='List'">
                   <p>Showing {[{ accommodation.length }]} listings </p>
 
                     <ul class="thumbnails">                
 
                         <li class="span3" ng-repeat="operator in accommodation">
                           <div class="thumbnail">
-                            <legend>Distance {[{ operator.distance | number:2}]}km</legend>
+                            <div class="pull-right pull_top" style="padding: 5px;font-weight: bold">{[{ operator.distance | number:2 | distance }]}</div>
                             <img class="opimg" ng-src="{[{operator.image}]}"/>                    
                             <b>{[{operator.name}]}</b>                 
                             <div class="truncate">{[{operator.description | truncate:120 }]}</div>
-                            <div class="star" score="{[{ operator.rating }]}" rating></div>
-                            test
+                            <div class="star pull-right" score="{[{ operator.rating }]}" rating></div>
+                            <br/>
+                            <hr/>
+                            <div style="padding: 5px">
+                                <div class="pull-left">1 NIGHT FROM</div>
+                                <div class="pull-right"><b>${[{ operator.min_rate }]}</b></div>
+                            </div>
+                            <br/>
                           </div>
                         </li>
 
                      </ul>        
-
-          </div>
+            </div>
+            <div ng-show="UIView=='Map'">         
+                <div google-map center="center" draggable="true" zoom="zoom" markers="markers" refresh="!isMapElementHidden" class="angular-google-map Flexible-container"></div>
+            </div>
+          </div>        
             
         <div id="event-list-view" ng-show="operatorView=='Events'">
 
@@ -118,8 +128,6 @@ file that was distributed with this source code.
                             <img class="opimg" ng-src="{[{operator.image}]}"/>                    
                             <b>{[{operator.name}]}</b>                 
                             <div class="truncate">{[{operator.description | truncate:120 }]}</div>
-                            <div class="star" score="{[{ operator.rating }]}" rating></div>
-                            test
                           </div>
                         </li>
 
@@ -139,8 +147,6 @@ file that was distributed with this source code.
                             <img class="opimg" ng-src="{[{operator.image}]}"/>                    
                             <b>{[{operator.name}]}</b>                 
                             <div class="truncate">{[{operator.description | truncate:120 }]}</div>
-                            <div class="star" score="{[{ operator.rating }]}" rating></div>
-                            test
                           </div>
                         </li>
 
@@ -158,38 +164,38 @@ file that was distributed with this source code.
             <li class="nav-header">Accommodation Type</li>
             <li>
                 <label class="checkbox">
-                    <input type="checkbox" ng-model="filters.hotel" ng-change="update()"> Hotel
+                    <input type="checkbox" ng-model="filters.hotel" ng-change="update(this, 'accType')"> Hotel
                 </label>                   
             </li>       
             <li>
                 <label class="checkbox">
-                    <input type="checkbox" ng-model="filters.motel" ng-change="update()"> Motel
+                    <input type="checkbox" ng-model="filters.motel" ng-change="update(this, 'accType')"> Motel
                 </label>             
             </li>
             <li>
                 <label class="checkbox">
-                    <input type="checkbox" ng-model="filters.bnb" ng-change="update()"> Bed & Breakfast
+                    <input type="checkbox" ng-model="filters.bnb" ng-change="update(this, 'accType')"> Bed & Breakfast
                 </label>             
             </li>
             <li>
                 <label class="checkbox">
-                    <input type="checkbox" ng-model="filters.camp" ng-change="update()"> Camp Site
+                    <input type="checkbox" ng-model="filters.camp" ng-change="update(this, 'accType')"> Camp Site
                 </label>             
             </li>
             <li>
                 <label class="checkbox">
-                    <input type="checkbox" ng-model="filters.hostel" ng-change="update()"> Hostel
+                    <input type="checkbox" ng-model="filters.hostel" ng-change="update(this, 'accType')"> Hostel
                 </label>             
             </li>
             <li class="nav-header"><br/>Distance from</li>
             <li>
                 <center>
-                <input type="text" id="distance-slider-val" style="border: 0; color: #333; font-weight: bold; text-align: center" ng-model="filters.distance" ng-change="update()"/><br/>
-                <div slider id="distance-slider"></div>
+                <input type="text" id="distance-slider-val" style="border: 0; color: #333; font-weight: bold; text-align: center" ng-model="filters.distance" ng-change="update(this, 'distance')"/><br/>
+                <div distance-slider ng-model="filters.distance" id="distance-slider"></div>
                 <br/>
                 </center>            
                 <label class="radio" ng-repeat="destination in destinations">
-                    <input type="radio"  ng-model="filters.destination" value="{[{ destination.id }]}" ng-change="update()"> {[{ destination.name }]} <br/>
+                    <input type="radio" ng-model="filters.destination" value="{[{ destination.id }]}" ng-change="update(this, 'destination')"> {[{ destination.name }]} <br/>
                 </label>
                 
             </li>
@@ -203,8 +209,8 @@ file that was distributed with this source code.
             </li>
             <li class="nav-header"><br/>Price</li>
             <li style="text-align: center">
-                <input type="text" id="price-slider-amt" style="border: 0; color: #333; font-weight: bold; text-align: center" /><br/>
-                <div id="price-slider"></div>
+                <input type="text" id="price-slider-amt" style="border: 0; color: #333; font-weight: bold; text-align: center" ng-model="filters.price" ng-change="update()"/><br/>
+                <div price-slider id="price-slider" ng-model="filters.price"></div>
             </li>        
             <li class="nav-header"><br/>Min. rating</li>
             <li><div class="star" data-score="4"></div></li>                    

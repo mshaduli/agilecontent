@@ -116,15 +116,13 @@ a.sonata-media-gallery-media-item-link:hover {
     z-index: 10000;
 }
 
-
-/* Flexible iFrame */
-
 .Flexible-container {
     position: relative;
     padding-bottom: 56.25%;
     padding-top: 30px;
     height: 0;
     overflow: hidden;
+    border: 1px solid #000;
 }
 
 .Flexible-container iframe,   

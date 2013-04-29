@@ -49,14 +49,16 @@ class DefaultController extends Controller
         $destination = $em->createQuery('SELECT d FROM TNEOperatorBundle:Destination d WHERE d.id = :destination')->setParameter('destination', $filters['destination'])->getSingleResult(Query::HYDRATE_ARRAY);   
         
         $distanceValue = \str_replace('km', '', $filters['distance']);
+        $maxRate = \str_replace('$', '', $filters['price']);
         
         $distanceQueryAccomm  =<<<EOD
         SELECT * FROM 
         (
-        SELECT `ac`.`id` as `id`, `ac`.`name` as `name`,  `ac`.`atdw_product_description` as `description`, `ac`.`latitude` as `latitude`, `ac`.`longitude` as `longitude`, 
-        (((acos(sin(($destination[latitude]*pi()/180)) * sin((`latitude`*pi()/180))+cos(($destination[latitude]*pi()/180)) * cos((`latitude`*pi()/180)) * cos((($destination[longitude] - `longitude`)*pi()/180))))*180/pi())*60*1.1515) AS `distance` FROM `Accommodation` ac        
-        ) as op 
-        HAVING distance < $distanceValue
+        SELECT `ac`.`id` as `id`, `ac`.`name` as `name`,  `ac`.`atdw_product_description` as `description`, `ac`.`latitude` as `latitude`, `ac`.`longitude` as `longitude`,         
+        (SELECT MIN(rate_from) FROM AccommodationRoom r WHERE `accommodation_id` = `ac`.`id`) as `min_rate`,
+        (((acos(sin(($destination[latitude]*pi()/180)) * sin((`latitude`*pi()/180))+cos(($destination[latitude]*pi()/180)) * cos((`latitude`*pi()/180)) * cos((($destination[longitude] - `longitude`)*pi()/180))))*180/pi())*60*1.1515) AS `distance` FROM `Accommodation` ac 
+        ) as op           
+        HAVING distance < $distanceValue AND min_rate < $maxRate
         ORDER BY distance ASC
 EOD;
         
@@ -68,15 +70,20 @@ EOD;
         
         foreach ($results as $result)
         {
+            
             $operator = $em->getRepository('TNEOperatorBundle:Accommodation')->find($result['id']);
+                        
             $operatorMedia = $operator->getMedia()->first();
             $result['image'] = $this->getOperatorImage($operatorMedia);
-            $result['rating'] = $operator->getRating();
+            $result['rating'] = $operator->getRating();            
             $result['tags'] = [];
             foreach($operator->getTags() as $tag)
             {
                 $result['tags'] []= $tag->getSingleName();
             }
+//            foreach($operator->getRooms() as $room){
+//                $result['rooms'] []= array('name'=>$room->getName(), 'from' => $room->getRateFrom(), 'to' => $room->getRateTo());
+//            }
             $operators []= $result;
         }
   
@@ -89,7 +96,7 @@ EOD;
         $em = $this->get('doctrine.orm.entity_manager');
         $filters = $this->fromRequestOrDb($this->getRequest()->query->all(), $em);        
                 
-        $destination = $em->createQuery('SELECT d FROM TNEOperatorBundle:Destination d WHERE d.id = :town')->setParameter('town', $filters['town'])->getSingleResult(Query::HYDRATE_ARRAY);   
+        $destination = $em->createQuery('SELECT d FROM TNEOperatorBundle:Destination d WHERE d.id = :destination')->setParameter('destination', $filters['destination'])->getSingleResult(Query::HYDRATE_ARRAY);   
         
         $distanceValue = \str_replace('km', '', $filters['distance']);
         
@@ -124,7 +131,7 @@ EOD;
         $em = $this->get('doctrine.orm.entity_manager');
         $filters = $this->fromRequestOrDb($this->getRequest()->query->all(), $em);        
                 
-        $destination = $em->createQuery('SELECT d FROM TNEOperatorBundle:Destination d WHERE d.id = :town')->setParameter('town', $filters['town'])->getSingleResult(Query::HYDRATE_ARRAY);   
+        $destination = $em->createQuery('SELECT d FROM TNEOperatorBundle:Destination d WHERE d.id = :destination')->setParameter('destination', $filters['destination'])->getSingleResult(Query::HYDRATE_ARRAY);   
         
         $distanceValue = \str_replace('km', '', $filters['distance']);
         
@@ -166,15 +173,16 @@ EOD;
     private function fromRequestOrDb($filters, $em)
     {
         
-        if(!isset($filters['town']))
+        if(!isset($filters['destination']))
         {
             $destinations = $em->createQuery(
                 'SELECT d.id, d.name, d.latitude, d.longitude FROM TNEOperatorBundle:Destination d'
             )->getResult(Query::HYDRATE_ARRAY);
             
-            $filters['town'] = $destinations[0]['id'];
+            $filters['destination'] = $destinations[0]['id'];
         }
         if(!isset($filters['distance'])) $filters['distance'] = '10';
+        if(!isset($filters['price'])) $filters['price'] = '1000';
         
         return $filters;
     }
