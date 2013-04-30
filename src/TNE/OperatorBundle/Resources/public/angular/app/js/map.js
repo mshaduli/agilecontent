@@ -93,9 +93,17 @@
             center: that.center,
             zoom: that.zoom,
             draggable: that.draggable,
-            mapTypeId : google.maps.MapTypeId.ROADMAP
+            mapTypeControl: false,
+            scaleControl: false,
+            streetViewControl: false,
+            zoomControl: true,
+            zoomControlOptions: {
+              style: google.maps.ZoomControlStyle.SMALL
+            },        
+            mapTypeId: google.maps.MapTypeId.ROADMAP 
           }));
-          
+					
+					          
           google.maps.event.addListener(_instance, "dragstart",
               
               function () {
@@ -192,8 +200,6 @@
           map: _instance,
           icon: icon
         });
-        
-        console.log(marker);
         
         if (label) {
           
@@ -327,8 +333,10 @@
     controller.$inject = ['$scope', '$element'];
     
     return {
-      restrict: "A",
+      restrict: "EC",
       priority: 100,
+      template: "<div class='angular-google-map'></div>",
+      replace: false,
       scope: {
         center: "=center", // required
         markers: "=markers", // optional
@@ -445,11 +453,9 @@
         // Put the map into the scope
         scope.map = _m;
         
-        
         // Check if we need to refresh the map
         if (angular.isUndefined(scope.refresh())) {
           // No refresh property given; draw the map immediately
-          
           _m.draw();
         }
         else {
@@ -466,7 +472,6 @@
           $timeout(function () {
             
             angular.forEach(newValue, function (v, i) {
-                
               if (!_m.hasMarker(v.latitude, v.longitude)) {
                 _m.addMarker(v.latitude, v.longitude, v.icon, v.infoWindow);
               }

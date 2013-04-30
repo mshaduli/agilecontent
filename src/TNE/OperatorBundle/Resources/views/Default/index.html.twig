@@ -114,7 +114,7 @@ file that was distributed with this source code.
                 </div>
                 <div ng-show="UIView=='Map'">
                     <p>Showing {[{ accommodation.length }]} listings </p>
-                    <div google-map id="acc_map" class="Flexible-container" center="mapOptions.center" zoom="mapOptions.zoom" refresh="UIView=='Map'" markers="accommodation"></div>
+                    <div google-map id="acc_map" class="Flexible-container" center="mapOptions.center" zoom="mapOptions.zoom" view="UIView" optype="operatorView" markers="accommodation"></div>
                 </div>
               </div>        
 
@@ -138,7 +138,7 @@ file that was distributed with this source code.
                  </div>     
                 <div ng-show="UIView=='Map'">
                     <p>Showing {[{ events.length }]} listings </p>
-                    <div google-map id="event_map" class="Flexible-container" center="mapOptions.center" zoom="mapOptions.zoom" refresh="UIView=='Map'" markers="events"></div>
+                    <div google-map id="event_map" class="Flexible-container" center="mapOptions.center" zoom="mapOptions.zoom" view="UIView" optype="operatorView" markers="events"></div>
                 </div>                      
 
               </div> 
@@ -163,7 +163,7 @@ file that was distributed with this source code.
                 </div>
                 <div ng-show="UIView=='Map'">
                     <p>Showing {[{ attractions.length }]} listings </p>
-                    <div google-map id="attr_map" class="Flexible-container" center="mapOptions.center" zoom="mapOptions.zoom" refresh="UIView=='Map'" markers="attractions"></div>
+                    <div google-map id="attr_map" class="Flexible-container" center="mapOptions.center" zoom="mapOptions.zoom" view="UIView" optype="operatorView" markers="attractions"></div>
                 </div>                     
               </div>
 

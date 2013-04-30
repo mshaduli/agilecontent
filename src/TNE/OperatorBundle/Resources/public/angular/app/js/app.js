@@ -70,10 +70,12 @@ OperatorListApp.factory('OperatorService', function($http, $q){
    }
 });
 
-OperatorListApp.service('MarkerService', function(){
+function MarkerModel(){
+
     var that = this;
     
     that.markers = [];
+    that.garbage = [];
     
     that.findMarker = function (lat, lng) {
         for (var i = 0; i < that.markers.length; i++) {
@@ -86,13 +88,67 @@ OperatorListApp.service('MarkerService', function(){
         return null;
       };  
       
+    that.findMarkerIndex = function (lat, lng) {
+        for (var i = 0; i < that.markers.length; i++) {
+          var pos = that.markers[i].getPosition();
+          
+          if (floatEqual(pos.lat(), lat) && floatEqual(pos.lng(), lng)) {
+            return i;
+          }
+        }
+        
+        return -1;
+      };      
+      
     that.reset = function(){
         for (var i = 0; i < that.markers.length; i++) {
             that.markers[i].setMap(null);
         }
         that.markers = [];
     }
-});
+    
+    that.removeMarkers = function (markerInstances) {
+        
+        var s = this;
+        
+        angular.forEach(markerInstances, function (v, i) {
+          var pos = v.getPosition(),
+            lat = pos.lat(),
+            lng = pos.lng(),
+            index = s.findMarkerIndex(lat, lng);
+          
+          that.markers.splice(index, 1);
+          s.markers.splice(index, 1);
+          
+          v.setMap(null);
+        });
+      };
+    
+    that.cleanUp = function(cleanMarkers){        
+        angular.forEach(that.markers, function (v, i) {
+
+        var pos = v.getPosition(),
+          lat = pos.lat(),
+          lng = pos.lng(),
+          found = false;
+
+        for (var si = 0; si < cleanMarkers.length; si++) {
+
+          var sm = cleanMarkers[si];
+
+          if (floatEqual(sm.latitude, lat) && floatEqual(sm.longitude, lng)) {
+            found = true;
+          }
+        }
+
+        if (!found) {
+          that.garbage.push(v);
+        }
+      });        
+       that.garbage.length && that.removeMarkers(that.garbage);
+       //Remove duplicates
+    }
+};
 
 OperatorListApp.directive('distanceSlider', function($parse) {
     return {
@@ -161,7 +217,7 @@ OperatorListApp.directive('rating', function(){
     }
 });
 
-OperatorListApp.directive('googleMap', function(MarkerService){
+OperatorListApp.directive('googleMap', function($timeout){
      return {
         restrict:'A',
         template: "",
@@ -169,46 +225,79 @@ OperatorListApp.directive('googleMap', function(MarkerService){
             center: '=',
             zoom: '=',
             view: '=',
+            optype: '=',
             markers: '='
         },
         link: function(scope,element,attrs)
-        {    
-       
+        {   
+            var myMarkers = new MarkerModel();
             scope.$watch("center", function(){
                 if(scope.center != '')
                 {
-                    MarkerService.reset();
-                    scope.map = new google.maps.Map(element.get(0), {
-                                            zoom: scope.zoom,
-                                            center: scope.center,
-                                            mapTypeControl: false,
-                                            scaleControl: false,
-                                            streetViewControl: false,
-                                            zoomControl: true,
-                                            zoomControlOptions: {
-                                              style: google.maps.ZoomControlStyle.SMALL
-                                            },        
-                                            mapTypeId: google.maps.MapTypeId.ROADMAP                        
-                                        });                                                               
+                    myMarkers.reset();
+                    if(!angular.isDefined(scope.map))
+                    {
+                        console.log('creating map');
+                        scope.map = new google.maps.Map(element.get(0), {
+                                                zoom: scope.zoom,
+                                                center: scope.center,
+                                                mapTypeControl: false,
+                                                scaleControl: false,
+                                                streetViewControl: false,
+                                                zoomControl: true,
+                                                zoomControlOptions: {
+                                                  style: google.maps.ZoomControlStyle.SMALL
+                                                },        
+                                                mapTypeId: google.maps.MapTypeId.ROADMAP                        
+                                            });  
+                    }
+                    else{
+                        console.log('centering map');
+                        $timeout(function(){
+                            scope.$apply(function(){
+                                console.log(scope.center);
+                                scope.map.setCenter(scope.center);
+                                //google.maps.event.trigger(scope.map, "resize");
+                            });    
+                        });
+                    }
                 }
 
             }, true);    
-            scope.$watch('markers', function(newValue, oldValue){                
+            scope.$watch('markers', function(newValue, oldValue){
+                   
                    angular.forEach(scope.markers, function(op){
-                       if(MarkerService.findMarker(op.latitude,op.longitude) == null)
+                       console.log(myMarkers.findMarker(op.latitude,op.longitude));
+                       if(myMarkers.findMarker(op.latitude,op.longitude) == null)
                        {
-                        MarkerService.markers.push(new google.maps.Marker({
+                        myMarkers.markers.push(new google.maps.Marker({
                            position: new google.maps.LatLng(op.latitude,op.longitude),
                            map: scope.map
                          }));  
                        }
                    });
+                   myMarkers.cleanUp(scope.markers);
             }, true);
             scope.$watch('view', function(newValue, oldValue){
-                if(newValue=='Map') {                    
-                    google.maps.event.trigger(_instance, "resize");
+                if(scope.center != '') {                                            
+                    
+                    $timeout(function(){
+                        scope.$apply(function(){
+                            google.maps.event.trigger(scope.map, "resize");
+                        });    
+                    });
                 }
             });
+            scope.$watch('optype', function(newValue, oldValue){
+                if(scope.center != '') {     
+                    $timeout(function(){
+                        scope.$apply(function(){
+                            
+                            google.maps.event.trigger(scope.map, "resize");
+                        });    
+                    });
+                }
+            });            
         }
     }
 });
@@ -279,7 +368,7 @@ function AppController($scope, OperatorService, DestinationService, $filter)
     }
     
     $scope.mapOptions = {
-        zoom: 13,
+        zoom: 14,
         center: ''
     };
         
