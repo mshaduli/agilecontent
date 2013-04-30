@@ -169,9 +169,7 @@ OperatorListApp.directive('googleMap', function(MarkerService){
             center: '=',
             zoom: '=',
             view: '=',
-            accommodationMarkers: '=',
-            eventMarkers: '=',
-            attractionMarkers: '='
+            markers: '='
         },
         link: function(scope,element,attrs)
         {    
@@ -195,9 +193,8 @@ OperatorListApp.directive('googleMap', function(MarkerService){
                 }
 
             }, true);    
-            scope.$watch('accommodationMarkers', function(newValue, oldValue){
-                   
-                   angular.forEach(scope.accommodationMarkers, function(op){
+            scope.$watch('markers', function(newValue, oldValue){                
+                   angular.forEach(scope.markers, function(op){
                        if(MarkerService.findMarker(op.latitude,op.longitude) == null)
                        {
                         MarkerService.markers.push(new google.maps.Marker({
@@ -207,34 +204,9 @@ OperatorListApp.directive('googleMap', function(MarkerService){
                        }
                    });
             }, true);
-            scope.$watch('eventMarkers', function(newValue, oldValue){
-
-                   angular.forEach(scope.eventMarkers, function(op){
-                       if(MarkerService.findMarker(op.latitude,op.longitude) == null)
-                       {                       
-                        MarkerService.markers.push(new google.maps.Marker({
-                           position: new google.maps.LatLng(op.latitude,op.longitude),
-                           map: scope.map
-                         }));       
-                      }
-                   });
-               
-            }, true);            
-            scope.$watch('attractionMarkers', function(newValue, oldValue){
-
-                   angular.forEach(scope.attractionMarkers, function(op){
-                       if(MarkerService.findMarker(op.latitude,op.longitude) == null)
-                       {                       
-                        MarkerService.markers.push(new google.maps.Marker({
-                           position: new google.maps.LatLng(op.latitude,op.longitude),
-                           map: scope.map
-                         }));   
-                       }
-                   });
-            }, true);                        
             scope.$watch('view', function(newValue, oldValue){
                 if(newValue=='Map') {                    
-            
+                    google.maps.event.trigger(_instance, "resize");
                 }
             });
         }
@@ -251,7 +223,7 @@ OperatorListApp.directive('buttonsRadio', function() {
                     $scope.model = option;
                 };      
             },
-            template: "<button type='button' class='btn {[{classes}]}' '"+
+            template: "<button type='button' class='btn {[{classes}]}' "+
                         "ng-class='{active: option == model}'"+
                         "ng-repeat='option in options' "+
                         "ng-click='activate(option)'>{[{option}]} "+

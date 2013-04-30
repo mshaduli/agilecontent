@@ -80,13 +80,9 @@ file that was distributed with this source code.
     <div class="row">
 
         <div id="main-pane" class="span9" >
-        <br/>                    
-        <div ng-show="UIView=='Map'">
-            <p>Showing {[{ accommodation.length + event.length + attractions.length }]} listings </p>
-            <div google-map class="Flexible-container" center="mapOptions.center" zoom="mapOptions.zoom" view="UIView" markers="operators"></div>
-        </div>        
+        <br/>                            
         <br/>
-        <div ng-show="UIView=='List'">
+        <div>
             <buttons-radio class="btn-group" data-toggle="buttons-radio" model='operatorView' options='operatorViewOptions' classes="span3"></buttons-radio>
             <br/>                    
             <br/>            
@@ -116,9 +112,14 @@ file that was distributed with this source code.
 
                          </ul>        
                 </div>
+                <div ng-show="UIView=='Map'">
+                    <p>Showing {[{ accommodation.length }]} listings </p>
+                    <div google-map id="acc_map" class="Flexible-container" center="mapOptions.center" zoom="mapOptions.zoom" refresh="UIView=='Map'" markers="accommodation"></div>
+                </div>
               </div>        
 
             <div id="event-list-view" ng-show="operatorView=='Events'">
+                <div ng-show="UIView=='List'">
 
                       <p>Showing {[{ events.length }]} listings </p>
 
@@ -134,11 +135,16 @@ file that was distributed with this source code.
                             </li>
 
                          </ul>        
+                 </div>     
+                <div ng-show="UIView=='Map'">
+                    <p>Showing {[{ events.length }]} listings </p>
+                    <div google-map id="event_map" class="Flexible-container" center="mapOptions.center" zoom="mapOptions.zoom" refresh="UIView=='Map'" markers="events"></div>
+                </div>                      
 
               </div> 
 
              <div id="sttraction-list-view" ng-show="operatorView=='Attractions'">
-
+                <div ng-show="UIView=='List'">
                       <p>Showing {[{ attractions.length }]} listings </p>
 
                         <ul class="thumbnails">                
@@ -153,7 +159,12 @@ file that was distributed with this source code.
                             </li>
 
                          </ul>        
-
+                      
+                </div>
+                <div ng-show="UIView=='Map'">
+                    <p>Showing {[{ attractions.length }]} listings </p>
+                    <div google-map id="attr_map" class="Flexible-container" center="mapOptions.center" zoom="mapOptions.zoom" refresh="UIView=='Map'" markers="attractions"></div>
+                </div>                     
               </div>
 
             </div>                
