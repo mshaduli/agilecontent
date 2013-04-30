@@ -250,14 +250,17 @@ OperatorListApp.directive('googleMap', function($timeout){
                                                 },        
                                                 mapTypeId: google.maps.MapTypeId.ROADMAP                        
                                             });  
+                        console.log(scope.center);                                            
+                        scope.map.panTo(scope.center); 
+                        google.maps.event.trigger(scope.map, "resize");
                     }
                     else{
                         console.log('centering map');
                         $timeout(function(){
                             scope.$apply(function(){
                                 console.log(scope.center);
-                                scope.map.setCenter(scope.center);
-                                //google.maps.event.trigger(scope.map, "resize");
+                                scope.map.panTo(scope.center);
+                                google.maps.event.trigger(scope.map, "resize");
                             });    
                         });
                     }
@@ -270,10 +273,17 @@ OperatorListApp.directive('googleMap', function($timeout){
                        console.log(myMarkers.findMarker(op.latitude,op.longitude));
                        if(myMarkers.findMarker(op.latitude,op.longitude) == null)
                        {
-                        myMarkers.markers.push(new google.maps.Marker({
+                        var marker = new google.maps.Marker({
                            position: new google.maps.LatLng(op.latitude,op.longitude),
-                           map: scope.map
-                         }));  
+                           map: scope.map,
+                           title: op.name,
+                           desc: op.description
+                         });
+                          google.maps.event.addListener(marker, 'click', function() {
+                            $('.copt').html(marker.title);
+                            $('.copd').html(marker.desc);
+                          });
+                          myMarkers.markers.push(marker);
                        }
                    });
                    myMarkers.cleanUp(scope.markers);
@@ -283,6 +293,7 @@ OperatorListApp.directive('googleMap', function($timeout){
                     
                     $timeout(function(){
                         scope.$apply(function(){
+                            scope.map.panTo(scope.center);
                             google.maps.event.trigger(scope.map, "resize");
                         });    
                     });
@@ -292,7 +303,7 @@ OperatorListApp.directive('googleMap', function($timeout){
                 if(scope.center != '') {     
                     $timeout(function(){
                         scope.$apply(function(){
-                            
+                            scope.map.panTo(scope.center);
                             google.maps.event.trigger(scope.map, "resize");
                         });    
                     });

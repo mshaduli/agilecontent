@@ -133,3 +133,16 @@ a.sonata-media-gallery-media-item-link:hover {
     width: 100%;
     height: 100%;
 }
+
+
+.pip_labels {
+     color: red;
+     background-color: white;
+     font-family: "Lucida Grande", "Arial", sans-serif;
+     font-size: 10px;
+     font-weight: bold;
+     text-align: center;
+     width: 60px;     
+     border: 2px solid black;
+     white-space: nowrap;
+   }

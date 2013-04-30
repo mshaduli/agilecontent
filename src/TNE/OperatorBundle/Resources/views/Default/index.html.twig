@@ -20,6 +20,7 @@ file that was distributed with this source code.
     {{ vichgeo_include_js() }}   
         <script src="{{ asset('bundles/tneoperator/angular/app/lib/angular/angular.js') }}" type="text/javascript"></script>
         <script src="{{ asset('bundles/tneoperator/angular/app/lib/angular/angular-resource.js') }}" type="text/javascript"></script>
+        
         <script src="{{ asset('bundles/tneoperator/angular/app/js/app.js') }}"></script>
 {% endblock %}    
     
@@ -115,6 +116,8 @@ file that was distributed with this source code.
                 <div ng-show="UIView=='Map'">
                     <p>Showing {[{ accommodation.length }]} listings </p>
                     <div google-map id="acc_map" class="Flexible-container" center="mapOptions.center" zoom="mapOptions.zoom" view="UIView" optype="operatorView" markers="accommodation"></div>
+                    <h1><div class="copt"></div></h1>
+                    <p><div class="copd"></div></p>
                 </div>
               </div>        
 
@@ -139,6 +142,8 @@ file that was distributed with this source code.
                 <div ng-show="UIView=='Map'">
                     <p>Showing {[{ events.length }]} listings </p>
                     <div google-map id="event_map" class="Flexible-container" center="mapOptions.center" zoom="mapOptions.zoom" view="UIView" optype="operatorView" markers="events"></div>
+                    <h1><div class="copt"></div></h1>
+                    <p><div class="copd"></div></p>
                 </div>                      
 
               </div> 
@@ -164,6 +169,8 @@ file that was distributed with this source code.
                 <div ng-show="UIView=='Map'">
                     <p>Showing {[{ attractions.length }]} listings </p>
                     <div google-map id="attr_map" class="Flexible-container" center="mapOptions.center" zoom="mapOptions.zoom" view="UIView" optype="operatorView" markers="attractions"></div>
+                    <h1><div class="copt"></div></h1>
+                    <p><div class="copd"></div></p>
                 </div>                     
               </div>
 
