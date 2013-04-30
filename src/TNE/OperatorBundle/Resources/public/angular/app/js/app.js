@@ -234,7 +234,7 @@ function AppController($scope, OperatorService, DestinationService, $filter)
 
     $scope.zoom = 13;
 
-    $scope.markers = [];
+    $scope.markers = [{latitude: "-36.3592910", longitude: "146.6872660"}];
         
     $scope.UIViewOptions = ['List','Map'];
     $scope.UIView = 'List';

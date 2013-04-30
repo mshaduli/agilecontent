@@ -111,7 +111,8 @@ file that was distributed with this source code.
 
                      </ul>        
             </div>
-            <div ng-show="UIView=='Map'">         
+            <div ng-show="UIView=='Map'">
+                <p>Showing {[{ accommodation.length }]} listings </p>
                 <div google-map center="center" draggable="true" zoom="zoom" markers="markers" refresh="!isMapElementHidden" class="angular-google-map Flexible-container"></div>
             </div>
           </div>        

@@ -193,6 +193,8 @@
           icon: icon
         });
         
+        console.log(marker);
+        
         if (label) {
           
         }
@@ -464,6 +466,7 @@
           $timeout(function () {
             
             angular.forEach(newValue, function (v, i) {
+                
               if (!_m.hasMarker(v.latitude, v.longitude)) {
                 _m.addMarker(v.latitude, v.longitude, v.icon, v.infoWindow);
               }
