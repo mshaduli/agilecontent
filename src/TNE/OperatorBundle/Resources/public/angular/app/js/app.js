@@ -1,5 +1,9 @@
 'use strict';
 
+function floatEqual (f1, f2) {
+  return (Math.abs(f1 - f2) < 0.000001);
+}
+
 var OperatorListApp = angular.module('OperatorListApp', ['OperatorListApp.filters']);
 
 OperatorListApp.config(function($interpolateProvider){
@@ -64,6 +68,30 @@ OperatorListApp.factory('OperatorService', function($http, $q){
        return deferred.promise;
      }     
    }
+});
+
+OperatorListApp.service('MarkerService', function(){
+    var that = this;
+    
+    that.markers = [];
+    
+    that.findMarker = function (lat, lng) {
+        for (var i = 0; i < that.markers.length; i++) {
+          var pos = that.markers[i].getPosition();
+          
+          if (floatEqual(pos.lat(), lat) && floatEqual(pos.lng(), lng)) {
+            return that.markers[i];
+          }
+        }        
+        return null;
+      };  
+      
+    that.reset = function(){
+        for (var i = 0; i < that.markers.length; i++) {
+            that.markers[i].setMap(null);
+        }
+        that.markers = [];
+    }
 });
 
 OperatorListApp.directive('distanceSlider', function($parse) {
@@ -133,6 +161,87 @@ OperatorListApp.directive('rating', function(){
     }
 });
 
+OperatorListApp.directive('googleMap', function(MarkerService){
+     return {
+        restrict:'A',
+        template: "",
+        scope: {
+            center: '=',
+            zoom: '=',
+            view: '=',
+            accommodationMarkers: '=',
+            eventMarkers: '=',
+            attractionMarkers: '='
+        },
+        link: function(scope,element,attrs)
+        {    
+       
+            scope.$watch("center", function(){
+                if(scope.center != '')
+                {
+                    MarkerService.reset();
+                    scope.map = new google.maps.Map(element.get(0), {
+                                            zoom: scope.zoom,
+                                            center: scope.center,
+                                            mapTypeControl: false,
+                                            scaleControl: false,
+                                            streetViewControl: false,
+                                            zoomControl: true,
+                                            zoomControlOptions: {
+                                              style: google.maps.ZoomControlStyle.SMALL
+                                            },        
+                                            mapTypeId: google.maps.MapTypeId.ROADMAP                        
+                                        });                                                               
+                }
+
+            }, true);    
+            scope.$watch('accommodationMarkers', function(newValue, oldValue){
+                   
+                   angular.forEach(scope.accommodationMarkers, function(op){
+                       if(MarkerService.findMarker(op.latitude,op.longitude) == null)
+                       {
+                        MarkerService.markers.push(new google.maps.Marker({
+                           position: new google.maps.LatLng(op.latitude,op.longitude),
+                           map: scope.map
+                         }));  
+                       }
+                   });
+            }, true);
+            scope.$watch('eventMarkers', function(newValue, oldValue){
+
+                   angular.forEach(scope.eventMarkers, function(op){
+                       if(MarkerService.findMarker(op.latitude,op.longitude) == null)
+                       {                       
+                        MarkerService.markers.push(new google.maps.Marker({
+                           position: new google.maps.LatLng(op.latitude,op.longitude),
+                           map: scope.map
+                         }));       
+                      }
+                   });
+               
+            }, true);            
+            scope.$watch('attractionMarkers', function(newValue, oldValue){
+
+                   angular.forEach(scope.attractionMarkers, function(op){
+                       if(MarkerService.findMarker(op.latitude,op.longitude) == null)
+                       {                       
+                        MarkerService.markers.push(new google.maps.Marker({
+                           position: new google.maps.LatLng(op.latitude,op.longitude),
+                           map: scope.map
+                         }));   
+                       }
+                   });
+            }, true);                        
+            scope.$watch('view', function(newValue, oldValue){
+                if(newValue=='Map') {                    
+            
+                }
+            });
+        }
+    }
+});
+
+
 OperatorListApp.directive('buttonsRadio', function() {
         return {
             restrict: 'E',
@@ -195,7 +304,12 @@ function AppController($scope, OperatorService, DestinationService, $filter)
         bnb: false,
         camp: false,
         hostel: false
-    }        
+    }
+    
+    $scope.mapOptions = {
+        zoom: 13,
+        center: ''
+    };
         
     $scope.UIViewOptions = ['List','Map'];
     $scope.UIView = 'List';
@@ -210,7 +324,7 @@ function AppController($scope, OperatorService, DestinationService, $filter)
              return dest;   
             }
         });
-//        defaultDest[0].latitude, defaultDest[0].longitude;
+        $scope.mapOptions.center = new google.maps.LatLng(defaultDest[0].latitude, defaultDest[0].longitude);
     });
         
     
@@ -228,7 +342,7 @@ function AppController($scope, OperatorService, DestinationService, $filter)
         
         if(type=='destination')
         {
-
+            $scope.mapOptions.center = new google.maps.LatLng(element.destination.latitude, element.destination.longitude);
         }
     }
     

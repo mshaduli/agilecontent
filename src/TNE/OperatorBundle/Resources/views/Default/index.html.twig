@@ -83,7 +83,7 @@ file that was distributed with this source code.
         <br/>                    
         <div ng-show="UIView=='Map'">
             <p>Showing {[{ accommodation.length + event.length + attractions.length }]} listings </p>
-            <div google-map class="Flexible-container"></div>
+            <div google-map class="Flexible-container" center="mapOptions.center" zoom="mapOptions.zoom" view="UIView" markers="operators"></div>
         </div>        
         <br/>
         <div ng-show="UIView=='List'">
