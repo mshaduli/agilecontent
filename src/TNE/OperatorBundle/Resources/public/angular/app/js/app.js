@@ -1,6 +1,6 @@
 'use strict';
 
-var OperatorListApp = angular.module('OperatorListApp', ['OperatorListApp.filters', 'google-maps']);
+var OperatorListApp = angular.module('OperatorListApp', ['OperatorListApp.filters']);
 
 OperatorListApp.config(function($interpolateProvider){
         $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
@@ -88,35 +88,6 @@ OperatorListApp.directive('distanceSlider', function($parse) {
 });
 
 
-//OperatorListApp.directive('googleMap', function(){
-//    return {
-//      restrict:'A',      
-//      template: '',
-//      link: function(scope, element, attrs){
-//            
-//            scope.$watch("map", function (newValue, oldValue) {
-//                if(newValue.center != null){ 
-//                    scopeEl = new google.maps.Map(element.get(0), scope);
-//                    //scopeEl.setCenter(newValue.center);
-//            }}, true);  
-//        
-//            scope.$watch("markers", function(newValue, oldValue){
-//                angular.forEach(newValue, function (v, i) {
-//            });
-//            
-//            }, true);
-//        
-//        
-//            scope.$watch("UIView", function(newValue, oldValue){
-//                if(newValue == 'Map'){                    
-//                    google.maps.event.trigger(scopeEl, "resize");                    
-//                }
-//            });
-//      }
-//    };
-//});
-
-
 OperatorListApp.directive('priceSlider', function($parse) {
     return {
         restrict:'A',
@@ -171,7 +142,7 @@ OperatorListApp.directive('buttonsRadio', function() {
                     $scope.model = option;
                 };      
             },
-            template: "<button type='button' class='btn {[{classes}]}' "+
+            template: "<button type='button' class='btn {[{classes}]}' '"+
                         "ng-class='{active: option == model}'"+
                         "ng-repeat='option in options' "+
                         "ng-click='activate(option)'>{[{option}]} "+
@@ -224,17 +195,7 @@ function AppController($scope, OperatorService, DestinationService, $filter)
         bnb: false,
         camp: false,
         hostel: false
-    }    
-    
-    $scope.isMapElementHidden = true;
-        
-
-
-    $scope.center = {lat: "-36.3592910", lng: "146.6872660"};
-
-    $scope.zoom = 13;
-
-    $scope.markers = [{latitude: "-36.3592910", longitude: "146.6872660"}];
+    }        
         
     $scope.UIViewOptions = ['List','Map'];
     $scope.UIView = 'List';
@@ -249,7 +210,7 @@ function AppController($scope, OperatorService, DestinationService, $filter)
              return dest;   
             }
         });
-        $scope.center = {lat:defaultDest[0].latitude,lng:defaultDest[0].longitude};        
+//        defaultDest[0].latitude, defaultDest[0].longitude;
     });
         
     
@@ -267,17 +228,10 @@ function AppController($scope, OperatorService, DestinationService, $filter)
         
         if(type=='destination')
         {
-            $scope.center = {lat:element.destination.latitude,lng:element.destination.longitude};
-            
-            console.log($scope.center);
+
         }
     }
     
-    $scope.$watch("UIView", function(newValue, oldValue){
-        if(newValue == 'Map'){                    
-            $scope.isMapElementHidden = false;                    
-        }
-    });
     
     $scope.$watch('filters', function(){
         $scope.update();
