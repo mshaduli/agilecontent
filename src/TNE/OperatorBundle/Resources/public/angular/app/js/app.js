@@ -4,7 +4,7 @@ function floatEqual (f1, f2) {
   return (Math.abs(f1 - f2) < 0.000001);
 }
 
-var OperatorListApp = angular.module('OperatorListApp', ['OperatorListApp.filters']);
+var OperatorListApp = angular.module('SearchApp', ['SearchApp.filters']);
 
 OperatorListApp.config(function($interpolateProvider){
         $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
@@ -332,7 +332,7 @@ OperatorListApp.directive('buttonsRadio', function() {
     });
 
 
-angular.module('OperatorListApp.filters', []).
+angular.module('SearchApp.filters', []).
     filter('truncate', function () {
         return function (text, length, end) {
             if (isNaN(length))
