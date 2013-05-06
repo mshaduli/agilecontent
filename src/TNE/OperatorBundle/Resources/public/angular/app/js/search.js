@@ -10,7 +10,7 @@ SearchApp.config(function($interpolateProvider){
 SearchApp.directive('tabs', function() {
     return {
         restrict: 'E',
-        scope: { model: '=', options:'=', classes:'@'},
+        scope: { model: '=', options:'=', classes:'@', count:'@'},
         controller: function($scope){
             $scope.activate = function(option){
                 $scope.model = option;
@@ -19,7 +19,7 @@ SearchApp.directive('tabs', function() {
         template: "<a class='btn {[{classes}]}' "+
                     "ng-class='{active: option == model}'"+
                     "ng-repeat='option in options' "+
-                    "ng-click='activate(option)'>{[{option}]} <span class='inner'>123</span>"+
+                    "ng-click='activate(option.name)'>{[{option.name}]} <span class='inner'>{[{option.count}]}</span>"+
                   "</a>"
     };
 });
@@ -44,15 +44,21 @@ SearchApp.directive('buttonsRadio', function() {
 
 SearchApp.directive('accommodationTypeFilter', function(){
     return {
-      restrict: 'E',
-      template: '<li>'+
-                 '<label class="checkbox">' +
-                '<input type="checkbox"  > Hotel ' +
-                '</label>' +
-                  '<label class="checkbox">' +
-                  '<input type="checkbox" > Motel ' +
-                  '</label>' +
-                '</li>'
+        restrict: 'E',
+        template: '<li class="nav-row">'+
+                    '<label class="checkbox">' +
+                    '<input type="checkbox"  > Hotel ' +
+                    '</label>' +
+                   '</li>' +
+                   '<li class="nav-row">' +
+                      '<label class="checkbox">' +
+                      '<input type="checkbox" > Motel ' +
+                      '</label>' +
+                    '</li>',
+        link: function(scope,element,attrs)
+        {
+           $(element).find('input[type="checkbox"]').prettyCheckable();
+        }
     };
 });
 
@@ -66,11 +72,18 @@ SearchApp.directive('distanceFilter', function(){
         },
         template: '<li>'+
             '{[{ distance }]}km' +
-            '<br/><input type="range" min="0" max="100" step="5" ng-model="distance" />' +
-            '<br/><label class="radio" ng-repeat="dest in destinations"><input type="radio" ng-model="$parent.destination" value="{[{ dest.id }]}"> {[{ dest.name }]} </label>' +
+            '<input type="range" min="0" max="100" step="5" ng-model="distance" />' +
+            '</li>' +
+            '<li class="nav-row" ng-repeat="dest in destinations">' +
+            '<label class="radio"><input type="radio" ng-model="$parent.destination" value="{[{ dest.id }]}"> {[{ dest.name }]} </label>' +
             '</li>',
-        link: function(scope, el, attrs)
+        link: function(scope, element, attrs)
         {
+
+            scope.$watch('destinations', function() {
+
+                $(element).find('input[type="radio"]').prettyCheckable();
+            });
         }
     };
 });
@@ -105,9 +118,11 @@ SearchApp.directive('resultsList', function(){
                     '<div class="card">' +
                         '<div class="title">{[{operator.name}]}</div>' +
                         '<div class="thumbnail">' +
-                            '<div class="info-bar clearfix">' +
+                            '<div class="info-bar">' +
+                                '<div class="info-content clearfix">' +
                                 '<div class="pull-left"><img src="/bundles/tneoperator/img/design-tripadvisor.png" width="99" height="17" /></div>' +
                                 '<div score="{[{ operator.rating }]}" class="star pull-right" rating></div>' +
+                                '</div>' +
                             '</div>' +
                             '<div class="tag tag-special"><i class="icon-heart"></i> Special</div>' +
                         '<div class="thumbnail-inner"><img src="http://regional.tne.applicationstaging.com/uploads/media/default/0001/01/thumb_91_default_big.jpeg" /></div>' +
@@ -193,13 +208,14 @@ SearchApp.directive('resultsMap', function(){
             });
 
             scope.$watch('operators', function(){
+                scope.mgr.clearMarkers();
+
                 markers = [];
                 angular.forEach(scope.operators, function(operator){
                     markers.push(createMarker(operator));
                 });
                 if(markers.length > 0)
                 {
-                    scope.mgr.clearMarkers();
                     scope.mgr.addMarkers(markers, 0, 17);
                     scope.mgr.refresh();
                 }
@@ -248,7 +264,7 @@ function SearchController($scope, $http, $q, $filter, $timeout)
 
     $scope.map = null;
 
-    $scope.OperatorViewOptions = ['Accommodation','Events','Attractions'];
+    $scope.OperatorViewOptions = [{name:'Accommodation',count:0},{name:'Events',count:0},{name:'Attractions',count:0}];
 
     $scope.filters = {
         distance: 10,
@@ -316,6 +332,7 @@ function SearchController($scope, $http, $q, $filter, $timeout)
 
         $http.get($scope.operatorUrl+queryString($scope.filters)).success(function(data) {
             $scope.operators = data;
+
         }).error(function(){
             console.log('operators not loaded');
         });
@@ -334,7 +351,11 @@ function queryString(filters)
 }
 
 function createMarker(operator) {
-    var marker = new google.maps.Marker({position: new google.maps.LatLng(operator.latitude, operator.longitude)});
+    var markerIcon = new google.maps.MarkerImage('/bundles/tneoperator/img/map/marker.png',
+        new google.maps.Size(34, 46),
+        new google.maps.Point(0,0),
+        new google.maps.Point(16, 46));
+    var marker = new google.maps.Marker({position: new google.maps.LatLng(operator.latitude, operator.longitude), icon:markerIcon});
     google.maps.event.addListener(marker, "click", function() {
         $('#markerdetail').show();
         $('#markerdetail').html(
@@ -345,9 +366,11 @@ function createMarker(operator) {
                     '<div class="content-group"><span class="label-important">2</span> Nights from <span class="price pull-right label-important">$'+ operator.min_rate +'</span></div>' +
                 '</div>' +
                 '<div class="thumbnail">' +
-                    '<div class="info-bar clearfix">' +
+                    '<div class="info-bar">' +
+                        '<div class="info-content clearfix">' +
                         '<div class="pull-left"><img src="/bundles/tneoperator/img/design-tripadvisor.png" width="99" height="17" /></div>' +
                         '<div data-score="' + operator.rating + '" class="star pull-right"></div>' +
+                        '</div>' +
                     '</div>' +
                     '<div class="tag tag-special"><i class="icon-heart"></i> Special</div>' +
                     '<div class="thumbnail-inner"><img ng-src="http://regional.tne.applicationstaging.com/uploads/media/default/0001/01/thumb_91_default_big.jpeg" src="http://regional.tne.applicationstaging.com/uploads/media/default/0001/01/thumb_91_default_big.jpeg"></div>' +

@@ -5,17 +5,31 @@
 
     <li class="nav-header">Accommodation Type</li>
     <accommodation-type-filter></accommodation-type-filter>
-    <li class="nav-header"><br/>Distance from</li>
+    <li class="clearfix"><a class="btn btn-link muted pull-right" href="#">See more</a></li>
+    <li class="nav-header">Distance from</li>
 
     <distance-filter distance="filters.distance" destination="filters.destination" destinations="destinations"></distance-filter>
-    <li class="nav-header"><br/>Filter by tags</li>
+    <li class="clearfix"><a class="btn btn-link muted pull-right" href="#">See more</a></li>
+    <li class="nav-header">Filter by tags</li>
     <tag-filter></tag-filter>
-    <li class="nav-header"><br/>Maximum nightly rate</li>
+    <li>
+        <ul class="nav nav-pills">
+            <li><a href="#">Kid Friendly</a></li>
+            <li class="active">
+                <a href="#">Cycle Friendly <i class="icon-remove"></i></a>
+            </li>
+            <li><a href="#">Eco Friendly</a></li>
+            <li><a href="#">Single</a></li>
+        </ul>
+    </li>
+    <li class="nav-header">Maximum nightly rate</li>
     <price-filter price="filters.price"></price-filter>
-    <li class="nav-header"><br/>Min. rating</li>
+    <li class="nav-header">Min. rating</li>
     <rating-filter score="3"></rating-filter>
-    <li class="nav-header"><br/>Facilities</li>
+    <li class="nav-header">Facilities</li>
     <facilities-filter></facilities-filter>
+    <li class="clearfix"><a class="btn btn-link muted pull-right" href="#">See more</a></li>
+
 </ul>
 <!--
     <li class="nav-header">Accommodation Type</li>

@@ -273,11 +273,19 @@ OperatorListApp.directive('googleMap', function($timeout){
                        console.log(myMarkers.findMarker(op.latitude,op.longitude));
                        if(myMarkers.findMarker(op.latitude,op.longitude) == null)
                        {
+                        // This marker is 20 pixels wide by 34 pixels tall.
+                        // The origin for this image is 0,0.
+                        // The anchor for this image is at 9,34.
+                        var iconMarker = new google.maps.MarkerImage('/bundles/tneoperator/img/map/marker.png',
+                            new google.maps.Size(34, 46),
+                            new google.maps.Point(0,0),
+                            new google.maps.Point(16, 46));
                         var marker = new google.maps.Marker({
                            position: new google.maps.LatLng(op.latitude,op.longitude),
                            map: scope.map,
                            title: op.name,
-                           desc: op.description
+                           desc: op.description,
+                           icon: iconMarker
                          });
                           google.maps.event.addListener(marker, 'click', function() {
                             $('.copt').html(marker.title);

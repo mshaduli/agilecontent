@@ -70,7 +70,7 @@ file that was distributed with this source code.
 
             </div>
 
-            <div id="side-pane" class="span3">
+            <div id="side-pane" class="span3 hidden-phone">
                 {% include 'TNEOperatorBundle:Default:filters.html.twig' %}
             </div>
         </div>
@@ -86,9 +86,6 @@ file that was distributed with this source code.
         
 <script>
     $(document).ready(function(){
-
-        // Custom Checkbox
-        $('input.tne').prettyCheckable();
 
         // Footer map
         var footerMapOptions = {
