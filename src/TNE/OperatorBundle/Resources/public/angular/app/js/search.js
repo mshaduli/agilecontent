@@ -81,7 +81,7 @@ SearchApp.directive('resultsList', function(){
             operators: '='
         },
         template: ''+
-            'Showing {[{ operators.length }]} listings' +
+            'Showing {[{ operators.length }]} listings<br/>' +
             '<ul class="thumbnails">' +
                 '<li class="span3" ng-repeat="operator in operators">' +
                     '<div class="thumbnail">' +
@@ -109,6 +109,30 @@ SearchApp.directive('resultsList', function(){
     };
 });
 
+SearchApp.directive('rating', function(){
+    return {
+        restrict:'A',
+        scope: {
+            score: '@'
+        },
+        link: function(scope,element,attrs)
+        {
+            scope.$watch("score", function () {
+                if (scope.score != 'undefined')
+                {
+                    element.raty({
+                        path: '/bundles/applicationsonataadmin/img',
+                        score: function() {
+                            return scope.score;
+                        }
+                    });
+                }
+            });
+
+        }
+    }
+});
+
 SearchApp.directive('resultsMap', function(){
     return {
         restrict: 'A',
@@ -118,12 +142,13 @@ SearchApp.directive('resultsMap', function(){
             operators: '=',
             map: '='
         },
+        template:'<div>Showing {[{ operators.length }]} listings</div><div id="mapdiv" class="map-canvas"></div><div id="markerdetail"></div>',
         link: function(scope, el, attrs)
         {
             var markers = [];
             var centerPoint = new google.maps.LatLng(scope.center.lat, scope.center.lng);
 
-            scope.map = new google.maps.Map(el.get(0), {
+            scope.map = new google.maps.Map(el.get(0).children[1], {
                 zoom: scope.zoom,
                 center: centerPoint,
                 mapTypeControl: false,
@@ -146,7 +171,7 @@ SearchApp.directive('resultsMap', function(){
             scope.$watch('operators', function(){
                 markers = [];
                 angular.forEach(scope.operators, function(operator){
-                    markers.push(createMarker(operator, operator.name));
+                    markers.push(createMarker(operator));
                 });
                 if(markers.length > 0)
                 {
@@ -284,11 +309,26 @@ function queryString(filters)
     return str;
 }
 
-function createMarker(operator,html) {
+function createMarker(operator) {
     var marker = new google.maps.Marker({position: new google.maps.LatLng(operator.latitude, operator.longitude)});
     google.maps.event.addListener(marker, "click", function() {
-        //marker.openInfoWindowHtml(html);
-        console.log(html);
+        $('#markerdetail').show();
+        $('#markerdetail').html(
+            '<div style="float: left; clear: right; width:250px">' +
+                '<img src="' + operator.image + '" class="opimg" />' +
+            '</div>' +
+            '<div style="float: left; padding: 10px; width:250px">' +
+                '<h4>' + operator.name + '</h4>' +
+                '<p>' + String(operator.description).substring(0, 60) + '...</p>' +
+                '<div class="star" data-score="' + operator.rating + '"></div>' +
+            '</div>'
+        );
+        $(".star").raty({
+            path: '/bundles/applicationsonataadmin/img',
+            score: function() {
+                return $(this).attr('data-score');
+            }
+        });
     });
     return marker;
 }
