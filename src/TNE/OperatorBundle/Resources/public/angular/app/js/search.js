@@ -115,12 +115,14 @@ SearchApp.directive('resultsMap', function(){
         scope: {
             center: '=',
             zoom: '=',
-            operators: '='
+            operators: '=',
+            map: '='
         },
         link: function(scope, el, attrs)
         {
             var markers = [];
             var centerPoint = new google.maps.LatLng(scope.center.lat, scope.center.lng);
+
             scope.map = new google.maps.Map(el.get(0), {
                 zoom: scope.zoom,
                 center: centerPoint,
@@ -189,11 +191,13 @@ angular.module('SearchApp.filters', []).
         })    
     ;
 
-function SearchController($scope, $http, $q, $filter)
+function SearchController($scope, $http, $q, $filter, $timeout)
 {
     $scope.operatorUrl = '/app_dev.php/operators';
     $scope.UIViewOptions = ['List','Map'];
     $scope.UIView = 'List';
+
+    $scope.map = null;
 
     $scope.OperatorViewOptions = ['Accommodation','Events','Attractions'];
 
@@ -219,6 +223,19 @@ function SearchController($scope, $http, $q, $filter)
         $scope.destinations = data;
     }).error(function(){
         console.log('destinations not loaded');
+    });
+
+    $scope.$watch('UIView', function(newValue, oldValue){
+        if(newValue == 'Map'){
+            //console.log($scope.map);
+
+            $timeout(function(){
+                $scope.$apply(function(){
+                    google.maps.event.trigger($scope.map, 'resize');
+                    $scope.map.panTo(new google.maps.LatLng($scope.mapOptions.center.lat, $scope.mapOptions.center.lng));
+                });
+            });
+        }
     });
 
     $scope.$watch('filters', function(){

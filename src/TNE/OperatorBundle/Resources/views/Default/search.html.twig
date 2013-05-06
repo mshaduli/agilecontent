@@ -80,9 +80,13 @@ file that was distributed with this source code.
             
             <br/>
 
-            <div results-map class="Flexible-container" operators="operators" center="mapOptions.center" zoom="mapOptions.zoom"></div>
+            <div ng-show="UIView=='Map'">
+                <div results-map class="map_canvas" operators="operators" center="mapOptions.center" zoom="mapOptions.zoom" map="map"></div>
+            </div>
 
-            <results-list operators="operators"></results-list>
+            <div ng-show="UIView=='List'">
+                <results-list operators="operators"></results-list>
+            </div>
 
         </div>
 
