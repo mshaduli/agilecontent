@@ -4,7 +4,7 @@ function floatEqual (f1, f2) {
   return (Math.abs(f1 - f2) < 0.000001);
 }
 
-var OperatorListApp = angular.module('OperatorListApp', ['OperatorListApp.filters']);
+var OperatorListApp = angular.module('SearchApp', ['SearchApp.filters']);
 
 OperatorListApp.config(function($interpolateProvider){
         $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
@@ -205,7 +205,7 @@ OperatorListApp.directive('rating', function(){
                 if (scope.score != 'undefined')
                 {
                     element.raty({
-                            path: '/bundles/tneoperator/img',
+                            path: '/bundles/applicationsonataadmin/img',        
                             score: function() {
                                 return scope.score;
                             }
@@ -314,7 +314,7 @@ OperatorListApp.directive('googleMap', function($timeout){
 });
 
 
-OperatorListApp.directive('tabs', function() {
+OperatorListApp.directive('buttonsRadio', function() {
         return {
             restrict: 'E',
             scope: { model: '=', options:'=', classes:'@'},
@@ -323,34 +323,16 @@ OperatorListApp.directive('tabs', function() {
                     $scope.model = option;
                 };      
             },
-            template: "<a class='btn {[{classes}]}' "+
-                "ng-class='{active: option == model}'"+
-                "ng-repeat='option in options' "+
-                "ng-click='activate(option)'>{[{option}]} <span class='inner'>123</span>"+
-                 "</a>"
+            template: "<button type='button' class='btn {[{classes}]}' "+
+                        "ng-class='{active: option == model}'"+
+                        "ng-repeat='option in options' "+
+                        "ng-click='activate(option)'>{[{option}]} "+
+                      "</button>"
         };
     });
 
 
-OperatorListApp.directive('buttonsRadio', function() {
-    return {
-        restrict: 'E',
-        scope: { model: '=', options:'=', classes:'@'},
-        controller: function($scope){
-            $scope.activate = function(option){
-                $scope.model = option;
-            };
-        },
-        template: "<a class='btn {[{classes}]}' "+
-            "ng-class='{active: option == model}'"+
-            "ng-repeat='option in options' "+
-            "ng-click='activate(option)'><i class='icon-{[{option|lowercase}]} icon-large'></i>"+
-            "</a>"
-    };
-});
-
-
-angular.module('OperatorListApp.filters', []).
+angular.module('SearchApp.filters', []).
     filter('truncate', function () {
         return function (text, length, end) {
             if (isNaN(length))
@@ -401,7 +383,7 @@ function AppController($scope, OperatorService, DestinationService, $filter)
         center: ''
     };
         
-    $scope.UIViewOptions = ['List','Calendar','Map'];
+    $scope.UIViewOptions = ['List','Map'];
     $scope.UIView = 'List';
     
     $scope.operatorViewOptions = ['Accommodation','Events', 'Attractions'];

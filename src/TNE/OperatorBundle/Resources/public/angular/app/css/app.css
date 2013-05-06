@@ -6,3 +6,56 @@
     border:1px solid #ccc;
     margin:.5em 10px .5em 0;
 }
+
+.Flexible-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px;
+    height: 0;
+    overflow: hidden;
+    height: 400px;
+}
+
+.Flexible-container iframe,
+.Flexible-container object,
+.Flexible-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+
+.pip_labels {
+    color: red;
+    background-color: white;
+    font-family: "Lucida Grande", "Arial", sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    width: 60px;
+    border: 2px solid black;
+    white-space: nowrap;
+}
+
+
+.map-canvas {
+    margin: 0;
+    padding: 0;
+    height: 800px;
+    border: 1px solid #ccc;
+}
+
+#markerdetail
+{
+    margin: 0;
+    padding: 0;
+    z-index: 2;
+    margin-top: -250px;
+    height: 250px;
+    width: 520px;
+    border: 1px solid #ccc;
+    background: #fff;
+    position: absolute;
+    display: none;
+}

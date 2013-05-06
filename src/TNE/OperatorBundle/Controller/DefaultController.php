@@ -14,7 +14,7 @@ class DefaultController extends Controller
 {
     public function searchAction()
     {
-        return $this->render('TNEOperatorBundle:Default:index.html.twig', array('name' => 'test'));
+        return $this->render('TNEOperatorBundle:Default:search.html.twig');
     }
 
     /**
@@ -81,9 +81,6 @@ EOD;
             {
                 $result['tags'] []= $tag->getSingleName();
             }
-//            foreach($operator->getRooms() as $room){
-//                $result['rooms'] []= array('name'=>$room->getName(), 'from' => $room->getRateFrom(), 'to' => $room->getRateTo());
-//            }
             $operators []= $result;
         }
   
