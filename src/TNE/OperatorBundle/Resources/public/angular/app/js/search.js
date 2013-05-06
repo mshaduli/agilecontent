@@ -106,7 +106,7 @@ SearchApp.directive('resultsList', function(){
                         '<div class="title">{[{operator.name}]}</div>' +
                         '<div class="thumbnail">' +
                             '<div class="info-bar clearfix">' +
-                                '<div class="pull-left"><img src="img/design-tripadvisor.png" width="99" height="17" /></div>' +
+                                '<div class="pull-left"><img src="/bundles/tneoperator/img/design-tripadvisor.png" width="99" height="17" /></div>' +
                                 '<div score="{[{ operator.rating }]}" class="star pull-right" rating></div>' +
                             '</div>' +
                             '<div class="tag tag-special"><i class="icon-heart"></i> Special</div>' +
@@ -346,7 +346,7 @@ function createMarker(operator) {
                 '</div>' +
                 '<div class="thumbnail">' +
                     '<div class="info-bar clearfix">' +
-                        '<div class="pull-left"><img src="img/design-tripadvisor.png" width="99" height="17" /></div>' +
+                        '<div class="pull-left"><img src="/bundles/tneoperator/img/design-tripadvisor.png" width="99" height="17" /></div>' +
                         '<div data-score="' + operator.rating + '" class="star pull-right"></div>' +
                     '</div>' +
                     '<div class="tag tag-special"><i class="icon-heart"></i> Special</div>' +
