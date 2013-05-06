@@ -78,12 +78,13 @@ SearchApp.directive('resultsList', function(){
     return {
         restrict: 'E',
         scope: {
-            operators: '='
+            operators: '=',
+            sort: '='
         },
         template: ''+
             'Showing {[{ operators.length }]} listings<br/>' +
             '<ul class="thumbnails">' +
-                '<li class="span3" ng-repeat="operator in operators">' +
+                '<li class="span3" ng-repeat="operator in operators | orderBy:sort">' +
                     '<div class="thumbnail">' +
                         '<div class="pull-right pull_top" style="padding: 5px;font-weight: bold">{[{ operator.distance | number:2 | distance }]}</div>' +
 
@@ -223,6 +224,8 @@ function SearchController($scope, $http, $q, $filter, $timeout)
     $scope.UIView = 'List';
 
     $scope.map = null;
+
+    $scope.sort = 'distance';
 
     $scope.OperatorViewOptions = ['Accommodation','Events','Attractions'];
 

@@ -58,11 +58,12 @@ file that was distributed with this source code.
                 
             </div>
             <div class="span4">
-                 <select id="sort">
-                     <option>Sort by</option>
-                     <option>Distance</option>
-                     <option>Price</option>
-                 </select>
+                <!-- Fix sort filter
+                 <select id="sort" ng-model="sort">
+                     <option value="">Sort by</option>
+                     <option value="distance">Distance</option>
+                     <option value="min_rate">Price</option>
+                 </select>-->
 
             </div>
             <div class="span4 pull-right">
@@ -85,7 +86,7 @@ file that was distributed with this source code.
             </div>
 
             <div ng-show="UIView=='List'">
-                <results-list operators="operators"></results-list>
+                <results-list operators="operators" sort="sort"></results-list>
             </div>
 
         </div>
