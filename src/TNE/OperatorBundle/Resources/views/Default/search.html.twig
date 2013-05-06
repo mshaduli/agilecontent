@@ -20,7 +20,7 @@ file that was distributed with this source code.
     {{ vichgeo_include_js() }}   
         <script src="{{ asset('bundles/tneoperator/angular/app/lib/angular/angular.js') }}" type="text/javascript"></script>
         <script src="{{ asset('bundles/tneoperator/angular/app/lib/angular/angular-resource.js') }}" type="text/javascript"></script>
-        
+        <script src="{{ asset('bundles/tneoperator/angular/app/js/map.js') }}"></script>
         <script src="{{ asset('bundles/tneoperator/angular/app/js/search.js') }}"></script>
 {% endblock %}    
     
@@ -77,7 +77,13 @@ file that was distributed with this source code.
         <div id="main-pane" class="span9">
             <buttons-radio class="btn-group" data-toggle="buttons-radio" model='filters.OperatorView' options='OperatorViewOptions' classes="span2"></buttons-radio>
             </br>
+            
+            <br/>
+
+            <div results-map class="Flexible-container" operators="operators" center="mapOptions.center" zoom="mapOptions.zoom"></div>
+
             <results-list operators="operators"></results-list>
+
         </div>
 
        <div class="span3">

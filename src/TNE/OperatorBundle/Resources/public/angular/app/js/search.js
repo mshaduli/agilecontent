@@ -109,6 +109,54 @@ SearchApp.directive('resultsList', function(){
     };
 });
 
+SearchApp.directive('resultsMap', function(){
+    return {
+        restrict: 'A',
+        scope: {
+            center: '=',
+            zoom: '=',
+            operators: '='
+        },
+        link: function(scope, el, attrs)
+        {
+            var markers = [];
+            var centerPoint = new google.maps.LatLng(scope.center.lat, scope.center.lng);
+            scope.map = new google.maps.Map(el.get(0), {
+                zoom: scope.zoom,
+                center: centerPoint,
+                mapTypeControl: false,
+                scaleControl: false,
+                streetViewControl: false,
+                zoomControl: true,
+                zoomControlOptions: {
+                    style: google.maps.ZoomControlStyle.SMALL
+                },
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+
+            scope.mgr = new MarkerManager(scope.map);
+
+            scope.$watch('center', function(){
+                centerPoint = new google.maps.LatLng(scope.center.lat, scope.center.lng);
+                scope.map.setCenter(centerPoint);
+            });
+
+            scope.$watch('operators', function(){
+                markers = [];
+                angular.forEach(scope.operators, function(operator){
+                    markers.push(createMarker(operator, operator.name));
+                });
+                if(markers.length > 0)
+                {
+                    scope.mgr.clearMarkers();
+                    scope.mgr.addMarkers(markers, 0, 17);
+                    scope.mgr.refresh();
+                }
+            });
+        }
+    };
+});
+
 angular.module('SearchApp.filters', []).
     filter('truncate', function () {
         return function (text, length, end) {
@@ -141,7 +189,7 @@ angular.module('SearchApp.filters', []).
         })    
     ;
 
-function SearchController($scope, $http, $q)
+function SearchController($scope, $http, $q, $filter)
 {
     $scope.operatorUrl = '/app_dev.php/operators';
     $scope.UIViewOptions = ['List','Map'];
@@ -156,8 +204,16 @@ function SearchController($scope, $http, $q)
         OperatorView: 'Accommodation'
     };
 
-    $scope.destinations = null;
+    $scope.mapOptions = {
+        zoom: 13,
+        center: {lat: "-36.3592910",
+                 lng: "146.6872660"}
+    };
+
+    $scope.destinations = [];
     $scope.operators = [];
+
+    $scope.isMapElementHidden = false;
 
     $http.get('/app_dev.php/operators/destinations').success(function(data) {
         $scope.destinations = data;
@@ -166,8 +222,6 @@ function SearchController($scope, $http, $q)
     });
 
     $scope.$watch('filters', function(){
-
-        console.log($scope.filters.OperatorView);
 
         if($scope.filters.OperatorView == 'Accommodation')
         {
@@ -181,6 +235,18 @@ function SearchController($scope, $http, $q)
         {
             $scope.operatorUrl = '/app_dev.php/operators/attractions';
         }
+
+        if($scope.destinations.length > 0)
+        {
+            var selDest = $filter('filter')($scope.destinations, function(dest){
+                if(dest.id == $scope.filters.destination){
+                    return dest;
+                }
+            });
+
+            $scope.mapOptions.center = {lat:selDest[0].latitude, lng: selDest[0].longitude};
+        }
+
 
         $http.get($scope.operatorUrl+queryString($scope.filters)).success(function(data) {
             $scope.operators = data;
@@ -199,4 +265,13 @@ function queryString(filters)
         str += key+'='+filters[key]+'&';
     }
     return str;
+}
+
+function createMarker(operator,html) {
+    var marker = new google.maps.Marker({position: new google.maps.LatLng(operator.latitude, operator.longitude)});
+    google.maps.event.addListener(marker, "click", function() {
+        //marker.openInfoWindowHtml(html);
+        console.log(html);
+    });
+    return marker;
 }
