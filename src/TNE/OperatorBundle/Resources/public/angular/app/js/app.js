@@ -205,7 +205,7 @@ OperatorListApp.directive('rating', function(){
                 if (scope.score != 'undefined')
                 {
                     element.raty({
-                            path: '/bundles/applicationsonataadmin/img',        
+                            path: '/bundles/tneoperator/img',
                             score: function() {
                                 return scope.score;
                             }
@@ -314,7 +314,7 @@ OperatorListApp.directive('googleMap', function($timeout){
 });
 
 
-OperatorListApp.directive('buttonsRadio', function() {
+OperatorListApp.directive('tabs', function() {
         return {
             restrict: 'E',
             scope: { model: '=', options:'=', classes:'@'},
@@ -323,13 +323,31 @@ OperatorListApp.directive('buttonsRadio', function() {
                     $scope.model = option;
                 };      
             },
-            template: "<button type='button' class='btn {[{classes}]}' "+
-                        "ng-class='{active: option == model}'"+
-                        "ng-repeat='option in options' "+
-                        "ng-click='activate(option)'>{[{option}]} "+
-                      "</button>"
+            template: "<a class='btn {[{classes}]}' "+
+                "ng-class='{active: option == model}'"+
+                "ng-repeat='option in options' "+
+                "ng-click='activate(option)'>{[{option}]} <span class='inner'>123</span>"+
+                 "</a>"
         };
     });
+
+
+OperatorListApp.directive('buttonsRadio', function() {
+    return {
+        restrict: 'E',
+        scope: { model: '=', options:'=', classes:'@'},
+        controller: function($scope){
+            $scope.activate = function(option){
+                $scope.model = option;
+            };
+        },
+        template: "<a class='btn {[{classes}]}' "+
+            "ng-class='{active: option == model}'"+
+            "ng-repeat='option in options' "+
+            "ng-click='activate(option)'><i class='icon-{[{option|lowercase}]} icon-large'></i>"+
+            "</a>"
+    };
+});
 
 
 angular.module('OperatorListApp.filters', []).
@@ -383,7 +401,7 @@ function AppController($scope, OperatorService, DestinationService, $filter)
         center: ''
     };
         
-    $scope.UIViewOptions = ['List','Map'];
+    $scope.UIViewOptions = ['List','Calendar','Map'];
     $scope.UIView = 'List';
     
     $scope.operatorViewOptions = ['Accommodation','Events', 'Attractions'];

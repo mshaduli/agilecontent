@@ -12,7 +12,10 @@ file that was distributed with this source code.
 
 {% block page_stylesheets %}
     {{ parent() }}
-<link rel="stylesheet" href="{{ asset('bundles/tneoperator/angular/app/css/app.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ asset('bundles/tneoperator/angular/app/css/app.css') }}" type="text/css" media="all" />
+
+    <link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/font-awesome.min.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/theme-falls-creek.css') }}" type="text/css" media="all" />
 {% endblock %}
 
 {% block page_javascripts %}
@@ -20,249 +23,195 @@ file that was distributed with this source code.
     {{ vichgeo_include_js() }}   
         <script src="{{ asset('bundles/tneoperator/angular/app/lib/angular/angular.js') }}" type="text/javascript"></script>
         <script src="{{ asset('bundles/tneoperator/angular/app/lib/angular/angular-resource.js') }}" type="text/javascript"></script>
-        
+
+        <script src="{{ asset('bundles/tneoperator/js/jquery.prettycheckable.js') }}"></script>
         <script src="{{ asset('bundles/tneoperator/angular/app/js/app.js') }}"></script>
 {% endblock %}    
     
 {% block content %}
 
-<div class="container" ng-app="OperatorListApp" id="maincontroller" ng-controller="AppController">
-    <div class="row12">
-        <div class="navbar">
-          <div class="navbar-inner">
-            <div class="container">
+<div id="maincontroller" ng-app="OperatorListApp" ng-controller="AppController">
 
-              <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-              <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </a>
-
-              <!-- Be sure to leave the brand out there if you want it shown -->
-              <a class="brand" href="#">Operators </a>
+{% include 'TNEOperatorBundle:Default:header.html.twig' %}
 
 
-              <!-- Everything you want hidden at 940px or less, place within here -->
-              <div class="nav-collapse collapse">
-                <!-- .nav, .navbar-search, .navbar-form, etc -->
-              </div>
-
+    <div id="main" class="container">
+        <div class="row hidden-phone">
+            <div class="span6">
+                <tabs class="btn-group" data-toggle="buttons-radio" model='operatorView' options='operatorViewOptions' classes=""></tabs>
             </div>
-          </div>
-        </div>        
-    </div>
-        <div class="row">
-            
-            <div class="span4 pull-left">
-                
+            <div class="span3">
+                <!--<div class="pull-right">
+                    Sort by <select id="sort">
+                             <option value="">Relevance</option>
+                             <option value="">Distance</option>
+                             <option value="">Price</option>
+                         </select>
+                </div>   -->
             </div>
-            <div class="span4">
-                 <select id="sort">
-                     <option>Sort by</option>
-                     <option>Distance</option>
-                     <option>Price</option>
-                 </select>
-
+            <div class="span3 pull-right">
+                <buttons-radio class="btn-group pull-right" data-toggle="buttons-radio" model='UIView' options='UIViewOptions' classes=""></buttons-radio>
             </div>
-            <div class="span4 pull-right">
-                
-<!--             <div id="tab" class="btn-group pull-right" data-toggle="buttons-radio">
-                <a id="list-btn" href="#/list" class="btn active"><i class="icon-list"></i>List</a>
-                <a id="map-btn" href="#/map" class="btn" ><i class="icon-map-marker"></i>Map</a>
-                <a id="grid-btn" href="#/grid" class="btn" ><i class="icon-th"></i>Grid</a>
-              </div> -->
-                
-             <buttons-radio class="btn-group" data-toggle="buttons-radio" model='UIView' options='UIViewOptions' classes="span2"></buttons-radio>                
-
-            </div>                
+        </div>
+        <div class="row hidden-phone">
+            <div class="span12 divider"></div>
         </div>
 
-    <div class="row">
+        <div class="row">
+            <div id="main-pane" class="span9" >
 
-        <div id="main-pane" class="span9" >
-        <br/>                            
-        <br/>
-        <div>
-            <buttons-radio class="btn-group" data-toggle="buttons-radio" model='operatorView' options='operatorViewOptions' classes="span3"></buttons-radio>
-            <br/>                    
-            <br/>            
+                <div id="accommodation-list-view" ng-show="operatorView=='Accommodation'">
+                    <div ng-show="UIView=='List'">
+                        <p>Showing {[{ accommodation.length }]} listings </p>
 
-            <div id="accommodation-list-view" ng-show="operatorView=='Accommodation'">
-                <div ng-show="UIView=='List'">
-                      <p>Showing {[{ accommodation.length }]} listings </p>
-
-                        <ul class="thumbnails">                
+                        <ul class="cards">
 
                             <li class="span3" ng-repeat="operator in accommodation">
-                              <div class="thumbnail">
-                                <div class="pull-right pull_top" style="padding: 5px;font-weight: bold">{[{ operator.distance | number:2 | distance }]}</div>
-                                <img class="opimg" ng-src="{[{operator.image}]}"/>                    
-                                <b>{[{operator.name}]}</b>                 
-                                <div class="truncate">{[{operator.description | truncate:120 }]}</div>
-                                <div class="star pull-right" score="{[{ operator.rating }]}" rating></div>
-                                <br/>
-                                <hr/>
-                                <div style="padding: 5px">
-                                    <div class="pull-left">1 NIGHT FROM</div>
-                                    <div class="pull-right"><b>${[{ operator.min_rate }]}</b></div>
+                                <div class="card">
+                                    <div class="title">{[{operator.name}]}</div>
+                                    <div class="thumbnail">
+                                        <div class="info-bar clearfix">
+                                            <div class="pull-left"><img src="img/design-tripadvisor.png" width="99" height="17" /></div>
+                                            <div score="{[{ operator.rating }]}" class="star pull-right" rating></div>
+                                        </div>
+                                        <div class="tag tag-special"><i class="icon-heart"></i> Special</div>
+                                        <div class="thumbnail-inner"><img src="http://regional.tne.applicationstaging.com/uploads/media/default/0001/01/thumb_91_default_big.jpeg" /></div>
+                                    </div>
+                                    <div class="content">
+                                        <div class="content-group"><span class="label-important">1</span> Night from <span class="price pull-right label-important">${[{ operator.min_rate }]}</span></div>
+                                        <div class="divider"></div>
+                                        <div class="content-group">
+                                            <span>Falls Creek</span> <span class="pull-right"><i class="icon-bolt"></i></span>
+                                            <span>Bed and Breakfast</span> <span class="price pull-right">{[{ operator.distance | number:2 | distance }]}</span>
+                                        </div>
+                                        <div>
+                                            <a href="#" class="btn btn-more"><i class="icon-star icon-white icon-large"></i></a>
+                                            <a href="#" class="btn btn-primary">More</a>
+                                        </div>
+                                    </div>
                                 </div>
-                                <br/>
-                              </div>
                             </li>
 
                          </ul>        
+                    </div>
+                    <div ng-show="UIView=='Map'" class="map-results">
+                        <p>Showing {[{ accommodation.length }]} listings </p>
+
+                        <div id="mapCard">
+                            <div class="card">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <div class="title">Beechworth Carriage Motor Inn</div>
+                                <div class="content-top">
+                                    <div class="content-group"><span class="label-important">2</span> Nights from <span class="price pull-right label-important">$265</span></div>
+                                </div>
+                                <div class="thumbnail">
+                                    <div class="info-bar clearfix">
+                                        <div class="pull-left"><img src="img/design-tripadvisor.png" width="99" height="17" /></div>
+                                        <div data-score="4" class="star pull-right"></div>
+                                    </div>
+                                    <div class="tag tag-special"><i class="icon-heart"></i> Special</div>
+                                    <div class="thumbnail-inner"><img ng-src="http://regional.tne.applicationstaging.com/uploads/media/default/0001/01/thumb_91_default_big.jpeg" src="http://regional.tne.applicationstaging.com/uploads/media/default/0001/01/thumb_91_default_big.jpeg"></div>
+                                </div>
+                                <div class="content">
+                                    <div class="content-group">
+                                        <span>Falls Creek</span> <span class="pull-right"><i class="icon-bolt"></i></span>
+                                        <span>Bed and Breakfast</span> <span class="price pull-right">99km</span>
+                                    </div>
+                                    <div>
+                                        <a href="#" class="btn btn-more"><i class="icon-star icon-white icon-large"></i></a>
+                                        <a href="#" class="btn btn-primary">More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div google-map id="acc_map" class="Flexible-container" center="mapOptions.center" zoom="mapOptions.zoom" view="UIView" optype="operatorView" markers="accommodation"></div>
+                    </div>
                 </div>
-                <div ng-show="UIView=='Map'">
-                    <p>Showing {[{ accommodation.length }]} listings </p>
-                    <div google-map id="acc_map" class="Flexible-container" center="mapOptions.center" zoom="mapOptions.zoom" view="UIView" optype="operatorView" markers="accommodation"></div>
-                    <h1><div class="copt"></div></h1>
-                    <p><div class="copd"></div></p>
+
+                <div id="event-list-view" ng-show="operatorView=='Events'">
+                    <div ng-show="UIView=='List'">
+
+                          <p>Showing {[{ events.length }]} listings </p>
+
+                            <ul class="thumbnails">
+
+                                <li class="span3" ng-repeat="operator in events">
+                                  <div class="thumbnail">
+                                    <legend>Distance {[{ operator.distance | number:2}]}km</legend>
+                                    <img class="opimg" ng-src="{[{operator.image}]}"/>
+                                    <b>{[{operator.name}]}</b>
+                                    <div class="truncate">{[{operator.description | truncate:120 }]}</div>
+                                  </div>
+                                </li>
+
+                             </ul>
+                     </div>
+                    <div ng-show="UIView=='Map'">
+                        <p>Showing {[{ events.length }]} listings </p>
+
+                        <div google-map id="event_map" class="Flexible-container" center="mapOptions.center" zoom="mapOptions.zoom" view="UIView" optype="operatorView" markers="events"></div>
+                        <h1><div class="copt"></div></h1>
+                        <p><div class="copd"></div></p>
+                    </div>
                 </div>
-              </div>        
 
-            <div id="event-list-view" ng-show="operatorView=='Events'">
-                <div ng-show="UIView=='List'">
+                <div id="attraction-list-view" ng-show="operatorView=='Attractions'">
+                    <div ng-show="UIView=='List'">
+                          <p>Showing {[{ attractions.length }]} listings </p>
 
-                      <p>Showing {[{ events.length }]} listings </p>
+                            <ul class="thumbnails">
 
-                        <ul class="thumbnails">                
+                                <li class="span3" ng-repeat="operator in attractions">
+                                  <div class="thumbnail">
+                                    <legend>Distance {[{ operator.distance | number:2}]}km</legend>
+                                    <img class="opimg" ng-src="{[{operator.image}]}"/>
+                                    <b>{[{operator.name}]}</b>
+                                    <div class="truncate">{[{operator.description | truncate:120 }]}</div>
+                                  </div>
+                                </li>
 
-                            <li class="span3" ng-repeat="operator in events">
-                              <div class="thumbnail">
-                                <legend>Distance {[{ operator.distance | number:2}]}km</legend>
-                                <img class="opimg" ng-src="{[{operator.image}]}"/>                    
-                                <b>{[{operator.name}]}</b>                 
-                                <div class="truncate">{[{operator.description | truncate:120 }]}</div>
-                              </div>
-                            </li>
+                             </ul>
 
-                         </ul>        
-                 </div>     
-                <div ng-show="UIView=='Map'">
-                    <p>Showing {[{ events.length }]} listings </p>
-                    <div google-map id="event_map" class="Flexible-container" center="mapOptions.center" zoom="mapOptions.zoom" view="UIView" optype="operatorView" markers="events"></div>
-                    <h1><div class="copt"></div></h1>
-                    <p><div class="copd"></div></p>
-                </div>                      
-
-              </div> 
-
-             <div id="sttraction-list-view" ng-show="operatorView=='Attractions'">
-                <div ng-show="UIView=='List'">
-                      <p>Showing {[{ attractions.length }]} listings </p>
-
-                        <ul class="thumbnails">                
-
-                            <li class="span3" ng-repeat="operator in attractions">
-                              <div class="thumbnail">
-                                <legend>Distance {[{ operator.distance | number:2}]}km</legend>
-                                <img class="opimg" ng-src="{[{operator.image}]}"/>                    
-                                <b>{[{operator.name}]}</b>                 
-                                <div class="truncate">{[{operator.description | truncate:120 }]}</div>
-                              </div>
-                            </li>
-
-                         </ul>        
-                      
+                    </div>
+                    <div ng-show="UIView=='Map'">
+                        <p>Showing {[{ attractions.length }]} listings </p>
+                        <div google-map id="attr_map" class="Flexible-container" center="mapOptions.center" zoom="mapOptions.zoom" view="UIView" optype="operatorView" markers="attractions"></div>
+                        <h1><div class="copt"></div></h1>
+                        <p><div class="copd"></div></p>
+                    </div>
                 </div>
-                <div ng-show="UIView=='Map'">
-                    <p>Showing {[{ attractions.length }]} listings </p>
-                    <div google-map id="attr_map" class="Flexible-container" center="mapOptions.center" zoom="mapOptions.zoom" view="UIView" optype="operatorView" markers="attractions"></div>
-                    <h1><div class="copt"></div></h1>
-                    <p><div class="copd"></div></p>
-                </div>                     
-              </div>
 
-            </div>                
+            </div>
+
+            <div id="side-pane" class="span3">
+                {% include 'TNEOperatorBundle:Default:filters.html.twig' %}
+            </div>
         </div>
-        
-        <div class="span3">
-        <br/>                    
-        <br/>            
-          <ul class="nav nav-list">
-            <li class="nav-header">Accommodation Type</li>
-            <li>
-                <label class="checkbox">
-                    <input type="checkbox" ng-model="filters.hotel" ng-change="update(this, 'accType')"> Hotel
-                </label>                   
-            </li>       
-            <li>
-                <label class="checkbox">
-                    <input type="checkbox" ng-model="filters.motel" ng-change="update(this, 'accType')"> Motel
-                </label>             
-            </li>
-            <li>
-                <label class="checkbox">
-                    <input type="checkbox" ng-model="filters.bnb" ng-change="update(this, 'accType')"> Bed & Breakfast
-                </label>             
-            </li>
-            <li>
-                <label class="checkbox">
-                    <input type="checkbox" ng-model="filters.camp" ng-change="update(this, 'accType')"> Camp Site
-                </label>             
-            </li>
-            <li>
-                <label class="checkbox">
-                    <input type="checkbox" ng-model="filters.hostel" ng-change="update(this, 'accType')"> Hostel
-                </label>             
-            </li>
-            <li class="nav-header"><br/>Distance from</li>
-            <li>
-                <center>
-                <input type="text" id="distance-slider-val" style="border: 0; color: #333; font-weight: bold; text-align: center" ng-model="filters.distance" ng-change="update(this, 'distance')"/><br/>
-                <div distance-slider ng-model="filters.distance" id="distance-slider"></div>
-                <br/>
-                </center>            
-                <label class="radio" ng-repeat="destination in destinations">
-                    <input type="radio" ng-model="filters.destination" value="{[{ destination.id }]}" ng-change="update(this, 'destination')"> {[{ destination.name }]} <br/>
-                </label>
-                
-            </li>
-            <li class="nav-header"><br/>Filter by tags</li>
-            <li>
-                <select id="tags" name="tags" multiple="true" style="height:100px; width: 100%">
-                    <option>One</option>
-                    <option>Two</option>
-                    <option>Three</option>
-                </select>
-            </li>
-            <li class="nav-header"><br/>Price</li>
-            <li style="text-align: center">
-                <input type="text" id="price-slider-amt" style="border: 0; color: #333; font-weight: bold; text-align: center" ng-model="filters.price" ng-change="update()"/><br/>
-                <div price-slider id="price-slider" ng-model="filters.price"></div>
-            </li>        
-            <li class="nav-header"><br/>Min. rating</li>
-            <li><div class="star" data-score="4"></div></li>                    
-            <li class="nav-header"><br/>Facilities</li>
-            <li>
-                <label class="checkbox">
-                    <input type="checkbox"> Wifi
-                </label>                   
-            </li>       
-            <li>
-                <label class="checkbox">
-                    <input type="checkbox"> Kitchen facilities
-                </label>             
-            </li>
-            <li>
-                <label class="checkbox">
-                    <input type="checkbox"> Dryer
-                </label>             
-            </li>
-            <li>
-                <label class="checkbox">
-                    <input type="checkbox"> Iron
-                </label>             
-            </li>
-          </ul>
-        </div>            
     </div>
+
+{% include 'TNEOperatorBundle:Default:footer.html.twig' %}
+
+
+    <div id="design"></div>
    
 </div>
         
         <script>
-$(document).ready(function(){ 
+$(document).ready(function(){
+
+    // Custom Checkbox
+    $('input.tne').prettyCheckable();
+
+    // Footer map
+    var footerMapOptions = {
+        zoom: 12,
+        center: new google.maps.LatLng(-36.86424, 147.282715),
+        disableDefaultUI: true,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    var footerMap = new google.maps.Map(document.getElementById("footerMap"),
+            footerMapOptions);
 
 $( "#price-slider" ).slider({
       range: true,
@@ -280,7 +229,7 @@ $( "#price-slider" ).slider({
     
     
     $('.star').raty({
-      path: '/bundles/applicationsonataadmin/img',        
+      path: '/bundles/tneoperator/img',
       score: function() {
         return $(this).attr('data-score');
       }

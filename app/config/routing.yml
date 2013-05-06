@@ -78,4 +78,8 @@ fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"    
     
 adesigns_calendar:
-  resource: "@ADesignsCalendarBundle/Resources/config/routing.xml"    
+  resource: "@ADesignsCalendarBundle/Resources/config/routing.xml"
+
+tne:
+    resource: '@TNEOperatorBundle/Resources/config/routing.xml'
+    prefix: /
