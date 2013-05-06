@@ -1,10 +1,23 @@
-<ul class="nav" ng-controller="FilterCtrl">
+<ul class="nav">
     <li>
         <a class="btn btn-nav" href="#">Instant confirmation <div class="switch pull-right"></div></a>
     </li>
-    <li class="nav-header">Maximum nightly rate <br/>
-        <div price-slider id="price-slider" ng-model="filters.price"></div>
-    </li>
+
+    <li class="nav-header">Accommodation Type</li>
+    <accommodation-type-filter></accommodation-type-filter>
+    <li class="nav-header"><br/>Distance from</li>
+
+    <distance-filter distance="filters.distance" destination="filters.destination" destinations="destinations"></distance-filter>
+    <li class="nav-header"><br/>Filter by tags</li>
+    <tag-filter></tag-filter>
+    <li class="nav-header"><br/>Maximum nightly rate</li>
+    <price-filter price="filters.price"></price-filter>
+    <li class="nav-header"><br/>Min. rating</li>
+    <rating-filter score="3"></rating-filter>
+    <li class="nav-header"><br/>Facilities</li>
+    <facilities-filter></facilities-filter>
+</ul>
+<!--
     <li class="nav-header">Accommodation Type</li>
     <li class="nav-row">
         <label class="checkbox">
@@ -101,15 +114,4 @@
     <li class="clearfix">
         <a class="btn btn-link muted pull-right" href="#">See more</a>
     </li>
-</ul>
-
-<!--
-<li class="nav-header"><br/>Filter by tags</li>
-<li>
-    <select id="tags" name="tags" multiple="true" style="height:100px; width: 100%">
-        <option>One</option>
-        <option>Two</option>
-        <option>Three</option>
-    </select>
-</li>
-     -->
+</ul>   -->

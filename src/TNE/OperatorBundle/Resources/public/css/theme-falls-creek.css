@@ -590,7 +590,7 @@ input[type="file"] {
 .map-results {
     position: relative;
 }
-.map-results #mapCard {
+.map-results #markerdetail {
     position: absolute;
     z-index: 5;
     left: 0px;

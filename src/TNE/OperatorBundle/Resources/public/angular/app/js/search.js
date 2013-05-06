@@ -7,29 +7,47 @@ SearchApp.config(function($interpolateProvider){
     }
 );
 
+SearchApp.directive('tabs', function() {
+    return {
+        restrict: 'E',
+        scope: { model: '=', options:'=', classes:'@'},
+        controller: function($scope){
+            $scope.activate = function(option){
+                $scope.model = option;
+            };
+        },
+        template: "<a class='btn {[{classes}]}' "+
+                    "ng-class='{active: option == model}'"+
+                    "ng-repeat='option in options' "+
+                    "ng-click='activate(option)'>{[{option}]} <span class='inner'>123</span>"+
+                  "</a>"
+    };
+});
+
 SearchApp.directive('buttonsRadio', function() {
-        return {
-            restrict: 'E',
-            scope: { model: '=', options:'=', classes:'@'},
-            controller: function($scope){
-                $scope.activate = function(option){
-                    $scope.model = option;
-                };
-            },
-            template: "<button type='button' class='btn {[{classes}]}' "+
-                        "ng-class='{active: option == model}'"+
-                        "ng-repeat='option in options' "+
-                        "ng-click='activate(option)'>{[{option}]} "+
-                      "</button>"
-        };
-    });
+    return {
+        restrict: 'E',
+        scope: { model: '=', options:'=', classes:'@'},
+        controller: function($scope){
+            $scope.activate = function(option){
+                $scope.model = option;
+            };
+        },
+        template: "<button type='button' class='btn {[{classes}]}' "+
+                    "ng-class='{active: option == model}'"+
+                    "ng-repeat='option in options' "+
+                    "ng-click='activate(option)'><i class='icon-{[{option|lowercase}]} icon-large'></i>"+
+                  "</button>"
+    };
+});
+
 
 SearchApp.directive('accommodationTypeFilter', function(){
     return {
       restrict: 'E',
       template: '<li>'+
                  '<label class="checkbox">' +
-                '<input type="checkbox" > Hotel ' +
+                '<input type="checkbox"  > Hotel ' +
                 '</label>' +
                   '<label class="checkbox">' +
                   '<input type="checkbox" > Motel ' +
@@ -82,23 +100,29 @@ SearchApp.directive('resultsList', function(){
         },
         template: ''+
             'Showing {[{ operators.length }]} listings<br/>' +
-            '<ul class="thumbnails">' +
+            '<ul class="cards">' +
                 '<li class="span3" ng-repeat="operator in operators">' +
-                    '<div class="thumbnail">' +
-                        '<div class="pull-right pull_top" style="padding: 5px;font-weight: bold">{[{ operator.distance | number:2 | distance }]}</div>' +
-
-                        '<img class="opimg" ng-src="{[{operator.image}]}"/>' +
-
-                        '<b>{[{operator.name}]}</b>' +
-
-                        '<div class="truncate">{[{operator.description | truncate:120 }]}</div>' +
-
-                        '<div class="star pull-right" score="{[{ operator.rating }]}" rating></div>' +
-
-                        '<hr/>' +
-                        '<div style="padding: 5px">' +
-                            '<div class="pull-left">1 NIGHT FROM</div>' +
-                            '<div class="pull-right"><b>${[{ operator.min_rate }]}</b></div>' +
+                    '<div class="card">' +
+                        '<div class="title">{[{operator.name}]}</div>' +
+                        '<div class="thumbnail">' +
+                            '<div class="info-bar clearfix">' +
+                                '<div class="pull-left"><img src="img/design-tripadvisor.png" width="99" height="17" /></div>' +
+                                '<div score="{[{ operator.rating }]}" class="star pull-right" rating></div>' +
+                            '</div>' +
+                            '<div class="tag tag-special"><i class="icon-heart"></i> Special</div>' +
+                        '<div class="thumbnail-inner"><img src="http://regional.tne.applicationstaging.com/uploads/media/default/0001/01/thumb_91_default_big.jpeg" /></div>' +
+                        '</div>' +
+                        '<div class="content">' +
+                            '<div class="content-group"><span class="label-important">1</span> Night from <span class="price pull-right label-important">${[{ operator.min_rate }]}</span></div>' +
+                            '<div class="divider"></div>' +
+                            '<div class="content-group">' +
+                                '<span>Falls Creek</span> <span class="pull-right"><i class="icon-bolt"></i></span>' +
+                                '<span>Bed and Breakfast</span> <span class="price pull-right">{[{ operator.distance | number:2 | distance }]}</span>' +
+                            '</div>' +
+                            '<div>' +
+                                '<a href="#" class="btn btn-more"><i class="icon-star icon-white icon-large"></i></a>' +
+                                '<a href="#" class="btn btn-primary">More</a>' +
+                            '</div>' +
                         '</div>' +
                     '</div>' +
                 '</li>' +
@@ -121,7 +145,7 @@ SearchApp.directive('rating', function(){
                 if (scope.score != 'undefined')
                 {
                     element.raty({
-                        path: '/bundles/applicationsonataadmin/img',
+                        path: '/bundles/tneoperator/img',
                         score: function() {
                             return scope.score;
                         }
@@ -314,17 +338,34 @@ function createMarker(operator) {
     google.maps.event.addListener(marker, "click", function() {
         $('#markerdetail').show();
         $('#markerdetail').html(
-            '<div style="float: left; clear: right; width:250px">' +
-                '<img src="' + operator.image + '" class="opimg" />' +
-            '</div>' +
-            '<div style="float: left; padding: 10px; width:250px">' +
-                '<h4>' + operator.name + '</h4>' +
-                '<p>' + String(operator.description).substring(0, 60) + '...</p>' +
-                '<div class="star" data-score="' + operator.rating + '"></div>' +
+            '<div class="card">' +
+                '<button type="button" class="close" data-dismiss="alert">×</button>' +
+                '<div class="title">' + operator.name + '</div>' +
+                '<div class="content-top">' +
+                    '<div class="content-group"><span class="label-important">2</span> Nights from <span class="price pull-right label-important">$'+ operator.min_rate +'</span></div>' +
+                '</div>' +
+                '<div class="thumbnail">' +
+                    '<div class="info-bar clearfix">' +
+                        '<div class="pull-left"><img src="img/design-tripadvisor.png" width="99" height="17" /></div>' +
+                        '<div data-score="' + operator.rating + '" class="star pull-right"></div>' +
+                    '</div>' +
+                    '<div class="tag tag-special"><i class="icon-heart"></i> Special</div>' +
+                    '<div class="thumbnail-inner"><img ng-src="http://regional.tne.applicationstaging.com/uploads/media/default/0001/01/thumb_91_default_big.jpeg" src="http://regional.tne.applicationstaging.com/uploads/media/default/0001/01/thumb_91_default_big.jpeg"></div>' +
+                '</div>' +
+                '<div class="content">' +
+                    '<div class="content-group">' +
+                        '<span>Falls Creek</span> <span class="pull-right"><i class="icon-bolt"></i></span>' +
+                        '<span>Bed and Breakfast</span> <span class="price pull-right">'+ operator.distance +'km</span>' +
+                    '</div>' +
+                    '<div>' +
+                        '<a href="#" class="btn btn-more"><i class="icon-star icon-white icon-large"></i></a>' +
+                        '<a href="#" class="btn btn-primary">More</a>' +
+                    '</div>' +
+                 '</div>' +
             '</div>'
         );
         $(".star").raty({
-            path: '/bundles/applicationsonataadmin/img',
+            path: '/bundles/tneoperator/img',
             score: function() {
                 return $(this).attr('data-score');
             }
