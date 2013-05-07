@@ -20,7 +20,7 @@
 #footer .navbar .nav > li > a {
     color: #FFF;
     float: none;
-    padding: 10px 15px;
+    padding: 0px 15px;
     text-decoration: none;
     text-shadow: none;
 }
@@ -764,7 +764,7 @@ input[type="file"] {
 }
 #footer .nav > li {
     line-height: 35px;
-    padding: 0px 15px;
+    padding: 0px 5px;
 }
 
 #footer .nav > li.share > a,
@@ -953,18 +953,52 @@ input[type="file"] {
         margin-right: 20px;
     }
 
+    #footerNav {
+        position: relative;
+    }
+    #footer .navbar {
+        background: none transparent;
+    }
     #footer .nav {
         display: table;
     }
+    #footer .navbar .nav > li > a {
+        padding: 10px 15px;
+    }
+    #footer .navbar .nav > li.share > a {
+        padding: 10px 5px;
+        color: #0076C0;
+    }
     #footer .nav li {
         display: table-cell;
-        width: 45%;
+        width: 49.8%;
         padding: 0px;
         text-align: center;
+        border-bottom: solid 1px #258FD5;
+        border-right: solid 1px #258FD5;
+        background: rgba(0, 118, 192, 0.90);
+
+    }
+    #footer .nav li:nth-child(4n+1) {
+        border-right: none;
+    }
+    #footer .nav li.share,
+    #footer .nav li.copyright{
+        width:100%;
+        background: none repeat scroll 0 0 transparent;
+        color: #0076C0;
+        font-size: 1.5em;
+        width: 100%;
+        border-right: none;
+        border-bottom: none;
+        line-height: 65px;
+    }
+    #footer .nav li.copyright {
+        font-size: 1em;
     }
     #footer .nav li.divider-vertical {
-        display: table-cell;
-        width: 10px;
+        display: none;
+        width: 0px;
     }
 
 }
