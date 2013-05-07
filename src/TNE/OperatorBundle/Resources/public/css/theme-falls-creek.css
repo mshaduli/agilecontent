@@ -961,6 +961,7 @@ input[type="file"] {
     }
     #footer .nav {
         display: table;
+        padding-left: 10px;
     }
     #footer .navbar .nav > li > a {
         padding: 10px 15px;
