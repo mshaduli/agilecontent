@@ -138,7 +138,7 @@ SearchApp.directive('resultsList', function(){
                             '<div class="content-group"><span class="label-important">1</span> Night from <span class="price pull-right label-important">${[{ operator.min_rate }]}</span></div>' +
                             '<div class="divider"></div>' +
                             '<div class="content-group">' +
-                                '<span>Falls Creek</span> <span class="pull-right"><i class="icon-bolt"></i></span>' +
+                                '<span>Falls Creek</span> <span class="pull-right"><i class="icon-shock"></i></span>' +
                                 '<span>Bed and Breakfast</span> <span class="price pull-right">{[{ operator.distance | number:2 | distance }]}</span>' +
                             '</div>' +
                             '<div>' +
@@ -384,7 +384,7 @@ function createMarker(operator) {
                 '</div>' +
                 '<div class="content">' +
                     '<div class="content-group">' +
-                        '<span>Falls Creek</span> <span class="pull-right"><i class="icon-bolt"></i></span>' +
+                        '<span>Falls Creek</span> <span class="pull-right"><i class="icon-shock"></i></span>' +
                         '<span>Bed and Breakfast</span> <span class="price pull-right">'+ operator.distance +'km</span>' +
                     '</div>' +
                     '<div>' +
