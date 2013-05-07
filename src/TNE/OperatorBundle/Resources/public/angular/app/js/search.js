@@ -57,7 +57,14 @@ SearchApp.directive('accommodationTypeFilter', function(){
                     '</li>',
         link: function(scope,element,attrs)
         {
-           $(element).find('input[type="checkbox"]').prettyCheckable();
+           $(element).find('input[type="checkbox"]').each(function(index, obj){
+               var $obj = $(obj);
+               $obj.prettyCheckable();
+               $obj.change(function(){
+                   var isChecked = ($(this).attr('checked') == 'checked');
+                   console.log('checked:'+isChecked);
+               });
+           });
         }
     };
 });
