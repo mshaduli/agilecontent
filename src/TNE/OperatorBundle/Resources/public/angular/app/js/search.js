@@ -115,13 +115,13 @@ SearchApp.directive('priceFilter', function(){
 });
 
 SearchApp.directive('resultsList', function(){
+    //Showing {[{ operators.length }]} listings<br/>
     return {
         restrict: 'E',
         scope: {
             operators: '='
         },
         template: ''+
-            'Showing {[{ operators.length }]} listings<br/>' +
             '<ul class="cards">' +
                 '<li class="span3" ng-repeat="operator in operators">' +
                     '<div class="card">' +
@@ -144,13 +144,16 @@ SearchApp.directive('resultsList', function(){
                                 '<span>Bed and Breakfast</span> <span class="price pull-right">{[{ operator.distance | number:2 | distance }]}</span>' +
                             '</div>' +
                             '<div>' +
-                                '<a href="#" class="btn btn-more"><i class="icon-star icon-white icon-large"></i></a>' +
+                                '<a href="#" class="btn btn-wishlist"><i class="icon-star icon-white"></i></a>' +
                                 '<a href="#" class="btn btn-primary">More</a>' +
                             '</div>' +
                         '</div>' +
                     '</div>' +
                 '</li>' +
-            '</ul>',
+            '</ul>' +
+            '<div class="visible-phone">' +
+            '<a class="btn btn-full" href="#">Show me more</a>' +
+            '</div>',
         link: function(scope, el, attrs)
         {
         }
@@ -392,7 +395,7 @@ function createMarker(operator) {
                         '<span>Bed and Breakfast</span> <span class="price pull-right">'+ operator.distance +'km</span>' +
                     '</div>' +
                     '<div>' +
-                        '<a href="#" class="btn btn-more"><i class="icon-star icon-white icon-large"></i></a>' +
+                        '<a href="#" class="btn btn-wishlist"><i class="icon-star icon-white"></i></a>' +
                         '<a href="#" class="btn btn-primary">More</a>' +
                     '</div>' +
                  '</div>' +
