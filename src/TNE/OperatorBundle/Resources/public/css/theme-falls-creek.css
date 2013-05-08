@@ -38,15 +38,15 @@
     z-index:-1;
 }
 
-#designsm {
+#design {
     position: absolute;
     display: block;
     top: 0px;
     left: 50%;
-    margin-left: -240px;
-    width: 480px;
-    height: 1956px;
-    background: url(../img/design-480.jpg);
+    margin-left: -160px;
+    width: 320px;
+    height: 1201px;
+    background: url(../img/design-320.jpg);
     z-index:-1;
 }
 
