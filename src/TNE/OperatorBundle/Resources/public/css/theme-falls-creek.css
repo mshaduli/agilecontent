@@ -196,14 +196,14 @@ input[type="file"] {
   float: right;
 }
 
-#header-top li.social > a {
-    padding: 10px 0px;
-}
-
 #header-top li > a {
     padding: 10px;
     color: #8ca3b5;
     text-shadow: none;
+}
+
+#header-top li.social > a {
+    padding: 10px 0px;
 }
 
 #header-top li:last-child > a {
@@ -211,14 +211,27 @@ input[type="file"] {
 }
 
 /* Header nav */
-.navbar .btn-navbar {
-    float: left;
+.navbar .btn-nav {
     background: none transparent;
     border-radius: 0px;
     border: none;
     box-shadow: none;
     text-shadow: none;
+    color: #FFFFFF;
+}
 
+.navbar .btn-nav .icon-bar {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background-color: #FFFFFF;
+    -webkit-border-radius: 1px;
+    -moz-border-radius: 1px;
+    border-radius: 1px;
+}
+
+.btn-nav .icon-bar + .icon-bar {
+    margin-top: 3px;
 }
 #header-nav {
     display: block;
@@ -239,9 +252,12 @@ input[type="file"] {
     text-shadow: none;
 }
 
-#header-nav .btn-search {
-    padding: 5px 20px;
+#header-nav .btn.btn-search {
     color: #FFFFFF;
+    margin-top: 40px;
+    padding: 5px 20px;
+    position: relative;
+    top: 50%;
 }
 
 #header-nav .icon-search {
@@ -256,15 +272,16 @@ input[type="file"] {
 
 /* Header search */
 
+#header-filter,
 #header-search {
     background-color: #FFFFFF;
 }
 
-#header-search .icon-repeat {
+#header-filter .icon-repeat {
     font-size: 3em;
 }
 
-#header-search .btn-search {
+#header-filter .btn-search {
     border: 0px none;
     padding: 20px 25px;
     margin-left: 8px;
@@ -273,16 +290,16 @@ input[type="file"] {
     text-shadow: none;
 }
 
-#header-search .nav li {
+#header-filter .nav li {
     margin-left: 8px;
     margin-top: 20px;
 }
 
-#header-search .nav li:first-child {
+#header-filter .nav li:first-child {
     margin-left: 0px;
 }
 
-#header-search .nav li input[type="text"] {
+#header-filter .nav li input[type="text"] {
     border-radius: 0px;
     height: 35px;
     line-height: 35px;
@@ -291,7 +308,7 @@ input[type="file"] {
     color: #79C143;
 }
 
-#header-search .input-append .btn {
+#header-filter .input-append .btn {
     border-radius: 0px;
     height: 45px;
     width: 41px;
@@ -312,7 +329,6 @@ input[type="file"] {
 
 #header {
     position: relative;
-    min-width: 480px;
 }
 
 #header .btn,
@@ -353,8 +369,8 @@ input[type="file"] {
     border-bottom: solid 1px #dadada;
 }
 
-.nav > li > a.btn-nav,
-.btn-nav {
+#side-pane .nav > li > a.btn-nav,
+#side-pane .btn-nav {
     background-color: #FFFFFF;
     background-image: none;
     border: 0 none;
@@ -895,18 +911,20 @@ input[type="file"] {
         padding-left: 0px;
         padding-right: 0px;
         overflow-x: hidden;
+        min-width: 320px;
     }
 
     .navbar {
         margin-bottom: 0px;
     }
     #brand {
+        background: url(../img/logo-falls-creek-mobile.png) #FFF center center no-repeat;
         position: absolute;
-        top: 60px;
-        width: 302px;
-        height: 100px;
+        top: 41px;
+        width: 202px;
+        height: 67px;
         left: 50%;
-        margin-left: -151px;
+        margin-left: -101px;
     }
     #main-pane, #side-pane {
         margin-top: 8px;
@@ -915,20 +933,40 @@ input[type="file"] {
         padding-right: 30px;
     }
 
+    #header .btn,
+    #header .btn-group {
+        margin: 0;
+    }
+
     #header-top {
         background: #2f2f2f;
         color: #979797;
+        height: 28px;
     }
+    #header-top li.social > a,
     #header-top li > a {
         color: #979797;
+        padding: 3px;
     }
     #header-top .nav {
         float: none;
-        margin-right: 30px;
-        margin-left: 30px;
+        margin-right: 28px;
+        margin-left: 28px;
     }
     #header .navbar .divider-vertical {
         margin: 0 6px;
+        height: 28px;
+    }
+    #header-nav .navbar .divider-vertical {
+        display: none;
+    }
+    #header-nav .navbar .nav > li {
+        width: 100%;
+        line-height: 28px;
+    }
+    #header-nav .navbar .nav-collapse > li > a {
+        width: 100%;
+        text-align: center;
     }
 
 
@@ -936,39 +974,62 @@ input[type="file"] {
     #header-nav {
         background: none;
         height: auto;
+        padding-top: 25px;
     }
 
     #header-nav .navbar {
         background: #0076c0;
         margin-top: 30px;
         margin-bottom: 0px;
-        min-height: 60px;
+        min-height: 40px;
     }
 
     #header-nav .btn-search {
         padding: 5px 20px;
+    }
+    #header-nav .navbar .nav-collapse.in {
+        margin-top: 20px;
+        width: 100%;
     }
 
     #header-nav .nav-collapse.collapse {
         float: left;
         margin-top: 0px;
     }
+    #header-nav .btn-nav {
+        min-height: 28px;
+        padding: 6px 16px;
+    }
+    #header-nav .btn.btn-search {
+        margin-top: 0px;
+        min-height: 28px;
+        padding: 6px 16px;
+    }
 
-    #header-search {
+    #header-nav .btn-nav .icon-bar {
+        height: 3px;
+        width: 26px;
+        margin-top: 5px;
+    }
+    #header-nav .btn-nav .icon-bar + .icon-bar {
+        margin-top: 4px;
+    }
+
+    #header-filter {
         background-color: #80c44c;
     }
 
-    #header-search .caret {
+    #header-filter .caret {
         border-bottom-color: #FFF;
         border-top-color: #FFF;
         margin-top: 18px;
         font-size: 1.5em;
     }
 
-    #header-search .btn.active {
+    #header-filter .btn.active {
         background-color: #579825;
     }
-    #header-search .btn {
+    #header-filter .btn {
         background-color: #80c44c;
         background-image: none;
         border-radius: 0px;
@@ -981,17 +1042,17 @@ input[type="file"] {
         min-height: 80px;
         padding: 27px 11px 0;
     }
-    #header-search .btn-group {
+    #header-filter .btn-group {
       display: table;
       width: 100%;
     }
-    #header-search .btn-group a {
+    #header-filter .btn-group a {
       display: table-cell;
       width: 20%;
     }
 
-    #header-search .btn.active .inner,
-    #header-search .btn .inner {
+    #header-filter .btn.active .inner,
+    #header-filter .btn .inner {
         background-color: #FFFFFF;
         color: #80c44c;
     }
