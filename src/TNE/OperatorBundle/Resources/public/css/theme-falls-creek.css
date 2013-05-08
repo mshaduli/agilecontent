@@ -1,5 +1,5 @@
 /* CSS Document */
-
+/*
 @font-face {
     font-family: 'swiss_721roman';
     src: url('../font/swiss_721_extended-webfont.eot');
@@ -10,7 +10,7 @@
     font-weight: normal;
     font-style: normal;
 }
-
+  */
 #footer .container {
     background: #1681c2;
     color: #FFFFFF;
@@ -55,11 +55,12 @@
 body {
     background-color: #efefef;
     color: #717073;
+    font-size: 13px;
 }
 
 body,
 input {
-    font-family: 'swiss_721roman';
+    font-family: 'Swiss 721 W01 Extended';
 }
 
 .muted {
@@ -69,6 +70,11 @@ input {
 
 .btn {
     text-shadow: none;
+    font-size: 13px;
+}
+
+label, input, button, select, textarea {
+    font-size: 13px;
 }
 
 .label-important {
@@ -300,7 +306,7 @@ input[type="file"] {
 #search-tag {
     line-height:83px;
     margin-left:10px;
-    font-size: 45px;
+    font-size: 32px;
     color: #79c143;
 }
 
@@ -321,8 +327,9 @@ input[type="file"] {
 }
 
 #header .navbar {
-    font-size: 16px;
+    font-size: 13px;
 }
+
 
 /* Side bar */
 
@@ -330,7 +337,7 @@ input[type="file"] {
     min-height: 43px;
     background: none repeat scroll 0 0 #FFFFFF;
     color: #717073;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: normal;
     line-height: 43px;
     text-align: left;
@@ -396,9 +403,7 @@ input[type="file"] {
 .cards{margin-left:-20px;list-style:none;*zoom:1;}.cards:before,.cards:after{display:table;content:"";line-height:0;}
 .cards:after{clear:both;}
 .cards>li{float:left;margin-bottom:20px;margin-left:20px;}
-.cards .span3 {
-    width: 276px;
-}
+
 
 .card {
     position: relative;
@@ -586,12 +591,15 @@ input[type="file"] {
     border: 0px none;
     color: #FFFFFF;
 }
+
 .ui-slider-horizontal {
-    height: 1.2em;
+    height: 1.5em;
 }
 .ui-slider-horizontal .ui-slider-handle {
     margin-left: 0em;
     top: 0em;
+    height: 1.5em;
+    width: 4em;
     border: 0px none;
     background: none #0076c0;
     color: #FFFFFF;
@@ -840,10 +848,53 @@ input[type="file"] {
     background-position: 0 -270px;
 }
 
+@media (min-width: 1200px) {
+
+    #search-tag {
+        font-size: 45px;
+    }
+
+    #header .navbar {
+        font-size: 16px;
+    }
+    .nav-header {
+        font-size: 14px;
+    }
+    .btn-group .btn {
+        padding: 0px 37px;
+    }
+    .btn {
+        font-size: 14px;
+    }
+    label, input, button, select, textarea {
+        font-size: 14px;
+    }
+    body {
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+
+    #footer .divider-vertical {
+        margin: 0px;
+        padding: 0px;
+    }
+
+}
+
+@media (min-width: 980px) and (max-width: 1170px) {
+    #header .navbar {
+        font-size: 13px;
+    }
+
+}
+
 @media (max-width: 768px) {
     body {
         padding-left: 0px;
         padding-right: 0px;
+        overflow-x: hidden;
     }
 
     .navbar {

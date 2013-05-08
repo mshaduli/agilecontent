@@ -6,9 +6,13 @@
     <li class="nav-header">Accommodation Type</li>
     <accommodation-type-filter></accommodation-type-filter>
     <li class="clearfix"><a class="btn btn-link muted pull-right" href="#">See more</a></li>
-    <li class="nav-header">Distance from</li>
+    <li class="nav-header">Distance from
 
-    <distance-filter distance="filters.distance" destination="filters.destination" destinations="destinations"></distance-filter>
+        <div>
+            <div class="slider" id="distance-slider"></div>
+        </div>
+    </li>
+
     <li class="clearfix"><a class="btn btn-link muted pull-right" href="#">See more</a></li>
     <li class="nav-header">Filter by tags</li>
     <tag-filter></tag-filter>
@@ -23,11 +27,12 @@
         </ul>
     </li>
     <li class="nav-header">Maximum nightly rate</li>
-    <price-filter price="filters.price"></price-filter>
+    <price-filter price="filters.price" symbol="currency"></price-filter>
     <li class="nav-header">Min. rating</li>
     <rating-filter score="3"></rating-filter>
     <li class="nav-header">Facilities</li>
     <facilities-filter></facilities-filter>
+
     <li class="clearfix"><a class="btn btn-link muted pull-right" href="#">See more</a></li>
 
 </ul>

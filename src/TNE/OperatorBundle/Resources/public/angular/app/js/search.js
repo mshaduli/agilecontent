@@ -62,6 +62,7 @@ SearchApp.directive('accommodationTypeFilter', function(){
                $obj.prettyCheckable();
                $obj.change(function(){
                    var isChecked = ($(this).attr('checked') == 'checked');
+                   //scope.filters.destination = $(this).val();
                    console.log('checked:'+isChecked);
                });
            });
@@ -86,23 +87,24 @@ SearchApp.directive('distanceFilter', function(){
             '</li>',
         link: function(scope, element, attrs)
         {
-
+            //$(element).find('input[type="radio"]').prettyCheckable();
             scope.$watch('destinations', function() {
-
                 $(element).find('input[type="radio"]').prettyCheckable();
             });
         }
     };
 });
 
+
 SearchApp.directive('priceFilter', function(){
     return {
         restrict: 'E',
         scope: {
-            price: '='
+            price: '=',
+            symbol: '='
         },
         template: '<li>'+
-            '${[{ price }]}' +
+            '{[{ symbol }]}{[{ price }]}' +
             '<br/><input type="range" min="0" max="1000" step="20" ng-model="price" />' +
             '</li>',
         link: function(scope, el, attrs)
@@ -266,10 +268,12 @@ angular.module('SearchApp.filters', []).
 function SearchController($scope, $http, $q, $filter, $timeout)
 {
     $scope.operatorUrl = '/app_dev.php/operators';
-    $scope.UIViewOptions = ['List','Map'];
+    $scope.UIViewOptions = ['List','Calendar','Map'];
     $scope.UIView = 'List';
 
     $scope.map = null;
+
+    $scope.currency = '$';
 
     $scope.OperatorViewOptions = [{name:'Accommodation',count:0},{name:'Events',count:0},{name:'Attractions',count:0}];
 
