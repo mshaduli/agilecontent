@@ -936,136 +936,6 @@ input[type="file"] {
     }
 }
 
-@media (min-width: 768px) and (max-width: 979px) {
-
-    #footer .divider-vertical {
-        margin: 0px;
-        padding: 0px;
-    }
-
-    #main-pane {
-        width: 476px;
-    }
-
-    #side-pane {
-        width: 228px;
-    }
-
-    #header-nav .container {
-        width: auto;
-    }
-
-    #search-filter .input-append {
-        width: 210px;
-    }
-    #search-filter .input-append input {
-        width: 152px;
-    }
-    #header-filter .nav li {
-        margin-left: 4px;
-    }
-    #header-filter .btn-search {
-        margin-left: 0;
-        padding: 20px 21px;
-    }
-
-    .cards > li {
-        width: 228px;
-        margin-left: 20px;
-    }
-
-    .navbar {
-        margin-bottom: 0px;
-    }
-    #brand {
-        background: url(../img/logo-falls-creek-mobile.png) #FFF center center no-repeat;
-        position: absolute;
-        top: 41px;
-        width: 202px;
-        height: 67px;
-        left: 50%;
-        margin-left: -101px;
-    }
-
-    #header .btn,
-    #header .btn-group {
-        margin: 0;
-        font-size: 12px;
-    }
-
-    #header-top {
-        background: #2f2f2f;
-        color: #979797;
-        height: 28px;
-    }
-    #header-top li.social > a,
-    #header-top li > a {
-        color: #979797;
-        padding: 3px;
-    }
-    #header-top .nav {
-        float: none;
-        margin-right: 28px;
-        margin-left: 28px;
-    }
-    #header .navbar .divider-vertical {
-        margin: 0 6px;
-        height: 28px;
-    }
-    #header-nav .navbar .divider-vertical {
-        display: none;
-    }
-    #header-nav .navbar .nav > li {
-        width: 100%;
-        line-height: 28px;
-    }
-    #header-nav .navbar .nav-collapse > li > a {
-        width: 100%;
-        text-align: center;
-    }
-    #header-nav {
-        background: none;
-        height: auto;
-        padding-top: 25px;
-    }
-    #header-nav .navbar {
-        background: #0076c0;
-        margin-top: 30px;
-        margin-bottom: 0px;
-        min-height: 40px;
-    }
-    #header-nav .btn-search {
-        padding: 5px 20px;
-    }
-    #header-nav .navbar .nav-collapse.in {
-        margin-top: 20px;
-        width: 100%;
-    }
-    #header-nav .nav-collapse.collapse {
-        float: left;
-        margin-top: 0px;
-    }
-    #header-nav .btn-nav {
-        min-height: 28px;
-        padding: 6px 16px;
-    }
-    #header-nav .btn.btn-search {
-        margin-top: 0px;
-        min-height: 28px;
-        padding: 6px 16px;
-    }
-    #header-nav .btn-nav .icon-bar {
-        height: 3px;
-        width: 26px;
-        margin-top: 5px;
-    }
-    #header-nav .btn-nav .icon-bar + .icon-bar {
-        margin-top: 4px;
-    }
-    #header-filter .navbar {
-        margin-bottom: 20px;
-    }
-}
 
 @media (min-width: 980px) and (max-width: 1170px) {
     #header .navbar {
@@ -1077,7 +947,7 @@ input[type="file"] {
 
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     body {
         padding-left: 0px;
         padding-right: 0px;
@@ -1348,6 +1218,138 @@ input[type="file"] {
         vertical-align: top;
     }
 
+}
+
+
+@media (min-width: 768px) and (max-width: 979px) {
+
+    #footer .divider-vertical {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    #main-pane {
+        width: 476px;
+    }
+
+    #side-pane {
+        width: 228px;
+    }
+
+    #header-nav .container {
+        width: auto;
+    }
+
+    #search-filter .input-append {
+        width: 210px;
+    }
+    #search-filter .input-append input {
+        width: 152px;
+    }
+    #header-filter .nav li {
+        margin-left: 4px;
+    }
+    #header-filter .btn-search {
+        margin-left: 0;
+        padding: 20px 21px;
+    }
+
+    .cards > li {
+        width: 228px;
+        margin-left: 20px;
+    }
+
+    .navbar {
+        margin-bottom: 0px;
+    }
+    #brand {
+        background: url(../img/logo-falls-creek-mobile.png) #FFF center center no-repeat;
+        position: absolute;
+        top: 41px;
+        width: 202px;
+        height: 67px;
+        left: 50%;
+        margin-left: -101px;
+    }
+
+    #header .btn,
+    #header .btn-group {
+        margin: 0;
+        font-size: 12px;
+    }
+
+    #header-top {
+        background: #2f2f2f;
+        color: #979797;
+        height: 28px;
+    }
+    #header-top li.social > a,
+    #header-top li > a {
+        color: #979797;
+        padding: 3px;
+    }
+    #header-top .nav {
+        float: none;
+        margin-right: 28px;
+        margin-left: 28px;
+    }
+    #header .navbar .divider-vertical {
+        margin: 0 6px;
+        height: 28px;
+    }
+    #header-nav .navbar .divider-vertical {
+        display: none;
+    }
+    #header-nav .navbar .nav > li {
+        width: 100%;
+        line-height: 28px;
+    }
+    #header-nav .navbar .nav-collapse > li > a {
+        width: 100%;
+        text-align: center;
+    }
+    #header-nav {
+        background: none;
+        height: auto;
+        padding-top: 25px;
+    }
+    #header-nav .navbar {
+        background: #0076c0;
+        margin-top: 30px;
+        margin-bottom: 0px;
+        min-height: 40px;
+    }
+    #header-nav .btn-search {
+        padding: 5px 20px;
+    }
+    #header-nav .navbar .nav-collapse.in {
+        margin-top: 20px;
+        width: 100%;
+    }
+    #header-nav .nav-collapse.collapse {
+        float: left;
+        margin-top: 0px;
+    }
+    #header-nav .btn-nav {
+        min-height: 28px;
+        padding: 6px 16px;
+    }
+    #header-nav .btn.btn-search {
+        margin-top: 0px;
+        min-height: 28px;
+        padding: 6px 16px;
+    }
+    #header-nav .btn-nav .icon-bar {
+        height: 3px;
+        width: 26px;
+        margin-top: 5px;
+    }
+    #header-nav .btn-nav .icon-bar + .icon-bar {
+        margin-top: 4px;
+    }
+    #header-filter .navbar {
+        margin-bottom: 20px;
+    }
 }
 
 
