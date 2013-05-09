@@ -149,7 +149,7 @@ SearchApp.directive('ratingFilter', function($timeout){
             score: '@',
             opRating: '='
         },
-        template: '<div id="rating-filter" class="star"></div>',
+        template: '<div id="rating-filter"></div>',
         link: function(scope,element,attrs)
         {
             scope.$watch("score", function () {
