@@ -24,19 +24,6 @@ SearchApp.directive('buttonsRadio', function() {
         };
     });
 
-SearchApp.directive('accommodationTypeFilter', function(){
-    return {
-      restrict: 'E',
-      template: '<li>'+
-                 '<label class="checkbox">' +
-                '<input type="checkbox" > Hotel ' +
-                '</label>' +
-                  '<label class="checkbox">' +
-                  '<input type="checkbox" > Motel ' +
-                  '</label>' +
-                '</li>'
-    };
-});
 
 SearchApp.directive('distanceFilter', function(){
     return {
@@ -57,6 +44,26 @@ SearchApp.directive('distanceFilter', function(){
     };
 });
 
+SearchApp.directive('classificationsFilter', function(){
+    return {
+        restrict: 'E',
+        scope: {
+            classifications: '=',
+            toggle: '&',
+            checked: '@'
+        },
+        template:
+            '<li ng-repeat="classification in classifications">'+
+                '<label class="checkbox">' +
+                   '<input type="checkbox" id="{[{ classification.keyStr }]}" value="{[{ classification.keyStr }]}" ng-checked="checked" ng-click="toggle({e:$event})"> {[{ classification.name }]} ' +
+                '</label>' +
+            '</li>',
+        link: function(scope, el, attrs)
+        {
+        }
+    };
+});
+
 SearchApp.directive('priceFilter', function(){
     return {
         restrict: 'E',
@@ -65,11 +72,10 @@ SearchApp.directive('priceFilter', function(){
         },
         template: '<li>'+
             '${[{ price }]}' +
-            '<br/><input type="range" min="0" max="1000" step="20" ng-model="price" />' +
+                '<br/><input type="range" min="0" max="1000" step="20" ng-model="price" />' +
             '</li>',
         link: function(scope, el, attrs)
         {
-
         }
     };
 });
@@ -81,7 +87,7 @@ SearchApp.directive('resultsList', function(){
             operators: '=',
             sort: '='
         },
-        template: ''+
+        template: '' +
             'Showing {[{ operators.length }]} listings<br/>' +
             '<ul class="thumbnails">' +
                 '<li class="span3" ng-repeat="operator in operators | orderBy:sort">' +
@@ -128,6 +134,7 @@ SearchApp.directive('rating', function(){
                             return scope.score;
                         }
                     });
+
                 }
             });
 
@@ -164,7 +171,6 @@ SearchApp.directive('ratingFilter', function($timeout){
                     });
                 }
             });
-
         }
     }
 });
@@ -269,7 +275,8 @@ function SearchController($scope, $http, $q, $filter, $timeout)
         destination: 1,
         price: 300,
         OperatorView: 'Accommodation',
-        rating: 0
+        rating: 0,
+        classifications: []
     };
 
     $scope.mapOptions = {
@@ -279,6 +286,7 @@ function SearchController($scope, $http, $q, $filter, $timeout)
     };
 
     $scope.destinations = [];
+    $scope.classifications = [];
     $scope.operators = [];
 
     $scope.isMapElementHidden = false;
@@ -288,6 +296,17 @@ function SearchController($scope, $http, $q, $filter, $timeout)
     }).error(function(){
         console.log('destinations not loaded');
     });
+
+    $http.get('/app_dev.php/operators/classifications').success(function(data) {
+        var tempCls = [];
+        $scope.classifications = data;
+        angular.forEach(data, function(cls){
+            tempCls.push(cls.keyStr);
+        });
+        $scope.filters.classifications = tempCls;
+    }).error(function(){
+            console.log('destinations not loaded');
+        });
 
     $scope.$watch('UIView', function(newValue, oldValue){
         if(newValue == 'Map'){
@@ -317,6 +336,8 @@ function SearchController($scope, $http, $q, $filter, $timeout)
             $scope.operatorUrl = '/app_dev.php/operators/attractions';
         }
 
+        console.log($scope.filters.classifications);
+
         if($scope.destinations.length > 0)
         {
             var selDest = $filter('filter')($scope.destinations, function(dest){
@@ -328,7 +349,6 @@ function SearchController($scope, $http, $q, $filter, $timeout)
             $scope.mapOptions.center = {lat:selDest[0].latitude, lng: selDest[0].longitude};
         }
 
-
         $http.get($scope.operatorUrl+queryString($scope.filters)).success(function(data) {
             $scope.operators = data;
         }).error(function(){
@@ -336,14 +356,43 @@ function SearchController($scope, $http, $q, $filter, $timeout)
         });
     }, true);
 
+    $scope.toggleClassification = function (e)
+    {
+        var checkbox = angular.element(e.srcElement).get(0);
+
+        var cIndex = jQuery.inArray(checkbox.value, $scope.filters.classifications);
+
+        if(checkbox.checked)
+        {
+            if(cIndex == -1)
+            {
+                $scope.filters.classifications.push(checkbox.value);
+            }
+        }
+        else
+        {
+            $scope.filters.classifications.splice(cIndex, 1);
+        }
+    }
+
 }
+
 
 function queryString(filters)
 {
     var str = '?';
     for(var key in filters)
     {
-        str += key+'='+filters[key]+'&';
+        if(jQuery.isArray(filters[key]))
+        {
+            for(var i=0;i<filters[key].length;i++){
+                str += key+'[]='+filters[key][i]+'&';
+            }
+        }
+        else
+        {
+            str += key+'='+filters[key]+'&';
+        }
     }
     return str;
 }

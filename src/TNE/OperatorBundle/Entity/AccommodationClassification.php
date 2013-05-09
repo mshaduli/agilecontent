@@ -19,7 +19,7 @@ class AccommodationClassification
      */
     private $name;
 
-    private $key;
+    private $keyStr;
 
     private $accommodation;
 
@@ -57,14 +57,14 @@ class AccommodationClassification
         return $this->name;
     }
 
-    public function setKey($key)
+    public function setKeyStr($key)
     {
-        $this->key = $key;
+        $this->keyStr = $key;
     }
 
-    public function getKey()
+    public function getKeyStr()
     {
-        return $this->key;
+        return $this->keyStr;
     }
 
     public function setAccommodation($accommodation)
@@ -75,6 +75,11 @@ class AccommodationClassification
     public function getAccommodation()
     {
         return $this->accommodation;
+    }
+
+    function __toString()
+    {
+        return $this->getName();
     }
 
 

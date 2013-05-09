@@ -18,23 +18,22 @@ class AccommodationClassificationsAdmin extends Admin
     {
         $formMapper
                 ->add('name', 'text', array('attr'=>array('class'=>'span12')))
-                ->add('key', 'text', array('attr'=>array('class'=>'span12')))
-        ;
+                ->add('keyStr', 'text', array('label'=>'ATDW Key', 'attr'=>array('class'=>'span12')));
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
                 ->add('name')
-                ->add('key')
+                ->add('keyStr')
         ;
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-                ->add('name')
-                ->add('key')
+                ->addIdentifier('name')
+                ->add('keyStr')
         ;
     }
 }

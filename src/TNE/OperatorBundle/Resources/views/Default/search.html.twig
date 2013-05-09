@@ -96,9 +96,8 @@ file that was distributed with this source code.
            <br/>
            <ul class="nav nav-list">
                <li class="nav-header">Accommodation Type</li>
-               <accommodation-type-filter></accommodation-type-filter>
+               <classifications-filter classifications="classifications" checked="{[{ true }]}" toggle="toggleClassification(e)"></classifications-filter>
                <li class="nav-header"><br/>Distance from</li>
-
                <distance-filter distance="filters.distance" destination="filters.destination" destinations="destinations"></distance-filter>
                <li class="nav-header"><br/>Filter by tags</li>
                <tag-filter></tag-filter>
@@ -113,11 +112,5 @@ file that was distributed with this source code.
     </div>
    
 </div>
-        
-        <script>
-$(document).ready(function(){
-    angular.bootstrap(document, ['SearchApp']);
-});        
-            </script>
-            
+
 {% endblock %}

@@ -51,6 +51,8 @@ class DefaultController extends Controller
         $distanceValue = \str_replace('km', '', $filters['distance']);
         $maxRate = \str_replace('$', '', $filters['price']);
         $rating = \str_replace('$', '', $filters['rating']);
+        $classifications = $filters['classifications'];
+
         
         $distanceQueryAccomm  =<<<EOD
         SELECT * FROM 
@@ -185,7 +187,7 @@ EOD;
         }
         if(!isset($filters['distance'])) $filters['distance'] = '10';
         if(!isset($filters['price'])) $filters['price'] = '1000';
-        
+
         return $filters;
     }
 
@@ -198,6 +200,17 @@ EOD;
         )
         ->getResult(Query::HYDRATE_ARRAY);
         
+        return new JsonResponse($d);
+    }
+
+    public function classificationsAction()
+    {
+        $em = $this->get('doctrine.orm.entity_manager');
+        $d = $em->createQuery(
+            'SELECT c.id, c.name, c.keyStr FROM TNEOperatorBundle:AccommodationClassification c'
+        )
+            ->getResult(Query::HYDRATE_ARRAY);
+
         return new JsonResponse($d);
     }
 }
