@@ -123,8 +123,43 @@ SearchApp.directive('rating', function(){
                 {
                     element.raty({
                         path: '/bundles/applicationsonataadmin/img',
+                        readOnly: true,
                         score: function() {
                             return scope.score;
+                        }
+                    });
+                }
+            });
+
+        }
+    }
+});
+
+SearchApp.directive('ratingFilter', function($timeout){
+    return {
+        restrict:'E',
+        scope: {
+            score: '@',
+            opRating: '='
+        },
+        template: '<div id="rating-filter" class="star"></div>',
+        link: function(scope,element,attrs)
+        {
+            scope.$watch("score", function () {
+                if (scope.score != 'undefined')
+                {
+                    element.raty({
+                        path: '/bundles/applicationsonataadmin/img',
+                        score: function() {
+                            return scope.score;
+                        },
+                        click: function(score, evt) {
+                            //console.log('ID: ' + $(this).attr('id') + "\nscore: " + score + "\nevent: " + evt);
+                            $timeout(function(){
+                                scope.$apply(function (){
+                                    scope.opRating = score;
+                                });
+                            });
                         }
                     });
                 }
@@ -170,13 +205,13 @@ SearchApp.directive('resultsMap', function(){
             });
 
             scope.$watch('operators', function(){
+                scope.mgr.clearMarkers();
                 markers = [];
                 angular.forEach(scope.operators, function(operator){
                     markers.push(createMarker(operator));
                 });
                 if(markers.length > 0)
                 {
-                    scope.mgr.clearMarkers();
                     scope.mgr.addMarkers(markers, 0, 17);
                     scope.mgr.refresh();
                 }
@@ -233,7 +268,8 @@ function SearchController($scope, $http, $q, $filter, $timeout)
         distance: 10,
         destination: 1,
         price: 300,
-        OperatorView: 'Accommodation'
+        OperatorView: 'Accommodation',
+        rating: 0
     };
 
     $scope.mapOptions = {

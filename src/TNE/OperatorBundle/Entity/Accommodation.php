@@ -453,7 +453,7 @@ class Accommodation
     }    
     
     public function getSelfRating() {
-        return $this->selfRating;
+        return $this->selfRating == null ? 0 : $this->selfRating;
     }
 
     public function setSelfRating($selfRating) {

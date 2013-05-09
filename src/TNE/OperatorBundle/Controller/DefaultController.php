@@ -50,11 +50,12 @@ class DefaultController extends Controller
         
         $distanceValue = \str_replace('km', '', $filters['distance']);
         $maxRate = \str_replace('$', '', $filters['price']);
+        $rating = \str_replace('$', '', $filters['rating']);
         
         $distanceQueryAccomm  =<<<EOD
         SELECT * FROM 
         (
-        SELECT `ac`.`id` as `id`, `ac`.`name` as `name`,  `ac`.`atdw_product_description` as `description`, `ac`.`latitude` as `latitude`, `ac`.`longitude` as `longitude`,         
+        SELECT `ac`.`id` as `id`, `ac`.`name` as `name`,  `ac`.`atdw_product_description` as `description`, `ac`.`latitude` as `latitude`, `ac`.`longitude` as `longitude`,
         (SELECT MIN(rate_from) FROM AccommodationRoom r WHERE `accommodation_id` = `ac`.`id`) as `min_rate`,
         (((acos(sin(($destination[latitude]*pi()/180)) * sin((`latitude`*pi()/180))+cos(($destination[latitude]*pi()/180)) * cos((`latitude`*pi()/180)) * cos((($destination[longitude] - `longitude`)*pi()/180))))*180/pi())*60*1.1515) AS `distance` FROM `Accommodation` ac 
         ) as op           
@@ -81,7 +82,11 @@ EOD;
             {
                 $result['tags'] []= $tag->getSingleName();
             }
-            $operators []= $result;
+
+            if($result['rating'] >= $rating)
+            {
+                $operators []= $result;
+            }
         }
   
         return new JsonResponse($operators);
