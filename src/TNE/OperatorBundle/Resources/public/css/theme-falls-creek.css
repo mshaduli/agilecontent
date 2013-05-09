@@ -59,7 +59,8 @@ body {
 }
 
 body,
-input {
+input,
+.ui-widget {
     font-family: 'Swiss 721 W01 Extended';
 }
 
@@ -637,16 +638,19 @@ input[type="file"] {
 }
 
 .ui-slider-horizontal {
-    height: 1.5em;
+    height: 2em;
 }
 .ui-slider-horizontal .ui-slider-handle {
-    margin-left: 0em;
     top: 0em;
-    height: 1.5em;
     width: 4em;
+    height: 2em;
+    line-height: 2em;
+    margin-left: 0em;
+    padding: 0 10px;
     border: 0px none;
     background: none #0076c0;
     color: #FFFFFF;
+    text-align: center;
 }
 
 /* map */
@@ -842,15 +846,26 @@ input[type="file"] {
 
 /** Pretty Checkbox */
 
-.prettycheckbox,
-.prettyradio {
+.checkbox > div,
+.radio > div {
     display: inline-block;
     padding:0px;
     margin:0px;
 }
 
-.prettycheckbox a,
-.prettyradio a{
+.radio > a,
+.radio > a:hover,
+.radio > a:focus,
+.checkbox > a,
+.checkbox > a:hover,
+.checkbox > a:focus {
+    color: #717073;
+    text-decoration: none;
+    padding-left: 10px;
+}
+
+.checkbox > div a,
+.radio > div a{
     width: 30px;
     height: 28px;
     background: url("../img/ui-checkbox.png") top left no-repeat;
@@ -860,40 +875,40 @@ input[type="file"] {
     margin:-7px 0px;
 }
 
-.prettyradio a {background-position: 0 -120px;}
+.radio > div a {background-position: 0 -120px;}
 
-.prettycheckbox a:focus,
-.prettyradio a:focus {outline: 0 none;}
+.checkbox > div a:focus,
+.radio > div a:focus {outline: 0 none;}
 
-.prettycheckbox a:focus{background-position: 0 -30px;}
-.prettyradio a:focus{background-position: 0 -150px;}
+.checkbox > div a:focus{background-position: 0 -30px;}
+.radio > div a:focus{background-position: 0 -150px;}
 
-.prettycheckbox a.checked{ background-position: 0 -60px; }
-.prettyradio a.checked { background-position: 0 -180px; }
+.checkbox > div a.checked{ background-position: 0 -60px; }
+.radio > div a.checked { background-position: 0 -180px; }
 
-.prettycheckbox a.checked:focus{ background-position: 0 -90px; }
-.prettyradio a.checked:focus { background-position: 0 -210px; }
+.checkbox > div a.checked:focus{ background-position: 0 -90px; }
+.radio > div a.checked:focus { background-position: 0 -210px; }
 
-.prettycheckbox label,
-.prettyradio label {
+.checkbox > div label,
+.radio > div label {
     display: block;
     float: left;
     margin: 6px 5px;
     cursor: pointer;
 }
 
-.prettycheckbox.disabled a,
-.prettyradio.disabled a,
-.prettycheckbox.disabled label,
-.prettyradio.disabled label{
+.checkbox > div.disabled a,
+.radio > div.disabled a,
+.checkbox > div.disabled label,
+.radio > div.disabled label{
     cursor:not-allowed;
 }
 
-.prettycheckbox.disabled a {
+.checkbox > div.disabled a {
     background-position: 0 -240px;
 }
 
-.prettyradio.disabled a {
+.radio > div.disabled a {
     background-position: 0 -270px;
 }
 

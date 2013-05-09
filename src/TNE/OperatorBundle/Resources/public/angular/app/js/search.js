@@ -7,6 +7,48 @@ SearchApp.config(function($interpolateProvider){
     }
 );
 
+SearchApp.directive('slider', function($timeout) {
+    return {
+        restrict: 'A',
+        scope: { model: '=' },
+        link: function(scope, element, attrs, model) {
+
+            var appendVal = attrs.append || '';
+            var prependVal = attrs.prepend || '';
+            var updateTimeout;
+            var $element = $(element);
+            var slider = $element.slider({
+                orientation: attrs.orientation || 'horizontal',
+                min:   parseFloat(attrs.min || 0),
+                max:   parseFloat(attrs.max || 200),
+                step:  parseFloat(attrs.step || 10),
+                range: false,
+                value: scope.model,
+                stop: function(event, ui) {
+                    scope.$apply(function() {
+
+                        // Callback so update is not called too quickly
+                        $timeout.cancel(updateTimeout);
+                        updateTimeout = $timeout(function() {
+                            scope.model = ui.value;
+                        }, 800);
+                    });
+                },
+                slide: function(event, ui) {
+                    $element.find('a').html(prependVal+ui.value+appendVal);
+                },
+                create: function(event, ui) {
+                    $element.find('a').html(prependVal+scope.model+appendVal);
+                }
+            });
+
+            scope.$watch('model', function(value) {
+                slider.slider('value', value);
+            });
+        }
+    };
+});
+
 SearchApp.directive('checkbox', function() {
     return {
         restrict: 'E',
@@ -14,15 +56,14 @@ SearchApp.directive('checkbox', function() {
         controller: function($scope){
             $scope.toggle = function(){
                 $scope.checked = !$scope.checked;
-                if($scope.checked) $scope.model = $scope.value;
+                ($scope.checked) ? $scope.model = $scope.value : $scope.value = false;
             };
         },
         template: '<label class="checkbox">'+
-                    '<div class="clearfix prettycheckbox labelright blue ">' +
-                        '<input type="checkbox" style="display: none;" ng-checked="checked" value="{[{value}]}">' +
+                    '<div class="clearfix labelright blue ">' +
+                        '<input type="checkbox" style="display: none;" ng-checked="checked" ng-model="checked" value="{[{value}]}">' +
                         '<a ng-class="{checked: checked == true}" ng-click="toggle()"></a>' +
-                        '<label for="undefined"></label>' +
-                    '</div>{[{label}]}'+
+                    '</div><a ng-click="toggle()">{[{label}]}</a>'+
                     '</label>',
         link: function(scope, element, attrs) {
             scope.$watch('model', function(newValue, oldValue) {
@@ -38,15 +79,18 @@ SearchApp.directive('radio', function() {
         scope: { model: '=', value:'@', label:'@', checked:'@'},
         controller: function($scope){
             $scope.toggle = function(){
-                $scope.checked = !$scope.checked;
-                if($scope.checked) $scope.model = $scope.value;
+                // Don't allow radio to be unchecked here.
+                if(!$scope.checked) {
+                    $scope.checked = true;
+                    $scope.model = $scope.value;
+                }
             };
         },
-        template: '<label class="radio">'+
+        template: '<label class="radio" for="radio-{[{value}]}">'+
             '<div class="clearfix prettyradio labelright blue ">' +
-            '<input type="radio" style="display: none;" ng-checked="checked" value="{[{value}]}">' +
-            '<a ng-class="{checked: checked == true}" ng-click="toggle()"></a>' +
-            '</div>{[{label}]}'+
+                '<input id="radio-{[{value}]}" type="radio" style="display: none;" ng-checked="checked" ng-model="checked" value="{[{value}]}">' +
+                '<a ng-class="{checked: checked == true}" ng-click="toggle()"></a>' +
+            '</div><a ng-click="toggle()">{[{label}]}</a>'+
             '</label>',
         link: function(scope, element, attrs) {
             scope.$watch('model', function(newValue, oldValue) {
@@ -95,23 +139,11 @@ SearchApp.directive('accommodationTypeFilter', function(){
     return {
         restrict: 'E',
         template: '<li class="nav-row">'+
-                    '<checkbox label="Hotel" checked="{[{ false }]}" >' +
+                    '<checkbox label="Hotel" checked="{[{ false }]}" ></checkbox>' +
                    '</li>' +
                    '<li class="nav-row">' +
-                    '<checkbox label="Motel" checked="true" >' +
-                   '</li>',
-        link: function(scope,element,attrs)
-        {
-           /*$(element).find('input[type="checkbox"]').each(function(index, obj){
-               var $obj = $(obj);
-               $obj.prettyCheckable();
-               $obj.change(function(){
-                   var isChecked = ($(this).attr('checked') == 'checked');
-                   //scope.filters.destination = $(this).val();
-                   console.log('checked:'+isChecked);
-               });
-           }); */
-        }
+                    '<checkbox label="Motel" checked="{[{ true }]}" ></checkbox>' +
+                   '</li>'
     };
 });
 
@@ -123,17 +155,12 @@ SearchApp.directive('distanceFilter', function(){
             destination: '=',
             destinations: '='
         },
-        template: '<li>'+
-            '{[{ distance }]}km' +
-            '<input type="range" min="0" max="100" step="5" ng-model="distance" />' +
-            '</li>' +
-            '<li class="nav-row" ng-repeat="dest in destinations">' +
-                '<radio label="{[{ dest.name }]}" value="{[{ dest.id }]}" checked="{[{ true }]}" model="$parent.destination">' +
-            '</li>',
-        link: function(scope, element, attrs)
-        {
-
-        }
+        template: '<li class="nav-header">'+
+                    '<div slider min="0" max="200" step="5" model="distance" class="slider" append="km"></div>'+
+                    '</li>' +
+                    '<li class="nav-row" ng-repeat="dest in destinations">' +
+                        '<radio label="{[{ dest.name }]}" value="{[{ dest.id }]}" checked="{[{ true }]}" model="$parent.destination"></radio>' +
+                    '</li>'
     };
 });
 
@@ -145,14 +172,9 @@ SearchApp.directive('priceFilter', function(){
             price: '=',
             symbol: '='
         },
-        template: '<li>'+
-            '{[{ symbol }]}{[{ price }]}' +
-            '<br/><input type="range" min="0" max="1000" step="20" ng-model="price" />' +
-            '</li>',
-        link: function(scope, el, attrs)
-        {
-
-        }
+        template: '<li class="nav-header">'+
+            '<div slider min="0" max="1000" model="price" step="20" prepend="$"></div>' +
+            '</li>'
     };
 });
 
