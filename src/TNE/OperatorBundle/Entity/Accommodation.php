@@ -79,6 +79,11 @@ class Accommodation
     protected $tags;
 
     /**
+     * @var type ArrayCollection
+     */
+    protected $classifications;
+
+    /**
      *
      * @var type int
      */
@@ -496,6 +501,29 @@ class Accommodation
         $this->starRating = $starRating;
     }
 
+    /**
+     * @param \TNE\OperatorBundle\Entity\type $classification
+     */
+    public function setClassifications($classification)
+    {
+        $this->classifications = $classification;
+    }
 
-    
+    /**
+     * @return \TNE\OperatorBundle\Entity\type
+     */
+    public function getClassifications()
+    {
+        return $this->classifications;
+    }
+
+    public function addClassification($classification){
+        $classification->setAccommodation($this);
+        $this->classifications->add($classification);
+    }
+
+    public function removeClassification($classification){
+        $this->classifications->remove($classification);
+    }
+
 }
