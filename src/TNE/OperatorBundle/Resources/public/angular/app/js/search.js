@@ -19,7 +19,7 @@ SearchApp.directive('checkbox', function() {
         },
         template: '<label class="checkbox">'+
                     '<div class="clearfix prettycheckbox labelright blue ">' +
-                        '<input type="checkbox" style="display: none;" ng-model="checked">' +
+                        '<input type="checkbox" style="display: none;" ng-checked="checked" value="{[{value}]}">' +
                         '<a ng-class="{checked: checked == true}" ng-click="toggle()"></a>' +
                         '<label for="undefined"></label>' +
                     '</div>{[{label}]}'+
@@ -44,7 +44,7 @@ SearchApp.directive('radio', function() {
         },
         template: '<label class="radio">'+
             '<div class="clearfix prettyradio labelright blue ">' +
-            '<input type="radio" style="display: none;" ng-model="checked">' +
+            '<input type="radio" style="display: none;" ng-checked="checked" value="{[{value}]}">' +
             '<a ng-class="{checked: checked == true}" ng-click="toggle()"></a>' +
             '</div>{[{label}]}'+
             '</label>',
@@ -95,10 +95,10 @@ SearchApp.directive('accommodationTypeFilter', function(){
     return {
         restrict: 'E',
         template: '<li class="nav-row">'+
-                    '<checkbox label="Hotel" checked="false" >' +
+                    '<checkbox label="Hotel" checked="{[{ false }]}" >' +
                    '</li>' +
                    '<li class="nav-row">' +
-                    '<checkbox label="Motel" checked="false" >' +
+                    '<checkbox label="Motel" checked="true" >' +
                    '</li>',
         link: function(scope,element,attrs)
         {
@@ -128,7 +128,7 @@ SearchApp.directive('distanceFilter', function(){
             '<input type="range" min="0" max="100" step="5" ng-model="distance" />' +
             '</li>' +
             '<li class="nav-row" ng-repeat="dest in destinations">' +
-                '<radio label="{[{ dest.name }]}" value="{[{ dest.id }]}" checked="ng-Bind: {$parent.destination == dest.id};" model="$parent.destination">' +
+                '<radio label="{[{ dest.name }]}" value="{[{ dest.id }]}" checked="{[{ true }]}" model="$parent.destination">' +
             '</li>',
         link: function(scope, element, attrs)
         {
