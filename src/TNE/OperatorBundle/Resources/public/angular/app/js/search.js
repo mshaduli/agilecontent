@@ -16,11 +16,11 @@ SearchApp.directive('tabs', function() {
                 $scope.model = option;
             };
         },
-        template: "<a class='btn {[{classes}]}' "+
-                    "ng-class='{active: option == model}'"+
-                    "ng-repeat='option in options' "+
-                    "ng-click='activate(option.name)'>{[{option.name}]} <span class='inner'>{[{option.count}]}</span>"+
-                  "</a>"
+        template: '<a class="btn {[{classes}]}" '+
+                    'ng-class="{active: option == model}"'+
+                    'ng-repeat="option in options" '+
+                    'ng-click="activate(option.name)">{[{option.name}]} <span class="inner hidden-tablet">{[{option.count}]}</span>'+
+                  '</a>'
     };
 });
 
@@ -123,7 +123,7 @@ SearchApp.directive('resultsList', function(){
         },
         template: ''+
             '<ul class="cards">' +
-                '<li class="span3" ng-repeat="operator in operators">' +
+                '<li ng-repeat="operator in operators">' +
                     '<div class="card">' +
                         '<div class="title">{[{operator.name}]}</div>' +
                         '<div class="thumbnail">' +
@@ -139,7 +139,7 @@ SearchApp.directive('resultsList', function(){
                         '<div class="content">' +
                             '<div class="content-group"><span class="label-important">1</span> Night from <span class="price pull-right label-important">${[{ operator.min_rate }]}</span></div>' +
                             '<div class="divider"></div>' +
-                            '<div class="content-group">' +
+                            '<div class="content-group clearfix">' +
                                 '<span>Falls Creek</span> <span class="pull-right"><i class="icon-shock"></i></span>' +
                                 '<span>Bed and Breakfast</span> <span class="price pull-right">{[{ operator.distance | number:2 | distance }]}</span>' +
                             '</div>' +
@@ -390,7 +390,7 @@ function createMarker(operator) {
                     '<div class="thumbnail-inner"><img ng-src="http://regional.tne.applicationstaging.com/uploads/media/default/0001/01/thumb_91_default_big.jpeg" src="http://regional.tne.applicationstaging.com/uploads/media/default/0001/01/thumb_91_default_big.jpeg"></div>' +
                 '</div>' +
                 '<div class="content">' +
-                    '<div class="content-group">' +
+                    '<div class="content-group clearfix">' +
                         '<span>Falls Creek</span> <span class="pull-right"><i class="icon-shock"></i></span>' +
                         '<span>Bed and Breakfast</span> <span class="price pull-right">'+ operator.distance +'km</span>' +
                     '</div>' +
