@@ -7,6 +7,55 @@ SearchApp.config(function($interpolateProvider){
     }
 );
 
+SearchApp.directive('checkbox', function() {
+    return {
+        restrict: 'E',
+        scope: { model: '=', value:'@', label:'@', checked:'@'},
+        controller: function($scope){
+            $scope.toggle = function(){
+                $scope.checked = !$scope.checked;
+                if($scope.checked) $scope.model = $scope.value;
+            };
+        },
+        template: '<label class="checkbox">'+
+                    '<div class="clearfix prettycheckbox labelright blue ">' +
+                        '<input type="checkbox" style="display: none;" ng-model="checked">' +
+                        '<a ng-class="{checked: checked == true}" ng-click="toggle()"></a>' +
+                        '<label for="undefined"></label>' +
+                    '</div>{[{label}]}'+
+                    '</label>',
+        link: function(scope, element, attrs) {
+            scope.$watch('model', function(newValue, oldValue) {
+                scope.checked = (newValue == scope.value);
+            });
+        }
+    };
+});
+
+SearchApp.directive('radio', function() {
+    return {
+        restrict: 'E',
+        scope: { model: '=', value:'@', label:'@', checked:'@'},
+        controller: function($scope){
+            $scope.toggle = function(){
+                $scope.checked = !$scope.checked;
+                if($scope.checked) $scope.model = $scope.value;
+            };
+        },
+        template: '<label class="radio">'+
+            '<div class="clearfix prettyradio labelright blue ">' +
+            '<input type="radio" style="display: none;" ng-model="checked">' +
+            '<a ng-class="{checked: checked == true}" ng-click="toggle()"></a>' +
+            '</div>{[{label}]}'+
+            '</label>',
+        link: function(scope, element, attrs) {
+            scope.$watch('model', function(newValue, oldValue) {
+                scope.checked = (newValue == scope.value);
+            });
+        }
+    };
+});
+
 SearchApp.directive('tabs', function() {
     return {
         restrict: 'E',
@@ -46,18 +95,14 @@ SearchApp.directive('accommodationTypeFilter', function(){
     return {
         restrict: 'E',
         template: '<li class="nav-row">'+
-                    '<label class="checkbox">' +
-                    '<input type="checkbox"  > Hotel ' +
-                    '</label>' +
+                    '<checkbox label="Hotel" checked="false" >' +
                    '</li>' +
                    '<li class="nav-row">' +
-                      '<label class="checkbox">' +
-                      '<input type="checkbox" > Motel ' +
-                      '</label>' +
-                    '</li>',
+                    '<checkbox label="Motel" checked="false" >' +
+                   '</li>',
         link: function(scope,element,attrs)
         {
-           $(element).find('input[type="checkbox"]').each(function(index, obj){
+           /*$(element).find('input[type="checkbox"]').each(function(index, obj){
                var $obj = $(obj);
                $obj.prettyCheckable();
                $obj.change(function(){
@@ -65,7 +110,7 @@ SearchApp.directive('accommodationTypeFilter', function(){
                    //scope.filters.destination = $(this).val();
                    console.log('checked:'+isChecked);
                });
-           });
+           }); */
         }
     };
 });
@@ -83,14 +128,11 @@ SearchApp.directive('distanceFilter', function(){
             '<input type="range" min="0" max="100" step="5" ng-model="distance" />' +
             '</li>' +
             '<li class="nav-row" ng-repeat="dest in destinations">' +
-            '<label class="radio"><input type="radio" ng-model="$parent.destination" value="{[{ dest.id }]}"> {[{ dest.name }]} </label>' +
+                '<radio label="{[{ dest.name }]}" value="{[{ dest.id }]}" checked="ng-Bind: {$parent.destination == dest.id};" model="$parent.destination">' +
             '</li>',
         link: function(scope, element, attrs)
         {
-            //$(element).find('input[type="radio"]').prettyCheckable();
-            scope.$watch('destinations', function() {
-                $(element).find('input[type="radio"]').prettyCheckable();
-            });
+
         }
     };
 });

@@ -12,6 +12,7 @@
             <div class="slider" id="distance-slider"></div>
         </div>
     </li>
+    <distance-filter distance="filters.distance" destination="filters.destination" destinations="destinations"></distance-filter>
 
     <li class="clearfix"><a class="btn btn-link muted pull-right" href="#">See more</a></li>
     <li class="nav-header">Filter by tags</li>
@@ -37,6 +38,9 @@
 
 </ul>
 <!--
+'<label class="radio"><input type="radio" ng-model="$parent.destination" value="{[{ dest.id }]}"> {[{ dest.name }]} </label>' +
+
+
     <li class="nav-header">Accommodation Type</li>
     <li class="nav-row">
         <label class="checkbox">
