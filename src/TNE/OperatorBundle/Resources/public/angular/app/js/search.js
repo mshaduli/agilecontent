@@ -180,13 +180,13 @@ SearchApp.directive('priceFilter', function(){
 });
 
 SearchApp.directive('resultsList', function(){
-    //Showing {[{ operators.length }]} listings<br/>
+    //
     return {
         restrict: 'E',
         scope: {
             operators: '='
         },
-        template: ''+
+        template: 'Showing {[{ operators.length }]} listings<br/>'+
             '<ul class="cards">' +
                 '<li ng-repeat="operator in operators">' +
                     '<div class="card">' +
@@ -291,7 +291,7 @@ SearchApp.directive('resultsMap', function($filter){
             operators: '=',
             map: '='
         },
-        template:'<div style="display: none;">Showing {[{ operators.length }]} listings</div><div id="mapdiv" class="map-canvas"></div><div id="markerdetail"></div>',
+        template:'<div>Showing {[{ operators.length }]} listings</div><div id="mapdiv" class="map-canvas"></div><div id="markerdetail"></div>',
         link: function(scope, el, attrs)
         {
             var markers = [];
@@ -499,7 +499,7 @@ function createMarker(operator, $filter) {
                         '</div>' +
                     '</div>' +
                     '<div class="tag tag-special"><i class="icon-heart"></i> Special</div>' +
-                    '<div class="thumbnail-inner"><img ng-src="{[{operator.image}]}"></div>' +
+                    '<div class="thumbnail-inner"><img src="'+operator.image+'"></div>' +
                 '</div>' +
                 '<div class="content">' +
                     '<div class="content-group clearfix">' +
