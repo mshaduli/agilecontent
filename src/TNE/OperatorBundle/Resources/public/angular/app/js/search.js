@@ -205,8 +205,8 @@ SearchApp.directive('resultsList', function(){
                             '<div class="content-group"><span class="label-important">1</span> Night from <span class="price pull-right label-important">${[{ operator.min_rate }]}</span></div>' +
                             '<div class="divider"></div>' +
                             '<div class="content-group clearfix">' +
-                                '<span>Falls Creek</span> <span class="pull-right"><i class="icon-shock"></i></span>' +
-                                '<span>Bed and Breakfast</span> <span class="price pull-right">{[{ operator.distance | number:2 | distance }]}</span>' +
+                                '<span>{[{operator.description | truncate:50}]}</span> <span class="pull-right"><i class="icon-shock"></i></span>' +
+                                '<span class="price pull-right">{[{ operator.distance | number:2 | distance }]}</span>' +
                             '</div>' +
                             '<div>' +
                                 '<a href="#" class="btn btn-wishlist"><i class="icon-star icon-white"></i></a>' +
@@ -249,7 +249,7 @@ SearchApp.directive('rating', function(){
     }
 });
 
-SearchApp.directive('resultsMap', function(){
+SearchApp.directive('resultsMap', function($filter){
     return {
         restrict: 'A',
         scope: {
@@ -258,7 +258,7 @@ SearchApp.directive('resultsMap', function(){
             operators: '=',
             map: '='
         },
-        template:'<div>Showing {[{ operators.length }]} listings</div><div id="mapdiv" class="map-canvas"></div><div id="markerdetail"></div>',
+        template:'<div style="display: none;">Showing {[{ operators.length }]} listings</div><div id="mapdiv" class="map-canvas"></div><div id="markerdetail"></div>',
         link: function(scope, el, attrs)
         {
             var markers = [];
@@ -289,7 +289,7 @@ SearchApp.directive('resultsMap', function(){
 
                 markers = [];
                 angular.forEach(scope.operators, function(operator){
-                    markers.push(createMarker(operator));
+                    markers.push(createMarker(operator, $filter));
                 });
                 if(markers.length > 0)
                 {
@@ -327,7 +327,7 @@ angular.module('SearchApp.filters', []).
                     text = text*1000;
                     distance = text+'m';
                 }
-                else distance = text+'km';
+                else distance =text+'km';
                 return distance;
             }
         })    
@@ -412,6 +412,16 @@ function SearchController($scope, $http, $q, $filter, $timeout)
         $http.get($scope.operatorUrl+queryString($scope.filters)).success(function(data) {
             $scope.operators = data;
 
+            var view;
+            var viewCount = $scope.OperatorViewOptions.length;
+            for (var i = 0; i < length; i++) {
+                if($scope.OperatorViewOptions[i].name == $scope.filters.OperatorView) {
+                    view = $scope.OperatorViewOptions[i];
+                    view.count = data.length;
+                    break;
+                }
+            }
+
         }).error(function(){
             console.log('operators not loaded');
         });
@@ -429,7 +439,7 @@ function queryString(filters)
     return str;
 }
 
-function createMarker(operator) {
+function createMarker(operator, $filter) {
     var markerIcon = new google.maps.MarkerImage('/bundles/tneoperator/img/map/marker.png',
         new google.maps.Size(34, 46),
         new google.maps.Point(0,0),
@@ -438,6 +448,8 @@ function createMarker(operator) {
     google.maps.event.addListener(marker, "click", function() {
 
         var operatorRate = operator.min_rate || '0';
+        var operatorDesc = $filter('truncate')((operator.description || ''), 50);
+        var operatorDistance = $filter('distance')($filter('number')(operator.distance, 2));
         $('#markerdetail').show();
         $('#markerdetail').html(
             '<div class="card">' +
@@ -458,8 +470,8 @@ function createMarker(operator) {
                 '</div>' +
                 '<div class="content">' +
                     '<div class="content-group clearfix">' +
-                        '<span>Falls Creek</span> <span class="pull-right"><i class="icon-shock"></i></span>' +
-                        '<span>Bed and Breakfast</span> <span class="price pull-right">'+ operator.distance +'km</span>' +
+                        '<span>'+ operatorDesc +'</span> <span class="pull-right"><i class="icon-shock"></i></span>' +
+                        '<span class="price pull-right">'+ operatorDistance +'</span>' +
                     '</div>' +
                     '<div>' +
                         '<a href="#" class="btn btn-wishlist"><i class="icon-star icon-white"></i></a>' +

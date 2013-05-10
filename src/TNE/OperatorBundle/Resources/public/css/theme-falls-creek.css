@@ -153,11 +153,13 @@ input[type="file"] {
 }
 
 .btn-group .btn.active .inner {
+    display: inline;
     background-color: #FFFFFF;
     color: #0076c0;
 }
 
 .btn-group .btn .inner {
+    display: none;
     padding: 3px 4px;
     background-color: #0076c0;
     color: #FFFFFF;
@@ -435,6 +437,7 @@ input[type="file"] {
     float:left;
     width: 300px;
     min-height: 1px;
+    max-height: 367px;
     margin-bottom:20px;
     margin-left:20px;
 }
