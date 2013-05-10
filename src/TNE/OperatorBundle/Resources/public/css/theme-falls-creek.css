@@ -363,9 +363,10 @@ input[type="file"] {
 
 
 /* Side bar */
-
+.nav-item,
 .nav-header {
     min-height: 43px;
+    padding: 3px 15px;
     background: none repeat scroll 0 0 #FFFFFF;
     color: #717073;
     font-size: 13px;
@@ -375,7 +376,7 @@ input[type="file"] {
     text-shadow: none;
     text-transform: none;
 }
-.nav li + .nav-header,
+.nav li.nav-header,
 .nav li > ul {
     margin-top: 15px;
 }
@@ -524,6 +525,7 @@ input[type="file"] {
 .card .thumbnail-inner {
     overflow: hidden;
     max-height: 200px;
+    min-height: 195px;
 }
 
 .card .info-bar {

@@ -156,7 +156,7 @@ SearchApp.directive('distanceFilter', function(){
             destination: '=',
             destinations: '='
         },
-        template: '<li class="nav-header">'+
+        template: '<li class="nav-item">'+
                     '<div slider min="0" max="200" step="5" model="distance" class="slider" append="km"></div>'+
                     '</li>' +
                     '<li class="nav-row" ng-repeat="dest in destinations">' +
@@ -173,7 +173,7 @@ SearchApp.directive('priceFilter', function(){
             price: '=',
             symbol: '='
         },
-        template: '<li class="nav-header">'+
+        template: '<li class="nav-item">'+
             '<div slider min="0" max="1000" model="price" step="20" prepend="$"></div>' +
             '</li>'
     };
@@ -199,7 +199,7 @@ SearchApp.directive('resultsList', function(){
                                 '</div>' +
                             '</div>' +
                             '<div class="tag tag-special"><i class="icon-heart"></i> Special</div>' +
-                        '<div class="thumbnail-inner"><img src="http://regional.tne.applicationstaging.com/uploads/media/default/0001/01/thumb_91_default_big.jpeg" /></div>' +
+                        '<div class="thumbnail-inner"><img ng-src="{[{operator.image}]}" /></div>' +
                         '</div>' +
                         '<div class="content">' +
                             '<div class="content-group"><span class="label-important">1</span> Night from <span class="price pull-right label-important">${[{ operator.min_rate }]}</span></div>' +
@@ -245,6 +245,39 @@ SearchApp.directive('rating', function(){
                 }
             });
 
+        }
+    }
+});
+
+SearchApp.directive('ratingFilter', function($timeout){
+    return {
+        restrict:'E',
+        scope: {
+            score: '@',
+            opRating: '='
+        },
+        template: '<li class="nav-item"><div id="rating-filter"></div></li>',
+        link: function(scope,element,attrs)
+        {
+            scope.$watch("score", function () {
+                if (scope.score != 'undefined')
+                {
+                    $(element).find('#rating-filter').raty({
+                        path: '/bundles/tneoperator/img',
+                        score: function() {
+                            return scope.score;
+                        },
+                        click: function(score, evt) {
+                            //console.log('ID: ' + $(this).attr('id') + "\nscore: " + score + "\nevent: " + evt);
+                            $timeout(function(){
+                                scope.$apply(function (){
+                                    scope.opRating = score;
+                                });
+                            });
+                        }
+                    });
+                }
+            });
         }
     }
 });
@@ -466,7 +499,7 @@ function createMarker(operator, $filter) {
                         '</div>' +
                     '</div>' +
                     '<div class="tag tag-special"><i class="icon-heart"></i> Special</div>' +
-                    '<div class="thumbnail-inner"><img ng-src="http://regional.tne.applicationstaging.com/uploads/media/default/0001/01/thumb_91_default_big.jpeg" src="http://regional.tne.applicationstaging.com/uploads/media/default/0001/01/thumb_91_default_big.jpeg"></div>' +
+                    '<div class="thumbnail-inner"><img ng-src="{[{operator.image}]}"></div>' +
                 '</div>' +
                 '<div class="content">' +
                     '<div class="content-group clearfix">' +
