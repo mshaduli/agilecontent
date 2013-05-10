@@ -198,22 +198,6 @@ file that was distributed with this source code.
 <script>
     $(document).ready(function(){
 
-        $('#distance-slider').slider({
-            range: false,
-            min: 0,
-            max: 200,
-            step: 10,
-            value: 10,
-            slide: function( event, ui ) {
-                /*var distance =  ui.value + "km";
-                $( "#distance-slider-val" ).val(distance);
-                var scope = angular.element('#distance-slider-val').scope();
-                scope.distance = distance;
-                scope.change();
-                scope.$apply();*/
-            }
-        });
-
         // Footer map
         var footerMapOptions = {
             zoom: 12,
@@ -222,8 +206,13 @@ file that was distributed with this source code.
             mapTypeId: google.maps.MapTypeId.ROADMAP
         }
         var footerMap = new google.maps.Map(document.getElementById("footerMap"), footerMapOptions);
+        var footerMarker = new google.maps.Marker({
+            position: new google.maps.LatLng(-36.86424, 147.282715),
+            map: footerMap,
+            icon: '/bundles/tneoperator/img/map/marker_blue.png'
+        });
 
-        angular.bootstrap(document, ['SearchApp']);
+        //angular.bootstrap(document, ['SearchApp']);
     });
 </script>
             
