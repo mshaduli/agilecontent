@@ -16,7 +16,10 @@ SearchApp.directive('slider', function($timeout) {
             var appendVal = attrs.append || '';
             var prependVal = attrs.prepend || '';
             var updateTimeout;
+
+            // UI-slider-container used as offset to fix jquery ui slider handle pos
             var $element = $(element);
+            $element.wrap('<div class="ui-slider-container" />');
             var slider = $element.slider({
                 orientation: attrs.orientation || 'horizontal',
                 min:   parseFloat(attrs.min || 0),
@@ -104,7 +107,7 @@ SearchApp.directive('radio', function() {
 SearchApp.directive('tabs', function() {
     return {
         restrict: 'E',
-        scope: { model: '=', options:'=', classes:'@', count:'@'},
+        scope: { model: '=', options:'=', classes:'@', count:'@', operators:'='},
         controller: function($scope){
             $scope.activate = function(option){
                 $scope.model = option;
@@ -113,7 +116,7 @@ SearchApp.directive('tabs', function() {
         template: '<a class="btn {[{classes}]}" '+
                     'ng-class="{active: option == model}"'+
                     'ng-repeat="option in options" '+
-                    'ng-click="activate(option.name)">{[{option.name}]} <span class="inner hidden-tablet">{[{option.count}]}</span>'+
+                    'ng-click="activate(option.name)">{[{option.name}]} <span class="inner hidden-tablet">{[{ $parent.operators.length }]}</span>'+
                   '</a>'
     };
 });
@@ -156,7 +159,7 @@ SearchApp.directive('distanceFilter', function(){
             destination: '=',
             destinations: '='
         },
-        template: '<li class="nav-item">'+
+        template: '<li class="nav-item-slider">'+
                     '<div slider min="0" max="200" step="5" model="distance" class="slider" append="km"></div>'+
                     '</li>' +
                     '<li class="nav-row" ng-repeat="dest in destinations">' +
@@ -165,7 +168,6 @@ SearchApp.directive('distanceFilter', function(){
     };
 });
 
-
 SearchApp.directive('priceFilter', function(){
     return {
         restrict: 'E',
@@ -173,7 +175,7 @@ SearchApp.directive('priceFilter', function(){
             price: '=',
             symbol: '='
         },
-        template: '<li class="nav-item">'+
+        template: '<li class="nav-item-slider">'+
             '<div slider min="0" max="1000" model="price" step="20" prepend="$"></div>' +
             '</li>'
     };
@@ -186,7 +188,7 @@ SearchApp.directive('resultsList', function(){
         scope: {
             operators: '='
         },
-        template: 'Showing {[{ operators.length }]} listings<br/>'+
+        template: ''+
             '<ul class="cards">' +
                 '<li ng-repeat="operator in operators">' +
                     '<div class="card">' +
@@ -256,14 +258,14 @@ SearchApp.directive('ratingFilter', function($timeout){
             score: '@',
             opRating: '='
         },
-        template: '<li class="nav-item"><div id="rating-filter"></div></li>',
+        template: '<li class="nav-item-rating">Min. rating <i class="icon-remove"></i><div id="rating-filter"></div></li>',
         link: function(scope,element,attrs)
         {
             scope.$watch("score", function () {
                 if (scope.score != 'undefined')
                 {
                     $(element).find('#rating-filter').raty({
-                        path: '/bundles/tneoperator/img',
+                        path: '/bundles/tneoperator/img/filter',
                         score: function() {
                             return scope.score;
                         },
@@ -291,7 +293,7 @@ SearchApp.directive('resultsMap', function($filter){
             operators: '=',
             map: '='
         },
-        template:'<div>Showing {[{ operators.length }]} listings</div><div id="mapdiv" class="map-canvas"></div><div id="markerdetail"></div>',
+        template:'<div id="mapdiv" class="map-canvas"></div><div id="markerdetail"></div>',
         link: function(scope, el, attrs)
         {
             var markers = [];

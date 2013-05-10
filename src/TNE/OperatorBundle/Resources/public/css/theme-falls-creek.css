@@ -376,6 +376,34 @@ input[type="file"] {
     text-shadow: none;
     text-transform: none;
 }
+.nav-item-slider {
+    background: none repeat scroll 0 0 #FFFFFF;
+    color: #717073;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 43px;
+    min-height: 30px;
+    padding: 5px;
+    text-align: left;
+    text-shadow: none;
+    text-transform: none;
+}
+.nav-item-rating {
+    background: none repeat scroll 0 0 #FFFFFF;
+    color: #717073;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 43px;
+    min-height: 30px;
+    padding: 3px 15px;
+    text-align: right;
+    text-shadow: none;
+    text-transform: none;
+}
+.nav-item-rating i {
+    color: #0076C0;
+}
+.nav li.nav-item-rating,
 .nav li.nav-header,
 .nav li > ul {
     margin-top: 15px;
@@ -383,6 +411,9 @@ input[type="file"] {
 
 .nav-row {
     border-bottom: solid 1px #dadada;
+}
+#rating-filter {
+    display: inline;
 }
 
 #side-pane .nav > li > a.btn-nav,
@@ -398,12 +429,14 @@ input[type="file"] {
     text-align: left;
 }
 
+
 .radio,
 .checkbox {
-    min-height: 38px;
+    min-height: 40px;
     padding-left: 0px;
     color: #717073;
-    line-height: 50px;
+    line-height: 40px;
+    margin-bottom: 0px;
 }
 
 .indent1 .checkbox {
@@ -636,21 +669,26 @@ input[type="file"] {
 }
 
 .ui-slider {
-    margin-bottom: 20px;
-    background: none #dbdbdc;
+    margin-bottom: 0px;
+    background: none transparent;
     border: 0px none;
     color: #FFFFFF;
 }
 
-.ui-slider-horizontal {
-    height: 2em;
+.ui-slider-container {
+    background: none repeat scroll 0 0 #DBDBDC;
+    border: 0 none;
+    height: 30px;
+    padding-left: 25px;
+    padding-right: 45px;
 }
+
 .ui-slider-horizontal .ui-slider-handle {
     top: 0em;
-    width: 4em;
-    height: 2em;
-    line-height: 2em;
-    margin-left: -2em;
+    width: 50px;
+    height: 30px;
+    line-height: 30px;
+    margin-left: -25px;
     padding: 0 10px;
     border: 0px none;
     background: none #0076c0;
