@@ -61,7 +61,7 @@ SearchApp.directive('checkbox', function() {
         },
         template: '<label class="checkbox">'+
                     '<div class="clearfix labelright blue ">' +
-                        '<input type="checkbox" style="display: none;" ng-checked="checked" ng-model="checked" value="{[{value}]}">' +
+                        '<input type="checkbox" style="display: none;" ng-checked="checked" value="{[{value}]}">' +
                         '<a ng-class="{checked: checked == true}" ng-click="toggle()"></a>' +
                     '</div><a ng-click="toggle()">{[{label}]}</a>'+
                     '</label>',
@@ -80,6 +80,7 @@ SearchApp.directive('radio', function() {
         controller: function($scope){
             $scope.toggle = function(){
                 // Don't allow radio to be unchecked here.
+                console.log('toggle:'+$scope.checked);
                 if(!$scope.checked) {
                     $scope.checked = true;
                     $scope.model = $scope.value;
@@ -88,7 +89,7 @@ SearchApp.directive('radio', function() {
         },
         template: '<label class="radio" for="radio-{[{value}]}">'+
             '<div class="clearfix prettyradio labelright blue ">' +
-                '<input id="radio-{[{value}]}" type="radio" style="display: none;" ng-checked="checked" ng-model="checked" value="{[{value}]}">' +
+                '<input id="radio-{[{value}]}" type="radio" style="display: none;" ng-checked="checked" value="{[{value}]}">' +
                 '<a ng-class="{checked: checked == true}" ng-click="toggle()"></a>' +
             '</div><a ng-click="toggle()">{[{label}]}</a>'+
             '</label>',
@@ -435,13 +436,15 @@ function createMarker(operator) {
         new google.maps.Point(16, 46));
     var marker = new google.maps.Marker({position: new google.maps.LatLng(operator.latitude, operator.longitude), icon:markerIcon});
     google.maps.event.addListener(marker, "click", function() {
+
+        var operatorRate = operator.min_rate || '0';
         $('#markerdetail').show();
         $('#markerdetail').html(
             '<div class="card">' +
                 '<button type="button" class="close" data-dismiss="alert">×</button>' +
                 '<div class="title">' + operator.name + '</div>' +
                 '<div class="content-top">' +
-                    '<div class="content-group"><span class="label-important">2</span> Nights from <span class="price pull-right label-important">$'+ operator.min_rate +'</span></div>' +
+                    '<div class="content-group"><span class="label-important">2</span> Nights from <span class="price pull-right label-important">$'+ operatorRate +'</span></div>' +
                 '</div>' +
                 '<div class="thumbnail">' +
                     '<div class="info-bar">' +

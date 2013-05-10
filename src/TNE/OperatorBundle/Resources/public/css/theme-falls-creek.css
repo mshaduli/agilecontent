@@ -645,7 +645,7 @@ input[type="file"] {
     width: 4em;
     height: 2em;
     line-height: 2em;
-    margin-left: 0em;
+    margin-left: -2em;
     padding: 0 10px;
     border: 0px none;
     background: none #0076c0;
