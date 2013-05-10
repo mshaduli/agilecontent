@@ -293,7 +293,7 @@ SearchApp.directive('resultsMap', function($filter){
             operators: '=',
             map: '='
         },
-        template:'<div id="mapdiv" class="map-canvas"></div><div id="markerdetail"></div>',
+        template:'<div style="display:none">Showing {[{ operators.length }]} listings</div><div id="mapdiv" class="map-canvas"></div><div id="markerdetail"></div>',
         link: function(scope, el, attrs)
         {
             var markers = [];
