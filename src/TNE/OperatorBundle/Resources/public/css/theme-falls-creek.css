@@ -732,6 +732,7 @@ input[type="file"] {
     border-right: 8px solid transparent;
     right: 0px;
     left: auto;
+    margin-left: 0;
 }
 
 .card .close {
