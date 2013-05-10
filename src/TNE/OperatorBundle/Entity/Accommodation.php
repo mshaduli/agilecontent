@@ -79,7 +79,7 @@ class Accommodation
     protected $tags;
 
     /**
-     * @var type ArrayCollection
+     *@ATDW\Classifications
      */
     protected $classifications;
 
@@ -504,9 +504,9 @@ class Accommodation
     /**
      * @param \TNE\OperatorBundle\Entity\type $classification
      */
-    public function setClassifications($classification)
+    public function setClassifications($classifications)
     {
-        $this->classifications = $classification;
+        $this->classifications = $classifications;
     }
 
     /**
@@ -517,13 +517,13 @@ class Accommodation
         return $this->classifications;
     }
 
-    public function addClassification($classification){
-        $classification->setAccommodation($this);
-        $this->classifications->add($classification);
-    }
-
-    public function removeClassification($classification){
-        $this->classifications->remove($classification);
-    }
+//    public function addClassification($classification){
+//        $classification->setAccommodation($this);
+//        $this->classifications->add($classification);
+//    }
+//
+//    public function removeClassification($classification){
+//        $this->classifications->remove($classification);
+//    }
 
 }

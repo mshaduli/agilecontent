@@ -160,6 +160,7 @@ SearchApp.directive('ratingFilter', function($timeout){
                         score: function() {
                             return scope.score;
                         },
+                        cancel: true,
                         click: function(score, evt) {
                             //console.log('ID: ' + $(this).attr('id') + "\nscore: " + score + "\nevent: " + evt);
                             $timeout(function(){

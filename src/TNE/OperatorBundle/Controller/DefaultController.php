@@ -187,7 +187,7 @@ EOD;
         }
         if(!isset($filters['distance'])) $filters['distance'] = '10';
         if(!isset($filters['price'])) $filters['price'] = '1000';
-
+        if(!isset($filters['rating']) || $filters['rating'] == 'null') $filters['rating'] = 0;
         return $filters;
     }
 
