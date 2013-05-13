@@ -195,10 +195,16 @@ SearchApp.directive('resultsList', function(){
     return {
         restrict: 'E',
         scope: {
+            loading: '=',
             operators: '=',
             sort: '='
         },
-        template: ''+
+        template: '' +
+            '<div id="loaderG" ng-show="loading">' +
+            '<div id="blockG_1" class="loader_blockG"></div>' +
+            '<div id="blockG_2" class="loader_blockG"></div>' +
+            '<div id="blockG_3" class="loader_blockG"></div>' +
+            '</div>'+
             '<ul class="cards">' +
                 '<li ng-repeat="operator in operators">' +
                     '<div class="card">' +
@@ -446,6 +452,9 @@ function SearchController($scope, $http, $q, $filter, $timeout)
 
     $scope.$watch('filters', function(){
 
+        $scope.operators = [];
+        $scope.loading = true;
+
         if($scope.filters.OperatorView.name == 'Accommodation')
         {
             $scope.operatorUrl = '/app_dev.php/operators';
@@ -459,8 +468,6 @@ function SearchController($scope, $http, $q, $filter, $timeout)
             $scope.operatorUrl = '/app_dev.php/operators/attractions';
         }
 
-        console.log($scope.filters.classifications);
-
         if($scope.destinations.length > 0)
         {
             var selDest = $filter('filter')($scope.destinations, function(dest){
@@ -471,30 +478,30 @@ function SearchController($scope, $http, $q, $filter, $timeout)
 
             $scope.mapOptions.center = {lat:selDest[0].latitude, lng: selDest[0].longitude};
         }
+        $timeout(function(){
+            $http.get($scope.operatorUrl+queryString($scope.filters)).success(function(data) {
+                $scope.loading = false;
+                $scope.operators = data;
 
-        $http.get($scope.operatorUrl+queryString($scope.filters)).success(function(data) {
-            $scope.operators = data;
-
-            var view;
-            var viewCount = $scope.OperatorViewOptions.length;
-            for (var i = 0; i < length; i++) {
-                if($scope.OperatorViewOptions[i].name == $scope.filters.OperatorView) {
-                    view = $scope.OperatorViewOptions[i];
-                    view.count = data.length;
-                    break;
+                var view;
+                var viewCount = $scope.OperatorViewOptions.length;
+                for (var i = 0; i < length; i++) {
+                    if($scope.OperatorViewOptions[i].name == $scope.filters.OperatorView) {
+                        view = $scope.OperatorViewOptions[i];
+                        view.count = data.length;
+                        break;
+                    }
                 }
-            }
 
-        }).error(function(){
-            console.log('operators not loaded');
-        });
+            }).error(function(){
+                    console.log('operators not loaded');
+                });
+        }, 500);
+
     }, true);
 
     $scope.toggleClassification = function (value, checked)
     {
-
-        console.log('value: '+value + ' checked:' + checked);
-//        var checkbox = angular.element(e.srcElement).get(0);
 
         var cIndex = jQuery.inArray(value, $scope.filters.classifications);
 
