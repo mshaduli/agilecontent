@@ -1164,6 +1164,7 @@ input[type="file"] {
         margin-right: 28px;
         margin-left: 28px;
     }
+
     #header .navbar .divider-vertical {
         margin: 0 6px;
         height: 28px;
@@ -1280,6 +1281,10 @@ input[type="file"] {
         margin-top: 19px;
         padding: 0 4px;
         vertical-align: top;
+    }
+    #header-filter .nav li:first-child,
+    #header-filter .nav li {
+        margin-left: 20px;
     }
 
 }
