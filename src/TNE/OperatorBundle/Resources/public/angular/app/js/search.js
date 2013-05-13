@@ -566,7 +566,7 @@ function createMarker(operator, $filter) {
                         '<div data-score="' + operator.rating + '" class="star pull-right"></div>' +
                         '</div>' +
                     '</div>' +
-                    '<div class="tag tag-special"><i class="icon-heart"></i> Special</div>' +
+//                    '<div class="tag tag-special"><i class="icon-heart"></i> Special</div>' +
                     '<div class="thumbnail-inner"><img src="'+operator.image+'"></div>' +
                 '</div>' +
                 '<div class="content">' +
@@ -583,6 +583,7 @@ function createMarker(operator, $filter) {
         );
         $(".star").raty({
             path: '/bundles/tneoperator/img',
+            readOnly: true,
             score: function() {
                 return $(this).attr('data-score');
             }
