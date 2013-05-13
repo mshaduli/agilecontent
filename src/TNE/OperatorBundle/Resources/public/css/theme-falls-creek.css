@@ -604,6 +604,11 @@ input[type="file"] {
     padding: 5px;
 }
 
+.card .content-group .distance {
+    font-size: 13px;
+    text-align: right;
+}
+
 .btn-primary {
     border: solid 1px #f3683c;
     background-color: #FFFFFF;

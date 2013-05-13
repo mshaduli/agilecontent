@@ -217,8 +217,8 @@ SearchApp.directive('resultsList', function(){
                             '<div class="content-group"><span class="label-important">1</span> Night from <span class="price pull-right label-important">${[{ operator.min_rate }]}</span></div>' +
                             '<div class="divider"></div>' +
                             '<div class="content-group clearfix">' +
-                                '<span>{[{operator.destination}]}<br/> {[{operator.type}]}</span> <span class="pull-right"><i class="icon-shock"></i></span>' +
-                                '<span class="price pull-right">{[{ operator.distance | number:2 | distance }]}</span>' +
+                                '<div class="pull-right distance"><i class="icon-shock"></i> <div>{[{ operator.distance | number:2 | distance }]}</div></div>' +
+                                '<span>{[{operator.destination}]}<br/> {[{operator.type}]}</span>' +
                             '</div>' +
                             '<div>' +
                                 '<a href="#" class="btn btn-wishlist"><i class="icon-star icon-white"></i></a>' +
@@ -270,7 +270,7 @@ SearchApp.directive('ratingFilter', function($timeout){
             score: '@',
             opRating: '='
         },
-        template: '<li class="nav-item-rating">Min. rating <i class="icon-remove"></i><div id="rating-filter"></div></li>',
+        template: '<li class="nav-item-rating">Min. rating <div id="rating-filter"></div></li>',
         link: function(scope,element,attrs)
         {
             scope.$watch("score", function () {
@@ -564,8 +564,8 @@ function createMarker(operator, $filter) {
                 '</div>' +
                 '<div class="content">' +
                     '<div class="content-group clearfix">' +
-                        '<span>'+ operator.destination + '<br/>' + operator.type +'</span> <span class="pull-right"><i class="icon-shock"></i></span>' +
-                        '<span class="price pull-right">'+ operatorDistance +'</span>' +
+                        '<div class="pull-right distance"><i class="icon-shock"></i> <div>'+ operatorDistance +'</div></div>' +
+                        '<span>'+ operator.destination + '<br/>' + operator.type +'</span>' +
                     '</div>' +
                     '<div>' +
                         '<a href="#" class="btn btn-wishlist"><i class="icon-star icon-white"></i></a>' +
