@@ -70,6 +70,8 @@ class AccommodationClassification
     public function setAccommodation($accommodation)
     {
         $this->accommodation = $accommodation;
+
+        return $this;
     }
 
     public function getAccommodation()

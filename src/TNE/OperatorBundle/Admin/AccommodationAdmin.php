@@ -29,6 +29,7 @@ class AccommodationAdmin extends Admin
                 ->add('address')
                 ->add('latitude')
                 ->add('longitude')
+                ->add('classifications', null, array('required' => false))
                 ->add('tags', null, array('required' => false))
                 ->add('selfRating', null, array('label'=>'Self Rating'))
                 ->add('starRating', null, array('label'=>'Star Rating'))
