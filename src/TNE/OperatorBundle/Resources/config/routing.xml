@@ -22,5 +22,9 @@
     
     <route id="tne_operator_listing_events_list" pattern="/operators/events">
         <default key="_controller">TNEOperatorBundle:Default:events</default>
-    </route>                   
+    </route>
+
+    <route id="tne_operator_listing_classifications_list" pattern="/operators/classifications">
+        <default key="_controller">TNEOperatorBundle:Default:classifications</default>
+    </route>
 </routes>

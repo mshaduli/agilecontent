@@ -64,9 +64,20 @@
                 <join-column name="tag_id" referenced-column-name="id"  nullable="true"/>
             </inverse-join-columns>
         </join-table>
-    </many-to-many>   
-    
-    <lifecycle-callbacks>
+    </many-to-many>
+
+    <many-to-many field="classifications" inversed-by="accommodation" target-entity="AccommodationClassification">
+      <join-table name="accommodation_classifications">
+          <join-columns>
+              <join-column name="accommodation_id" referenced-column-name="id" nullable="true"/>
+          </join-columns>
+          <inverse-join-columns>
+              <join-column name="classification_id" referenced-column-name="id"  nullable="true"/>
+          </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+
+      <lifecycle-callbacks>
         <lifecycle-callback type="prePersist" method="computeStarRating" />
     </lifecycle-callbacks>    
     

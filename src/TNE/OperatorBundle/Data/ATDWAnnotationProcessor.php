@@ -67,7 +67,7 @@ class ATDWAnnotationProcessor {
         $this->atdwResults = simplexml_load_string($xmlUf8);        
     }
 
-    public function populate($object, $index=1)
+    public function populate($object, $index=1, $em=null)
     {         
         $classMetadata = $this->metadataFactory->getMetadataForClass(get_class($object));
         echo "\n----------------------------------------------------------------------------------------------------\n Importing: " . $object->getName() . " \n\n";
@@ -95,6 +95,30 @@ class ATDWAnnotationProcessor {
                             $subObject = $this->fillObject(new $objectClassName(), $row);
                             //\Doctrine\Common\Util\Debug::dump($subObject);
                             $object->$addMethod($subObject);
+                        }
+                    }
+                    else if(property_exists($propertyMetadata, 'setManyToManyMethod'))
+                    {
+                        $setManyToManyMethod = $propertyMetadata->setManyToManyMethod;
+                        foreach($atdwValue as $row)
+                        {
+                            /**
+                             * @fixme Special Case - assuming structure about the property, convert to generic use!
+                             */
+
+                            echo "\n\n -- Loading classifications -- \n\n";
+
+                            var_dump($row);
+
+                            $repoName = $propertyMetadata->repoName;
+                            $r = $em->createQuery(
+                                'SELECT r FROM ' . $repoName . ' r' . ' WHERE r.keyStr = :atdwKey'
+                            )
+                            ->setParameter('atdwKey', $row->product_type_id)
+                            ->getSingleResult();
+
+                            $r->$setManyToManyMethod($object);
+                            \Doctrine\Common\Util\Debug::dump($r);
                         }
                     }
                     else

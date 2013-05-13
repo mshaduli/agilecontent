@@ -139,6 +139,7 @@ SearchApp.directive('buttonsRadio', function() {
 });
 
 
+<<<<<<< HEAD
 SearchApp.directive('accommodationTypeFilter', function(){
     return {
         restrict: 'E',
@@ -150,6 +151,8 @@ SearchApp.directive('accommodationTypeFilter', function(){
                    '</li>'
     };
 });
+=======
+>>>>>>> search_cleanup
 
 SearchApp.directive('distanceFilter', function(){
     return {
@@ -173,12 +176,14 @@ SearchApp.directive('classificationsFilter', function(){
         restrict: 'E',
         scope: {
             classifications: '=',
-//            toggle: '&',
-//            checked: '@'
+            toggle: '&',
+            checked: '@'
         },
         template:
-            '<li class="nav-row" ng-repeat="classification in classifications">'+
-                '<checkbox label="{[{ classification.name }]}" checked="{[{ true }]}" value="{[{ classification.keyStr }]}" model="classification.keyStr"></checkbox>' +
+            '<li ng-repeat="classification in classifications">'+
+                '<label class="checkbox">' +
+                   '<input type="checkbox" id="{[{ classification.keyStr }]}" value="{[{ classification.keyStr }]}" ng-checked="checked" ng-click="toggle({e:$event})"> {[{ classification.name }]} ' +
+                '</label>' +
             '</li>',
         link: function(scope, el, attrs)
         {
@@ -193,9 +198,19 @@ SearchApp.directive('priceFilter', function(){
             price: '=',
             symbol: '='
         },
+<<<<<<< HEAD
         template: '<li class="nav-item-slider">'+
             '<div slider min="0" max="1000" model="price" step="20" prepend="$"></div>' +
             '</li>'
+=======
+        template: '<li>'+
+            '${[{ price }]}' +
+                '<br/><input type="range" min="0" max="1000" step="20" ng-model="price" />' +
+            '</li>',
+        link: function(scope, el, attrs)
+        {
+        }
+>>>>>>> search_cleanup
     };
 });
 
@@ -207,6 +222,7 @@ SearchApp.directive('resultsList', function(){
             operators: '=',
             sort: '='
         },
+<<<<<<< HEAD
         template: ''+
             '<ul class="cards">' +
                 '<li ng-repeat="operator in operators">' +
@@ -233,6 +249,27 @@ SearchApp.directive('resultsList', function(){
                                 '<a href="#" class="btn btn-wishlist"><i class="icon-star icon-white"></i></a>' +
                                 '<a href="#" class="btn btn-primary">More</a>' +
                             '</div>' +
+=======
+        template: '' +
+            'Showing {[{ operators.length }]} listings<br/>' +
+            '<ul class="thumbnails">' +
+                '<li class="span3" ng-repeat="operator in operators | orderBy:sort">' +
+                    '<div class="thumbnail">' +
+                        '<div class="pull-right pull_top" style="padding: 5px;font-weight: bold">{[{ operator.distance | number:2 | distance }]}</div>' +
+
+                        '<img class="opimg" ng-src="{[{operator.image}]}"/>' +
+
+                        '<b>{[{operator.name}]}</b>' +
+
+                        '<div class="truncate">{[{operator.description | truncate:120 }]}</div>' +
+
+                        '<div class="star pull-right" score="{[{ operator.rating }]}" rating></div>' +
+
+                        '<hr/>' +
+                        '<div style="padding: 5px">' +
+                            '<div class="pull-left">1 NIGHT FROM</div>' +
+                            '<div class="pull-right"><b>${[{ operator.min_rate }]}</b></div>' +
+>>>>>>> search_cleanup
                         '</div>' +
                     '</div>' +
                 '</li>' +
@@ -258,7 +295,12 @@ SearchApp.directive('rating', function(){
                 if (scope.score != 'undefined')
                 {
                     element.raty({
+<<<<<<< HEAD
                         path: '/bundles/tneoperator/img',
+=======
+                        path: '/bundles/applicationsonataadmin/img',
+                        readOnly: true,
+>>>>>>> search_cleanup
                         score: function() {
                             return scope.score;
                         }
@@ -278,17 +320,30 @@ SearchApp.directive('ratingFilter', function($timeout){
             score: '@',
             opRating: '='
         },
+<<<<<<< HEAD
         template: '<li class="nav-item-rating">Min. rating <i class="icon-remove"></i><div id="rating-filter"></div></li>',
+=======
+        template: '<div id="rating-filter"></div>',
+>>>>>>> search_cleanup
         link: function(scope,element,attrs)
         {
             scope.$watch("score", function () {
                 if (scope.score != 'undefined')
                 {
+<<<<<<< HEAD
                     $(element).find('#rating-filter').raty({
                         path: '/bundles/tneoperator/img/filter',
                         score: function() {
                             return scope.score;
                         },
+=======
+                    element.raty({
+                        path: '/bundles/applicationsonataadmin/img',
+                        score: function() {
+                            return scope.score;
+                        },
+                        cancel: true,
+>>>>>>> search_cleanup
                         click: function(score, evt) {
                             //console.log('ID: ' + $(this).attr('id') + "\nscore: " + score + "\nevent: " + evt);
                             $timeout(function(){
@@ -304,7 +359,11 @@ SearchApp.directive('ratingFilter', function($timeout){
     }
 });
 
+<<<<<<< HEAD
 SearchApp.directive('resultsMap', function($filter){
+=======
+SearchApp.directive('resultsMap', function(){
+>>>>>>> search_cleanup
     return {
         restrict: 'A',
         scope: {
@@ -341,7 +400,10 @@ SearchApp.directive('resultsMap', function($filter){
 
             scope.$watch('operators', function(){
                 scope.mgr.clearMarkers();
+<<<<<<< HEAD
 
+=======
+>>>>>>> search_cleanup
                 markers = [];
                 angular.forEach(scope.operators, function(operator){
                     markers.push(createMarker(operator, $filter));
@@ -396,9 +458,15 @@ function SearchController($scope, $http, $q, $filter, $timeout)
 
     $scope.map = null;
 
+<<<<<<< HEAD
     $scope.currency = '$';
 
     $scope.OperatorViewOptions = [{name:'Accommodation',count:0},{name:'Events',count:0},{name:'Attractions',count:0}];
+=======
+    $scope.sort = 'distance';
+
+    $scope.OperatorViewOptions = ['Accommodation','Events','Attractions'];
+>>>>>>> search_cleanup
 
     $scope.filters = {
         distance: 10,
@@ -497,24 +565,24 @@ function SearchController($scope, $http, $q, $filter, $timeout)
         });
     }, true);
 
-//    $scope.toggleClassification = function (e)
-//    {
-//        var checkbox = angular.element(e.srcElement).get(0);
-//
-//        var cIndex = jQuery.inArray(checkbox.value, $scope.filters.classifications);
-//
-//        if(checkbox.checked)
-//        {
-//            if(cIndex == -1)
-//            {
-//                $scope.filters.classifications.push(checkbox.value);
-//            }
-//        }
-//        else
-//        {
-//            $scope.filters.classifications.splice(cIndex, 1);
-//        }
-//    }
+    $scope.toggleClassification = function (e)
+    {
+        var checkbox = angular.element(e.srcElement).get(0);
+
+        var cIndex = jQuery.inArray(checkbox.value, $scope.filters.classifications);
+
+        if(checkbox.checked)
+        {
+            if(cIndex == -1)
+            {
+                $scope.filters.classifications.push(checkbox.value);
+            }
+        }
+        else
+        {
+            $scope.filters.classifications.splice(cIndex, 1);
+        }
+    }
 
 }
 

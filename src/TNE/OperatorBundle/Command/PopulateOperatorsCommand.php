@@ -25,7 +25,8 @@ class PopulateOperatorsCommand extends ContainerAwareCommand {
         $this
             ->setName('tne:operators:load')
             ->addArgument('id', InputArgument::OPTIONAL, 'Choose accommodation recored to repopulate')                
-            ->addOption('type', null, InputOption::VALUE_NONE, 'If set, will batch import products')                
+            ->addOption('type', null, InputOption::VALUE_NONE, 'If set, will batch import products')
+            ->addOption('pid', null, InputOption::VALUE_NONE, 'test product id')
             ->setDescription('Load operators from ATDW')
         ;
     }
@@ -54,7 +55,9 @@ class PopulateOperatorsCommand extends ContainerAwareCommand {
                 break;
             case 'restaurant':
                 $this->populate('Restaurant', $atdwProcessor, $em);
-                break;            
+                break;
+            case 'test':
+                $atdwProcessor->getProductXml($input->getOption('pid'));
         }        
         
         $output->writeln("processed");
@@ -67,7 +70,7 @@ class PopulateOperatorsCommand extends ContainerAwareCommand {
         for($i=1;$i<=$atdwProcessor->getProductCount();$i++)
         {
             $newRecord = new $className();
-            $atdwProcessor->populate($newRecord, $i);
+            $atdwProcessor->populate($newRecord, $i, $em);
             $em->persist($newRecord);
         }
         $em->flush();        
