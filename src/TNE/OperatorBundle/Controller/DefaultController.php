@@ -183,7 +183,8 @@ EOD;
     private function getOperatorImage($media)
     {
         if(!$media) return '/uploads/media/noimg.gif';
-        $mediaItem = $media->getMediaItem();        
+        $mediaItem = $media->getMediaItem();
+        if(!$mediaItem === null) return '/uploads/media/noimg.gif';
         $imageProvider = $this->get('sonata.media.provider.image');                
         $format = $imageProvider->getFormatName($mediaItem, 'big');      
         return $this->get('sonata.media.twig.extension')->path($mediaItem, $format);              
