@@ -32,8 +32,9 @@ class AnnotationDriver implements DriverInterface
                     
                     if(method_exists($annotation, 'getCommandType')) $propertyMetadata->commandType = $annotation::getCommandType();
                     if(method_exists($annotation, 'getAddMethodName')) $propertyMetadata->addMethod = $annotation::getAddMethodName();
+                    if(method_exists($annotation, 'getSetManyToManyMethodName')) $propertyMetadata->setManyToManyMethod = $annotation::getSetManyToManyMethodName();
                     if(method_exists($annotation, 'getObjectClassName')) $propertyMetadata->objectClassName = $annotation::getObjectClassName();
-                    
+                    if(method_exists($annotation, 'getRepoName')) $propertyMetadata->repoName = $annotation::getRepoName();
                     $classMetadata->addPropertyMetadata($propertyMetadata);
                 }
             }           

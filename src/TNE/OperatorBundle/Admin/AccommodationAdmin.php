@@ -29,6 +29,7 @@ class AccommodationAdmin extends Admin
                 ->add('address')
                 ->add('latitude')
                 ->add('longitude')
+                ->add('classifications', null, array('required' => false))
                 ->add('tags', null, array('required' => false))
                 ->add('selfRating', null, array('label'=>'Self Rating'))
                 ->add('starRating', null, array('label'=>'Star Rating'))
@@ -88,6 +89,7 @@ class AccommodationAdmin extends Admin
             ->add('name')
             ->add('destination')
             ->add('tags')
+            ->add('classifications')
         ;
     }
 
@@ -96,7 +98,7 @@ class AccommodationAdmin extends Admin
         $listMapper
             ->addIdentifier('name')
             ->add('destination')
-            ->add('tags')                
+            ->add('classifications')
             ->add('atdwStarRating', null, array('label'=>'Star Rating'))
             ->add('roomCount', null, array('label'=>'Rooms'))
             ->add('latitude')

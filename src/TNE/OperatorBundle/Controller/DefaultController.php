@@ -50,11 +50,14 @@ class DefaultController extends Controller
         
         $distanceValue = \str_replace('km', '', $filters['distance']);
         $maxRate = \str_replace('$', '', $filters['price']);
+        $rating = \str_replace('$', '', $filters['rating']);
+        $classifications = $filters['classifications'];
+
         
         $distanceQueryAccomm  =<<<EOD
         SELECT * FROM 
         (
-        SELECT `ac`.`id` as `id`, `ac`.`name` as `name`,  `ac`.`atdw_product_description` as `description`, `ac`.`latitude` as `latitude`, `ac`.`longitude` as `longitude`,         
+        SELECT `ac`.`id` as `id`, `ac`.`name` as `name`,  `ac`.`atdw_product_description` as `description`, `ac`.`atdw_city_name` as `destination`, `ac`.`latitude` as `latitude`, `ac`.`longitude` as `longitude`,
         (SELECT MIN(rate_from) FROM AccommodationRoom r WHERE `accommodation_id` = `ac`.`id`) as `min_rate`,
         (((acos(sin(($destination[latitude]*pi()/180)) * sin((`latitude`*pi()/180))+cos(($destination[latitude]*pi()/180)) * cos((`latitude`*pi()/180)) * cos((($destination[longitude] - `longitude`)*pi()/180))))*180/pi())*60*1.1515) AS `distance` FROM `Accommodation` ac 
         ) as op           
@@ -77,14 +80,33 @@ EOD;
             $result['image'] = $this->getOperatorImage($operatorMedia);
             $result['rating'] = $operator->getRating();            
             $result['tags'] = [];
+            $result['type'] = $operator->getClassifications()->first()->getName();
             foreach($operator->getTags() as $tag)
             {
                 $result['tags'] []= $tag->getSingleName();
             }
-            $operators []= $result;
+
+
+            if($result['rating'] >= $rating && $this->operatorIsClassified($operator, $classifications))
+            {
+                $operators []= $result;
+            }
+
         }
   
         return new JsonResponse($operators);
+    }
+
+    private function operatorIsClassified($operator, $classifications)
+    {
+        foreach($operator->getClassifications() as $classification)
+        {
+            if(in_array($classification->getKeyStr(), $classifications))
+            {
+                return true;
+            }
+        }
+        return false;
     }
     
     public function attractionsAction()
@@ -160,7 +182,7 @@ EOD;
     
     private function getOperatorImage($media)
     {
-        if(!$media) return '/uploads/media/default/0001/01/thumb_91_default_big.jpeg';        
+        if(!$media) return '/uploads/media/noimg.gif';
         $mediaItem = $media->getMediaItem();        
         $imageProvider = $this->get('sonata.media.provider.image');                
         $format = $imageProvider->getFormatName($mediaItem, 'big');      
@@ -180,7 +202,7 @@ EOD;
         }
         if(!isset($filters['distance'])) $filters['distance'] = '10';
         if(!isset($filters['price'])) $filters['price'] = '1000';
-        
+        if(!isset($filters['rating']) || $filters['rating'] == 'null') $filters['rating'] = 0;
         return $filters;
     }
 
@@ -193,6 +215,17 @@ EOD;
         )
         ->getResult(Query::HYDRATE_ARRAY);
         
+        return new JsonResponse($d);
+    }
+
+    public function classificationsAction()
+    {
+        $em = $this->get('doctrine.orm.entity_manager');
+        $d = $em->createQuery(
+            'SELECT c.id, c.name, c.keyStr FROM TNEOperatorBundle:AccommodationClassification c'
+        )
+            ->getResult(Query::HYDRATE_ARRAY);
+
         return new JsonResponse($d);
     }
 }

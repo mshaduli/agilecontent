@@ -42,8 +42,18 @@
           <call method="setTranslationDomain">
               <argument>TNEOperatorBundle</argument>
           </call>
-      </service>                
-      
+      </service>
+
+        <service id="sonata.admin.accommodation.classifications" class="TNE\OperatorBundle\Admin\AccommodationClassificationsAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Tags" label="ATDW Classifications"/>
+            <argument />
+            <argument>TNE\OperatorBundle\Entity\AccommodationClassification</argument>
+            <argument>SonataAdminBundle:CRUD</argument>
+            <call method="setTranslationDomain">
+                <argument>TNEOperatorBundle</argument>
+            </call>
+        </service>
+
         <service id="sonata.admin.form.type.operator_media_list" class="TNE\OperatorBundle\Form\Type\OperatorMediaType">
             <tag name="form.type" alias="operator_media_list" />
         </service>

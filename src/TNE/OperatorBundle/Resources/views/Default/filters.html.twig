@@ -4,7 +4,8 @@
     </li>
 
     <li class="nav-header">Accommodation Type</li>
-    <accommodation-type-filter></accommodation-type-filter>
+    <classifications-filter classifications="classifications" checked="{[{ true }]}" toggle="toggleClassification(value, checked)"></classifications-filter>
+
     <li class="clearfix"><a class="btn btn-link muted pull-right" href="#">See more</a></li>
     <li class="nav-header">Distance from</li>
     <distance-filter distance="filters.distance" destination="filters.destination" destinations="destinations"></distance-filter>
@@ -25,111 +26,10 @@
     <li class="nav-header">Maximum nightly rate</li>
     <price-filter price="filters.price" symbol="currency"></price-filter>
 
-    <rating-filter score="3"></rating-filter>
+    <rating-filter score="0" op-rating="filters.rating"></rating-filter>
 
     <li class="nav-header">Facilities</li>
     <facilities-filter></facilities-filter>
     <li class="clearfix"><a class="btn btn-link muted pull-right" href="#">See more</a></li>
 
 </ul>
-<!--
-'<label class="radio"><input type="radio" ng-model="$parent.destination" value="{[{ dest.id }]}"> {[{ dest.name }]} </label>' +
-
-
-    <li class="nav-header">Accommodation Type</li>
-    <li class="nav-row">
-        <label class="checkbox">
-            <input type="checkbox" class="tne" ng-model="type_hotel" ng-change="change()" id="typehotel"> Hotel <span class="inner">230</span>
-        </label>
-    </li>
-    <li class="nav-row">
-        <label class="checkbox">
-            <input type="checkbox" class="tne" ng-model="type_motel" ng-change="change()" id="typemotel"> Motel  <span class="inner">115</span>
-        </label>
-    </li>
-    <li class="nav-row">
-        <label class="checkbox">
-            <input type="checkbox" class="tne" ng-model="type_bnb" ng-change="change()" id="typebnb"> Bed & Breakfast  <span class="inner">234</span>
-        </label>
-    </li>
-    <li class="nav-row">
-        <label class="checkbox">
-            <input type="checkbox" class="tne" ng-model="type_camp" ng-change="change()" id="typecamp"> Camp Site <span class="inner">35</span>
-        </label>
-    </li>
-    <li class="nav-row">
-        <label class="checkbox">
-            <input type="checkbox" class="tne" ng-model="type_hostel" ng-change="change()" id="typehostel"> Hostel <span class="inner">46</span>
-        </label>
-    </li>
-    <li class="clearfix">
-        <a class="btn btn-link muted pull-right" href="#">See more</a>
-    </li>
-    <li class="nav-header">Maximum distance<br/>
-        <div distance-slider ng-model="filters.distance" id="distance-slider"></div>
-    </li>
-    <li class="nav-row">
-        <label class="checkbox">
-            <input type="checkbox" class="tne" ng-model="type_hotel" ng-change="change()"> Falls Creek <span class="inner">0km</span>
-        </label>
-    </li>
-    <li class="nav-row indent1">
-        <label class="checkbox">
-            <input type="checkbox" class="tne" ng-model="type_motel" ng-change="change()"> Small location  <span class="inner">115km</span>
-        </label>
-    </li>
-    <li class="nav-row indent1">
-        <label class="checkbox">
-            <input type="checkbox" class="tne" ng-model="type_bnb" ng-change="change()"> Small location <span class="inner">234km</span>
-        </label>
-    </li>
-    <li class="nav-row">
-        <label class="checkbox">
-            <input type="checkbox" class="tne" ng-model="type_camp" ng-change="change()"> Hero location <span class="inner">35km</span>
-        </label>
-    </li>
-    <li class="nav-row">
-        <label class="checkbox">
-            <input type="checkbox" class="tne" ng-model="type_hostel" ng-change="change()"> Hero location <span class="inner">46km</span>
-        </label>
-    </li>
-    <li class="clearfix">
-        <a class="btn btn-link muted pull-right" href="#">See more</a>
-    </li>
-    <li class="nav-header">Min. rating <div class="star pull-right" data-score="4"></div></li>
-    <li class="nav-header">Tags</li>
-    <li>
-        <ul class="nav nav-pills">
-            <li><a href="#">Kid Friendly</a></li>
-            <li class="active">
-                <a href="#">Cycle Friendly <i class="icon-remove"></i></a>
-            </li>
-            <li><a href="#">Eco Friendly</a></li>
-            <li><a href="#">Single</a></li>
-        </ul>
-    </li>
-    <li class="nav-header">Facilities</li>
-    <li class="nav-row">
-        <label class="checkbox">
-            <input type="checkbox" class="tne"> Wifi
-        </label>
-    </li>
-    <li class="nav-row">
-        <label class="checkbox">
-            <input type="checkbox" class="tne"> Kitchen facilities
-        </label>
-    </li>
-    <li class="nav-row">
-        <label class="checkbox">
-            <input type="checkbox" class="tne"> Dryer
-        </label>
-    </li>
-    <li class="nav-row">
-        <label class="checkbox">
-            <input type="checkbox" class="tne"> Iron
-        </label>
-    </li>
-    <li class="clearfix">
-        <a class="btn btn-link muted pull-right" href="#">See more</a>
-    </li>
-</ul>   -->
