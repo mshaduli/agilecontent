@@ -79,7 +79,7 @@ class Accommodation
     protected $tags;
 
     /**
-     *@ATDW\Classifications
+     * fixme - implement ATDW\Classifications
      */
     protected $classifications;
 
@@ -146,6 +146,7 @@ class Accommodation
     public function __construct() {
         $this->rooms = new ArrayCollection();
         $this->media = new ArrayCollection();
+        $this->classifications = new ArrayCollection();
     }
 
     /**
@@ -517,13 +518,13 @@ class Accommodation
         return $this->classifications;
     }
 
-//    public function addClassification($classification){
-//        $classification->setAccommodation($this);
-//        $this->classifications->add($classification);
-//    }
-//
-//    public function removeClassification($classification){
-//        $this->classifications->remove($classification);
-//    }
+    public function addClassification($classification){
+        $classification->setAccommodation($this);
+        $this->classifications->add($classification);
+    }
+
+    public function removeClassification($classification){
+        $this->classifications->remove($classification);
+    }
 
 }
