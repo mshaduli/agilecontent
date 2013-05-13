@@ -89,6 +89,7 @@ class AccommodationAdmin extends Admin
             ->add('name')
             ->add('destination')
             ->add('tags')
+            ->add('classifications')
         ;
     }
 
@@ -97,7 +98,7 @@ class AccommodationAdmin extends Admin
         $listMapper
             ->addIdentifier('name')
             ->add('destination')
-            ->add('tags')                
+            ->add('classifications')
             ->add('atdwStarRating', null, array('label'=>'Star Rating'))
             ->add('roomCount', null, array('label'=>'Rooms'))
             ->add('latitude')

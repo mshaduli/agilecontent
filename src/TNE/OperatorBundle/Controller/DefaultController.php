@@ -57,7 +57,7 @@ class DefaultController extends Controller
         $distanceQueryAccomm  =<<<EOD
         SELECT * FROM 
         (
-        SELECT `ac`.`id` as `id`, `ac`.`name` as `name`,  `ac`.`atdw_product_description` as `description`, `ac`.`latitude` as `latitude`, `ac`.`longitude` as `longitude`,
+        SELECT `ac`.`id` as `id`, `ac`.`name` as `name`,  `ac`.`atdw_product_description` as `description`, `ac`.`atdw_city_name` as `destination`, `ac`.`latitude` as `latitude`, `ac`.`longitude` as `longitude`,
         (SELECT MIN(rate_from) FROM AccommodationRoom r WHERE `accommodation_id` = `ac`.`id`) as `min_rate`,
         (((acos(sin(($destination[latitude]*pi()/180)) * sin((`latitude`*pi()/180))+cos(($destination[latitude]*pi()/180)) * cos((`latitude`*pi()/180)) * cos((($destination[longitude] - `longitude`)*pi()/180))))*180/pi())*60*1.1515) AS `distance` FROM `Accommodation` ac 
         ) as op           
@@ -80,6 +80,7 @@ EOD;
             $result['image'] = $this->getOperatorImage($operatorMedia);
             $result['rating'] = $operator->getRating();            
             $result['tags'] = [];
+            $result['type'] = $operator->getClassifications()->first()->getName();
             foreach($operator->getTags() as $tag)
             {
                 $result['tags'] []= $tag->getSingleName();
@@ -181,7 +182,7 @@ EOD;
     
     private function getOperatorImage($media)
     {
-        if(!$media) return '/uploads/media/default/0001/01/thumb_91_default_big.jpeg';        
+        if(!$media) return '/uploads/media/noimg.gif';
         $mediaItem = $media->getMediaItem();        
         $imageProvider = $this->get('sonata.media.provider.image');                
         $format = $imageProvider->getFormatName($mediaItem, 'big');      

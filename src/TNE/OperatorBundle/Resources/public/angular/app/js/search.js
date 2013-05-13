@@ -210,14 +210,14 @@ SearchApp.directive('resultsList', function(){
                                 '<div score="{[{ operator.rating }]}" class="star pull-right" rating></div>' +
                                 '</div>' +
                             '</div>' +
-                            '<div class="tag tag-special"><i class="icon-heart"></i> Special</div>' +
+//                            '<div class="tag tag-special"><i class="icon-heart"></i> Special</div>' +
                         '<div class="thumbnail-inner"><img ng-src="{[{operator.image}]}" /></div>' +
                         '</div>' +
                         '<div class="content">' +
                             '<div class="content-group"><span class="label-important">1</span> Night from <span class="price pull-right label-important">${[{ operator.min_rate }]}</span></div>' +
                             '<div class="divider"></div>' +
                             '<div class="content-group clearfix">' +
-                                '<span>{[{operator.description | truncate:50}]}</span> <span class="pull-right"><i class="icon-shock"></i></span>' +
+                                '<span>{[{operator.destination}]}<br/> {[{operator.type}]}</span> <span class="pull-right"><i class="icon-shock"></i></span>' +
                                 '<span class="price pull-right">{[{ operator.distance | number:2 | distance }]}</span>' +
                             '</div>' +
                             '<div>' +
@@ -562,7 +562,7 @@ function createMarker(operator, $filter) {
                 '</div>' +
                 '<div class="content">' +
                     '<div class="content-group clearfix">' +
-                        '<span>'+ operatorDesc +'</span> <span class="pull-right"><i class="icon-shock"></i></span>' +
+                        '<span>'+ operator.destination + '<br/>' + operator.type +'</span> <span class="pull-right"><i class="icon-shock"></i></span>' +
                         '<span class="price pull-right">'+ operatorDistance +'</span>' +
                     '</div>' +
                     '<div>' +
