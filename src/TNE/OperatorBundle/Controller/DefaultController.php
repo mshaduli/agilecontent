@@ -85,13 +85,27 @@ EOD;
                 $result['tags'] []= $tag->getSingleName();
             }
 
-            if($result['rating'] >= $rating)
+
+            if($result['rating'] >= $rating && $this->operatorIsClassified($operator, $classifications))
             {
                 $operators []= $result;
             }
+
         }
   
         return new JsonResponse($operators);
+    }
+
+    private function operatorIsClassified($operator, $classifications)
+    {
+        foreach($operator->getClassifications() as $classification)
+        {
+            if(in_array($classification->getKeyStr(), $classifications))
+            {
+                return true;
+            }
+        }
+        return false;
     }
     
     public function attractionsAction()
