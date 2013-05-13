@@ -52,30 +52,6 @@ SearchApp.directive('slider', function($timeout) {
     };
 });
 
-SearchApp.directive('checkbox', function() {
-    return {
-        restrict: 'E',
-        scope: { model: '=', value:'@', label:'@', checked:'@'},
-        controller: function($scope){
-            $scope.toggle = function(){
-                $scope.checked = !$scope.checked;
-                ($scope.checked) ? $scope.model = $scope.value : $scope.value = false;
-            };
-        },
-        template: '<label class="checkbox">'+
-                    '<div class="clearfix labelright blue ">' +
-                        '<input type="checkbox" style="display: none;" ng-checked="checked" value="{[{value}]}">' +
-                        '<a ng-class="{checked: checked == true}" ng-click="toggle()"></a>' +
-                    '</div><a ng-click="toggle()">{[{label}]}</a>'+
-                    '</label>',
-        link: function(scope, element, attrs) {
-            scope.$watch('model', function(newValue, oldValue) {
-                scope.checked = (newValue == scope.value);
-            });
-        }
-    };
-});
-
 SearchApp.directive('radio', function() {
     return {
         restrict: 'E',
@@ -116,8 +92,11 @@ SearchApp.directive('tabs', function() {
         template: '<a class="btn {[{classes}]}" '+
                     'ng-class="{active: option == model}"'+
                     'ng-repeat="option in options" '+
-                    'ng-click="activate(option.name)">{[{option.name}]} <span class="inner hidden-tablet">{[{ $parent.operators.length }]}</span>'+
-                  '</a>'
+                    'ng-click="activate(option)">{[{option.name}]} <span class="inner hidden-tablet">{[{ $parent.operators.length }]}</span>'+
+                  '</a>',
+        link: function(scope, element, attrs) {
+
+        }
     };
 });
 
@@ -138,19 +117,6 @@ SearchApp.directive('buttonsRadio', function() {
     };
 });
 
-
-SearchApp.directive('accommodationTypeFilter', function(){
-    return {
-        restrict: 'E',
-        template: '<li class="nav-row">'+
-                    '<checkbox label="Hotel" checked="{[{ false }]}" ></checkbox>' +
-                   '</li>' +
-                   '<li class="nav-row">' +
-                    '<checkbox label="Motel" checked="{[{ true }]}" ></checkbox>' +
-                   '</li>'
-    };
-});
-
 SearchApp.directive('distanceFilter', function(){
     return {
         restrict: 'E',
@@ -168,17 +134,42 @@ SearchApp.directive('distanceFilter', function(){
     };
 });
 
+SearchApp.directive('checkbox', function() {
+    return {
+        restrict: 'E',
+        scope: {
+            model: '=', value:'@', label:'@', checked:'@', toggleHandler: '&'
+        },
+        controller: function($scope){
+            $scope.toggle = function(){
+                $scope.checked = !$scope.checked;
+                $scope.toggleHandler({value: $scope.value, checked: $scope.checked});
+            };
+        },
+        template: '<label class="checkbox">'+
+            '<div class="clearfix labelright blue ">' +
+            '<input type="checkbox" style="display: none;" ng-checked="checked" value="{[{value}]}">' +
+            '<a ng-class="{checked: checked == true}" ng-click="toggle()"></a>' +
+            '</div><a ng-click="toggle()">{[{label}]}</a>'+
+            '</label>',
+        link: function(scope, element, attrs) {
+            scope.$watch('model', function(newValue, oldValue) {
+                scope.checked = (newValue == scope.value);
+            });
+        }
+    };
+});
+
 SearchApp.directive('classificationsFilter', function(){
     return {
         restrict: 'E',
         scope: {
             classifications: '=',
-//            toggle: '&',
-//            checked: '@'
+            toggle: '&'
         },
         template:
             '<li class="nav-row" ng-repeat="classification in classifications">'+
-                '<checkbox label="{[{ classification.name }]}" checked="{[{ true }]}" value="{[{ classification.keyStr }]}" model="classification.keyStr"></checkbox>' +
+                '<checkbox label="{[{ classification.name }]}" checked="{[{ true }]}" value="{[{ classification.keyStr }]}" model="classification.keyStr" toggle-handler="toggle({value:value, checked:checked})"></checkbox>' +
             '</li>',
         link: function(scope, el, attrs)
         {
@@ -404,7 +395,7 @@ function SearchController($scope, $http, $q, $filter, $timeout)
         distance: 10,
         destination: 1,
         price: 300,
-        OperatorView: 'Accommodation',
+        OperatorView: $scope.OperatorViewOptions[0],
         rating: 0,
         classifications: []
     };
@@ -453,15 +444,15 @@ function SearchController($scope, $http, $q, $filter, $timeout)
 
     $scope.$watch('filters', function(){
 
-        if($scope.filters.OperatorView == 'Accommodation')
+        if($scope.filters.OperatorView.name == 'Accommodation')
         {
             $scope.operatorUrl = '/app_dev.php/operators';
         }
-        else if ($scope.filters.OperatorView == 'Events')
+        else if ($scope.filters.OperatorView.name == 'Events')
         {
             $scope.operatorUrl = '/app_dev.php/operators/events';
         }
-        else if ($scope.filters.OperatorView == 'Attractions')
+        else if ($scope.filters.OperatorView.name == 'Attractions')
         {
             $scope.operatorUrl = '/app_dev.php/operators/attractions';
         }
@@ -497,24 +488,26 @@ function SearchController($scope, $http, $q, $filter, $timeout)
         });
     }, true);
 
-//    $scope.toggleClassification = function (e)
-//    {
+    $scope.toggleClassification = function (value, checked)
+    {
+
+        console.log('value: '+value + ' checked:' + checked);
 //        var checkbox = angular.element(e.srcElement).get(0);
-//
-//        var cIndex = jQuery.inArray(checkbox.value, $scope.filters.classifications);
-//
-//        if(checkbox.checked)
-//        {
-//            if(cIndex == -1)
-//            {
-//                $scope.filters.classifications.push(checkbox.value);
-//            }
-//        }
-//        else
-//        {
-//            $scope.filters.classifications.splice(cIndex, 1);
-//        }
-//    }
+
+        var cIndex = jQuery.inArray(value, $scope.filters.classifications);
+
+        if(checked)
+        {
+            if(cIndex == -1)
+            {
+                $scope.filters.classifications.push(value);
+            }
+        }
+        else
+        {
+            $scope.filters.classifications.splice(cIndex, 1);
+        }
+    }
 
 }
 
