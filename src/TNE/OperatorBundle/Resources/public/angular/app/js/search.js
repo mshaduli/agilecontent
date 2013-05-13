@@ -250,6 +250,7 @@ SearchApp.directive('rating', function(){
                 {
                     element.raty({
                         path: '/bundles/tneoperator/img',
+                        readOnly: true,
                         score: function() {
                             return scope.score;
                         }
@@ -277,6 +278,7 @@ SearchApp.directive('ratingFilter', function($timeout){
                 {
                     $(element).find('#rating-filter').raty({
                         path: '/bundles/tneoperator/img/filter',
+                        cancel: true,
                         score: function() {
                             return scope.score;
                         },
