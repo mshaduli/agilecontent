@@ -36,6 +36,13 @@ abstract class BaseMediaAdmin extends Admin
         parent::__construct($code, $class, $baseControllerName);
 
         $this->pool = $pool;
+
+        $this->datagridValues = array(
+        '_page'       => 1,
+        '_per_page'   => 25,
+        '_sort_order' => 'DESC', // sort direction
+        '_sort_by' => 'updatedAt' // field name
+        );
     }
 
     /**
@@ -44,7 +51,6 @@ abstract class BaseMediaAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-//            ->add('image', 'string', array('template' => 'SonataMediaBundle:MediaAdmin:list_image.html.twig'))
             ->add('custom', 'string', array('template' => 'SonataMediaBundle:MediaAdmin:list_custom.html.twig'))
             ->add('tags', null, array('required' => false))
             ->add('enabled', 'boolean', array('editable' => true))
@@ -54,6 +60,7 @@ abstract class BaseMediaAdmin extends Admin
                     'edit' => array(),
                 )
             ))
+           ->add('updatedAt')
         ;
     }
 
