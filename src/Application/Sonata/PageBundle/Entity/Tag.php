@@ -49,7 +49,7 @@ class Tag
     {
         return $this->id;
     }
-
+    
     /**
      * Set name
      *

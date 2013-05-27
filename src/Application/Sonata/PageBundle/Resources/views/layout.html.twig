@@ -89,23 +89,19 @@ file that was distributed with this source code.
     
 {% block page_container %}
    {{ sonata_page_render_container('content_top', page.parent) }}
-<div id="aboutus">
+              {{ sonata_page_render_container('taggedmedia', page) }}
+   <div id="aboutus">
         <div class="container">            
             <div class="row">
                 <div class="span6 intro editable">
                    {{ page.bodyCopy | raw }}
                 </div>
                 <div class="span6 flexslider">
-                      <ul class="slides">
-                       {% for tag in page.taggedMedia %}
-                      
-                            {% for media in tag['media'] %}
-                      
-                        <li>
-                              <img src="{% path media['id'], 'big' %}" />
-                        </li>
-                      
-                        {% endfor %}
+                    <ul class="slides">
+                        {% for media in page.taggedMedia %}
+                            <li>
+                              <img src="{% path media.id, 'small' %}" />
+                            </li>
                         {% endfor %}
                         </ul>
                 </div>  
@@ -113,7 +109,7 @@ file that was distributed with this source code.
                                     
             <div class="row">
                 <div class="span12">
-                  {{ vichgeo_map_for('operator', page.taggedOperators) }}
+                  {#{ vichgeo_map_for('operator', page.taggedOperators) }#}
                 </div>
             </div>
 

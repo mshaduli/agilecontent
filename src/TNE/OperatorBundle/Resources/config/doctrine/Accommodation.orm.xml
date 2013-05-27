@@ -20,7 +20,8 @@
     <field name="tripadvisorUrl" type="string" column="atdw_tripadvisor_url" length="255" nullable="true"/>
     <field name="latitude" type="decimal" column="latitude" scale="7"/>
     <field name="longitude" type="decimal" column="longitude" scale="7"/>
-    
+    <field name="state" type="string" column="state" length="255"/>
+            
             
     <many-to-one field="site" target-entity="Application\Sonata\PageBundle\Entity\Site">
         <join-column name="site_id" referenced-column-name="id" />

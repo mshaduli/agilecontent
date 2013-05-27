@@ -73,76 +73,16 @@ class Page extends BasePage
     
     public function getTaggedMedia()
     {   
-        $content = array();
-        
-        foreach($this->getTags() as $tag)
-        {
-            $content[] = $this->createTags($tag);
+        $taggedMedia = array();
+        foreach ($this->getTags() as $tag){
+                $taggedMedia = array_merge($taggedMedia, $tag->getMedia()->toArray());
         }
         
-        return $content;
-    }
-    
-    
-    public function createTags($tag)
-    {
-        $content = array();
-        $content['id']     = $tag->getId();
-        $content['name']  = $tag->getName();
-        
-        if(count($tag->getMedia()) > 0)
-        {
-            foreach($tag->getMedia() as $media)
-            {
-                $content['media'][] = $this->createMediaTags($media);
-            }
-        }else
-        {
-            $content['media'] = array();
-        }
-        
-        return $content;
-    }
-    
-    public function createMediaTags($media)
-    {
-        $mediaContent = array();
-        $mediaContent['id'] = $media->getId();
-        $mediaContent['name'] = $media->getName();
-        $mediaContent['description'] = $media->getDescription();
-        $mediaContent['enabled'] = $media->getEnabled();
-        $mediaContent['provider_name'] = $media->getProviderName();
-        $mediaContent['provider_status'] = $media->getProviderStatus();
-        $mediaContent['provider_reference'] = $media->getProviderReference();
-        $mediaContent['provider_metadata'] = $media->getProviderMetadata();
-        $mediaContent['width'] = $media->getWidth();
-        $mediaContent['height'] = $media->getHeight();
-        $mediaContent['length'] = $media->getLength();
-        $mediaContent['content_type'] = $media->getContentType();
-        $mediaContent['tagIds'] = $media->getTagIds();
-        $mediaContent['copyright'] = $media->getCopyright();
-        $mediaContent['author_name'] = $media->getAuthorName();
-        $mediaContent['context'] = $media->getContext();
-        $mediaContent['cdn_is_flushable'] = $media->getCdnIsFlushable();
-        $mediaContent['cdn_status'] = $media->getCdnStatus();
-        $mediaContent['cdn_flush_at'] = $media->getCdnFlushAt();
-        $mediaContent['updated_at'] = $media->getUpdatedAt();
-        $mediaContent['created_at'] = $media->getCreatedAt();
-        
-        return $mediaContent;
+        return array_unique($taggedMedia);
     }
     
     public function getTaggedOperators()
-    {
-//        $content = array();
-//        
-//        foreach($this->getTags() as $tag)
-//        {
-//            $content[] = $this->createAccommodationTags($tag);
-//        }
-//        
-//        return $content;
-        
+    {   
         $taggedOperators = array();
         foreach ($this->getTags() as $tag){
             $taggedOperators = array_merge($taggedOperators, $tag->getAccommodation()->toArray());
@@ -150,35 +90,4 @@ class Page extends BasePage
         return array_unique($taggedOperators);
     }
     
-    public function createAccommodationTags($tag)
-    {
-        $content = array();
-        $content['id']     = $tag->getId();
-        $content['name']  = $tag->getName();
-        
-        if(count($tag->getAccommodation()) > 0)
-        {
-            foreach($tag->getAccommodation() as $accommodation)
-            {
-                $content['accommodation'][] = $this->createAccommodationDataTags($accommodation);
-            }
-        }else
-        {
-            $content['accommodation'] = array();
-        }
-        
-        return $content;
-    }
-
-    public function createAccommodationDataTags($accommodation)
-    {
-        $accommodationData = array();
-        $accommodationData['id'] = $accommodation->getId();
-        $accommodationData['name'] = $accommodation->getName();
-        $accommodationData['description'] = $accommodation->getDescription();
-        $accommodationData['atdwStarRating'] = $accommodation->getAtdwStarRating();
-        $accommodationData['heroImage'] = $accommodation->getHeroImage();
-        
-        return $accommodationData;
-    }    
 }

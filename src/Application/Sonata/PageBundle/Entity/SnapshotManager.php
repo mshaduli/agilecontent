@@ -291,7 +291,7 @@ class SnapshotManager extends BaseManager
 
         return $block;
     }
-
+    
     /**
      * {@inheritdoc}
      */

@@ -11,3 +11,18 @@ parameters:
     sonata.page.manager.snapshot.class: Application\Sonata\PageBundle\Entity\SnapshotManager
     #CMS Snapshot Manager
     sonata.page.cms_manager.snapshot.class: Application\Sonata\PageBundle\CmsManager\CmsSnapshotManager
+    
+#    sonata.media.manager.media: Application\Sonata\PageBundle\Block\MediaManagerInterface
+    
+    sonata.media.manager.media.class: Application\Sonata\PageBundle\Block\MediaManager
+    
+services: 
+      
+    sonata.block.service.taggedmedia:
+        class:        Application\Sonata\PageBundle\Block\TaggedMediaBlockService
+        arguments:    ['sonata.block.service.taggedmedia', "@templating", "@service_container", "@sonata.media.manager.media"]
+        tags:
+            -  { name: sonata.block, agile_content_sidebar_title: "RichText", agile_content_sidebar_class: "sidebar_block ui-draggable" , agile_content_sidebar_data_template: "text-block-template" }        
+            
+            
+#Application\Sonata\PageBundle\Block\MediaManagerInterface, instance of Sonata\MediaBundle\Entity\MediaManager
