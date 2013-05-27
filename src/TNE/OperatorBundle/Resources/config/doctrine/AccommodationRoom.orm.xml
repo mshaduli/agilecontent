@@ -10,8 +10,19 @@
     <field name="rateTo" type="decimal" column="rate_to" nullable="true"/>
     
     <many-to-one field="accommodation" target-entity="Accommodation" inversed-by="rooms">
-        <join-column name="accommodation_id" referenced-column-name="id" />
+        <join-column name="accommodation_id" referenced-column-name="id" />        
+        <cascade>
+            <cascade-all/>
+        </cascade>           
     </many-to-one>
+    
+    <one-to-many field="dates" target-entity="AccommodationRoomCalendar" mapped-by="room">
+        <cascade>
+            <cascade-persist />
+            <cascade-refresh />
+            <cascade-remove />
+        </cascade>        
+    </one-to-many>    
         
   </entity>
 </doctrine-mapping>

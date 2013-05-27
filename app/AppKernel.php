@@ -80,9 +80,12 @@ class AppKernel extends Kernel
             new SimpleThings\EntityAudit\SimpleThingsEntityAuditBundle(),
             
             // TinyMCE
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
             new TNE\OperatorBundle\TNEOperatorBundle(),
             new Vich\GeographicalBundle\VichGeographicalBundle(),
+            new ADesigns\CalendarBundle\ADesignsCalendarBundle(),
+            
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

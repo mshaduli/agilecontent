@@ -11,3 +11,5 @@ vendor
 .idea
 nbproject
 composer.phar
+
+.DS_Store

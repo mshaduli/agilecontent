@@ -1,3 +1,69 @@
 {% block map_widget %}
 <iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com.au/maps?hl=en&safe=off&q={{value}}" style="color:#0000FF;text-align:left"></iframe>
 {% endblock %}
+
+{% block room_calendar_type_widget %}
+    {% spaceless %}
+            
+        <div class="calendar_holder" data-room="{{ form.get('value') }}">
+        </div>
+    {% endspaceless %}
+{% endblock %}
+
+{% block operator_media_list_widget %}
+
+    <div id="field_container_{{ id }}" class="field-container">
+        <span id="field_widget_{{ id }}" > 
+            
+            <a href="{{ sonata_admin.field_description.associationadmin.generateUrl('edit', {'id':sonata_admin.field_description.associationadmin.id(sonata_admin.value)}) }}">{% media sonata_admin.value, 'small' %}</a>
+            
+        </span>
+        <span style="display: none" > 
+            {{ form_widget(form) }}
+        </span>
+
+        <span id="field_actions_{{ id }}" class="field-actions">
+
+            {% if sonata_admin.field_description.associationadmin.hasroute('list') and sonata_admin.field_description.associationadmin.isGranted('LIST') %}
+
+                <a  href="{{ sonata_admin.field_description.associationadmin.generateUrl('list') }}"
+                    onclick="return start_field_dialog_form_list_{{ id }}(this);"
+                    class="btn sonata-ba-action"
+                    title="{{ 'link_list'|trans({}, 'SonataAdminBundle') }}"
+                    >
+                    <i class="icon-list"></i>
+                    
+                    {{ 'link_list'|trans({}, 'SonataAdminBundle') }}
+                </a>
+            {% endif %}
+
+            {% if sonata_admin.field_description.associationadmin.hasroute('create') and sonata_admin.field_description.associationadmin.isGranted('CREATE') %}
+                <a  href="{{ sonata_admin.field_description.associationadmin.generateUrl('create') }}"
+                    onclick="return start_field_dialog_form_add_{{ id }}(this);"
+                    class="btn sonata-ba-action"
+                    title="{{ 'link_add'|trans({}, 'SonataAdminBundle') }}"
+                    >
+                    <i class="icon-plus"></i>
+                    {{ 'link_add'|trans({}, 'SonataAdminBundle') }}
+                </a>
+            {% endif %}
+
+            {% if sonata_admin.field_description.associationadmin.hasRoute('delete') and sonata_admin.field_description.associationadmin.isGranted('DELETE') %}
+                <a  href=""
+                    onclick="return remove_selected_element_{{ id }}(this);"
+                    class="btn sonata-ba-action"
+                    title="{{ 'link_delete'|trans({}, 'SonataAdminBundle') }}"
+                    >
+                    <i class="icon-off"></i>
+                    {{ 'link_delete'|trans({}, 'SonataAdminBundle') }}
+                </a>
+            {% endif %}
+        </span>
+
+        <div class="container sonata-ba-modal sonata-ba-modal-edit-one-to-one" style="display: none" id="field_dialog_{{ id }}">
+
+        </div>
+    </div>
+
+    {% include 'SonataDoctrineORMAdminBundle:CRUD:edit_orm_many_association_script.html.twig' %}
+{% endblock %}

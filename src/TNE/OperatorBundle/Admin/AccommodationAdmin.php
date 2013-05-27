@@ -18,6 +18,7 @@ class AccommodationAdmin extends Admin
         $formMapper
             ->with('General')
                 ->add('name')
+                ->add('destination')
                 ->add('site')
                 ->add('description', 'textarea', array(
                         'attr' => array(
@@ -26,8 +27,19 @@ class AccommodationAdmin extends Admin
                         )
                     ))
                 ->add('address')
-                ->add('tags')
-                ->add('atdwStarRating', null, array('label'=>'Star Rating'))
+                ->add('latitude')
+                ->add('longitude')
+                ->add('classifications', null, array('required' => false))
+                ->add('tags', null, array('required' => false))
+                ->add('selfRating', null, array('label'=>'Self Rating'))
+                ->add('starRating', null, array('label'=>'Star Rating'))
+                ->add('hiddenSecret', 'textarea', array(
+                        'required' => false,
+                        'attr' => array(
+                            'class' => 'tinymce span6',
+                            'data-theme' => 'advanced'
+                        )
+                    ))                
             ->end()
             ->with('Contact', array('collapsed' => true))
                 ->add('atdwContactEmail', null, array('label'=>'Email'))
@@ -77,6 +89,7 @@ class AccommodationAdmin extends Admin
             ->add('name')
             ->add('destination')
             ->add('tags')
+            ->add('classifications')
         ;
     }
 
@@ -85,7 +98,7 @@ class AccommodationAdmin extends Admin
         $listMapper
             ->addIdentifier('name')
             ->add('destination')
-            ->add('tags')                
+            ->add('classifications')
             ->add('atdwStarRating', null, array('label'=>'Star Rating'))
             ->add('roomCount', null, array('label'=>'Rooms'))
             ->add('latitude')

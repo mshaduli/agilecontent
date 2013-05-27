@@ -30,8 +30,11 @@ class MediaThumbnailListener
         if (null != $this->driver->getReader()->getClassAnnotation(new \ReflectionClass(get_class($entity)), 'TNE\\OperatorBundle\\Annotation\\ATDW\\Entity') && method_exists($entity, 'addMedia')) {
             foreach ($entity->getMedia() as $media)
             {
-                //\Doctrine\Common\Util\Debug::dump($mediaItem);
-                $this->provider->generateThumbnails($media->getMediaItem());  
+//                \Doctrine\Common\Util\Debug::dump($media);
+                if(null != $media->getMediaItem())
+                {
+                    $this->provider->generateThumbnails($media->getMediaItem());  
+                }
             }
         }
     }

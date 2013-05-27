@@ -1,0 +1,260 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+{% extends 'ApplicationSonataPageBundle::base_func_layout.html.twig' %}
+
+{% block page_stylesheets %}
+    {{ parent() }}
+<link rel="stylesheet" href="http://fast.fonts.com/cssapi/1a5d5164-616e-4355-a99a-4cbe2bd50933.css" type="text/css"/>
+<link rel="stylesheet" href="{{ asset('bundles/tneoperator/angular/app/css/app.css') }}" type="text/css" media="all" />
+
+<link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/font-awesome.min.css') }}" type="text/css" media="all" />
+<link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/theme-falls-creek.css') }}" type="text/css" media="all" />
+
+{% endblock %}
+
+{% block page_javascripts %}
+    {{ parent() }}
+    {{ vichgeo_include_js() }}
+        <script src="{{ asset('bundles/tneoperator/angular/app/lib/angular/angular.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/tneoperator/angular/app/lib/angular/angular-resource.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/tneoperator/angular/app/js/map.js') }}"></script>
+        <script src="{{ asset('bundles/tneoperator/angular/app/js/search.js') }}"></script>
+{% endblock %}    
+    
+{% block content %}
+
+<div ng-app="SearchApp" ng-controller="SearchController">
+
+{% include 'TNEOperatorBundle:Default:header.html.twig' %}
+
+    <div id="main" class="container">
+        <div class="row hidden-phone">
+            <div class="span6">
+                <tabs class="btn-group" data-toggle="buttons-radio" model='filters.OperatorView' operators="operators" options='OperatorViewOptions' classes=""></tabs>
+            </div>
+            <div class="span3">
+                <!--<div class="pull-right">
+                    Sort by <select id="sort">
+                             <option value="">Relevance</option>
+                             <option value="">Distance</option>
+                             <option value="">Price</option>
+                         </select>
+                </div>   -->
+            </div>
+<<<<<<< HEAD
+            <div class="span3 pull-right">
+                <buttons-radio class="btn-group pull-right" data-toggle="buttons-radio" model='UIView' options='UIViewOptions' classes=""></buttons-radio>
+=======
+            <div class="span4">
+                <!-- Fix sort filter
+                 <select id="sort" ng-model="sort">
+                     <option value="">Sort by</option>
+                     <option value="distance">Distance</option>
+                     <option value="min_rate">Price</option>
+                 </select>-->
+
+>>>>>>> search_cleanup
+            </div>
+        </div>
+        <div class="row hidden-phone">
+            <div class="span12 divider"></div>
+        </div>
+        <div class="row" >
+            <div id="main-pane" class="span9" >
+
+                <div ng-show="UIView=='Map'">
+                    <div results-map operators="operators" center="mapOptions.center" zoom="mapOptions.zoom" map="map" class="map-results"></div>
+                </div>
+
+                <div ng-show="UIView=='List'">
+                    <results-list operators="operators"></results-list>
+                </div>
+
+                <div id="grid" ng-show="UIView=='Calendar'">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>Tue<div class="date">11MAR</div></th>
+                            <th>Wed<div class="date">11MAR</div></th>
+                            <th>Thu<div class="date">11MAR</div></th>
+                            <th>Fri<div class="date">11MAR</div></th>
+                            <th>Sat<div class="date">11MAR</div></th>
+                            <th>Sun<div class="date">11MAR</div></th>
+                            <th>Mon<div class="date">11MAR</div></th>
+                            <th>Tue<div class="date">11MAR</div></th>
+                            <th>Wed<div class="date">11MAR</div></th>
+                            <th class="control"><i class="icon-angle-left icon-2x"></i></th>
+                            <th class="control"><i class="icon-angle-right icon-2x"></i></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <span class="title">Silverski Hotel and Apart..</span>
+                                <div>Falls Creek <div data-score="4" class="star pull-right"></div></div>
+                            </td>
+                            <td><span class="price">$999</span></td>
+                            <td><span class="price">$999</span></td>
+                            <td><span class="price">$999</span></td>
+                            <td class="selected"><span class="price">$999</span></td>
+                            <td class="selected"><span class="price">$999</span></td>
+                            <td class="selected"><span class="price">$999</span></td>
+                            <td><span class="price">$999</span></td>
+                            <td><span class="price">$999</span></td>
+                            <td><span class="price">$999</span></td>
+                            <td><a class="btn btn-link btn-off" href="#"><i class="icon-star"></i></a></td>
+                            <td><a class="btn btn-link btn-success" href="#"><i class="icon-ok"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="title">Silverski Hotel and Apart..</span>
+                                <div>Falls Creek <div data-score="4" class="star pull-right"></div></div>
+                            </td>
+                            <td><span class="price">$999</span></td>
+                            <td><span class="price">$999</span></td>
+                            <td><span class="price">$999</span></td>
+                            <td class="selected"><span class="price">$999</span></td>
+                            <td class="selected"><span class="price">$999</span></td>
+                            <td class="selected"><span class="price">$999</span></td>
+                            <td><span class="price">$999</span></td>
+                            <td><span class="price">$999</span></td>
+                            <td><span class="price">$999</span></td>
+                            <td><a class="btn btn-link btn-on" href="#"><i class="icon-star"></i></a></td>
+                            <td><a class="btn btn-link btn-success" href="#"><i class="icon-ok"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="title">Silverski Hotel and Apart..</span>
+                                <div>Falls Creek <div data-score="4" class="star pull-right"></div></div>
+                            </td>
+                            <td><span class="price">$999</span></td>
+                            <td><span class="price">$999</span></td>
+                            <td><span class="price">$999</span></td>
+                            <td class="selected"><span class="price">$999</span></td>
+                            <td class="selected"><span class="price">$999</span></td>
+                            <td class="selected"><span class="price">$999</span></td>
+                            <td><span class="price">$999</span></td>
+                            <td><span class="price">$999</span></td>
+                            <td><span class="price">$999</span></td>
+                            <td><a class="btn btn-link btn-off" href="#"><i class="icon-star"></i></a></td>
+                            <td><a class="btn btn-link btn-success" href="#"><i class="icon-ok"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="title">Silverski Hotel and Apart..</span>
+                                <div>Falls Creek <div data-score="4" class="star pull-right"></div></div>
+                            </td>
+                            <td><span class="price">$999</span></td>
+                            <td><span class="price">$999</span></td>
+                            <td><span class="price">$999</span></td>
+                            <td class="selected"><span class="price">$999</span></td>
+                            <td class="selected"><span class="price">$999</span></td>
+                            <td class="selected booked"><i class="icon-remove icon-large"></i></td>
+                            <td class="booked"><i class="icon-remove icon-large"></i></td>
+                            <td class="booked"><i class="icon-remove icon-large"></i></td>
+                            <td><span class="price">$999</span></td>
+                            <td><a class="btn btn-link btn-off" href="#"><i class="icon-star"></i></a></td>
+                            <td><a class="btn btn-link btn-success" href="#"><i class="icon-ok"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="title">Silverski Hotel and Apart..</span>
+                                <div>Falls Creek <div data-score="4" class="star pull-right"></div></div>
+                            </td>
+                            <td><span class="price">$999</span></td>
+                            <td><span class="price">$999</span></td>
+                            <td><span class="price">$999</span></td>
+                            <td class="selected"><span class="price">$999</span></td>
+                            <td class="selected"><span class="price">$999</span></td>
+                            <td class="selected"><span class="price">$999</span></td>
+                            <td><span class="price">$999</span></td>
+                            <td><span class="price">$999</span></td>
+                            <td><span class="price">$999</span></td>
+                            <td><a class="btn btn-link btn-off" href="#"><i class="icon-star"></i></a></td>
+                            <td><a class="btn btn-link btn-success" href="#"><i class="icon-ok"></i></a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div>
+                        <a class="btn btn-full" href="#">Show me more</a>
+                    </div>
+                </div>
+            
+
+            </div>
+
+<<<<<<< HEAD
+            <div id="side-pane" class="span3 hidden-phone">
+                {% include 'TNEOperatorBundle:Default:filters.html.twig' %}
+=======
+            <div ng-show="UIView=='List'">
+                <results-list operators="operators" sort="sort"></results-list>
+>>>>>>> search_cleanup
+            </div>
+        </div>
+
+<<<<<<< HEAD
+
+
+=======
+       <div class="span3">
+           <br/>
+           <br/>
+           <ul class="nav nav-list">
+               <li class="nav-header">Accommodation Type</li>
+               <classifications-filter classifications="classifications" checked="{[{ true }]}" toggle="toggleClassification(e)"></classifications-filter>
+               <li class="nav-header"><br/>Distance from</li>
+               <distance-filter distance="filters.distance" destination="filters.destination" destinations="destinations"></distance-filter>
+               <li class="nav-header"><br/>Filter by tags</li>
+               <tag-filter></tag-filter>
+               <li class="nav-header"><br/>Price</li>
+               <price-filter price="filters.price"></price-filter>
+               <li class="nav-header"><br/>Min. rating</li>
+               <rating-filter score="0" op-rating="filters.rating"></rating-filter>
+               <li class="nav-header"><br/>Facilities</li>
+               <facilities-filter></facilities-filter>
+           </ul>
+       </div>
+>>>>>>> search_cleanup
+    </div>
+
+{% include 'TNEOperatorBundle:Default:footer.html.twig' %}
+
+    <div id="design"></div>
+</div>
+<<<<<<< HEAD
+        
+<script>
+    $(document).ready(function(){
+
+        // Footer map
+        var footerMapOptions = {
+            zoom: 12,
+            center: new google.maps.LatLng(-36.86424, 147.282715),
+            disableDefaultUI: true,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var footerMap = new google.maps.Map(document.getElementById("footerMap"), footerMapOptions);
+        var footerMarker = new google.maps.Marker({
+            position: new google.maps.LatLng(-36.86424, 147.282715),
+            map: footerMap,
+            icon: '/bundles/tneoperator/img/map/marker_blue.png'
+        });
+
+        //angular.bootstrap(document, ['SearchApp']);
+    });
+</script>
+            
+=======
+
+>>>>>>> search_cleanup
+{% endblock %}

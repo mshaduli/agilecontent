@@ -24,7 +24,17 @@
           </call>
       </service>  
       
-       <service id="sonata.admin.accommodation.media" class="TNE\OperatorBundle\Admin\AccommodationMediaAdmin">
+       <service id="sonata.admin.accommodation.room.dates" class="TNE\OperatorBundle\Admin\AccommodationCalendarAdmin">
+          <tag name="sonata.admin" manager_type="orm" show_in_dashboard="false"/>
+          <argument />
+          <argument>TNE\OperatorBundle\Entity\AccommodationRoomCalendar</argument>
+          <argument>SonataAdminBundle:CRUD</argument>
+          <call method="setTranslationDomain">
+              <argument>TNEOperatorBundle</argument>
+          </call>
+      </service>        
+      
+       <service id="sonata.admin.accommodation.media" class="TNE\OperatorBundle\Admin\OperatorMediaAdmin">
           <tag name="sonata.admin" manager_type="orm" show_in_dashboard="false"/>
           <argument />
           <argument>TNE\OperatorBundle\Entity\OperatorMedia</argument>
@@ -32,6 +42,26 @@
           <call method="setTranslationDomain">
               <argument>TNEOperatorBundle</argument>
           </call>
-      </service>                
+      </service>
+
+        <service id="sonata.admin.accommodation.classifications" class="TNE\OperatorBundle\Admin\AccommodationClassificationsAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Tags" label="ATDW Classifications"/>
+            <argument />
+            <argument>TNE\OperatorBundle\Entity\AccommodationClassification</argument>
+            <argument>SonataAdminBundle:CRUD</argument>
+            <call method="setTranslationDomain">
+                <argument>TNEOperatorBundle</argument>
+            </call>
+        </service>
+
+        <service id="sonata.admin.form.type.operator_media_list" class="TNE\OperatorBundle\Form\Type\OperatorMediaType">
+            <tag name="form.type" alias="operator_media_list" />
+        </service>
+            
+    <service id="sonata.admin.accommodation.calendar" class="TNE\OperatorBundle\EventListener\CalendarEventListener">
+        <argument type="service" id="doctrine.orm.entity_manager" />
+        <tag name="kernel.event_listener" event="calendar.load_events" method="loadEvents" />
+    </service>
+      
    </services>
 </container>

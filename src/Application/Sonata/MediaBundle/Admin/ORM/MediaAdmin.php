@@ -16,6 +16,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 
 class MediaAdmin extends Admin
 {
+
     /**
      * @param  \Sonata\AdminBundle\Datagrid\DatagridMapper $datagridMapper
      * @return void
@@ -27,6 +28,7 @@ class MediaAdmin extends Admin
             ->add('providerReference')
             ->add('enabled')
             ->add('context')
+            ->add('tags')
         ;
 
         $providers = array();

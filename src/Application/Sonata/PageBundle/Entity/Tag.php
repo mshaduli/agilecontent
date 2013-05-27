@@ -34,11 +34,25 @@ class Tag
      */
     private $media;
     
+    private $parent;
+    
+    private $position;    
+    
+    private $hidden;        
+
+
     /**
      * @var array
      */
     private $accommodation;    
-
+    
+    private $attraction;
+    
+    private $event;
+    
+    private $restaurant;
+    
+    private $article;
 
     /**
      * Get id
@@ -69,6 +83,21 @@ class Tag
      * @return string 
      */
     public function getName()
+    {
+
+        if($this->getParentName()) return $this->name . ' \ ' . $this->getParentName();
+        return $this->name;
+    }
+    
+    public function getParentName()
+    {
+        //Check if parent == self and return false
+        
+        if(null != $this->getParent()) return $this->getParent()->getName();
+        return false;
+    }
+    
+    public function getSingleName()
     {
         return $this->name;
     }
@@ -133,10 +162,67 @@ class Tag
     {
         return $this->accommodation;
     }    
+    
+    
+    public function getParent() {
+        return $this->parent;
+    }
 
+    public function setParent($parent) {
+        $this->parent = $parent;
+    }
 
+    public function getPosition() {
+        return $this->position;
+    }
+
+    public function setPosition($position) {
+        $this->position = $position;
+    }
+
+    public function getHidden() {
+        return $this->hidden;
+    }
+
+    public function setHidden($hidden) {
+        $this->hidden = $hidden;
+    }
+
+    
     public function __toString() {
         return $this->getName();
     }
     
+    public function getAttraction() {
+        return $this->attraction;
+    }
+
+    public function setAttraction($attraction) {
+        $this->attraction = $attraction;
+    }
+
+    public function getEvent() {
+        return $this->event;
+    }
+
+    public function setEvent($event) {
+        $this->event = $event;
+    }
+
+    public function getRestaurant() {
+        return $this->restaurant;
+    }
+
+    public function setRestaurant($restaurant) {
+        $this->restaurant = $restaurant;
+    }
+
+    public function getArticle() {
+        return $this->article;
+    }
+
+    public function setArticle($article) {
+        $this->article = $article;
+    }
+
 }

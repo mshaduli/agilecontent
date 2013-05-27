@@ -22,6 +22,22 @@ class OperatorMedia
      * @var integer
      */
     protected $accommodation;
+    
+    /**
+     * @var integer
+     */
+    protected $event;    
+    
+    
+    /**
+     * @var integer
+     */
+    protected $attraction;   
+    
+    /**
+     * @var integer
+     */
+    protected $restaurant;       
 
     /**
      * @var \DateTime
@@ -279,7 +295,32 @@ class OperatorMedia
         $this->width = $width;
     }
 
-            
+    
+    public function getEvent() {
+        return $this->event;
+    }
+
+    public function setEvent($event) {
+        $this->event = $event;
+    }
+
+    public function getAttraction() {
+        return $this->attraction;
+    }
+
+    public function setAttraction($attraction) {
+        $this->attraction = $attraction;
+    }    
+    
+    public function getRestaurant() {
+        return $this->restaurant;
+    }
+
+    public function setRestaurant($restaurant) {
+        $this->restaurant = $restaurant;
+    }
+
+        
     public function setField($key, $value)
     {
         switch($key)

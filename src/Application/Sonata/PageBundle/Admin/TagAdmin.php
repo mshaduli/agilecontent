@@ -17,6 +17,9 @@ class TagAdmin extends Admin
     {
         $formMapper
             ->add('name')
+            ->add('parent')
+            ->add('position')
+            ->add('hidden')
         ;
     }
 
@@ -24,6 +27,9 @@ class TagAdmin extends Admin
     {
         $datagridMapper
             ->add('name')
+            ->add('parent')
+            ->add('position')                
+            ->add('hidden')
         ;
     }
 
@@ -31,6 +37,9 @@ class TagAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('name')
+            ->add('parent')
+            ->add('position')
+            ->add('hidden')
         ;
     }
 }

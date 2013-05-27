@@ -26,16 +26,21 @@ class MediaListener
     {
         $entity = $args->getEntity();
         
+        
+        
         if (null != $this->driver->getReader()->getClassAnnotation(new \ReflectionClass(get_class($entity)), 'TNE\\OperatorBundle\\Annotation\\ATDW\\Entity') && method_exists($entity, 'addMedia')) {
             
+            
             $newMedia = $entity->getMedia();
+            
+            \Doctrine\Common\Util\Debug::dump($entity);
             
             foreach($newMedia as &$operatorMedia){
                 
                 $remotePath = parse_url($operatorMedia->getRemotePath());
                 $remotePathInfo = pathinfo($remotePath['path']);
 
-                TryAgain:
+//                TryAgain:
                     
                 echo "\n ";
                 
@@ -48,10 +53,11 @@ class MediaListener
                     copy($operatorMedia->getRemotePath(), $localFile);
                 
                 }
-                catch (Exception $e)
+                catch (\Exception $e)
                 {
                     echo 'Download failed with message: ' . $e->getMessage() . '. Trying again...';
-                    goto TryAgain;
+//                    goto TryAgain;
+                    continue;
                 }
                 
                 $mediaItem = new Media();
@@ -61,8 +67,8 @@ class MediaListener
 
                 $mediaItem->setName($operatorMedia->getMultimediaId());
                 $mediaItem->setDescription($operatorMedia->getAltText());
-                $mediaItem->setAuthorName('ATDW');
-                $mediaItem->setContext('default');
+                $mediaItem->setAuthorName(get_class($entity));
+                $mediaItem->setContext('ATDW');
                 
                 if(null === $operatorMedia->getHeight()){
                     $height = $operatorMedia->getMediaOrientation()=='LARGELAND'?600:800;

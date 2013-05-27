@@ -25,7 +25,7 @@ class Accommodation
      * @var integer
      * @ATDW\ProductAttrId
      */    
-    private $atdwId;
+    private $atdwId = 0;
     
     /**
      * @ATDW\ProductName
@@ -46,8 +46,11 @@ class Accommodation
      *@ATDW\StarRating
      */
     private $atdwStarRating;
-
     
+    private $selfRating = 0;
+
+    private $starRating = 0;
+
     /**
      *@ATDW\CityName
      */    
@@ -74,6 +77,11 @@ class Accommodation
      * @var type ArrayCollection
      */
     protected $tags;
+
+    /**
+     * fixme - implement ATDW\Classifications
+     */
+    protected $classifications;
 
     /**
      *
@@ -128,6 +136,9 @@ class Accommodation
      *@ATDW\Media
      */
     protected $media;
+    
+    
+    protected $hiddenSecret;
 
 
     protected $gallery;
@@ -141,6 +152,7 @@ class Accommodation
     public function __construct() {
         $this->rooms = new ArrayCollection();
         $this->media = new ArrayCollection();
+        $this->classifications = new ArrayCollection();
     }
 
     /**
@@ -403,7 +415,16 @@ class Accommodation
     {
         return $this->getRooms()->count();
     }
+    
+    public function getHiddenSecret() {
+        return $this->hiddenSecret;
+    }
 
+    public function setHiddenSecret($hiddenSecret) {
+        $this->hiddenSecret = $hiddenSecret;
+    }
+
+    
     public function __toString() {
         return $this->getName();
     }
@@ -430,13 +451,13 @@ class Accommodation
     
     public function getHeroImage()
     {
-        $gallery = $this->getGallery();
-        if($gallery)
+        foreach ($this->getMedia() as $media)
         {
-            $images = $gallery->getGalleryHasMedias();
-            if(count($images) > 0) return $images[0];
+            //if($media->getMediaItem()->hasTag('hero')) return $media->getMediaItem();
+ 
+            return $media->getMediaItem();
         }
-        
+ 
         return false;
     }
     
@@ -445,9 +466,81 @@ class Accommodation
         $tagLinks = array();
         foreach($this->getTags() as $tag)
         {
-            $tagLinks[]=$tag->getName();
+            if(!$tag->getHidden())
+            {
+                $tagLinks[]=$tag->getName();
+            }
         }
         return $tagLinks;
     }    
     
+    public function getSelfRating() {
+        return $this->selfRating == null ? 0 : $this->selfRating;
+    }
+
+    public function setSelfRating($selfRating) {
+        $this->selfRating = $selfRating;
+    }
+    
+    public function getRating()
+    {
+        return $this->getStarRating() == 0 ? $this->getSelfRating() : $this->getStarRating();
+    }
+    
+    public function computeStarRating()
+    {        
+        if ($this->getAtdwStarRating() == 'Not Available' ) $this->setStarRating(0); 
+        else $this->setStarRating($this->fractionToDec($this->getAtdwStarRating()));
+    }
+    
+    public function fractionToDec($input)
+    {
+        $rating = explode(' ', \str_replace(' Stars', '', $input));
+        $result = 0;
+        $fraction = array('whole'=>0);
+        if(count($rating)>1)
+        {
+            $fraction['whole'] = $rating[0];
+            $part = explode('/', $rating[1]);
+            $fraction['n'] = $part[0];
+            $fraction['d'] = $part[1];
+            $result = $fraction['whole'] + $fraction['n'] / $fraction['d'];
+        }
+        return $result;
+    }
+
+
+    public function getStarRating() {
+        return $this->starRating;
+    }
+
+    public function setStarRating($starRating) {
+        $this->starRating = $starRating;
+    }
+
+    /**
+     * @param \TNE\OperatorBundle\Entity\type $classification
+     */
+    public function setClassifications($classifications)
+    {
+        $this->classifications = $classifications;
+    }
+
+    /**
+     * @return \TNE\OperatorBundle\Entity\type
+     */
+    public function getClassifications()
+    {
+        return $this->classifications;
+    }
+
+    public function addClassification($classification){
+        $classification->setAccommodation($this);
+        $this->classifications->add($classification);
+    }
+
+    public function removeClassification($classification){
+        $this->classifications->remove($classification);
+    }
+
 }

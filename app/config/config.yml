@@ -23,7 +23,14 @@ imports:
     - { resource: '@TNEOperatorBundle/Resources/config/services.xml' }
     
     - { resource: '@ApplicationSonataPageBundle/Resources/config/tag.xml' }
+    - { resource: '@ApplicationSonataPageBundle/Resources/config/article.xml' }
     - { resource: '@TNEOperatorBundle/Resources/config/accommodation.xml' }    
+    - { resource: '@TNEOperatorBundle/Resources/config/event.xml' }        
+    - { resource: '@TNEOperatorBundle/Resources/config/attraction.xml' }
+    - { resource: '@TNEOperatorBundle/Resources/config/restaurant.xml' }
+    - { resource: '@TNEOperatorBundle/Resources/config/tour.xml' }
+    - { resource: '@TNEOperatorBundle/Resources/config/hire.xml' }
+    - { resource: '@TNEOperatorBundle/Resources/config/destination.xml' }
     - { resource: '@TNEOperatorBundle/Resources/config/map.xml' }
     - { resource: '@TNEOperatorBundle/Resources/config/annotations.xml' }
     

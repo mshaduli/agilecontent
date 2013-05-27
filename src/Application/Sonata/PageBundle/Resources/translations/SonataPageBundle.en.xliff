@@ -368,7 +368,7 @@
       </trans-unit>
       <trans-unit id="91" resname="sonata_page">
         <source>sonata_page</source>
-        <target>Page</target>
+        <target>Content</target>
       </trans-unit>
       <trans-unit id="92" resname="title_create_snapshot">
         <source>title_create_snapshot</source>
@@ -492,7 +492,7 @@
       </trans-unit>
       <trans-unit id="122" resname="site">
           <source>site</source>
-          <target>Site</target>
+          <target>Sites</target>
       </trans-unit>
       <trans-unit id="123" resname="show.label_is_default">
           <source>show.label_is_default</source>
@@ -580,7 +580,7 @@
       </trans-unit>
       <trans-unit id="144" resname="sonata_page">
           <source>sonata_page</source>
-          <target>Pages</target>
+          <target>Content</target>
       </trans-unit>
       <trans-unit id="145" resname="form.label_page_alias">
           <source>form.label_page_alias</source>

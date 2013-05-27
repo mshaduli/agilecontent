@@ -1,1 +1,354 @@
-Hello {{ name }}!
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+{% extends 'ApplicationSonataPageBundle::base_func_layout.html.twig' %}
+
+{% block page_stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="{{ asset('bundles/tneoperator/angular/app/css/app.css') }}" type="text/css" media="all" />
+
+    <link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/font-awesome.min.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/theme-falls-creek.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block page_javascripts %}
+    {{ parent() }}
+    {{ vichgeo_include_js() }}
+        <script type="text/javascript" src="http://fast.fonts.com/jsapi/1a5d5164-616e-4355-a99a-4cbe2bd50933.js"></script>
+        <script src="{{ asset('bundles/tneoperator/angular/app/lib/angular/angular.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/tneoperator/angular/app/lib/angular/angular-resource.js') }}" type="text/javascript"></script>
+
+        <script src="{{ asset('bundles/tneoperator/js/jquery.prettycheckable.js') }}"></script>
+        <script src="{{ asset('bundles/tneoperator/angular/app/js/app.js') }}"></script>
+{% endblock %}    
+    
+{% block content %}
+
+<div id="maincontroller" ng-app="OperatorListApp" ng-controller="AppController">
+
+{% include 'TNEOperatorBundle:Default:header.html.twig' %}
+
+
+    <div id="main" class="container">
+        <div class="row hidden-phone">
+            <div class="span6">
+                <tabs class="btn-group" data-toggle="buttons-radio" model='operatorView' options='operatorViewOptions' classes=""></tabs>
+            </div>
+            <div class="span3">
+                <!--<div class="pull-right">
+                    Sort by <select id="sort">
+                             <option value="">Relevance</option>
+                             <option value="">Distance</option>
+                             <option value="">Price</option>
+                         </select>
+                </div>   -->
+            </div>
+            <div class="span3 pull-right">
+                <buttons-radio class="btn-group pull-right" data-toggle="buttons-radio" model='UIView' options='UIViewOptions' classes=""></buttons-radio>
+            </div>
+        </div>
+        <div class="row hidden-phone">
+            <div class="span12 divider"></div>
+        </div>
+
+        <div class="row">
+            <div id="main-pane" >
+
+                <div id="accommodation-list-view" ng-show="operatorView=='Accommodation'">
+                    <div ng-show="UIView=='List'">
+                        <p style="display: none">Showing {[{ accommodation.length }]} listings </p>
+
+                        <ul class="cards">
+
+                            <li class="span3" ng-repeat="operator in accommodation">
+                                <div class="card">
+                                    <div class="title">{[{operator.name}]}</div>
+                                    <div class="thumbnail">
+                                        <div class="info-bar clearfix">
+                                            <div class="pull-left"><img src="img/design-tripadvisor.png" width="99" height="17" /></div>
+                                            <div score="{[{ operator.rating }]}" class="star pull-right" rating></div>
+                                        </div>
+                                        <div class="tag tag-special"><i class="icon-heart"></i> Special</div>
+                                        <div class="thumbnail-inner"><img src="http://regional.tne.applicationstaging.com/uploads/media/default/0001/01/thumb_91_default_big.jpeg" /></div>
+                                    </div>
+                                    <div class="content">
+                                        <div class="content-group"><span class="label-important">1</span> Night from <span class="price pull-right label-important">${[{ operator.min_rate }]}</span></div>
+                                        <div class="divider"></div>
+                                        <div class="content-group">
+                                            <span>Falls Creek</span> <span class="pull-right"><i class="icon-bolt"></i></span>
+                                            <span>Bed and Breakfast</span> <span class="price pull-right">{[{ operator.distance | number:2 | distance }]}</span>
+                                        </div>
+                                        <div>
+                                            <a href="#" class="btn btn-more"><i class="icon-star icon-white icon-large"></i></a>
+                                            <a href="#" class="btn btn-primary">More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                         </ul>        
+                    </div>
+                    <div ng-show="UIView=='Map'" class="map-results">
+                        <p>Showing {[{ accommodation.length }]} listings </p>
+
+                        <div id="mapCard">
+                            <div class="card">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <div class="title">Beechworth Carriage Motor Inn</div>
+                                <div class="content-top">
+                                    <div class="content-group"><span class="label-important">2</span> Nights from <span class="price pull-right label-important">$265</span></div>
+                                </div>
+                                <div class="thumbnail">
+                                    <div class="info-bar clearfix">
+                                        <div class="pull-left"><img src="img/design-tripadvisor.png" width="99" height="17" /></div>
+                                        <div data-score="4" class="star pull-right"></div>
+                                    </div>
+                                    <div class="tag tag-special"><i class="icon-heart"></i> Special</div>
+                                    <div class="thumbnail-inner"><img ng-src="http://regional.tne.applicationstaging.com/uploads/media/default/0001/01/thumb_91_default_big.jpeg" src="http://regional.tne.applicationstaging.com/uploads/media/default/0001/01/thumb_91_default_big.jpeg"></div>
+                                </div>
+                                <div class="content">
+                                    <div class="content-group">
+                                        <span>Falls Creek</span> <span class="pull-right"><i class="icon-bolt"></i></span>
+                                        <span>Bed and Breakfast</span> <span class="price pull-right">99km</span>
+                                    </div>
+                                    <div>
+                                        <a href="#" class="btn btn-more"><i class="icon-star icon-white icon-large"></i></a>
+                                        <a href="#" class="btn btn-primary">More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div google-map id="acc_map" class="Flexible-container" center="mapOptions.center" zoom="mapOptions.zoom" view="UIView" optype="operatorView" markers="accommodation"></div>
+                    </div>
+                </div>
+
+                <div id="event-list-view" ng-show="operatorView=='Events'">
+                    <div ng-show="UIView=='List'">
+
+                          <p>Showing {[{ events.length }]} listings </p>
+
+                            <ul class="thumbnails">
+
+                                <li class="span3" ng-repeat="operator in events">
+                                  <div class="thumbnail">
+                                    <legend>Distance {[{ operator.distance | number:2}]}km</legend>
+                                    <img class="opimg" ng-src="{[{operator.image}]}"/>
+                                    <b>{[{operator.name}]}</b>
+                                    <div class="truncate">{[{operator.description | truncate:120 }]}</div>
+                                  </div>
+                                </li>
+
+                             </ul>
+                     </div>
+                    <div id="grid" ng-show="UIView=='Calendar'">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>Tue<div class="date">11MAR</div></th>
+                                <th>Wed<div class="date">11MAR</div></th>
+                                <th>Thu<div class="date">11MAR</div></th>
+                                <th>Fri<div class="date">11MAR</div></th>
+                                <th>Sat<div class="date">11MAR</div></th>
+                                <th>Sun<div class="date">11MAR</div></th>
+                                <th>Mon<div class="date">11MAR</div></th>
+                                <th>Tue<div class="date">11MAR</div></th>
+                                <th>Wed<div class="date">11MAR</div></th>
+                                <th class="control"><i class="icon-angle-left icon-2x"></i></th>
+                                <th class="control"><i class="icon-angle-right icon-2x"></i></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <span class="title">Silverski Hotel and Apart..</span>
+                                    <div>Falls Creek <div data-score="4" class="star pull-right"></div></div>
+                                </td>
+                                <td><span class="price">$999</span></td>
+                                <td><span class="price">$999</span></td>
+                                <td><span class="price">$999</span></td>
+                                <td class="selected"><span class="price">$999</span></td>
+                                <td class="selected"><span class="price">$999</span></td>
+                                <td class="selected"><span class="price">$999</span></td>
+                                <td><span class="price">$999</span></td>
+                                <td><span class="price">$999</span></td>
+                                <td><span class="price">$999</span></td>
+                                <td><a class="btn btn-link btn-off" href="#"><i class="icon-star"></i></a></td>
+                                <td><a class="btn btn-link btn-success" href="#"><i class="icon-ok"></i></a></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="title">Silverski Hotel and Apart..</span>
+                                    <div>Falls Creek <div data-score="4" class="star pull-right"></div></div>
+                                </td>
+                                <td><span class="price">$999</span></td>
+                                <td><span class="price">$999</span></td>
+                                <td><span class="price">$999</span></td>
+                                <td class="selected"><span class="price">$999</span></td>
+                                <td class="selected"><span class="price">$999</span></td>
+                                <td class="selected"><span class="price">$999</span></td>
+                                <td><span class="price">$999</span></td>
+                                <td><span class="price">$999</span></td>
+                                <td><span class="price">$999</span></td>
+                                <td><a class="btn btn-link btn-on" href="#"><i class="icon-star"></i></a></td>
+                                <td><a class="btn btn-link btn-success" href="#"><i class="icon-ok"></i></a></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="title">Silverski Hotel and Apart..</span>
+                                    <div>Falls Creek <div data-score="4" class="star pull-right"></div></div>
+                                </td>
+                                <td><span class="price">$999</span></td>
+                                <td><span class="price">$999</span></td>
+                                <td><span class="price">$999</span></td>
+                                <td class="selected"><span class="price">$999</span></td>
+                                <td class="selected"><span class="price">$999</span></td>
+                                <td class="selected"><span class="price">$999</span></td>
+                                <td><span class="price">$999</span></td>
+                                <td><span class="price">$999</span></td>
+                                <td><span class="price">$999</span></td>
+                                <td><a class="btn btn-link btn-off" href="#"><i class="icon-star"></i></a></td>
+                                <td><a class="btn btn-link btn-success" href="#"><i class="icon-ok"></i></a></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="title">Silverski Hotel and Apart..</span>
+                                    <div>Falls Creek <div data-score="4" class="star pull-right"></div></div>
+                                </td>
+                                <td><span class="price">$999</span></td>
+                                <td><span class="price">$999</span></td>
+                                <td><span class="price">$999</span></td>
+                                <td class="selected"><span class="price">$999</span></td>
+                                <td class="selected"><span class="price">$999</span></td>
+                                <td class="selected booked"><i class="icon-remove icon-large"></i></td>
+                                <td class="booked"><i class="icon-remove icon-large"></i></td>
+                                <td class="booked"><i class="icon-remove icon-large"></i></td>
+                                <td><span class="price">$999</span></td>
+                                <td><a class="btn btn-link btn-off" href="#"><i class="icon-star"></i></a></td>
+                                <td><a class="btn btn-link btn-success" href="#"><i class="icon-ok"></i></a></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="title">Silverski Hotel and Apart..</span>
+                                    <div>Falls Creek <div data-score="4" class="star pull-right"></div></div>
+                                </td>
+                                <td><span class="price">$999</span></td>
+                                <td><span class="price">$999</span></td>
+                                <td><span class="price">$999</span></td>
+                                <td class="selected"><span class="price">$999</span></td>
+                                <td class="selected"><span class="price">$999</span></td>
+                                <td class="selected"><span class="price">$999</span></td>
+                                <td><span class="price">$999</span></td>
+                                <td><span class="price">$999</span></td>
+                                <td><span class="price">$999</span></td>
+                                <td><a class="btn btn-link btn-off" href="#"><i class="icon-star"></i></a></td>
+                                <td><a class="btn btn-link btn-success" href="#"><i class="icon-ok"></i></a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div>
+                            <a class="btn btn-full" href="#">Show me more</a>
+                        </div>
+                    </div>
+                    <div ng-show="UIView=='Map'">
+                        <p>Showing {[{ events.length }]} listings </p>
+
+                        <div google-map id="event_map" class="Flexible-container" center="mapOptions.center" zoom="mapOptions.zoom" view="UIView" optype="operatorView" markers="events"></div>
+                        <h1><div class="copt"></div></h1>
+                        <p><div class="copd"></div></p>
+                    </div>
+                </div>
+
+                <div id="attraction-list-view" ng-show="operatorView=='Attractions'">
+                    <div ng-show="UIView=='List'">
+                          <p>Showing {[{ attractions.length }]} listings </p>
+
+                            <ul class="thumbnails">
+
+                                <li class="span3" ng-repeat="operator in attractions">
+                                  <div class="thumbnail">
+                                    <legend>Distance {[{ operator.distance | number:2}]}km</legend>
+                                    <img class="opimg" ng-src="{[{operator.image}]}"/>
+                                    <b>{[{operator.name}]}</b>
+                                    <div class="truncate">{[{operator.description | truncate:120 }]}</div>
+                                  </div>
+                                </li>
+
+                             </ul>
+
+                    </div>
+                    <div ng-show="UIView=='Map'">
+                        <p>Showing {[{ attractions.length }]} listings </p>
+                        <div google-map id="attr_map" class="Flexible-container" center="mapOptions.center" zoom="mapOptions.zoom" view="UIView" optype="operatorView" markers="attractions"></div>
+                        <h1><div class="copt"></div></h1>
+                        <p><div class="copd"></div></p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="side-pane">
+                {% include 'TNEOperatorBundle:Default:filters.html.twig' %}
+            </div>
+        </div>
+    </div>
+
+{% include 'TNEOperatorBundle:Default:footer.html.twig' %}
+
+
+    <div id="design"></div>
+   
+</div>
+        
+        <script>
+$(document).ready(function(){
+
+    // Custom Checkbox
+    $('input.tne').prettyCheckable();
+
+    // Footer map
+    var footerMapOptions = {
+        zoom: 12,
+        center: new google.maps.LatLng(-36.86424, 147.282715),
+        disableDefaultUI: true,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    var footerMap = new google.maps.Map(document.getElementById("footerMap"),
+            footerMapOptions);
+
+$( "#price-slider" ).slider({
+      range: true,
+      min: 0,
+      max: 500,
+      step: 50,
+      values: [ 120, 350 ],
+      slide: function( event, ui ) {
+        $( "#price-slider-amt" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+      }
+    });
+    
+    $( "#price-slider-amt" ).val( "$" + $( "#price-slider" ).slider( "values", 0 ) +
+      " - $" + $( "#price-slider" ).slider( "values", 1 ) );
+    
+    
+    $('.star').raty({
+      path: '/bundles/tneoperator/img',
+      score: function() {
+        return $(this).attr('data-score');
+      }
+    });
+		
+    angular.bootstrap(document, ['SearchApp']);
+});        
+            </script>
+            
+{% endblock %}

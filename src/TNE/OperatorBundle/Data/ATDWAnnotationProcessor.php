@@ -61,10 +61,13 @@ class ATDWAnnotationProcessor {
         $result = $client->CommandHandler($param);
 
         $xmlUf8 = preg_replace('/(<\?xml[^?]+?)utf-16/i', '$1utf-8', $result->CommandHandlerResult);
+        
+        echo $xmlUf8;
+        
         $this->atdwResults = simplexml_load_string($xmlUf8);        
     }
 
-    public function populate($object, $index=1)
+    public function populate($object, $index=1, $em=null)
     {         
         $classMetadata = $this->metadataFactory->getMetadataForClass(get_class($object));
         echo "\n----------------------------------------------------------------------------------------------------\n Importing: " . $object->getName() . " \n\n";
@@ -72,8 +75,12 @@ class ATDWAnnotationProcessor {
             if (isset($propertyMetadata->xpathString)) {
                 if(($propertyMetadata->commandType == 'set1'))
                 {
-                    $atdwValue = $this->getAtdwResults()->xpath(str_replace('$index', $index, $propertyMetadata->xpathString));
-                    $propertyMetadata->setValue($object, $atdwValue[0]);
+                    $atdwValue = $this->getAtdwResults()->xpath(str_replace('$index', $index, $propertyMetadata->xpathString));    
+                    if(isset($atdwValue[0]))
+                    {
+                        // Handle date type
+                        $propertyMetadata->setValue($object, (string) $atdwValue[0]);
+                    }
                 }
                 else
                 {                    
@@ -90,9 +97,33 @@ class ATDWAnnotationProcessor {
                             $object->$addMethod($subObject);
                         }
                     }
+                    else if(property_exists($propertyMetadata, 'setManyToManyMethod'))
+                    {
+                        $setManyToManyMethod = $propertyMetadata->setManyToManyMethod;
+                        foreach($atdwValue as $row)
+                        {
+                            /**
+                             * @fixme Special Case - assuming structure about the property, convert to generic use!
+                             */
+
+                            echo "\n\n -- Loading classifications -- \n\n";
+
+                            var_dump($row);
+
+                            $repoName = $propertyMetadata->repoName;
+                            $r = $em->createQuery(
+                                'SELECT r FROM ' . $repoName . ' r' . ' WHERE r.keyStr = :atdwKey'
+                            )
+                            ->setParameter('atdwKey', $row->product_type_id)
+                            ->getSingleResult();
+
+                            $r->$setManyToManyMethod($object);
+                            \Doctrine\Common\Util\Debug::dump($r);
+                        }
+                    }
                     else
                     {
-                        if(isset($atdwValue[0])) $propertyMetadata->setValue($object, $atdwValue[0]);
+                        if(isset($atdwValue[0])) $propertyMetadata->setValue($object, (string) $atdwValue[0]);
                     }
                 }
             }

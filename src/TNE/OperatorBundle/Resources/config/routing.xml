@@ -3,8 +3,28 @@
 <routes xmlns="http://symfony.com/schema/routing"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
-
-    <route id="tne_operator_homepage" pattern="/hello/{name}">
+    
+    <route id="tne_operator_listing_list" pattern="/operators">
         <default key="_controller">TNEOperatorBundle:Default:index</default>
+    </route>
+    
+    <route id="tne_operator_listing_search" pattern="/operators/search">
+        <default key="_controller">TNEOperatorBundle:Default:search</default>
+    </route>  
+    
+    <route id="tne_operator_listing_destinations_list" pattern="/operators/destinations">
+        <default key="_controller">TNEOperatorBundle:Default:destinations</default>
+    </route>     
+    
+    <route id="tne_operator_listing_attractions_list" pattern="/operators/attractions">
+        <default key="_controller">TNEOperatorBundle:Default:attractions</default>
+    </route>         
+    
+    <route id="tne_operator_listing_events_list" pattern="/operators/events">
+        <default key="_controller">TNEOperatorBundle:Default:events</default>
+    </route>
+
+    <route id="tne_operator_listing_classifications_list" pattern="/operators/classifications">
+        <default key="_controller">TNEOperatorBundle:Default:classifications</default>
     </route>
 </routes>
