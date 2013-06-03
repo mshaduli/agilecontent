@@ -123,14 +123,21 @@ SearchApp.directive('distanceFilter', function(){
         scope: {
             distance: '=',
             destination: '=',
-            destinations: '='
+            destinations: '=',
+            limit: '@'
+        },
+        controller: function($scope){
+            $scope.more = function(){
+                $scope.limit = $scope.destinations.length;
+            };
         },
         template: '<li class="nav-item-slider">'+
                     '<div slider min="0" max="200" step="5" model="distance" class="slider" append="km"></div>'+
                     '</li>' +
-                    '<li class="nav-row" ng-repeat="dest in destinations">' +
+                    '<li class="nav-row" ng-repeat="dest in destinations | limitTo: limit">' +
                         '<radio label="{[{ dest.name }]}" value="{[{ dest.id }]}" checked="{[{ true }]}" model="$parent.destination"></radio>' +
-                    '</li>'
+                    '</li>' +
+                    '<li class="clearfix" ng-show="limit < destinations.length"><a class="btn btn-link muted pull-right" ng-click="more()">See more</a></li>'
     };
 });
 
@@ -189,14 +196,22 @@ SearchApp.directive('classificationsFilter', function(){
         restrict: 'E',
         scope: {
             classifications: '=',
+            limit: '@',
             toggle: '&'
         },
+        controller: function($scope){
+            $scope.more = function(){
+                $scope.limit = $scope.classifications.length;
+            };
+        },
         template:
-            '<li class="nav-row" ng-repeat="classification in classifications">'+
+            '<li class="nav-row" ng-repeat="classification in classifications | limitTo: limit">'+
                 '<checkbox label="{[{ classification.name }]}" checked="{[{ true }]}" value="{[{ classification.keyStr }]}" model="classification.keyStr" toggle-handler="toggle({value:value, checked:checked})"></checkbox>' +
-            '</li>',
+            '</li>' +
+            '<li class="clearfix" ng-show="limit < classifications.length"><a class="btn btn-link muted pull-right" ng-click="more()">See more</a></li>',
         link: function(scope, el, attrs)
         {
+
         }
     };
 });

@@ -4,14 +4,12 @@
     </li>
 
     <li class="nav-header">Accommodation Type</li>
-    <classifications-filter classifications="classifications" checked="{[{ true }]}" toggle="toggleClassification(value, checked)"></classifications-filter>
-    <li class="clearfix"><a class="btn btn-link muted pull-right" href="#">See more</a></li>
+    <classifications-filter classifications="classifications" checked="{[{ true }]}" toggle="toggleClassification(value, checked)" limit="4"></classifications-filter>
 </ul>
 <ul class="nav">
     <li class="nav-header">Distance from</li>
-    <distance-filter distance="filters.distance" destination="filters.destination" destinations="destinations"></distance-filter>
+    <distance-filter distance="filters.distance" destination="filters.destination" destinations="destinations" limit="2"></distance-filter>
 
-    <li class="clearfix"><a class="btn btn-link muted pull-right" href="#">See more</a></li>
     <li class="nav-header">Filter by tags</li>
     <tag-filter></tag-filter>
     <li>
