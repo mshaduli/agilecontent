@@ -134,6 +134,30 @@ SearchApp.directive('distanceFilter', function(){
     };
 });
 
+SearchApp.directive('switch', function() {
+    return {
+        restrict: 'A',
+        scope: {
+            model: '=', value:'@', checked:'@', toggleHandler: '&'
+        },
+        controller: function($scope){
+            $scope.toggle = function(){
+                $scope.checked = !$scope.checked;
+                $scope.toggleHandler({value: $scope.value, checked: $scope.checked});
+            };
+        },
+        template:'<div class="clearfix blue">' +
+            '<input type="checkbox" style="display: none;" ng-checked="checked" value="{[{value}]}">' +
+            '<a ng-class="{checked: checked == true}" ng-click="toggle()"></a>' +
+            '</div>',
+        link: function(scope, element, attrs) {
+            scope.$watch('model', function(newValue, oldValue) {
+                scope.checked = (newValue == scope.value);
+            });
+        }
+    };
+});
+
 SearchApp.directive('checkbox', function() {
     return {
         restrict: 'E',
@@ -223,11 +247,11 @@ SearchApp.directive('resultsList', function(){
                             '<div class="content-group"><span class="label-important">1</span> Night from <span class="price pull-right label-important">${[{ operator.min_rate }]}</span></div>' +
                             '<div class="divider"></div>' +
                             '<div class="content-group clearfix">' +
-                                '<div class="pull-right distance"><i class="icon-shock"></i> <div>{[{ operator.distance | number:2 | distance }]}</div></div>' +
+                                '<div class="pull-right distance"><i class="icon-bolt"></i> <div>{[{ operator.distance | number:2 | distance }]}</div></div>' +
                                 '<span>{[{operator.destination}]}<br/> {[{operator.type}]}</span>' +
                             '</div>' +
                             '<div>' +
-                                '<a href="#" class="btn btn-wishlist"><i class="icon-star icon-white"></i></a>' +
+                                '<a href="#" class="btn btn-wishlist"><i class="icon-star"></i></a>' +
                                 '<a href="#" class="btn btn-primary">More</a>' +
                             '</div>' +
                         '</div>' +
@@ -571,11 +595,11 @@ function createMarker(operator, $filter) {
                 '</div>' +
                 '<div class="content">' +
                     '<div class="content-group clearfix">' +
-                        '<div class="pull-right distance"><i class="icon-shock"></i> <div>'+ operatorDistance +'</div></div>' +
+                        '<div class="pull-right distance"><i class="icon-bolt"></i> <div>'+ operatorDistance +'</div></div>' +
                         '<span>'+ operator.destination + '<br/>' + operator.type +'</span>' +
                     '</div>' +
                     '<div>' +
-                        '<a href="#" class="btn btn-wishlist"><i class="icon-star icon-white"></i></a>' +
+                        '<a href="#" class="btn btn-wishlist"><i class="icon-star"></i></a>' +
                         '<a href="#" class="btn btn-primary">More</a>' +
                     '</div>' +
                  '</div>' +
