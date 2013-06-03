@@ -506,7 +506,7 @@ input[type="file"] {
     background-color: #0076c0;
     color: #FFFFFF;
     font-size: 18px;
-    margin-right: 10px;
+    width: 93%;
     margin-left: -8px;
     padding: 10px;
 }
@@ -573,8 +573,7 @@ input[type="file"] {
 
 .card .thumbnail-inner {
     overflow: hidden;
-    max-height: 200px;
-    min-height: 195px;
+    height: 200px;
 }
 
 .card .info-bar {
@@ -713,6 +712,8 @@ input[type="file"] {
     height: 18px;
 }
 
+.ui-datepicker{ z-index: 100 !important;}
+
 .ui-slider {
     margin-bottom: 0px;
     background: none transparent;
@@ -756,6 +757,7 @@ input[type="file"] {
 .map-results .card .title {
     position: relative;
     margin-right: 0px;
+    margin-left: 0px;
     top: 0px;
 }
 
@@ -859,9 +861,10 @@ input[type="file"] {
 #grid .table-bordered td,
 #grid .table-bordered {
     border-color: #d9ebf6;
+    vertical-align: middle;
 }
 
-#grid .btn-full {
+#main-pane .btn-full {
     min-height: 63px;
     line-height: 63px;
     font-size: 30px;

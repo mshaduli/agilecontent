@@ -64,7 +64,7 @@ file that was distributed with this source code.
                 </div>
 
                 <div ng-show="UIView=='List'">
-                    <results-list operators="operators" loading="loading"></results-list>
+                    <results-list operators="operators" loading="loading" limit="6" page="6"></results-list>
                 </div>
 
                 <div id="grid" ng-show="UIView=='Calendar'">
@@ -88,7 +88,7 @@ file that was distributed with this source code.
                         <tbody>
                         <tr>
                             <td>
-                                <span class="title">Silverski Hotel and Apart..</span>
+                                <span class="title">Silverski Hotel and A..</span>
                                 <div>Falls Creek <div data-score="4" class="star pull-right"></div></div>
                             </td>
                             <td><span class="price">$999</span></td>
@@ -105,7 +105,7 @@ file that was distributed with this source code.
                         </tr>
                         <tr>
                             <td>
-                                <span class="title">Silverski Hotel and Apart..</span>
+                                <span class="title">Silverski Hotel and A..</span>
                                 <div>Falls Creek <div data-score="4" class="star pull-right"></div></div>
                             </td>
                             <td><span class="price">$999</span></td>
@@ -122,7 +122,7 @@ file that was distributed with this source code.
                         </tr>
                         <tr>
                             <td>
-                                <span class="title">Silverski Hotel and Apart..</span>
+                                <span class="title">Silverski Hotel and A..</span>
                                 <div>Falls Creek <div data-score="4" class="star pull-right"></div></div>
                             </td>
                             <td><span class="price">$999</span></td>
@@ -139,7 +139,7 @@ file that was distributed with this source code.
                         </tr>
                         <tr>
                             <td>
-                                <span class="title">Silverski Hotel and Apart..</span>
+                                <span class="title">Silverski Hotel and A..</span>
                                 <div>Falls Creek <div data-score="4" class="star pull-right"></div></div>
                             </td>
                             <td><span class="price">$999</span></td>
@@ -156,7 +156,7 @@ file that was distributed with this source code.
                         </tr>
                         <tr>
                             <td>
-                                <span class="title">Silverski Hotel and Apart..</span>
+                                <span class="title">Silverski Hotel and A..</span>
                                 <div>Falls Creek <div data-score="4" class="star pull-right"></div></div>
                             </td>
                             <td><span class="price">$999</span></td>
@@ -211,6 +211,14 @@ file that was distributed with this source code.
             map: footerMap,
             icon: '/bundles/tneoperator/img/map/marker_blue.png'
         });
+
+        // Init date picker
+        var $filterDate = $('#filterDate');
+        $filterDate.datepicker();
+        $('#filterDateBtn').click(function(){
+            $filterDate.datepicker( "show" );
+        });
+
 
         //angular.bootstrap(document, ['SearchApp']);
     });

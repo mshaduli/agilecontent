@@ -236,7 +236,14 @@ SearchApp.directive('resultsList', function(){
         scope: {
             loading: '=',
             operators: '=',
-            sort: '='
+            sort: '=',
+            limit: '@',
+            page: '@'
+        },
+        controller: function($scope){
+            $scope.more = function(){
+                $scope.limit = parseInt($scope.limit)+parseInt($scope.page);
+            };
         },
         template: '' +
             '<div id="loaderG" ng-show="loading">' +
@@ -245,14 +252,14 @@ SearchApp.directive('resultsList', function(){
             '<div id="blockG_3" class="loader_blockG"></div>' +
             '</div>'+
             '<ul class="cards">' +
-                '<li ng-repeat="operator in operators">' +
+                '<li ng-repeat="operator in operators | limitTo: limit">' +
                     '<div class="card">' +
                         '<div class="title">{[{operator.name}]}</div>' +
                         '<div class="thumbnail">' +
                             '<div class="info-bar">' +
                                 '<div class="info-content clearfix">' +
                                 '<div class="pull-left"><img src="/bundles/tneoperator/img/design-tripadvisor.png" width="99" height="17" /></div>' +
-                                '<div score="{[{ operator.rating }]}" class="star pull-right" rating></div>' +
+                                '<div score="{[{ operator.rating }]}" class="star pull-right" self="false" rating></div>' +
                                 '</div>' +
                             '</div>' +
 //                            '<div class="tag tag-special"><i class="icon-heart"></i> Special</div>' +
@@ -263,7 +270,7 @@ SearchApp.directive('resultsList', function(){
                             '<div class="divider"></div>' +
                             '<div class="content-group clearfix">' +
                                 '<div class="pull-right distance"><i class="icon-bolt"></i> <div>{[{ operator.distance | number:2 | distance }]}</div></div>' +
-                                '<span>{[{operator.destination}]}<br/> {[{operator.type}]}</span>' +
+                                '<span>{[{operator.destination|truncate:15}]}<br/> {[{operator.type|truncate:15}]}</span>' +
                             '</div>' +
                             '<div>' +
                                 '<a href="#" class="btn btn-wishlist"><i class="icon-star"></i></a>' +
@@ -273,9 +280,10 @@ SearchApp.directive('resultsList', function(){
                     '</div>' +
                 '</li>' +
             '</ul>' +
-            '<div class="visible-phone">' +
-            '<a class="btn btn-full" href="#">Show me more</a>' +
-            '</div>',
+            '<div ng-show="limit < operators.length">' +
+            '<a class="btn btn-full" href="#" ng-click="more()">Show me more</a>' +
+            '</div>' +
+            '<br/> ',
         link: function(scope, el, attrs)
         {
         }
@@ -286,15 +294,17 @@ SearchApp.directive('rating', function(){
     return {
         restrict:'A',
         scope: {
-            score: '@'
+            score: '@',
+            self: '@'
         },
         link: function(scope,element,attrs)
         {
             scope.$watch("score", function () {
                 if (scope.score != 'undefined')
                 {
+                    var imgPath = ($(element).attr('self') == 'true') ? '/bundles/tneoperator/img/self' : '/bundles/tneoperator/img';
                     element.raty({
-                        path: '/bundles/tneoperator/img',
+                        path: imgPath,
                         readOnly: true,
                         score: function() {
                             return scope.score;
