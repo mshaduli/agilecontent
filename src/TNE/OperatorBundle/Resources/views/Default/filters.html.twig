@@ -13,14 +13,12 @@
     <li class="nav-header">Filter by tags</li>
     <tag-filter></tag-filter>
     <li>
-        <ul class="nav nav-pills">
-            <li><a href="#">Kid Friendly</a></li>
-            <li class="active">
-                <a href="#">Cycle Friendly <i class="icon-remove"></i></a>
-            </li>
-            <li><a href="#">Eco Friendly</a></li>
-            <li><a href="#">Single</a></li>
-        </ul>
+        <select id="filterTags" multiple="" class="select2-offscreen">
+            <option value="AL">Kid Friendly</option>
+            <option value="WF">Cycle Friendly</option>
+            <option value="EF">Eco Friendly</option>
+            <option value="SI">Single</option>
+        </select>
     </li>
 </ul>
 <ul class="nav" ng-show="filters.OperatorView.name=='Accommodation'">

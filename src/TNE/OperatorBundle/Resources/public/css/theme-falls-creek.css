@@ -83,14 +83,48 @@ label, input, button, select, textarea {
     font-size: 25px;
 }
 
-.nav-pills li > a {
-    background: #717073;
+#s2id_filterTags.select2-container-multi .select2-choices .select2-search-choice {
+    -moz-user-select: none;
+    background-clip: padding-box;
+    background-color: #0076C0;
+    background-image: none;
+    border: 0 none;
+    border-radius: 20px 20px 20px 20px;
+    box-shadow: none;
     color: #FFFFFF;
-    border-radius: 20px;
+    cursor: default;
+    line-height: 14px;
+    margin: 2px 0 3px 5px;
+    padding: 10px 24px 7px 12px;
+    position: relative;
 }
 
-.nav-pills li > a.active {
-    background: #0076c0;
+#s2id_filterTags.select2-container-multi {
+    width: 100%;
+}
+
+#s2id_filterTags.select2-container-multi .select2-choices {
+    background-color: #DBDBDC;
+    background-image: none;
+    border: 0px none;
+    padding: 5px;
+}
+
+#s2id_filterTags.select2-container-multi .select2-search-choice-close {
+    float: right;
+    left: inherit;
+    right: 6px;
+    top: 8px;
+}
+
+#s2id_filterTags.select2-container-multi.select2-container-active .select2-choices {
+    border: 0px none;
+    outline: none;
+    background: #FFFFFF;
+
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
 }
 
 .nav-collapse-phone.collapse {
