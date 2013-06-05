@@ -1,28 +1,24 @@
 <ul class="nav" ng-show="filters.OperatorView.name=='Accommodation'">
     <li>
-        <a class="btn btn-nav" href="#">Instant confirmation <div class="switch pull-right"></div></a>
+        <a class="btn btn-nav" href="#">Instant confirmation <div switch class="switch pull-right" toggleHandler=""></div></a>
     </li>
 
     <li class="nav-header">Accommodation Type</li>
-    <classifications-filter classifications="classifications" checked="{[{ true }]}" toggle="toggleClassification(value, checked)"></classifications-filter>
-    <li class="clearfix"><a class="btn btn-link muted pull-right" href="#">See more</a></li>
+    <classifications-filter classifications="classifications" checked="{[{ true }]}" toggle="toggleClassification(value, checked)" limit="4"></classifications-filter>
 </ul>
 <ul class="nav">
     <li class="nav-header">Distance from</li>
-    <distance-filter distance="filters.distance" destination="filters.destination" destinations="destinations"></distance-filter>
+    <distance-filter distance="filters.distance" destination="filters.destination" destinations="destinations" limit="2"></distance-filter>
 
-    <li class="clearfix"><a class="btn btn-link muted pull-right" href="#">See more</a></li>
     <li class="nav-header">Filter by tags</li>
     <tag-filter></tag-filter>
     <li>
-        <ul class="nav nav-pills">
-            <li><a href="#">Kid Friendly</a></li>
-            <li class="active">
-                <a href="#">Cycle Friendly <i class="icon-remove"></i></a>
-            </li>
-            <li><a href="#">Eco Friendly</a></li>
-            <li><a href="#">Single</a></li>
-        </ul>
+        <select id="filterTags" multiple="" class="select2-offscreen">
+            <option value="AL">Kid Friendly</option>
+            <option value="WF">Cycle Friendly</option>
+            <option value="EF">Eco Friendly</option>
+            <option value="SI">Single</option>
+        </select>
     </li>
 </ul>
 <ul class="nav" ng-show="filters.OperatorView.name=='Accommodation'">

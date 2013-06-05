@@ -83,14 +83,48 @@ label, input, button, select, textarea {
     font-size: 25px;
 }
 
-.nav-pills li > a {
-    background: #717073;
+#s2id_filterTags.select2-container-multi .select2-choices .select2-search-choice {
+    -moz-user-select: none;
+    background-clip: padding-box;
+    background-color: #0076C0;
+    background-image: none;
+    border: 0 none;
+    border-radius: 20px 20px 20px 20px;
+    box-shadow: none;
     color: #FFFFFF;
-    border-radius: 20px;
+    cursor: default;
+    line-height: 14px;
+    margin: 2px 0 3px 5px;
+    padding: 10px 24px 7px 12px;
+    position: relative;
 }
 
-.nav-pills li > a.active {
-    background: #0076c0;
+#s2id_filterTags.select2-container-multi {
+    width: 100%;
+}
+
+#s2id_filterTags.select2-container-multi .select2-choices {
+    background-color: #DBDBDC;
+    background-image: none;
+    border: 0px none;
+    padding: 5px;
+}
+
+#s2id_filterTags.select2-container-multi .select2-search-choice-close {
+    float: right;
+    left: inherit;
+    right: 6px;
+    top: 8px;
+}
+
+#s2id_filterTags.select2-container-multi.select2-container-active .select2-choices {
+    border: 0px none;
+    outline: none;
+    background: #FFFFFF;
+
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
 }
 
 .nav-collapse-phone.collapse {
@@ -296,12 +330,28 @@ input[type="file"] {
 }
 
 #header-filter .btn-search {
-    border: 0px none;
-    padding: 21px 25px;
+    border: solid 1px #79C143;
+    padding: 20px 24px;
     margin-left: 8px;
     background: #79C143;
     color: #FFF;
     text-shadow: none;
+    text-decoration: none;
+}
+
+#header-filter .btn-search:focus,
+#header-filter .btn-search:hover,
+#header-filter .btn-search:active {
+    background: #FFFFFF;
+    color: #79C143;
+    border: solid 1px #79C143;
+    text-decoration: none;
+}
+
+#header-filter .btn-search:focus i,
+#header-filter .btn-search:hover i,
+#header-filter .btn-search:active i {
+    color: #79C143;
 }
 
 #header-filter .nav li {
@@ -490,7 +540,7 @@ input[type="file"] {
     background-color: #0076c0;
     color: #FFFFFF;
     font-size: 18px;
-    margin-right: 10px;
+    width: 93%;
     margin-left: -8px;
     padding: 10px;
 }
@@ -557,8 +607,7 @@ input[type="file"] {
 
 .card .thumbnail-inner {
     overflow: hidden;
-    max-height: 200px;
-    min-height: 195px;
+    height: 200px;
 }
 
 .card .info-bar {
@@ -597,6 +646,22 @@ input[type="file"] {
     float: left;
     width: 19px;
 }
+.card .content .btn-wishlist:hover,
+.card .content .btn-wishlist:focus,
+.card .content .btn-wishlist:active {
+    color: #F3683C;
+    background-color: #FFFFFF;
+}
+
+.card .content .btn-wishlist i.icon-star {
+    font-size: 1.2em;
+}
+
+.card .content .btn-wishlist:hover i.icon-star,
+.card .content .btn-wishlist:focus i.icon-star,
+.card .content .btn-wishlist:active i.icon-star {
+    color: #f3683c;
+}
 
 .card .content-group {
     line-height: 23px;
@@ -617,6 +682,22 @@ input[type="file"] {
     color: #f3683c;
     text-transform:uppercase;
     font-size:16px;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.btn-primary.disabled,
+.btn-primary[disabled] {
+    color: #ffffff;
+    background-color: #f3683c;
+    *background-color: #f3683c;
+}
+
+.btn-primary:active,
+.btn-primary.active {
+    background-color: #f3683c;
 }
 
 .btn-more {
@@ -665,13 +746,7 @@ input[type="file"] {
     height: 18px;
 }
 
-.switch {
-    display: block;
-    background: url("../img/icon-switch.png") no-repeat;
-    width: 53px;
-    height: 26px;
-    margin-top: 6px;
-}
+.ui-datepicker{ z-index: 100 !important;}
 
 .ui-slider {
     margin-bottom: 0px;
@@ -716,6 +791,7 @@ input[type="file"] {
 .map-results .card .title {
     position: relative;
     margin-right: 0px;
+    margin-left: 0px;
     top: 0px;
 }
 
@@ -819,9 +895,10 @@ input[type="file"] {
 #grid .table-bordered td,
 #grid .table-bordered {
     border-color: #d9ebf6;
+    vertical-align: middle;
 }
 
-#grid .btn-full {
+#main-pane .btn-full {
     min-height: 63px;
     line-height: 63px;
     font-size: 30px;
@@ -894,6 +971,49 @@ input[type="file"] {
 }
 
 /** Pretty Checkbox */
+
+.switch > div {
+    display: inline-block;
+    padding:0px;
+    margin:0px;
+}
+
+.switch > a,
+.switch > a:hover,
+.switch > a:focus {
+    color: #717073;
+    text-decoration: none;
+    padding-left: 10px;
+}
+
+.switch > div a{
+    width: 60px;
+    height: 28px;
+    background: url("../img/ui-switch.png") top left no-repeat;
+    display: block;
+    float: left;
+    cursor: pointer;
+    margin:-7px 0px;
+}
+
+.switch > div a {background-position: 0 -2px;}
+.switch > div a:focus{outline: 0 none;}
+.switch > div a:focus{background-position: 0 -32px;}
+.switch > div a.checked{ background-position: 0 -62px; }
+.switch > div a.checked:focus{ background-position: 0 -92px; }
+
+.switch > div label {
+    display: block;
+    float: left;
+    margin: 6px 5px;
+    cursor: pointer;
+}
+
+.switch > div.disabled a,
+.switch > div.disabled label {
+    cursor:not-allowed;
+}
+
 
 .checkbox > div,
 .radio > div {

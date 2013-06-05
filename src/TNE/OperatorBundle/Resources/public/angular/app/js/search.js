@@ -123,14 +123,45 @@ SearchApp.directive('distanceFilter', function(){
         scope: {
             distance: '=',
             destination: '=',
-            destinations: '='
+            destinations: '=',
+            limit: '@'
+        },
+        controller: function($scope){
+            $scope.more = function(){
+                $scope.limit = $scope.destinations.length;
+            };
         },
         template: '<li class="nav-item-slider">'+
                     '<div slider min="0" max="200" step="5" model="distance" class="slider" append="km"></div>'+
                     '</li>' +
-                    '<li class="nav-row" ng-repeat="dest in destinations">' +
+                    '<li class="nav-row" ng-repeat="dest in destinations | limitTo: limit">' +
                         '<radio label="{[{ dest.name }]}" value="{[{ dest.id }]}" checked="{[{ true }]}" model="$parent.destination"></radio>' +
-                    '</li>'
+                    '</li>' +
+                    '<li class="clearfix" ng-show="limit < destinations.length"><a class="btn btn-link muted pull-right" ng-click="more()">See more</a></li>'
+    };
+});
+
+SearchApp.directive('switch', function() {
+    return {
+        restrict: 'A',
+        scope: {
+            model: '=', value:'@', checked:'@', toggleHandler: '&'
+        },
+        controller: function($scope){
+            $scope.toggle = function(){
+                $scope.checked = !$scope.checked;
+                $scope.toggleHandler({value: $scope.value, checked: $scope.checked});
+            };
+        },
+        template:'<div class="clearfix blue">' +
+            '<input type="checkbox" style="display: none;" ng-checked="checked" value="{[{value}]}">' +
+            '<a ng-class="{checked: checked == true}" ng-click="toggle()"></a>' +
+            '</div>',
+        link: function(scope, element, attrs) {
+            scope.$watch('model', function(newValue, oldValue) {
+                scope.checked = (newValue == scope.value);
+            });
+        }
     };
 });
 
@@ -165,14 +196,22 @@ SearchApp.directive('classificationsFilter', function(){
         restrict: 'E',
         scope: {
             classifications: '=',
+            limit: '@',
             toggle: '&'
         },
+        controller: function($scope){
+            $scope.more = function(){
+                $scope.limit = $scope.classifications.length;
+            };
+        },
         template:
-            '<li class="nav-row" ng-repeat="classification in classifications">'+
+            '<li class="nav-row" ng-repeat="classification in classifications | limitTo: limit">'+
                 '<checkbox label="{[{ classification.name }]}" checked="{[{ true }]}" value="{[{ classification.keyStr }]}" model="classification.keyStr" toggle-handler="toggle({value:value, checked:checked})"></checkbox>' +
-            '</li>',
+            '</li>' +
+            '<li class="clearfix" ng-show="limit < classifications.length"><a class="btn btn-link muted pull-right" ng-click="more()">See more</a></li>',
         link: function(scope, el, attrs)
         {
+
         }
     };
 });
@@ -197,7 +236,14 @@ SearchApp.directive('resultsList', function(){
         scope: {
             loading: '=',
             operators: '=',
-            sort: '='
+            sort: '=',
+            limit: '@',
+            page: '@'
+        },
+        controller: function($scope){
+            $scope.more = function(){
+                $scope.limit = parseInt($scope.limit)+parseInt($scope.page);
+            };
         },
         template: '' +
             '<div id="loaderG" ng-show="loading">' +
@@ -206,14 +252,14 @@ SearchApp.directive('resultsList', function(){
             '<div id="blockG_3" class="loader_blockG"></div>' +
             '</div>'+
             '<ul class="cards">' +
-                '<li ng-repeat="operator in operators">' +
+                '<li ng-repeat="operator in operators | limitTo: limit">' +
                     '<div class="card">' +
                         '<div class="title">{[{operator.name}]}</div>' +
                         '<div class="thumbnail">' +
                             '<div class="info-bar">' +
                                 '<div class="info-content clearfix">' +
                                 '<div class="pull-left"><img src="/bundles/tneoperator/img/design-tripadvisor.png" width="99" height="17" /></div>' +
-                                '<div score="{[{ operator.rating }]}" class="star pull-right" rating></div>' +
+                                '<div score="{[{ operator.rating }]}" class="star pull-right" self="false" rating></div>' +
                                 '</div>' +
                             '</div>' +
 //                            '<div class="tag tag-special"><i class="icon-heart"></i> Special</div>' +
@@ -223,20 +269,21 @@ SearchApp.directive('resultsList', function(){
                             '<div class="content-group"><span class="label-important">1</span> Night from <span class="price pull-right label-important">${[{ operator.min_rate }]}</span></div>' +
                             '<div class="divider"></div>' +
                             '<div class="content-group clearfix">' +
-                                '<div class="pull-right distance"><i class="icon-shock"></i> <div>{[{ operator.distance | number:2 | distance }]}</div></div>' +
-                                '<span>{[{operator.destination}]}<br/> {[{operator.type}]}</span>' +
+                                '<div class="pull-right distance"><i class="icon-bolt"></i> <div>{[{ operator.distance | number:2 | distance }]}</div></div>' +
+                                '<span>{[{operator.destination|truncate:15}]}<br/> {[{operator.type|truncate:15}]}</span>' +
                             '</div>' +
                             '<div>' +
-                                '<a href="#" class="btn btn-wishlist"><i class="icon-star icon-white"></i></a>' +
+                                '<a href="#" class="btn btn-wishlist"><i class="icon-star"></i></a>' +
                                 '<a href="#" class="btn btn-primary">More</a>' +
                             '</div>' +
                         '</div>' +
                     '</div>' +
                 '</li>' +
             '</ul>' +
-            '<div class="visible-phone">' +
-            '<a class="btn btn-full" href="#">Show me more</a>' +
-            '</div>',
+            '<div ng-show="limit < operators.length">' +
+            '<a class="btn btn-full" href="#" ng-click="more()">Show me more</a>' +
+            '</div>' +
+            '<br/> ',
         link: function(scope, el, attrs)
         {
         }
@@ -247,15 +294,17 @@ SearchApp.directive('rating', function(){
     return {
         restrict:'A',
         scope: {
-            score: '@'
+            score: '@',
+            self: '@'
         },
         link: function(scope,element,attrs)
         {
             scope.$watch("score", function () {
                 if (scope.score != 'undefined')
                 {
+                    var imgPath = ($(element).attr('self') == 'true') ? '/bundles/tneoperator/img/self' : '/bundles/tneoperator/img';
                     element.raty({
-                        path: '/bundles/tneoperator/img',
+                        path: imgPath,
                         readOnly: true,
                         score: function() {
                             return scope.score;
@@ -571,11 +620,11 @@ function createMarker(operator, $filter) {
                 '</div>' +
                 '<div class="content">' +
                     '<div class="content-group clearfix">' +
-                        '<div class="pull-right distance"><i class="icon-shock"></i> <div>'+ operatorDistance +'</div></div>' +
+                        '<div class="pull-right distance"><i class="icon-bolt"></i> <div>'+ operatorDistance +'</div></div>' +
                         '<span>'+ operator.destination + '<br/>' + operator.type +'</span>' +
                     '</div>' +
                     '<div>' +
-                        '<a href="#" class="btn btn-wishlist"><i class="icon-star icon-white"></i></a>' +
+                        '<a href="#" class="btn btn-wishlist"><i class="icon-star"></i></a>' +
                         '<a href="#" class="btn btn-primary">More</a>' +
                     '</div>' +
                  '</div>' +
