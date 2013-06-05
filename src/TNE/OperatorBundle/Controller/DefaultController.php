@@ -79,7 +79,7 @@ EOD;
             $operatorMedia = $operator->getMedia()->first();
             $result['image'] = $this->getOperatorImage($operatorMedia);
             $result['rating'] = $operator->getRating();            
-            $result['tags'] = [];
+            $result['tags'] = "";
             $result['type'] = $operator->getClassifications()->first()->getName();
             foreach($operator->getTags() as $tag)
             {

@@ -204,7 +204,7 @@ class SnapshotManager extends BaseManager
         $page->setEnabled($snapshot->getEnabled());
 //        $page->setTags($snapshot->getTags());
         $content = $this->fixPageContent($snapshot->getContent());
-
+        
         $page->setId($content['id']);
         $page->setJavascript($content['javascript']);
         $page->setStylesheet($content['stylesheet']);
@@ -217,7 +217,7 @@ class SnapshotManager extends BaseManager
         $page->setSlug($content['slug']);
         $page->setTemplateCode($content['template_code']);
         $page->setRequestMethod($content['request_method']);
-        $page->setTags($content['tags']);
+//        $page->setTags($content['tags']);
         $createdAt = new \DateTime;
         $createdAt->setTimestamp($content['created_at']);
         $page->setCreatedAt($createdAt);

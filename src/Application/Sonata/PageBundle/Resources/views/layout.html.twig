@@ -98,11 +98,11 @@ file that was distributed with this source code.
                 </div>
                 <div class="span6 flexslider">
                     <ul class="slides">
-                        {% for media in page.taggedMedia %}
+                        {#% for media in page.taggedMedia %#}
                             <li>
-                              <img src="{% path media.id, 'small' %}" />
+                              <img src="{#% path media.id, 'small' %#}" />
                             </li>
-                        {% endfor %}
+                        {#% endfor %#}
                         </ul>
                 </div>  
             </div>

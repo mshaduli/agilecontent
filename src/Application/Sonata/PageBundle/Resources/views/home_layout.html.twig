@@ -107,19 +107,19 @@ file that was distributed with this source code.
             For the backgrounds, you can combine from the bgs folder :D
         -->
         
-        {% for media in page.taggedMedia %}
+        {#% for media in page.taggedMedia %#}
            
-            <article class="slide" id="{{media.id}}" style="background: url('{{  asset('bundles/applicationsonatapage/theme/img/backgrounds/landscape.png') }} repeat-x top center;">
-                <img class="asset left-30 sp600 t120 z1" src="{% path media, 'big' %}" style="border: 20x solid #666"/>
+            <article class="slide" id="{{ "Id" }}" style="background: url('{#{  asset('bundles/applicationsonatapage/theme/img/backgrounds/landscape.png') }#} repeat-x top center;">
+                <img class="asset left-30 sp600 t120 z1" src="{#% path media, 'big' %#}" style="border: 20x solid #666"/>
                 <div class="info">
-                    <h2 style="color: #fff">{{ media.description }}</h2>
-                    {% for tag in media.tagLinks %}
-                                <span class="label label-info">{{ tag }}</span>
-                    {% endfor %}
+                    <h2 style="color: #fff">{{ "desc" }}</h2>
+                    {#% for tag in media.tagLinks %#}
+                                <span class="label label-info">{{ "IN" }}</span>
+                    {#% endfor %#}
                 </div>
 
             </article>
-        {% endfor %}
+        {#% endfor %#}
     </section>    
       <!-- @todo: Convert to Slideshow Block -->
       
