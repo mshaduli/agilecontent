@@ -34,6 +34,6 @@ file that was distributed with this source code.
     </div>
     {% if sonata_page.isEditor or app.security and app.security.isGranted('ROLE_PREVIOUS_ADMIN') %}
     <a class="btn-primary btn" id="clickBtn" href="/app_dev.php/admin/sonata/media/media/list" data-toggle="modal" data-target="#myModal_{{ block.id }}">Edit</a>
-    <div class="modal fade" id="myModal_{{ block.id }}" style="width:80%;height:80%;overflow: scroll; left: 30%"></div>
+    <div class="modal fade" id="myModal_{{ block.id }}" style="width:80%;height:80%;overflow: scroll; left: 30%; display: none;"></div>
     {% endif %}
 {% endblock %}
