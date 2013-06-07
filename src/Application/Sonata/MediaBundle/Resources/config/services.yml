@@ -1,3 +1,4 @@
 parameters:
     #Media Admin Class
     sonata.media.admin.media.class: Application\Sonata\MediaBundle\Admin\ORM\MediaAdmin
+    sonata.media.block.feature_media.class: Application\Sonata\MediaBundle\Block\FeatureMediaBlockService

@@ -205,10 +205,12 @@ class PageAdminController extends Controller
     }
     
     public function blockMediaSaveAction(){
-        $pageManager = $this->get('sonata.page.manager.page');
-        $page = $pageManager->findOneBy(array('id' => $this->getRequest()->get('id')));
-        $page->setBodyCopy($this->getRequest()->get('content'));
-        $pageManager->save($page);
+        $blockManager = $this->get('sonata.page.manager.block');
+        $block = $blockManager->findOneBy(array('id' => $this->getRequest()->get('blockId')));
+        $settigns = $block->getSettings();
+        $settigns['mediaId'] = $this->getRequest()->get('mediaId');
+        $block->setSettings($settigns);
+        $blockManager->save($block);
 //        $this->createPageSnapshot($page);
         return new \Symfony\Component\HttpFoundation\Response('success'); 
     }

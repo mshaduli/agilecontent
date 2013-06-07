@@ -100,7 +100,8 @@ class PageAdmin extends Admin
     
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->add('aloha', $this->getRouterIdParameter().'/aloha'); 
+        $collection->add('aloha', $this->getRouterIdParameter().'/aloha');
+        $collection->add('blockMediaSave', '/blockMediaSave'); 
     }    
 
     /**
