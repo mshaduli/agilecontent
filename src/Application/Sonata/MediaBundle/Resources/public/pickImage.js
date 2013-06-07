@@ -38,7 +38,7 @@ jQuery(document).ready(function() {
                             dataType: "html"
                     }).done(function(){
                         path = path.replace('admin','default_big');
-                        $('#'+imgobj+' img').attr('src',path);
+                        $('#'+imgobj+' img').attr('src',path);                        
                         return false;
                     });
 

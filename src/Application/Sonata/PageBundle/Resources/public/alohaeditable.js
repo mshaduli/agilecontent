@@ -14,7 +14,6 @@
                                                                 var blockId = $('#'+container).attr('data-id');
                                                                 //var content = Aloha.activeEditable.getContents();
                                                                 var content = $.trim($('#'+container).html());
-                                                                alert($('#'+container+' div div').text());
                                                                 var contentId = Aloha.activeEditable.obj[0].id;
                                                                 var pageId = '{{ page.id }}';
 
@@ -24,10 +23,9 @@
                                                                 }
 
                                                                 var request = jQuery.ajax({
-                                                                        url: '/app_dev.php/admin/sonata/page/page//aloha',
+                                                                        url: '/app_dev.php/admin/sonata/page/page/1/aloha',
                                                                         type: "POST",
-                                                                        data: {
-                                                                                id: 1,
+                                                                        data: {                                                                                
                                                                                 content : content,
                                                                                 contentId : contentId,
                                                                                 block_id : blockId
