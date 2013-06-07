@@ -192,18 +192,6 @@ class PageAdminController extends Controller
         $snapshotManager->enableSnapshots(array($snapshot));
     }
     
-    
-    // Move to custom controller
-    
-    public function alohaAction(){
-        $pageManager = $this->get('sonata.page.manager.page');
-        $page = $pageManager->findOneBy(array('id' => $this->getRequest()->get('id')));
-        $page->setBodyCopy($this->getRequest()->get('content'));
-        $pageManager->save($page);
-//        $this->createPageSnapshot($page);
-        return new \Symfony\Component\HttpFoundation\Response('success'); 
-    }
-    
     public function blockMediaSaveAction(){
         $blockManager = $this->get('sonata.page.manager.block');
         $block = $blockManager->findOneBy(array('id' => $this->getRequest()->get('blockId')));
