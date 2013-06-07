@@ -208,6 +208,10 @@ class PageAdminController extends Controller
         $blockManager = $this->get('sonata.page.manager.block');
         $block = $blockManager->findOneBy(array('id' => $this->getRequest()->get('blockId')));
         $settigns = $block->getSettings();
+        if(!$settigns)
+        {
+            $settigns = array("media" => false,"orientation" => "left","title" => null,"content" => null,"context" => "default","format" => "default_big","mediaId" => null);
+        }
         $settigns['mediaId'] = $this->getRequest()->get('mediaId');
         $block->setSettings($settigns);
         $blockManager->save($block);
