@@ -12,6 +12,8 @@ parameters:
     #CMS Snapshot Manager
     sonata.page.cms_manager.snapshot.class: Application\Sonata\PageBundle\CmsManager\CmsSnapshotManager
     
+    sonata.page.cms_manager.page.class: Application\Sonata\PageBundle\CmsManager\CmsPageManager
+    
 #    sonata.media.manager.media: Application\Sonata\PageBundle\Block\MediaManagerInterface
     
     sonata.media.manager.media.class: Application\Sonata\PageBundle\Block\MediaManager

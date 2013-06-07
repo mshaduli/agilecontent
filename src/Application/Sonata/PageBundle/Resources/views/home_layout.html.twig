@@ -8,126 +8,76 @@ For the full copyright and license information, please view the LICENSE
 file that was distributed with this source code.
 
 #}
-{% extends 'ApplicationSonataPageBundle::base_layout.html.twig' %}
+{#% extends 'ApplicationSonataPageBundle::base_layout.html.twig' %#}
 
-{% block page_stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('bundles/applicationsonatapage/theme/css/index.css') }}" type="text/css" media="all" />
-{% endblock %}
+{#
 
-{% block page_javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('bundles/applicationsonatapage/theme/js/index-slider.js') }}" type="text/javascript"></script>
-                                  <!-- load the jQuery and require.js libraries -->
-         {% if app.security.token and app.security.isGranted('ROLE_SONATA_PAGE_ADMIN_PAGE_EDIT') %}
-              <script type="text/javascript" src="http://cdn.aloha-editor.org/latest/lib/require.js"></script>
+This file is part of the Sonata package.
 
- 
-              <!-- load the Aloha Editor core and some plugins -->
-              <script src="http://cdn.aloha-editor.org/latest/lib/aloha.js"
-                                   data-aloha-plugins="common/ui,
-                                                        common/format,
-                                                        common/list,
-                                                        common/link,
-                                                        common/highlighteditables">
-              </script>
-               
-              <!-- load the Aloha Editor CSS styles -->
-              <link href="http://cdn.aloha-editor.org/latest/css/aloha.css" rel="stylesheet" type="text/css" />
- 
-              <!-- make all elements with class="editable" editable with Aloha Editor -->
-              <script type="text/javascript">
-                     Aloha.ready( function() {
-                            //var $ = Aloha.jQuery;
-                            $('.editable').aloha();                            
-                     });
-                     
-                     Aloha.ready(function() {
-                    Aloha.require( ['aloha', 'aloha/jquery'], function( Aloha, jQuery) {
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
 
-                                    // save all changes after leaving an editable
-                                                  Aloha.bind('aloha-editable-deactivated', function(){
-                                                                var content = Aloha.activeEditable.getContents();
-                                                                var contentId = Aloha.activeEditable.obj[0].id;
-                                                                var pageId = '{{ page.id }}';
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
 
-                                                                // textarea handling -- html id is "xy" and will be "xy-aloha" for the aloha editable
-                                                                if ( contentId.match(/-aloha$/gi) ) {
-                                                                        contentId = contentId.replace( /-aloha/gi, '' );
-                                                                }
+#}
+{% extends 'SonataPageBundle::base_layout.html.twig' %}
 
-                                                                var request = jQuery.ajax({
-                                                                        url: '{{ path('admin_sonata_page_page_aloha', {id: page.id}) }}',
-                                                                        type: "POST",
-                                                                        data: {
-                                                                                content : content,
-                                                                                contentId : contentId,
-                                                                                id : pageId
-                                                                        },
-                                                                        dataType: "html"
-                                                                });
-
-                                                                request.done(function(msg) {
-                                                                    console.log('Changes Saved');
-                                                                        //jQuery("#log").html( msg ).show().delay(800).fadeOut();
-                                                                        return true;
-                                                                });
-
-                                                                request.error(function(jqXHR, textStatus) {
-                                                                        console.log( "Request failed: " + textStatus );
-                                                                        return true;
-                                                                });
-                                                                return true;
-                                                        });
-
-                                                });
-});
-              </script>
- {% endif%}              
-{% endblock %}
-    
 {% block page_container %}
-   {{ sonata_page_render_container('content_top', page) }}
-
-              {{ sonata_page_render_container('taggedmedia', page) }}
-      <!-- @todo: Convert to Slideshow Block -->
-    <section id="feature_slider" class="">
-        <!-- 
-            Each slide is composed by <img> and .info
-            - .info's position is customized with css in index.css
-            - each <img> parallax effect is declared by the following params inside its class:
-            
-            example: class="asset left-472 sp600 t120 z3"
-            left-472 means left: -472px from the center
-            sp600 is speed transition
-            t120 is top to 120px
-            z3 is z-index to 3
-            Note: Maintain this order of params
-
-            For the backgrounds, you can combine from the bgs folder :D
-        -->
-        
-        {#% for media in page.taggedMedia %#}
-           
-            <article class="slide" id="{{ "Id" }}" style="background: url('{#{  asset('bundles/applicationsonatapage/theme/img/backgrounds/landscape.png') }#} repeat-x top center;">
-                <img class="asset left-30 sp600 t120 z1" src="{#% path media, 'big' %#}" style="border: 20x solid #666"/>
-                <div class="info">
-                    <h2 style="color: #fff">{{ "desc" }}</h2>
-                    {#% for tag in media.tagLinks %#}
-                                <span class="label label-info">{{ "IN" }}</span>
-                    {#% endfor %#}
+    <div class="container">
+        <div class="content">
+            <div class="page-header">
+                <div class="pull-left">
+                    {{ sonata_page_render_container('title', 'global') }}
                 </div>
 
-            </article>
-        {#% endfor %#}
-    </section>    
-      <!-- @todo: Convert to Slideshow Block -->
-      
-      <div class="container">
-          <div class="row">
-              <div class="span12 editable" data-toggle="tooltip" title="Saved" data-trigger="manual">
-                  {{ page.bodyCopy | raw }}
-              </div>
-          </div>
-      </div>
+                <div class="pull-right navigation">
+                    {{ sonata_page_render_container('header', 'global') }}
+                </div>
+
+                <div style="clear: both"></div>
+            </div>
+
+            {% if page is defined %}
+                <div class="row">
+                    {{ sonata_page_render_container('content_top', page) }}
+                </div>
+            {% endif %}
+
+            <div class="row">
+                {% if content is defined %}
+                    {{ content|raw }}
+                {% else %}
+                    {% set content = block('content') %}
+                    {% if content|length > 0 %}
+                        {{ content|raw }}
+                    {% elseif page is defined %}
+                        {{ sonata_page_render_container('content', page) }}
+                    {% endif %}
+                {% endif %}
+            </div>
+            
+                <div class="row">
+                    {{ sonata_page_render_container('test', page) }}
+                        
+                </div>
+
+        </div>
+            
+        <footer>
+            {{ sonata_page_render_container('footer', 'global') }}
+        </footer>
+    </div>
+<script type="text/javascript">
+    $(document).ready(function(){            
+           
+           setTimeout(function(){$("#awesome-iframe").contents().find("img").bind("click", function () {
+                alert ("test");
+                return false;
+            })
+           }, 10000);
+            
+            
+    });
+
+    </script>
 {% endblock %}

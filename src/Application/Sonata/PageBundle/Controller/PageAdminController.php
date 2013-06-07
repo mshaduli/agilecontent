@@ -203,4 +203,13 @@ class PageAdminController extends Controller
 //        $this->createPageSnapshot($page);
         return new \Symfony\Component\HttpFoundation\Response('success'); 
     }
+    
+    public function blockMediaSaveAction(){
+        $pageManager = $this->get('sonata.page.manager.page');
+        $page = $pageManager->findOneBy(array('id' => $this->getRequest()->get('id')));
+        $page->setBodyCopy($this->getRequest()->get('content'));
+        $pageManager->save($page);
+//        $this->createPageSnapshot($page);
+        return new \Symfony\Component\HttpFoundation\Response('success'); 
+    }
 }
