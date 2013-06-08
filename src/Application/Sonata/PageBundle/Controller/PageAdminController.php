@@ -210,12 +210,11 @@ class PageAdminController extends Controller
     // Move to custom controller
     
     public function alohaAction(){
-        $pageManager = $this->get('sonata.page.manager.page');
-        
+         echo stripslashes($this->getRequest()->get('content'));
         $blockManager = $this->get('sonata.page.manager.block');
         
           $block = $blockManager->findOneBy(array('id' => $this->getRequest()->get('block_id')));
-          $block->setSettings(array('content'=>$this->getRequest()->get('content')));
+          $block->setSettings(array('content'=>stripslashes($this->getRequest()->get('content'))));
           $blockManager->save($block);
         return new \Symfony\Component\HttpFoundation\Response('success'); 
     }

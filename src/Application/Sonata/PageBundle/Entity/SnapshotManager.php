@@ -213,7 +213,7 @@ class SnapshotManager extends BaseManager
         $page->setMetaDescription($content['meta_description']);
         $page->setMetaKeyword($content['meta_keyword']);
         $page->setName($content['name']);
-        $page->setBodyCopy($content['body_copy']);
+//        $page->setBodyCopy($content['body_copy']);
         $page->setSlug($content['slug']);
         $page->setTemplateCode($content['template_code']);
         $page->setRequestMethod($content['request_method']);
@@ -341,7 +341,7 @@ class SnapshotManager extends BaseManager
         $content['meta_keyword']     = $page->getMetaKeyword();
         $content['template_code']    = $page->getTemplateCode();
         $content['request_method']   = $page->getRequestMethod();
-        $content['body_copy']        = $page->getBodyCopy();
+//        $content['body_copy']        = $page->getBodyCopy();
         $content['created_at']       = $page->getCreatedAt()->format('U');
         $content['updated_at']       = $page->getUpdatedAt()->format('U');
         $content['slug']             = $page->getSlug();
