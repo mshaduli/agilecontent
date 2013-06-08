@@ -1,10 +1,10 @@
 $(document).ready(function(){
+     CKEDITOR.config.allowedContent = true;
     $('.inline-edit-save').bind("click", function(){
        
         var blockid = $(this).attr('id');
             blockid = blockid.substr(17, blockid.length);
         var content = CKEDITOR.instances['cms-block-'+blockid].getData();
-        
         var request = jQuery.ajax({
                 url: '/app_dev.php/admin/sonata/page/page/1/aloha',
                 type: "POST",

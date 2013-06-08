@@ -210,8 +210,8 @@ class PageAdminController extends Controller
     // Move to custom controller
     
     public function alohaAction(){
-         echo stripslashes($this->getRequest()->get('content'));
-        $blockManager = $this->get('sonata.page.manager.block');
+        
+          $blockManager = $this->get('sonata.page.manager.block');
         
           $block = $blockManager->findOneBy(array('id' => $this->getRequest()->get('block_id')));
           $block->setSettings(array('content'=>stripslashes($this->getRequest()->get('content'))));
