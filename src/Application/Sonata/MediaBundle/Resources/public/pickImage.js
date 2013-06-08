@@ -29,7 +29,7 @@ jQuery(document).ready(function() {
                 var row = $(this).parents('td'); 
                 var mediaid = $(row).attr('objectid');
                 var request = jQuery.ajax({
-                            url: '/app_dev.php/admin/sonata/page/page//blockMediaSave',
+                            url: '/app_dev.php/admin/sonata/page/page/blockMediaSave',
                             type: "POST",
                             data: {
                                     mediaId : mediaid,
