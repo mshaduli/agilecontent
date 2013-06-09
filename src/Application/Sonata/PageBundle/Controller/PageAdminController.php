@@ -207,9 +207,7 @@ class PageAdminController extends Controller
         return new \Symfony\Component\HttpFoundation\Response('success'); 
     }
     
-    // Move to custom controller
-    
-    public function alohaAction(){
+    public function CKEditorSaveAction(){
         
           $blockManager = $this->get('sonata.page.manager.block');
         
