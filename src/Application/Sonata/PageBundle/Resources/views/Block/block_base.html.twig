@@ -17,6 +17,14 @@ file that was distributed with this source code.
         data-role="{% block block_role %}block{% endblock %}"
         data-page-id="{{ block.page.id }}"
     {% endif %}
+    {% if sonata_page.isEditor or app.security and app.security.isGranted('ROLE_PREVIOUS_ADMIN') %}
+        {% if block.type == 'sonata.block.service.text' %} contenteditable="true" {% endif %}
+    {% endif %}
     >
     {% block block %}EMPTY CONTENT{% endblock %}
 </div>
+{% if sonata_page.isEditor or app.security and app.security.isGranted('ROLE_PREVIOUS_ADMIN') %}
+{% if block.type == 'sonata.block.service.text' %} 
+    <a href="javascript:void(0);" id="inline-edit-save-{{ block.id }}" class="btn btn-primary inline-edit-save">Save </a>
+{% endif %}
+    {% endif %}
