@@ -33,10 +33,15 @@ file that was distributed with this source code.
         <div style="clear: both"></div>
     </div>
     {% if sonata_page.isEditor or app.security and app.security.isGranted('ROLE_PREVIOUS_ADMIN') %}
-
-    <a href="/admin/sonata/media/media/list?uniqid=s51b41b760fd19&amp;code=sonata.media.admin.media&amp;pcode=sonata.page.admin.block&amp;puniqid=s51b41b76033d8" onclick="return start_field_dialog_form_list_s51b41b76033d8_settings_mediaId(this);" class="btn sonata-ba-action" blockid="{{ block.id }}" title="List"><i class="icon-list"></i>
+    {% if app.environment == 'prod' %}
+        <a href="/admin/sonata/media/media/list?uniqid=s51b41b760fd19&amp;code=sonata.media.admin.media&amp;pcode=sonata.page.admin.block&amp;puniqid=s51b41b76033d8" onclick="return start_field_dialog_form_list_s51b41b76033d8_settings_mediaId(this);" class="btn sonata-ba-action" blockid="{{ block.id }}" title="List"><i class="icon-list"></i>
                     Select Media
-                </a>
+        </a>
+     {% else %}
+        <a href="/app_dev.php/admin/sonata/media/media/list?uniqid=s51b41b760fd19&amp;code=sonata.media.admin.media&amp;pcode=sonata.page.admin.block&amp;puniqid=s51b41b76033d8" onclick="return start_field_dialog_form_list_s51b41b76033d8_settings_mediaId(this);" class="btn sonata-ba-action" blockid="{{ block.id }}" title="List"><i class="icon-list"></i>
+                    Select Media
+        </a>
+     {% endif %}
     <!--<a class="btn-primary btn" id="clickBtn" href="/app_dev.php/admin/sonata/media/media/list?uniqid=s51b41b760fd19&code=sonata.media.admin.media&pcode=sonata.page.admin.block&puniqid=s51b41b76033d8" data-toggle="modal" data-target="#myModal_{#{ block.id }#}">Edit</a> -->
 
     <div class="container sonata-ba-modal sonata-ba-modal-edit-one-to-one ui-dialog-content ui-widget-content" style="width: auto; min-height: 104px; height: auto; display: none; " id="field_dialog_s51b41b76033d8_settings_mediaId" scrolltop="0" scrollleft="0">
