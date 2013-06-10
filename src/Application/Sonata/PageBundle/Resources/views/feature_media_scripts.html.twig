@@ -1,8 +1,16 @@
     
     <script type="text/javascript">
-      {% set id = 's51b41b76033d8_settings_mediaId' %}
-      {% set uniqid = 's51b41b760fd19' %}
+      {% set id = 's51b41b76033d5_settings_mediaId' %}
+      {% set uniqid = 's51b41b760fd35' %}
       {% set code = 'sonata.media.admin.media' %}
+      {% if app.environment == 'prod' %}
+          {% set url = '/admin/sonata/page/page/blockMediaSave' %}
+      {% else %}
+          {% set url = '/app_dev.php/admin/sonata/page/page/blockMediaSave' %}
+      {% endif %}
+      
+      
+      
     {#
       handle link click in a list :
         - if the parent has an objectId defined then the related input get updated
@@ -39,12 +47,19 @@
                     type: "POST",
                     data: {
                             mediaId : mediaid,
-                            blockId : blockid_back,
+                            blockId : blockid_back
                     },
                     dataType: "html"
             }).done(function(){
                 path = path.replace('admin','default_big');
-                $('#cms-block-'+blockid_back+ ' img').attr('src',path);    
+                src = $('#cms-block-'+blockid_back+ ' img').attr('src');
+                if (typeof src !== 'undefined' && src !== false) {
+                    $('#cms-block-'+blockid_back+ ' img').attr('src',path);
+                }else{
+                   $('#cms-block-'+blockid_back+ ' iframe').remove();
+                   $('#cms-block-'+blockid_back+ ' div').eq(1).html('<img src="'+path+'" width="819" height="1227" />');
+                }
+                 
                 return true;
             });
 
@@ -69,6 +84,7 @@
         
 
         var a = jQuery(this);
+        blockid_back = a.attr('blockid');        
 
         field_dialog_{{ id }}.html('');
 
@@ -79,7 +95,7 @@
             success: function(html) {
 
                
-
+               
                 // populate the popup container
                 field_dialog_{{ id }}.html(html);
 
@@ -233,7 +249,7 @@
         // this can be only done this way has popup can be cascaded
         var blockid_back = '';
         function start_field_dialog_form_list_{{ id }}(link) {
-
+            
             link.onclick = null;
             blockid_back = $(link).attr('blockid');
             initialize_popup_{{ id }}();
