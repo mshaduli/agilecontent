@@ -202,3 +202,11 @@ vich_geographical:
     # if you specify the Bing map renderer then add your api key as follows
     bing:
         api_key: my_api_key
+        
+services:
+    como.twig.custom_extension:
+        class: Application\Sonata\PageBundle\Twig\Extension\CustomPageExtension
+        arguments: 
+          blockManager:  "@sonata.page.manager.block"
+        tags:
+            - { name: twig.extension }

@@ -39,7 +39,7 @@ file that was distributed with this source code.
 
             {% if page is defined %}
                 <div class="row">
-                    {{ sonata_page_render_container('content_top', page) }}
+                    {{ sonata_page_render_container('content_top', page)  | sonata_page_render_custome_block(['sonata.block.service.text','sonata.media.block.feature_media']) }}
                 </div>
             {% endif %}
 
@@ -57,11 +57,15 @@ file that was distributed with this source code.
             </div>
             
                 <div class="row">
-                    {{ sonata_page_render_container('firstimage', page) }}
+                    {{ sonata_page_render_container('firstimage', page) | sonata_page_render_custome_block(['sonata.block.service.text','sonata.media.block.feature_media']) }}
                         
                 </div>
                 <div class="row">
-                    {{ sonata_page_render_container('2image', page) }}
+                    {{ sonata_page_render_container('2image', page) | sonata_page_render_custome_block(['sonata.block.service.text','sonata.media.block.feature_media'])  }}
+                        
+                </div>
+                <div class="row">
+                    {{ sonata_page_render_container('3image', page)   }}
                         
                 </div>
                 
