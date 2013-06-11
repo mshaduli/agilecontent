@@ -40,14 +40,14 @@
             return;
         }else{
         
-            $('#cms-block-'+blockid_back+ ' img').attr('src','/uploads/loadernew.gif');
-            
             src = $('#cms-block-'+blockid_back+ ' img').attr('src');
                 if (typeof src !== 'undefined' && src !== false) {
-                   $('#cms-block-'+blockid_back+ ' img').attr('src','/uploads/loadernew.gif');
+                   $('#cms-block-'+blockid_back+ ' img').attr('src','/bundles/sonataadmin/ajax-loader.gif');
+                   $('#cms-block-'+blockid_back+ ' img').attr('width','200');
+                   $('#cms-block-'+blockid_back+ ' img').attr('height','200');
                 }else{
                    $('#cms-block-'+blockid_back+ ' iframe').remove();
-                   $('#cms-block-'+blockid_back+ ' div').eq(1).html('<img src="/uploads/loadernew.gif" width="819" height="1227" />');
+                   $('#cms-block-'+blockid_back+ ' div').eq(1).html('<img src="/bundles/sonataadmin/ajax-loader.gif"/>');
                 }
                 
             mediaid = $(this).parents('td').attr('objectid');
@@ -65,6 +65,8 @@
                 src = $('#cms-block-'+blockid_back+ ' img').attr('src');
                 if (typeof src !== 'undefined' && src !== false) {
                     $('#cms-block-'+blockid_back+ ' img').attr('src',path);
+                    $('#cms-block-'+blockid_back+ ' img').attr('width','819');
+                    $('#cms-block-'+blockid_back+ ' img').attr('height','1227');
                 }else{
                    $('#cms-block-'+blockid_back+ ' iframe').remove();
                    $('#cms-block-'+blockid_back+ ' div').eq(1).html('<img src="'+path+'" width="819" height="1227" />');
@@ -95,7 +97,7 @@
         var a = jQuery(this);
         blockid_back = a.attr('blockid');        
         
-        field_dialog_{{ id }}.html('<div id="loading-image" align="center" ><img src="/uploads/loadernew.gif" alt="Loading..." /></div>');
+        field_dialog_{{ id }}.html('<div id="loading-image" align="center" ><img src="/bundles/sonataadmin/ajax-loader.gif" alt="Loading..." /></div>');
         field_dialog_{{ id }}.dialog({
                     height: 'auto',
                     width: 980,
