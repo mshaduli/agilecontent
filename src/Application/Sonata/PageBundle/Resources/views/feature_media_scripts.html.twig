@@ -52,6 +52,7 @@
                     dataType: "html"
             }).done(function(){
                 path = path.replace('admin','default_big');
+                alert(path);
                 src = $('#cms-block-'+blockid_back+ ' img').attr('src');
                 if (typeof src !== 'undefined' && src !== false) {
                     $('#cms-block-'+blockid_back+ ' img').attr('src',path);

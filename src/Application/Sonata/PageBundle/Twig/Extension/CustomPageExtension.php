@@ -110,8 +110,8 @@ class CustomPageExtension extends \Twig_Extension
             $newblock->setParent($block);
              if($value == 'sonata.block.service.text')
                 $newblock->setSettings(array("content" => "Insert your content here"));
-             else
-                $newblock->setSettings(array("content" => ""));
+             elseif($value == 'sonata.media.block.feature_media')
+                $newblock->setSettings(array("media" => false,"orientation" => "left","title" => null,"content" => null,"context" => "default","format" => "default_big","mediaId" => null));
             $newblock->setEnabled(1);
             $newblock->setPosition(1);
             $this->blockmanager->save($newblock);
