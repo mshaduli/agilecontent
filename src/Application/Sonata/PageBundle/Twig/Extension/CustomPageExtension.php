@@ -56,18 +56,18 @@ class CustomPageExtension extends \Twig_Extension
         $block = $this->blockmanager->findOneBy(array( 'id'=>$container_id, 'type'=>'sonata.page.block.container'));
         $tobecreated = array();
         $flag = true;
-        
-        foreach($services as $key=> $service){
-            $flag = true;
-            foreach ($block->getChildren() as $child){
-                if($service == $child->getType()){
-                    $flag = false;
+        if($block){
+            foreach($services as $key=> $service){
+                $flag = true;
+                foreach ($block->getChildren() as $child){
+                    if($service == $child->getType()){
+                        $flag = false;
+                    }
                 }
+                if($flag)
+                    $tobecreated[$key] = $service;
             }
-            if($flag)
-                $tobecreated[$key] = $service;
         }
-        
         foreach($tobecreated as $key=>$value){
             $newblock = $this->blockmanager->create();
             
