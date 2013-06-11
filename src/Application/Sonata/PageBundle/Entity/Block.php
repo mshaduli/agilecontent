@@ -36,4 +36,11 @@ class Block extends BaseBlock
     {
         return $this->id;
     }
+    
+    public function __construct()
+    {
+        parent::__construct();
+        $this->enabled  = true;
+        
+    }    
 }
