@@ -55,15 +55,25 @@ file that was distributed with this source code.
                     {% endif %}
                 {% endif %}
             </div>
-            
-                <div class="row">
-                    {{ sonata_page_render_container('firstimage', page) | sonata_page_render_custome_block(['sonata.block.service.text','sonata.media.block.feature_media']) }}
-                        
-                </div>
-                <div class="row">
-                    {{ sonata_page_render_container('2image', page) | sonata_page_render_custome_block(['sonata.block.service.text','sonata.media.block.feature_media'])  }}
-                        
-                </div>
+                {% if sonata_page.isEditor or app.security and app.security.isGranted('ROLE_PREVIOUS_ADMIN') %}
+                    <div class="row">
+                        {{ sonata_page_render_container('firstimage', page) | sonata_page_render_custome_block(['sonata.block.service.text','sonata.media.block.feature_media']) }}
+
+                    </div>
+                    <div class="row">
+                        {{ sonata_page_render_container('2image', page) | sonata_page_render_custome_block(['sonata.block.service.text','sonata.media.block.feature_media'])  }}
+
+                    </div>
+                {% else %}
+                    <div class="row">
+                        {{ sonata_page_render_container('firstimage', page) }}
+
+                    </div>
+                    <div class="row">
+                        {{ sonata_page_render_container('2image', page) }}
+
+                    </div>
+                {% endif %}
                 <div class="row">
                     {{ sonata_page_render_container('3image', page)   }}
                         
