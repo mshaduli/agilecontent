@@ -39,7 +39,17 @@
 
             return;
         }else{
+            //$('.<img src="/uploads/loader.gif" alt="Loading..." /></div>
+            $('#cms-block-'+blockid_back+ ' img').attr('src','/uploads/loadernew.gif');
             
+            src = $('#cms-block-'+blockid_back+ ' img').attr('src');
+                if (typeof src !== 'undefined' && src !== false) {
+                   $('#cms-block-'+blockid_back+ ' img').attr('src','/uploads/loadernew.gif');
+                }else{
+                   $('#cms-block-'+blockid_back+ ' iframe').remove();
+                   $('#cms-block-'+blockid_back+ ' div').eq(1).html('<img src="/uploads/loadernew.gif" width="819" height="1227" />');
+                }
+                
             mediaid = $(this).parents('td').attr('objectid');
             path = $(this).find('img').attr('src');
             var request = jQuery.ajax({
@@ -72,14 +82,6 @@
         field_dialog_{{ id }}.dialog('close');
     }
 
-    function showLoadingImage() {
-        $('#loaderajax').html('<div id="loading-image"><img src="/uploads/loader.gif" alt="Loading..." /></div>');
-    }
-
-    function hideLoadingImage() {
-        $('#loading-image').remove();
-    }
-
     // handle the add link
     var field_dialog_form_list_{{ id }} = function(event) {
 
@@ -93,7 +95,7 @@
         var a = jQuery(this);
         blockid_back = a.attr('blockid');        
         
-        field_dialog_{{ id }}.html('<div id="loading-image" align="center" ><img src="/uploads/loader.gif" alt="Loading..." /></div>');
+        field_dialog_{{ id }}.html('<div id="loading-image" align="center" ><img src="/uploads/loadernew.gif" alt="Loading..." /></div>');
         field_dialog_{{ id }}.dialog({
                     height: 'auto',
                     width: 980,
