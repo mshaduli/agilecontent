@@ -23,8 +23,7 @@ class MediaThumbnailListener
     
   
     public function postPersist(LifecycleEventArgs $args)
-    {
-        echo "\n Generating Thumbnail \n\n";
+    {        
         $entity = $args->getEntity();
         
         if (null != $this->driver->getReader()->getClassAnnotation(new \ReflectionClass(get_class($entity)), 'TNE\\OperatorBundle\\Annotation\\ATDW\\Entity') && method_exists($entity, 'addMedia')) {
