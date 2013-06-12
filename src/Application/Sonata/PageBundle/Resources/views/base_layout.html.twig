@@ -70,14 +70,14 @@ file that was distributed with this source code.
 
                     <!-- CMS specific variables -->
                     <script>
-                        jQuery(document).ready(function() {
+                       /* jQuery(document).ready(function() {
                             Sonata.Page.init({
                                 url: {
-                                    block_save_position: '{{ path('admin_sonata_page_block_savePosition') }}',
-                                    block_edit:          '{{ path('admin_sonata_page_block_edit', {'id': 'BLOCK_ID'}) }}'
+                                    block_save_position: '{#{ path('admin_sonata_page_block_savePosition') }#}',
+                                    block_edit:          '{#{ path('admin_sonata_page_block_edit', {'id': 'BLOCK_ID'}) }#}'
                                 }
                             });
-                        });
+                        }); */
                     </script>
                 {% endif %}
 
@@ -127,11 +127,8 @@ file that was distributed with this source code.
                                         {% endif %}
 
                                         {% if page is defined %}
-                                            <li style="padding: 8px 0px 0px 0px;" >
-                                                <form class="form-inline" style="margin: 0px">
-                                                    <label for="page-action-enabled-edit"><input type="checkbox" id="page-action-enabled-edit" />{{ 'header.show_zone'|trans({}, 'SonataPageBundle') }}</label>
-                                                    <input type="submit" class="btn" value="{{ 'btn_save_position'|trans({}, 'SonataPageBundle') }}" id="page-action-save-position" />
-                                                </form>
+                                            <li style="padding: 0px 0px 0px 0px;" >
+                                                <input type="button" id="ck-change-save" class="btn btn-inverse" value="Save changes"/>
                                             </li>
                                         {% endif %}
                                     {% endif %}

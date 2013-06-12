@@ -39,7 +39,17 @@
 
             return;
         }else{
-            
+        
+            src = $('#cms-block-'+blockid_back+ ' img').attr('src');
+                if (typeof src !== 'undefined' && src !== false) {
+                   $('#cms-block-'+blockid_back+ ' img').attr('src','/bundles/sonataadmin/ajax-loader.gif');
+                   $('#cms-block-'+blockid_back+ ' img').attr('width','200');
+                   $('#cms-block-'+blockid_back+ ' img').attr('height','200');
+                }else{
+                   $('#cms-block-'+blockid_back+ ' iframe').remove();
+                   $('#cms-block-'+blockid_back+ ' div').eq(1).html('<img src="/bundles/sonataadmin/ajax-loader.gif"/>');
+                }
+                
             mediaid = $(this).parents('td').attr('objectid');
             path = $(this).find('img').attr('src');
             var request = jQuery.ajax({
@@ -55,6 +65,8 @@
                 src = $('#cms-block-'+blockid_back+ ' img').attr('src');
                 if (typeof src !== 'undefined' && src !== false) {
                     $('#cms-block-'+blockid_back+ ' img').attr('src',path);
+                    $('#cms-block-'+blockid_back+ ' img').attr('width','819');
+                    $('#cms-block-'+blockid_back+ ' img').attr('height','1227');
                 }else{
                    $('#cms-block-'+blockid_back+ ' iframe').remove();
                    $('#cms-block-'+blockid_back+ ' div').eq(1).html('<img src="'+path+'" width="819" height="1227" />');
@@ -72,7 +84,6 @@
         field_dialog_{{ id }}.dialog('close');
     }
 
-
     // handle the add link
     var field_dialog_form_list_{{ id }} = function(event) {
 
@@ -85,9 +96,21 @@
 
         var a = jQuery(this);
         blockid_back = a.attr('blockid');        
-
-        field_dialog_{{ id }}.html('');
-
+        
+        field_dialog_{{ id }}.html('<div id="loading-image" align="center" ><img src="/bundles/sonataadmin/ajax-loader.gif" alt="Loading..." /></div>');
+        field_dialog_{{ id }}.dialog({
+                    height: 'auto',
+                    width: 980,
+                    modal: true,
+                    resizable: true,
+                    title: 'Media List',
+                    close: function(event, ui) {
+                        // make sure we have a clean state
+                        jQuery('a', field_dialog_{{ id }}).die('click');
+                        jQuery('form', field_dialog_{{ id }}).die('submit');
+                    },
+                    zIndex: 9998,
+                });
         // retrieve the form element from the related admin generator
         jQuery.ajax({
             url: a.attr('href'),
@@ -95,7 +118,7 @@
             success: function(html) {
 
                
-               
+                
                 // populate the popup container
                 field_dialog_{{ id }}.html(html);
 
@@ -110,7 +133,7 @@
                 jQuery('a', field_dialog_{{ id }}).live('click', field_dialog_form_list_link_{{ id }});
                 jQuery('form', field_dialog_{{ id }}).live('submit', function(event) {
                     event.preventDefault();
-
+                    field_dialog_{{ id }}.html(html);
                     var form = jQuery(this);
                     jQuery(form).ajaxSubmit({
                         type: form.attr('method'),

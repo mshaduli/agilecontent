@@ -209,11 +209,19 @@ class PageAdminController extends Controller
     
     public function CKEditorSaveAction(){
         
-          $blockManager = $this->get('sonata.page.manager.block');
-        
-          $block = $blockManager->findOneBy(array('id' => $this->getRequest()->get('block_id')));
-          $block->setSettings(array('content'=>stripslashes($this->getRequest()->get('content'))));
-          $blockManager->save($block);
+         $blockManager = $this->get('sonata.page.manager.block');
+         $data = $this->getRequest()->get('data1');
+         $value_array = array();
+         foreach($data as $d){
+             foreach($d as $value){
+                 $value_array[] .= $value;
+             }
+            $block = $blockManager->findOneBy(array('id' => str_replace('cms-block-', '', $value_array[0])));
+            $block->setSettings(array('content'=>stripslashes($value_array[1])));
+            $blockManager->save($block);
+            $value_array = array();
+         }
+         
         return new \Symfony\Component\HttpFoundation\Response('success'); 
     }
 
