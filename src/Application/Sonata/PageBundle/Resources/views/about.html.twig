@@ -30,58 +30,43 @@ file that was distributed with this source code.
         <script src="{{ asset('bundles/tneoperator/angular/app/js/search.js') }}"></script>
         <script src="{{ asset('bundles/tneoperator/js/select2.js') }}"></script>
 {% endblock %}    
-    
-{% block content %}
 
 
+{% block page_container %}
+        
 
 {% include 'TNEOperatorBundle:Default:content_header.html.twig' %}
    <div class="page-title-div">
     <div class="page-title">
-      <h1>Page Title</h1>
+      {{ sonata_page_render_container('pagetitle', page) | sonata_page_render_custome_block(['sonata.block.service.text']) }}
     </div>
   </div>
     <div id="main" class="container general-content-main">
     <div class="row" >
-      <div class="span12">
+      <div class="">
         <div class="breadcrum-area-main">
           <div class="general-content-mailarea"> <a href="#"><i class="content-share-icon"></i></a> <a href="#"><i class="content-mail-icon"></i></a> <a href="#"><i class="content-printer-icon"></i></a> </div>
           <div class="breadcrumb"><a href="#">Home</a> / <a href="#">Section</a> / <a href="#">Page title</a></div>
           <div class="general-content-page-heading2">
-            <h2>This is an example of h2 that covers two lines of text and is optional</h2>
+             {{ sonata_page_render_container('heading', page) | sonata_page_render_custome_block(['sonata.block.service.text']) }}
           </div>
         </div>
         <!-- New Markup for Operator Bundle -->
-        <div class="general-content-slider"> <img src="{{ '/bundles/tneoperator/img/banner.jpg' }}" alt="" title=""> </div>
+        <div class="general-content-slider"> {{ sonata_page_render_container('bannerimage', page) | sonata_page_render_custome_block(['sonata.media.block.feature_media']) }} </div>
         <div class="content-temp-body">
           <div class="content-temp-lft span6 ">
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining <a href="#">essentially unchanged</a>.</p>
-            <div class="map-inner"><img src="{{ '/bundles/tneoperator/img/map-inner.jpg' }}"></div>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining <a href="#">essentially unchanged</a>.</p>
-            <div class="blockquote-main">
-              <blockquote><span>he printing and typesetting industry. Lorem Ipsum has been the industry's standard Lorem Ipsum has</span></blockquote>
-              <div class="blockquote-author">- Aristotle</div>
-            </div>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into</p>
-            <h3>HEADING 3</h3>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into</p>
-            <div class="list-item">
-              <ul>
-                <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever
-                  <ul>
-                    <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</li>
-                  </ul>
-                </li>
-                <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</li>
-              </ul>
-            </div>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into</p>
+            {{ sonata_page_render_container('contenttop', page) | sonata_page_render_custome_block(['sonata.block.service.text']) }}
+            
+            <div class="map-inner">{{ sonata_page_render_container('mapimage', page) | sonata_page_render_custome_block(['sonata.media.block.feature_media']) }}</div>
+            {{ sonata_page_render_container('contenttwo', page) | sonata_page_render_custome_block(['sonata.block.service.text']) }}
+            
+            {{ sonata_page_render_container('contentfive', page) | sonata_page_render_custome_block(['sonata.block.service.text']) }}
+            
           </div>
           <div class="content-temp-rgt span4">
             <div class="featured-hotel-heading">Featured Accomodation</div>
             <div class="feaured-hotel-block">
-              <div><img src="{{'/bundles/tneoperator/img/featured-hotel-img.jpg'}}">
+              <div class="my-div">{{ sonata_page_render_container('featuredhotel', page) | sonata_page_render_custome_block(['sonata.media.block.feature_media']) }}
                 <div>
                   <div class="featured-accomodation-content">
                     <div>
@@ -142,5 +127,5 @@ file that was distributed with this source code.
         //angular.bootstrap(document, ['SearchApp']);
     });
 </script>
-            
+  
 {% endblock %}

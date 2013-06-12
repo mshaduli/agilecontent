@@ -1,5 +1,5 @@
 /* CSS Document */
-/*
+
 @font-face {
     font-family: 'swiss_721roman';
     src: url('../font/swiss_721_extended-webfont.eot');
@@ -10,7 +10,7 @@
     font-weight: normal;
     font-style: normal;
 }
-  */
+
 #footer .container {
     background: #1681c2;
     color: #FFFFFF;
@@ -56,6 +56,7 @@ body {
     background-color: #efefef;
     color: #717073;
     font-size: 13px;
+    font-family: 'swiss_721roman' !important;
 }
 
 body,
@@ -1186,6 +1187,7 @@ color:#8bca5d;
 font-size:48px;
 margin:0px;
 padding:0px;
+font-family: 'swiss_721roman';
 }
 
 .general-content-main
@@ -1272,6 +1274,8 @@ margin-top:15px;
 background:#7fb9df;
 color:#fff;
 }
+
+.general-content-main blockquote p{display:inline}
 
 .blockquote-author
 {
@@ -1460,6 +1464,24 @@ background:url(../img/printer-icon-hover.png) center #8bca5d no-repeat;
 .breadcrumb a{ font-size:13px; color:#ccc;}
 .breadcrumb>.active{color:#999;}
 
+.map-inner img{
+max-width:600px;
+max-height:344px;
+}
+
+
+.my-div img{
+   max-width:352px;
+   max-height:198px;
+}
+
+.my-div .sonata-media-block-feature-media-container
+{padding:0px;
+margin:0px;}
+
+.map-inner .sonata-media-block-feature-media-container
+{padding:0px;
+margin:0px;}
 
 
 /***** GENERAL CONTENT TEMPLATE STYLES ENDS HERE ****/
@@ -1519,6 +1541,17 @@ background:url(../img/printer-icon-hover.png) center #8bca5d no-repeat;
 	padding-left:20px;
 	width:510px;
 	}
+        
+        .map-inner img{
+        max-width:510px;
+        max-height:auto;
+}
+
+.page-title
+	{
+	width:940px;
+	}
+
 /**** GENERAL CONTENT TEMPLATE STYLES ENDS HERE ****/
     
     
@@ -1549,6 +1582,23 @@ width:275px;
 {
 font-size:20px;
 }
+
+.map-inner img{
+max-width:375px;
+max-height:auto;
+}
+
+
+.my-div img{
+   max-width:274px;
+   max-height:auto;
+}
+
+
+.page-title
+	{
+	width:724px;
+	}
 
 /**** GENERAL CONTENT TEMPLATE STYLES ENDS HERE ****/
 
