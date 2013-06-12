@@ -43,6 +43,8 @@
             src = $('#cms-block-'+blockid_back+ ' img').attr('src');
                 if (typeof src !== 'undefined' && src !== false) {
                    $('#cms-block-'+blockid_back+ ' img').attr('src','/bundles/sonataadmin/ajax-loader.gif');
+                   $('#cms-block-'+blockid_back+ ' img').attr('width','');
+                   $('#cms-block-'+blockid_back+ ' img').attr('height','');
                 }else{
                    $('#cms-block-'+blockid_back+ ' iframe').remove();
                    $('#cms-block-'+blockid_back+ ' div').eq(1).html('<img src="/bundles/sonataadmin/ajax-loader.gif"/>');
@@ -58,8 +60,8 @@
                             blockId : blockid_back
                     },
                     dataType: "html"
-            }).done(function(){
-                path = path.replace('admin','default_big');
+            }).done(function(obj){
+                path = path.replace(/[^/]*$/,obj);
                 src = $('#cms-block-'+blockid_back+ ' img').attr('src');
                 if (typeof src !== 'undefined' && src !== false) {
                     $('#cms-block-'+blockid_back+ ' img').attr('src',path);

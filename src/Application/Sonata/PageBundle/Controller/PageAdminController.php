@@ -194,6 +194,7 @@ class PageAdminController extends Controller
     
     public function blockMediaSaveAction(){
         $blockManager = $this->get('sonata.page.manager.block');
+        $mediaManager = $this->get('sonata.media.manager.media');
         $block = $blockManager->findOneBy(array('id' => $this->getRequest()->get('blockId')));
         $settigns = $block->getSettings();
         if(!$settigns)
@@ -203,8 +204,9 @@ class PageAdminController extends Controller
         $settigns['mediaId'] = $this->getRequest()->get('mediaId');
         $block->setSettings($settigns);
         $blockManager->save($block);
+        $mediaObj = $mediaManager->findOneBy(array('id' => $this->getRequest()->get('mediaId')));
 //        $this->createPageSnapshot($page);
-        return new \Symfony\Component\HttpFoundation\Response('success'); 
+        return new \Symfony\Component\HttpFoundation\Response($mediaObj->getProviderReference()); 
     }
     
     public function CKEditorSaveAction(){

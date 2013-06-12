@@ -1194,6 +1194,7 @@ font-family: 'swiss_721roman';
 {
 background:#FFFFFF;
 margin-top:15px;
+width:1170px\9;
 }
 
 .breadcrum-area-main
@@ -1482,6 +1483,19 @@ margin:0px;}
 .map-inner .sonata-media-block-feature-media-container
 {padding:0px;
 margin:0px;}
+
+
+
+.fix-ie
+{
+width:1170px\9;
+}
+
+.topnav-my
+{
+width:1170px\9;
+
+}
 
 
 /***** GENERAL CONTENT TEMPLATE STYLES ENDS HERE ****/
