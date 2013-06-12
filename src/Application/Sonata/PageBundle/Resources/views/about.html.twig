@@ -46,7 +46,7 @@ file that was distributed with this source code.
       <div class="fix-ie">
         <div class="breadcrum-area-main">
           <div class="general-content-mailarea"> <a href="#"><i class="content-share-icon"></i></a> <a href="#"><i class="content-mail-icon"></i></a> <a href="#"><i class="content-printer-icon"></i></a> </div>
-          <div class="breadcrumb"><a href="#">Home</a> / <a href="#">Section</a> / <a href="#">Page title</a></div>
+          <div class="breadcrumb"><a href="#">Home</a> / <a href="#">Section</a> / <a href="#">Page title Breadcrumbs</a></div>
           <div class="general-content-page-heading2">
              {{ sonata_page_render_container('heading', page) | sonata_page_render_custome_block(['sonata.block.service.text']) }}
           </div>
@@ -60,13 +60,15 @@ file that was distributed with this source code.
             <div class="map-inner">{{ sonata_page_render_container('mapimage', page) | sonata_page_render_custome_block(['sonata.media.block.feature_media']) }}</div>
             {{ sonata_page_render_container('contenttwo', page) | sonata_page_render_custome_block(['sonata.block.service.text']) }}
             
-            {{ sonata_page_render_container('contentfive', page) | sonata_page_render_custome_block(['sonata.block.service.text']) }}
             
           </div>
           <div class="content-temp-rgt span4">
             <div class="featured-hotel-heading">Featured Accomodation</div>
             <div class="feaured-hotel-block">
-              <div class="my-div">{{ sonata_page_render_container('featuredhotel', page) | sonata_page_render_custome_block(['sonata.media.block.feature_media']) }}
+              <div class="my-div card">
+                <div class="title ng-binding"><span>From</span> <br>
+                $124</div>
+                 {{ sonata_page_render_container('featuredhotel', page) | sonata_page_render_custome_block(['sonata.media.block.feature_media']) }}
                 <div>
                   <div class="featured-accomodation-content">
                     <div>
@@ -81,7 +83,7 @@ file that was distributed with this source code.
                 </div>
               </div>
             </div>
-            <div></div>
+            <div class="medium-rectangle"><img src="{{'/bundles/tneoperator/img/medium-rectangle.jpg'}}"</div>
           </div>
           <div class="clear"></div>
         </div>

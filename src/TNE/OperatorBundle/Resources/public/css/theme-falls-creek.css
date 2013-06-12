@@ -1497,6 +1497,38 @@ width:1170px\9;
 
 }
 
+.general-content-slider .sonata-media-block-feature-media-container-left
+{
+    margin:0px !important;
+    padding:0px !important;
+}
+.general-content-slider .sonata-media-block-feature-media-container
+{
+    margin:0px !important;
+    padding:0px !important;
+}
+
+
+.medium-rectangle
+{
+margin-top:35px;
+margin-bottom:30px;
+}
+
+.feaured-hotel-block .card .ng-binding
+{
+text-align:center;
+font-size:21px;
+padding-top:0px;
+padding-bottom:7px;
+line-height:22px;
+width:56px;
+}
+.feaured-hotel-block span
+{
+font-size:14px;
+}
+
 
 /***** GENERAL CONTENT TEMPLATE STYLES ENDS HERE ****/
 
