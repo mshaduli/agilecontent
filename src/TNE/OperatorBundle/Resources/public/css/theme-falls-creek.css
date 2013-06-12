@@ -1184,7 +1184,6 @@ margin:auto;
 {
 color:#8bca5d;
 font-size:48px;
-font-family: 'swiss_721roman';
 margin:0px;
 padding:0px;
 }
@@ -1214,7 +1213,6 @@ padding-bottom:5px;
 color:#0070c0;
 font-size:28px;
 font-weight:normal;
-font-family: 'swiss_721roman';
 line-height:normal;
 }
 
@@ -1288,7 +1286,6 @@ font-size:15px;
 color:#82b7d6;
 font-size:18px;
 font-weight:normal;
-font-family: 'swiss_721roman';
 line-height:normal;
 margin-bottom:25px;
 }
@@ -1382,7 +1379,7 @@ float:left;
 
 .hotel-name
 {
-font-family: 'swiss_721roman';
+
 font-size:17px;
 font-weight:bold;
 padding-top:12px;
@@ -1459,7 +1456,7 @@ height:40px;
 background:url(../img/printer-icon-hover.png) center #8bca5d no-repeat;
 }
 
-.breadcrumb{ font-size:13px; color:#ccc; background:none;}.breadcrumb>li{display:inline-block;*display:inline;*zoom:1;text-shadow:0 1px 0 #ffffff;}.breadcrumb>li>.divider{padding:0 5px;color:#ccc;}
+.breadcrumb{ font-size:13px; color:#ccc; background:none; margin-bottom:0px;}.breadcrumb>li{display:inline-block;*display:inline;*zoom:1;text-shadow:0 1px 0 #ffffff;}.breadcrumb>li>.divider{padding:0 5px;color:#ccc;}
 .breadcrumb a{ font-size:13px; color:#ccc;}
 .breadcrumb>.active{color:#999;}
 
