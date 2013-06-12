@@ -70,14 +70,14 @@ file that was distributed with this source code.
 
                     <!-- CMS specific variables -->
                     <script>
-                        jQuery(document).ready(function() {
+                       /* jQuery(document).ready(function() {
                             Sonata.Page.init({
                                 url: {
-                                    block_save_position: '{{ path('admin_sonata_page_block_savePosition') }}',
-                                    block_edit:          '{{ path('admin_sonata_page_block_edit', {'id': 'BLOCK_ID'}) }}'
+                                    block_save_position: '{#{ path('admin_sonata_page_block_savePosition') }#}',
+                                    block_edit:          '{#{ path('admin_sonata_page_block_edit', {'id': 'BLOCK_ID'}) }#}'
                                 }
                             });
-                        });
+                        }); */
                     </script>
                 {% endif %}
 
