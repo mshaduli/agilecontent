@@ -53,5 +53,46 @@ class GalleryBlockService extends BaseGalleryBlockService
             'elements'  => $gallery ? $this->buildElements($gallery) : array(),
         ), $response);
     }
+    
+    private function buildElements(GalleryInterface $gallery)
+    {
+        $elements = array();
+        foreach ($gallery->getGalleryHasMedias() as $galleryHasMedia) {
+            if (!$galleryHasMedia->getEnabled()) {
+                continue;
+            }
+
+            $type = $this->getMediaType($galleryHasMedia->getMedia());
+
+            if (!$type) {
+                continue;
+            }
+
+            $elements[] = array(
+                'title'     => $galleryHasMedia->getMedia()->getName(),
+                'caption'   => $galleryHasMedia->getMedia()->getDescription(),
+                'type'      => $type,
+                'media'     => $galleryHasMedia->getMedia(),
+            );
+        }
+
+        return $elements;
+    }
+    
+    /**
+     * @param \Sonata\MediaBundle\Model\MediaInterface $media
+     *
+     * @return false|string
+     */
+    private function getMediaType(MediaInterface $media)
+    {
+        if ($media->getContentType() == 'video/x-flv') {
+            return 'video';
+        } elseif (substr($media->getContentType(), 0, 5) == 'image') {
+            return 'image';
+        }
+
+        return false;
+    }    
 
 }

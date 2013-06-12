@@ -164,7 +164,52 @@
         });
     };
 
-  
+    // handle the add link
+    var field_dialog_form_add_{{ id }} = function(event) {
+        initialize_popup_{{ id }}();
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        var a = jQuery(this);
+
+        field_dialog_{{ id }}.html('');
+
+
+        // retrieve the form element from the related admin generator
+        jQuery.ajax({
+            url: a.attr('href'),
+            dataType: 'html',
+            success: function(html) {
+
+
+                // populate the popup container
+                field_dialog_{{ id }}.html(html);
+
+                // capture the submit event to make an ajax call, ie : POST data to the
+                // related create admin
+                jQuery('a', field_dialog_{{ id }}).live('click', field_dialog_form_action_{{ id }});
+                jQuery('form', field_dialog_{{ id }}).live('submit', field_dialog_form_action_{{ id }});
+
+                // open the dialog in modal mode
+                field_dialog_{{ id }}.dialog({
+                    height: 'auto',
+                    width: 650,
+                    modal: true,
+                    autoOpen: true,
+                    resizable: true,
+                    title: '{{ "test" }}',
+                    close: function(event, ui) {
+                        
+                        // make sure we have a clean state
+                        jQuery('a', field_dialog_{{ id }}).die('click');
+                        jQuery('form', field_dialog_{{ id }}).die('submit');
+                    },
+                    zIndex: 9998
+                });
+            }
+        });
+    };
 
     // handle the post data
     var field_dialog_form_action_{{ id }} = function(event) {
@@ -259,7 +304,26 @@
         }
     }
 
-    
+     {#
+        This code is used to defined the "add" popup
+    #}
+    // this function initialize the popup
+    // this can be only done this way has popup can be cascaded
+    function start_field_dialog_form_add_{{ id }}(link) {
+
+        // remove the html event
+        link.onclick = null;
+
+        initialize_popup_{{ id }}();
+
+        // add the jQuery event to the a element
+        jQuery(link)
+            .click(field_dialog_form_add_{{ id }})
+            .trigger('click')
+        ;
+
+        return false;
+    }
 
     
 
