@@ -1597,6 +1597,12 @@ font-size:14px;
 	{
 	width:940px;
 	}
+        
+        
+        .general-content-main .general-content-slider img
+        {
+          width:940px;  
+        }
 
 /**** GENERAL CONTENT TEMPLATE STYLES ENDS HERE ****/
     
@@ -1645,6 +1651,11 @@ max-height:auto;
 	{
 	width:724px;
 	}
+        
+        .general-content-main .general-content-slider img
+        {
+          width:724px;  
+        }
 
 /**** GENERAL CONTENT TEMPLATE STYLES ENDS HERE ****/
 
@@ -1953,6 +1964,9 @@ width:440px;
 font-size:25px;
 }
 
+.my-div.card
+{margin-right:0px;}
+
 /**** GENERAL CONTENT TEMPLATE STYLES ENDS HERE ****/
     
 
@@ -2119,15 +2133,22 @@ font-size:25px;
 width:280px;
 }
 
+.general-content-main .general-content-slider img
+{
+    max-width:320px;
+}
+
+.map-inner img{
+    max-width:280px;
+}
+
+.breadcrum-area-main{
+    padding-top:55px;
+}
+
 /**** GENERAL CONTENT TEMPLATE STYLES ENDS HERE ****/
 
 
 
 
 }
-
-
-
-
-
-
