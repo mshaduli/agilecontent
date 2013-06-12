@@ -1456,7 +1456,7 @@ height:40px;
 background:url(../img/printer-icon-hover.png) center #8bca5d no-repeat;
 }
 
-.breadcrumb{ font-size:13px; color:#ccc; background:none; margin-bottom:0px;}.breadcrumb>li{display:inline-block;*display:inline;*zoom:1;text-shadow:0 1px 0 #ffffff;}.breadcrumb>li>.divider{padding:0 5px;color:#ccc;}
+.breadcrumb{ font-size:13px; color:#ccc; background:none; margin-bottom:0px; padding:0px;}.breadcrumb>li{display:inline-block;*display:inline;*zoom:1;text-shadow:0 1px 0 #ffffff;}.breadcrumb>li>.divider{padding:0 5px;color:#ccc;}
 .breadcrumb a{ font-size:13px; color:#ccc;}
 .breadcrumb>.active{color:#999;}
 
