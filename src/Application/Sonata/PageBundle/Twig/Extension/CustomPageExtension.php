@@ -48,6 +48,7 @@ class CustomPageExtension extends \Twig_Extension
     
     public function customeBlockRender($container, $services){ 
         $container_html = $container;
+        if($container_html !=''){
         $p1 = strpos($container, '"');
         $p2 = strpos($container, '"',$p1+1);
         $container = substr($container, $p1+1, ($p2-$p1)-1);
@@ -86,6 +87,7 @@ class CustomPageExtension extends \Twig_Extension
             
         }
         echo $container_html;
+        }
     }
     
     /**
