@@ -446,7 +446,7 @@ input[type="file"] {
     line-height: 43px;
     min-height: 30px;
     padding: 3px 15px;
-    text-align: right;
+    text-align: left;
     text-shadow: none;
     text-transform: none;
 }
@@ -464,6 +464,7 @@ input[type="file"] {
 }
 #rating-filter {
     display: inline;
+    float: right;
 }
 
 #side-pane .nav > li > a.btn-nav,
@@ -793,6 +794,8 @@ input[type="file"] {
     margin-right: 0px;
     margin-left: 0px;
     top: 0px;
+    padding-right: 16px;
+    width: 90%;
 }
 
 .map-results .card .tag {
