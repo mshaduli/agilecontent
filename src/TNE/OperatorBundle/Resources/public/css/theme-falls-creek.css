@@ -1529,6 +1529,35 @@ width:56px;
 font-size:14px;
 }
 
+#footer .navbar
+{
+    padding:0px;
+}
+#footerNav .navbar .nav
+{
+    margin-right: 0px;
+    margin-left:6px;
+}
+
+#header-top .mobile-fix
+{
+    margin-left:30px;
+    margin-right:17px;
+}
+
+#header-top .mobile-fix2
+{
+    margin-left:8px;
+    
+}
+
+.general-content-slider img
+{
+    max-width:1170px;
+}
+
+
+
 
 /***** GENERAL CONTENT TEMPLATE STYLES ENDS HERE ****/
 
@@ -1573,6 +1602,10 @@ font-size:14px;
         width: 270px;
         margin-left: 26px;
     }
+    
+    #header-top #brand{
+    margin-left:12px
+}
 }
 
 
@@ -1591,7 +1624,7 @@ font-size:14px;
         .map-inner img{
         max-width:510px;
         max-height:auto;
-}
+        }
 
 .page-title
 	{
@@ -1602,6 +1635,10 @@ font-size:14px;
         .general-content-main .general-content-slider img
         {
           width:940px;  
+        }
+        
+        #header-top #brand{
+        margin-left:12px
         }
 
 /**** GENERAL CONTENT TEMPLATE STYLES ENDS HERE ****/
@@ -2144,6 +2181,23 @@ width:280px;
 
 .breadcrum-area-main{
     padding-top:55px;
+}
+
+#header-top .nav{
+    margin-left:15px;
+    margin-right:0px;
+}
+
+#header-top .mobile-fix
+{
+    margin-left:8px;
+    margin-right:0px;
+}
+
+#header-top .mobile-fix2
+{
+    margin-left:0px;
+    
 }
 
 /**** GENERAL CONTENT TEMPLATE STYLES ENDS HERE ****/
