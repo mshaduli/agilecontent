@@ -43,6 +43,7 @@ class MenuBlockService extends BaseBlockService implements BlockServiceInterface
     {
         $settings = array_merge($this->getDefaultSettings(), $block->getSettings());
         
+        
         if (!$response) {
             $response = new Response();
         }
@@ -70,8 +71,8 @@ class MenuBlockService extends BaseBlockService implements BlockServiceInterface
     function validateBlock(ErrorElement $errorElement, BlockInterface $block)
     {
         $errorElement
-            ->with('settings.items')
-                ->assertNotNull(array())
+            ->with('settings.content')
+                ->assertNotNull(array('items'))
                 ->assertNotBlank()
             ->end();
             
@@ -92,7 +93,7 @@ class MenuBlockService extends BaseBlockService implements BlockServiceInterface
     public function getDefaultSettings()
     {
     return array(
-        'items' => array()
+        'content' => array('items' => array())
     );
     }
 

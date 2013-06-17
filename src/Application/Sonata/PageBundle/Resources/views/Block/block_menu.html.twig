@@ -108,6 +108,7 @@ $('.typeahead').typeahead({
                     return item
                 }
 });
+
 var menu = {{ settings.content.items|json_encode()|raw }};
 var menu_count = {{ settings.content.items|length }};
 function addNavItem(){
