@@ -352,6 +352,40 @@ SearchApp.directive('ratingFilter', function($timeout){
     }
 });
 
+SearchApp.directive('topFilters', function($timeout){
+    return {
+        restrict: 'E',
+        scope: {
+            filterByDates: '&',
+            dates: '@'
+        },
+        template:
+            '<div id="search-tag" class="pull-left visible-desktop">I\'m looking for</div>' +
+                '<div id="search-option" class="pull-right">' +
+                    '<ul id="search-filter" class="nav nav-collapse-phone collapse">' +
+                        '<li>' +
+                            '<select id="filterAccomm">' +
+                                '<option value="A">Accommodation</option>' +
+                            '</select>' +
+                        '</li>' +
+                        '<li>' +
+                            '<select id="filterOccupants">' +
+                                '<option value="A">2 Adults</option>' +
+                            '</select>' +
+                        '</li>' +
+                        '<li>' +
+                            '<div class="input-append">' +
+                                '<input class="span2" id="filterDate" type="text" ng-model="dates">' +
+                                '<button id="filterDateBtn" class="btn" type="button"><i class="icon-reorder"></i></button>' +
+                            '</div>' +
+                        '</li>' +
+                    '</ul>' +
+                    '<a href="#" class="btn btn-link btn-search pull-right hidden-phone" ng-click="filterByDates({dates:dates})"><i class="icon-repeat"></i></a>' +
+                '</div>' +
+            '</div>'
+    }
+});
+
 SearchApp.directive('resultsMap', function($filter){
     return {
         restrict: 'A',
@@ -433,7 +467,7 @@ angular.module('SearchApp.filters', []).
                 else distance =text+'km';
                 return distance;
             }
-        })    
+        })
     ;
 
 function SearchController($scope, $http, $q, $filter, $timeout)
@@ -449,12 +483,14 @@ function SearchController($scope, $http, $q, $filter, $timeout)
     $scope.OperatorViewOptions = [{name:'Accommodation',count:0},{name:'Events',count:0},{name:'Attractions',count:0}];
 
     $scope.filters = {
+        dirty: false,
         distance: 10,
         destination: 1,
         price: 300,
         OperatorView: $scope.OperatorViewOptions[0],
         rating: 0,
-        classifications: []
+        classifications: [],
+        dates: moment().format('DD/MM') + ' to ' + moment().add('days', 7).format('DD/MM')
     };
 
     $scope.mapOptions = {
@@ -488,7 +524,6 @@ function SearchController($scope, $http, $q, $filter, $timeout)
 
     $scope.$watch('UIView', function(newValue, oldValue){
         if(newValue == 'Map'){
-            //console.log($scope.map);
 
             $timeout(function(){
                 $scope.$apply(function(){
@@ -498,6 +533,14 @@ function SearchController($scope, $http, $q, $filter, $timeout)
             });
         }
     });
+
+    $scope.filterByDates = function(){
+        $timeout(function(){
+            $scope.$apply(function(){
+                $scope.filters.dirty = true;
+            });
+        });
+    }
 
     $scope.$watch('filters', function(){
 
@@ -546,6 +589,8 @@ function SearchController($scope, $http, $q, $filter, $timeout)
                     console.log('operators not loaded');
                 });
         }, 500);
+
+        $scope.filters.dirty = false;
 
     }, true);
 
