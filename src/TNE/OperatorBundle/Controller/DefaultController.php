@@ -229,4 +229,17 @@ EOD;
 
         return new JsonResponse($d);
     }
+    
+    public function tripadvisorAction()
+    {   
+        $strWSDL = 'http://api.tripadvisor.com/api/partner/1.0/location/89575?key=b8e9b5af-ac5c-4193-bda5-f013fae5f050';
+        $client = new \SoapClient($strWSDL);
+        
+        $result = $client->CommandHandler();
+        $xmlUf8 = preg_replace('/(<\?xml[^?]+?)utf-16/i', '$1utf-8', $result->CommandHandlerResult);        
+        echo $xmlUf8;
+        
+        $this->atdwResults = simplexml_load_string($xmlUf8);        
+        print_r($this->atdwResults); exit;
+    }
 }

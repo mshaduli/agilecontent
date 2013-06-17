@@ -209,6 +209,32 @@ class PageAdminController extends Controller
         return new \Symfony\Component\HttpFoundation\Response($mediaObj->getProviderReference()); 
     }
     
+    public function blockGallerySaveAction(){
+        $blockManager = $this->get('sonata.page.manager.block');
+        $galleryManager = $this->get('sonata.media.manager.gallery');
+        $block = $blockManager->findOneBy(array('id' => $this->getRequest()->get('blockId')));
+        $settigns = $block->getSettings();
+        if(!$settigns)
+        {
+            $settigns = array("gallery" => false,"title" => "etst","context" => "default","format" => "default_big","pauseTime" => 3000,"animSpeed" => 300,"startPaused" => 1,"directionNav" => 1,"progressBar" => 1,"galleryId" => null);
+        }
+        $settigns['galleryId'] = $this->getRequest()->get('galleryId');
+        $block->setSettings($settigns);
+        $blockManager->save($block);
+        $galleryObj = $galleryManager->findOneBy(array('id' => $this->getRequest()->get('galleryId')));
+        $media = $galleryObj->getGalleryHasMedias();
+        $result = ''; 
+        foreach($media as $mediaItem)
+        {
+//           echo get_class($mediaItem->getMedia());exit;
+//            $result['title'] = $mediaItem->getTitle();
+            $result .= '/uploads/media/default/0001/01/thumb_'.$mediaItem->getMedia()->getId().'_default_big.jpeg,';
+        }
+        
+//        $this->createPageSnapshot($page);
+        return new \Symfony\Component\HttpFoundation\Response(rtrim($result,',')); 
+    }    
+    
     public function CKEditorSaveAction(){
         
          $blockManager = $this->get('sonata.page.manager.block');

@@ -27,4 +27,8 @@
     <route id="tne_operator_listing_classifications_list" pattern="/operators/classifications">
         <default key="_controller">TNEOperatorBundle:Default:classifications</default>
     </route>
+
+    <route id="tne_operator_tripadvisor" pattern="/operators/tripadvisor">
+        <default key="_controller">TNEOperatorBundle:Default:tripadvisor</default>
+    </route>        
 </routes>
