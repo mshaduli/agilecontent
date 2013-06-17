@@ -6,6 +6,7 @@ web/uploads
 web/sitemap*.xml
 
 app/config/parameters*.yml
+app/config/parameters.yml
 composer.lock
 vendor
 .idea
