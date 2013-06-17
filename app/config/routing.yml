@@ -1,3 +1,16 @@
+menu_block_page_url:
+  pattern: /page_url/{page_id}
+  defaults: { _controller: ApplicationSonataPageBundle:Default:pageUrl } 
+  
+menu_block_add_menu_item:
+  pattern: /add_menu
+  defaults: { _controller: ApplicationSonataPageBundle:Default:addMenu }   
+  requirements: { _method: post }
+  
+menu_block_typeahead:
+  pattern: /typeahead/{page_id}/{query}
+  defaults: { _controller: ApplicationSonataPageBundle:Default:typeahead }   
+  
 tne_operator:
     resource: "@TNEOperatorBundle/Resources/config/routing.xml"
     prefix:   /

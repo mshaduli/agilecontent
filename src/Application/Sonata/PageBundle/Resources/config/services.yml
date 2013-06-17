@@ -18,6 +18,8 @@ parameters:
     
     sonata.media.manager.media.class: Application\Sonata\PageBundle\Block\MediaManager
     
+    #sonata.page.block.children_pages.class: Application\Sonata\PageBundle\Block\MenuBlockService
+    
 services: 
       
     sonata.block.service.taggedmedia:
@@ -25,6 +27,18 @@ services:
         arguments:    ['sonata.block.service.taggedmedia', "@templating", "@service_container", "@sonata.media.manager.media"]
         tags:
             -  { name: sonata.block, agile_content_sidebar_title: "RichText", agile_content_sidebar_class: "sidebar_block ui-draggable" , agile_content_sidebar_data_template: "text-block-template" }        
+    sonata.block.service.menu:
+        class:        Application\Sonata\PageBundle\Block\MenuBlockService
+        arguments:    ['sonata.block.service.menu', "@templating", "@sonata.page.site.selector", "@sonata.page.cms_manager_selector"]
+        tags:
+            -  { name: sonata.block, agile_content_sidebar_title: "Nav", agile_content_sidebar_class: "sidebar_block ui-draggable" }
             
+    pageurl.twig.extension:
+        class: Application\Sonata\PageBundle\Twig\Extension\PageUrlTwigExtension
+        tags:
+            -  { name: twig.extension }
+        arguments:
+            em: "@doctrine.orm.entity_manager"
+            router: "@symfony_cmf_routing_extra.router"
             
 #Application\Sonata\PageBundle\Block\MediaManagerInterface, instance of Sonata\MediaBundle\Entity\MediaManager

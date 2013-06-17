@@ -14,15 +14,15 @@ file that was distributed with this source code.
 {% block block %}
 
     <div class="navbar navbar-inverse navbar-static-top {{ settings.class }}">
-      <div class="navbar-inner">
+    <div class="navbar-inner">
         <div class="container">
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
-            <a class="brand" href="{% if page.parent %}{{ path(page.parent) }}{% else %}{{ path(page) }}{% endif %}">
-                <strong>{{ page.site.name }}</strong>
+                <a class="brand" href="{% if page.parent %}{{ path(page.parent) }}{% else %}{{ path(page) }}{% endif %}">
+                    <strong>{{ page.site.name }}</strong>
                 </a>
             <div class="nav-collapse collapse">
                 <ul class="nav pull-right">
@@ -37,7 +37,7 @@ file that was distributed with this source code.
                             {% endfor %}
                         {% endif %}                             
                     {% endif %}
-               </ul>
+                </ul>
             </div>
         </div>
 
