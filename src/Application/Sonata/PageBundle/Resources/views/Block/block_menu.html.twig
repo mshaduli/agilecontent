@@ -43,7 +43,7 @@ file that was distributed with this source code.
                         {% endfor %}
                     {% endif %}
                             </ul>
-                            
+{% if app.security.token and app.security.isGranted('ROLE_SONATA_ADMIN') %}                          
                             <a href="#addMenu" data-toggle="modal"><i class="icon-plus"></i></a>
                             <div id="addMenu" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-header">
@@ -76,13 +76,14 @@ file that was distributed with this source code.
                                     <button class="btn btn-primary" onclick="addNavItem()" >Add</button>
                                 </div>
                             </div>
+{% endif %}
                             </div>
                         </div>
 
                     </div>
                 </div>
             </div>
-
+{% if app.security.token and app.security.isGranted('ROLE_SONATA_ADMIN') %}
 <script type="text/javascript">
 var page_id = '{{page.id}}';
 var block_id = '{{block.id}}';
@@ -193,4 +194,5 @@ function reloadMenu(item)
     }
 }
 </script>
+{% endif %}
 {% endblock %}
