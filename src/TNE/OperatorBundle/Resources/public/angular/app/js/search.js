@@ -236,13 +236,16 @@ SearchApp.directive('resultsList', function(){
         scope: {
             loading: '=',
             operators: '=',
-            sort: '=',
-            limit: '@',
-            page: '@'
+            sort: '='
         },
         controller: function($scope){
-            $scope.more = function(){
-                $scope.limit = parseInt($scope.limit)+parseInt($scope.page);
+            var pagesShown = 1;
+            var pageSize = 9;
+            $scope.itemsLimit = function(){
+                return pageSize * pagesShown;
+            };
+            $scope.showMoreItems = function() {
+                pagesShown = pagesShown + 1;
             };
         },
         template: '' +
@@ -252,43 +255,40 @@ SearchApp.directive('resultsList', function(){
             '<div id="blockG_3" class="loader_blockG"></div>' +
             '</div>'+
             '<ul class="cards">' +
-                '<li ng-repeat="operator in operators | limitTo: limit">' +
-                    '<div class="card">' +
-                        '<div class="title">{[{operator.name}]}</div>' +
-                        '<div class="thumbnail">' +
-                            '<div class="info-bar">' +
-                                '<div class="info-content clearfix">' +
-                                '<div class="pull-left"><img src="/bundles/tneoperator/img/design-tripadvisor.png" width="99" height="17" /></div>' +
-                                '<div score="{[{ operator.rating }]}" class="star pull-right" self="false" rating></div>' +
-                                '</div>' +
-                            '</div>' +
-//                            '<div class="tag tag-special"><i class="icon-heart"></i> Special</div>' +
-                        '<div class="thumbnail-inner"><img ng-src="{[{operator.image}]}" /></div>' +
-                        '</div>' +
-                        '<div class="content">' +
-                            '<div class="content-group"><span class="label-important">1</span> Night from <span class="price pull-right label-important">${[{ operator.min_rate }]}</span></div>' +
-                            '<div class="divider"></div>' +
-                            '<div class="content-group clearfix">' +
-                                '<div class="pull-right distance"><i class="icon-bolt"></i> <div>{[{ operator.distance | number:2 | distance }]}</div></div>' +
-                                '<span>{[{operator.destination|truncate:15}]}<br/> {[{operator.type|truncate:15}]}</span>' +
-                            '</div>' +
-                            '<div>' +
-                                '<a href="#" class="btn btn-wishlist"><i class="icon-star"></i></a>' +
-                                '<a href="#" class="btn btn-primary">More</a>' +
-                            '</div>' +
-                        '</div>' +
-                    '</div>' +
-                '</li>' +
-            '</ul>' +
-            '<div ng-show="limit < operators.length">' +
-            '<a class="btn btn-full" href="#" ng-click="more()">Show me more</a>' +
+            '<li ng-repeat="operator in operators | limitTo: itemsLimit()">' +
+            '<div class="card">' +
+            '<div class="title">{[{operator.name}]}</div>' +
+            '<div class="thumbnail">' +
+            '<div class="info-bar">' +
+            '<div class="info-content clearfix">' +
+            '<div class="pull-left"><img src="/bundles/tneoperator/img/design-tripadvisor.png" width="99" height="17" /></div>' +
+            '<div score="{[{ operator.rating }]}" class="star pull-right" rating></div>' +
             '</div>' +
-            '<br/> ',
-        link: function(scope, el, attrs)
-        {
-        }
+            '</div>' +
+//                            '<div class="tag tag-special"><i class="icon-heart"></i> Special</div>' +
+            '<div class="thumbnail-inner"><img ng-src="{[{operator.image}]}" /></div>' +
+            '</div>' +
+            '<div class="content">' +
+            '<div class="content-group"> From <span class="price pull-right label-important">${[{ operator.min_rate }]}</span></div>' +
+            '<div class="divider"></div>' +
+            '<div class="content-group clearfix">' +
+            '<div class="pull-right distance"> <div>{[{ operator.distance | number:2 | distance }]}</div></div>' +
+            '<span>{[{operator.destination}]}<br/> {[{operator.type}]}</span>' +
+            '</div>' +
+            '<div>' +
+            '<a href="#" class="btn btn-wishlist"><i class="icon-star icon-white"></i></a>' +
+            '<a href="#" class="btn btn-primary">More</a>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</li>' +
+            '</ul>' +
+            '<div>' +
+            '<br/><br/><br/><br/><button class="btn btn-full" ng-click="showMoreItems()">Show me more</button>' +
+            '</div>'
     };
 });
+
 
 SearchApp.directive('rating', function(){
     return {
