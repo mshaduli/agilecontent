@@ -30,11 +30,11 @@ file that was distributed with this source code.
                                             
                                             <li class="dropdown-submenu dropdown" id="{{menuitem.idAttr}}">
                                                 {% set currentPage = page(menuitem.pageId) %}
-                                                <a class="dropdown-toggle {{ menuitem.classAttr }}" data-toggle="dropdown" href="{{ path(page(menuitem.pageId)) }}">{{ menuitem.name }}</a>
+                                                <a class="dropdown-toggle {{ menuitem.classAttr }}" data-toggle="dropdown" href="{%if menuitem.link is empty %}#{% else %}{{ path(page(menuitem.pageId)) }}{% endif %}">{{ menuitem.name }}</a>
                                                 {% if menuitem.items is defined %}
                                                 <ul class="dropdown-menu" id="submenu-{{menuitem.idAttr}}">
                                                 {% for j, submenu in menuitem.items %}
-                                                    <li id="{{submenu.idAttr}}"><a class="{{ submenu.classAttr }}" href="{{ path(page(submenu.pageId)) }}">{{ submenu.name }}</a></li>
+                                                    <li id="{{submenu.idAttr}}"><a class="{{ submenu.classAttr }}" href="{%if submenu.link is empty %}#{% else %}{{ path(page(submenu.pageId)) }}{% endif %}">{{ submenu.name }}</a></li>
                                                 {% endfor %}
                                                 </ul>
                                                 {% endif%}
