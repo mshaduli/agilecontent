@@ -80,6 +80,8 @@ class CustomPageExtension extends \Twig_Extension
                 $newblock->setSettings(array("content" => "Insert your content here"));
              elseif($value == 'sonata.media.block.feature_media')
                 $newblock->setSettings(array("media" => false,"orientation" => "left","title" => null,"content" => null,"context" => "default","format" => "reference","mediaId" => null));
+             elseif($value == 'sonata.media.admin.gallery')
+                $newblock->setSettings(array("gallery" => false,"title" => "etst","context" => "default","format" => "default_big","pauseTime" => 3000,"animSpeed" => 300,"startPaused" => 1,"directionNav" => 1,"progressBar" => 1,"galleryId" => null));
             $newblock->setEnabled(1);
             $newblock->setPosition(1);
             $this->blockmanager->save($newblock);

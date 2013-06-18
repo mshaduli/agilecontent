@@ -85,7 +85,7 @@
                         dataType: "html"
                 }).done(function(obj){
                     var mediaItems = obj.split(',');
-                    $('#sonata-media-block-gallery-'+blockid_back).remove();
+                    //$('#sonata-media-block-gallery-'+blockid_back).remove();
                     $(mediaItems).each(function(k,v){
                         if((mediaItems.length-1) == k)
                         {   
@@ -94,7 +94,7 @@
                             $('#cms-block-'+blockid_back+ ' ul').append('<li data-type="image" data-caption="" class="slide-'+(k+1)+'" data-caption style="display: none;"><img title="IMG_3620.JPG" src="'+v+'"></li>');
                         }
                     });
-                    
+                    document.location.reload(true);
                     return true;
                 });
             }
