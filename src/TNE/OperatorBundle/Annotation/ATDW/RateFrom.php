@@ -11,10 +11,10 @@ namespace TNE\OperatorBundle\Annotation\ATDW;
  */
 class RateFrom {    
     public static function getXpathString(){
-        return '/atdw_data_results/product_distribution/product_record/product_name';
+        return '/atdw_data_results/product_distribution[$index]/product_record/rate_from';
     }
     public static function getCommandType(){
-        return 'set2';
+        return 'set1';
     }    
 }
 

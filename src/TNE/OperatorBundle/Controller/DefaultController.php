@@ -47,13 +47,18 @@ class DefaultController extends Controller
         $filters = $this->fromRequestOrDb($this->getRequest()->query->all(), $em);
 
         $destination = $em->createQuery('SELECT d FROM TNEOperatorBundle:Destination d WHERE d.id = :destination')->setParameter('destination', $filters['destination'])->getSingleResult(Query::HYDRATE_ARRAY);
+        $available_rooms_accomedation_ids = $em->createQuery('SELECT d FROM TNEOperatorBundle:Destination d WHERE d.id = :destination')->setParameter('destination', $filters['destination'])->getSingleResult(Query::HYDRATE_ARRAY);
 
         $distanceValue = \str_replace('km', '', $filters['distance']);
         $maxRate = \str_replace('$', '', $filters['price']);
         $rating = \str_replace('$', '', $filters['rating']);
         $classifications = $filters['classifications'];
-
-
+        $dates = $filters['dates'];
+        $dates_ary = explode(' to ',$dates);
+        
+        $date_from =  date('Y-m-d',strtotime(str_replace('/','-',$dates_ary[0])));
+        $date_to =  date('Y-m-d',strtotime(str_replace('/','-',$dates_ary[1])));
+        
         $distanceQueryAccomm  =<<<EOD
         SELECT * FROM 
         (
@@ -64,12 +69,26 @@ class DefaultController extends Controller
         ORDER BY distance ASC
 EOD;
 
-
+        
+        
+        echo $availabilityQry =<<<EOD
+                SELECT ACCR.accommodation_id
+FROM  `AccommodationRoomCalendar` ARC
+INNER JOIN AccommodationRoom ACCR ON ACCR.id = ARC.accommodation_room_id
+INNER JOIN Accommodation ACC ON ACC.id = ACCR.accommodation_id
+WHERE  `date` 
+BETWEEN  '$date_from'
+AND  '$date_to'
+EOD;
+           
+                
+        $bookedstmt = $em->getConnection()->prepare($availabilityQry);
         $accStmt = $em->getConnection()->prepare($distanceQueryAccomm);
 
         $accStmt->execute();
-
+        $bookedstmt->execute();
         $results = $accStmt->fetchAll();
+        $bookedids = $bookedstmt->fetchAll();
 
         foreach ($results as $result)
         {
@@ -80,7 +99,7 @@ EOD;
             $operatorMedia = $operator->getMedia()->first();
             $result['image'] = $this->getOperatorImage($operatorMedia);
             $result['rating'] = $operator->getRating();
-            $result['tags'] = [];
+            $result['tags'] = array();
             $result['min_rate'] = number_format($result['min_rate'], 0);
 
             if($operator->getClassifications()->count() > 0) $result['type'] = $operator->getClassifications()->first()->getName();

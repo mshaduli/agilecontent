@@ -490,7 +490,7 @@ function SearchController($scope, $http, $q, $filter, $timeout)
         OperatorView: $scope.OperatorViewOptions[0],
         rating: 0,
         classifications: [],
-        dates: moment().format('DD/MM') + ' to ' + moment().add('days', 7).format('DD/MM')
+        dates: moment().format('DD/MM/YYYY') + ' to ' + moment().add('days', 7).format('DD/MM/YYYY')
     };
 
     $scope.mapOptions = {
