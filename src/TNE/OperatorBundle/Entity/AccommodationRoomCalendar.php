@@ -24,6 +24,11 @@ class AccommodationRoomCalendar
      */
     private $rate;
     
+    /**
+     * @var integer
+     */
+    private $accommodation_room_id ;
+    
     private $available = true;
     
     private $room;
@@ -91,6 +96,12 @@ class AccommodationRoomCalendar
     public function setAvailable($available) {
         $this->available = $available;
     }
+    
+    public function getAccomadationRoomId()
+    {
+        return $this->getRoom()->getId();
+    }
+
     public function getRoom() {
         return $this->room;
     }
