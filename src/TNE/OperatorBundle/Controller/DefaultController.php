@@ -265,9 +265,14 @@ EOD;
     public function tripadvisorAction()
     {   
         $url = 'http://api.tripadvisor.com/api/partner/1.0/location/89575?key=b8e9b5af-ac5c-4193-bda5-f013fae5f050';
-        $result =  file_get_contents($url);
+        $results =  file_get_contents($url);
+        $data = json_decode($results, TRUE);
+        echo "<pre>";
+        print_r($data);
+        echo "</pre>";
+        exit;
         return $this->render('TNEOperatorBundle:Default:tripadvisor.html.twig', array(
-            'results'     => $result
+            'results'     => $data
         ));
     }
 }
