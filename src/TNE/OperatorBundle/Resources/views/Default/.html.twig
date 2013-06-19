@@ -1,0 +1,53 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+{% extends 'ApplicationSonataPageBundle::base_func_layout_tne.html.twig' %}
+
+{% block page_stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="{{ asset('bundles/tneoperator/angular/app/css/app.css') }}" type="text/css" media="all" />
+
+    <link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/font-awesome.min.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/theme-falls-creek.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block page_javascripts %}
+    {{ parent() }}
+    {{ vichgeo_include_js() }}
+        <script type="text/javascript" src="http://fast.fonts.com/jsapi/1a5d5164-616e-4355-a99a-4cbe2bd50933.js"></script>
+        <script src="{{ asset('bundles/tneoperator/angular/app/lib/angular/angular.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/tneoperator/angular/app/lib/angular/angular-resource.js') }}" type="text/javascript"></script>
+
+        <script src="{{ asset('bundles/tneoperator/js/jquery.prettycheckable.js') }}"></script>
+        <script src="{{ asset('bundles/tneoperator/angular/app/js/app.js') }}"></script>
+{% endblock %}    
+    
+{% block content %}
+
+<div id="maincontroller" ng-app="OperatorListApp" ng-controller="AppController">
+
+{% include 'TNEOperatorBundle:Default:header.html.twig' %}
+    {#{ dump(results) }#}
+    {% for result in results %}
+        <li>{{ "r" }}</li>
+        <a href="{{ result.subcategory_key }}" title="test" />
+    {% else %}
+        <li><em>no  found</em></li>
+    {% endfor %}
+    
+    {% include 'TNEOperatorBundle:Default:footer.html.twig' %}
+
+
+    <div id="design"></div>
+   
+</div>
+            
+{% endblock %}
