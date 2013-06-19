@@ -33,7 +33,7 @@ class Accommodation
     private $name;
     
     /**
-     *ATDW\rateFrom
+     *@ATDW\RateFrom
      */
     private $atdwRateFrom;
     

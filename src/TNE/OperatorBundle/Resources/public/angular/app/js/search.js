@@ -236,13 +236,16 @@ SearchApp.directive('resultsList', function(){
         scope: {
             loading: '=',
             operators: '=',
-            sort: '=',
-            limit: '@',
-            page: '@'
+            sort: '='
         },
         controller: function($scope){
-            $scope.more = function(){
-                $scope.limit = parseInt($scope.limit)+parseInt($scope.page);
+            var pagesShown = 1;
+            var pageSize = 9;
+            $scope.itemsLimit = function(){
+                return pageSize * pagesShown;
+            };
+            $scope.showMoreItems = function() {
+                pagesShown = pagesShown + 1;
             };
         },
         template: '' +
@@ -252,43 +255,40 @@ SearchApp.directive('resultsList', function(){
             '<div id="blockG_3" class="loader_blockG"></div>' +
             '</div>'+
             '<ul class="cards">' +
-                '<li ng-repeat="operator in operators | limitTo: limit">' +
-                    '<div class="card">' +
-                        '<div class="title">{[{operator.name}]}</div>' +
-                        '<div class="thumbnail">' +
-                            '<div class="info-bar">' +
-                                '<div class="info-content clearfix">' +
-                                '<div class="pull-left"><img src="/bundles/tneoperator/img/design-tripadvisor.png" width="99" height="17" /></div>' +
-                                '<div score="{[{ operator.rating }]}" class="star pull-right" self="false" rating></div>' +
-                                '</div>' +
-                            '</div>' +
-//                            '<div class="tag tag-special"><i class="icon-heart"></i> Special</div>' +
-                        '<div class="thumbnail-inner"><img ng-src="{[{operator.image}]}" /></div>' +
-                        '</div>' +
-                        '<div class="content">' +
-                            '<div class="content-group"><span class="label-important">1</span> Night from <span class="price pull-right label-important">${[{ operator.min_rate }]}</span></div>' +
-                            '<div class="divider"></div>' +
-                            '<div class="content-group clearfix">' +
-                                '<div class="pull-right distance"><i class="icon-bolt"></i> <div>{[{ operator.distance | number:2 | distance }]}</div></div>' +
-                                '<span>{[{operator.destination|truncate:15}]}<br/> {[{operator.type|truncate:15}]}</span>' +
-                            '</div>' +
-                            '<div>' +
-                                '<a href="#" class="btn btn-wishlist"><i class="icon-star"></i></a>' +
-                                '<a href="#" class="btn btn-primary">More</a>' +
-                            '</div>' +
-                        '</div>' +
-                    '</div>' +
-                '</li>' +
-            '</ul>' +
-            '<div ng-show="limit < operators.length">' +
-            '<a class="btn btn-full" href="#" ng-click="more()">Show me more</a>' +
+            '<li ng-repeat="operator in operators | limitTo: itemsLimit()">' +
+            '<div class="card">' +
+            '<div class="title">{[{operator.name}]}</div>' +
+            '<div class="thumbnail">' +
+            '<div class="info-bar">' +
+            '<div class="info-content clearfix">' +
+            '<div class="pull-left"><img src="/bundles/tneoperator/img/design-tripadvisor.png" width="99" height="17" /></div>' +
+            '<div score="{[{ operator.rating }]}" class="star pull-right" rating></div>' +
             '</div>' +
-            '<br/> ',
-        link: function(scope, el, attrs)
-        {
-        }
+            '</div>' +
+//                            '<div class="tag tag-special"><i class="icon-heart"></i> Special</div>' +
+            '<div class="thumbnail-inner"><img ng-src="{[{operator.image}]}" /></div>' +
+            '</div>' +
+            '<div class="content">' +
+            '<div class="content-group"> From <span class="price pull-right label-important">${[{ operator.min_rate }]}</span></div>' +
+            '<div class="divider"></div>' +
+            '<div class="content-group clearfix">' +
+            '<div class="pull-right distance"> <div>{[{ operator.distance | number:2 | distance }]}</div></div>' +
+            '<span>{[{operator.destination}]}<br/> {[{operator.type}]}</span>' +
+            '</div>' +
+            '<div>' +
+            '<a href="#" class="btn btn-wishlist"><i class="icon-star icon-white"></i></a>' +
+            '<a href="#" class="btn btn-primary">More</a>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</li>' +
+            '</ul>' +
+            '<div>' +
+            '<br/><br/><br/><br/><button class="btn btn-full" ng-click="showMoreItems()">Show me more</button>' +
+            '</div>'
     };
 });
+
 
 SearchApp.directive('rating', function(){
     return {
@@ -349,6 +349,40 @@ SearchApp.directive('ratingFilter', function($timeout){
                 }
             });
         }
+    }
+});
+
+SearchApp.directive('topFilters', function($timeout){
+    return {
+        restrict: 'E',
+        scope: {
+            filterByDates: '&',
+            dates: '@'
+        },
+        template:
+            '<div id="search-tag" class="pull-left visible-desktop">I\'m looking for</div>' +
+                '<div id="search-option" class="pull-right">' +
+                    '<ul id="search-filter" class="nav nav-collapse-phone collapse">' +
+                        '<li>' +
+                            '<select id="filterAccomm">' +
+                                '<option value="A">Accommodation</option>' +
+                            '</select>' +
+                        '</li>' +
+                        '<li>' +
+                            '<select id="filterOccupants">' +
+                                '<option value="A">2 Adults</option>' +
+                            '</select>' +
+                        '</li>' +
+                        '<li>' +
+                            '<div class="input-append">' +
+                                '<input class="span2" id="filterDate" type="text" ng-model="dates">' +
+                                '<button id="filterDateBtn" class="btn" type="button"><i class="icon-reorder"></i></button>' +
+                            '</div>' +
+                        '</li>' +
+                    '</ul>' +
+                    '<a href="#" class="btn btn-link btn-search pull-right hidden-phone" ng-click="filterByDates({dates:dates})"><i class="icon-repeat"></i></a>' +
+                '</div>' +
+            '</div>'
     }
 });
 
@@ -433,7 +467,7 @@ angular.module('SearchApp.filters', []).
                 else distance =text+'km';
                 return distance;
             }
-        })    
+        })
     ;
 
 function SearchController($scope, $http, $q, $filter, $timeout)
@@ -449,12 +483,14 @@ function SearchController($scope, $http, $q, $filter, $timeout)
     $scope.OperatorViewOptions = [{name:'Accommodation',count:0},{name:'Events',count:0},{name:'Attractions',count:0}];
 
     $scope.filters = {
+        dirty: false,
         distance: 10,
         destination: 1,
         price: 300,
         OperatorView: $scope.OperatorViewOptions[0],
         rating: 0,
-        classifications: []
+        classifications: [],
+        dates: moment().format('DD/MM/YYYY') + ' to ' + moment().add('days', 7).format('DD/MM/YYYY')
     };
 
     $scope.mapOptions = {
@@ -488,7 +524,6 @@ function SearchController($scope, $http, $q, $filter, $timeout)
 
     $scope.$watch('UIView', function(newValue, oldValue){
         if(newValue == 'Map'){
-            //console.log($scope.map);
 
             $timeout(function(){
                 $scope.$apply(function(){
@@ -498,6 +533,14 @@ function SearchController($scope, $http, $q, $filter, $timeout)
             });
         }
     });
+
+    $scope.filterByDates = function(){
+        $timeout(function(){
+            $scope.$apply(function(){
+                $scope.filters.dirty = true;
+            });
+        });
+    }
 
     $scope.$watch('filters', function(){
 
@@ -546,6 +589,8 @@ function SearchController($scope, $http, $q, $filter, $timeout)
                     console.log('operators not loaded');
                 });
         }, 500);
+
+        $scope.filters.dirty = false;
 
     }, true);
 

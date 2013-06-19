@@ -2,7 +2,7 @@
 
         <!-- links -->
         <div id="header-top">
-            <div class="navbar container topnav-my">
+            <div class="navbar container">
                 <!-- brand -->
                 <a id="brand" class="hide-text" href="#">Falls Creek</a>
 
@@ -109,6 +109,31 @@
                         </li>
                     </ul>
                 </div>
-                <top-filters dates="{[{ filters.dates }]}" filter-by-dates="filterByDates(dates)"></top-filters>
+                <div id="search-tag" class="pull-left visible-desktop">I'm looking for</div>
+                <div id="search-option" class="pull-right">
+                    <ul id="search-filter" class="nav nav-collapse-phone collapse">
+                        <li>
+                            <div class="input-append">
+                                <input class="span2" id="appendedInputButton1" type="text" value="Accomodation">
+                                <button class="btn" type="button"><i class="icon-reorder"></i></button>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="input-append">
+                                <input class="span2" id="appendedInputButton2" type="text" value="2 Adults">
+                                <button class="btn" type="button"><i class="icon-reorder"></i></button>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="input-append">
+                                <input class="span2" id="filterDate" type="text" value="29/5 - 30/5">
+                                <button id="filterDateBtn" class="btn" type="button"><i class="icon-reorder"></i></button>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <a href="#" class="btn btn-link btn-search pull-right hidden-phone"><i class="icon-repeat"></i></a>
+                </div>
+            </div>
         </div>
     </header>

@@ -2,7 +2,7 @@
 
         <!-- links -->
         <div id="header-top">
-            <div class="navbar container topnav-my">
+            <div class="navbar container">
                 <!-- brand -->
                 <a id="brand" class="hide-text" href="#">Falls Creek</a>
 
@@ -109,6 +109,35 @@
                         </li>
                     </ul>
                 </div>
-                <top-filters dates="{[{ filters.dates }]}" filter-by-dates="filterByDates(dates)"></top-filters>
+                <div id="search-tag" class="pull-left visible-desktop">I'm looking for</div>
+                <div id="search-option" class="pull-right">
+                    <ul id="search-filter" class="nav nav-collapse-phone collapse">
+                        <li>
+                            <select id="filterAccomm">
+                                <option value="A">Accommodation</option>
+                                <option value="B">Accommodation 1</option>
+                                <option value="C">Accommodation 2</option>
+                                <option value="D">Accommodation 3</option>
+                            </select>
+                        </li>
+                        <li>
+                            <select id="filterOccupants">
+                                <option value="A">2 Adults</option>
+                                <option value="B">3 Adults</option>
+                                <option value="C">4 Adults</option>
+                                <option value="D">5 Adults</option>
+                            </select>
+                        </li>
+                        <li>
+                            <div class="input-append">
+                                <input class="span2" id="filterDate" type="text" value="29/5 - 30/5">
+                                <button id="filterDateBtn" class="btn" type="button"><div class="icons-choice"></div></button>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <a href="#" class="btn btn-link btn-search pull-right hidden-phone"><i class="icon-repeat"></i></a>
+                </div>
+            </div>
         </div>
     </header>
