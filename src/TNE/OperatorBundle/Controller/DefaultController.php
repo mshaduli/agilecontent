@@ -59,24 +59,34 @@ class DefaultController extends Controller
         $date_from =  date('Y-m-d',strtotime(str_replace('/','-',$dates_ary[0])));
         $date_to =  date('Y-m-d',strtotime(str_replace('/','-',$dates_ary[1])));
         
-        
+        /**
+         * Find 
+         */
         
         $roomCalendarQry =<<<EOD
                 SELECT accommodation_room_id as room_id FROM  `AccommodationRoomCalendar` ARC WHERE  `date`  BETWEEN  '$date_from' AND  '$date_to'
 EOD;
         $bookedStmt = $em->getConnection()->prepare($roomCalendarQry);
         $bookedStmt->execute();
-        $bookedRoomIds = $bookedstmt->fetchAll();
+        $bookedRoomIds = $bookedStmt->fetchAll();
+        $roomIdAry = array(0);
+        foreach($bookedRoomIds as $room)
+        {
+            $roomIdAry[] = $room['room_id'];
+        }
+                
+        $roomIds = implode(',', $roomIdAry);
         
+        exit;
         $accomedationIdsQry =<<<EOD
-                SELECT accommodation_id FROM  `AccommodationRoom` AR WHERE  id NOT IN ($bookedRoomIds)
+                SELECT accommodation_id  FROM  `AccommodationRoom` AR WHERE  id NOT IN ($roomIds)
 EOD;
         $accomedationIdsStmt = $em->getConnection()->prepare($accomedationIdsQry);
         $accomedationIdsStmt->execute();
         $accomedationIds = $accomedationIdsStmt->fetchAll();
         
         
-        $distanceQueryAccomm  =<<<EOD
+       echo  $distanceQueryAccomm  =<<<EOD
         SELECT * FROM 
         (
         SELECT `ac`.`id` as `id`, `ac`.`name` as `name`,  `ac`.`atdw_product_description` as `description`, `ac`.`atdw_city_name` as `destination`, `ac`.`latitude` as `latitude`, `ac`.`longitude` as `longitude`, `ac`.`atdw_rate_from` as `min_rate`,
