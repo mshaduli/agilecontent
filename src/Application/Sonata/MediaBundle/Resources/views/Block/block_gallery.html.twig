@@ -36,22 +36,33 @@ file that was distributed with this source code.
     <!--<div class="modal fade" id="myModal_{#{ block.id }#}" style="width:80%;height:80%;overflow: scroll; left: 30%; display: none;"></div> -->
     {% endif %}
         
-    <div class="sonata-media-block-gallery-container">
-        <div id="sonata-media-block-gallery-{{ block.id }}" class="nivoGallery">
-            <ul>
-                {% for element in elements %}
-                    <li data-type="{{ element.type }}" data-title="{{ element.title }}" data-caption="{{ element.caption }}">
+    
+        
+   <div class="container">
+      <div id="sonata-media-block-gallery-{{ block.id }}" class="carousel slide">
+        <div class="carousel-inner">
+          {% for element in elements %}
+                {% if(loop.first) %}
+                    <div class="item active">
+                {% else %}
+                            <div class="item">
+                {% endif %}
                         {% if element.type == 'image' %}
-                            {% media element.media, settings.format %}
+                                    {% media element.media, settings.format %}
                         {% elseif element.type == 'video' %}
                             {% media element.media, settings.format %}
                         {% endif %}
-                    </li>
-                {% else %}
+                        <div class="carousel-caption">
+                          <p>{{ element.caption }}</p>
+                        </div>
+                    </div>
+            {% else %}
                     {# no elements #}
-                {% endfor %}
-            </ul>
+         {% endfor %}                
         </div>
+          <a class="carousel-control left" href="#sonata-media-block-gallery-{{ block.id }}" data-slide="prev">&lsaquo;</a>
+          <a class="carousel-control right" href="#sonata-media-block-gallery-{{ block.id }}" data-slide="next">&rsaquo;</a>
+      </div>
     </div>
 
     {% if sonata_page.isEditor or app.security and app.security.isGranted('ROLE_PREVIOUS_ADMIN') %}
@@ -62,16 +73,11 @@ file that was distributed with this source code.
         
     {% endif %}
     
-    <script type="text/javascript">
-        jQuery(document).ready(function() {
-            jQuery('#sonata-media-block-gallery-{{ block.id }}').nivoGallery({
-                 pauseTime:     {{ settings.pauseTime }},
-                 animSpeed:     {{ settings.animSpeed }},
-                 effect:        'fade',
-                 startPaused:   {% if settings.startPaused == 1 %}true{% else %}false{% endif %},
-                 directionNav:  {% if settings.directionNav == 1 %}true{% else %}false{% endif %},
-                 progressBar:   {% if settings.progressBar == 1 %}true{% else %}false{% endif %},
-            });
+<script>
+      $(document).ready(function(){
+        $('.carousel').carousel({
+          interval: 4000
         });
+      });
     </script>
 {% endblock %}
