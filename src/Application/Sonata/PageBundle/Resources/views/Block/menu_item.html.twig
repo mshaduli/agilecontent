@@ -1,0 +1,15 @@
+{% for link in links %}
+    <li class="{% if link.items is defined %} parent collapsed {% endif %}" data-id="{{ link.id }}" data-name="{{ link.name }}" data-route="{{ link.route }}" data-link="{{ link.link }}" data-class="{{ link.classAttr }}"  data-pageid="{{ link.pageId }}" >
+        <a href="{{ link.link }}" class="caption ui-droppable" rel="{{ link.id }}">{{ link.name }}</a>
+        <span class="cmds">
+            <span class="callback op1">Add</span> 
+            <span class="callback op2">Edit</span>
+            <span class="callback op3">Delete</span>
+	</span>
+        {% if link.items is defined %}
+            <ul style="display: none;">
+                {% include "ApplicationSonataPageBundle:Block:menu_item.html.twig" with {'links':link.items} only %}
+            </ul>
+        {% endif %}
+    </li>
+{% endfor %}

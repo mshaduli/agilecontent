@@ -57,10 +57,13 @@ file that was distributed with this source code.
 
         {% block page_top_bar %}
             {% if sonata_page.isEditor or (app.security and app.security.isGranted('ROLE_PREVIOUS_ADMIN')) %}
-
+            
                 <link rel="stylesheet" href="{{ asset('bundles/sonatapage/page.css') }}" type="text/css" media="all">
                 <link rel="stylesheet" href="{{ asset('bundles/applicationsonatapage/custom.css') }}" type="text/css" media="all">
-
+               
+                
+                <script src="{{ asset('bundles/applicationsonatapage/sitemap/jquery.liveflex.Tree.js') }}" type="text/javascript"></script>
+                
                 {% if sonata_page.isEditor %}
                     <script src="{{ asset('bundles/sonatapage/page.js') }}" type="text/javascript"></script>
 
