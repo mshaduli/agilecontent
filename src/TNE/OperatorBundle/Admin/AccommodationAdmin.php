@@ -39,7 +39,8 @@ class AccommodationAdmin extends Admin
                             'class' => 'tinymce span6',
                             'data-theme' => 'advanced'
                         )
-                    ))                
+                    ))
+                ->add('tripadvisorKey', null, array('label'=>'Tripadvisor Key'))
             ->end()
             ->with('Contact', array('collapsed' => true))
                 ->add('atdwContactEmail', null, array('label'=>'Email'))

@@ -357,7 +357,7 @@ SearchApp.directive('topFilters', function($timeout){
         restrict: 'E',
         scope: {
             filterByDates: '&',
-            dates: '@'
+            dates: '='
         },
         template:
             '<div id="search-tag" class="pull-left visible-desktop">I\'m looking for</div>' +

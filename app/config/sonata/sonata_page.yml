@@ -34,6 +34,7 @@ sonata_page:
         - tne_operator_listing_attractions_list
         - tne_operator_listing_events_list
         - tne_operator_listing_classifications_list
+        - fullcalendar_loader
 
     ignore_uri_patterns:
         - admin(.*)         # ignore admin route, ie route containing 'admin'

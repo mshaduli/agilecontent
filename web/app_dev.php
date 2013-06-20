@@ -15,3 +15,10 @@ $kernel->loadClassCache();
 use Symfony\Component\HttpFoundation\Request;
 
 $kernel->handle(Request::createFromGlobals())->send();
+
+
+function d($var){
+    echo "<pre>";
+    print_r($var);
+    echo "</pre>";
+}

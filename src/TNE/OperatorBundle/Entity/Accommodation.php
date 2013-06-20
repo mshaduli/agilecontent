@@ -143,6 +143,8 @@ class Accommodation
 
     protected $gallery;
 
+    protected $tripadvisorKey;    
+
 
     /**
      *@ATDW\State
@@ -541,6 +543,14 @@ class Accommodation
 
     public function removeClassification($classification){
         $this->classifications->remove($classification);
+    }
+    
+    public function getTripadvisorKey() {
+        return $this->tripadvisorKey;
+    }
+
+    public function setTripadvisorKey($tripadvisorKey) {
+        $this->tripadvisorKey = $tripadvisorKey;
     }
 
 }

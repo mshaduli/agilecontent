@@ -56,31 +56,72 @@ class DefaultController extends Controller
         $dates = $filters['dates'];
         $dates_ary = explode(' to ',$dates);
         
-        $date_from =  date('Y-m-d',strtotime(str_replace('/','-',$dates_ary[0])));
-        $date_to =  date('Y-m-d',strtotime(str_replace('/','-',$dates_ary[1])));
+        $date_from =  strtotime(str_replace('/','-',$dates_ary[0]));
+        $date_to =  strtotime(str_replace('/','-',$dates_ary[1]));
+        
+        $datediff = $date_to - $date_from;
+        $days = floor($datediff/(60*60*24));
+//        if($days == 0)
+//            $days = 1;
+//        echo $days;
+        for($i = 0; $i<= $days ;$i++)
+        {
+            
+            $date = date('Y-m-d', strtotime('+ '.$i.' day',$date_from));
+            
+            $qry = "SELECT accommodation_room_id as room_id FROM  `AccommodationRoomCalendar` ARC WHERE  `date`  =   '".$date."' and `available` = 0";
+            $bookedStmt = $em->getConnection()->prepare($qry);
+            $bookedStmt->execute();
+            $bookedRoomIdsRes = $bookedStmt->fetchAll();
+            
+            $bookedRoomIds = array();
+            foreach($bookedRoomIdsRes as $room)
+            {
+                $bookedRoomIds[] = $room['room_id'];
+            }
+            
+            if(isset($room_ids))
+            {
+                $room_ids = array_intersect($room_ids, $bookedRoomIds);
+            }else{
+                $room_ids = $bookedRoomIds;
+            }
+        }
+        
+      
+        
+        $accom = array();
+        
+        if(isset($room_ids) && count($room_ids) > 0)
+        {
+            $roomIds = implode(',', $room_ids);
+
+
+            $accomedationIdsQry = "SELECT accommodation_id  FROM  `AccommodationRoom` AR WHERE  id NOT IN ($roomIds) GROUP BY accommodation_id";
+            $accomedationIdsStmt = $em->getConnection()->prepare($accomedationIdsQry);
+            $accomedationIdsStmt->execute();
+            $accomedationIds = $accomedationIdsStmt->fetchAll();
+
+            foreach($accomedationIds as $accomedation)
+            {
+                $accom[] = $accomedation['accommodation_id'];
+            }
+        }
+        $where = "";
+        if(count($accom) > 0 )
+        {
+            $accomIds = implode(',', $accom);
+             $where = "WHERE `ac`.`id` IN ($accomIds)";
+        }
         
         
         
-        $roomCalendarQry =<<<EOD
-                SELECT accommodation_room_id as room_id FROM  `AccommodationRoomCalendar` ARC WHERE  `date`  BETWEEN  '$date_from' AND  '$date_to'
-EOD;
-        $bookedStmt = $em->getConnection()->prepare($roomCalendarQry);
-        $bookedStmt->execute();
-        $bookedRoomIds = $bookedstmt->fetchAll();
-        
-        $accomedationIdsQry =<<<EOD
-                SELECT accommodation_id FROM  `AccommodationRoom` AR WHERE  id NOT IN ($bookedRoomIds)
-EOD;
-        $accomedationIdsStmt = $em->getConnection()->prepare($accomedationIdsQry);
-        $accomedationIdsStmt->execute();
-        $accomedationIds = $accomedationIdsStmt->fetchAll();
-        
-        
-        $distanceQueryAccomm  =<<<EOD
+       $distanceQueryAccomm  =<<<EOD
         SELECT * FROM 
         (
         SELECT `ac`.`id` as `id`, `ac`.`name` as `name`,  `ac`.`atdw_product_description` as `description`, `ac`.`atdw_city_name` as `destination`, `ac`.`latitude` as `latitude`, `ac`.`longitude` as `longitude`, `ac`.`atdw_rate_from` as `min_rate`,
         (((acos(sin(($destination[latitude]*pi()/180)) * sin((`latitude`*pi()/180))+cos(($destination[latitude]*pi()/180)) * cos((`latitude`*pi()/180)) * cos((($destination[longitude] - `longitude`)*pi()/180))))*180/pi())*60*1.1515) AS `distance` FROM `Accommodation` ac 
+               $where
         ) as op           
         HAVING distance < $distanceValue AND min_rate < $maxRate
         ORDER BY distance ASC

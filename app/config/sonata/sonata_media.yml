@@ -30,8 +30,8 @@ sonata_media:
                 - sonata.media.provider.dailymotion
 
             formats:
-                small: { width: 100, quality: 100}
-                big:   { width: 820 , quality: 100}
+                default_small: { width: 100, quality: 100}
+                default_big:   { width: 820 , quality: 100}
                 
 
     cdn:
