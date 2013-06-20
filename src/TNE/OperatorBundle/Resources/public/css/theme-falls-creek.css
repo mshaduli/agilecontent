@@ -1600,7 +1600,8 @@ font-size:14px;
 
 .general-content-slider img
 {
-    max-width:1170px;
+    min-width:1170px;
+    max-height: 587px !important;
 }
 
 
