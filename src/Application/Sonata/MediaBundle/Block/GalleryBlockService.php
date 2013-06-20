@@ -62,7 +62,12 @@ class GalleryBlockService extends BaseGalleryBlockService
                 continue;
             }
 
-            $type = $this->getMediaType($galleryHasMedia->getMedia());
+            if($galleryHasMedia->getMedia())
+            {
+                $type = $this->getMediaType($galleryHasMedia->getMedia());
+            }else{
+                $type = "";
+            }
 
             if (!$type) {
                 continue;
