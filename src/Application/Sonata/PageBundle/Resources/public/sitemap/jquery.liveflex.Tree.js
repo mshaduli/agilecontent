@@ -40,7 +40,6 @@ $('#MoveResults').val(data);
 		base.init = function() {
 			base.options = $.extend({}, $.liveflex.treeview.defaultOptions, options);
 			base.$el.delegate('*', 'click', function(e) { handleClick(e) });
-
 			if (base.options.drag) {
 				base.$el.find('li ' + base.options.handle).droppable({
 					tolerance: "pointer",
@@ -217,17 +216,20 @@ $('#MoveResults').val(data);
 				var subtree = $(this).children("ul");
 				if (subtree.size() > 0){
                                     var item = {
+                                        id: $(this).attr("data-id"),
                                         name:$(this).attr("data-name"),
                                         link: $(this).attr("data-link"), 
                                         route: $(this).attr("data-route"),
                                         classAttr: $(this).attr("data-class"),
-                                        pageId: $(this).attr("data-pageid")
+                                        pageId: $(this).attr("data-pageid"),
+                                        items: base.parseTree(subtree),
                                     };
-                                    item['items'] = base.parseTree(subtree);
+                                    
                                     tags.push(item);
                                 }	
 				else {
                                     var item = {
+                                        id: $(this).attr("data-id"),
                                         name:$(this).attr("data-name"),
                                         link: $(this).attr("data-link"), 
                                         route: $(this).attr("data-route"),
