@@ -210,3 +210,9 @@ services:
           blockManager:  "@sonata.page.manager.block"
         tags:
             - { name: twig.extension }
+            
+    tne.accommodation.admin:
+        class: TNE\OperatorBundle\Admin\AccommodationAdmin
+        tags:
+          - { name: sonata.admin, manager_type: orm, group: tutorial_blog, label: tag }
+        arguments: [null, TNE\OperatorBundle\Entity\Accommodation, TNEOperatorBundle:AccommodationAdmin]
