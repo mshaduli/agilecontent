@@ -13,7 +13,7 @@ use \Doctrine\ORM\Query;
 class DefaultController extends Controller
 {
     public function searchAction()
-    {
+    { 
         return $this->render('TNEOperatorBundle:Default:search.html.twig');
     }
 
@@ -315,5 +315,19 @@ EOD;
         return $this->render('TNEOperatorBundle:Default:tripadvisor.html.twig', array(
             'results'     => $data
         ));
+    }
+    
+    public function operatorDetailsAction($id)
+    {   
+       $em = $this->get('doctrine.orm.entity_manager');
+        $d = $em->createQuery(
+            'SELECT c FROM TNEOperatorBundle:Accommodation c WHERE c.id=:id'
+        )->setParameter('id',$id)
+            ->getResult();
+        
+        return $this->render('TNEOperatorBundle:Default:operatorDetails.html.twig', array(
+            'operator'     => $d
+        ));
+
     }
 }
