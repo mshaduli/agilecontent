@@ -60,8 +60,10 @@ file that was distributed with this source code.
                     {# no elements #}
          {% endfor %}                
         </div>
-          <a class="carousel-control left" href="#sonata-media-block-gallery-{{ block.id }}" data-slide="prev">&lsaquo;</a>
-          <a class="carousel-control right" href="#sonata-media-block-gallery-{{ block.id }}" data-slide="next">&rsaquo;</a>
+          {% if elements %}
+            <a class="carousel-control left" href="#sonata-media-block-gallery-{{ block.id }}" data-slide="prev">&lsaquo;</a>
+            <a class="carousel-control right" href="#sonata-media-block-gallery-{{ block.id }}" data-slide="next">&rsaquo;</a>
+          {% endif %}
       </div>
     </div>
 
