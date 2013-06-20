@@ -199,8 +199,6 @@ function loadTree(){
                             
                         }
 		},itemMoved: function(csv){
-
-                    alert('ok');
 		},dirClick: function(node){
 			console.log(node.find('>a').text() + " > " + (node.hasClass('collapsed') ? ' closed' : ' opened'));
 		},nodeClick: function(node){
@@ -226,7 +224,7 @@ $(document).ready(function () {
                             'content': treeArray
                         },
                         success: function(response) {
-                            alert('date saved')
+                            location.reload();
                         }
                     });
 
