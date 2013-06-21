@@ -29,7 +29,7 @@ file that was distributed with this source code.
                     
                     {% if settings.content.items is defined %}
                         {% set menu = settings.content.items %}
-                        {% include "ApplicationSonataPageBundle:Block:nav_item.html.twig" with {'links':menu} only %}  
+                        {% include "ApplicationSonataPageBundle:Block:nav_item.html.twig" with {'links':menu, 'li_class': 'dropdown'} only %}  
                     {% endif %}
                 </ul>
                     
