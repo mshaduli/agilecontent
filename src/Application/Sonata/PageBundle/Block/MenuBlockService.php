@@ -16,6 +16,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\BlockBundle\Block\BaseBlockService;
+use Sonata\PageBundle\Model\PageInterface;
 
 class MenuBlockService extends BaseBlockService implements BlockServiceInterface
 {
@@ -58,7 +59,9 @@ class MenuBlockService extends BaseBlockService implements BlockServiceInterface
                 ->select('p.name, p.url', 'p.id')
                 ->from('ApplicationSonataPageBundle:Page', 'p')
                 ->where('p.site = :site_id')
+                ->andWhere('p.routeName = :routeName')
                 ->setParameter('site_id', $currentSite->getId())
+                ->setParameter('routeName', PageInterface::PAGE_ROUTE_CMS_NAME)
                 ->addGroupBy('p.name')
            ;
         
