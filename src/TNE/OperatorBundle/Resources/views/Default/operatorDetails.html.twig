@@ -9,7 +9,7 @@ file that was distributed with this source code.
 
 #}
 {% extends 'ApplicationSonataPageBundle::base_func_layout_tne.html.twig' %}
-
+{% set url = 'http://rutherglen.ac.captechnix.com/' %}
 {% block page_stylesheets %}
     {{ parent() }}
 <link rel="stylesheet" href="http://fast.fonts.com/cssapi/1a5d5164-616e-4355-a99a-4cbe2bd50933.css" type="text/css"/>
@@ -84,6 +84,7 @@ $("#slider-map").addClass('active');
 $("#slider-info").removeClass('active');
 $("#slider-availability").removeClass('active');
 $("#slider-contact").removeClass('active');
+ showLargeMap();
 })
 
 $("#slider-info").click(function(){
@@ -264,7 +265,10 @@ $('#ask-form-close-btn').click(function(){
                 <ul class="nav">
                   <li class="social">SOCIAL
                     <div class="clear"></div>
-                    <a class="btn btn-link" href="#"><i class="icon-large icon-twitter"></i></a><a class="btn btn-link" href="#"><i class="icon-large icon-facebook"></i></a><a href="#"><i class="icon-large icon-google-plus"></i></a></a> <a href="#"><i class="icon-large icon-pinterest"></i></a> </li>
+                    <a class="btn btn-link" target="_blank" href="https://twitter.com/intent/tweet?url={{ url}}&text={{ operator.description |slice(0,50) }}..."><i class="icon-large icon-twitter"></i></a>
+                    <a class="btn btn-link" href="javascript:sharetofb(this);"><i class="icon-large icon-facebook"></i></a>
+                    <a target="_blank" href="https://plus.google.com/share?url={{ url }}"><i class="icon-large icon-google-plus"></i></a>
+                    <a target="_blank" href="http://pinterest.com/pin/create/button/?url={{ url }}&description={{ operator.description |slice(0,50) }}...&media="><i class="icon-large icon-pinterest"></i></a> </li>
                 </ul>
               </div>
               <div class="clear"></div>
@@ -587,7 +591,13 @@ $('#ask-form-close-btn').click(function(){
 $(".large-map-link").click(function(){
 $("#top-tab-block").hide();
 $(".map-section").show();
-    var mapViewOptions = {
+    showLargeMap();
+})        
+        
+    });
+    
+    function showLargeMap(){
+        var mapViewOptions = {
             zoom: 8,
             center: new google.maps.LatLng({{ operator.latitude }},{{ operator.longitude }}),
             disableDefaultUI: true,
@@ -599,9 +609,43 @@ $(".map-section").show();
             map: mapViewLarge,
             icon: '/bundles/tneoperator/img/map/marker_blue.png'
         });
-})        
         
-    });
+/*        var contentString = '<div id="content" class="map-address-popup">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
+      '<div id="bodyContent">'+
+      'test'+
+      '</div>'+
+      '</div>';
+
+  var infowindow = new google.maps.InfoWindow({
+      content: contentString,
+      disableAutoPan: true
+  });
+  
+  google.maps.event.addListener(mapViewLargeMarker, 'click', function() {
+    infowindow.open(mapViewLarge,mapViewLargeMarker);
+  });
+  */
+    }
+    
+    function sharetofb(obj){
+    
+        FB.ui(
+                {
+                    method: 'feed',
+                    name: '{{ operator.name }}',
+                    
+                    caption: '{{ operator.name }}',
+                    description: '{{ operator.description |striptags | slice(0,50) }}...',
+                    link: location.href,
+                    show_error: true
+                },
+        function(response) {
+        }
+        );
+    }
 </script>
     
 <script>
@@ -634,5 +678,58 @@ $(".map-section").show();
     right: 0;
     color: black;
     }
+    
+    #map-canvas, #map_canvas {
+  height: 100%;
+}
+
+#panel {
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  margin-left: -180px;
+  z-index: 5;
+  background-color: #fff;
+  padding: 5px;
+  border: 1px solid #999;
+}
+
+
+.map-address-popup
+{
+position:absolute;
+z-index:1000;
+width:383px;
+background:#fff;
+top:50px;
+left:50px;
+box-shadow: 0px 0px 4px #333;
+}
+
+
+.map-address-popup h1
+{
+background:#0076c0;
+font-size:17px;
+color:#fff;
+padding:12px 20px;
+margin:0px;
+font-weight:normal;
+}
+
+
+.map-address-popup #bodyContent
+{
+padding:15px 20px;
+font-size:15px;
+font-weight:normal;
+
+}
+
+.map-address-popup .op-rooms
+{
+padding-top:15px;
+margin-bottom:0px;
+}
     </style>
 {% endblock %}
