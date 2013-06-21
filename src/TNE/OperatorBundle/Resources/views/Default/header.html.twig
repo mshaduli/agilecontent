@@ -140,10 +140,10 @@
                 {
                     method: 'feed',
                     name: 'test',
-                    picture: '<?php echo $sf_request->getUriPrefix() ?>/images/aaa-facebook-promo.jpg',
-                    caption: '<?php echo $sf_request->getUriPrefix() ?>',
+                    picture: '{{ path(app.request.attributes.get('_route')) }}/images/facebook-promo.jpg',
+                    caption: '{{ path(app.request.attributes.get('_route')) }}',
                     description: 'Test share',
-                    link: '<?php echo $sf_request->getUriPrefix() ?>',
+                    link: '<?{{ path(app.request.attributes.get('_route')) }}',
                     show_error: true
                 },
         function(response) {
