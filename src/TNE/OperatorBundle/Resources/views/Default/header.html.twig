@@ -140,10 +140,10 @@
                 {
                     method: 'feed',
                     name: 'test',
-                    picture: '<?php echo $sf_request->getUriPrefix() ?>/images/aaa-facebook-promo.jpg',
-                    caption: '<?php echo $sf_request->getUriPrefix() ?>',
-                    description: 'Test share',
-                    link: '<?php echo $sf_request->getUriPrefix() ?>',
+                    picture: location.protocol+'//'+location.host+'/'+'/images/facebook-promo.jpg',
+                    caption: '',
+                    description: 'Rutherglen Home page',
+                    link: location.protocol+'//'+location.host,
                     show_error: true
                 },
         function(response) {

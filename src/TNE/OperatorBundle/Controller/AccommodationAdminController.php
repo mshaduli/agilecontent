@@ -61,30 +61,32 @@ class AccommodationAdminController extends Controller
                  */
                 $em = $this->getDoctrine()->getManager();
                 $room_calendars = $this->get('request')->request->get('room_calendar');
-               
-                foreach($room_calendars as $room_id => $calendars)
+                if(count($room_calendars))
                 {
-                    $month_calcu = array_keys($calendars);
-                    
-                    $month = date('m',strtotime($month_calcu[0]));
-                    $room = $em->createQuery('SELECT ar FROM TNEOperatorBundle:AccommodationRoom ar WHERE ar.id = :id')->setParameter('id', $room_id)->getSingleResult();
-                    
-                    
-                    $q = $em->getConnection()->prepare('DELETE FROM AccommodationRoomCalendar WHERE MONTH(`date`) = '.$month);
-                    $numDeleted = $q->execute();
-                    
-                    foreach($calendars as $date => $calendar)
-                    {
-                        
-                        $room_calendar_obj = new \TNE\OperatorBundle\Entity\AccommodationRoomCalendar();
-                        $room_calendar_obj->setDate(new \DateTime($calendar['date']));
-                        $room_calendar_obj->setAvailable(isset($calendar['available']));
-                        $room_calendar_obj->setRate((isset($calendar['rate'])?$calendar['rate']:0));
-                        $room_calendar_obj->setRoom($room);
-                        $em->persist($room_calendar_obj);
-                    }
-                    
-                    
+                 foreach($room_calendars as $room_id => $calendars)
+                 {
+                     $month_calcu = array_keys($calendars);
+
+                     $month = date('m',strtotime($month_calcu[0]));
+                     $room = $em->createQuery('SELECT ar FROM TNEOperatorBundle:AccommodationRoom ar WHERE ar.id = :id')->setParameter('id', $room_id)->getSingleResult();
+
+
+                     $q = $em->getConnection()->prepare('DELETE FROM AccommodationRoomCalendar WHERE MONTH(`date`) = '.$month);
+                     $numDeleted = $q->execute();
+
+                     foreach($calendars as $date => $calendar)
+                     {
+
+                         $room_calendar_obj = new \TNE\OperatorBundle\Entity\AccommodationRoomCalendar();
+                         $room_calendar_obj->setDate(new \DateTime($calendar['date']));
+                         $room_calendar_obj->setAvailable(isset($calendar['available']));
+                         $room_calendar_obj->setRate((isset($calendar['rate'])?$calendar['rate']:0));
+                         $room_calendar_obj->setRoom($room);
+                         $em->persist($room_calendar_obj);
+                     }
+
+
+                 }
                 }
                 $em->flush();
                 
