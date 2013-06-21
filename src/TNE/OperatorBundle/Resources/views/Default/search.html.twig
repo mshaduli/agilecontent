@@ -217,25 +217,6 @@ file that was distributed with this source code.
             icon: '/bundles/tneoperator/img/map/marker_blue.png'
         });
 
-        // Init date picker
-        var $filterDate = $('#filterDate');
-        $filterDate.daterangepicker(
-            {
-                opens: 'left',
-                format: 'DD/MM',
-                separator: ' to ',
-                startDate: new Date(),
-                endDate: moment().add('days', 7)
-            }
-        );
-//        $filterDate.val(moment().format('DD/MM') + ' to ' + moment().add('days', 7).format('DD/MM'));
-
-//        $('#filterDateBtn').click(function(){
-//            $filterDate.datepicker( "show" );
-//        });
-
-
-
         // Init the filters
         $("#filterTags").select2({ containerCssClass : "search-filter" });
 

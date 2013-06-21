@@ -18,5 +18,7 @@
         </id>
         
         <field name="context" type="string" column="context" length="255"/>
+
+        <field name="gacode" type="text" column="gacode"/>
     </entity>
 </doctrine-mapping>

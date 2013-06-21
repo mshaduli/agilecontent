@@ -382,7 +382,30 @@ SearchApp.directive('topFilters', function($timeout){
                     '</ul>' +
                     '<a href="#" class="btn btn-link btn-search pull-right hidden-phone" ng-click="filterByDates({dates:dates})"><i class="icon-repeat"></i></a>' +
                 '</div>' +
-            '</div>'
+            '</div>',
+        controller: function($scope){
+            $scope.filterByDates = function(){
+                $timeout(function(){
+                    $scope.$apply(function(){
+                        $scope.dates = $scope.datesStr;
+                    });
+                });
+            }
+        },
+        link: function(scope, element, attrs)
+        {
+            $(element.find('#filterDate')).daterangepicker(
+                {
+                    opens: 'left',
+                    format: 'DD/MM',
+                    separator: ' to ',
+                    startDate: new Date(),
+                    endDate: moment().add('days', 7)
+                }, function(start, end) {
+                   scope.datesStr = moment(start).format('DD/MM/YYYY') + ' to ' + moment(end).format('DD/MM/YYYY');
+                }
+            );
+        }
     }
 });
 
@@ -483,7 +506,6 @@ function SearchController($scope, $http, $q, $filter, $timeout)
     $scope.OperatorViewOptions = [{name:'Accommodation',count:0},{name:'Events',count:0},{name:'Attractions',count:0}];
 
     $scope.filters = {
-        dirty: false,
         distance: 10,
         destination: 1,
         price: 300,
@@ -534,14 +556,6 @@ function SearchController($scope, $http, $q, $filter, $timeout)
         }
     });
 
-    $scope.filterByDates = function(){
-        $timeout(function(){
-            $scope.$apply(function(){
-                $scope.filters.dirty = true;
-            });
-        });
-    }
-
     $scope.$watch('filters', function(){
 
         $scope.operators = [];
@@ -590,7 +604,6 @@ function SearchController($scope, $http, $q, $filter, $timeout)
                 });
         }, 500);
 
-        $scope.filters.dirty = false;
 
     }, true);
 

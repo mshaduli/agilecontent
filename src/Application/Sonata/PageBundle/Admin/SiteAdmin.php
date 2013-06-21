@@ -100,6 +100,7 @@ class SiteAdmin extends Admin
                 ->add('title', null, array('required' => false))
                 ->add('metaDescription', 'textarea', array('required' => false))
                 ->add('metaKeywords', 'textarea', array('required' => false))
+                ->add('gacode', 'textarea', array('required' => false))
             ->end()
         ;
     }
