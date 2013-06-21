@@ -60,12 +60,16 @@ file that was distributed with this source code.
                                     <legent>Add or Edit</legend>
                                     <p>
                                             <input id="nav-item-id" type="hidden" value="">
-                                            <input id="nav-item-name" class="input-medium" type="text" ><br/>
-                                            <input id="nav-item-link" type="hidden" value="">
-                                            <input id="nav-item-page-id" type="hidden" value="">
-                                            <input id="nav-item-link-display" class="input-medium typeahead" type="text" placeholder="Link"><br/>
-                                            <input id="nav-item-class" class="input-medium" type="text" placeholder="Item Class"  data-provide="typeahead" >
-
+                                            <input id="nav-item-name" class="input-medium" type="text" placeholder="Title"><br/>
+                                            
+                                            <select id="nav-item-page-id">
+                                                <option value="">Select a Page</option>
+                                                {% for pageItem in pages %}
+                                                    <option  value="{{ pageItem.id }}">{{ pageItem.name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                            <br/>
+                                            <input id="nav-item-class" class="input-medium" type="text" placeholder="Item Class">
                                             <input id="nav-item-new" type="hidden" value="">
                                     </p>
                                     <button class="btn btn-primary" onclick="saveNode($('#nav-item-new').val())" >Add</button>
@@ -89,36 +93,17 @@ file that was distributed with this source code.
 <script type="text/javascript">
 var page_id = '{{page.id}}';
 var block_id = '{{block.id}}';
-$('.typeahead').typeahead({
-                source: function(query, process) {
-                    return $.ajax({
-                        url: '/app_dev.php/typeahead/'+page_id+'/'+query,
-                        type: 'get',
 
-                        dataType: 'json',
-                        success: function(json) {
-                            console.log(json.urls);
-                            links = json.urls;
-                            pages = json.pages;
-                            return typeof json.options == 'undefined' ? false : process(json.options);
-                        }
-                    });
-                },
-                
-                updater: function(item) {
-                    $('#nav-item-link').val(links[item]);
-                    $('#nav-item-page-id').val(pages[item]);
-                    return item
-                }
-});
 
 var menu = {{ settings.content.items|json_encode()|raw }};
 var menu_count = {{ settings.content.items|length }};
 
 var currentNode =  '';
+
 function addNode(node)
 {
     $('#node-form input').val('');
+    $('#node-form select').val('').trigger('change');
     $('#nav-item-new').val(1);
     menu_count++;
     $('#nav-item-id').val(menu_count);
@@ -129,10 +114,10 @@ function editNode(node)
 {
     $('#nav-item-id').val(node.attr('data-id')); 
     $('#nav-item-name').val(node.attr('data-name')); 
-    $('#nav-item-link').val(node.attr('data-route'));
-    $('#nav-item-link-display').val(node.attr('data-link'));
+    //$('#nav-item-link').val(node.attr('data-route'));
+    //$('#nav-item-link-display').val(node.attr('data-link'));
     $('#nav-item-class').val(node.attr('data-class'));
-    $('#nav-item-page-id').val(node.attr('data-pageid'));
+    $('#nav-item-page-id').val(node.attr('data-pageid')).trigger('change');
     $('#nav-item-new').val(0);
     $('#node-form').show();
     currentNode = node;
@@ -141,17 +126,17 @@ function editNode(node)
 function saveNode(is_new)
 {
     var classAttr = 'parent collapsed';
-    var menuItem = $('<li class="ui-draggable" data-id="'+$('#nav-item-id').val()+'"data-name="'+$('#nav-item-name').val()+'" data-route="'+$('#nav-item-link').val()+'"data-link="'+$('#nav-item-link-display').val()+'" data-class="'+$('#nav-item-class').val()+'" data-pageid="'+$('#nav-item-page-id').val()+'" ><a href="'+$('#nav-item-link').val()+'" class="caption ui-droppable" rel="'+$('#nav-item-id').val()+'">'+$('#nav-item-name').val()+'</a><span class="cmds"><span class="callback op1">Add</span> <span class="callback op2">Edit</span><span class="callback op3">Delete</span></span></li>');
+    var menuItem = $('<li class="ui-draggable" data-id="'+$('#nav-item-id').val()+'" data-name="'+$('#nav-item-name').val()+'" data-class="'+$('#nav-item-class').val()+'" data-pageid="'+$('#nav-item-page-id').val()+'" ><a href="#" class="caption ui-droppable" rel="'+$('#nav-item-id').val()+'">'+$('#nav-item-name').val()+'</a><span class="cmds"><span class="callback op1 icon-plus"></span> <span class="callback op2 icon-pencil"></span><span class="callback op3 icon-trash"></span></span></li>');
     if(currentNode != null){
         if(is_new == 0){
             classAttr = currentNode.attr('class');
             currentNode.attr('data-name', $('#nav-item-name').val()); 
-            currentNode.attr('data-route',$('#nav-item-link').val());
-            currentNode.attr('data-link', $('#nav-item-link-display').val());
+            //currentNode.attr('data-route',$('#nav-item-link').val());
+            //currentNode.attr('data-link', $('#nav-item-link-display').val());
             currentNode.attr('data-class', $('#nav-item-class').val());
             currentNode.attr('data-pageid', $('#nav-item-page-id').val());
             currentNode.children('a').html($('#nav-item-name').val());
-            currentNode.children('a').attr('href', $('#nav-item-link').val());
+            //currentNode.children('a').attr('href', $('#nav-item-link').val());
             currentNode.addClass(classAttr);
         }
         else if(!currentNode.children('ul').length){
