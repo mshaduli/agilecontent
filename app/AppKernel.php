@@ -86,6 +86,11 @@ class AppKernel extends Kernel
             new Vich\GeographicalBundle\VichGeographicalBundle(),
             new ADesigns\CalendarBundle\ADesignsCalendarBundle(),
             
+            /*
+             * Calendar Bulded Easy Extended
+             */
+            new Application\ADesigns\CalendarBundle\ApplicationADesignsCalendarBundle(),
+            
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

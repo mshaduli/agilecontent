@@ -36,11 +36,14 @@ class AccommodationRoom
      * @var float
      */
     private $rateTo;
+
+    private $media;    
     
     private $dates;
     
     public function __construct() {
         $this->dates = new ArrayCollection();
+        $this->media = new ArrayCollection();
     }    
 
      /**
@@ -199,5 +202,24 @@ class AccommodationRoom
     public function setId($id) {
         $this->id = $id;
     }
+    
+    public function getMedia()
+    {
+        return $this->media;
+    }
+    
+    public function setMedia($media)
+    {
+        $this->media = $media;
+    }    
+    
+    public function addMedia($media){
+        $media->setAccommodationRoom($this);
+        $this->media->add($media);        
+    }
+    
+    public function removeMedia($media){
+        $this->media->remove($media);
+    } 
             
 }
