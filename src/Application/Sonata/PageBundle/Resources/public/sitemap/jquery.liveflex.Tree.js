@@ -218,8 +218,6 @@ $('#MoveResults').val(data);
                                     var item = {
                                         id: $(this).attr("data-id"),
                                         name:$(this).attr("data-name"),
-                                        link: $(this).attr("data-link"), 
-                                        route: $(this).attr("data-route"),
                                         classAttr: $(this).attr("data-class"),
                                         pageId: $(this).attr("data-pageid"),
                                         items: base.parseTree(subtree),
@@ -231,8 +229,6 @@ $('#MoveResults').val(data);
                                     var item = {
                                         id: $(this).attr("data-id"),
                                         name:$(this).attr("data-name"),
-                                        link: $(this).attr("data-link"), 
-                                        route: $(this).attr("data-route"),
                                         classAttr: $(this).attr("data-class"),
                                         pageId: $(this).attr("data-pageid")
                                     };
