@@ -1,6 +1,6 @@
 $(function() {
 
-    $('div[class^=calendar_holder]').fullCalendar({
+    $('div[id^=calendar_holder_]').fullCalendar({
         header: {
             left: 'prev, next',
             center: 'title',
@@ -18,7 +18,7 @@ $(function() {
             var dateObj = new Date(date);
             var month = parseInt(dateObj.getMonth())+1;
             var newDate = dateObj.getFullYear() + "-" + (month > 9?month:'0'+month) + "-" + (dateObj.getDate() > 9?dateObj.getDate():'0'+dateObj.getDate());
-            var Month = $(".calendar_holder_"+room_id).fullCalendar('getDate').getMonth();
+            var Month = $("#calendar_holder_"+room_id).fullCalendar('getDate').getMonth();
             
             if(isNaN(Month))
                 {
