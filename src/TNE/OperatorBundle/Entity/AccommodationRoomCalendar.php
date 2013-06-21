@@ -27,9 +27,13 @@ class AccommodationRoomCalendar
     /**
      * @var integer
      */
-    private $accommodation_room_id ;
-    
     private $available = true;
+    
+    /**
+     * @Column(name="`accommodation_room_id`", type="integer") 
+     */
+     
+    private $accommodation_room_id ;
     
     private $room;
 
