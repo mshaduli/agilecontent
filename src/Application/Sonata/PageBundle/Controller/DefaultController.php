@@ -34,14 +34,12 @@ class DefaultController extends Controller
         $pageUrls = array();
         $pageCollection = array();
         foreach($pages as $key => $page) {
-            $pageRoutes[$key] = $page['name'];
-            $pageUrls[$page['name']] = $page['url'];
-            $pageCollection[$page['name']] = $page['id'];
+            $pageRoutes[$key] = array('name' => $page['name'], 'value' => $page['id']);
+//            $pageUrls[$page['name']] = $page['url'];
+//            $pageCollection[$page['name']] = $page['id'];
         }
         
-        $response = array( 'options' => $pageRoutes,
-                           'urls' => $pageUrls,
-                           'pages' => $pageCollection
+        $response = array( 'options' => $pageRoutes
                          );
         return new Response(json_encode($response));
     }

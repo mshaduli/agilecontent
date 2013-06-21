@@ -19,7 +19,11 @@ use Sonata\BlockBundle\Block\BaseBlockService;
 
 class MenuBlockService extends BaseBlockService implements BlockServiceInterface
 {
-
+    protected $em;
+    public function __construct($name, \Symfony\Bundle\FrameworkBundle\Templating\EngineInterface $templating, \Doctrine\ORM\EntityManager $em) {
+        parent::__construct($name, $templating);
+        $this->em = $em;
+    }
     /**
      * @param \Sonata\AdminBundle\Form\FormMapper $form
      * @param \Sonata\BlockBundle\Model\BlockInterface $block
@@ -49,13 +53,26 @@ class MenuBlockService extends BaseBlockService implements BlockServiceInterface
         }
         
         $currentPage = $block->getPage();
+        $currentSite = $currentPage->getSite();
+        $qb = $this->em->getRepository('ApplicationSonataPageBundle:Page')->createQueryBuilder('j')
+                ->select('p.name, p.url', 'p.id')
+                ->from('ApplicationSonataPageBundle:Page', 'p')
+                ->where('p.site = :site_id')
+                ->setParameter('site_id', $currentSite->getId())
+                ->addGroupBy('p.name')
+           ;
+        
+        
+        $pages = $qb->getQuery()
+                        ->getArrayResult();
         if ($block->getEnabled()) {
             $response = $this->renderResponse(
                     'SonataPageBundle:Block:block_menu.html.twig', 
                     array(
                         'page'      => $currentPage,
                         'block'     => $block,
-                        'settings'  => $settings
+                        'settings'  => $settings,
+                        'pages'     => $pages
                     ), 
                     $response);
         }
