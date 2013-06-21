@@ -93,49 +93,13 @@ file that was distributed with this source code.
 <script type="text/javascript">
 var page_id = '{{page.id}}';
 var block_id = '{{block.id}}';
-/*$('.typeahead').typeahead({
-                source: function(query, process) {
-                    return $.ajax({
-                        url: '/app_dev.php/typeahead/'+page_id+'/'+query,
-                        type: 'get',
 
-                        dataType: 'json',
-                        success: function(json) {
-                            console.log(json);
-                            var pages = json.options;
-                            return typeof json.options == 'undefined' ? false : process(json.options);
-                        }
-                    });
-                },
-                updater: function (item) {
-                    // implementation
-                },
-                matcher: function (item) {
-                    // implementation
-                },
-                sorter: function (items) {
-                    // implementation
-                },
-                highlighter: function (item) {
-                   // implementation
-                },
-});
-*/
 
 var menu = {{ settings.content.items|json_encode()|raw }};
 var menu_count = {{ settings.content.items|length }};
 
 var currentNode =  '';
 
-function loadPageOptions(){
-    $.ajax({
-                        url: '/app_dev.php/page_options/'+page_id,
-                        type: 'get',
-                        success: function(response) {
-                            $('#nav-item-page-id').append(response);
-                        }
-    });
-}
 function addNode(node)
 {
     $('#node-form input').val('');
