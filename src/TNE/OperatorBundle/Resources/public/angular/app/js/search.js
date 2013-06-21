@@ -397,7 +397,7 @@ SearchApp.directive('topFilters', function($timeout){
             $(element.find('#filterDate')).daterangepicker(
                 {
                     opens: 'left',
-                    format: 'DD/MM',
+                    format: 'DD/MM/YYYY',
                     separator: ' to ',
                     startDate: new Date(),
                     endDate: moment().add('days', 7)
