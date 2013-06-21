@@ -5,7 +5,7 @@
 {% block room_calendar_type_widget %}
     {% spaceless %}
             
-        <div class="calendar_holder" data-room="{{ form.get('value') }}">
+        <div class="calendar_holder" id="calendar_holder_{{ form.get('value') }}" data-room="{{ form.get('value') }}">
         </div>
     {% endspaceless %}
 {% endblock %}

@@ -101,6 +101,11 @@ class AccommodationRoomCalendar
     {
         return $this->getRoom()->getId();
     }
+    
+     public function setAccomadationRoomId($room_id)
+    {
+        $this->accommodation_room_id = $room_id;
+    }
 
     public function getRoom() {
         return $this->room;

@@ -1906,6 +1906,8 @@ margin-bottom:10px;
 	
 }
 
+
+
 .contact-form-left .input-append .btn {
     border-radius: 0px;
     height: 38px;
@@ -1924,6 +1926,9 @@ color: #717073;
 font-size:15px;
 line-height:normal;
 }
+.contact-form-left textarea{ background-color: #fff !important; margin-bottom: 0; }
+.contact-form-left label.alert-error{ color: #b94a48; }
+.contact-form-left label.alert{ margin-top: 6px; margin-bottom: 6px; }
 
 .contact-textfield
 {
@@ -1982,7 +1987,14 @@ display:none;
 padding-top:20px;
 display:none;
 margin-top:40px;
+position: relative;
 }
+
+/* Close button for Map Section */
+#map-close-btn{ position: absolute; color: #fff; right: 30px; top: 25px; }
+#map-close-btn:hover{ text-decoration: none; }
+#ask-form-close-btn{ color: #717073; }
+#ask-form-close-btn:hover{ color: #717073; text-decoration: none; }
 
 .tabbable
 {
@@ -3012,28 +3024,26 @@ font-size:25px;
 #mobile-rooms .star a:hover{ text-decoration: none; }
 #mobile-rooms .special-room{ position: absolute; background-color: #7ec148; color: #fff; text-transform: uppercase; padding: 0 9px; line-height: 26px; top: 6px; }
 #mobile-rooms .special-room:after{ width: 0; height: 0;	border-top: 8px solid #539025; border-left: 8px solid transparent; content: ''; position: absolute; left: 0; bottom: -8px; }
-
-/* --------------------- Date Check in Styles -------------------------*/	
+/* Date Check in Styles */
 .op-rooms-date.nav li{ margin-top: 0; width: 49%; display: inline-block; }
 .op-rooms-date .input-append{ width: 100%; }
-.op-rooms-date .input-append input{ width: 80%;}
-.op-rooms-date.nav li input[type="text"]{ height: 45px; line-height: 45px; }
+.op-rooms-date .input-append input{ width: 85%;}
+.op-rooms-date.nav li input[type="text"]{ height: 35px; line-height: 35px; }
 .op-rooms-date .input-append .btn{ height: 35px; width: 15%; border-left: none; }
-.op-rooms-capacity{ padding: 0 0 12px; }
-.op-rooms-date.nav li img{ min-width: auto !important; }
+.op-rooms-capacity{ padding: 0 0 12px; }	
 	
 .whats-on-lft-area{ width: 100%; margin-top: 0; }
 .whats-on-lft-area .slider-caption{ width: auto; right: 10px; }
 .whats-on-lft-area .phone-data{ padding: 0 20px 18px; font-size: 15px; }
 
-.slider-thumb-nav-img, #operator-slider .show-thumb-nav{ display:none !important; }
 
-/* --------------------- Form Styles -------------------------*/	
-.contact-form-left .input-append{ display: block; }
-.contact-textfield{ float: none; width: 100%;}
-.contact-txtarea{ margin-right: 15px !important; }
-.contact-form-left input[type="text"]{ display: block; width: 100%; }
-.contact-form-left textarea{ display: block; width: 100%; padding-left: 0; }
+.slider-thumb-nav-img, #operator-slider .show-thumb-nav
+{
+display:none !important;
+}
+
+
+
 }
 
 
@@ -3199,7 +3209,7 @@ width:280px;
 
 /**** GENERAL CONTENT TEMPLATE STYLES ENDS HERE ****/
 
-.op-rooms-date.nav li{ width: 100%; display: block; margin-left: 0; }
+
 
 
 }

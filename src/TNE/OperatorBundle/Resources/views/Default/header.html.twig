@@ -8,7 +8,7 @@
 
                 <ul class="nav">
                     <li class="social">
-                        Connect <a href="#" class="btn btn-link"><i class="icon-facebook"></i></a> <a href="#" class="btn btn-link"><i class="icon-twitter"></i></a> <a href="#"><i class="icon-envelope-alt"></i></a>
+                        Connect <a href="javascript:fbShare();" class="btn btn-link"><i class="icon-facebook"></i></a> <a href="#" class="btn btn-link"><i class="icon-twitter"></i></a> <a href="#"><i class="icon-envelope-alt"></i></a>
                     </li>
                     <li class="divider-vertical"></li>
                     <li>
@@ -112,3 +112,42 @@
                 <top-filters dates="filters.dates" filter-by-dates="filterByDates(dates)"></top-filters>
         </div>
     </header>
+<script type="text/javascript">
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId: '268338333304765', // App ID
+            status: true, // check login status
+            cookie: true, // enable cookies to allow the server to access the session
+            xfbml: true  // parse XFBML
+        });
+    };
+
+    (function(d) {
+        var js, id = 'facebook-jssdk';
+        if (d.getElementById(id)) {
+            return;
+        }
+        js = d.createElement('script');
+        js.id = id;
+        js.async = true;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        d.getElementsByTagName('head')[0].appendChild(js);
+    }(document));
+
+    function fbShare()
+    {
+        FB.ui(
+                {
+                    method: 'feed',
+                    name: 'test',
+                    picture: '<?php echo $sf_request->getUriPrefix() ?>/images/aaa-facebook-promo.jpg',
+                    caption: '<?php echo $sf_request->getUriPrefix() ?>',
+                    description: 'Test share',
+                    link: '<?php echo $sf_request->getUriPrefix() ?>',
+                    show_error: true
+                },
+        function(response) {
+        }
+        );
+    }
+</script>
