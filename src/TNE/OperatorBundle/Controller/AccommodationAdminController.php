@@ -61,8 +61,10 @@ class AccommodationAdminController extends Controller
                  */
                 $em = $this->getDoctrine()->getManager();
                 $room_calendars = $this->get('request')->request->get('room_calendar');
+//                d($room_calendars);exit;
                 if(count($room_calendars))
                 {
+//                    d($room_calendars);exit;
                  foreach($room_calendars as $room_id => $calendars)
                  {
                      $month_calcu = array_keys($calendars);
@@ -71,7 +73,7 @@ class AccommodationAdminController extends Controller
                      $room = $em->createQuery('SELECT ar FROM TNEOperatorBundle:AccommodationRoom ar WHERE ar.id = :id')->setParameter('id', $room_id)->getSingleResult();
 
 
-                     $q = $em->getConnection()->prepare('DELETE FROM AccommodationRoomCalendar WHERE MONTH(`date`) = '.$month);
+                     $q = $em->getConnection()->prepare('DELETE FROM AccommodationRoomCalendar WHERE MONTH(`date`) = '.$month.' AND accommodation_room_id='.$room_id);
                      $numDeleted = $q->execute();
 
                      foreach($calendars as $date => $calendar)

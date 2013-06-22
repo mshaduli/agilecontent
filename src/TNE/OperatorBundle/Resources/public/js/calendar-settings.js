@@ -36,6 +36,7 @@ $(function() {
             
             var room_id = $(this.element).parent().parent().attr('data-room');
             var events = $("#calendar_holder_"+room_id).fullCalendar('clientEvents');
+//            console.log(events);
             if(events.length > 0)
             {
                 $.each(events, function(idx, obj){
@@ -62,9 +63,6 @@ $(function() {
             {
                 url: Routing.generate('fullcalendar_loader'),
                 type: 'POST',
-                data:{
-                    room_id:1
-                },
                 error: function() {
                     //alert('There was an error while fetching Google Calendar!');
             }
