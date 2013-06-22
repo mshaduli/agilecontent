@@ -25,7 +25,10 @@ class AccommodationRoomAdmin extends Admin
                         ),
                         'required' => false
                     ))
-//                    
+                 ->add('file', 'file', array(
+                            'data_class' => null
+                        )
+                    )
 //               ->add('media', 'sonata_type_collection', array(
 //                        'required' => false,
 //                        'by_reference' => false,
