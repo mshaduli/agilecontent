@@ -334,7 +334,7 @@ SearchApp.directive('resultsGrid', function(){
             '<tr ng-repeat="operator in operators | limitTo: itemsLimit()">' +
             '<td>' +
             '<span class="title">{[{operator.name}]}</span>' +
-            '<div>Falls Creek <div data-score="4" class="star pull-right"></div></div>' +
+            '<div>{[{operator.destination}]}<div data-score="4" class="star pull-right"></div></div>' +
             '</td>' +
             '<td ng-repeat="day in days"><span class="price">{[{ getRoomRateForDate(operator, day.date) }]}</span></td>' +
             '<td><a class="btn btn-link btn-off" href="#"><i class="icon-star"></i></a></td>' +
@@ -579,7 +579,8 @@ function SearchController($scope, $http, $q, $filter, $timeout)
         OperatorView: $scope.OperatorViewOptions[0],
         rating: 0,
         classifications: [],
-        dates: moment().format('DD/MM/YYYY') + ' to ' + moment().add('days', 7).format('DD/MM/YYYY')
+        dates: moment().format('DD/MM/YYYY') + ' to ' + moment().add('days', 7).format('DD/MM/YYYY'),
+        gridView: 'false'
     };
 
     $scope.mapOptions = {
@@ -618,6 +619,20 @@ function SearchController($scope, $http, $q, $filter, $timeout)
                 $scope.$apply(function(){
                     google.maps.event.trigger($scope.map, 'resize');
                     $scope.map.panTo(new google.maps.LatLng($scope.mapOptions.center.lat, $scope.mapOptions.center.lng));
+                });
+            });
+        }
+        if(newValue == "Calendar")
+        {
+                $timeout(function(){
+                $scope.$apply(function(){
+                    $scope.filters.gridView = 'true';
+                });
+            });
+        }else{
+            $timeout(function(){
+                $scope.$apply(function(){
+                    $scope.filters.gridView = 'false';
                 });
             });
         }
