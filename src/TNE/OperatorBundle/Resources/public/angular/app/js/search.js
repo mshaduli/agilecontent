@@ -309,6 +309,11 @@ SearchApp.directive('resultsGrid', function(){
             $scope.showMoreItems = function() {
                 pagesShown = pagesShown + 1;
             };
+
+            $scope.getRoomRateForDate = function(room, date){
+                console.log(room.name + ' - ' + date);
+                return '$295';
+            }
         },
         template: '' +
             '<div id="loaderG" ng-show="loading">' +
@@ -320,15 +325,7 @@ SearchApp.directive('resultsGrid', function(){
             '<thead>' +
             '<tr>' +
             '<th></th>' +
-            '<th>Tue<div class="date">11MAR</div></th>' +
-            '<th>Wed<div class="date">11MAR</div></th>' +
-            '<th>Thu<div class="date">11MAR</div></th>' +
-            '<th>Fri<div class="date">11MAR</div></th>' +
-            '<th>Sat<div class="date">11MAR</div></th>' +
-            '<th>Sun<div class="date">11MAR</div></th>' +
-            '<th>Mon<div class="date">11MAR</div></th>' +
-            '<th>Tue<div class="date">11MAR</div></th>' +
-            '<th>Wed<div class="date">11MAR</div></th>' +
+            '<th ng-repeat="day in days">{[{day.name}]}</th>' +
             '<th class="control"><i class="icon-angle-left icon-2x"></i></th>' +
             '<th class="control"><i class="icon-angle-right icon-2x"></i></th>' +
             '</tr>' +
@@ -339,15 +336,7 @@ SearchApp.directive('resultsGrid', function(){
             '<span class="title">{[{operator.name}]}</span>' +
             '<div>Falls Creek <div data-score="4" class="star pull-right"></div></div>' +
             '</td>' +
-            '<td><span class="price">$999</span></td>' +
-            '<td><span class="price">$999</span></td>' +
-            '<td><span class="price">$999</span></td>' +
-            '<td class="selected"><span class="price">$999</span></td>' +
-            '<td class="selected"><span class="price">$999</span></td>' +
-            '<td class="selected"><span class="price">$999</span></td>' +
-            '<td><span class="price">$999</span></td>' +
-            '<td><span class="price">$999</span></td>' +
-            '<td><span class="price">$999</span></td>' +
+            '<td ng-repeat="day in days"><span class="price">{[{ getRoomRateForDate(operator, day.date) }]}</span></td>' +
             '<td><a class="btn btn-link btn-off" href="#"><i class="icon-star"></i></a></td>' +
             '<td><a class="btn btn-link btn-success" href="#"><i class="icon-ok"></i></a></td>' +
             '</tr>' +
@@ -355,7 +344,15 @@ SearchApp.directive('resultsGrid', function(){
             '</table>' +
             '<div>' +
             '<br/><br/><br/><br/><button class="btn btn-full" ng-click="showMoreItems()">Show me more</button>' +
-            '</div>'
+            '</div>',
+        link: function(scope, element, attrs){
+            var days = [];
+            for(var i=1;i<=attrs.days;i++)
+            {
+                days.push({name:moment().add(i, 'days').format('ddd D MMM'), date:moment().add(i,'days').format('DD/MM/YYYY')});
+            }
+            scope.days = days;
+        }
     };
 });
 
