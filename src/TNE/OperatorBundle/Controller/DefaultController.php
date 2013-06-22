@@ -155,24 +155,34 @@ EOD;
         $results = $accStmt->fetchAll();
         if($filters['gridView'] == 'true')
         {
-            $qry = "SELECT * FROM  `AccommodationRoomCalendar` ARC WHERE  `date` BETWEEN '".date('Y-m-d',$date_from)."' AND '".date('Y-m-d',$date_to)."'";
-            $roomStmt = $em->getConnection()->prepare($qry);
-            $roomStmt->execute();
-            $room_calendars = $roomStmt->fetchAll();
+            
 
             $roomary = array();
-
-            foreach($room_calendars as $room_calendar)
+            /**
+             * 
+             * 
+             * 
+             * Big Fix Needed
+             * 
+             * 
+             * 
+             * 
+             */
+            for($i = 0; $i<= $days ;$i++)
             {
-                 for($i = 0; $i<= $days ;$i++)
-                {
-                    $date = date('Y-m-d', strtotime('+ '.$i.' day',$date_from));
-                    $roomary[$room_calendar['accommodation_room_id']][$date]['rate']= $room_calendar['accommodation_room_id'];
-                    $roomary[$room_calendar['accommodation_room_id']][$date]['available']= $room_calendar['available'];
+                $date = date('Y-m-d', strtotime('+ '.$i.' day',$date_from));
+                $qry = "SELECT * FROM  `AccommodationRoomCalendar` ARC WHERE  `date` = '".$date."'";
+                $roomStmt = $em->getConnection()->prepare($qry);
+                $roomStmt->execute();
+                $room_calendars = $roomStmt->fetchAll();
+                foreach($room_calendars as $room_calendar)
+                {   
+                    $roomary[$room_calendar['accommodation_room_id']][$date]['rate']= $room_calendar['rate'];
+                    $roomary[$room_calendar['accommodation_room_id']][$date]['available']= ($room_calendar['available'] == 1)?"true":"false";
                 }
             }
         }
-
+        
         foreach ($results as $result)
         {
 
@@ -184,12 +194,12 @@ EOD;
                 {
                     $date = date('Y-m-d', strtotime('+ '.$i.' day',$date_from));
                     
-                    if(isset($roomary['room_id']))
+                    if(isset($roomary[$result['room_id']]))
                     {
-                        if(isset($roomary['room_id']['date']))
+                        if(isset($roomary[$result['room_id']][$date]))
                         {
-                            $result[$date]['rate'] = $roomary['room_id']['date']['rate'];
-                            $result[$date]['available'] = $roomary['room_id']['date']['available'];   
+                            $result[$date]['rate'] = $roomary[$result['room_id']][$date]['rate'];
+                            $result[$date]['available'] = $roomary[$result['room_id']][$date]['available'];   
                         }
                         else
                         {

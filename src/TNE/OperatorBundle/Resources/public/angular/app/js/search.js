@@ -311,8 +311,16 @@ SearchApp.directive('resultsGrid', function(){
             };
 
             $scope.getRoomRateForDate = function(room, date){
-                console.log(date);
-                return '$295';
+                
+                if(typeof room[date] != "undefined")
+                {
+                    if(room[date].available == "true")
+                        return '$'+room[date].rate;
+                    else
+                        return "N/A";
+                }else{
+                    return '$295';
+                }
             }
         },
         template: '' +
@@ -336,7 +344,7 @@ SearchApp.directive('resultsGrid', function(){
                             '<span class="title">{[{operator.room_name}]}</span>' +
                             '<div>{[{operator.name}]} ({[{operator.destination}]})<div data-score="4" class="star pull-right"></div></div>' +
                         '</td>' +
-                        '<td ng-repeat="day in days"><span class="price">{[{ operator[day.date].rate }]}</span></td>' +
+                        '<td ng-repeat="day in days"><span class="price">{[{ getRoomRateForDate(operator, day.date) }]}</span></td>' +
                         '<td><a class="btn btn-link btn-off" href="#"><i class="icon-star"></i></a></td>' +
                         '<td><a class="btn btn-link btn-success" href="#"><i class="icon-ok"></i></a></td>' +
                     '</tr>' +
@@ -347,7 +355,7 @@ SearchApp.directive('resultsGrid', function(){
             '</div>',
         link: function(scope, element, attrs){
             var days = [];
-            for(var i=1;i<=attrs.days;i++)
+            for(var i=0;i<=attrs.days;i++)
             {
                 days.push({name:moment().add(i, 'days').format('ddd D MMM'), date:moment().add(i,'days').format('YYYY-MM-DD')});
             }
