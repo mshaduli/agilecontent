@@ -49,6 +49,14 @@
         </cascade>        
     </one-to-many>
     
+    <one-to-many field="recommendations" target-entity="Recommendation" mapped-by="accommodation">
+        <cascade>
+            <cascade-persist />
+            <cascade-refresh />
+            <cascade-remove />
+        </cascade>        
+    </one-to-many>    
+    
     <one-to-many field="media" target-entity="OperatorMedia" mapped-by="accommodation">
         <cascade>
             <cascade-persist />

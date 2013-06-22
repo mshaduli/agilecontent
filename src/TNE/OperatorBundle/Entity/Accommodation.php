@@ -140,6 +140,7 @@ class Accommodation
     
     protected $hiddenSecret;
 
+    protected $recommendations;
 
     protected $gallery;
 
@@ -552,5 +553,24 @@ class Accommodation
     public function setTripadvisorKey($tripadvisorKey) {
         $this->tripadvisorKey = $tripadvisorKey;
     }
+    
+    public function getRecommendations()
+    {
+        return $this->recommendations;
+    }
+    
+    public function setRecommendations($recommendations)
+    {
+        $this->recommendations = $recommendations;
+    }  
+    
+    public function addRecommendation($recommendation){
+        $recommendation->setAccommodation($this);
+        $this->recommendations->add($recommendation);
+    }
+    
+    public function removeRecommendation($recommendation){
+        $this->recommendations->remove($recommendation);
+    }  
 
 }
