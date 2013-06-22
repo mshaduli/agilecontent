@@ -34,6 +34,9 @@ class Site extends BaseSite
      */
     private $context;
 
+
+    private $gacode;
+
     /**
      * Get id
      *
@@ -53,5 +56,23 @@ class Site extends BaseSite
     {
         $this->context = $context;
     }
-    
+
+    /**
+     * @param mixed $gacode
+     */
+    public function setGacode($gacode)
+    {
+        $this->gacode = $gacode;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGacode()
+    {
+        return $this->gacode;
+    }
+
+
+
 }

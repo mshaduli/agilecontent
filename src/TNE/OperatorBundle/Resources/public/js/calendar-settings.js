@@ -36,7 +36,6 @@ $(function() {
             
             var room_id = $(this.element).parent().parent().attr('data-room');
             var events = $("#calendar_holder_"+room_id).fullCalendar('clientEvents');
-//            console.log(events);
             if(events.length > 0)
             {
                 $.each(events, function(idx, obj){
@@ -49,13 +48,10 @@ $(function() {
                     
                     $(id+"rate").val(obj.rate);
                     $(id+"available").prop('checked', obj.available);
-//                    $(id+"available").val(obj.available)
                     $(id+"date").val(newDate)
-//                    console.log(id);
                 });
             }
-//            $("input[name='room_calendar["+room_id+"]]")
-//            console.log($("#calendar_holder_"+room_id).fullCalendar('clientEvents'))
+
         },
                 
 
