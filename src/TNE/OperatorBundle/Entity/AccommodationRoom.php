@@ -244,7 +244,6 @@ class AccommodationRoom
     public function preUpload()
     {
         if (null != $this->getFile()) {
-            // do whatever you want to generate a unique name
             $filename = sha1(uniqid(mt_rand(), true));
             $this->path = $filename.'.'.$this->getFile()->guessExtension();
             
@@ -261,10 +260,6 @@ class AccommodationRoom
             return;
         }
 
-        // if there is an error when moving the file, an exception will
-        // be automatically thrown by move(). This will properly prevent
-        // the entity from being persisted to the database on error
-//        echo $this->path;
         $this->getFile()->move($this->getUploadRootDir(), $this->path);
         if ($this->temp) {
             // delete the old image
@@ -288,15 +283,11 @@ class AccommodationRoom
 
     protected function getUploadRootDir()
     {
-        // the absolute directory path where uploaded
-        // documents should be saved
         return __DIR__.'/../../../../web/'.$this->getUploadDir();
     }
 
     protected function getUploadDir()
     {
-        // get rid of the __DIR__ so it doesn't screw up
-        // when displaying uploaded doc/image in the view.
         return 'uploads/rooms';
     }
     
