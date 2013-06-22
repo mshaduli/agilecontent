@@ -52,6 +52,8 @@ SearchApp.directive('slider', function($timeout) {
     };
 });
 
+
+
 SearchApp.directive('radio', function() {
     return {
         restrict: 'E',
@@ -283,6 +285,74 @@ SearchApp.directive('resultsList', function(){
             '</div>' +
             '</li>' +
             '</ul>' +
+            '<div>' +
+            '<br/><br/><br/><br/><button class="btn btn-full" ng-click="showMoreItems()">Show me more</button>' +
+            '</div>'
+    };
+});
+
+
+SearchApp.directive('resultsGrid', function(){
+    return {
+        restrict: 'E',
+        scope: {
+            loading: '=',
+            operators: '=',
+            sort: '='
+        },
+        controller: function($scope){
+            var pagesShown = 1;
+            var pageSize = 9;
+            $scope.itemsLimit = function(){
+                return pageSize * pagesShown;
+            };
+            $scope.showMoreItems = function() {
+                pagesShown = pagesShown + 1;
+            };
+        },
+        template: '' +
+            '<div id="loaderG" ng-show="loading">' +
+            '<div id="blockG_1" class="loader_blockG"></div>' +
+            '<div id="blockG_2" class="loader_blockG"></div>' +
+            '<div id="blockG_3" class="loader_blockG"></div>' +
+            '</div>'+
+            '<table class="table table-bordered table-hover">' +
+            '<thead>' +
+            '<tr>' +
+            '<th></th>' +
+            '<th>Tue<div class="date">11MAR</div></th>' +
+            '<th>Wed<div class="date">11MAR</div></th>' +
+            '<th>Thu<div class="date">11MAR</div></th>' +
+            '<th>Fri<div class="date">11MAR</div></th>' +
+            '<th>Sat<div class="date">11MAR</div></th>' +
+            '<th>Sun<div class="date">11MAR</div></th>' +
+            '<th>Mon<div class="date">11MAR</div></th>' +
+            '<th>Tue<div class="date">11MAR</div></th>' +
+            '<th>Wed<div class="date">11MAR</div></th>' +
+            '<th class="control"><i class="icon-angle-left icon-2x"></i></th>' +
+            '<th class="control"><i class="icon-angle-right icon-2x"></i></th>' +
+            '</tr>' +
+            '</thead>' +
+            '<tbody>' +
+            '<tr ng-repeat="operator in operators | limitTo: itemsLimit()">' +
+            '<td>' +
+            '<span class="title">{[{operator.name}]}</span>' +
+            '<div>Falls Creek <div data-score="4" class="star pull-right"></div></div>' +
+            '</td>' +
+            '<td><span class="price">$999</span></td>' +
+            '<td><span class="price">$999</span></td>' +
+            '<td><span class="price">$999</span></td>' +
+            '<td class="selected"><span class="price">$999</span></td>' +
+            '<td class="selected"><span class="price">$999</span></td>' +
+            '<td class="selected"><span class="price">$999</span></td>' +
+            '<td><span class="price">$999</span></td>' +
+            '<td><span class="price">$999</span></td>' +
+            '<td><span class="price">$999</span></td>' +
+            '<td><a class="btn btn-link btn-off" href="#"><i class="icon-star"></i></a></td>' +
+            '<td><a class="btn btn-link btn-success" href="#"><i class="icon-ok"></i></a></td>' +
+            '</tr>' +
+            '</tbody>' +
+            '</table>' +
             '<div>' +
             '<br/><br/><br/><br/><button class="btn btn-full" ng-click="showMoreItems()">Show me more</button>' +
             '</div>'
