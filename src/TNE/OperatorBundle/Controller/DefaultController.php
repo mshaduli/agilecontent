@@ -115,7 +115,8 @@ class DefaultController extends Controller
         }
         
         
-        
+        if($filters['gridView'] == 'false')
+        {
        $distanceQueryAccomm  =<<<EOD
         SELECT * FROM 
         (
@@ -126,27 +127,95 @@ class DefaultController extends Controller
         HAVING distance < $distanceValue AND min_rate < $maxRate
         ORDER BY distance ASC
 EOD;
-
-        
-        
-
-        
-
-                
+        }else{
+       $distanceQueryAccomm  = <<<EOD
+               SELECT * FROM ( 
+                    SELECT `ac`.`id` as `id`, `ac`.`name` as `name`, 
+                    `ac`.`atdw_city_name` as `destination`, `ac`.`latitude` as `latitude`, `ac`.`longitude` as `longitude`, 
+                   `ac`.`atdw_rate_from` as `min_rate`, 
+                    (((acos(sin(($destination[latitude]*pi()/180)) * sin((`latitude`*pi()/180))+cos(($destination[latitude]*pi()/180)) * cos((`latitude`*pi()/180)) * cos((($destination[longitude] - `longitude`)*pi()/180))))*180/pi())*60*1.1515) AS `distance`,
+                    AR.id as room_id, AR.name as room_name
+                    FROM `Accommodation` ac
+                    INNER JOIN AccommodationRoom AR ON AR.accommodation_id = ac.id 
+                    
+                    $where
+                   ) as op
+            HAVING 
+               distance < $distanceValue AND 
+               min_rate < $maxRate 
+               ORDER BY distance ASC
+EOD;
+        }
+             
         
         $accStmt = $em->getConnection()->prepare($distanceQueryAccomm);
 
         $accStmt->execute();
         
         $results = $accStmt->fetchAll();
-        
+        if($filters['gridView'] == 'true')
+        {
+            
 
+            $roomary = array();
+            /**
+             * 
+             * 
+             * 
+             * Big Fix Needed
+             * 
+             * 
+             * 
+             * 
+             */
+            for($i = 0; $i<= $days ;$i++)
+            {
+                $date = date('Y-m-d', strtotime('+ '.$i.' day',$date_from));
+                $qry = "SELECT * FROM  `AccommodationRoomCalendar` ARC WHERE  `date` = '".$date."'";
+                $roomStmt = $em->getConnection()->prepare($qry);
+                $roomStmt->execute();
+                $room_calendars = $roomStmt->fetchAll();
+                foreach($room_calendars as $room_calendar)
+                {   
+                    $roomary[$room_calendar['accommodation_room_id']][$date]['rate']= $room_calendar['rate'];
+                    $roomary[$room_calendar['accommodation_room_id']][$date]['available']= ($room_calendar['available'] == 1)?"true":"false";
+                }
+            }
+        }
+        
         foreach ($results as $result)
         {
 
             $operator = $em->getRepository('TNEOperatorBundle:Accommodation')->find($result['id']);
-
-
+            
+            if($filters['gridView'] == 'true')
+            {
+                for($i = 0; $i<= $days ;$i++)
+                {
+                    $date = date('Y-m-d', strtotime('+ '.$i.' day',$date_from));
+                    
+                    if(isset($roomary[$result['room_id']]))
+                    {
+                        if(isset($roomary[$result['room_id']][$date]))
+                        {
+                            $result[$date]['rate'] = $roomary[$result['room_id']][$date]['rate'];
+                            $result[$date]['available'] = $roomary[$result['room_id']][$date]['available'];   
+                        }
+                        else
+                        {
+                            $result[$date]['rate'] = '0';
+                            $result[$date]['available'] = 'true';
+                        }
+                    }
+                    else
+                    {
+                        $result[$date]['rate'] = '0';
+                        $result[$date]['available'] = 'true';
+                    }
+                }
+            }
+            
+            
             $operatorMedia = $operator->getMedia()->first();
             $result['image'] = $this->getOperatorImage($operatorMedia);
             $result['rating'] = $operator->getRating();
