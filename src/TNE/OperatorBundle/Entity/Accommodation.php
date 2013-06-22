@@ -200,6 +200,28 @@ class Accommodation
         return $this->name;
     }
 
+    /**
+     * Set Atdw Rate
+     *
+     * @param string $atdwRateFrom
+     * @return Accommodation
+     */
+    public function setAtdwRateFrom($atdwRateFrom)
+    {
+        $this->atdwRateFrom = $atdwRateFrom;
+    
+        return $this;
+    }
+
+    /**
+     * Get Atdw Rate
+     *
+     * @return string 
+     */
+    public function getAtdwRateFrom()
+    {
+        return $this->atdwRateFrom;
+    }
     
     public function setAddress($address)
     {

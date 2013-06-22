@@ -25,6 +25,20 @@
     text-shadow: none;
 }
 
+/* map options starts */
+#map-view-large{
+    height: 580px;
+    }
+#map-view-small{
+    height: 214px;
+    }
+#map-close-btn{
+    top: 0;
+    right: 0;
+    color: black;
+    }
+/* map options ends */
+
 /* design elements */
 #designs {
     position: absolute;
@@ -969,14 +983,16 @@ input[type="file"] {
 	position: absolute;
 	z-index: 5;
 	top: -10px;
-	left: 10px;
+	left: 12px;
+	right: 10px;
 	min-height: 28px;
 	background-color: #0076c0;
 	color: #FFFFFF;
 	margin-right: 10px;
-	padding: 19px 10px 10px 10px;
-	width: 96%;
+	padding: 10px;
 }
+#operator-slider .slider-caption h2{ font-size: 26px; font-weight: normal; margin: 0; line-height: 1.3em; }
+#operator-slider .slider-caption h2 span a{ font-size: 19px; color: #80bbe0; }
 #operator-slider .slider-caption:after{
 	display: block;
 	content: "";
@@ -993,7 +1009,9 @@ input[type="file"] {
 
 .op-section-header{ font-size: 40px; line-height: 1.2em; color: #0076c0; text-transform: uppercase; margin-bottom: 12px; }
 .op-rooms{ background-color: #fff; position: relative; padding-top: 36px; }
-.op-rooms-header{ position: absolute; font-size: 22px; color: #fff; background-color: #0076c0; min-height: 57px; line-height: 57px; width: 96%; left: 0; top: 0; padding-left: 12px; padding-right: 12px; z-index:1000;}
+.op-rooms-header{ position: absolute; font-size: 22px; color: #fff; background-color: #0076c0; min-height: 57px; line-height: 57px; left: 0; right: 20px; top: 0; padding-left: 12px; padding-right: 12px; z-index:1000;}
+.op-rooms-header .op-rooms-price{ font-size: 14px; color: #80bbe0; line-height: 1em; margin-top: 18px; margin-right: 18px;}
+.op-rooms-header .op-rooms-price em{ font-style: normal; font-size: 20px; color: #fff; line-height: 1em; }
 .op-rooms-date{ margin: 0;}
 .op-rooms-date.nav li {
     margin-left: 8px;
@@ -1028,7 +1046,8 @@ input[type="file"] {
     color: #0076c0;
 }
 .op-rooms-details p{ font-size: 15px; }
-.op-rooms-capacity{ color: #0076c0; text-align: right; padding: 24px 0; }
+.op-rooms-capacity{ color: #7fbadf; text-align: right; padding: 18px 0; padding-top: 12px; }
+.op-rooms-capacity span{ font-size: 20px; color: #0076c0; display: inline-block; padding-left: 6px; position: relative; top: 2px; }
 .op-rooms .btn-primary{ display: block; border-color: #0076c0; color: #0076c0; padding-top: 6px; padding-bottom: 6px; }
 
 .contact-form-left .btn-primary{ display: block; border-color: #0076c0; color: #0076c0; padding-top: 6px; padding-bottom: 6px; }
@@ -1854,6 +1873,7 @@ padding-bottom:10px;
 margin:0px;
 padding:0px;
 margin-top:15px;
+font-size: 15px; 
 }
 
 .info-default-rgt
@@ -1868,10 +1888,9 @@ padding-top:8px;
 position:relative;
 }
 
-.contact-main-default
-{
-padding-bottom:5px;
-
+.contact-main-default{
+	padding-bottom:5px;
+	font-size: 15px;
 }
 
 .info-default-rgt h3
@@ -1898,11 +1917,26 @@ float:left;
 width:100px;
 }
 
-.contact-rgt-content
-{
-float:left;
-width:275px;
+.contact-rgt-content{
+	float:left;
+	width:275px;
+	
+	-ms-word-break: break-all;
+	word-break: break-all;
+	word-break: break-word;
+	-webkit-hyphens: auto;
+	-moz-hyphens: auto;
+	hyphens: auto;
 }
+
+/* Address Minimize styles */
+.address-minimize-btn{ display: inline-block; background-color: #7fbadf; color: #fff; width: 30px; text-align: center; padding: 6px 0; margin-top: 4px; }
+.address-minimize-btn:hover{ text-decoration: none; color: #fff; }
+.address-minimize-btn .icon-plus{ display: none; }
+.address-minimize-btn .icon-minus{ display: block; }
+
+.address-minimize-btn.collapsed .icon-plus{ display: block; }
+.address-minimize-btn.collapsed .icon-minus{ display: none; }
 
 .info-default-rgt .op-rooms
 {
@@ -1940,6 +1974,7 @@ color:#fff;
 text-align:center;
 position:absolute;
 right:10px;
+z-index: 99;
 }
 
 .large-map-link a
@@ -1994,6 +2029,7 @@ color: #717073;
 font-size:15px;
 line-height:normal;
 }
+.contact-form-left .alert{ border-radius: 0; }
 .contact-form-left textarea{ background-color: #fff !important; margin-bottom: 0; }
 .contact-form-left label.alert-error{ color: #b94a48; }
 .contact-form-left label.alert{ margin-top: 6px; margin-bottom: 6px; }
@@ -2059,7 +2095,7 @@ position: relative;
 }
 
 /* Close button for Map Section */
-#map-close-btn{ position: absolute; color: #fff; right: 30px; top: 25px; }
+#map-close-btn{ position: absolute; color: #000; right: 0; top: 0; }
 #map-close-btn:hover{ text-decoration: none; }
 #ask-form-close-btn{ color: #717073; }
 #ask-form-close-btn:hover{ color: #717073; text-decoration: none; }
@@ -2089,16 +2125,29 @@ cursor:pointer;
 width:330px;
 }
 
-.slider-nav
-{
-position:absolute;
-bottom:-8px;
-background:#FFFFFF;
-left:12px;
-right: 12px;
-position:absolute;
-z-index:1100;
+.slider-nav{
+	position:absolute;
+	bottom:-10px;
+	background:#FFFFFF;
+	left:12px;
+	right: 10px;
+	position:absolute;
+	margin-right: 10px;
+	z-index:1100;
 }
+.slider-nav:after{
+	display: block;
+	content: "";
+	position: absolute;
+	right: -10px;
+	bottom: 0px;
+	z-index: 6;
+	width: 0;
+	height: 0;
+	line-height: 0px;
+	border-top: 10px solid #838383;
+	border-right: 10px solid transparent;	
+}	
 .slider-nav ul
 {
 margin:0px;
@@ -2198,10 +2247,9 @@ display:none;
 position:absolute;
 width:228px;
 background:#0076c0;
-z-index:110;
+z-index:1000;
 top:46px;
 right:34px;
-height:228px;
 
 }
 
@@ -2236,6 +2284,7 @@ height:100px;
 float:left;
 margin-right:4px !important;
 margin-bottom:6px !important;
+overflow: hidden;
 }
 
 #operator-slider .flex-direction-nav .flex-prev
@@ -2515,10 +2564,13 @@ left:4px;
 font-size:12px;
 
 }
-
-
-
-
+.contact-form-left .input-append{ width: 100%; }
+.contact-textfield{ width: 100%; box-sizing: border-box; }
+.contact-textfield2{ width: 100%; box-sizing: border-box; }
+.contact-form-left input[type="text"]{ width: 100%; box-sizing: border-box; height: 36px;}
+.contact-txtarea textarea{ width: 100%; box-sizing: border-box; }
+.contact-form-left button{ width: 100%; }
+#Items1_container, #Items2_container{ width: 100% !important; box-sizing: border-box; }
 
 /**** OPERATOR  TEMPLATE STYLES ENDS HERE ****/	
 	
@@ -2598,15 +2650,20 @@ width:703px;
 {
 width:165px;
 }
-
-
-.op-rooms .span7
-{
-width:683px;
-margin-top:40px;
-margin-left:40px;
-margin-bottom:50px;
+.op-rooms-header{ font-size: 18px; right: 0; }
+.op-rooms{ margin-bottom: 24px; }
+.common-block{ margin-bottom: 24px; }
+.op-rooms .span7{
+	width:683px;
+	margin-top:40px;
+	margin-left:40px;
+	margin-bottom:20px;
 }
+.op-rooms .span7 > div { height: auto !important; }
+.op-rooms-date.nav li input[type="text"]{ width: 272px; }
+.op-rooms-capacity{ padding-top: 0;}
+textarea.alert{ padding: 0 !important; padding-left: 12px; width: 100% !important; }
+.contact-textfield{ margin-right: 0; }
 
 .recomment-lft-area
 {
@@ -2760,7 +2817,7 @@ height:177px;
 width:75px;
 height:75px;
 }
-
+.widget.right-padding{ padding-bottom: 0;}
 
 /**** OPERATOR  TEMPLATE STYLES ENDS HERE ****/	
 
@@ -3081,6 +3138,7 @@ font-size:25px;
 {margin-right:0px;}
 
 /**** GENERAL CONTENT TEMPLATE STYLES ENDS HERE ****/
+
 #main{ margin-left: 5px; margin-right: 5px; }
 .info-default-lft-main{ width: 100%; }
 .top-info-content p{ font-size: 15px; }
@@ -3133,10 +3191,9 @@ font-size:25px;
 #mobile-rooms .special-room{ position: absolute; background-color: #7ec148; color: #fff; text-transform: uppercase; padding: 0 9px; line-height: 26px; top: 6px; }
 #mobile-rooms .special-room:after{ width: 0; height: 0;	border-top: 8px solid #539025; border-left: 8px solid transparent; content: ''; position: absolute; left: 0; bottom: -8px; }
 /* Date Check in Styles */
-.op-rooms-date.nav li{ margin-top: 0; width: 49%; display: inline-block; }
+.op-rooms-date.nav li{ margin-top: 0; width: 100%; display: inline-block; margin-left: 0;}
 .op-rooms-date .input-append{ width: 100%; }
-.op-rooms-date .input-append input{ width: 85%;}
-.op-rooms-date.nav li input[type="text"]{ height: 35px; line-height: 35px; }
+.op-rooms-date.nav li input[type="text"]{ height: 45px; line-height: 45px; width: 89%;}
 .op-rooms-date .input-append .btn{ height: 35px; width: 15%; border-left: none; }
 .op-rooms-capacity{ padding: 0 0 12px; }	
 	
@@ -3144,12 +3201,10 @@ font-size:25px;
 .whats-on-lft-area .slider-caption{ width: auto; right: 10px; }
 .whats-on-lft-area .phone-data{ padding: 0 20px 18px; font-size: 15px; }
 
+.slider-thumb-nav-img, #operator-slider .show-thumb-nav{ display:none !important; }
 
-.slider-thumb-nav-img, #operator-slider .show-thumb-nav
-{
-display:none !important;
-}
-
+/* Date Check in Styles */	
+.input-append.date-pick img{ min-width: auto !important; }
 
 
 }
@@ -3347,9 +3402,10 @@ width:280px;
 
 /**** GENERAL CONTENT TEMPLATE STYLES ENDS HERE ****/
 
+.op-rooms-date.nav li{ width: 100%; margin-left: 0; margin-right: 12px; }
+.op-rooms-date.nav li input[type="text"]{ width: 89%; }
 
-
-
+#mobile-rooms .accordion-heading .accordion-toggle{ display: block; width: 100%; box-sizing: border-box; }
 }
 
 
