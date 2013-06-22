@@ -1,5 +1,8 @@
 $(function() {
-
+    
+    var idAry  = location.href.split('/');
+    var id =idAry[idAry.length-2];
+    
     $('div[id^=calendar_holder_]').fullCalendar({
         header: {
             left: 'prev, next',
@@ -59,6 +62,9 @@ $(function() {
             {
                 url: Routing.generate('fullcalendar_loader'),
                 type: 'POST',
+                data:{
+                    accommodation_id: id
+                },
                 error: function() {
                     //alert('There was an error while fetching Google Calendar!');
             }
