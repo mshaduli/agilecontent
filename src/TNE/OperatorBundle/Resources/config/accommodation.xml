@@ -4,13 +4,16 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-       <service id="sonata.admin.accommodation" class="TNE\OperatorBundle\Admin\AccommodationAdmin">
+        <service id="sonata.admin.accommodation" class="TNE\OperatorBundle\Admin\AccommodationAdmin">
           <tag name="sonata.admin" manager_type="orm" group="Operators" label="Accommodation"/>
           <argument />
           <argument>TNE\OperatorBundle\Entity\Accommodation</argument>
           <argument>TNEOperatorBundle:AccommodationAdmin</argument>
           <call method="setTranslationDomain">
               <argument>TNEOperatorBundle</argument>
+          </call>
+          <call method="setOwnerFilter">
+                <argument type="service" id="tneoperator.admin.owner.filter" />
           </call>
       </service>
       
