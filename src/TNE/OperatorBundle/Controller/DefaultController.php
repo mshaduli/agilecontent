@@ -126,9 +126,25 @@ class DefaultController extends Controller
         HAVING distance < $distanceValue AND min_rate < $maxRate
         ORDER BY distance ASC
 EOD;
+//       $distanceQueryAccomm  = "SELECT * FROM ( 
+//                SELECT `ac`.`id` as `id`, `ac`.`name` as `name`, `ac`.`atdw_product_description` as `description`, 
+//                `ac`.`atdw_city_name` as `destination`, `ac`.`latitude` as `latitude`, `ac`.`longitude` as `longitude`, 
+//               `ac`.`atdw_rate_from` as `min_rate`, 
+//                (((acos(sin(($destination[latitude]*pi()/180)) * sin((`latitude`*pi()/180))+cos(($destination[latitude]*pi()/180)) * cos((`latitude`*pi()/180)) * cos((($destination[longitude] - `longitude`)*pi()/180))))*180/pi())*60*1.1515) AS `distance`,
+//                AR.id as room_id, AR.name as room_name, ARC.rate as room_rate, ARC.date as room_date, ARC.available as room_available
+//                FROM `Accommodation` ac
+//                INNER JOIN AccommodationRoom AR ON AR.accommodation_id = ac.id 
+//                LEFT JOIN AccommodationRoomCalendar ARC ON ARC.accommodation_room_id=AR.id
+//                $where
+//       HAVING 
+//               distance < $distanceValue AND 
+//               min_rate < $maxRate 
+//               ORDER BY distance ASC";
 
-        
-        
+       
+       
+//        echo $distanceQueryAccomm;exit;
+//        room_rate,room_availability,`ac`.`id` as `id`, `ac`.`name` as `name`,  `ac`.`atdw_product_description` as `description`, `ac`.`atdw_city_name` as `destination`, `ac`.`latitude` as `latitude`, `ac`.`longitude` as `longitude`, `ac`.`atdw_rate_from` as `min_rate`,room_name
 
         
 
