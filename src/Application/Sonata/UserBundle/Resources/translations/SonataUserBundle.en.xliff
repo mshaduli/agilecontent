@@ -398,6 +398,15 @@
                 <source>list.label_site</source>
                 <target>Site</target>
             </trans-unit>
+             <trans-unit id="form.label_accommodation">
+                <source>form.label_accommodation</source>
+                <target>Accommodation</target>
+             </trans-unit>
+             <trans-unit id="list.label_accommodation">
+                <source>list.label_accommodation</source>
+                <target>Accommodation</target>
+             </trans-unit>
+
         </body>
     </file>
 </xliff>
