@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity repository-class="TNE\OperatorBundle\Entity\BookingRepository" name="TNE\OperatorBundle\Entity\Booking">
+    <id name="id" type="integer" column="id">
+      <generator strategy="AUTO"/>
+    </id>
+    <field name="start" type="date" column="start"/>
+    <field name="end" type="date" column="end"/>
+    <field name="adults" type="integer" column="adults"/>
+    <field name="children" type="integer" column="children"/>
+    <field name="status" type="string" column="status" length="255"/>
+
+    <many-to-one field="room" target-entity="AccommodationRoom" inversed-by="bookings">
+      <join-column name="accommodation_room_id" referenced-column-name="id" />
+      <cascade>
+          <cascade-all/>
+      </cascade>
+    </many-to-one>
+
+    <many-to-one field="site" target-entity="Application\Sonata\PageBundle\Entity\Site">
+      <join-column name="site_id" referenced-column-name="id" />
+    </many-to-one>
+
+  </entity>
+</doctrine-mapping>

@@ -38,6 +38,8 @@ class AccommodationRoom
     private $rateTo;
     
     private $dates;
+
+    private $bookings;
     
     public function __construct() {
         $this->dates = new ArrayCollection();
@@ -199,5 +201,23 @@ class AccommodationRoom
     public function setId($id) {
         $this->id = $id;
     }
-            
+
+    /**
+     * @param mixed $bookings
+     */
+    public function setBookings($bookings)
+    {
+        $this->bookings = $bookings;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBookings()
+    {
+        return $this->bookings;
+    }
+
+
+
 }
