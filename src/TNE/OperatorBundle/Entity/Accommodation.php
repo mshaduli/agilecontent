@@ -600,7 +600,12 @@ class Accommodation
         if($this->getTripadvisorKey())
         {
             $url = 'http://api.tripadvisor.com/api/partner/1.0/location/89575?key='.$this->getTripadvisorKey();
-            $results =  file_get_contents($url);
+            try{
+                $results = file_get_contents($url);
+            }  catch (\Exception $e){
+                $results = null;
+            }
+            
             $data = json_decode($results, TRUE);
         }else{
             $data = null;
