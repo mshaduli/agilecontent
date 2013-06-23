@@ -210,7 +210,7 @@ class AccommodationRoom
     public function setId($id) {
         $this->id = $id;
     }
-<<<<<<< HEAD
+
 
     /**
      * @param mixed $bookings
@@ -228,9 +228,6 @@ class AccommodationRoom
         return $this->bookings;
     }
 
-
-
-=======
     
     /**
      * Get file.
@@ -320,5 +317,5 @@ class AccommodationRoom
             ? null
             : $this->getUploadRootDir().'/'.$this->path;
     }  
->>>>>>> calendar_search_updated
+
 }
