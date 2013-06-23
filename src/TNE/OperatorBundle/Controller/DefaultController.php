@@ -399,13 +399,13 @@ EOD;
     
     public function roomAvailabilityAction()
     {
-
+        $id =$this->getRequest()->get('id');
          $distanceQueryAccomm  = <<<EOD
 
                     SELECT `ac`.`id` as `id`, `ac`.`name` as `name`, 
                     `ac`.`atdw_city_name` as `destination`, `ac`.`atdw_rate_from` as `min_rate`, AR.id as room_id, AR.name as room_name
                     FROM `Accommodation` ac INNER JOIN AccommodationRoom AR ON AR.accommodation_id = ac.id 
-                   where ac.id = 1
+                   where ac.id = $id
 EOD;
         
              

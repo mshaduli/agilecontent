@@ -122,8 +122,9 @@ angular.module('OperatorApp.filters', []).
 function OperatorController($scope, $http, $q, $filter, $timeout)
 {
     $scope.operatorUrl = '/app_dev.php/operator/rooms';
-
-    $http.get($scope.operatorUrl + "?hashir=kettavan").success(function(data) {
+    var idAry = location.href.split('/');
+    var id = idAry[idAry.length-1];
+    $http.get($scope.operatorUrl + "?id="+id).success(function(data) {
         $scope.loading = false;
         $scope.operators = data;
 

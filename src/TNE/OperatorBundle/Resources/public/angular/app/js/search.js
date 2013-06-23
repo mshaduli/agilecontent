@@ -608,7 +608,7 @@ function SearchController($scope, $http, $q, $filter, $timeout)
         OperatorView: $scope.OperatorViewOptions[0],
         rating: 0,
         classifications: [],
-        dates: moment().format('DD/MM/YYYY') + ' to ' + moment().add('days', 5).format('DD/MM/YYYY')
+        dates: moment().format('DD/MM/YYYY') + ' to ' + moment().add('days', 5).format('DD/MM/YYYY'),
         gridView: 'false'
     };
 
