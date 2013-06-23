@@ -301,7 +301,7 @@ SearchApp.directive('resultsGrid', function(){
             sort: '=',
             dates: '='
         },
-        controller: function($scope){
+        controller: function($scope, $http){
             var pagesShown = 1;
             var pageSize = 9;
             $scope.itemsLimit = function(){
@@ -338,6 +338,15 @@ SearchApp.directive('resultsGrid', function(){
 
                 return dateClass;
             }
+            ,$scope.addToCart = function(room){
+                console.log(room);
+                $http.get('/app_dev.php/operators/classifications')
+                 .success(function(data) {
+                    console.log(data);
+                 }).error(function(){
+                    console.log('destinations not loaded');
+                 });
+            }
 
         },
         template: '' +
@@ -363,7 +372,7 @@ SearchApp.directive('resultsGrid', function(){
                         '</td>' +
                         '<td ng-repeat="day in days" ng-class="day.class"><span class="price">{[{ getRoomRateForDate(operator, day.date) }]}</span></td>' +
                         '<td><a class="btn btn-link btn-off" href="#"><i class="icon-star"></i></a></td>' +
-                        '<td><a class="btn btn-link btn-success" href="#"><i class="icon-ok"></i></a></td>' +
+                        '<td><a class="btn btn-link btn-success" href="#" ng-click="addToCart(operator)"><i class="icon-ok"></i></a></td>' +
                     '</tr>' +
                 '</tbody>' +
 
@@ -608,7 +617,7 @@ function SearchController($scope, $http, $q, $filter, $timeout)
         OperatorView: $scope.OperatorViewOptions[0],
         rating: 0,
         classifications: [],
-        dates: moment().format('DD/MM/YYYY') + ' to ' + moment().add('days', 5).format('DD/MM/YYYY')
+        dates: moment().format('DD/MM/YYYY') + ' to ' + moment().add('days', 5).format('DD/MM/YYYY'),
         gridView: 'false'
     };
 
