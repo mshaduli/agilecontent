@@ -9,7 +9,7 @@ file that was distributed with this source code.
 
 #}
 {% extends 'ApplicationSonataPageBundle::base_func_layout_tne.html.twig' %}
-{% set url = 'http://rutherglen.ac.captechnix.com/' %}
+
 {% block page_stylesheets %}
     {{ parent() }}
 <link rel="stylesheet" href="http://fast.fonts.com/cssapi/1a5d5164-616e-4355-a99a-4cbe2bd50933.css" type="text/css"/>
@@ -194,7 +194,7 @@ $('#ask-form-close-btn').click(function(){
         
         
          <div class="slider-caption">
-         	<h2 class="pull-left visible-phone">Quay West Resort & Spa <span><a href="#">FALLS CREEK</a></span></h2>
+         	<h2 class="pull-left">Quay West Resort & Spa <span><a href="#">FALLS CREEK</a></span></h2>
             <div class="addtocart-main visible-phone pull-right">
             <div class="star"><a href="#"><i class="icon-star"></i></a></div>
             <div class="massage-addtocart"> <a href="#" class="btn btn-primary">ROOMS</a> </div>
@@ -203,8 +203,8 @@ $('#ask-form-close-btn').click(function(){
           
          <div class="flexslider">
           <ul class="slides">
-            {% for media in operator.media %}
-                <li> <img src="{{ media.remotePath}}" alt="{{ media.AltText }}" data-thumb="{{ asset('bundles/tneoperator/img/slider-thumb1.png') }}" />
+            {% for media in operator.media %}                  
+                <li> <img src="{% path media.mediaItem, 'big' %}" alt="{{ media.AltText }}" data-thumb="{% path media.mediaItem, 'small' %}" />
                   <p class="flex-caption">{{ media.AltText }} <span><a href="#"> {{ operator.site}} site name needs to be changed</a></span></p>
                 </li>
             {% endfor %}
@@ -253,7 +253,7 @@ $('#ask-form-close-btn').click(function(){
                 <div class="clear"></div>
               </div>
               <div class="nights-from">NIGHTS FROM
-                <div class="value">$439</div>
+                <div class="value">${{ operator.atdwRateFrom }}</div>
               </div>
               <div class="min-nights">MIN. NIGHTS
                 <div class="value">1</div>
@@ -265,10 +265,10 @@ $('#ask-form-close-btn').click(function(){
                 <ul class="nav">
                   <li class="social">SOCIAL
                     <div class="clear"></div>
-                    <a class="btn btn-link" target="_blank" href="https://twitter.com/intent/tweet?url={{ url}}&text={{ operator.description |slice(0,50) }}..."><i class="icon-large icon-twitter"></i></a>
+                    <a class="btn btn-link" target="_blank" href="https://twitter.com/intent/tweet?url={{ app.request.host }}&text={{ operator.description |slice(0,50) }}..."><i class="icon-large icon-twitter"></i></a>
                     <a class="btn btn-link" href="javascript:sharetofb(this);"><i class="icon-large icon-facebook"></i></a>
-                    <a target="_blank" href="https://plus.google.com/share?url={{ url }}"><i class="icon-large icon-google-plus"></i></a>
-                    <a target="_blank" href="http://pinterest.com/pin/create/button/?url={{ url }}&description={{ operator.description |slice(0,50) }}...&media="><i class="icon-large icon-pinterest"></i></a> </li>
+                    <a target="_blank" href="https://plus.google.com/share?url={{ app.request.host }}"><i class="icon-large icon-google-plus"></i></a>
+                    <a target="_blank" href="http://pinterest.com/pin/create/button/?url={{ app.request.host }}&description={{ operator.description |slice(0,50) }}...&media="><i class="icon-large icon-pinterest"></i></a> </li>
                 </ul>
               </div>
               <div class="clear"></div>
@@ -340,23 +340,29 @@ $('#ask-form-close-btn').click(function(){
           <div class="info-default-rgt hidden-phone">
             <div class="map-info">
               <div class="large-map-link"><a href="javascript:void(0)">VIEW LARGE MAP</a></div>
-              <img src="{{ asset('bundles/tneoperator/img/map-img.jpg') }}"></div>
+              <div id="map-view-small"></div>
+             </div> 
             <div class="contact-main-default">
-              <h3>CONTACT</h3>
-              <div class="contact-indiv-content">
-                <div class="contact-lft-content">Tel</div>
-                <div class="contact-rgt-content">{{ operator.AtdwContactPhone}}</div>
-                <div class="clear"></div>
+              <div class="clearfix">	
+                  <h3 class="pull-left">CONTACT</h3>
+                  <a href="javascript:void(0)" class="address-minimize-btn pull-right" data-toggle="collapse" data-target="#minimize-address"><i class="icon-large icon-plus"></i><i class="icon-large icon-minus"></i></a>
               </div>
-              <div class="contact-indiv-content">
-                <div class="contact-lft-content">Fax</div>
-                <div class="contact-rgt-content">(+61) 3 5732 8099 - needs to be changed</div>
-                <div class="clear"></div>
-              </div>
-              <div class="contact-indiv-content">
-                <div class="contact-lft-content">Web</div>
-                <div class="contact-rgt-content">{{ operator.AtdwContactUrl }}</div>
-                <div class="clear"></div>
+              <div id="minimize-address" class="in collapse">
+                  <div class="contact-indiv-content">
+                    <div class="contact-lft-content">Tel</div>
+                    <div class="contact-rgt-content">{{ operator.AtdwContactPhone}}</div>
+                    <div class="clear"></div>
+                  </div>
+                  <div class="contact-indiv-content">
+                    <div class="contact-lft-content">Fax</div>
+                    <div class="contact-rgt-content">(+61) 3 5732 8099</div>
+                    <div class="clear"></div>
+                  </div>
+                  <div class="contact-indiv-content">
+                    <div class="contact-lft-content">Web</div>
+                    <div class="contact-rgt-content">{{ operator.AtdwContactUrl }}</div>
+                    <div class="clear"></div>
+                  </div>
               </div>
               <div class="contact-indiv-content">
                 <div class="contact-lft-content">Facebook</div>
@@ -508,26 +514,8 @@ $('#ask-form-close-btn').click(function(){
         {% for room in operator.rooms %}
             {% include 'TNEOperatorBundle:Default:operatorRooms.html.twig' with {'room': room } %}
         {% endfor %}
-        <div class="common-block op-rooms hidden-phone">
-          <h1>WE RECOMMEND</h1>
-          <div class="recomment-lft-area">
-            <div class="recommend-res-heading">J.B.�s Restaurant & Bar</div>
-            <div>J.B.'s Restaurant and Bar - Specialising in European and Aussie Cuisine. Open for major events plus pre-bookings</div>
-            <div class="addtocart-main">
-              <div class="star"><a href="#"><img src="{{ asset('bundles/tneoperator/img/star.png') }}"></a></div>
-              <div class="massage-addtocart"> <a class="btn btn-primary" href="#"><i class="icon-large icon-shopping-cart"></i>ADD TO CART</a> </div>
-            </div>
-          </div>
-          <div class="recomment-rgt-area">
-            <div class="recommend-res-heading">J.B.�s Restaurant & Bar</div>
-            <div>J.B.'s Restaurant and Bar - Specialising in European and Aussie Cuisine. Open for major events plus pre-bookings</div>
-            <div class="addtocart-main">
-              <div class="star"><a href="#"><img src="{{ asset('bundles/tneoperator/img/star.png') }}"></a></div>
-              <div class="massage-addtocart"> <a class="btn btn-primary" href="#"><i class="icon-large icon-shopping-cart"></i>ADD TO CART</a> </div>
-            </div>
-          </div>
-          <div class="clear"></div>
-        </div>
+        
+        {% include 'TNEOperatorBundle:Default:operatorRecommendation.html.twig' with {'recommendations': operator.recommendations } %}
         
         <div class="common-block hidden-phone"><img src="{{ asset('bundles/tneoperator/img/fb-plugin.jpg') }}"></div>
         
@@ -577,14 +565,27 @@ $('#ask-form-close-btn').click(function(){
         // Footer map
         var footerMapOptions = {
             zoom: 12,
-            center: new google.maps.LatLng(-36.86424, 147.282715),
+            center: new google.maps.LatLng({{ operator.latitude }},{{ operator.longitude }}),
             disableDefaultUI: true,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         }
         var footerMap = new google.maps.Map(document.getElementById("footerMap"), footerMapOptions);
         var footerMarker = new google.maps.Marker({
-            position: new google.maps.LatLng(-36.86424, 147.282715),
+            position: new google.maps.LatLng({{ operator.latitude }},{{ operator.longitude }}),
             map: footerMap,
+            icon: '/bundles/tneoperator/img/map/marker_blue.png'
+        });
+        
+        var smallMapOptions = {
+            zoom: 8,
+            center: new google.maps.LatLng({{ operator.latitude }},{{ operator.longitude }}),
+            disableDefaultUI: true,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var smallMap = new google.maps.Map(document.getElementById("map-view-small"), smallMapOptions);
+        var smallMarker = new google.maps.Marker({
+            position: new google.maps.LatLng({{ operator.latitude }},{{ operator.longitude }}),
+            map: smallMap,
             icon: '/bundles/tneoperator/img/map/marker_blue.png'
         });
          
@@ -593,7 +594,7 @@ $("#top-tab-block").hide();
 $(".map-section").show();
     showLargeMap();
 })        
-        
+  
     });
     
     function showLargeMap(){
@@ -628,7 +629,7 @@ $(".map-section").show();
     infowindow.open(mapViewLarge,mapViewLargeMarker);
   });
   */
-    }
+    }        
     
     function sharetofb(obj){
     
@@ -638,7 +639,7 @@ $(".map-section").show();
                     name: '{{ operator.name }}',
                     
                     caption: '{{ operator.name }}',
-                    description: '{{ operator.description |striptags | slice(0,50) }}...',
+                    description: '{{ operator.description |replace("'","") | slice(0,50) }}...',
                     link: location.href,
                     show_error: true
                 },
@@ -670,31 +671,9 @@ $(".map-section").show();
 	});
 </script>
 <style type="text/css">
-#map-view-large{
-    height: 580px;
+.flex-viewport{
+    height: 600px;
     }
-#map-close-btn{
-    top: 0;
-    right: 0;
-    color: black;
-    }
-    
-    #map-canvas, #map_canvas {
-  height: 100%;
-}
-
-#panel {
-  position: absolute;
-  top: 5px;
-  left: 50%;
-  margin-left: -180px;
-  z-index: 5;
-  background-color: #fff;
-  padding: 5px;
-  border: 1px solid #999;
-}
-
-
 .map-address-popup
 {
 position:absolute;

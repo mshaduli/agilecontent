@@ -73,6 +73,17 @@ class AccommodationAdmin extends OwnerAwareAdmin
                         'inline' => 'table'
                     )
                 )
+            ->end()
+            ->with('Recommendations', array('collapsed' => true))
+                ->add('recommendations', 'sonata_type_collection', array(
+                        'required' => false,
+                        'by_reference' => false,
+                        'label' => 'Recommendation List'
+                    ), array(
+                        'edit' => 'inline',
+                        'inline' => 'table',
+                    )
+                )
             ->end()                
             ->with('Social Media', array('collapsed' => true))
                 ->add('facebookUrl')

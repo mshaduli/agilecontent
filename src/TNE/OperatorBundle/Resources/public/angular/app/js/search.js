@@ -311,45 +311,53 @@ SearchApp.directive('resultsGrid', function(){
             };
 
             $scope.getRoomRateForDate = function(room, date){
-                console.log(room.name + ' - ' + date);
-                return '$295';
+                
+                if(typeof room[date] != "undefined")
+                {
+                    if(room[date].available == "true")
+                        return '$'+room[date].rate;
+                    else
+                        return "N/A";
+                }else{
+                    return '$295';
+                }
             }
         },
         template: '' +
             '<div id="loaderG" ng-show="loading">' +
-            '<div id="blockG_1" class="loader_blockG"></div>' +
-            '<div id="blockG_2" class="loader_blockG"></div>' +
-            '<div id="blockG_3" class="loader_blockG"></div>' +
+                '<div id="blockG_1" class="loader_blockG"></div>' +
+                '<div id="blockG_2" class="loader_blockG"></div>' +
+                '<div id="blockG_3" class="loader_blockG"></div>' +
             '</div>'+
             '<table class="table table-bordered table-hover">' +
-            '<thead>' +
-            '<tr>' +
-            '<th></th>' +
-            '<th ng-repeat="day in days">{[{day.name}]}</th>' +
-            '<th class="control"><i class="icon-angle-left icon-2x"></i></th>' +
-            '<th class="control"><i class="icon-angle-right icon-2x"></i></th>' +
-            '</tr>' +
-            '</thead>' +
-            '<tbody>' +
-            '<tr ng-repeat="operator in operators | limitTo: itemsLimit()">' +
-            '<td>' +
-            '<span class="title">{[{operator.name}]}</span>' +
-            '<div>Falls Creek <div data-score="4" class="star pull-right"></div></div>' +
-            '</td>' +
-            '<td ng-repeat="day in days"><span class="price">{[{ getRoomRateForDate(operator, day.date) }]}</span></td>' +
-            '<td><a class="btn btn-link btn-off" href="#"><i class="icon-star"></i></a></td>' +
-            '<td><a class="btn btn-link btn-success" href="#"><i class="icon-ok"></i></a></td>' +
-            '</tr>' +
-            '</tbody>' +
+                '<thead>' +
+                    '<tr>' +
+                        '<th></th>' +
+                        '<th ng-repeat="day in days">{[{day.name}]}</th>' +
+                        '<th class="control"><i class="icon-angle-left icon-2x"></i></th>' +
+                        '<th class="control"><i class="icon-angle-right icon-2x"></i></th>' +
+                    '</tr>' +
+                '</thead>' +
+                '<tbody>' +
+                    '<tr ng-repeat="operator in operators | limitTo: itemsLimit()">' +
+                        '<td>' +
+                            '<span class="title">{[{operator.room_name}]}</span>' +
+                            '<div>{[{operator.name}]} ({[{operator.destination}]})<div data-score="4" class="star pull-right"></div></div>' +
+                        '</td>' +
+                        '<td ng-repeat="day in days"><span class="price">{[{ getRoomRateForDate(operator, day.date) }]}</span></td>' +
+                        '<td><a class="btn btn-link btn-off" href="#"><i class="icon-star"></i></a></td>' +
+                        '<td><a class="btn btn-link btn-success" href="#"><i class="icon-ok"></i></a></td>' +
+                    '</tr>' +
+                '</tbody>' +
             '</table>' +
             '<div>' +
-            '<br/><br/><br/><br/><button class="btn btn-full" ng-click="showMoreItems()">Show me more</button>' +
+                '<br/><br/><br/><br/><button class="btn btn-full" ng-click="showMoreItems()">Show me more</button>' +
             '</div>',
         link: function(scope, element, attrs){
             var days = [];
-            for(var i=1;i<=attrs.days;i++)
+            for(var i=0;i<=attrs.days;i++)
             {
-                days.push({name:moment().add(i, 'days').format('ddd D MMM'), date:moment().add(i,'days').format('DD/MM/YYYY')});
+                days.push({name:moment().add(i, 'days').format('ddd D MMM'), date:moment().add(i,'days').format('YYYY-MM-DD')});
             }
             scope.days = days;
         }
@@ -579,7 +587,8 @@ function SearchController($scope, $http, $q, $filter, $timeout)
         OperatorView: $scope.OperatorViewOptions[0],
         rating: 0,
         classifications: [],
-        dates: moment().format('DD/MM/YYYY') + ' to ' + moment().add('days', 7).format('DD/MM/YYYY')
+        dates: moment().format('DD/MM/YYYY') + ' to ' + moment().add('days', 7).format('DD/MM/YYYY'),
+        gridView: 'false'
     };
 
     $scope.mapOptions = {
@@ -618,6 +627,20 @@ function SearchController($scope, $http, $q, $filter, $timeout)
                 $scope.$apply(function(){
                     google.maps.event.trigger($scope.map, 'resize');
                     $scope.map.panTo(new google.maps.LatLng($scope.mapOptions.center.lat, $scope.mapOptions.center.lng));
+                });
+            });
+        }
+        if(newValue == "Calendar")
+        {
+                $timeout(function(){
+                $scope.$apply(function(){
+                    $scope.filters.gridView = 'true';
+                });
+            });
+        }else{
+            $timeout(function(){
+                $scope.$apply(function(){
+                    $scope.filters.gridView = 'false';
                 });
             });
         }

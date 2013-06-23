@@ -1,6 +1,6 @@
 <div class="hidden-phone">
             <div class="op-rooms">
-              <div class="op-rooms-header">{{ room.name }}</div>
+              <div class="op-rooms-header">{{ room.name }}<span class="pull-right op-rooms-price">2 NIGHTS <em>$439</em></span></div>
               <div class="row">
                 <div class="span5">
                   <div class="widget right-padding">
@@ -28,7 +28,7 @@
                 <div class="span7">
                   <div style="height:350px;">
                     <div class="tabbable" style="margin-top:-25px;">
-                      <ul class="nav nav-tabs" style="position:absolute; z-index:1100; bottom:-10px; margin-left:20px;">
+                      <ul class="nav nav-tabs" style="position:absolute; z-index:1100; bottom:-10px; margin-left:20px; display: none;">
                         <li class="active"><a href="#pane1{{ loop.index }}" data-toggle="tab">Photos</a></li>
                         <li><a href="#pane2{{ loop.index }}" data-toggle="tab">Facilities</a></li>
                         <li><a href="#pane3{{ loop.index }}" data-toggle="tab">Packages</a></li>
@@ -38,7 +38,7 @@
                           <div>
                             <div class="flexslider" id="image-gallary">
                               <ul class="slides">
-                                <li> <img src="{{ asset('bundles/tneoperator/img/slide-img.jpg') }}" alt=""> </li>
+                                <li> <img src="/uploads/rooms/{{ room.path }}" alt=""> </li>
                               </ul>
                             </div>
                           </div>

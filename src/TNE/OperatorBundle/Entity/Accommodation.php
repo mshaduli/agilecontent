@@ -140,6 +140,7 @@ class Accommodation
     
     protected $hiddenSecret;
 
+    protected $recommendations;
 
     protected $gallery;
 
@@ -199,6 +200,28 @@ class Accommodation
         return $this->name;
     }
 
+    /**
+     * Set Atdw Rate
+     *
+     * @param string $atdwRateFrom
+     * @return Accommodation
+     */
+    public function setAtdwRateFrom($atdwRateFrom)
+    {
+        $this->atdwRateFrom = $atdwRateFrom;
+    
+        return $this;
+    }
+
+    /**
+     * Get Atdw Rate
+     *
+     * @return string 
+     */
+    public function getAtdwRateFrom()
+    {
+        return $this->atdwRateFrom;
+    }
     
     public function setAddress($address)
     {
@@ -552,5 +575,24 @@ class Accommodation
     public function setTripadvisorKey($tripadvisorKey) {
         $this->tripadvisorKey = $tripadvisorKey;
     }
+    
+    public function getRecommendations()
+    {
+        return $this->recommendations;
+    }
+    
+    public function setRecommendations($recommendations)
+    {
+        $this->recommendations = $recommendations;
+    }  
+    
+    public function addRecommendation($recommendation){
+        $recommendation->setAccommodation($this);
+        $this->recommendations->add($recommendation);
+    }
+    
+    public function removeRecommendation($recommendation){
+        $this->recommendations->remove($recommendation);
+    }  
 
 }
