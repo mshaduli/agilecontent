@@ -399,4 +399,68 @@ EOD;
         ));
 
     }
+    
+    public function roomAvailabilityAction()
+    {
+
+         $distanceQueryAccomm  = <<<EOD
+
+                    SELECT `ac`.`id` as `id`, `ac`.`name` as `name`, 
+                    `ac`.`atdw_city_name` as `destination`, `ac`.`atdw_rate_from` as `min_rate`, AR.id as room_id, AR.name as room_name
+                    FROM `Accommodation` ac INNER JOIN AccommodationRoom AR ON AR.accommodation_id = ac.id 
+                   where ac.id = 1
+EOD;
+        
+             
+        $em =$this->getDoctrine()->getEntityManager();
+        $accStmt = $em->getConnection()->prepare($distanceQueryAccomm);
+
+        $accStmt->execute();
+        
+        $results = $accStmt->fetchAll();
+        $roomary = array();
+
+        for ($i = 0; $i <= 10; $i++) {
+            $date = date('Y-m-d', strtotime('+ ' . $i . ' day', time()));
+            $qry = "SELECT * FROM  `AccommodationRoomCalendar` ARC WHERE  `date` = '" . $date . "'";
+            $roomStmt = $em->getConnection()->prepare($qry);
+            $roomStmt->execute();
+            $room_calendars = $roomStmt->fetchAll();
+            foreach ($room_calendars as $room_calendar) {
+                $roomary[$room_calendar['accommodation_room_id']][$date]['rate'] = $room_calendar['rate'];
+                $roomary[$room_calendar['accommodation_room_id']][$date]['available'] = ($room_calendar['available'] == 1) ? "true" : "false";
+            }
+        }
+        
+        
+        foreach ($results as $result)
+        {
+            $operator = $em->getRepository('TNEOperatorBundle:Accommodation')->find($result['id']);
+            for($i = 0; $i<= 10 ;$i++)
+            {
+                $date = date('Y-m-d', strtotime('+ '.$i.' day',time()));
+
+                if(isset($roomary[$result['room_id']]))
+                {
+                    if(isset($roomary[$result['room_id']][$date]))
+                    {
+                        $result[$date]['rate'] = ($roomary[$result['room_id']][$date]['rate'] == 0)?$operator->getAtdwRateFrom():$roomary[$result['room_id']][$date]['rate'];
+                        $result[$date]['available'] = ($roomary[$result['room_id']][$date]['available'] == "1")?"true":"false";   
+                    }
+                    else
+                    {
+                        $result[$date]['rate'] = $operator->getAtdwRateFrom();
+                        $result[$date]['available'] = 'true';
+                    }
+                }
+                else
+                {
+                    $result[$date]['rate'] = $operator->getAtdwRateFrom();
+                    $result[$date]['available'] = 'true';
+                }
+            }
+                $operators []= $result;
+        }
+        return new JsonResponse($operators);
+    }
 }

@@ -35,4 +35,7 @@
     <route id="tne_operator_details" pattern="/operators/{id}">
         <default key="_controller">TNEOperatorBundle:Default:operatorDetails</default>
     </route>     
+    <route id="tne_room_calender" pattern="/operator/rooms">
+        <default key="_controller">TNEOperatorBundle:Default:roomAvailability</default>
+    </route>     
 </routes>
