@@ -109,7 +109,7 @@ class UserAdmin extends Admin
             ->with('General')
                 ->add('username')
                 ->add('site', 'sonata_type_model', array('required' => true, 'expanded' => false, 'multiple' => false))
-                ->add('accommodation', 'sonata_type_model', array('required' => false, 'expanded' => false, 'multiple' => false))
+                ->add('accommodation', 'sonata_type_model', array('required' => false, 'expanded' => false, 'multiple' => false, 'label' => 'Accommodation'))
                 ->add('email')
                 ->add('plainPassword', 'text', array('required' => false))
             ->end()
