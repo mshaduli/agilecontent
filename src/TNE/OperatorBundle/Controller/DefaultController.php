@@ -388,14 +388,11 @@ EOD;
     
     public function operatorDetailsAction($id)
     {   
-       $em = $this->get('doctrine.orm.entity_manager');
-        $d = $em->createQuery(
-            'SELECT c FROM TNEOperatorBundle:Accommodation c WHERE c.id=:id'
-        )->setParameter('id',$id)
-            ->getResult();
-        
+        $em = $this->get('doctrine.orm.entity_manager');
+        $operator = $em->getRepository('TNEOperatorBundle:Accommodation')->find($id);
+       
         return $this->render('TNEOperatorBundle:Default:operatorDetails.html.twig', array(
-            'operator'     => $d
+            'operator'     => $operator
         ));
 
     }

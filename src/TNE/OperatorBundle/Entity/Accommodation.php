@@ -593,6 +593,20 @@ class Accommodation
     
     public function removeRecommendation($recommendation){
         $this->recommendations->remove($recommendation);
-    }  
+    }
+    
+    public function getTripadvisorData()
+    {
+        if($this->getTripadvisorKey())
+        {
+            $url = 'http://api.tripadvisor.com/api/partner/1.0/location/89575?key='.$this->getTripadvisorKey();
+            $results =  file_get_contents($url);
+            $data = json_decode($results, TRUE);
+        }else{
+            $data = null;
+        }
+        
+        return $data;
+    }
 
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity repository-class="TNE\OperatorBundle\Entity\GuestRepository" name="TNE\OperatorBundle\Entity\Guest">
+    <id name="id" type="integer" column="id">
+      <generator strategy="AUTO"/>
+    </id>
+    <field name="firstname" type="string" column="firstname" length="255"/>
+    <field name="lastname" type="string" column="lastname" length="255"/>
+    <field name="email" type="string" column="email" length="255"/>
+    <field name="phone" type="string" column="phone" length="255"/>
+    <field name="mobile" type="string" column="mobile" length="255"/>
+    <field name="address_one" type="string" column="address_one" length="255"/>
+    <field name="address_two" type="string" column="address_two" length="255"/>
+    <field name="city" type="string" column="city" length="255"/>
+    <field name="postcode" type="string" column="postcode" length="255"/>
+    <field name="state" type="string" column="state" length="255"/>
+    <field name="country" type="string" column="country" length="255"/>
+    <field name="comments" type="string" column="comments" length="255"/>
+  </entity>
+</doctrine-mapping>

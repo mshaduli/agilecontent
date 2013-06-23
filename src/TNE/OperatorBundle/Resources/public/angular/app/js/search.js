@@ -298,7 +298,8 @@ SearchApp.directive('resultsGrid', function(){
         scope: {
             loading: '=',
             operators: '=',
-            sort: '='
+            sort: '=',
+            dates: '='
         },
         controller: function($scope){
             var pagesShown = 1;
@@ -322,6 +323,22 @@ SearchApp.directive('resultsGrid', function(){
                     return '$295';
                 }
             }
+
+            $scope.classForDate = function(date){
+                var dates = $scope.dates.split(' to ');
+
+                console.log(dates);
+
+                var range = moment().range(moment(dates[0], 'DD/MM/YYYY'), moment(dates[1], 'DD/MM/YYYY'));
+                var inputDate = moment(date, 'DD/MM/YYYY');
+
+                console.log(inputDate.within(range));
+
+                var dateClass = inputDate.within(range)?'selected':'none';
+
+                return dateClass;
+            }
+
         },
         template: '' +
             '<div id="loaderG" ng-show="loading">' +
@@ -344,22 +361,26 @@ SearchApp.directive('resultsGrid', function(){
                             '<span class="title">{[{operator.room_name}]}</span>' +
                             '<div>{[{operator.name}]} ({[{operator.destination}]})<div data-score="4" class="star pull-right"></div></div>' +
                         '</td>' +
-                        '<td ng-repeat="day in days"><span class="price">{[{ getRoomRateForDate(operator, day.date) }]}</span></td>' +
+                        '<td ng-repeat="day in days" ng-class="day.class"><span class="price">{[{ getRoomRateForDate(operator, day.date) }]}</span></td>' +
                         '<td><a class="btn btn-link btn-off" href="#"><i class="icon-star"></i></a></td>' +
                         '<td><a class="btn btn-link btn-success" href="#"><i class="icon-ok"></i></a></td>' +
                     '</tr>' +
                 '</tbody>' +
+
             '</table>' +
             '<div>' +
                 '<br/><br/><br/><br/><button class="btn btn-full" ng-click="showMoreItems()">Show me more</button>' +
             '</div>',
         link: function(scope, element, attrs){
-            var days = [];
-            for(var i=0;i<=attrs.days;i++)
-            {
-                days.push({name:moment().add(i, 'days').format('ddd D MMM'), date:moment().add(i,'days').format('YYYY-MM-DD')});
-            }
-            scope.days = days;
+            scope.$watch('dates',function(){
+                var days = [];
+                for(var i=1;i<=attrs.days;i++)
+                {
+                    days.push({name:moment().add(i, 'days').format('ddd D MMM'), date:moment().add(i,'days').format('DD/MM/YYYY'), class: scope.classForDate(moment().add(i,'days').format('DD/MM/YYYY'))});
+                }
+                scope.days = days;
+            }, true);
+
         }
     };
 });
@@ -587,7 +608,7 @@ function SearchController($scope, $http, $q, $filter, $timeout)
         OperatorView: $scope.OperatorViewOptions[0],
         rating: 0,
         classifications: [],
-        dates: moment().format('DD/MM/YYYY') + ' to ' + moment().add('days', 7).format('DD/MM/YYYY'),
+        dates: moment().format('DD/MM/YYYY') + ' to ' + moment().add('days', 5).format('DD/MM/YYYY')
         gridView: 'false'
     };
 

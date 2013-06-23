@@ -6,12 +6,12 @@
  */
 namespace TNE\OperatorBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use TNE\OperatorBundle\Admin\OwnerAwareAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-class AccommodationAdmin extends Admin
+class AccommodationAdmin extends OwnerAwareAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {

@@ -160,8 +160,6 @@ $('#ask-form-close-btn').click(function(){
     
 {% block content %}
 
-{% set operator = operator[0] %} 
-
 <div ng-app="OperatorApp" ng-controller="OperatorController">
     
 
@@ -414,9 +412,10 @@ $('#ask-form-close-btn').click(function(){
         {% endfor %}
         
         {% include 'TNEOperatorBundle:Default:operatorRecommendation.html.twig' with {'recommendations': operator.recommendations } %}
-        
-        <div class="common-block hidden-phone"><img src="{{ asset('bundles/tneoperator/img/fb-plugin.jpg') }}"></div>
-        
+        <div class="common-block hidden-phone clearfix"> 
+        {% include 'TNEOperatorBundle:Default:tripadvisor.html.twig' with {'tripadvisor': operator.tripadvisorData } %}
+        {% include 'TNEOperatorBundle:Default:tripadvisor.html.twig' with {'tripadvisor': operator.tripadvisorData } %}
+        </div>
         <div class="common-block op-rooms phone-padding">
           <div class="op-section-header">WHAT'S ON NEARBY</div>
           <div class="whats-on-lft-area">

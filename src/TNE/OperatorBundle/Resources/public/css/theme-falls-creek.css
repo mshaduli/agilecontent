@@ -25,6 +25,23 @@
     text-shadow: none;
 }
 
+/* Trip advisor */
+
+.trip-review{ display: block; color: #8c878e; font-style: italic; }
+	.trip-sub-review{ display: block; color: #8c878e; font-size: 11px; }
+	.trip-advisor h2{ font-size: 18px; line-height: 1.2em; }
+	.trip-advisor h3{ font-size: 13px; line-height: 1.2em; }
+	.trip-advisor ul{ margin: 0; }
+	.trip-advisor li{ list-style-type: none; margin-bottom: 6px; font-size: 11px; line-height: 18px;}
+	.trip-advisor li a{ color: #166e9e; }
+	.trip-advisor .copywrite{ color: #a6a5a3; }
+
+        .trip-advisor{
+            float:left;
+            width: 555px;
+            margin-right: 20px;
+        }        
+        .trip-advisor:last-child{ margin-right: 0;}
 /* map options starts */
 #map-view-large{
     height: 580px;
