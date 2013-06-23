@@ -25,6 +25,19 @@ class AccommodationRoomAdmin extends Admin
                         ),
                         'required' => false
                     ))
+                 ->add('file', 'file', array(
+                            'data_class' => null
+                        )
+                    )
+//               ->add('media', 'sonata_type_collection', array(
+//                        'required' => false,
+//                        'by_reference' => false,
+//                        'label' => 'Media List'
+//                    ), array(
+//                        'edit' => 'inline',
+//                        'inline' => 'table',
+//                    )
+//                )
 //                ->add('rateFrom', 'text', array('attr'=>array('class'=>'span5')))
 //                ->add('rateTo', 'text', array('attr'=>array('class'=>'span5')))                                   
                 ->add('id', new RoomCalendarType(), array('label'=>'Rates & Availability'))

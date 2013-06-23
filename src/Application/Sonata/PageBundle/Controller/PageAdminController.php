@@ -228,7 +228,7 @@ class PageAdminController extends Controller
         {
 //           echo get_class($mediaItem->getMedia());exit;
 //            $result['title'] = $mediaItem->getTitle();
-            $result .= '/uploads/media/default/0001/01/thumb_'.$mediaItem->getMedia()->getId().'_default_big.jpeg,';
+            $result .= '/uploads/media/'.$mediaItem->getMedia()->getContext().'/0001/01/thumb_'.$mediaItem->getMedia()->getId().'_default_big.jpeg,';
         }
         
 //        $this->createPageSnapshot($page);

@@ -17,10 +17,11 @@ file that was distributed with this source code.
 
 <link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/font-awesome.min.css') }}" type="text/css" media="all" />
 <link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/theme-falls-creek.css') }}" type="text/css" media="all" />
+<link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/theme-falls-creek1.css') }}" type="text/css" media="all" />
 <link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/select2.css') }}" type="text/css" media="all" />
 <link rel="stylesheet" href="{{ asset('bundles/tneoperator/angular/app/css/daterangepicker.css') }}" type="text/css" media="all" />
 
-<link href="{{ asset('bundles/tneoperator/css/theme-falls-creek1.css') }}" type="text/css" rel="stylesheet" media="all" />
+
     <link href="{{ asset('bundles/tneoperator/css/flexslider.css') }}" type="text/css" rel="stylesheet" media="all" >
     <link href="{{ asset('bundles/tneoperator/css/flexslider2.css') }}" type="text/css" rel="stylesheet" media="all" >
     
@@ -33,12 +34,14 @@ file that was distributed with this source code.
         <script src="{{ asset('bundles/tneoperator/angular/app/js/daterangepicker.js') }}"></script>
         <script src="{{ asset('bundles/tneoperator/angular/app/js/moment.min.js') }}"></script>
         <script src="{{ asset('bundles/tneoperator/angular/app/js/map.js') }}"></script>
-        <script src="{{ asset('bundles/tneoperator/angular/app/js/search.js') }}"></script>
         <script src="{{ asset('bundles/tneoperator/js/select2.js') }}"></script>
         
         <script src="{{ asset('bundles/tneoperator/js/jquery.selectbox-0.5.js') }}" type="text/javascript"></script>
         <script src="{{ asset('bundles/tneoperator/js/jquery.flexslider.js') }}" type="text/javascript"></script>
         <script src="{{ asset('bundles/tneoperator/js/jquery-datepicker.js') }}"></script>
+        <script src="{{ asset('bundles/tneoperator/js/jquery.validate.min.js') }}"></script>
+        <script src="{{ asset('bundles/tneoperator/js/additional-methods.min.js') }}"></script>
+        
         <script>
 $(function() {
 $( ".datepicker" ).datepicker({
@@ -73,12 +76,6 @@ $(".contact-form-left").show();
 
 })
 
-$(".large-map-link").click(function(){
-$("#top-tab-block").hide();
-$(".map-section").show();
-})
-
-
 $("#slider-map").click(function(){
 $("#top-tab-block").hide();
 $("#availability-section").hide();
@@ -87,6 +84,7 @@ $("#slider-map").addClass('active');
 $("#slider-info").removeClass('active');
 $("#slider-availability").removeClass('active');
 $("#slider-contact").removeClass('active');
+ showLargeMap();
 })
 
 $("#slider-info").click(function(){
@@ -130,6 +128,17 @@ $(".show-thumb-nav").slideToggle();
 })
 
 
+$('#map-close-btn').click(function(){
+	$(".map-section").hide();
+	$("#top-tab-block").show();
+})
+
+$('#ask-form-close-btn').click(function(){
+	$('.info-default-lft').show();
+	$('.contact-form-left').hide();
+})
+
+
 });
 
 </script>
@@ -148,6 +157,8 @@ $(".show-thumb-nav").slideToggle();
 {% endblock %}    
     
 {% block content %}
+
+{% set operator = operator[0] %} 
 
 <div ng-app="SearchApp" ng-controller="SearchController">
 
@@ -183,7 +194,7 @@ $(".show-thumb-nav").slideToggle();
         
         
          <div class="slider-caption">
-         	<h2 class="pull-left visible-phone">Quay West Resort & Spa <span><a href="#">FALLS CREEK</a></span></h2>
+         	<h2 class="pull-left">Quay West Resort & Spa <span><a href="#">FALLS CREEK</a></span></h2>
             <div class="addtocart-main visible-phone pull-right">
             <div class="star"><a href="#"><i class="icon-star"></i></a></div>
             <div class="massage-addtocart"> <a href="#" class="btn btn-primary">ROOMS</a> </div>
@@ -192,9 +203,11 @@ $(".show-thumb-nav").slideToggle();
           
          <div class="flexslider">
           <ul class="slides">
-            <li> <img src="{{ asset('bundles/tneoperator/img/banner.jpg') }}" alt="" data-thumb="{{ asset('bundles/tneoperator/img/slider-thumb1.png') }}" />
-              <p class="flex-caption">Quay West Resort & Spa <span><a href="#">FALLS CREEK</a></span></p>
-            </li>
+            {% for media in operator.media %}                  
+                <li> <img src="{% path media.mediaItem, 'big' %}" alt="{{ media.AltText }}" data-thumb="{% path media.mediaItem, 'small' %}" />
+                  <p class="flex-caption">{{ media.AltText }} <span><a href="#"> {{ operator.site}} site name needs to be changed</a></span></p>
+                </li>
+            {% endfor %}
             
           </ul>
         </div> 
@@ -240,7 +253,7 @@ $(".show-thumb-nav").slideToggle();
                 <div class="clear"></div>
               </div>
               <div class="nights-from">NIGHTS FROM
-                <div class="value">$439</div>
+                <div class="value">${{ operator.atdwRateFrom }}</div>
               </div>
               <div class="min-nights">MIN. NIGHTS
                 <div class="value">1</div>
@@ -252,26 +265,30 @@ $(".show-thumb-nav").slideToggle();
                 <ul class="nav">
                   <li class="social">SOCIAL
                     <div class="clear"></div>
-                    <a class="btn btn-link" href="#"><i class="icon-large icon-twitter"></i></a><a class="btn btn-link" href="#"><i class="icon-large icon-facebook"></i></a><a href="#"><i class="icon-large icon-google-plus"></i></a></a> <a href="#"><i class="icon-large icon-pinterest"></i></a> </li>
+                    <a class="btn btn-link" target="_blank" href="https://twitter.com/intent/tweet?url={{ app.request.host }}&text={{ operator.description |slice(0,50) }}..."><i class="icon-large icon-twitter"></i></a>
+                    <a class="btn btn-link" href="javascript:sharetofb(this);"><i class="icon-large icon-facebook"></i></a>
+                    <a target="_blank" href="https://plus.google.com/share?url={{ app.request.host }}"><i class="icon-large icon-google-plus"></i></a>
+                    <a target="_blank" href="http://pinterest.com/pin/create/button/?url={{ app.request.host }}&description={{ operator.description |slice(0,50) }}...&media="><i class="icon-large icon-pinterest"></i></a> </li>
                 </ul>
               </div>
               <div class="clear"></div>
               <div class="top-info-content">
-                  {{ operator[0].description }}
+                  {{ operator.description }}
               </div>
             </div>
             <div class="contact-form-left">
-              <div class="contact-heading">ASK A QUESTION</div>
-              <div>
+              <div class="contact-heading">ASK A QUESTION <a href="javascript:void(0)" id="ask-form-close-btn" style="float:right;"><i class="icon-remove"></i></a></div>
+              <form action="#" method="post" id="ask-question-form">
+              	<div class="alert alert-success" style="display:none;" id="ask-success-msg">Your Form Sucessfully submited.</div>
                 <div class="input-append">
                   <div>
                     <div class="contact-textfield">
                       <label>NAME</label>
-                      <input type="text"  id="roomCheckInDate" class="span2">
+                      <input type="text" id="askname" name="askname" class="span2">
                     </div>
                     <div class="contact-textfield" style="margin-right:0px;">
                       <label>EMAIL</label>
-                      <input type="text"  id="roomCheckInDate" class="span2">
+                      <input type="text" id="askemail" name="askemail" class="span2">
                       <!--<div class="alert alert-error">alert message</div>-->
                     </div>
                     <div class="clear"></div>
@@ -279,7 +296,7 @@ $(".show-thumb-nav").slideToggle();
                   <div>
                     <div class="contact-textfield">
                       <label>PHONE</label>
-                      <input type="text"  id="roomCheckInDate" class="span2">
+                      <input type="text" id="askphone" name="askphone" class="span2">
                     </div>
                     <div class="contact-textfield2" style="margin-right:0px;">
                       <label>CONTACT ME BY</label>
@@ -310,51 +327,57 @@ $(".show-thumb-nav").slideToggle();
                   <div>
                     <div class="contact-txtarea" style="margin-right:0px;">
                       <label>SUBJECT</label>
-                      <textarea name="" cols="" rows=""></textarea>
+                      <textarea name="askmessage" id="askmessage" cols="" rows=""></textarea>
                     </div>
                     <div class="clear"></div>
                   </div>
                   <div class="clear"></div>
                 </div>
-                <div class="contact-send"><a href="#" class="btn btn-primary">SEND</a></div>
-              </div>
+                <button type="submit" class="btn btn-primary">Send</button>
+              </form>
             </div>
           </div>
           <div class="info-default-rgt hidden-phone">
             <div class="map-info">
               <div class="large-map-link"><a href="javascript:void(0)">VIEW LARGE MAP</a></div>
-              <img src="{{ asset('bundles/tneoperator/img/map-img.jpg') }}"></div>
+              <div id="map-view-small"></div>
+             </div> 
             <div class="contact-main-default">
-              <h3>CONTACT</h3>
-              <div class="contact-indiv-content">
-                <div class="contact-lft-content">Tel</div>
-                <div class="contact-rgt-content">(+61) 3 5732 8000</div>
-                <div class="clear"></div>
+              <div class="clearfix">	
+                  <h3 class="pull-left">CONTACT</h3>
+                  <a href="javascript:void(0)" class="address-minimize-btn pull-right" data-toggle="collapse" data-target="#minimize-address"><i class="icon-large icon-plus"></i><i class="icon-large icon-minus"></i></a>
               </div>
-              <div class="contact-indiv-content">
-                <div class="contact-lft-content">Fax</div>
-                <div class="contact-rgt-content">(+61) 3 5732 8099</div>
-                <div class="clear"></div>
-              </div>
-              <div class="contact-indiv-content">
-                <div class="contact-lft-content">Web</div>
-                <div class="contact-rgt-content">quaywestfallscreek.com.au</div>
-                <div class="clear"></div>
+              <div id="minimize-address" class="in collapse">
+                  <div class="contact-indiv-content">
+                    <div class="contact-lft-content">Tel</div>
+                    <div class="contact-rgt-content">{{ operator.AtdwContactPhone}}</div>
+                    <div class="clear"></div>
+                  </div>
+                  <div class="contact-indiv-content">
+                    <div class="contact-lft-content">Fax</div>
+                    <div class="contact-rgt-content">(+61) 3 5732 8099</div>
+                    <div class="clear"></div>
+                  </div>
+                  <div class="contact-indiv-content">
+                    <div class="contact-lft-content">Web</div>
+                    <div class="contact-rgt-content">{{ operator.AtdwContactUrl }}</div>
+                    <div class="clear"></div>
+                  </div>
               </div>
               <div class="contact-indiv-content">
                 <div class="contact-lft-content">Facebook</div>
-                <div class="contact-rgt-content">facebook.com/FallsCreekAustralia</div>
+                <div class="contact-rgt-content">{{ operator.FacebookUrl }}</div>
                 <div class="clear"></div>
               </div>
               <div class="contact-indiv-content">
                 <div class="contact-lft-content">twitter</div>
-                <div class="contact-rgt-content">twitter.com/FallsCreekAust</div>
+                <div class="contact-rgt-content">{{ operator.TwitterUrl }}</div>
                 <div class="clear"></div>
               </div>
             </div>
             <div class="contact-main-default">
               <h3>ADDRESS</h3>
-              <div>17 Bogong High Plains Road, 3699, Falls Creek, Australia</div>
+              <div>{{ operator.address}}</div>
             </div>
             <div class="op-rooms">
               <div class="ask-question contact-btn"><a href="javascript:void(0)" class="btn btn-primary"><i class="icon-large icon-question-sign"></i>ASK A QUESTION</a></div>
@@ -483,498 +506,16 @@ $(".show-thumb-nav").slideToggle();
          </div>
         
         
-        <div class="common-block map-section"><img src="{{ asset('bundles/tneoperator/img/map.jpg') }}"></div>
+        <div class="common-block map-section"><a href="javascript:void(0)" id="map-close-btn"><i class="icon-large icon-remove"></i></a>
+            <div id="map-view-large"  ></div>
+        </div>
         <div class="op-section-header">our rooms</div>
         <!-- Rooms Section Hidden in Phone -->
-        <div class="hidden-phone">
-            <div class="op-rooms">
-              <div class="op-rooms-header">1 Bedroom 1 Bathroom Apartment with Hot Tub</div>
-              <div class="row">
-                <div class="span5">
-                  <div class="widget right-padding">
-                    <ul class="op-rooms-date nav nav-collapse-phone collapse clearfix">
-                      <li class="date-pick">
-                      <div class="date-pick-label">Check In</div>
-                        <div class="input-append">
-						 <input class="span2 datepicker" id="" type="text" value="">
-                        </div>
-                      </li>
-                      <li class="date-pick">
-                      <div class="date-pick-label">Check Out</div>
-                        <div class="input-append date-pick">
-                          <input class="span2 datepicker" id="" type="text" value="">
-                        </div>
-                      </li>
-                    </ul>
-                    <div class="op-rooms-details">
-                      <p>Each apartment features a queen size bed in the bedroom a separate lounge with sofa bed and dining area fully equipped kitchen laundry bathroom and a private outdoor terrace with hot tub views of Kiewa Valley or Falls Creek ski runs.</p>
-                    </div>
-                    <div class="op-rooms-capacity">MAX. CAPACITY<span>2</span></div>
-                    <a href="#" class="btn btn-primary"><i class="icon-large icon-shopping-cart"></i>ADD TO CART</a> </div>
-                  <!-- end of widget -->
-                </div>
-                <div class="span7">
-                  <div style="height:350px;">
-                    <div class="tabbable" style="margin-top:-25px;">
-                      <ul class="nav nav-tabs" style="position:absolute; z-index:1100; bottom:-10px; margin-left:20px;">
-                        <li class="active"><a href="#pane1" data-toggle="tab">Photos</a></li>
-                        <li><a href="#pane2" data-toggle="tab">Facilities</a></li>
-                        <li><a href="#pane3" data-toggle="tab">Packages</a></li>
-                      </ul>
-                      <div class="home-gallery tab-content">
-                        <div id="pane1" class="tab-pane active">
-                          <div>
-                            <div class="flexslider" id="image-gallary">
-                              <ul class="slides">
-                                <li> <img src="{{ asset('bundles/tneoperator/img/slide-img.jpg') }}" alt=""> </li>
-                                <li> <img src="{{ asset('bundles/tneoperator/img/slide-img2.jpg') }}" alt=""> </li>
-                                <li> <img src="{{ asset('bundles/tneoperator/img/slide-img3.jpg') }}" alt=""> </li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                        <div id="pane2" class="tab-pane">
-                          <div class="tab-facilities-main">
-                            <ul class="left">
-                              <li>220/240 V AC</li>
-                              <li>Automatic air control</li>
-                              <li>Safe deposit box in room</li>
-                              <li>TV with on-screen billing info</li>
-                              <li>Radio in room</li>
-                              <li>Opening windows</li>
-                              <li>Work desk in all rooms</li>
-                              <li>Pay per view channel(s)</li>
-                              <li>Manual temperature control</li>
-                            </ul>
-                            <ul class="right">
-                              <li>Manual temperature control</li>
-                              <li>Telephone</li>
-                              <li>Wi-Fi in your room</li>
-                              <li>Minibar</li>
-                              <li>Iron in room</li>
-                              <li>RJ 45 outlet</li>
-                              <li>Full kitchen</li>
-                              <li>Microwave in room</li>
-                              <li>Coffee/tea making facilities</li>
-                            </ul>
-                            <div class="clear"></div>
-                          </div>
-                        </div>
-                        <div id="pane3" class="tab-pane">
-                          <div class="tab-packages-main">
-                            <div class="massage-package">
-                              <h2>MASSAGE PACKAGE</h2>
-                              <div>Each apartment features a queen size bed in the bedroom a separate lounge with sofa bed and dining area fully equipped kitchen laundry bathroom and a private outdoor terrace with aundry bathroom and </div>
-                              <div class="addtocart-main">
-                                <div class="star"><a href="#"><img src="{{ asset('bundles/tneoperator/img/star.png') }}"></a></div>
-                                <div class="massage-addtocart"> <a href="#" class="btn btn-primary"><i class="icon-large icon-shopping-cart"></i>ADD TO CART</a> </div>
-                              </div>
-                            </div>
-                            <div class="massage-package" style="float:right">
-                              <h2>MASSAGE PACKAGE</h2>
-                              <div>Each apartment features a queen size bed in the bedroom a separate lounge with sofa bed and dining area fully equipped kitchen laundry bathroom and a private outdoor terrace with aundry bathroom and </div>
-                              <div class="addtocart-main">
-                                <div class="star"><a href="#"><img src="{{ asset('bundles/tneoperator/img/star.png') }}"></a></div>
-                                <div class="massage-addtocart"> <a href="#" class="btn btn-primary"><i class="icon-large icon-shopping-cart"></i>ADD TO CART</a> </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- /.tab-content -->
-                  </div>
-                  <!-- /.tabbable -->
-                </div>
-              </div>
-            </div>
-            <div class="op-rooms">
-              <div class="op-rooms-header">1 Bedroom 1 Bathroom Apartment with Hot Tub</div>
-              <div class="row">
-                <div class="span5">
-                  <div class="widget right-padding">
-                    <ul class="op-rooms-date nav nav-collapse-phone collapse clearfix">
-                      <li class="date-pick">
-                      <div class="date-pick-label">Check In</div>
-                        <div class="input-append date-pick">
-                          <input class="span2 datepicker" id="" type="text" value="">
-                        </div>
-                      </li>
-                      <li class="date-pick">
-                      <div class="date-pick-label">Check Out</div>
-                        <div class="input-append date-pick">
-                          <input class="span2 datepicker" id="" type="text" value="">
-                        </div>
-                      </li>
-                    </ul>
-                    <div class="op-rooms-details">
-                      <p>Each apartment features a queen size bed in the bedroom a separate lounge with sofa bed and dining area fully equipped kitchen laundry bathroom and a private outdoor terrace with hot tub views of Kiewa Valley or Falls Creek ski runs.</p>
-                    </div>
-                    <div class="op-rooms-capacity">MAX. CAPACITY<span>2</span></div>
-                    <a href="#" class="btn btn-primary"><i class="icon-large icon-shopping-cart"></i>ADD TO CART</a> </div>
-                  <!-- end of widget -->
-                </div>
-                <div class="span7">
-                  <div style="height:350px;">
-                    <div class="tabbable" style="margin-top:-25px;">
-                      <ul class="nav nav-tabs" style="position:absolute; z-index:1100; bottom:-10px; margin-left:20px;">
-                        <li class="active"><a href="#pane4" data-toggle="tab">Photos</a></li>
-                        <li><a href="#pane5" data-toggle="tab">Facilities</a></li>
-                        <li><a href="#pane6" data-toggle="tab">Packages</a></li>
-                      </ul>
-                      <div class="home-gallery tab-content">
-                        <div id="pane4" class="tab-pane active">
-                          <div>
-                            <div class="flexslider" id="image-gallary2">
-                              <ul class="slides">
-                                <li> <img src="{{ asset('bundles/tneoperator/img/slide-img.jpg') }}" alt=""> </li>
-                                <li> <img src="{{ asset('bundles/tneoperator/img/slide-img2.jpg') }}" alt=""> </li>
-                                <li> <img src="{{ asset('bundles/tneoperator/img/slide-img3.jpg') }}" alt=""> </li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                        <div id="pane5" class="tab-pane">
-                          <div class="tab-facilities-main">
-                            <ul class="left">
-                              <li>220/240 V AC</li>
-                              <li>Automatic air control</li>
-                              <li>Safe deposit box in room</li>
-                              <li>TV with on-screen billing info</li>
-                              <li>Radio in room</li>
-                              <li>Opening windows</li>
-                              <li>Work desk in all rooms</li>
-                              <li>Pay per view channel(s)</li>
-                              <li>Manual temperature control</li>
-                            </ul>
-                            <ul class="right">
-                              <li>Manual temperature control</li>
-                              <li>Telephone</li>
-                              <li>Wi-Fi in your room</li>
-                              <li>Minibar</li>
-                              <li>Iron in room</li>
-                              <li>RJ 45 outlet</li>
-                              <li>Full kitchen</li>
-                              <li>Microwave in room</li>
-                              <li>Coffee/tea making facilities</li>
-                            </ul>
-                            <div class="clear"></div>
-                          </div>
-                        </div>
-                        <div id="pane6" class="tab-pane">
-                          <div class="tab-packages-main">
-                            <div class="massage-package">
-                              <h2>MASSAGE PACKAGE</h2>
-                              <div>Each apartment features a queen size bed in the bedroom a separate lounge with sofa bed and dining area fully equipped kitchen laundry bathroom and a private outdoor terrace with aundry bathroom and </div>
-                              <div class="addtocart-main">
-                                <div class="star"><a href="#"><img src="{{ asset('bundles/tneoperator/img/star.png') }}"></a></div>
-                                <div class="massage-addtocart"> <a href="#" class="btn btn-primary"><i class="icon-large icon-shopping-cart"></i>ADD TO CART</a> </div>
-                              </div>
-                            </div>
-                            <div class="massage-package" style="float:right">
-                              <h2>MASSAGE PACKAGE</h2>
-                              <div>Each apartment features a queen size bed in the bedroom a separate lounge with sofa bed and dining area fully equipped kitchen laundry bathroom and a private outdoor terrace with aundry bathroom and </div>
-                              <div class="addtocart-main">
-                                <div class="star"><a href="#"><img src="{{ asset('bundles/tneoperator/img/star.png') }}"></a></div>
-                                <div class="massage-addtocart"> <a href="#" class="btn btn-primary"><i class="icon-large icon-shopping-cart"></i>ADD TO CART</a> </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- /.tab-content -->
-                  </div>
-                  <!-- /.tabbable -->
-                </div>
-              </div>
-            </div>
-        </div>
-        <!-- Rooms Section Visible in Phone -->
-        <div class="visible-phone">
-			<div class="accordion" id="mobile-rooms">
-            	<div class="accordion-group">
-                	<div class="accordion-heading clearfix">
-                    	<a href="#room1" class="accordion-toggle" data-toggle="collapse" data-parent="#mobile-rooms"><i class="icon-caret-right"></i> Apartment with Hot Tub</a>
-                        <span class="pull-right">2 Nights <em>$439</em></span>
-                    </div>
-                    <div class="accordion-body collapse in" id="room1">
-                        <div class="accordion-inner">
-                        	<div class="special-room">special</div>
-                        	<img src="{{ asset('bundles/tneoperator/img/slide-img.jpg') }}" alt="" title="">
-                            <div class="accordion-data">
-                            <ul class="op-rooms-date nav clearfix">
-                              <li class="date-pick">
-                                <div class="date-pick-label">Check In</div>
-                                <div class="input-append date-pick">
-                                  <input class="span2 datepicker" id="" type="text" value="">
-                                </div>
-                              </li>
-                              <li class="date-pick">
-                                <div class="date-pick-label">Check Out</div>
-                                <div class="input-append date-pick">
-                                  <input class="span2 datepicker" id="" type="text" value="">
-                                </div>
-                              </li>
-                            </ul>
-							<div class="op-rooms-details">
-			                    <p>Each apartment features a queen size bed in the bedroom a separate lounge with sofa bed and dining area fully equipped kitchen laundry bathroom and a private outdoor terrace with hot tub views of Kiewa Valley or Falls Creek ski runs.</p>
-            		        </div>
-                    		<div class="op-rooms-capacity">MAX. CAPACITY<span>2</span></div>
-                              <div class="addtocart-main">
-                                <div class="star"><a href="#"><i class="icon-large icon-star"></i></a></div>
-                                <div class="massage-addtocart"> <a href="#" class="btn btn-primary"><i class="icon-large icon-shopping-cart"></i>ADD TO CART</a> </div>
-                              </div>
-							 </div>
-                            <!-- Start of facilities collapse -->
-                            <a data-toggle="collapse" data-target="#facilities-1" class="sub-collapse collapsed"><i class="icon-caret-right"></i><i class="icon-caret-down"></i> Facilities</a>
-                            <div class="collapse" id="facilities-1">
-                            	<div class="accordion-data">
-                                    <ul class="facilities">
-                                        <li>220/240 V AC</li>
-                                        <li>Automatic air control</li>
-                                        <li>Safe deposit box in room</li>
-                                        <li>TV with on-screen billing info</li>
-                                        <li>Radio in room</li>
-                                        <li>Opening windows</li>
-                                        <li>Work desk in all rooms</li>
-                                        <li>Pay per view channel(s)</li>
-                                        <li>Manual temperature control</li>    
-                                        <li>Telephone</li>
-                                        <li>Wi-Fi in your room</li>
-                                        <li>Minibar</li>
-                                        <li>Iron in room</li>
-                                        <li>Radio in room</li>
-                                        <li>Full kitchen</li>
-                                        <li>Microwave in room</li>
-                                        <li>Coffee/tea making facilities</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- end of facilities collapse -->
-                            <!-- Start of package collapse -->
-                            <a data-toggle="collapse" data-target="#packages-1" class="sub-collapse collapsed"><i class="icon-caret-right"></i><i class="icon-caret-down"></i> Package Extras/Deals</a>
-                            <div class="collapse" id="packages-1">
-                            	<div class="accordion-data">
-                                    <div class="massage-package">
-                                      <h2>MASSAGE PACKAGE</h2>
-                                      <div>Each apartment features a queen size bed in the bedroom a separate lounge with sofa bed and dining area fully equipped kitchen laundry bathroom and a private outdoor terrace with aundry bathroom and </div>
-                                        <div class="addtocart-main">
-                                          <div class="star"><a href="#"><i class="icon-large icon-star"></i></div>
-                                          <div class="massage-addtocart"> <a class="btn btn-primary" href="#"><i class="icon-large icon-shopping-cart"></i>ADD TO CART</a> </div>
-                                        </div>                                      
-                                    </div>
-                                    <div class="massage-package">
-                                      <h2>MASSAGE PACKAGE</h2>
-                                      <div>Each apartment features a queen size bed in the bedroom a separate lounge with sofa bed and dining area fully equipped kitchen laundry bathroom and a private outdoor terrace with aundry bathroom and </div>
-                                      <div class="addtocart-main">
-                                        <div class="star"><a href="#"><i class="icon-large icon-star"></i></div>
-                                        <div class="massage-addtocart"> <a href="#" class="btn btn-primary"><i class="icon-large icon-shopping-cart"></i>ADD TO CART</a> </div>
-                                      </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end of package collapse -->                            
-                        </div>
-                    </div>
-                </div>
-            	<div class="accordion-group">
-                	<div class="accordion-heading clearfix">
-                    	<a href="#room2" class="accordion-toggle" data-toggle="collapse" data-parent="#mobile-rooms"><i class="icon-caret-right"></i> 2 bedroom 2 bathroom with Hot Tub </a>
-                        <a href="javascript:void(0)"><span class="pull-right">Select dates</span></a>
-                    </div>
-                    <div class="accordion-body collapse" id="room2">
-						<div class="accordion-inner">
-                        	<div class="special-room">special</div>
-                        	<img src="{{ asset('bundles/tneoperator/img/slide-img.jpg') }}" alt="" title="">
-                            <div class="accordion-data">
-                            <ul class="op-rooms-date nav clearfix">
-                              <li class="date-pick">
-                                <div class="date-pick-label">Check In</div>
-                                <div class="input-append date-pick">
-                                  <input class="span2 datepicker" id="" type="text" value="">
-                                </div>
-                              </li>
-                              <li class="date-pick">
-                                <div class="date-pick-label">Check Out</div>
-                                <div class="input-append date-pick">
-                                  <input class="span2 datepicker" id="" type="text" value="">
-                                </div>
-                              </li>
-                            </ul>
-							<div class="op-rooms-details">
-			                    <p>Each apartment features a queen size bed in the bedroom a separate lounge with sofa bed and dining area fully equipped kitchen laundry bathroom and a private outdoor terrace with hot tub views of Kiewa Valley or Falls Creek ski runs.</p>
-            		        </div>
-                    		<div class="op-rooms-capacity">MAX. CAPACITY<span>2</span></div>
-                              <div class="addtocart-main">
-                                <div class="star"><a href="#"><i class="icon-large icon-star"></i></a></div>
-                                <div class="massage-addtocart"> <a href="#" class="btn btn-primary"><i class="icon-large icon-shopping-cart"></i>ADD TO CART</a> </div>
-                              </div>
-							 </div>
-                            <!-- Start of facilities collapse -->
-                            <a data-toggle="collapse" data-target="#facilities-2" class="sub-collapse collapsed"><i class="icon-caret-right"></i><i class="icon-caret-down"></i> Facilities</a>
-                            <div class="collapse" id="facilities-2">
-                            	<div class="accordion-data">
-                                    <ul class="facilities">
-                                        <li>220/240 V AC</li>
-                                        <li>Automatic air control</li>
-                                        <li>Safe deposit box in room</li>
-                                        <li>TV with on-screen billing info</li>
-                                        <li>Radio in room</li>
-                                        <li>Opening windows</li>
-                                        <li>Work desk in all rooms</li>
-                                        <li>Pay per view channel(s)</li>
-                                        <li>Manual temperature control</li>    
-                                        <li>Telephone</li>
-                                        <li>Wi-Fi in your room</li>
-                                        <li>Minibar</li>
-                                        <li>Iron in room</li>
-                                        <li>Radio in room</li>
-                                        <li>Full kitchen</li>
-                                        <li>Microwave in room</li>
-                                        <li>Coffee/tea making facilities</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- end of facilities collapse -->
-                            <!-- Start of package collapse -->
-                            <a data-toggle="collapse" data-target="#packages-2" class="sub-collapse collapsed"><i class="icon-caret-right"></i><i class="icon-caret-down"></i> Package Extras/Deals</a>
-                            <div class="collapse" id="packages-2">
-                            	<div class="accordion-data">
-                                    <div class="massage-package">
-                                      <h2>MASSAGE PACKAGE</h2>
-                                      <div>Each apartment features a queen size bed in the bedroom a separate lounge with sofa bed and dining area fully equipped kitchen laundry bathroom and a private outdoor terrace with aundry bathroom and </div>
-                                        <div class="addtocart-main">
-                                          <div class="star"><a href="#"><i class="icon-large icon-star"></i></div>
-                                          <div class="massage-addtocart"> <a class="btn btn-primary" href="#"><i class="icon-large icon-shopping-cart"></i>ADD TO CART</a> </div>
-                                        </div>                                      
-                                    </div>
-                                    <div class="massage-package">
-                                      <h2>MASSAGE PACKAGE</h2>
-
-                                      <div>Each apartment features a queen size bed in the bedroom a separate lounge with sofa bed and dining area fully equipped kitchen laundry bathroom and a private outdoor terrace with aundry bathroom and </div>
-                                      <div class="addtocart-main">
-                                        <div class="star"><a href="#"><i class="icon-large icon-star"></i></div>
-                                        <div class="massage-addtocart"> <a href="#" class="btn btn-primary"><i class="icon-large icon-shopping-cart"></i>ADD TO CART</a> </div>
-                                      </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end of package collapse -->                            
-                        </div>
-                    </div>
-                </div>
-            	<div class="accordion-group">
-                	<div class="accordion-heading clearfix">
-                    	<a href="#room3" class="accordion-toggle" data-toggle="collapse" data-parent="#mobile-rooms"><i class="icon-caret-right"></i> 3 Bedroom 2 Bathroom Apartment with Hot Tub </a>
-                        <a href="javascript:void(0)"><span class="pull-right">Select dates</span></a>
-                    </div>
-                    <div class="accordion-body collapse" id="room3">
-						<div class="accordion-inner">
-                        	<div class="special-room">special</div>
-                        	<img src="{{ asset('bundles/tneoperator/img/slide-img.jpg') }}" alt="" title="">
-                            <div class="accordion-data">
-                            <ul class="op-rooms-date nav clearfix">
-                              <li class="date-pick">
-                                <div class="date-pick-label">Check In</div>
-                                <div class="input-append date-pick">
-                                  <input class="span2 datepicker" id="" type="text" value="">
-                                </div>
-                              </li>
-                              <li class="date-pick">
-                                <div class="date-pick-label">Check Out</div>
-                                <div class="input-append date-pick">
-                                  <input class="span2 datepicker" id="" type="text" value="">
-                                </div>
-                              </li>
-                            </ul>
-							<div class="op-rooms-details">
-			                    <p>Each apartment features a queen size bed in the bedroom a separate lounge with sofa bed and dining area fully equipped kitchen laundry bathroom and a private outdoor terrace with hot tub views of Kiewa Valley or Falls Creek ski runs.</p>
-            		        </div>
-                    		<div class="op-rooms-capacity">MAX. CAPACITY<span>2</span></div>
-                              <div class="addtocart-main">
-                                <div class="star"><a href="#"><i class="icon-large icon-star"></i></a></div>
-                                <div class="massage-addtocart"> <a href="#" class="btn btn-primary"><i class="icon-large icon-shopping-cart"></i>ADD TO CART</a> </div>
-                              </div>
-							 </div>
-                            <!-- Start of facilities collapse -->
-                            <a data-toggle="collapse" data-target="#facilities-3" class="sub-collapse collapsed"><i class="icon-caret-right"></i><i class="icon-caret-down"></i> Facilities</a>
-                            <div class="collapse" id="facilities-3">
-                            	<div class="accordion-data">
-                                    <ul class="facilities">
-                                        <li>220/240 V AC</li>
-                                        <li>Automatic air control</li>
-                                        <li>Safe deposit box in room</li>
-                                        <li>TV with on-screen billing info</li>
-                                        <li>Radio in room</li>
-                                        <li>Opening windows</li>
-                                        <li>Work desk in all rooms</li>
-                                        <li>Pay per view channel(s)</li>
-                                        <li>Manual temperature control</li>    
-                                        <li>Telephone</li>
-                                        <li>Wi-Fi in your room</li>
-                                        <li>Minibar</li>
-                                        <li>Iron in room</li>
-                                        <li>Radio in room</li>
-                                        <li>Full kitchen</li>
-                                        <li>Microwave in room</li>
-                                        <li>Coffee/tea making facilities</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- end of facilities collapse -->
-                            <!-- Start of package collapse -->
-                            <a data-toggle="collapse" data-target="#packages-3" class="sub-collapse collapsed"><i class="icon-caret-right"></i><i class="icon-caret-down"></i> Package Extras/Deals</a>
-                            <div class="collapse" id="packages-3">
-                            	<div class="accordion-data">
-                                    <div class="massage-package">
-                                      <h2>MASSAGE PACKAGE</h2>
-                                      <div>Each apartment features a queen size bed in the bedroom a separate lounge with sofa bed and dining area fully equipped kitchen laundry bathroom and a private outdoor terrace with aundry bathroom and </div>
-                                        <div class="addtocart-main">
-                                          <div class="star"><a href="#"><i class="icon-large icon-star"></i></div>
-                                          <div class="massage-addtocart"> <a class="btn btn-primary" href="#"><i class="icon-large icon-shopping-cart"></i>ADD TO CART</a> </div>
-                                        </div>                                      
-                                    </div>
-                                    <div class="massage-package">
-                                      <h2>MASSAGE PACKAGE</h2>
-                                      <div>Each apartment features a queen size bed in the bedroom a separate lounge with sofa bed and dining area fully equipped kitchen laundry bathroom and a private outdoor terrace with aundry bathroom and </div>
-                                      <div class="addtocart-main">
-                                        <div class="star"><a href="#"><i class="icon-large icon-star"></i></div>
-                                        <div class="massage-addtocart"> <a href="#" class="btn btn-primary"><i class="icon-large icon-shopping-cart"></i>ADD TO CART</a> </div>
-                                      </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end of package collapse -->                            
-                        </div>
-                    </div>
-                </div>
-                                                
-            </div>        	
-            
-            
-        </div>
+        {% for room in operator.rooms %}
+            {% include 'TNEOperatorBundle:Default:operatorRooms.html.twig' with {'room': room } %}
+        {% endfor %}
         
-        <div class="common-block op-rooms hidden-phone">
-          <h1>WE RECOMMEND</h1>
-          <div class="recomment-lft-area">
-            <div class="recommend-res-heading">J.B.�s Restaurant & Bar</div>
-            <div>J.B.'s Restaurant and Bar - Specialising in European and Aussie Cuisine. Open for major events plus pre-bookings</div>
-            <div class="addtocart-main">
-              <div class="star"><a href="#"><img src="{{ asset('bundles/tneoperator/img/star.png') }}"></a></div>
-              <div class="massage-addtocart"> <a class="btn btn-primary" href="#"><i class="icon-large icon-shopping-cart"></i>ADD TO CART</a> </div>
-            </div>
-          </div>
-          <div class="recomment-rgt-area">
-            <div class="recommend-res-heading">J.B.�s Restaurant & Bar</div>
-            <div>J.B.'s Restaurant and Bar - Specialising in European and Aussie Cuisine. Open for major events plus pre-bookings</div>
-            <div class="addtocart-main">
-              <div class="star"><a href="#"><img src="{{ asset('bundles/tneoperator/img/star.png') }}"></a></div>
-              <div class="massage-addtocart"> <a class="btn btn-primary" href="#"><i class="icon-large icon-shopping-cart"></i>ADD TO CART</a> </div>
-            </div>
-          </div>
-          <div class="clear"></div>
-        </div>
+        {% include 'TNEOperatorBundle:Default:operatorRecommendation.html.twig' with {'recommendations': operator.recommendations } %}
         
         <div class="common-block hidden-phone"><img src="{{ asset('bundles/tneoperator/img/fb-plugin.jpg') }}"></div>
         
@@ -1024,19 +565,150 @@ $(".show-thumb-nav").slideToggle();
         // Footer map
         var footerMapOptions = {
             zoom: 12,
-            center: new google.maps.LatLng(-36.86424, 147.282715),
+            center: new google.maps.LatLng({{ operator.latitude }},{{ operator.longitude }}),
             disableDefaultUI: true,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         }
         var footerMap = new google.maps.Map(document.getElementById("footerMap"), footerMapOptions);
         var footerMarker = new google.maps.Marker({
-            position: new google.maps.LatLng(-36.86424, 147.282715),
+            position: new google.maps.LatLng({{ operator.latitude }},{{ operator.longitude }}),
             map: footerMap,
             icon: '/bundles/tneoperator/img/map/marker_blue.png'
         });
-
         
+        var smallMapOptions = {
+            zoom: 8,
+            center: new google.maps.LatLng({{ operator.latitude }},{{ operator.longitude }}),
+            disableDefaultUI: true,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var smallMap = new google.maps.Map(document.getElementById("map-view-small"), smallMapOptions);
+        var smallMarker = new google.maps.Marker({
+            position: new google.maps.LatLng({{ operator.latitude }},{{ operator.longitude }}),
+            map: smallMap,
+            icon: '/bundles/tneoperator/img/map/marker_blue.png'
+        });
+         
+$(".large-map-link").click(function(){
+$("#top-tab-block").hide();
+$(".map-section").show();
+    showLargeMap();
+})        
+  
     });
+    
+    function showLargeMap(){
+        var mapViewOptions = {
+            zoom: 8,
+            center: new google.maps.LatLng({{ operator.latitude }},{{ operator.longitude }}),
+            disableDefaultUI: true,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var mapViewLarge = new google.maps.Map(document.getElementById("map-view-large"), mapViewOptions);
+        var mapViewLargeMarker = new google.maps.Marker({
+            position: new google.maps.LatLng({{ operator.latitude }},{{ operator.longitude }}),
+            map: mapViewLarge,
+            icon: '/bundles/tneoperator/img/map/marker_blue.png'
+        });
+        
+/*        var contentString = '<div id="content" class="map-address-popup">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
+      '<div id="bodyContent">'+
+      'test'+
+      '</div>'+
+      '</div>';
+
+  var infowindow = new google.maps.InfoWindow({
+      content: contentString,
+      disableAutoPan: true
+  });
+  
+  google.maps.event.addListener(mapViewLargeMarker, 'click', function() {
+    infowindow.open(mapViewLarge,mapViewLargeMarker);
+  });
+  */
+    }        
+    
+    function sharetofb(obj){
+    
+        FB.ui(
+                {
+                    method: 'feed',
+                    name: '{{ operator.name }}',
+                    
+                    caption: '{{ operator.name }}',
+                    description: '{{ operator.description |replace("'","") | slice(0,50) }}...',
+                    link: location.href,
+                    show_error: true
+                },
+        function(response) {
+        }
+        );
+    }
 </script>
-            
+    
+<script>
+	$('#ask-question-form').validate({
+		rules:{
+			askname:{
+				required: true
+			},
+			askemail:{
+				email: true,
+				required: true
+			},
+			askmessage:{
+				required: true,
+				minlength: 10
+			}
+		},
+		 submitHandler: function(form) {
+		 	$('#ask-success-msg').css({display: 'block'});
+	 	    
+	    }
+	});
+</script>
+<style type="text/css">
+.flex-viewport{
+    height: 600px;
+    }
+.map-address-popup
+{
+position:absolute;
+z-index:1000;
+width:383px;
+background:#fff;
+top:50px;
+left:50px;
+box-shadow: 0px 0px 4px #333;
+}
+
+
+.map-address-popup h1
+{
+background:#0076c0;
+font-size:17px;
+color:#fff;
+padding:12px 20px;
+margin:0px;
+font-weight:normal;
+}
+
+
+.map-address-popup #bodyContent
+{
+padding:15px 20px;
+font-size:15px;
+font-weight:normal;
+
+}
+
+.map-address-popup .op-rooms
+{
+padding-top:15px;
+margin-bottom:0px;
+}
+    </style>
 {% endblock %}

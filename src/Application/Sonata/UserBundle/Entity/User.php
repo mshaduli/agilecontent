@@ -33,7 +33,11 @@ class User extends BaseUser
      * @var type int
      */
     protected $site;
-    
+
+    /**
+     * @var type int
+     */
+    private $accommodation;
 
     /**
      * Get id
@@ -60,5 +64,30 @@ class User extends BaseUser
     {
         return $this->site;
     }
+
+    
+    /**
+     * Set accommodation
+     *
+     * @param \TNE\OperatorBundle\Entity\Accommodation $accommodation
+     * @return User
+     */
+    public function setAccommodation(\TNE\OperatorBundle\Entity\Accommodation $accommodation = null)
+    {
+        $this->accommodation = $accommodation;
+    
+        return $this;
+    }
+
+    /**
+     * Get accommodation
+     *
+     * @return \TNE\OperatorBundle\Entity\Accommodation 
+     */
+    public function getAccommodation()
+    {
+        return $this->accommodation;
+    }
+
 
 }

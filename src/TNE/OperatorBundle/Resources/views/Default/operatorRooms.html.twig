@@ -1,0 +1,103 @@
+<div class="hidden-phone">
+            <div class="op-rooms">
+              <div class="op-rooms-header">{{ room.name }}<span class="pull-right op-rooms-price">2 NIGHTS <em>$439</em></span></div>
+              <div class="row">
+                <div class="span5">
+                  <div class="widget right-padding">
+                    <ul class="op-rooms-date nav nav-collapse-phone collapse clearfix">
+                      <li class="date-pick">
+                      <div class="date-pick-label">Check In</div>
+                        <div class="input-append">
+						 <input class="span2 datepicker" id="" type="text" value="">
+                        </div>
+                      </li>
+                      <li class="date-pick">
+                      <div class="date-pick-label">Check Out</div>
+                        <div class="input-append date-pick">
+                          <input class="span2 datepicker" id="" type="text" value="">
+                        </div>
+                      </li>
+                    </ul>
+                    <div class="op-rooms-details">
+                      {{ room.description }}
+                    </div>
+                    <div class="op-rooms-capacity">MAX. CAPACITY<span>2</span></div>
+                    <a href="#" class="btn btn-primary"><i class="icon-large icon-shopping-cart"></i>ADD TO CART</a> </div>
+                  <!-- end of widget -->
+                </div>
+                <div class="span7">
+                  <div style="height:350px;">
+                    <div class="tabbable" style="margin-top:-25px;">
+                      <ul class="nav nav-tabs" style="position:absolute; z-index:1100; bottom:-10px; margin-left:20px; display: none;">
+                        <li class="active"><a href="#pane1{{ loop.index }}" data-toggle="tab">Photos</a></li>
+                        <li><a href="#pane2{{ loop.index }}" data-toggle="tab">Facilities</a></li>
+                        <li><a href="#pane3{{ loop.index }}" data-toggle="tab">Packages</a></li>
+                      </ul>
+                      <div class="home-gallery tab-content">
+                        <div id="pane1{{ loop.index }}" class="tab-pane active">
+                          <div>
+                            <div class="flexslider" id="image-gallary">
+                              <ul class="slides">
+                                <li> <img src="/uploads/rooms/{{ room.path }}" alt=""> </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                        <div id="pane2{{ loop.index }}" class="tab-pane">
+                          <div class="tab-facilities-main">
+                            <ul class="left">
+                              <li>220/240 V AC</li>
+                              <li>Automatic air control</li>
+                              <li>Safe deposit box in room</li>
+                              <li>TV with on-screen billing info</li>
+                              <li>Radio in room</li>
+                              <li>Opening windows</li>
+                              <li>Work desk in all rooms</li>
+                              <li>Pay per view channel(s)</li>
+                              <li>Manual temperature control</li>
+                            </ul>
+                            <ul class="right">
+                              <li>Manual temperature control</li>
+                              <li>Telephone</li>
+                              <li>Wi-Fi in your room</li>
+                              <li>Minibar</li>
+                              <li>Iron in room</li>
+                              <li>RJ 45 outlet</li>
+                              <li>Full kitchen</li>
+                              <li>Microwave in room</li>
+                              <li>Coffee/tea making facilities</li>
+                            </ul>
+                            <div class="clear"></div>
+                          </div>
+                        </div>
+                        <div id="pane3{{ loop.index }}" class="tab-pane">
+                          <div class="tab-packages-main">
+                            <div class="massage-package">
+                              <h2>MASSAGE PACKAGE</h2>
+                              <div>Each apartment features a queen size bed in the bedroom a separate lounge with sofa bed and dining area fully equipped kitchen laundry bathroom and a private outdoor terrace with aundry bathroom and </div>
+                              <div class="addtocart-main">
+                                <div class="star"><a href="#"><img src="{{ asset('bundles/tneoperator/img/star.png') }}"></a></div>
+                                <div class="massage-addtocart"> <a href="#" class="btn btn-primary"><i class="icon-large icon-shopping-cart"></i>ADD TO CART</a> </div>
+                              </div>
+                            </div>
+                            <div class="massage-package" style="float:right">
+                              <h2>MASSAGE PACKAGE</h2>
+                              <div>Each apartment features a queen size bed in the bedroom a separate lounge with sofa bed and dining area fully equipped kitchen laundry bathroom and a private outdoor terrace with aundry bathroom and </div>
+                              <div class="addtocart-main">
+                                <div class="star"><a href="#"><img src="{{ asset('bundles/tneoperator/img/star.png') }}"></a></div>
+                                <div class="massage-addtocart"> <a href="#" class="btn btn-primary"><i class="icon-large icon-shopping-cart"></i>ADD TO CART</a> </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.tab-content -->
+                  </div>
+                  <!-- /.tabbable -->
+                </div>
+              </div>
+            </div>
+            
+        </div>
+        {% include 'TNEOperatorBundle:Default:operatorRoomsPhone.html.twig' with {'room': room } %}

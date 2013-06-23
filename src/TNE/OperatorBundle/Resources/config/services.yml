@@ -9,3 +9,9 @@ services:
   #        - "%genders%"
       tags:
           - { name: form.type, alias: map }
+
+  tneoperator.admin.owner.filter:
+      class: TNE\OperatorBundle\Admin\Filter\OwnerFilter
+      arguments: ["@security.context", "id"]
+      tags:
+          - { name: filter.type, alias: owner.filter }

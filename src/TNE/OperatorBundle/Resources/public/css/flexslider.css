@@ -55,8 +55,14 @@ html[xmlns] .slides {display: block;}
 .flex-direction-nav .flex-disabled {opacity: .3!important; filter:alpha(opacity=30); cursor: default;}
 
 /* Control Nav */
-#operator-slider .flex-control-nav {position: absolute; top: 6px; right:81px; text-align: center; z-index:100; line-height:6px;}
-#operator-slider .flex-control-nav li {margin: 0 2px; display: inline-block; zoom: 1; *display: inline; padding:0px; line-height:0px;}
+#operator-slider .flex-control-nav {
+    position: relative;
+    top: 6px;
+    text-align: center;
+    z-index: 100;
+    padding-bottom: 12px;
+}
+#operator-slider .flex-control-nav li {margin: 0 2px; display: inline-block; zoom: 1; *display: inline; padding:0px; line-height:0px; overflow: hidden;}
 #operator-slider .flex-control-paging li a {width: 9px; height: 9px; display: block; background:#f1f0f1; cursor: pointer; text-indent: -9999px; box-shadow:none; border-radius:0px;}
 
 

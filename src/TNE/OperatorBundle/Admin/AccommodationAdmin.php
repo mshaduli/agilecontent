@@ -6,12 +6,12 @@
  */
 namespace TNE\OperatorBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use TNE\OperatorBundle\Admin\OwnerAwareAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-class AccommodationAdmin extends Admin
+class AccommodationAdmin extends OwnerAwareAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -39,7 +39,8 @@ class AccommodationAdmin extends Admin
                             'class' => 'tinymce span6',
                             'data-theme' => 'advanced'
                         )
-                    ))                
+                    ))
+                ->add('tripadvisorKey', null, array('label'=>'Tripadvisor Key'))
             ->end()
             ->with('Contact', array('collapsed' => true))
                 ->add('atdwContactEmail', null, array('label'=>'Email'))
@@ -70,6 +71,17 @@ class AccommodationAdmin extends Admin
                     ), array(
                         'edit' => 'inline',
                         'inline' => 'table'
+                    )
+                )
+            ->end()
+            ->with('Recommendations', array('collapsed' => true))
+                ->add('recommendations', 'sonata_type_collection', array(
+                        'required' => false,
+                        'by_reference' => false,
+                        'label' => 'Recommendation List'
+                    ), array(
+                        'edit' => 'inline',
+                        'inline' => 'table',
                     )
                 )
             ->end()                

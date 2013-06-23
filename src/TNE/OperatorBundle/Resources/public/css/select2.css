@@ -9,6 +9,7 @@ Version: 3.4.0 Timestamp: Tue May 14 08:27:33 PDT 2013
     zoom: 1;
     *display: inline;
     vertical-align: middle;
+    display: none;
 }
 
 .select2-container,

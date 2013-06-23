@@ -27,9 +27,13 @@ class AccommodationRoomCalendar
     /**
      * @var integer
      */
-    private $accommodation_room_id ;
-    
     private $available = true;
+    
+    /**
+     * @Column(name="`accommodation_room_id`", type="integer") 
+     */
+     
+    private $accommodation_room_id ;
     
     private $room;
 
@@ -100,6 +104,11 @@ class AccommodationRoomCalendar
     public function getAccomadationRoomId()
     {
         return $this->getRoom()->getId();
+    }
+    
+     public function setAccomadationRoomId($room_id)
+    {
+        $this->accommodation_room_id = $room_id;
     }
 
     public function getRoom() {

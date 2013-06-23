@@ -8,6 +8,7 @@
     <field name="description" type="text" column="description" nullable="true"/>
     <field name="rateFrom" type="decimal" column="rate_from" nullable="true"/>
     <field name="rateTo" type="decimal" column="rate_to" nullable="true"/>
+    <field name="path" type="string" column="path" length="255" nullable="true"/>
     
     <many-to-one field="accommodation" target-entity="Accommodation" inversed-by="rooms">
         <join-column name="accommodation_id" referenced-column-name="id" />        
@@ -22,6 +23,7 @@
             <cascade-refresh />
             <cascade-remove />
         </cascade>        
+
     </one-to-many>
 
     <one-to-many field="bookings" target-entity="Booking" mapped-by="room">
@@ -32,5 +34,14 @@
       </cascade>
     </one-to-many>
 
+    </one-to-many>  
+    
+      <lifecycle-callbacks>
+        <lifecycle-callback type="prePersist" method="preUpload" />
+        <lifecycle-callback type="preUpdate" method="preUpload" />
+        <lifecycle-callback type="postPersist" method="upload" />
+        <lifecycle-callback type="postUpdate" method="upload" />
+        <lifecycle-callback type="postRemove" method="removeUpload" />
+    </lifecycle-callbacks>
   </entity>
 </doctrine-mapping>

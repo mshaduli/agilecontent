@@ -24,6 +24,7 @@
     <field name="latitude" type="decimal" column="latitude" scale="7"/>
     <field name="longitude" type="decimal" column="longitude" scale="7"/>
     <field name="state" type="string" column="state" length="255"/>
+    <field name="tripadvisorKey" type="string" column="tripadvisor_key" length="255"/>
             
             
     <many-to-one field="site" target-entity="Application\Sonata\PageBundle\Entity\Site">
@@ -47,6 +48,14 @@
             <cascade-remove />
         </cascade>        
     </one-to-many>
+    
+    <one-to-many field="recommendations" target-entity="Recommendation" mapped-by="accommodation">
+        <cascade>
+            <cascade-persist />
+            <cascade-refresh />
+            <cascade-remove />
+        </cascade>        
+    </one-to-many>    
     
     <one-to-many field="media" target-entity="OperatorMedia" mapped-by="accommodation">
         <cascade>

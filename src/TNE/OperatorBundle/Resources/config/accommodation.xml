@@ -4,13 +4,16 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-       <service id="sonata.admin.accommodation" class="TNE\OperatorBundle\Admin\AccommodationAdmin">
+        <service id="sonata.admin.accommodation" class="TNE\OperatorBundle\Admin\AccommodationAdmin">
           <tag name="sonata.admin" manager_type="orm" group="Operators" label="Accommodation"/>
           <argument />
           <argument>TNE\OperatorBundle\Entity\Accommodation</argument>
-          <argument>SonataAdminBundle:CRUD</argument>
+          <argument>TNEOperatorBundle:AccommodationAdmin</argument>
           <call method="setTranslationDomain">
               <argument>TNEOperatorBundle</argument>
+          </call>
+          <call method="setOwnerFilter">
+                <argument type="service" id="tneoperator.admin.owner.filter" />
           </call>
       </service>
       
@@ -23,6 +26,17 @@
               <argument>TNEOperatorBundle</argument>
           </call>
       </service>  
+      
+       <service id="sonata.admin.accommodation.recommendation" class="TNE\OperatorBundle\Admin\RecommendationAdmin">
+          <tag name="sonata.admin" manager_type="orm" show_in_dashboard="false"/>
+          <argument />
+          <argument>TNE\OperatorBundle\Entity\Recommendation</argument>
+          <argument>SonataAdminBundle:CRUD</argument>
+          <call method="setTranslationDomain">
+              <argument>TNEOperatorBundle</argument>
+          </call>
+      </service>  
+            
       
        <service id="sonata.admin.accommodation.room.dates" class="TNE\OperatorBundle\Admin\AccommodationCalendarAdmin">
           <tag name="sonata.admin" manager_type="orm" show_in_dashboard="false"/>
@@ -43,6 +57,16 @@
               <argument>TNEOperatorBundle</argument>
           </call>
       </service>
+      
+       <service id="sonata.admin.accommodation.room.media" class="TNE\OperatorBundle\Admin\AccommodationRoomMediaAdmin">
+          <tag name="sonata.admin" manager_type="orm" show_in_dashboard="false"/>
+          <argument />
+          <argument>TNE\OperatorBundle\Entity\AccommodationRoomMedia</argument>
+          <argument>SonataAdminBundle:CRUD</argument>
+          <call method="setTranslationDomain">
+              <argument>TNEOperatorBundle</argument>
+          </call>
+      </service>      
 
         <service id="sonata.admin.accommodation.classifications" class="TNE\OperatorBundle\Admin\AccommodationClassificationsAdmin">
             <tag name="sonata.admin" manager_type="orm" group="Tags" label="ATDW Classifications"/>
@@ -57,6 +81,10 @@
         <service id="sonata.admin.form.type.operator_media_list" class="TNE\OperatorBundle\Form\Type\OperatorMediaType">
             <tag name="form.type" alias="operator_media_list" />
         </service>
+        
+        <service id="sonata.admin.form.type.accommodation_room_media_list" class="TNE\OperatorBundle\Form\Type\AccommodationRoomMediaType">
+            <tag name="form.type" alias="accommodation_room_media_list" />
+        </service>        
             
     <service id="sonata.admin.accommodation.calendar" class="TNE\OperatorBundle\EventListener\CalendarEventListener">
         <argument type="service" id="doctrine.orm.entity_manager" />
