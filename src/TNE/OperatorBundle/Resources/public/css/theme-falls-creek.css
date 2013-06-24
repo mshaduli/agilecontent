@@ -56,6 +56,20 @@
     }
 /* map options ends */
 
+/* Terms and Conditions */
+
+#terms-view-large{
+    height: 580px;
+    }
+    
+#terms-close-btn{
+    top: 0;
+    right: 0;
+    color: black;
+    }
+
+/* Terms and Conditions ends */
+
 /* design elements */
 #designs {
     position: absolute;
@@ -2104,6 +2118,14 @@ display:none;
 }
 
 .map-section
+{
+padding-top:20px;
+display:none;
+margin-top:40px;
+position: relative;
+}
+
+.terms-section
 {
 padding-top:20px;
 display:none;

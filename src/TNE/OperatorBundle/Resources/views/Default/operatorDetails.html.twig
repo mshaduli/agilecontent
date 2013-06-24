@@ -140,6 +140,10 @@ $('#ask-form-close-btn').click(function(){
 	$('.contact-form-left').hide();
 })
 
+$('#terms-close-btn').click(function(){
+	$(".terms-section").hide();
+	$("#top-tab-block").show();
+})
 
 });
 
@@ -383,7 +387,7 @@ $('#ask-form-close-btn').click(function(){
             <div class="op-rooms">
               <div class="ask-question contact-btn"><a href="javascript:void(0)" class="btn btn-primary"><i class="icon-large icon-question-sign"></i>ASK A QUESTION</a></div>
               <div class="ask-question"><a href="javascript:void(0)" class="btn btn-primary"><i class="icon-large icon-download-alt"></i>VIEW BROCHURE</a></div>
-              <div class="terms-condition"><a href="#">FACILITIES</a>&nbsp; &nbsp; <a href="#">TERMS AND CONDITIONS</a></div>
+              <div class="terms-condition"><a href="#">FACILITIES</a>&nbsp; &nbsp; <a href="javascript:void(0)" id="terms_conditions">TERMS AND CONDITIONS</a></div>
             </div>
           </div>
           <div class="clear"></div>
@@ -405,6 +409,13 @@ $('#ask-form-close-btn').click(function(){
         <div class="common-block map-section"><a href="javascript:void(0)" id="map-close-btn"><i class="icon-large icon-remove"></i></a>
             <div id="map-view-large"  ></div>
         </div>
+        
+        <div class="common-block terms-section" id="terms-section" style="display: none"><a href="javascript:void(0)" id="terms-close-btn" class="pull-right"><i class="icon-large icon-remove"></i></a>
+            <div id="terms-view-large">
+                {{ operator.termsAndConditions }}
+            </div>
+        </div>
+        
         <div class="op-section-header">our rooms</div>
         <!-- Rooms Section Hidden in Phone -->
         {% for room in operator.rooms %}
@@ -416,6 +427,7 @@ $('#ask-form-close-btn').click(function(){
         {% include 'TNEOperatorBundle:Default:tripadvisor.html.twig' with {'tripadvisor': operator.tripadvisorData } %}
         {% include 'TNEOperatorBundle:Default:tripadvisor.html.twig' with {'tripadvisor': operator.tripadvisorData } %}
         </div>
+        <!--<img src="{#{ asset('bundles/tneoperator/img/fb-plugin.jpg') }#}">-->
         <div class="common-block op-rooms phone-padding">
           <div class="op-section-header">WHAT'S ON NEARBY</div>
           <div class="whats-on-lft-area">
@@ -485,13 +497,17 @@ $('#ask-form-close-btn').click(function(){
             map: smallMap,
             icon: '/bundles/tneoperator/img/map/marker_blue.png'
         });
-         
+$("#terms_conditions").click(function(){
+   $("#top-tab-block").hide();
+   $("#terms-section").show();
+});
+
 $(".large-map-link").click(function(){
 $("#top-tab-block").hide();
 $(".map-section").show();
     showLargeMap();
-})        
-  
+});
+
     });
     
     function showLargeMap(){
