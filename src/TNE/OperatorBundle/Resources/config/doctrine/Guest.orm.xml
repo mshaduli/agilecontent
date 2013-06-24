@@ -16,5 +16,10 @@
     <field name="state" type="string" column="state" length="255"/>
     <field name="country" type="string" column="country" length="255"/>
     <field name="comments" type="string" column="comments" length="255"/>
+
+      <one-to-one field="customer" target-entity="TNE\OperatorBundle\Entity\Customer" inversed-by="guest">
+          <cascade><cascade-remove /></cascade>
+          <join-column name="customer_id" referenced-column-name="id" on-delete="CASCADE" on-update="CASCADE"/>
+      </one-to-one>
   </entity>
 </doctrine-mapping>

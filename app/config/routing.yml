@@ -96,3 +96,7 @@ adesigns_calendar:
 tne:
     resource: '@TNEOperatorBundle/Resources/config/routing.xml'
     prefix: /
+
+TNEOperatorBundle_booking:
+    resource: "@TNEOperatorBundle/Resources/config/routing/customer.yml"
+    prefix:   /booking
