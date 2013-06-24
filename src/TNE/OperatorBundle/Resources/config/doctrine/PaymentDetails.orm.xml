@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity repository-class="TNE\OperatorBundle\Entity\PaymentDetailsRepository" name="TNE\OperatorBundle\Entity\PaymentDetails">
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO"/>
+        </id>
+        <field name="name_on_card" type="string" column="name_on_card" length="255"/>
+        <field name="card_type" type="string" column="card_type" length="255"/>
+        <field name="card_number" type="string" column="card_number" length="255"/>
+        <field name="ccv" type="string" column="ccv" length="255"/>
+        <field name="expiry_month" type="string" column="expiry_month" length="255"/>
+        <field name="expiry_year" type="string" column="expiry_year" length="255"/>
+
+        <one-to-one field="customer" target-entity="TNE\OperatorBundle\Entity\Customer" inversed-by="payment">
+            <cascade><cascade-remove /></cascade>
+            <join-column name="customer_id" referenced-column-name="id" on-delete="CASCADE" on-update="CASCADE"/>
+        </one-to-one>
+
+    </entity>
+</doctrine-mapping>
