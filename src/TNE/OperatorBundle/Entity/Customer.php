@@ -192,4 +192,60 @@ class Customer
     {
         return $this->mobile;
     }
+    /**
+     * @var \TNE\OperatorBundle\Entity\Guest
+     */
+    private $guest;
+
+    /**
+     * @var \TNE\OpearatorBundle\Entity\PaymentDetails
+     */
+    private $payment;
+
+
+    /**
+     * Set guest
+     *
+     * @param \TNE\OperatorBundle\Entity\Guest $guest
+     * @return Customer
+     */
+    public function setGuest(\TNE\OperatorBundle\Entity\Guest $guest = null)
+    {
+        $this->guest = $guest;
+    
+        return $this;
+    }
+
+    /**
+     * Get guest
+     *
+     * @return \TNE\OperatorBundle\Entity\Guest 
+     */
+    public function getGuest()
+    {
+        return $this->guest;
+    }
+
+    /**
+     * Set payment
+     *
+     * @param \TNE\OperatorBundle\Entity\PaymentDetails $payment
+     * @return Customer
+     */
+    public function setPayment(\TNE\OperatorBundle\Entity\PaymentDetails $payment = null)
+    {
+        $this->payment = $payment;
+    
+        return $this;
+    }
+
+    /**
+     * Get payment
+     *
+     * @return \TNE\OperatorBundle\Entity\PaymentDetails
+     */
+    public function getPayment()
+    {
+        return $this->payment;
+    }
 }
