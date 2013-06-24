@@ -360,4 +360,32 @@ class Guest
     {
         return $this->comments;
     }
+    /**
+     * @var \TNE\OperatorBundle\Entity\Customer
+     */
+    private $customer;
+
+
+    /**
+     * Set customer
+     *
+     * @param \TNE\OperatorBundle\Entity\Customer $customer
+     * @return Guest
+     */
+    public function setCustomer(\TNE\OperatorBundle\Entity\Customer $customer = null)
+    {
+        $this->customer = $customer;
+    
+        return $this;
+    }
+
+    /**
+     * Get customer
+     *
+     * @return \TNE\OperatorBundle\Entity\Customer 
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
+    }
 }

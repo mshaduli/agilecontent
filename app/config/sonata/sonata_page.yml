@@ -41,6 +41,7 @@ sonata_page:
 
     ignore_uri_patterns:
         - admin(.*)         # ignore admin route, ie route containing 'admin'
+        - /booking/*
 
     cache_invalidation:
         service:  sonata.page.cache.invalidation.simple
