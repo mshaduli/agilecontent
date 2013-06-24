@@ -34,6 +34,7 @@ file that was distributed with this source code.
         <script src="{{ asset('bundles/tneoperator/angular/app/lib/angular/angular-resource.js') }}" type="text/javascript"></script>
         <script src="{{ asset('bundles/tneoperator/angular/app/js/daterangepicker.js') }}"></script>
         <script src="{{ asset('bundles/tneoperator/angular/app/js/moment.min.js') }}"></script>
+        <script src="{{ asset('bundles/tneoperator/angular/app/js/moment-range.js') }}"></script>
         <script src="{{ asset('bundles/tneoperator/angular/app/js/map.js') }}"></script>
         <script src="{{ asset('bundles/tneoperator/js/select2.js') }}"></script>
         
@@ -399,7 +400,7 @@ $('#terms-close-btn').click(function(){
          
          
          <div id="grid">
-                    <results-grid operators="operators" loading="loading" limit="9" page="9" days="10"></results-grid>
+             <results-grid operators="operators" loading="loading" limit="9" page="9" days="6" dates="filters.dates"></results-grid>
                 </div>
          
          

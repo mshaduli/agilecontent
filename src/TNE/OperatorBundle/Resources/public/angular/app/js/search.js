@@ -277,7 +277,7 @@ SearchApp.directive('resultsList', function(){
             '</div>' +
             '<div>' +
             '<a href="#" class="btn btn-wishlist"><i class="icon-star icon-white"></i></a>' +
-            '<a href="#" class="btn btn-primary">More</a>' +
+            '<a href="/app_dev.php/operators/{[{operator.id}]}" class="btn btn-primary">More</a>' +
             '</div>' +
             '</div>' +
             '</div>' +
@@ -288,7 +288,6 @@ SearchApp.directive('resultsList', function(){
             '</div>'
     };
 });
-
 
 SearchApp.directive('resultsGrid', function(){
     return {
@@ -412,7 +411,6 @@ SearchApp.directive('resultsGrid', function(){
         }
     };
 });
-
 
 SearchApp.directive('rating', function(){
     return {
@@ -822,7 +820,7 @@ function createMarker(operator, $filter) {
                     '</div>' +
                     '<div>' +
                         '<a href="#" class="btn btn-wishlist"><i class="icon-star"></i></a>' +
-                        '<a href="#" class="btn btn-primary">More</a>' +
+                        '<a href="/app_dev.php/operators/'+operator.id+'" class="btn btn-primary">More</a>' +
                     '</div>' +
                  '</div>' +
             '</div>'
