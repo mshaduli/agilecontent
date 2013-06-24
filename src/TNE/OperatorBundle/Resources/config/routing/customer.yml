@@ -28,3 +28,15 @@ booking_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "TNEOperatorBundle:Customer:delete" }
     requirements: { _method: post }
+
+booking_cart:
+    pattern:  /cart
+    defaults: { _controller: "TNEOperatorBundle:Customer:cart" }
+
+booking_add_to_cart:
+    pattern:  /addToCart
+    defaults: { _controller: "TNEOperatorBundle:Customer:addToCart" }
+
+booking_remove_from_cart:
+    pattern:  /removeFromCart/{id}
+    defaults: { _controller: "TNEOperatorBundle:Customer:removeFromCart" }

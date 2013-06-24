@@ -316,7 +316,7 @@ class AccommodationRoom
     public function getAbsolutePath()
     {
         return null === $this->path
-            ? null
+            ? 'noimg.jpg'
             : $this->getUploadRootDir().'/'.$this->path;
     }
     

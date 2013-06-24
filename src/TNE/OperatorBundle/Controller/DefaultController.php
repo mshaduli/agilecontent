@@ -456,36 +456,4 @@ EOD;
         return new JsonResponse($operators);
     }
 
-
-    /**
-     * @todo Move below function to booking controller
-     */
-
-    public function addToCartAction()
-    {
-//        $this->getRequest()->getSession()->remove('booking_data');
-        if($this->getRequest()->isXmlHttpRequest())
-        {
-            $session = $this->getRequest()->getSession();
-
-            $_data['room_id'] = $this->getRequest()->get('room_id');
-            $_data['start_date'] = $this->getRequest()->get('start_date');
-            $_data['end_date'] = $this->getRequest()->get('end_date');
-
-            if(is_null($session->get('booking_data')))
-            {
-                $booking_data = array();
-                $booking_data[0] = $_data;
-            }
-            else
-            {
-                $booking_data = $session->get('booking_data');
-                array_push($booking_data,$_data);
-            }
-
-            $session->set('booking_data',$booking_data);
-        }
-//        $session->remove('booking_data');
-        return new JsonResponse(array("status"=> "Added to cart successfully","count"=>count($booking_data)));
-    }
 }

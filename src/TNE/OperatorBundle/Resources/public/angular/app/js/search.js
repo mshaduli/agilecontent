@@ -353,7 +353,7 @@ SearchApp.directive('resultsGrid', function(){
             $scope.addToCart = function(room){
 
                 var dates = $scope.dates.split(' to ');
-                $http.get('/app_dev.php/operator/addToCart?room_id='+room.room_id+"&start_date="+dates[0]+"&end_date="+dates[1])
+                $http.get('/app_dev.php/booking/addToCart?room_id='+room.room_id+"&start_date="+dates[0]+"&end_date="+dates[1])
                  .success(function(data) {
                     alert(data.status);
                         $('div#header-top ul.nav li a').filter(':contains(Cart)').html('Cart ('+data.count+')');

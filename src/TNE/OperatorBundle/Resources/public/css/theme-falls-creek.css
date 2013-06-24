@@ -2367,6 +2367,20 @@ z-index:1001 !important;
 
 
 /***** OPERATOR TEMPLATE STYLES ENDS HERE ****/
+/* Checkout Process Styles*/
+.checkout-panel{ background-color: #fff; margin-bottom: 12px; }
+.checkout-header{ padding: 12px; }
+.checkout-panel h1{ font-size: 18px; text-transform: uppercase; font-weight: normal; line-height: 1.2em; }
+.checkout-panel .collapse-btn{ display: inline-block; width: 30px; height: 30px; line-height: 30px; border: 1px solid #000; text-align: center; }
+.cart-rooms h2{ font-size: 16px; text-transform: uppercase; font-weight: normal; line-height: 1.2em; }
+.cart-rooms ul{ padding: 0; margin: 0; list-style-type: none; }
+.cart-rooms li{ font-size: 14px; text-transform: uppercase; font-weight: normal; line-height: 1em; margin-bottom: 12px; }
+.cart-rooms li a{ display: inline-block; margin-left: 12px; }
+.inner-padding{ padding: 12px; }
+.total-charge{ padding: 12px; margin: 12px; border: 1px solid #000; }
+.total-charge h2{ font-size: 16px; text-transform: uppercase; font-weight: normal; line-height: 1.2em; }
+.checkout-status { margin: 12px; border: 1px solid #000; padding: 12px; }
+.checkout-status h3{ font-size: 16px; text-transform: uppercase; font-weight: normal; line-height: 1.2em; }
 
 
 

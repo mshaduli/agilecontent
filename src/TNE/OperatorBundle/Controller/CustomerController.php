@@ -4,6 +4,7 @@ namespace TNE\OperatorBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 use TNE\OperatorBundle\Entity\Customer;
 use TNE\OperatorBundle\Form\CustomerType;
@@ -175,5 +176,85 @@ class CustomerController extends Controller
             ->add('id', 'hidden')
             ->getForm()
         ;
+    }
+
+    /**
+     * @todo Move below function to booking controller
+     */
+
+    public function addToCartAction()
+    {
+//        $this->getRequest()->getSession()->remove('booking_data');
+        $booking_data = array();
+        $booking_data_refined = array();
+        if($this->getRequest()->isXmlHttpRequest())
+        {
+
+            $session = $this->getRequest()->getSession();
+
+            $_data['room_id'] = $this->getRequest()->get('room_id');
+            $_data['start_date'] = $this->getRequest()->get('start_date');
+            $_data['end_date'] = $this->getRequest()->get('end_date');
+
+            if(is_null($session->get('booking_data')))
+            {
+
+                $booking_data[0] = $_data;
+            }
+            else
+            {
+                $booking_data = $session->get('booking_data');
+                array_push($booking_data,$_data);
+            }
+            foreach($booking_data as $booking)
+            {
+                $booking_data_refined [$booking['room_id']]= $booking;
+
+
+            }
+            $session->set('booking_data',$booking_data_refined);
+        }
+//        $session->remove('booking_data');
+        return new JsonResponse(array("status"=> "Added to cart successfully","count"=>count($booking_data_refined)));
+    }
+
+
+    public function cartAction()
+    {
+
+       $cart = $this->getRequest()->getSession()->get('booking_data');
+        $total = 0;
+        $rooms = array();
+        $em = $this->getDoctrine()->getManager();
+        foreach ($cart as $room)
+        {
+
+            $roomObj = $em->getRepository('TNEOperatorBundle:AccommodationRoom')->find($room['room_id']);
+
+            $qry = "SELECT sum(rate) as rate FROM  `AccommodationRoomCalendar` ARC WHERE accommodation_room_id =".$room['room_id']."
+                    AND `date` BETWEEN '".date('Y-m-d', strtotime(str_replace('/','-',$room['start_date'])))."'
+                    AND '".date('Y-m-d', strtotime(str_replace('/','-',$room['end_date'])))."'";
+            $roomStmt = $em->getConnection()->prepare($qry);
+            $roomStmt->execute();
+            $rate= $roomStmt->fetchAll();
+            $room_rate = $rate[0]['rate'] == ""?$roomObj->getAccommodation()->getAtdwRateFrom():$rate[0]['rate'];
+
+            $room_cart [$room['room_id']]=  array('start_date' => $room['start_date'], 'end_date' => $room['end_date'],'rate' => $room_rate);
+            $rooms[]=$roomObj;
+            $total +=$room_rate;
+
+        }
+
+        return $this->render('TNEOperatorBundle:Customer:cart.html.twig', array('rooms' => $rooms,'cart_data'=> $room_cart,'total_rate' => $total));
+    }
+
+    public function removeFromCartAction()
+    {
+        $session = $this->getRequest()->getSession();
+        $booking_data = $session->get('booking_data');
+        unset($booking_data[$this->getRequest()->get('id')]);
+        $session->set('booking_data',$booking_data);
+        return $this->redirect($this->generateUrl('booking_cart'));
+
     }
 }
