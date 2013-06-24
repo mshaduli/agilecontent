@@ -41,4 +41,7 @@
     <route id="tne_operators_add_to_cart" pattern="/operator/addToCart">
         <default key="_controller">TNEOperatorBundle:Default:addToCart</default>
     </route>
+    <route id="tne_operators_header" pattern="/operator/header">
+        <default key="_controller">TNEOperatorBundle:Default:header</default>
+    </route>
 </routes>

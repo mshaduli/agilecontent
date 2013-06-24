@@ -12,8 +12,29 @@ use \Doctrine\ORM\Query;
 
 class DefaultController extends Controller
 {
+    public function headerAction()
+    {
+        $host = $this->getRequest()->getHost();
+        $em =  $this->getDoctrine()->getManager();
+        $site = $em->getRepository('ApplicationSonataPageBundle:Site')->findOneBy(array('host' => $host));
+        $homePage = $em->getRepository('ApplicationSonataPageBundle:Page')->findOneBy(array('site' => $site, 'url' => '/'));
+        $defaultPage = $em->getRepository('ApplicationSonataPageBundle:Page')->findOneBy(array('site' => $site, 'routeName' => '_page_internal_global'));
+        $menu = $em->createQueryBuilder()
+                    ->select('b')
+                    ->from('ApplicationSonataPageBundle:Block', 'b')
+                    ->where('b.page = :page')
+                    ->andWhere('b.type LIKE :block_type')
+                    ->setParameter('page', $defaultPage)
+                    ->setParameter('block_type', '%sonata.block.service.menu%')
+                    ->getQuery()
+                    ->getSingleResult();
+
+
+        return $this->render('TNEOperatorBundle:Default:header.html.twig', array('site' => $site, 'home_page' => $homePage, 'settings' => $menu->getSettings()));
+    }
     public function searchAction()
-    { 
+    {
+
         return $this->render('TNEOperatorBundle:Default:search.html.twig');
     }
 

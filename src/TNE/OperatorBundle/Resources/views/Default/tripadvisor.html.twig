@@ -6,12 +6,12 @@
 
 <div class="trip-advisor">
         <img src="img/trip-advisor-logo.jpg" alt="" />
-        <p class="trip-review">{{ tripadvisor.num_reviews }} Reviews of {{ "Hotel Name" }}</p>
+        <p class="trip-review">{{ tripadvisor.num_reviews }} Reviews of {{ tripadvisor.name }}</p>
         <hr />
-        <h2>{{ "Hotel Name" }}</h2>
+        <h2>{{ tripadvisor.name }}</h2>
         <h3>Trip Advisor Traveller Rating</h3>
         <img src="{{ tripadvisor.ratingImageUrl }} "/>
-        <p class="trip-sub-review">{{ tripadvisor.num_reviews }} Reviews of {{ "Hotel Name" }}</p>
+        <p class="trip-sub-review">{{ tripadvisor.num_reviews }} Reviews of {{ tripadvisor.name }}</p>
         <hr />
         <h3>Most Recent Traveller Reviews</h3>
         <ul>

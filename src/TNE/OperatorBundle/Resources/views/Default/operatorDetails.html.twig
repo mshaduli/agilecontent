@@ -168,8 +168,8 @@ $('#terms-close-btn').click(function(){
 <div ng-app="OperatorApp" ng-controller="OperatorController">
     
 
-{% include 'TNEOperatorBundle:Default:header.html.twig' %}
-
+{#{% include 'TNEOperatorBundle:Default:header.html.twig' %}#}
+{% render url('tne_operators_header') %}
     <div>
        
        
@@ -279,7 +279,7 @@ $('#terms-close-btn').click(function(){
               </div>
               <div class="clear"></div>
               <div class="top-info-content">
-                  {{ operator.description }}
+                  {{ operator.description|raw }}
               </div>
             </div>
             <div class="contact-form-left">
@@ -413,7 +413,7 @@ $('#terms-close-btn').click(function(){
         
         <div class="common-block terms-section" id="terms-section" style="display: none"><a href="javascript:void(0)" id="terms-close-btn" class="pull-right"><i class="icon-large icon-remove"></i></a>
             <div id="terms-view-large">
-                {{ operator.termsAndConditions }}
+                {{ operator.termsAndConditions|raw }}
             </div>
         </div>
         
