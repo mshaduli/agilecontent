@@ -33,8 +33,23 @@ file that was distributed with this source code.
                 <div class="pull-right navigation">
                     {{ sonata_page_render_container('header', 'global') }}
                 </div>
-                {{ sonata_page_render_container('menu', 'global') | sonata_page_render_custome_block(['sonata.block.service.menu']) }}    
+                <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                <div class="">
 
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="{{ site.url }}">
+                    <strong>{{ site.name }}</strong>
+                    </a>
+                {{ sonata_page_render_container('menu', 'global') | sonata_page_render_custome_block(['sonata.block.service.menu']) }}
+                </div>
+
+                </div>
+                </div>
                 <div style="clear: both"></div>
             </div>
                 
