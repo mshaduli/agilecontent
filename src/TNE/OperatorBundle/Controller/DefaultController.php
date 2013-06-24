@@ -61,6 +61,10 @@ class DefaultController extends Controller
         
         $datediff = $date_to - $date_from;
         $days = floor($datediff/(60*60*24));
+        if($filters['gridView'] == 'true')
+        {
+            $days = 6;
+        }
 //        if($days == 0)
 //            $days = 1;
 //        echo $days;
@@ -158,16 +162,7 @@ EOD;
             
 
             $roomary = array();
-            /**
-             * 
-             * 
-             * 
-             * Big Fix Needed
-             * 
-             * 
-             * 
-             * 
-             */
+
             for($i = 0; $i<= $days ;$i++)
             {
                 $date = date('Y-m-d', strtotime('+ '.$i.' day',$date_from));
@@ -198,18 +193,18 @@ EOD;
                     {
                         if(isset($roomary[$result['room_id']][$date]))
                         {
-                            $result[$date]['rate'] = $roomary[$result['room_id']][$date]['rate'];
+                            $result[$date]['rate'] = ($roomary[$result['room_id']][$date]['rate'] == 0)?$operator->getAtdwRateFrom():$roomary[$result['room_id']][$date]['rate'];
                             $result[$date]['available'] = $roomary[$result['room_id']][$date]['available'];   
                         }
                         else
                         {
-                            $result[$date]['rate'] = '0';
+                            $result[$date]['rate'] = $operator->getAtdwRateFrom();
                             $result[$date]['available'] = 'true';
                         }
                     }
                     else
                     {
-                        $result[$date]['rate'] = '0';
+                        $result[$date]['rate'] = $operator->getAtdwRateFrom();
                         $result[$date]['available'] = 'true';
                     }
                 }
@@ -459,5 +454,38 @@ EOD;
                 $operators []= $result;
         }
         return new JsonResponse($operators);
+    }
+
+
+    /**
+     * @todo Move below function to booking controller
+     */
+
+    public function addToCartAction()
+    {
+//        $this->getRequest()->getSession()->remove('booking_data');
+        if($this->getRequest()->isXmlHttpRequest())
+        {
+            $session = $this->getRequest()->getSession();
+
+            $_data['room_id'] = $this->getRequest()->get('room_id');
+            $_data['start_date'] = $this->getRequest()->get('start_date');
+            $_data['end_date'] = $this->getRequest()->get('end_date');
+
+            if(is_null($session->get('booking_data')))
+            {
+                $booking_data = array();
+                $booking_data[0] = $_data;
+            }
+            else
+            {
+                $booking_data = $session->get('booking_data');
+                array_push($booking_data,$_data);
+            }
+
+            $session->set('booking_data',$booking_data);
+        }
+//        $session->remove('booking_data');
+        return new JsonResponse(array("status"=> "Added to cart successfully","count"=>count($booking_data)));
     }
 }
