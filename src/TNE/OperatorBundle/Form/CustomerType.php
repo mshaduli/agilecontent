@@ -19,6 +19,8 @@ class CustomerType extends AbstractType
             ->add('mobile')
             ->add('guest')
             ->add('payment')
+            ->add('guest', new GuestType())
+        ->add('payment', new PaymentDetailsType())
         ;
     }
 
