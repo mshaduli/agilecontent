@@ -4,7 +4,7 @@
         <div id="header-top">
             <div class="navbar container topnav-my">
                 <!-- brand -->
-                <a id="brand" class="hide-text" href="#">Falls Creek</a>
+                <a id="brand" class="hide-text" href="{{ path(home_page) }}">{{ site.name }}</a>
 
                 <ul class="nav">
                     <li class="social">
@@ -35,46 +35,51 @@
                 </a>
 
                 <ul id="header-nav-items" class="nav nav-collapse collapse pull-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Your Trip <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li>Item 1</li>
-                            <li>Item 2</li>
-                            <li>Item 3</li>
-                        </ul>
-                    </li>
-                    <li class="divider-vertical"></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">The Resort <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li>Item 1</li>
-                            <li>Item 2</li>
-                            <li>Item 3</li>
-                        </ul>
-                    </li>
-                    <li class="divider-vertical"></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Activities <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li>Item 1</li>
-                            <li>Item 2</li>
-                            <li>Item 3</li>
-                        </ul>
-                    </li>
-                    <li class="divider-vertical"></li>
-                    <li>
-                        <a href="#">News</a>
-                    </li>
-                    <li class="divider-vertical"></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Corporate <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li>Item 1</li>
-                            <li>Item 2</li>
-                            <li>Item 3</li>
-                        </ul>
-                    </li>
-                    <li class="divider-vertical"></li>
+                    {#<li class="dropdown">#}
+                        {#<a href="#" class="dropdown-toggle" data-toggle="dropdown">Your Trip <span class="caret"></span></a>#}
+                        {#<ul class="dropdown-menu">#}
+                            {#<li>Item 1</li>#}
+                            {#<li>Item 2</li>#}
+                            {#<li>Item 3</li>#}
+                        {#</ul>#}
+                    {#</li>#}
+                    {#<li class="divider-vertical"></li>#}
+                    {#<li class="dropdown">#}
+                        {#<a href="#" class="dropdown-toggle" data-toggle="dropdown">The Resort <span class="caret"></span></a>#}
+                        {#<ul class="dropdown-menu">#}
+                            {#<li>Item 1</li>#}
+                            {#<li>Item 2</li>#}
+                            {#<li>Item 3</li>#}
+                        {#</ul>#}
+                    {#</li>#}
+                    {#<li class="divider-vertical"></li>#}
+                    {#<li class="dropdown">#}
+                        {#<a href="#" class="dropdown-toggle" data-toggle="dropdown">Activities <span class="caret"></span></a>#}
+                        {#<ul class="dropdown-menu">#}
+                            {#<li>Item 1</li>#}
+                            {#<li>Item 2</li>#}
+                            {#<li>Item 3</li>#}
+                        {#</ul>#}
+                    {#</li>#}
+                    {#<li class="divider-vertical"></li>#}
+                    {#<li>#}
+                        {#<a href="#">News</a>#}
+                    {#</li>#}
+                    {#<li class="divider-vertical"></li>#}
+                    {#<li class="dropdown">#}
+                        {#<a href="#" class="dropdown-toggle" data-toggle="dropdown">Corporate <span class="caret"></span></a>#}
+                        {#<ul class="dropdown-menu">#}
+                            {#<li>Item 1</li>#}
+                            {#<li>Item 2</li>#}
+                            {#<li>Item 3</li>#}
+                        {#</ul>#}
+                    {#</li>#}
+                    {#<li class="divider-vertical"></li>#}
+
+                    {% if settings.content.items is defined %}
+                        {% set menu = settings.content.items %}
+                        {% include "ApplicationSonataPageBundle:Block:nav_item.html.twig" with {'links':menu, 'li_class': 'dropdown', 'data_hover': true } only %}
+                    {% endif %}
                 </ul>
             </div>
         </div>
