@@ -49,6 +49,8 @@ class AccommodationRoom
 
     private $bookings;
     
+    private $maxCapacity;
+    
     public function __construct() {
         $this->dates = new ArrayCollection();
 //        $this->media = new ArrayCollection();
@@ -316,6 +318,29 @@ class AccommodationRoom
         return null === $this->path
             ? null
             : $this->getUploadRootDir().'/'.$this->path;
-    }  
+    }
+    
+    /**
+     * Set $maxCapacity
+     *
+     * @param string $maxCapacity
+     * @return AccommodationRoom
+     */
+    public function setMaxCapacity($maxCapacity)
+    {
+        $this->maxCapacity = $maxCapacity;
+    
+        return $this;
+    }
+
+    /**
+     * Get $maxCapacity
+     *
+     * @return string 
+     */
+    public function getMaxCapacity()
+    {
+        return $this->maxCapacity;
+    }    
 
 }

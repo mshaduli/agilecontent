@@ -25,6 +25,7 @@
     <field name="longitude" type="decimal" column="longitude" scale="7"/>
     <field name="state" type="string" column="state" length="255"/>
     <field name="tripadvisorKey" type="string" column="tripadvisor_key" length="255"/>
+    <field name="termsAndConditions" type="text" column="terms_and_conditions" nullable="true"/>            
             
             
     <many-to-one field="site" target-entity="Application\Sonata\PageBundle\Entity\Site">

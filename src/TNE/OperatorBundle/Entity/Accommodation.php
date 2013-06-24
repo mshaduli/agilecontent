@@ -144,7 +144,9 @@ class Accommodation
 
     protected $gallery;
 
-    protected $tripadvisorKey;    
+    protected $tripadvisorKey;
+    
+    protected $termsAndConditions;    
 
 
     /**
@@ -575,6 +577,14 @@ class Accommodation
     public function setTripadvisorKey($tripadvisorKey) {
         $this->tripadvisorKey = $tripadvisorKey;
     }
+    
+    public function getTermsAndConditions() {
+        return $this->termsAndConditions;
+    }
+
+    public function setTermsAndConditions($termsAndConditions) {
+        $this->termsAndConditions = $termsAndConditions;
+    }    
     
     public function getRecommendations()
     {
