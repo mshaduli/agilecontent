@@ -52,8 +52,6 @@ SearchApp.directive('slider', function($timeout) {
     };
 });
 
-
-
 SearchApp.directive('radio', function() {
     return {
         restrict: 'E',
@@ -301,7 +299,7 @@ SearchApp.directive('resultsGrid', function(){
             sort: '=',
             dates: '='
         },
-        controller: function($scope){
+        controller: function($scope, $http){
             var pagesShown = 1;
             var pageSize = 9;
             $scope.itemsLimit = function(){
@@ -312,7 +310,7 @@ SearchApp.directive('resultsGrid', function(){
             };
 
             $scope.getRoomRateForDate = function(room, date){
-                
+
                 if(typeof room[date] != "undefined")
                 {
                     if(room[date].available == "true")
@@ -320,24 +318,49 @@ SearchApp.directive('resultsGrid', function(){
                     else
                         return "N/A";
                 }else{
-                    return '$295';
+                    return room.min_rate;
                 }
-            }
+            };
 
             $scope.classForDate = function(date){
                 var dates = $scope.dates.split(' to ');
-
-                console.log(dates);
-
                 var range = moment().range(moment(dates[0], 'DD/MM/YYYY'), moment(dates[1], 'DD/MM/YYYY'));
                 var inputDate = moment(date, 'DD/MM/YYYY');
-
-                console.log(inputDate.within(range));
-
                 var dateClass = inputDate.within(range)?'selected':'none';
-
                 return dateClass;
-            }
+            };
+
+            $scope.cartIcon = function(room){
+
+                var available = true;
+                var key = "";
+                for(key in room){
+                    if(typeof room[key] == "object" && room[key] != 'tags' )
+                    {
+                        if(room[key].available == "false")
+                        {
+                            available = false;
+                            break;
+                        }
+                    }
+                }
+                if(available)
+                    return '';
+                else
+                    return 'hidden';
+
+            };
+            $scope.addToCart = function(room){
+
+                var dates = $scope.dates.split(' to ');
+                $http.get('/app_dev.php/operator/addToCart?room_id='+room.room_id+"&start_date="+dates[0]+"&end_date="+dates[1])
+                 .success(function(data) {
+                    alert(data.status);
+                        $('div#header-top ul.nav li a').filter(':contains(Cart)').html('Cart ('+data.count+')');
+                 }).error(function(){
+
+                 });
+            };
 
         },
         template: '' +
@@ -363,7 +386,7 @@ SearchApp.directive('resultsGrid', function(){
                         '</td>' +
                         '<td ng-repeat="day in days" ng-class="day.class"><span class="price">{[{ getRoomRateForDate(operator, day.date) }]}</span></td>' +
                         '<td><a class="btn btn-link btn-off" href="#"><i class="icon-star"></i></a></td>' +
-                        '<td><a class="btn btn-link btn-success" href="#"><i class="icon-ok"></i></a></td>' +
+                        '<td><a class="btn btn-link btn-success {[{ cartIcon(operator) }]}" href="#" ng-click="addToCart(operator)"><i class="icon-ok"></i></a></td>' +
                     '</tr>' +
                 '</tbody>' +
 
@@ -374,9 +397,14 @@ SearchApp.directive('resultsGrid', function(){
         link: function(scope, element, attrs){
             scope.$watch('dates',function(){
                 var days = [];
-                for(var i=1;i<=attrs.days;i++)
+                for(var i=0;i<=attrs.days;i++)
                 {
-                    days.push({name:moment().add(i, 'days').format('ddd D MMM'), date:moment().add(i,'days').format('DD/MM/YYYY'), class: scope.classForDate(moment().add(i,'days').format('DD/MM/YYYY'))});
+                    days.push({
+                        name:moment().add(i, 'days').format('ddd D MMM'),
+                        date:moment().add(i,'days').format('YYYY-MM-DD'),
+                        class: scope.classForDate(moment().add(i,'days').format('DD/MM/YYYY')),
+                        add_to_cart: scope.cartIcon(moment().add(i,'days').format('DD/MM/YYYY'))
+                    });
                 }
                 scope.days = days;
             }, true);

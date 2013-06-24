@@ -37,5 +37,8 @@
     </route>     
     <route id="tne_room_calender" pattern="/operator/rooms">
         <default key="_controller">TNEOperatorBundle:Default:roomAvailability</default>
-    </route>     
+    </route>
+    <route id="tne_operators_add_to_cart" pattern="/operator/addToCart">
+        <default key="_controller">TNEOperatorBundle:Default:addToCart</default>
+    </route>
 </routes>
