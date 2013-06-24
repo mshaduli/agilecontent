@@ -82,6 +82,7 @@ class SiteAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $diff = new \DateTime;
         $formMapper
             ->with($this->trans('form_site.label_general'))
                 ->add('name')
@@ -93,8 +94,8 @@ class SiteAdmin extends Admin
                     'required' => false
                 ))
                 ->add('relativePath', null, array('required' => false))
-                ->add('enabledFrom')
-                ->add('enabledTo')
+                ->add('enabledFrom', null, array('data' => new \DateTime))
+                ->add('enabledTo', null, array('data' => $diff->add(new \DateInterval('P1Y'))))
             ->end()
             ->with($this->trans('form_site.label_seo'))
                 ->add('title', null, array('required' => false))
