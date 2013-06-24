@@ -30,7 +30,8 @@ file that was distributed with this source code.
 {% block page_javascripts %}
     {{ parent() }}
     {{ vichgeo_include_js() }}
-        
+        <script src="{{ asset('bundles/tneoperator/angular/app/lib/angular/angular.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/tneoperator/angular/app/lib/angular/angular-resource.js') }}" type="text/javascript"></script>
         <script src="{{ asset('bundles/tneoperator/angular/app/js/daterangepicker.js') }}"></script>
         <script src="{{ asset('bundles/tneoperator/angular/app/js/moment.min.js') }}"></script>
         <script src="{{ asset('bundles/tneoperator/angular/app/js/map.js') }}"></script>
@@ -41,6 +42,7 @@ file that was distributed with this source code.
         <script src="{{ asset('bundles/tneoperator/js/jquery-datepicker.js') }}"></script>
         <script src="{{ asset('bundles/tneoperator/js/jquery.validate.min.js') }}"></script>
         <script src="{{ asset('bundles/tneoperator/js/additional-methods.min.js') }}"></script>
+        <script src="{{ asset('bundles/tneoperator/angular/app/js/operator_grid.js') }}"></script>
         
         <script>
 $(function() {
@@ -158,13 +160,12 @@ $('#ask-form-close-btn').click(function(){
     
 {% block content %}
 
-{% set operator = operator[0] %} 
-
-<div ng-app="SearchApp" ng-controller="SearchController">
+<div ng-app="OperatorApp" ng-controller="OperatorController">
+    
 
 {% include 'TNEOperatorBundle:Default:header.html.twig' %}
 
-    <div ng-app="SearchApp" ng-controller="SearchController">
+    <div>
        
        
         <div style="background:url(img/banner-bg.png) center no-repeat; margin-top:50px;">
@@ -393,113 +394,8 @@ $('#ask-form-close-btn').click(function(){
          <div class="common-block" id="availability-section">
          
          
-         <div ng-show="UIView=='Calendar'" id="grid" style="">
-                    <table class="table table-bordered table-hover">
-                        <thead>
-                        <tr>
-                            <th></th>
-                            <th>Tue<div class="date">11MAR</div></th>
-                            <th>Wed<div class="date">11MAR</div></th>
-                            <th>Thu<div class="date">11MAR</div></th>
-                            <th>Fri<div class="date">11MAR</div></th>
-                            <th>Sat<div class="date">11MAR</div></th>
-                            <th>Sun<div class="date">11MAR</div></th>
-                            <th>Mon<div class="date">11MAR</div></th>
-                            <th>Tue<div class="date">11MAR</div></th>
-                            <th>Wed<div class="date">11MAR</div></th>
-                            <th class="control"><i class="icon-angle-left icon-2x"></i></th>
-                            <th class="control"><i class="icon-angle-right icon-2x"></i></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>
-                                <span class="title">Silverski Hotel and Apart..</span>
-                                <div>Falls Creek <div class="star pull-right" data-score="4"></div></div>
-                            </td>
-                            <td><span class="price">$999</span></td>
-                            <td><span class="price">$999</span></td>
-                            <td><span class="price">$999</span></td>
-                            <td class="selected"><span class="price">$999</span></td>
-                            <td class="selected"><span class="price">$999</span></td>
-                            <td class="selected"><span class="price">$999</span></td>
-                            <td><span class="price">$999</span></td>
-                            <td><span class="price">$999</span></td>
-                            <td><span class="price">$999</span></td>
-                            <td><a href="#" class="btn btn-link btn-off"><i class="icon-star"></i></a></td>
-                            <td><a href="#" class="btn btn-link btn-success"><i class="icon-ok"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="title">Silverski Hotel and Apart..</span>
-                                <div>Falls Creek <div class="star pull-right" data-score="4"></div></div>
-                            </td>
-                            <td><span class="price">$999</span></td>
-                            <td><span class="price">$999</span></td>
-                            <td><span class="price">$999</span></td>
-                            <td class="selected"><span class="price">$999</span></td>
-                            <td class="selected"><span class="price">$999</span></td>
-                            <td class="selected"><span class="price">$999</span></td>
-                            <td><span class="price">$999</span></td>
-                            <td><span class="price">$999</span></td>
-                            <td><span class="price">$999</span></td>
-                            <td><a href="#" class="btn btn-link btn-on"><i class="icon-star"></i></a></td>
-                            <td><a href="#" class="btn btn-link btn-success"><i class="icon-ok"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="title">Silverski Hotel and Apart..</span>
-                                <div>Falls Creek <div class="star pull-right" data-score="4"></div></div>
-                            </td>
-                            <td><span class="price">$999</span></td>
-                            <td><span class="price">$999</span></td>
-                            <td><span class="price">$999</span></td>
-                            <td class="selected"><span class="price">$999</span></td>
-                            <td class="selected"><span class="price">$999</span></td>
-                            <td class="selected"><span class="price">$999</span></td>
-                            <td><span class="price">$999</span></td>
-                            <td><span class="price">$999</span></td>
-                            <td><span class="price">$999</span></td>
-                            <td><a href="#" class="btn btn-link btn-off"><i class="icon-star"></i></a></td>
-                            <td><a href="#" class="btn btn-link btn-success"><i class="icon-ok"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="title">Silverski Hotel and Apart..</span>
-                                <div>Falls Creek <div class="star pull-right" data-score="4"></div></div>
-                            </td>
-                            <td><span class="price">$999</span></td>
-                            <td><span class="price">$999</span></td>
-                            <td><span class="price">$999</span></td>
-                            <td class="selected"><span class="price">$999</span></td>
-                            <td class="selected"><span class="price">$999</span></td>
-                            <td class="selected booked"><i class="icon-remove icon-large"></i></td>
-                            <td class="booked"><i class="icon-remove icon-large"></i></td>
-                            <td class="booked"><i class="icon-remove icon-large"></i></td>
-                            <td><span class="price">$999</span></td>
-                            <td><a href="#" class="btn btn-link btn-off"><i class="icon-star"></i></a></td>
-                            <td><a href="#" class="btn btn-link btn-success"><i class="icon-ok"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="title">Silverski Hotel and Apart..</span>
-                                <div>Falls Creek <div class="star pull-right" data-score="4"></div></div>
-                            </td>
-                            <td><span class="price">$999</span></td>
-                            <td><span class="price">$999</span></td>
-                            <td><span class="price">$999</span></td>
-                            <td class="selected"><span class="price">$999</span></td>
-                            <td class="selected"><span class="price">$999</span></td>
-                            <td class="selected"><span class="price">$999</span></td>
-                            <td><span class="price">$999</span></td>
-                            <td><span class="price">$999</span></td>
-                            <td><span class="price">$999</span></td>
-                            <td><a href="#" class="btn btn-link btn-off"><i class="icon-star"></i></a></td>
-                            <td><a href="#" class="btn btn-link btn-success"><i class="icon-ok"></i></a></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                   
+         <div id="grid">
+                    <results-grid operators="operators" loading="loading" limit="9" page="9" days="10"></results-grid>
                 </div>
          
          
@@ -516,9 +412,10 @@ $('#ask-form-close-btn').click(function(){
         {% endfor %}
         
         {% include 'TNEOperatorBundle:Default:operatorRecommendation.html.twig' with {'recommendations': operator.recommendations } %}
-        
-        <div class="common-block hidden-phone"><img src="{{ asset('bundles/tneoperator/img/fb-plugin.jpg') }}"></div>
-        
+        <div class="common-block hidden-phone clearfix"> 
+        {% include 'TNEOperatorBundle:Default:tripadvisor.html.twig' with {'tripadvisor': operator.tripadvisorData } %}
+        {% include 'TNEOperatorBundle:Default:tripadvisor.html.twig' with {'tripadvisor': operator.tripadvisorData } %}
+        </div>
         <div class="common-block op-rooms phone-padding">
           <div class="op-section-header">WHAT'S ON NEARBY</div>
           <div class="whats-on-lft-area">
