@@ -2,7 +2,7 @@
 Version: 3.3.1 Timestamp: Wed Feb 20 09:57:22 PST 2013
 */
 .select2-container {
-    position: relative;
+    /*position: relative;*/
     display: inline-block;
     /* inline-block for ie7 */
     zoom: 1;
