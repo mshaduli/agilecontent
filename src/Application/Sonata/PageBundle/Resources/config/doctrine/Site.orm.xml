@@ -19,6 +19,6 @@
         
         <field name="context" type="string" column="context" length="255"/>
 
-        <field name="gacode" type="text" column="gacode"/>
+        <field name="gacode" type="text" column="gacode" nullable="true"/>
     </entity>
 </doctrine-mapping>

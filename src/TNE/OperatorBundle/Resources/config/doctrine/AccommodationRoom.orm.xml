@@ -9,7 +9,7 @@
     <field name="rateFrom" type="decimal" column="rate_from" nullable="true"/>
     <field name="rateTo" type="decimal" column="rate_to" nullable="true"/>
     <field name="path" type="string" column="path" length="255" nullable="true"/>
-    
+    <field name="maxCapacity" type="string" column="max_capacity" length="255" nullable="true"/>
     <many-to-one field="accommodation" target-entity="Accommodation" inversed-by="rooms">
         <join-column name="accommodation_id" referenced-column-name="id" />        
         <cascade>
@@ -34,7 +34,7 @@
       </cascade>
     </one-to-many>
 
-   
+
     
       <lifecycle-callbacks>
         <lifecycle-callback type="prePersist" method="preUpload" />

@@ -12,7 +12,7 @@ file that was distributed with this source code.
 
 {% block block %}
     {% if settings.title %}
-        <h3 class="sonata-media-block-media-title">{{ settings.title }}</h3>
+        <h3 class="sonata-media-block-media-title">{#{ settings.title }#}</h3>
     {% endif %}
 
    {% if sonata_page.isEditor or app.security and app.security.isGranted('ROLE_PREVIOUS_ADMIN') %}

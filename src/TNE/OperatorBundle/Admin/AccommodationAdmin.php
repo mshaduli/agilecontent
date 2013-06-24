@@ -40,7 +40,14 @@ class AccommodationAdmin extends OwnerAwareAdmin
                             'data-theme' => 'advanced'
                         )
                     ))
-                ->add('tripadvisorKey', null, array('label'=>'Tripadvisor Key'))
+                ->add('tripadvisorKey', null, array('label'=>'Tripadvisor Key','required' => false))
+                ->add('termsAndConditions', 'textarea', array(
+                        'attr' => array(
+                            'class' => 'tinymce span6',
+                            'data-theme' => 'advanced'
+                        ),
+                        'required' => false
+                    ))                
             ->end()
             ->with('Contact', array('collapsed' => true))
                 ->add('atdwContactEmail', null, array('label'=>'Email'))

@@ -144,7 +144,9 @@ class Accommodation
 
     protected $gallery;
 
-    protected $tripadvisorKey;    
+    protected $tripadvisorKey;
+    
+    protected $termsAndConditions;    
 
 
     /**
@@ -576,6 +578,14 @@ class Accommodation
         $this->tripadvisorKey = $tripadvisorKey;
     }
     
+    public function getTermsAndConditions() {
+        return $this->termsAndConditions;
+    }
+
+    public function setTermsAndConditions($termsAndConditions) {
+        $this->termsAndConditions = $termsAndConditions;
+    }    
+    
     public function getRecommendations()
     {
         return $this->recommendations;
@@ -593,6 +603,25 @@ class Accommodation
     
     public function removeRecommendation($recommendation){
         $this->recommendations->remove($recommendation);
-    }  
+    }
+    
+    public function getTripadvisorData()
+    {
+        if($this->getTripadvisorKey())
+        {
+            $url = 'http://api.tripadvisor.com/api/partner/1.0/location/89575?key='.$this->getTripadvisorKey();
+            try{
+                $results = file_get_contents($url);
+            }  catch (\Exception $e){
+                $results = null;
+            }
+            
+            $data = json_decode($results, TRUE);
+        }else{
+            $data = null;
+        }
+        
+        return $data;
+    }
 
 }
