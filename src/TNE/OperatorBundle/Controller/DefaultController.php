@@ -27,7 +27,7 @@ class DefaultController extends Controller
                     ->setParameter('page', $defaultPage)
                     ->setParameter('block_type', '%sonata.block.service.menu%')
                     ->getQuery()
-                    ->getSingleResult();
+                    ->getOneOrNullResult();
 
 
         return $this->render('TNEOperatorBundle:Default:header.html.twig', array('site' => $site, 'home_page' => $homePage, 'settings' => $menu->getSettings()));
