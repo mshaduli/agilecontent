@@ -1250,7 +1250,7 @@ padding-bottom:20px;
 
 .general-content-main .list-item ul
 {
-margin:px;
+
 padding:0px;
 list-style:none;
 }
@@ -1265,7 +1265,6 @@ margin-bottom:10px;
 
 .general-content-main .list-item ul
 {
-margin:px;
 padding:0px;
 list-style:none;
 }
@@ -1439,7 +1438,7 @@ width:1170px\9;
 
 .topnav-my
 {
-width:1170px\9;
+width:1170px;
 
 }
 
@@ -2400,6 +2399,488 @@ z-index:1001 !important;
 .checkout-status { margin: 12px; border: 1px solid #000; padding: 12px; }
 .checkout-status h3{ font-size: 16px; text-transform: uppercase; font-weight: normal; line-height: 1.2em; }
 
+
+/*** CART PAGE STYLES STARTS HERE ***/
+
+.cart-head-div
+{
+    width:auto;
+    background:#e2e2e2;
+    padding:12px 15px;
+    margin-top:50px;
+}
+
+.your-cart-main
+{
+    float:left;
+    padding-right:50px;
+}
+
+.cart-sno
+{
+    float:left;
+    background:#FFFFFF;
+    text-align:center;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:14px;
+    color:#666;
+    width:40px;
+    padding:8px 0px;
+}
+
+.cart-label
+{
+    float:left;
+    font-size:13px;
+    color:#333;
+    padding:8px 0px 0px 15px;
+}
+
+.card-head-div .proceed-confirmation-main
+{
+    float:right;
+}
+
+.cart-head-div .proceed-confirmation
+{
+    float:right;
+    font-family:Arial, Helvetica, sans-serif;
+    margin-top:8px;
+}
+
+
+.cart-head-div .proceed-confirmation a
+{
+    background:#383838;
+    font-size:14px;
+    color:#FFFFFF;
+    font-weight:bold;
+    padding:13px 15px;
+    text-decoration:none;
+}
+
+.cart-head-div .proceed-confirmation a:hover
+{
+    color:#CCCCCC;
+}
+
+
+.cart-head-div .back
+{
+    float:right;
+    font-family:Arial, Helvetica, sans-serif;
+    margin-top:8px;
+    margin-right:7px;
+}
+
+
+.cart-head-div .back a
+{
+    background:#aaaaaa;
+    font-size:14px;
+    color:#FFFFFF;
+    font-weight:bold;
+    padding:13px 15px;
+    text-decoration:none;
+}
+
+.cart-head-div .back a:hover
+{
+    color:#ddd;
+}
+
+.your-cart-main.selected .cart-sno, .your-cart-main.selected .cart-label
+{
+
+    font-size:23px;
+    font-weight:bold;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.cart-content-area
+{
+    padding:25px 15px;
+    margin-top:50px;
+}
+
+.cart-content-lft
+{
+    width:560px;
+    float:left;
+}
+
+.cart-marking-booking
+{
+    background:#fafafa;
+    border:1px #e2e2e2 solid;
+    padding:12px 15px 12px 25px;
+}
+.cart-marking-booking .top-dd-label
+{
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:18px;
+    font-weight:bold;
+    color:#282828;
+    padding-right:15px;
+    float:left;
+    padding-top:2px;
+}
+
+.cart-marking-booking .dd
+{
+    float:left;
+    width:250px;
+}
+
+.cart-marking-booking .dd select
+{
+    width:250px;
+    line-height:normal;
+    height:auto;
+}
+
+
+.purchase-details-block
+{
+    margin-top:35px;
+
+}
+
+.purchase-details-heading
+{
+    font-size:24px;
+    color:#8d8d8d;
+}
+
+.purchase-details-block .small-txt
+{
+    font-size:13px;
+    padding:13px 0px 22px 0px;
+}
+
+.cart-content-area label, .lft-from label, .rgt-from label
+{
+    font-size:16px;
+    color:#444;
+    padding-bottom:4px;
+
+}
+
+.cart-form-indiv
+{
+    padding-bottom:5px;
+}
+
+.cart-form-indiv input
+{
+    padding:2px 5px;
+}
+
+.cart-form-indiv input.company-name
+{
+    width:545px;
+    border-radius:0px;
+    border:1px #b9b9b9 solid;
+}
+
+.cart-form-indiv .lft-from
+{
+    float:left;
+    width:260px;
+}
+
+
+
+.cart-form-indiv .lft-from
+{
+    float:left;
+    width:258px;
+    margin-right:40px;
+}
+
+.cart-form-indiv .rgt-from
+{
+    float:left;
+    width:258px;
+}
+
+.lft-from input, .rgt-from input
+{
+    width:245px;
+    border-radius:0px;
+    border:1px #b9b9b9 solid;
+    margin-right:0px;
+}
+
+.phone-area-code
+{
+    float:left;
+    margin-right:15px;
+}
+
+.phone-area-code input
+{
+    float:left;
+    width:43px !important;
+}
+
+
+.phone-no-cart input
+{
+    float:left;
+    width:175px !important;
+}
+
+
+
+
+.cart-form-indiv .suburb
+{
+    float:left;
+    width:330px;
+    margin-right:40px;
+}
+
+.cart-form-indiv .suburb input
+{
+    width:317px;
+
+}
+
+.cart-form-indiv .postcode
+{
+    float:left;
+    width:187px;
+    margin-right:0px;
+}
+
+.cart-form-indiv .postcode input
+{
+    width:174px;
+
+}
+
+
+
+
+.cart-form-indiv .country
+{
+    float:left;
+    width:330px;
+    margin-right:0px;
+
+}
+
+.cart-form-indiv .country select
+{
+    width:329px;
+    height:auto;
+    line-height:normal;
+    border-radius:0px;
+
+}
+
+.cart-form-indiv .state
+{
+    float:left;
+    width:187px;
+    margin-right:40px;
+}
+
+.cart-form-indiv .state select
+{
+    width:174px;
+    height:auto;
+    line-height:normal;
+    border-radius:0px;
+
+}
+
+
+.cart-form-indiv textarea
+{
+    width:545px;
+    border-radius:0px;
+    border:1px #b9b9b9 solid;
+    height:150px;
+}
+
+
+.cart-checkbox-area
+{
+    background:#fafafa;
+    border:1px #e2e2e2 solid;
+    padding:12px 15px 5px 15px;
+    margin-bottom:50px;
+    margin-top:10px;
+}
+
+.cart-checkbox-area label
+{
+    display:inline;
+    font-size:13px;
+    font-weight:normal;
+    padding-left:5px;
+}
+
+.cart-checkbox-area input
+{
+    margin:0px;
+    padding:0px;
+}
+
+.cart-checkbox-area div
+{
+    margin-bottom:8px;
+}
+
+
+.cart-content-right
+{
+    margin-left:45px;
+    width:532px;
+    float:left;
+}
+
+
+
+
+
+
+.cart-form-indiv .expiry-month
+{
+    float:left;
+    width:150px;
+    margin-right:40px;
+}
+
+.cart-form-indiv .expiry-month select
+{
+    width:148px;
+    line-height:normal;
+    height:auto;
+
+}
+
+.cart-form-indiv .expiry-year
+{
+    float:left;
+    width:150px;
+    margin-right:0px;
+}
+
+.cart-form-indiv .expiry-year select
+{
+    width:148px;
+    line-height:normal;
+    height:auto;
+
+}
+
+
+.secure-payment-area
+{
+    background:url(../img/lock-icon.jpg) #fafafa no-repeat;
+    border:1px #e2e2e2 solid;
+    padding:18px 15px 15px 98px;
+    margin-top:10px;
+    background-position:25px 25px;
+    margin-top:22px;
+    font-size:12px;
+    color:#383838;
+
+}
+
+.availability-enquiries-area
+{
+    background:url(../img/time-icon.jpg) #fafafa no-repeat;
+    border:1px #e2e2e2 solid;
+    padding:18px 15px 15px 98px;
+    margin-top:10px;
+    background-position:20px 25px;
+    margin-top:22px;
+    font-size:12px;
+    color:#383838;
+
+}
+
+.secure-payment-area .heading, .availability-enquiries-area .heading
+{
+    font-weight:bold;
+    padding-bottom:5px;
+    color:#383838;
+}
+
+
+.proceed-confirmation
+{
+    margin-top:0px;
+    padding:0px;
+    margin-left:8px;
+}
+
+.proceed-confirmation input[type=submit]{
+    background-color:#383838;
+    font-weight:bold;
+    font-family:Arial,Helvetica,sans-serif;
+    border:none;
+    color:#fff;
+    margin:0px;
+    padding:12px 20px;
+    font-size:12px;
+}
+
+.proceed-confirmation:hover input[type=submit]{
+    background-color:#555;
+}
+
+.cart-submit .proceed-confirmation
+{
+    float:right;
+}
+
+.back input[type=button]{
+    background-color:#aaaaaa;
+    font-weight:bold;
+    font-family:Arial,Helvetica,sans-serif;
+    border:none;
+    color:#fff;
+    margin:0px;
+    padding:12px 30px;
+    font-size:12px;
+}
+
+.back:hover input[type=button]{
+    background:#999999;
+
+}
+
+.cart-submit .back
+{
+    float:right;
+}
+
+.cart-submit
+{
+    background:#FFFFFF;
+    border:1px #e2e2e2 solid;
+    padding-right:7px;
+    padding-bottom:8px;
+    margin-top:22px;
+    padding-top:8px;
+}
+
+.top-confirmation.cart-submit
+{
+    float:right;
+    margin:0px;
+    padding:0px;
+    background:none;
+}
+
+
+
+/*** CART PAGE STYLES ENDS HERE ***/
 
 
 @media (min-width: 1200px) {

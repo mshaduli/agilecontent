@@ -17,10 +17,9 @@ class CustomerType extends AbstractType
             ->add('email')
             ->add('phone')
             ->add('mobile')
-            ->add('guest')
-            ->add('payment')
+//            ->add('guest')
+//            ->add('payment')
             ->add('guest', new GuestType())
-        ->add('payment', new PaymentDetailsType())
         ;
     }
 

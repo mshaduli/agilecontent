@@ -40,3 +40,8 @@ booking_add_to_cart:
 booking_remove_from_cart:
     pattern:  /removeFromCart/{id}
     defaults: { _controller: "TNEOperatorBundle:Customer:removeFromCart" }
+
+booking_order_confirmation:
+    pattern:  /confimation/{id}
+    defaults: { _controller: "TNEOperatorBundle:Customer:confirmation" }
+

@@ -38,86 +38,57 @@ file that was distributed with this source code.
 {% block content %}
 
 <div>
-{% render url('tne_operators_header') %}
-{#{% include 'TNEOperatorBundle:Default:header.html.twig' %}#}
+
+{% include 'TNEOperatorBundle:Default:header.html.twig' %}
 
     <div id="main" class="container">
-        <div class=" hidden-phone">
+        <div class="row hidden-phone">
             <div class="span9">
-                <div id="search-tag" class="pull-left visible-desktop">Checkout <span>Your details</span></div>
+                <div id="search-tag" class="pull-left visible-desktop">Order Confirmation</div>
             </div>
             <div class="span3 pull-right">
-                <span>1/4</span>
+                <span>4/4</span>
                 <!--<buttons-radio class="btn-group pull-right" data-toggle="buttons-radio" model='UIView' options='UIViewOptions' classes=""></buttons-radio>-->
             </div>
         </div>
-        <div class="hidden-phone">
+        <div class="row hidden-phone">
             <div class="span12 divider"></div>
         </div>
-        <div class="" >
+        <div class="row" >
             <div id="main-pane" class="span9" >
                 <div class="checkout-panel clearfix">
 
-                <div class="checkout-header">
-                    <h1 class="pull-left"><i class="icon icon-edit"></i> instant confirm <span class="inner hidden-tablet ng-binding">8</span></h1>
-                    <a href="#" class="collapse-btn pull-right" data-toggle="collapse">-</a>
-                    <div class="clear"></div>
-                </div>
 
-                <div class="checkout-status">
-                    <h3>the following operators have</h3>
-                    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-                </div>
-                {% for room in rooms %}
+
+
                 <div class="cart-rooms row">
                     <div class="span7">
                         <div class="inner-padding">
-                        <h2>{{ room.name }}</h2>
-                            {{ room.accommodation.name }}<br/>
-                            ({{ room.accommodation.destination }})
-                        <ul>
-                            <li>CHECK-IN <a href="#">{{ cart_data[room.id].start_date }} <i class="icon icon-pencil"></i> </a> </li>
-                            <li>CHECK-OUT <a href="#">{{ cart_data[room.id].end_date }} <i class="icon icon-pencil"></i> </a> </li>
-                            {#<li>room type <span>spa</span></li>#}
-                        </ul>
+                            Hi {{ order.firstname }} {{ order.lastname }}, <br/>
+                        <h2>Your Order Number is {{ order.id }}</h2>
+
+
+
                             </div>
                     </div>
-                    <div class="span2 cart-thumb">
-                        {% if( room.file is not null ) %}
-                            <img src="/uploads/rooms/{{ room.file }}" alt="">
-                        {% else %}
-                            <img src="{{ asset('bundles/tneoperator/img/noimg.jpg') }}" alt="">
-                        {% endif %}
-                        <span class="cart-price">$ {{ cart_data[room.id].rate }}</span>
-                        <a href="{{ path('booking_remove_from_cart',{ 'id': room.id }) }}"><i class="icon icon-bar">Remove from cart</i> </a>
-                    </div>
-                </div>
-               {% endfor %}
-                <div class="total-charge clearfix"><h2 class="pull-left">total to be charged</h2> <span class="pull-right">$ {{ total_rate }}</span></div>
-            </div>
-            <div class="checkout-panel clearfix">
-                <div class="checkout-header">
-                    <h1 class="pull-left"><i class="icon icon-edit"></i> instant confirm <span class="inner hidden-tablet ng-binding">8</span></h1>
-                    <a href="#" class="collapse-btn pull-right" data-toggle="collapse">-</a>
-                    <div class="clear"></div>
-                </div>
-            </div>
-            <div class="checkout-panel clearfix">
-                <div class="checkout-header">
-                    <h1 class="pull-left"><i class="icon icon-edit"></i> instant confirm <span class="inner hidden-tablet ng-binding">8</span></h1>
-                    <a href="#" class="collapse-btn pull-right" data-toggle="collapse">-</a>
-                    <div class="clear"></div>
-                </div>
-            </div>
-            <a href="{{ path('booking_new') }}">Go to payment</a>
-            </div>
 
 
+                </div>
+
+
+
+
+            </div>
+
+            <div id="side-pane" class="span3 hidden-phone">
+
+            </div>
         </div>
 
 
 
     </div>
+        </div>
 
 {% include 'TNEOperatorBundle:Default:footer.html.twig' %}
 

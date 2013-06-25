@@ -21,13 +21,24 @@ class CustomerController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
+//        $em = $this->getDoctrine()->getManager();
+//
+//        $entities = $em->getRepository('TNEOperatorBundle:Customer')->findAll();
+//
+//        return $this->render('TNEOperatorBundle:Customer:index.html.twig', array(
+//            'entities' => $entities,
+//        ));
 
-        $entities = $em->getRepository('TNEOperatorBundle:Customer')->findAll();
+        if( $this->getRequest()->getSession()->get('booking_data')){
 
-        return $this->render('TNEOperatorBundle:Customer:index.html.twig', array(
-            'entities' => $entities,
-        ));
+            $entity = new Customer();
+            $form   = $this->createForm(new CustomerType(), $entity);
+
+            return $this->render('TNEOperatorBundle:Customer:new.html.twig', array(
+                'entity' => $entity,
+                'form'   => $form->createView(),
+            ));
+        }
     }
 
     /**
@@ -81,7 +92,7 @@ class CustomerController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('booking_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('booking_order_confirmation', array('id' => $entity->getId())));
         }
 
         return $this->render('TNEOperatorBundle:Customer:new.html.twig', array(
@@ -178,10 +189,6 @@ class CustomerController extends Controller
         ;
     }
 
-    /**
-     * @todo Move below function to booking controller
-     */
-
     public function addToCartAction()
     {
 //        $this->getRequest()->getSession()->remove('booking_data');
@@ -255,6 +262,14 @@ class CustomerController extends Controller
         unset($booking_data[$this->getRequest()->get('id')]);
         $session->set('booking_data',$booking_data);
         return $this->redirect($this->generateUrl('booking_cart'));
+
+    }
+
+    public function confirmationAction()
+    {
+        $this->getRequest()->getSession()->remove('booking_data');
+        $order = $this->getDoctrine()->getManager()->getRepository('TNEOperatorBundle:Customer')->find($this->getRequest()->get('id'));
+        return $this->render('TNEOperatorBundle:Customer:confirmation.html.twig', array('order' => $order));
 
     }
 }

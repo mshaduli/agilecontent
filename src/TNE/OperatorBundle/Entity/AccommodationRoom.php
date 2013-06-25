@@ -299,7 +299,8 @@ class AccommodationRoom
     public function removeUpload()
     {
         if ($file = $this->getAbsolutePath()) {
-            unlink($file);
+            if($file != 'noimg.jpg')
+                unlink($file);
         }
     }
 

@@ -23,7 +23,7 @@ class GuestType extends AbstractType
             ->add('state')
             ->add('country')
             ->add('comments')
-            ->add('customer')
+//            ->add('customer')
         ;
     }
 
