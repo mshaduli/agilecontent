@@ -17,7 +17,7 @@ class PaymentDetailsType extends AbstractType
             ->add('ccv')
             ->add('expiry_month')
             ->add('expiry_year')
-            ->add('customer')
+//            ->add('customer')
         ;
     }
 

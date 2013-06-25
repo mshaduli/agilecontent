@@ -11,14 +11,22 @@
         <field name="phone" type="string" column="phone" length="255"/>
         <field name="mobile" type="string" column="mobile" length="255"/>
 
-        <one-to-one field="guest" target-entity="TNE\OperatorBundle\Entity\Guest" inversed-by="customer">
-            <cascade><cascade-remove /></cascade>
+        <one-to-one field="guest" target-entity="TNE\OperatorBundle\Entity\Guest" inversed-by="customer">            
             <join-column name="guest_id" referenced-column-name="id" on-delete="CASCADE" on-update="CASCADE"/>
+            <cascade>
+                <cascade-persist />
+                <cascade-refresh />
+                <cascade-remove />
+            </cascade> 
         </one-to-one>
 
         <one-to-one field="payment" target-entity="TNE\OperatorBundle\Entity\PaymentDetails" inversed-by="customer">
-            <cascade><cascade-remove /></cascade>
             <join-column name="payment_id" referenced-column-name="id" on-delete="CASCADE" on-update="CASCADE"/>
+            <cascade>
+                <cascade-persist />
+                <cascade-refresh />
+                <cascade-remove />
+            </cascade> 
         </one-to-one>
 
     </entity>
