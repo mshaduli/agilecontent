@@ -206,7 +206,7 @@ $('#terms-close-btn').click(function(){
             <div class="massage-addtocart"> <a href="#" class="btn btn-primary">ROOMS</a> </div>
             </div>
          </div>
-          
+         {% if operator.media is defined %}
          <div class="flexslider">
           <ul class="slides">
             {% for media in operator.media %}                  
@@ -216,7 +216,8 @@ $('#terms-close-btn').click(function(){
             {% endfor %}
             
           </ul>
-        </div> 
+        </div>
+        {% endif %}
          
          
          
