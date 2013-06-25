@@ -406,9 +406,9 @@ EOD;
     {   
         $em = $this->get('doctrine.orm.entity_manager');
         $operator = $em->getRepository('TNEOperatorBundle:Accommodation')->find($id);
-       
+        $opObj = ($operator)?$operator:null;
         return $this->render('TNEOperatorBundle:Default:operatorDetails.html.twig', array(
-            'operator'     => $operator
+            'operator'     => $opObj
         ));
 
     }

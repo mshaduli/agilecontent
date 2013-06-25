@@ -176,7 +176,7 @@ $('#terms-close-btn').click(function(){
         <div style="background:url(img/banner-bg.png) center no-repeat; margin-top:50px;">
   
   <div class="span12" style="margin:auto; float:none">
-  
+  {% if operator is not null %}
   <div id="operator-slider">
         
         <div class="slider-thumb-nav-img"><img src="{{ asset('bundles/tneoperator/img/slider-thumb-img.png') }}"></div>
@@ -206,7 +206,7 @@ $('#terms-close-btn').click(function(){
             <div class="massage-addtocart"> <a href="#" class="btn btn-primary">ROOMS</a> </div>
             </div>
          </div>
-          
+         
          <div class="flexslider">
           <ul class="slides">
             {% for media in operator.media %}                  
@@ -216,18 +216,19 @@ $('#terms-close-btn').click(function(){
             {% endfor %}
             
           </ul>
-        </div> 
+        </div>
+        
          
          
          
          
           </div>
-  
+  {% endif %}
   </div>
   
   <div class="clear"></div>
   </div>
-
+{% if operator is not null %}
 <div id="main" class="container">
     <div class="row hidden-phone">
       <div class="span6">
@@ -461,7 +462,32 @@ $('#terms-close-btn').click(function(){
       <!-- end of operator -->
     </div>
   </div>
-
+ {% else %}
+        <div id="main" class="container">
+            <div class="row hidden-phone">
+                <div class="span6">
+                  <tabs class="btn-group" data-toggle="buttons-radio" model='filters.OperatorView' operators="operators" options='OperatorViewOptions' classes=""></tabs>
+                </div>
+                <div class="span3">
+                  <!--<div class="pull-right">
+                              Sort by <select id="sort">
+                                       <option value="">Relevance</option>
+                                       <option value="">Distance</option>
+                                       <option value="">Price</option>
+                                   </select>
+                          </div>   -->
+                </div>
+                <div class="span3 pull-right">
+                  <buttons-radio class="btn-group pull-right" data-toggle="buttons-radio" model='UIView' options='UIViewOptions' classes=""></buttons-radio>
+                </div>
+              </div>
+            <div class="row" >
+                <div class="span12">
+                    {{ "Operator data unavailable" }}
+                </div>
+            </div>
+        </div>
+ {% endif %}
     </div>
 
 {% include 'TNEOperatorBundle:Default:footer.html.twig' %}
@@ -471,7 +497,7 @@ $('#terms-close-btn').click(function(){
         
 <script>
     $(document).ready(function(){
-
+        {% if operator is not null %}
         // Footer map
         var footerMapOptions = {
             zoom: 12,
@@ -561,6 +587,7 @@ $(".map-section").show();
         }
         );
     }
+    {% endif %}
 </script>
     
 <script>
