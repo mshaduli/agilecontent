@@ -392,5 +392,31 @@ $('#terms-close-btn').click(function(){
           </form>
         </div>
 {% include 'TNEOperatorBundle:Default:footer.html.twig' %}
+    <script>
+        $(document).ready(function(){
 
+            // Footer map
+            var footerMapOptions = {
+                zoom: 12,
+                center: new google.maps.LatLng(-36.86424, 147.282715),
+                disableDefaultUI: true,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+            var footerMap = new google.maps.Map(document.getElementById("footerMap"), footerMapOptions);
+            var footerMarker = new google.maps.Marker({
+                position: new google.maps.LatLng(-36.86424, 147.282715),
+                map: footerMap,
+                icon: '/bundles/tneoperator/img/map/marker_blue.png'
+            });
+
+            // Init the filters
+            $("#filterTags").select2({ containerCssClass : "search-filter" });
+
+            // Init header filters
+            $('#filterAccomm').select2({});
+            $('#filterOccupants').select2({});
+
+            //angular.bootstrap(document, ['SearchApp']);
+        });
+    </script>
 {% endblock %}
