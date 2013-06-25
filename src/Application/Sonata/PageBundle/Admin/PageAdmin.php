@@ -297,11 +297,11 @@ class PageAdmin extends Admin
         );
         
         if (!$this->getSubject()->isHybrid()) {
-
+            $url = ($this->getSubject()->getUrl()=='/')?'':$this->getSubject()->getUrl();
             try {
                 $menu->addChild(
                     $this->trans('view_page'),
-                    array('uri' => $this->getRouteGenerator()->generate('page_slug', array('path' => $this->getSubject()->getUrl())))
+                    array('uri' => 'http://'.$this->getSubject()->getSite()->getHost().$url)
                 );
             } catch (RouteNotFoundException $e) {
                 // avoid crashing the admin if the route is not setup correctly
