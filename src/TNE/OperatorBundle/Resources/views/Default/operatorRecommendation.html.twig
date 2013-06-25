@@ -3,8 +3,8 @@
         {% for recommendation in recommendations %}
             {% if loop.index  is divisibleby(2)  %}
                 <div class="recomment-rgt-area">
-                    <div class="recommend-res-heading"> {{ recommendation.title }}</div>
-                    <div>{{ recommendation.description }}</div>
+                    <div class="recommend-res-heading"> {{ recommendation.title|raw }}</div>
+                    <div>{{ recommendation.description|raw }}</div>
                     <div class="addtocart-main">
                         <div class="star"><a href="#"><img src="{{ asset('bundles/tneoperator/img/star.png') }}"></a></div>
                         <div class="massage-addtocart"> <a class="btn btn-primary" href="#"><i class="icon-large icon-shopping-cart"></i>ADD TO CART</a> </div>
@@ -12,8 +12,8 @@
                 </div>
              {% else %}
                 <div class="recomment-lft-area">
-                    <div class="recommend-res-heading"> {{ recommendation.title }}</div>
-                    <div> {{ recommendation.description }}</div>
+                    <div class="recommend-res-heading"> {{ recommendation.title|raw }}</div>
+                    <div> {{ recommendation.description|raw }}</div>
                     <div class="addtocart-main">
                         <div class="star"><a href="#"><img src="{{ asset('bundles/tneoperator/img/star.png') }}"></a></div>
                         <div class="massage-addtocart"> <a class="btn btn-primary" href="#"><i class="icon-large icon-shopping-cart"></i>ADD TO CART</a> </div>
