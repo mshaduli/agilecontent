@@ -10,12 +10,19 @@
     <field name="children" type="integer" column="children"/>
     <field name="status" type="string" column="status" length="255"/>
 
-    <many-to-one field="room" target-entity="AccommodationRoom" inversed-by="bookings">
-      <join-column name="accommodation_room_id" referenced-column-name="id" />
-      <cascade>
-          <cascade-all/>
-      </cascade>
-    </many-to-one>
+      <many-to-one field="customer" target-entity="Customer" inversed-by="bookings">
+          <join-column name="customer_id" referenced-column-name="id" />
+          <cascade>
+              <cascade-all/>
+          </cascade>
+      </many-to-one>
+
+        <many-to-one field="room" target-entity="AccommodationRoom" inversed-by="bookings">
+          <join-column name="accommodation_room_id" referenced-column-name="id" />
+          <cascade>
+              <cascade-all/>
+          </cascade>
+        </many-to-one>
 
     <many-to-one field="site" target-entity="Application\Sonata\PageBundle\Entity\Site">
       <join-column name="site_id" referenced-column-name="id" />

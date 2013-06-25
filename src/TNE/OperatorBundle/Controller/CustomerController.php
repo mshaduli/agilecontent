@@ -2,12 +2,14 @@
 
 namespace TNE\OperatorBundle\Controller;
 
+use Faker\Provider\DateTime;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 use TNE\OperatorBundle\Entity\Customer;
 use TNE\OperatorBundle\Form\CustomerType;
+use TNE\OperatorBundle\Entity\Booking as Booking;
 
 /**
  * Customer controller.
@@ -92,7 +94,29 @@ class CustomerController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('booking_order_confirmation', array('id' => $entity->getId())));
+            $host = $this->getRequest()->getHost();
+            $em =  $this->getDoctrine()->getManager();
+            $site = $em->getRepository('ApplicationSonataPageBundle:Site')->findOneBy(array('host' => $host));
+
+            $session = $this->getRequest()->getSession();
+            $booking_data = $session->get('booking_data');
+            foreach($booking_data as $booked_room)
+            {
+                $room = $em->getRepository('TNEOperatorBundle:AccommodationRoom')->find($booked_room['room_id']);
+                $booking = new Booking();
+                $booking->setAdults("2");
+                $booking->setChildren("2");
+                $booking->setStart(new \DateTime(strtotime($booked_room['start_date'])));
+                $booking->setEnd(new \DateTime(strtotime($booked_room['end_date'])));
+                $booking->setRoom($room);
+                $booking->setCustomer($entity);
+                $booking->setSite($site);
+                $booking->setStatus("Booked");
+                $em->persist($booking);
+            }
+            $em->flush();
+            $session->set('booking_id', $entity->getId());
+            return $this->redirect($this->generateUrl('booking_order_confirmation'));
         }
 
         return $this->render('TNEOperatorBundle:Customer:new.html.twig', array(
@@ -267,9 +291,19 @@ class CustomerController extends Controller
 
     public function confirmationAction()
     {
+
+        if($this->getRequest()->getSession()->get('booking_id'))
+        {
+
+
         $this->getRequest()->getSession()->remove('booking_data');
-        $order = $this->getDoctrine()->getManager()->getRepository('TNEOperatorBundle:Customer')->find($this->getRequest()->get('id'));
+        $order = $this->getDoctrine()->getManager()->getRepository('TNEOperatorBundle:Customer')->find($this->getRequest()->getSession()->get('booking_id'));
+        $this->getRequest()->getSession()->remove('booking_id');
         return $this->render('TNEOperatorBundle:Customer:confirmation.html.twig', array('order' => $order));
+        }
+        else{
+            return $this->redirect('/');
+        }
 
     }
 }

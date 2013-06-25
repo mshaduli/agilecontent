@@ -49,6 +49,10 @@ class Booking
      */
     private $status;
 
+    /**
+     * @var integer
+     */
+    private $customer;
 
     /**
      * Get id
@@ -219,5 +223,28 @@ class Booking
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * Set customer
+     *
+     * @param integer $customer
+     * @return Booking
+     */
+    public function setCustomer($customer)
+    {
+        $this->customer = $customer;
+
+        return $this;
+    }
+
+    /**
+     * Get customer
+     *
+     * @return integer
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
     }
 }

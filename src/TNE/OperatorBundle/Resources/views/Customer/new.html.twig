@@ -154,7 +154,8 @@ $('#terms-close-btn').click(function(){
 
 {% block content %}
 
-{% include 'TNEOperatorBundle:Default:header.html.twig' %}
+{#{% include 'TNEOperatorBundle:Default:header.html.twig' %}#}
+{% render url('tne_operators_header') %}
 
 <div id="main" class="container" style="background:#FFFFFF;">
     <form action="{{ path('booking_create') }}" method="post" {{ form_enctype(form) }}>  

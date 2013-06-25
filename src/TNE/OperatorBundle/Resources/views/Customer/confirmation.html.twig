@@ -39,7 +39,8 @@ file that was distributed with this source code.
 
 <div>
 
-{% include 'TNEOperatorBundle:Default:header.html.twig' %}
+{#{% include 'TNEOperatorBundle:Default:header.html.twig' %}#}
+    {% render url('tne_operators_header') %}
 
     <div id="main" class="container">
         <div class="row hidden-phone">

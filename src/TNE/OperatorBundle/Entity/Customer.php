@@ -3,6 +3,7 @@
 namespace TNE\OperatorBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Customer
@@ -43,6 +44,15 @@ class Customer
      * @var string
      */
     private $mobile;
+
+    /**
+     * @var integer
+     */
+    private $bookings;
+
+    public function __construct() {
+        $this->bookings = new ArrayCollection();
+    }
 
 
     /**
@@ -247,5 +257,34 @@ class Customer
     public function getPayment()
     {
         return $this->payment;
+    }
+
+    /**
+     * Set booking
+     *
+     * @param \TNE\OperatorBundle\Entity\Booking $booking
+     * @return Customer
+     */
+    public function setBookings(\TNE\OperatorBundle\Entity\Booking $booking = null)
+    {
+        $this->bookings = $booking;
+
+        return $this;
+    }
+
+    /**
+     * Get payment
+     *
+     * @return \TNE\OperatorBundle\Entity\PaymentDetails
+     */
+    public function getBookings()
+    {
+        return $this->bookings;
+    }
+
+
+    public function __toString()
+    {
+        return $this->getFirstname().' '.$this->getLastname();
     }
 }
