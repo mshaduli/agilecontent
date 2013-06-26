@@ -15,60 +15,7 @@ file that was distributed with this source code.
 
 {% include 'TNEOperatorBundle:Default:rutherglen_header.html.twig' %}
 
-    <div id="panel1" class="container"><!-- first panel -->
-
-        <div class="row">
-            <div class="span12 clearfix">
-                <div id="carousel1" class="carousel slide">
-                  <div class="carousel-inner">
-                    <div class="item active">
-                        <img src="{{ asset('bundles/applicationsonatapage/theme/img/operator-rutherglen/uploaded/firstNew.jpg') }}" alt=""  />
-                      <div class="container">
-                        <div class="carousel-caption">
-                            <div>
-                                <h1>Be something new</h1>
-                                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin laoreet nisi at sapien ullamcorper vel mattis orc</p>
-                            </div>
-                            <!-- NL form -->
-                            <form id="nl-form" class="nl-form">
-                                <span>I'd like</span>
-                                <select>
-                                    <option value="1" selected>accommodation</option>
-                                    <option value="2">Bed &amp; Breakfast</option>
-                                    <option value="3">Motel</option>
-                                    <option value="4">Campsite</option>
-                                </select>
-                                <br class="hidden-phone" /><span>for</span>
-                                <select>
-                                    <option value="1" selected>2 adults</option>
-                                    <option value="2">3 adults</option>
-                                    <option value="3">4 adults</option>
-                                </select>
-                                <br class="hidden-phone tabletShow" /><span>on the</span>
-                                <select>
-                                    <option value="1" selected>5th Jun</option><!-- this needs to become a datePicker but I think it's best to do post-integration as already exists in operator search -->
-                                </select>
-                                <span class="noClear">for</span>
-                                <select>
-                                    <option value="1" selected>3 nights</option>
-                                    <option value="2">4 nights</option>
-                                    <option value="3">5 nights</option>
-                                </select>
-                                <div class="nl-submit-wrap">
-                                    <input class="nl-submit" value="see what's on offer" type="submit" />
-                                </div>
-                                <div class="nl-overlay"></div>
-                            </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-            </div>
-        </div>
-
-    </div>
+    {{ sonata_page_render_container('BannerImage', page) | sonata_page_render_custome_block([{'service':'sonata.block.service.linkedmedia','template':'hero'}]) }}
 
     <div id="panel2" class="container"> <!-- second panel -->
 
