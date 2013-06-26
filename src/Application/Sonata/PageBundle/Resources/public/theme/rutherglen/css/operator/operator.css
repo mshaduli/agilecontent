@@ -2,7 +2,7 @@
 These styles are operator specific - Rutherglen
 */
 body {
-	background: white url(../../../img/operator-rutherglen/bg.png) no-repeat center center fixed;
+	background: white url(../../img/bg.png) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -47,7 +47,7 @@ a:hover {
     text-indent: -9000px;	
 	width: 356px;
 	height: 100%;
-    background: transparent url(../../../img/operator-rutherglen/logo.png) no-repeat left 31px;
+    background: transparent url(../../img/logo.png) no-repeat left 31px;
 }
 #panel0 .logo a.showTablet {
  	background-image: none;
@@ -66,7 +66,7 @@ a:hover {
 	float: right;
 }
 .lt-ie9 #panel0 ul.bar {
-	background: url(../../../img/operator-rutherglen/headerUL.png) no-repeat 0 0;
+	background: url(../../img/headerUL.png) no-repeat 0 0;
 }
 #panel0 ul.bar li {
 	padding: 0;
@@ -300,12 +300,12 @@ a:hover {
 
 /* Panel 2 */
 #panel2 .span6 {
-	background: transparent url(../../../img/operator-rutherglen/leaf.png) no-repeat 0 0;
+	background: transparent url(../../img/leaf.png) no-repeat 0 0;
 	min-height: 640px;
 	position: relative;
 }
 #panel2 .span6 #leafClip {
-	background: transparent url(../../../img/operator-rutherglen/leafClip.png) no-repeat 0 0;
+	background: transparent url(../../img/leafClip.png) no-repeat 0 0;
 	width: 20px;
 	height: 22px;
 	position: absolute;
@@ -507,7 +507,7 @@ a:hover {
 }
 #panel5 h5 {
 	font-size: 18px;
-	background: transparent url(../../../img/twitter.png) no-repeat right center;
+	background: transparent url(../../img/twitter.png) no-repeat right center;
 }
 #panel5 p {
 	font-size: 16px;
@@ -618,7 +618,7 @@ a:hover {
 		font-size: 16px;
 	}
 	#panel0 .logo a {
-		background-image: url(../../../img/operator-rutherglen/1200/logo.png)
+		background-image: url(../../img/1200/logo.png)
 	}
 
 	#panel0 ul.nav {
@@ -794,7 +794,7 @@ a:hover {
 		height: 65px;
 	}
 	#panel0 .logo a {
-		background: transparent url(../../../img/operator-rutherglen/768/logo.png) no-repeat left center;
+		background: transparent url(../../img/768/logo.png) no-repeat left center;
 		width: 161px;
 	}
 	#panel0 .logo a.showTablet {
@@ -864,7 +864,7 @@ a:hover {
 	    border-top: 1px solid white;
 	}
 	#panel0 ul.nav > li > .parent {
-	    background-image: url("../../../img/downArrow.png");
+	    background-image: url("../../img/downArrow.png");
 	    background-repeat: no-repeat;
 	    background-position: right;
 	}
@@ -914,7 +914,7 @@ a:hover {
         background-position: 90% 50%;
     }
     #panel0 ul.nav li li .parent {
-        background-image: url("../../../img/downArrow.png");
+        background-image: url("../../img/downArrow.png");
         background-repeat: no-repeat;
         background-position: 90% 50%;
         color: #fff;
