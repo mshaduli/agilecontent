@@ -13,7 +13,7 @@ file that was distributed with this source code.
     
 {% block page_container %}
 
-{% include 'TNEOperatorBundle:Default:rutherglen_header.html.twig' %}
+{% include 'ApplicationSonataPageBundle::rutherglen_header.html.twig' %}
 
     {{ sonata_page_render_container('BannerImage', page) | sonata_page_render_custome_block([{'service':'sonata.block.service.linkedmedia','template':'hero'}]) }}
 
@@ -389,6 +389,6 @@ file that was distributed with this source code.
         </div><!-- row -->
     </div> <!-- /container -->
     
-{% include 'TNEOperatorBundle:Default:rutherglen_footer.html.twig' %}
+{% include 'ApplicationSonataPageBundle::rutherglen_footer.html.twig' %}
             
 {% endblock %}
