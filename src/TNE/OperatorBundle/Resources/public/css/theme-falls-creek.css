@@ -2612,10 +2612,25 @@ z-index:1001 !important;
     margin-right:0px;
 }
 
+.lft-from.state input
+{
+    width:194px;
+    border-radius:0px;
+    border:1px #b9b9b9 solid;
+    margin-right:0px;
+}
+.lft-from.country input
+{
+    width:230px;
+    border-radius:0px;
+    border:1px #b9b9b9 solid;
+    margin-right:0px;
+}
 .phone-area-code
 {
     float:left;
     margin-right:15px;
+    margin-top: 9px;
 }
 
 .phone-area-code input
@@ -2872,10 +2887,41 @@ z-index:1001 !important;
 
 .top-confirmation.cart-submit
 {
-    float:right;
+    float:left;
     margin:0px;
     padding:0px;
     background:none;
+}
+
+.control-group
+{
+    margin:0px;
+    padding:0px;
+}
+
+
+.proceed-payment-btn a{
+    border:1px orange solid;
+    font-size:25px;
+    color:orange;
+    text-align: center;
+    width:100%;
+    display:block;
+    text-decoration:none;
+    padding:20px 0px 20px 0px;
+    background-color: white;
+    line-height: 20px;
+}
+
+.proceed-payment-btn a:hover
+{
+    color:#aaa;
+}
+
+.proceed-payment-btn
+{
+    margin-top:12px;
+    margin-bottom:40px;
 }
 
 
