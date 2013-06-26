@@ -46,7 +46,7 @@ class CustomPageExtension extends \Twig_Extension
         );
     }
     
-    public function customeBlockRender($container, $services){ 
+    public function customeBlockRender($container, $services){
         $container_html = $container;
         if($container_html !=''){
         $p1 = strpos($container, '"');
@@ -61,7 +61,7 @@ class CustomPageExtension extends \Twig_Extension
             foreach($services as $key=> $service){
                 $flag = true;
                 foreach ($block->getChildren() as $child){
-                    if($service == $child->getType()){
+                    if($service['service'] == $child->getType()){
                         $flag = false;
                     }
                 }
@@ -71,27 +71,41 @@ class CustomPageExtension extends \Twig_Extension
         }
         foreach($tobecreated as $key=>$value){
             $newblock = $this->blockmanager->create();
-            
+
             $newblock->setName($key);
-            $newblock->setType($value);
+            $newblock->setType($value['service']);
             $newblock->setPage($block->getPage());
             $newblock->setParent($block);
-             if($value == 'sonata.block.service.text')
+             if($value['service'] == 'sonata.block.service.text')
                 $newblock->setSettings(array("content" => "Insert your content here"));
-             elseif($value == 'sonata.media.block.feature_media')
+             elseif($value['service'] == 'sonata.media.block.feature_media')
                 $newblock->setSettings(array("media" => false,"orientation" => "left","title" => null,"content" => null,"context" => "default","format" => "reference","mediaId" => null));
-             elseif($value == 'sonata.media.admin.gallery')
+             elseif($value['service'] == 'sonata.media.admin.gallery')
                 $newblock->setSettings(array("gallery" => false,"title" => "etst","context" => "default","format" => "default_big","pauseTime" => 3000,"animSpeed" => 300,"startPaused" => 1,"directionNav" => 1,"progressBar" => 1,"galleryId" => null));
+             elseif($value['service'] == 'sonata.block.service.linkedmedia')
+                 $newblock->setSettings(array(
+                     "media" => false,
+                     "orientation" => "left",
+                     "title" => null,
+                     "content" => null,
+                     "context" => "default",
+                     "format" => "reference",
+                     "mediaId" => null,
+                     'url'     => "",
+                     'desc'    => "",
+                     'overlay_title' => "",
+                     'template' => $value['template']
+                 ));
             $newblock->setEnabled(1);
             $newblock->setPosition(1);
             $this->blockmanager->save($newblock);
-            
-            
+
+
         }
         echo $container_html;
         }
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -106,5 +120,5 @@ class CustomPageExtension extends \Twig_Extension
     public function getName()
     {
         return 'sonata_custom_page';
-    }    
+    }
 }

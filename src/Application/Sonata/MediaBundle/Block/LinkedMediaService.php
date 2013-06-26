@@ -10,16 +10,16 @@
 
 namespace Application\Sonata\MediaBundle\Block;
 
-use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Admin\Admin;
-use Sonata\AdminBundle\Validator\ErrorElement;
+
 use Application\Sonata\MediaBundle\Block\FeatureMediaBlockService as BaseFeaturedMediaService;
 use Sonata\BlockBundle\Model\BlockInterface;
 
-use Sonata\MediaBundle\Model\MediaManagerInterface;
-use Sonata\MediaBundle\Model\MediaInterface;
-
+use Application\Sonata\PageBundle\Block\MediaManager;
 use Symfony\Component\HttpFoundation\Response;
+
+use Symfony\Component\Templating\EngineInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 
 /**
@@ -29,6 +29,11 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class LinkedMediaService extends BaseFeaturedMediaService
 {
+    protected $media_manager;
+    public function __construct($name, EngineInterface $templating, ContainerInterface $container, MediaManager $media_manager) {
+        parent::__construct($name, $templating,$container,$media_manager);
+        $this->media_manager = $media_manager;
+    }
     /**
      * {@inheritdoc}
      */
@@ -49,32 +54,11 @@ class LinkedMediaService extends BaseFeaturedMediaService
             'content' => false,
             'context' => false,
             'format'  => false,
+            'url'     => "",
+            'desc'    => "",
+            'overlay_title' => "",
+            'template' => 'hero'
         );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function buildEditForm(FormMapper $formMapper, BlockInterface $block)
-    {
-        $contextChoices = $this->getContextChoices();
-        $formatChoices = $this->getFormatChoices($block->getSetting('mediaId'));
-
-        $translator = $this->container->get('translator');
-
-        $formMapper->add('settings', 'sonata_type_immutable_array', array(
-            'keys' => array(
-                array('title', 'text', array('required' => false)),
-                array('content', 'textarea', array('required' => false)),
-                array('orientation', 'choice', array('choices' => array(
-                    'left'  => $translator->trans('feature_left_choice', array(), 'SonataMediaBundle'),
-                    'right' => $translator->trans('feature_right_choice', array(), 'SonataMediaBundle')
-                ))),
-                array('context', 'choice', array('required' => true, 'choices' => $contextChoices)),
-                array('format', 'choice', array('required' => count($formatChoices) > 0, 'choices' => $formatChoices)),
-                array($this->getMediaBuilder($formMapper), null, array()),
-            )
-        ));
     }
 
     /**
@@ -92,15 +76,5 @@ class LinkedMediaService extends BaseFeaturedMediaService
             'block'     => $block,
             'settings'  => $settings
         ), $response);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getStylesheets($media)
-    {
-        return array(
-            '/bundles/sonatamedia/blocks/feature_media/theme.css'
-        );
     }
 }
