@@ -67,7 +67,7 @@ class CustomerAdmin extends Admin
             ->add('mobile')
             ->add('guest.firstname')
             ->add('guest.lastname')
-//            ->add('bookings')
+            ->add('bookings')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'view' => array()),
