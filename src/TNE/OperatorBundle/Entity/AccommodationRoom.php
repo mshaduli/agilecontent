@@ -342,6 +342,11 @@ class AccommodationRoom
     public function getMaxCapacity()
     {
         return $this->maxCapacity;
-    }    
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
 
 }

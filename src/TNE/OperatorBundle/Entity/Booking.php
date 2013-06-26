@@ -247,4 +247,10 @@ class Booking
     {
         return $this->customer;
     }
+
+    public function __toString()
+    {
+        return $this->getRoom()->getName() . ' for ' .  $this->getStart()->format('D-M-Y') . ' to ' .  $this->getEnd()->format('D-M-Y');
+    }
+
 }
