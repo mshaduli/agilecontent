@@ -72,10 +72,10 @@ file that was distributed with this source code.
 
     {% endif %}
                 <ul class="nav pull-right" id="header-nav-items">
-                    
+
                     {% if settings.content.items is defined %}
                         {% set menu = settings.content.items %}
-                        {% include "ApplicationSonataPageBundle:Block:nav_item.html.twig" with {'links':menu, 'li_class': 'dropdown', 'data_hover': true } only %}  
+                        {% include "ApplicationSonataPageBundle:Block:nav_item.html.twig" with {'links':menu, 'li_class': 'dropdown', 'data_hover': true } only %}
                     {% endif %}
                 </ul>
                     
