@@ -22,12 +22,8 @@ file that was distributed with this source code.
         <div class="row">
             <div class="span6">
                 <div id="leafClip" class="hidden-phone"></div>
-                <dl>
-                    <dt><h2>About an hour from anywhere</h2></dt>
-                    <dd class="first">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id enim tellus. Praesent porttitor imperdiet.</dd>
-                    <dd>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id enim tellus. Praesent porttitor imperdiet dolor. Sed at arcu enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel lectus at ipsum tempor pellentesque vel eu mauris. Sed ornare, lorem ullamcorper eleifend gravida, lectus libero aliquet eros, id commodo mi.</dd>
-                    <dd class="hidden-phone">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id enim tellus. Praesent porttitor imperdiet dolor. Sed at arcu enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel lectus at ipsum tempor pellentesque vel eu mauris. Sed ornare, lorem ullamcorper eleifend</dd>
-                </dl>
+                {{ sonata_page_render_container('content-top', page) | sonata_page_render_custome_block([{'service':'sonata.block.service.text'}]) }}
+
                 <a class="mapsLink" href="#">getting to rutherglen</a>
             </div>
             <div class="span6 rightLinks">
