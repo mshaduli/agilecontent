@@ -2,7 +2,6 @@
 
 namespace TNE\OperatorBundle\Controller;
 
-use Faker\Provider\DateTime;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -70,6 +69,9 @@ class CustomerController extends Controller
      */
     public function newAction()
     {
+        if(!$this->getRequest()->getSession()->get('booking_id'))
+            $this->redirect('/');
+
         $entity = new Customer();
         $form   = $this->createForm(new CustomerType(), $entity);
 
@@ -252,8 +254,11 @@ class CustomerController extends Controller
 
     public function cartAction()
     {
-
        $cart = $this->getRequest()->getSession()->get('booking_data');
+
+        if(count($cart) <= 0 || $cart == "" || is_null($cart))
+            $this->redirect('/');
+
         $total = 0;
         $rooms = array();
         $em = $this->getDoctrine()->getManager();
