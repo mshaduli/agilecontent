@@ -609,7 +609,7 @@ class Accommodation
     {
         if($this->getTripadvisorKey())
         {
-            $url = 'http://api.tripadvisor.com/api/partner/1.0/location/89575?key='.$this->getTripadvisorKey();
+            $url = 'http://api.tripadvisor.com/api/partner/1.0/location/'.$this->getTripadvisorKey().'?key=b8e9b5af-ac5c-4193-bda5-f013fae5f050';
             try{
                 $results = file_get_contents($url);
             }  catch (\Exception $e){
