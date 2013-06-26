@@ -1,0 +1,447 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+{% extends 'ApplicationSonataPageBundle::rutherglen_base_layout.html.twig' %}
+
+    
+{% block page_container %}
+
+{% include 'TNEOperatorBundle:Default:rutherglen_header.html.twig' %}
+
+    <div id="panel1" class="container"><!-- first panel -->
+
+        <div class="row">
+            <div class="span12 clearfix">
+                <div id="carousel1" class="carousel slide">
+                  <div class="carousel-inner">
+                    <div class="item active">
+                        <img src="{{ asset('bundles/applicationsonatapage/theme/img/operator-rutherglen/uploaded/firstNew.jpg') }}" alt=""  />
+                      <div class="container">
+                        <div class="carousel-caption">
+                            <div>
+                                <h1>Be something new</h1>
+                                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin laoreet nisi at sapien ullamcorper vel mattis orc</p>
+                            </div>
+                            <!-- NL form -->
+                            <form id="nl-form" class="nl-form">
+                                <span>I'd like</span>
+                                <select>
+                                    <option value="1" selected>accommodation</option>
+                                    <option value="2">Bed &amp; Breakfast</option>
+                                    <option value="3">Motel</option>
+                                    <option value="4">Campsite</option>
+                                </select>
+                                <br class="hidden-phone" /><span>for</span>
+                                <select>
+                                    <option value="1" selected>2 adults</option>
+                                    <option value="2">3 adults</option>
+                                    <option value="3">4 adults</option>
+                                </select>
+                                <br class="hidden-phone tabletShow" /><span>on the</span>
+                                <select>
+                                    <option value="1" selected>5th Jun</option><!-- this needs to become a datePicker but I think it's best to do post-integration as already exists in operator search -->
+                                </select>
+                                <span class="noClear">for</span>
+                                <select>
+                                    <option value="1" selected>3 nights</option>
+                                    <option value="2">4 nights</option>
+                                    <option value="3">5 nights</option>
+                                </select>
+                                <div class="nl-submit-wrap">
+                                    <input class="nl-submit" value="see what's on offer" type="submit" />
+                                </div>
+                                <div class="nl-overlay"></div>
+                            </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div id="panel2" class="container"> <!-- second panel -->
+
+        <div class="row">
+            <div class="span6">
+                <div id="leafClip" class="hidden-phone"></div>
+                <dl>
+                    <dt><h2>About an hour from anywhere</h2></dt>
+                    <dd class="first">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id enim tellus. Praesent porttitor imperdiet.</dd>
+                    <dd>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id enim tellus. Praesent porttitor imperdiet dolor. Sed at arcu enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel lectus at ipsum tempor pellentesque vel eu mauris. Sed ornare, lorem ullamcorper eleifend gravida, lectus libero aliquet eros, id commodo mi.</dd>
+                    <dd class="hidden-phone">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id enim tellus. Praesent porttitor imperdiet dolor. Sed at arcu enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel lectus at ipsum tempor pellentesque vel eu mauris. Sed ornare, lorem ullamcorper eleifend</dd>
+                </dl>
+                <a class="mapsLink" href="#">getting to rutherglen</a>
+            </div>
+            <div class="span6 rightLinks">
+                <a href="#">
+                    <img 
+                        src="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/panel2box.jpg" 
+                        data-src481="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/panel2box.jpg" 
+                        data-src1025="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/panel2box.jpg" 
+                        alt=""
+                    />
+                    <h3>Our wine region</h3>
+                </a>
+                <a href="#">
+                    <img 
+                        src="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/panel2box.jpg" 
+                        data-src481="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/panel2box.jpg" 
+                        data-src1025="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/panel2box.jpg" 
+                        alt=""
+                    />
+                    <h3>Our wine region</h3>
+                </a>
+                <a href="#">
+                    <img 
+                        src="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/panel2box.jpg" 
+                        data-src481="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/panel2box.jpg" 
+                        data-src1025="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/panel2box.jpg" 
+                        alt=""
+                    />
+                    <h3>Our wine region</h3>
+                </a>
+                <a href="#">
+                    <img 
+                        src="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/panel2box.jpg" 
+                        data-src481="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/panel2box.jpg" 
+                        data-src1025="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/panel2box.jpg" 
+                        alt=""
+                    />
+                    <h3>Our wine region</h3>
+                </a>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+    </div> <!-- /container -->
+
+    <div class="container"><!-- third panel -->
+
+        <div class="row">
+            <div class="span12 clearfix">
+                
+                <div id="panel3" class="container-fluid">
+                    <h2>Events at Rutherglen</h2>
+                    <div class="row-fluid">
+                        <div class="carousel slide" id="myCarousel">
+                            <div class="carousel-inner">
+                              <div class="item active">
+                                    <ul class="thumbnails">
+                                        <!-- IE8 may not like the hyperlinks below but I don't have time to test -->
+                                        <li class="span4">
+                                            <a href="#">
+                                                <!-- opacity controlled by CMS class can be opaque1-10 -->
+                                                <div class="thumbnail opaque5">
+                                                    <img 
+                                                        src="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/slider2imgNew.jpg" 
+                                                        data-src481="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/slider2imgNew.jpg" 
+                                                        data-src1025="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/slider2imgNew.jpg" 
+                                                        alt=""
+                                                    />
+                                                </div>
+                                                <div class="caption">
+                                                    <dl>
+                                                        <dt>The Sweet Cycle</dt>
+                                                        <dd>Sat 18 May 2013</dd>
+                                                        <dd class="hidden-phone">
+                                                            <p>
+                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin laoreet nisi at sapien ullamcorper vel mattis orc
+                                                            </p>
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="readMore">read more</div>
+                                            </a>
+                                        </li>
+                                        <li class="span4">
+                                            <a href="#">
+                                                <div class="thumbnail">
+                                                    <img 
+                                                        src="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/slider2imgNew.jpg" 
+                                                        data-src481="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/slider2imgNew.jpg" 
+                                                        data-src1025="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/slider2imgNew.jpg" 
+                                                        alt=""
+                                                    />
+                                                </div>
+                                                <div class="caption">
+                                                    <dl>
+                                                        <dt>The Sweet Cycle</dt>
+                                                        <dd>Sat 18 May 2013</dd>
+                                                        <dd class="hidden-phone">
+                                                            <p>
+                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin laoreet nisi at sapien ullamcorper vel mattis orc
+                                                            </p>
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="readMore">read more</div>
+                                            </a>
+                                        </li>
+                                        <li class="span4">
+                                            <a href="#">
+                                                <div class="thumbnail">
+                                                    <img 
+                                                        src="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/slider2imgNew.jpg" 
+                                                        data-src481="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/slider2imgNew.jpg" 
+                                                        data-src1025="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/slider2imgNew.jpg" 
+                                                        alt=""
+                                                    />
+                                                </div>
+                                                <div class="caption">
+                                                    <dl>
+                                                        <dt>The Sweet Cycle</dt>
+                                                        <dd>Sat 18 May 2013</dd>
+                                                        <dd class="hidden-phone">
+                                                            <p>
+                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin laoreet nisi at sapien ullamcorper vel mattis orc
+                                                            </p>
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="readMore">read more</div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                              </div>
+                              <div class="item">
+                                    <ul class="thumbnails">
+                                        <li class="span4">
+                                            <a href="#">
+                                                <div class="thumbnail">
+                                                    <img 
+                                                        src="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/slider2imgNew.jpg" 
+                                                        data-src481="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/slider2imgNew.jpg" 
+                                                        data-src1025="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/slider2imgNew.jpg" 
+                                                        alt=""
+                                                    />
+                                                </div>
+                                                <div class="caption">
+                                                    <dl>
+                                                        <dt>The Sweet Cycle</dt>
+                                                        <dd>Sat 18 May 2013</dd>
+                                                        <dd class="hidden-phone">
+                                                            <p>
+                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin laoreet nisi at sapien ullamcorper vel mattis orc
+                                                            </p>
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="readMore">read more</div>
+                                            </a>
+                                        </li>
+                                        <li class="span4">
+                                            <a href="#">
+                                                <div class="thumbnail">
+                                                    <img 
+                                                        src="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/slider2imgNew.jpg" 
+                                                        data-src481="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/slider2imgNew.jpg" 
+                                                        data-src1025="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/slider2imgNew.jpg" 
+                                                        alt=""
+                                                    />
+                                                </div>
+                                                <div class="caption">
+                                                    <dl>
+                                                        <dt>The Sweet Cycle</dt>
+                                                        <dd>Sat 18 May 2013</dd>
+                                                        <dd class="hidden-phone">
+                                                            <p>
+                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin laoreet nisi at sapien ullamcorper vel mattis orc
+                                                            </p>
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="readMore">read more</div>
+                                            </a>
+                                        </li>
+                                        <li class="span4">
+                                            <a href="#">
+                                                <div class="thumbnail">
+                                                    <img 
+                                                        src="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/slider2imgNew.jpg" 
+                                                        data-src481="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/slider2imgNew.jpg" 
+                                                        data-src1025="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/slider2imgNew.jpg" 
+                                                        alt=""
+                                                    />
+                                                </div>
+                                                <div class="caption">
+                                                    <dl>
+                                                        <dt>The Sweet Cycle</dt>
+                                                        <dd>Sat 18 May 2013</dd>
+                                                        <dd class="hidden-phone">
+                                                            <p>
+                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin laoreet nisi at sapien ullamcorper vel mattis orc
+                                                            </p>
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="readMore">read more</div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                              </div>
+                              <div class="item">
+                                    <ul class="thumbnails">
+                                        <li class="span4">
+                                            <a href="#">
+                                                <div class="thumbnail">
+                                                    <img 
+                                                        src="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/slider2imgNew.jpg" 
+                                                        data-src481="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/slider2imgNew.jpg" 
+                                                        data-src1025="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/slider2imgNew.jpg" 
+                                                        alt=""
+                                                    />
+                                                </div>
+                                                <div class="caption">
+                                                    <dl>
+                                                        <dt>The Sweet Cycle</dt>
+                                                        <dd>Sat 18 May 2013</dd>
+                                                        <dd class="hidden-phone">
+                                                            <p>
+                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin laoreet nisi at sapien ullamcorper vel mattis orc
+                                                            </p>
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="readMore">read more</div>
+                                            </a>
+                                        </li>
+                                        <li class="span4">
+                                            <a href="#">
+                                                <div class="thumbnail">
+                                                    <img 
+                                                        src="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/slider2imgNew.jpg" 
+                                                        data-src481="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/slider2imgNew.jpg" 
+                                                        data-src1025="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/slider2imgNew.jpg" 
+                                                        alt=""
+                                                    />
+                                                </div>
+                                                <div class="caption">
+                                                    <dl>
+                                                        <dt>The Sweet Cycle</dt>
+                                                        <dd>Sat 18 May 2013</dd>
+                                                        <dd class="hidden-phone">
+                                                            <p>
+                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin laoreet nisi at sapien ullamcorper vel mattis orc
+                                                            </p>
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="readMore">read more</div>
+                                            </a>
+                                        </li>
+                                        <li class="span4">
+                                            <a href="#">
+                                                <div class="thumbnail">
+                                                    <img 
+                                                        src="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/slider2imgNew.jpg" 
+                                                        data-src481="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/slider2imgNew.jpg" 
+                                                        data-src1025="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/slider2imgNew.jpg" 
+                                                        alt=""
+                                                    />
+                                                </div>
+                                                <div class="caption">
+                                                    <dl>
+                                                        <dt>The Sweet Cycle</dt>
+                                                        <dd>Sat 18 May 2013</dd>
+                                                        <dd class="hidden-phone">
+                                                            <p>
+                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin laoreet nisi at sapien ullamcorper vel mattis orc
+                                                            </p>
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="readMore">read more</div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                              </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span12 myCarouselControl">
+                            <div class="centerControl">
+                                <a data-slide="prev" href="#myCarousel" class="left"><span class="entypo chevron-thin-left"></span></a>
+                                <strong>SEE MORE EVENTS</strong>
+                                <a data-slide="next" href="#myCarousel" class="right"><span class="entypo chevron-thin-right"></span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                </diV>
+            </div>
+        </div>
+
+    </div> <!-- /container -->
+
+    <div id="panel4" class="container"><!-- fourth panel -->
+        <div class="row">
+            <div class="span12">
+                <h2>More to see and do</h2>
+            </div>
+            <div class="span3">
+                <a href="#">
+                    <img 
+                        src="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/panel4box.jpg" 
+                        data-src481="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/panel4box.jpg" 
+                        data-src1025="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/panel4box.jpg" 
+                        alt=""
+                    />
+                    <h3>Tuileries</h3>
+                    <span>READ MORE</span>
+                </a>  
+            </div>
+            <div class="span3">
+                <a href="#">
+                    <img 
+                        src="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/panel4box.jpg" 
+                        data-src481="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/panel4box.jpg" 
+                        data-src1025="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/panel4box.jpg" 
+                        alt=""
+                    />
+                    <h3>Boobs, Bikes &amp; Bubbles</h3>
+                    <span>READ MORE</span>
+                </a>  
+            </div>
+            <div class="span3">
+                <a href="#">
+                    <img 
+                        src="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/panel4box.jpg" 
+                        data-src481="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/panel4box.jpg" 
+                        data-src1025="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/panel4box.jpg" 
+                        alt=""
+                    />
+                    <h3>Scion Vineyard &amp; Winery</h3>
+                    <span>READ MORE</span>
+                </a>  
+            </div>
+            <div class="span3">
+                <a href="#">
+                    <img 
+                        src="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/panel4box.jpg" 
+                        data-src481="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/panel4box.jpg" 
+                        data-src1025="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/panel4box.jpg" 
+                        alt=""
+                    />
+                    <h3>Jones Vineyard &amp; Cafe </h3>
+                    <span>READ MORE</span>
+                </a>  
+            </div>
+        </div><!-- row -->
+    </div> <!-- /container -->
+    
+{% include 'TNEOperatorBundle:Default:rutherglen_footer.html.twig' %}
+            
+{% endblock %}
