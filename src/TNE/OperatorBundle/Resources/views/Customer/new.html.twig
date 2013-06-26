@@ -160,34 +160,8 @@ $('#terms-close-btn').click(function(){
 <div id="main" class="container" style="background:#FFFFFF;">
     <form action="{{ path('booking_create') }}" method="post" {{ form_enctype(form) }}>  
         
-<div class="cart-head-div">
-      <div class="your-cart-main">
-        <div class="cart-sno">1</div>
-        <div class="cart-label">Your Cart</div>
-      </div>
-      <div class="your-cart-main selected">
-        <div class="cart-sno">2</div>
-        <div class="cart-label">Your Details</div>
-      </div>
-      <div class="your-cart-main">
-        <div class="cart-sno">3</div>
-        <div class="cart-label">Verify + Pay</div>
-      </div>
-      <div class="your-cart-main">
-        <div class="cart-sno">4</div>
-        <div class="cart-label">Confirmation</div>
-      </div>
-      <div>
-          <div class="top-confirmation cart-submit">
-              <div class="proceed-confirmation" style="margin-top:0px;"><input type="submit" value="PROCEED TO CONFIRMATION"></div>
-              <div class="back" style="margin-right:0px; margin-top:0px;"><input type="button" value="BACK"></div>
-              <div class="clear"></div>
-          </div>
-      </div>
-      <div class="clear"></div>
-    </div>
-    
-    
+
+
     
     
   
@@ -370,10 +344,18 @@ $('#terms-close-btn').click(function(){
               <label>Comments / Special Requests</label>
               {{ form_row(form.guest.comments) }}
             </div>
-            
 
-            
-   <div class="clear"></div>
+
+              <div>
+                  <div class="top-confirmation cart-submit">
+                      <div class="proceed-confirmation" style="margin-top:0px;"><input type="submit" value="PROCEED TO CONFIRMATION"></div>
+                      <div class="back" style="margin-right:0px; margin-top:0px;"><input type="button" value="BACK"></div>
+                      <div class="clear"></div>
+                  </div>
+              </div>
+
+
+              <div class="clear"></div>
           </div>
           
           

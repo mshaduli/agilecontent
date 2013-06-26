@@ -59,7 +59,7 @@ file that was distributed with this source code.
                 <div class="checkout-panel clearfix">
 
                 <div class="checkout-header">
-                    <h1 class="pull-left"><i class="icon icon-edit"></i> instant confirm <span class="inner hidden-tablet ng-binding">8</span></h1>
+                    <h1 class="pull-left"><i class="icon icon-edit"></i> instant confirm <span class="inner hidden-tablet ng-binding">{{ rooms| length }}</span></h1>
                     <a href="#" class="collapse-btn pull-right" data-toggle="collapse">-</a>
                     <div class="clear"></div>
                 </div>
@@ -97,19 +97,19 @@ file that was distributed with this source code.
             </div>
             <div class="checkout-panel clearfix">
                 <div class="checkout-header">
-                    <h1 class="pull-left"><i class="icon icon-edit"></i> instant confirm <span class="inner hidden-tablet ng-binding">8</span></h1>
+                    <h1 class="pull-left"><i class="icon icon-edit"></i> instant confirm <span class="inner hidden-tablet ng-binding"></span></h1>
                     <a href="#" class="collapse-btn pull-right" data-toggle="collapse">-</a>
                     <div class="clear"></div>
                 </div>
             </div>
             <div class="checkout-panel clearfix">
                 <div class="checkout-header">
-                    <h1 class="pull-left"><i class="icon icon-edit"></i> instant confirm <span class="inner hidden-tablet ng-binding">8</span></h1>
+                    <h1 class="pull-left"><i class="icon icon-edit"></i> instant confirm <span class="inner hidden-tablet ng-binding"></span></h1>
                     <a href="#" class="collapse-btn pull-right" data-toggle="collapse">-</a>
                     <div class="clear"></div>
                 </div>
             </div>
-            <a href="{{ path('booking_new') }}">Go to payment</a>
+           <div class="proceed-payment-btn"> <a href="{{ path('booking_new') }}">Proceed to Details Page</a></div>
             </div>
 
 
