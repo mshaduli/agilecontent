@@ -40,9 +40,10 @@ class MenuBlockService extends BaseBlockService implements BlockServiceInterface
     }
 
     /**
-     * @param \Sonata\BlockBundle\Model\BlockInterface $block
-     * @param null|\Symfony\Component\HttpFoundation\Response $response
-     * @param \Symfony\Component\HttpFoundation\Response $response
+     * @param BlockInterface $block
+     * @param null|Response $response
+     *
+     * @return Response $response
      */
     public function execute(BlockInterface $block, Response $response = null)
     {
