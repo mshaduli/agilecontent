@@ -16,12 +16,11 @@ file that was distributed with this source code.
 <link rel="stylesheet" href="{{ asset('bundles/tneoperator/angular/app/css/app.css') }}" type="text/css" media="all" />
 
 <link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/font-awesome.min.css') }}" type="text/css" media="all" />
-<link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/theme-falls-creek.css') }}" type="text/css" media="all" />
+<link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/theme-rutherglen.css') }}" type="text/css" media="all" />
 <link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/select2.css') }}" type="text/css" media="all" />
 <link rel="stylesheet" href="{{ asset('bundles/tneoperator/angular/app/css/daterangepicker.css') }}" type="text/css" media="all" />
 
 {% endblock %}
-
 {% block page_javascripts %}
     {{ parent() }}
     {{ vichgeo_include_js() }}
@@ -39,8 +38,10 @@ file that was distributed with this source code.
 
 <div ng-app="SearchApp" ng-controller="SearchController">
 
-{#{% include 'TNEOperatorBundle:Default:header.html.twig' %}#}
 {% render url('tne_operators_header') %}
+
+<div class="main-bg-container">
+
     <div id="main" class="container">
         <div class="row hidden-phone">
             <div class="span6">
@@ -87,7 +88,7 @@ file that was distributed with this source code.
 
 
     </div>
-
+</div><!-- end of main-bg-container -->
 {% include 'TNEOperatorBundle:Default:footer.html.twig' %}
 
     <div id="design"></div>
