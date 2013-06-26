@@ -91,5 +91,15 @@
         <tag name="kernel.event_listener" event="calendar.load_events" method="loadEvents" />
     </service>
 
+        <service id="sonata.admin.customer" class="TNE\OperatorBundle\Admin\CustomerAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Reports" label="Bookings" audit="false" />
+            <argument />
+            <argument>TNE\OperatorBundle\Entity\Customer</argument>
+            <argument>SonataAdminBundle:CRUD</argument>
+            <call method="setTranslationDomain">
+                <argument>TNEOperatorBundle</argument>
+            </call>
+        </service>
+
    </services>
 </container>
