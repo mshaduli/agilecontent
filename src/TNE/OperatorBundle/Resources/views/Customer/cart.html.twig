@@ -12,13 +12,15 @@ file that was distributed with this source code.
 
 {% block page_stylesheets %}
     {{ parent() }}
-<link rel="stylesheet" href="http://fast.fonts.com/cssapi/1a5d5164-616e-4355-a99a-4cbe2bd50933.css" type="text/css"/>
+
 <link rel="stylesheet" href="{{ asset('bundles/tneoperator/angular/app/css/app.css') }}" type="text/css" media="all" />
 
 <link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/font-awesome.min.css') }}" type="text/css" media="all" />
 <link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/theme-rutherglen.css') }}" type="text/css" media="all" />
 <link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/select2.css') }}" type="text/css" media="all" />
 <link rel="stylesheet" href="{{ asset('bundles/tneoperator/angular/app/css/daterangepicker.css') }}" type="text/css" media="all" />
+
+    <link id="MonoTypeFontApiFontTracker" type="text/css" rel="stylesheet" href="http://fast.fonts.com/t/1.css?apiType=js&amp;projectid=1a5d5164-616e-4355-a99a-4cbe2bd50933">
 
 {% endblock %}
 
@@ -88,15 +90,16 @@ file that was distributed with this source code.
                             {{ room.accommodation.name }}<br/>
                             ({{ room.accommodation.destination }})
                         <ul>
-                            <li><div class="checkin-indiv">CHECK-IN</div> <a href="#">{{ cart_data[room.id].start_date }} <i class="icon-large icon-pencil"></i> </a> </li>
-                            <li><div class="checkin-indiv">CHECK-OUT</div> <a href="#">{{ cart_data[room.id].end_date }} <i class="icon-large icon-pencil"></i> </a> </li>
+                            <li><div class="checkin-indiv">CHECK-IN</div> <a  href="{{ path('tne_operator_details',{ 'id': room.accommodation.id }) }}#{{ room.id }}"> {{ cart_data[room.id].start_date }} <i class="icon-large icon-pencil"></i> </a> </li>
+                            <li><div class="checkin-indiv">CHECK-OUT</div> <a  href="{{ path('tne_operator_details',{ 'id': room.accommodation.id }) }}#{{ room.id }}"> {{ cart_data[room.id].end_date }} <i class="icon-large icon-pencil"></i> </a> </li>
+
                             {#<li>room type <span>spa</span></li>#}
                         </ul>
                             </div>
                     </div>
                     <div class="span2 cart-thumb">
                         
-                        <div class="rate">${{ cart_data[room.id].rate }}</div>
+                        <div class="rate">${{ cart_data[room.id].rate * cart_data[room.id].days }}</div>
                         <div class="delete-link">
                             <a href="{{ path('booking_remove_from_cart',{ 'id': room.id }) }}"><img src="{{ asset('bundles/tneoperator/img/delete-bin.jpg') }}"></a>
                         </div>
@@ -105,8 +108,6 @@ file that was distributed with this source code.
                         {% else %}
                             <img src="{{ asset('bundles/tneoperator/img/noimg.jpg') }}" alt="">
                         {% endif %}
-                        
-                        
                     </div>
                 </div>
                {% endfor %}
