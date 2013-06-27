@@ -25,6 +25,9 @@
     text-shadow: none;
 }
 
+#map-view-small{ height: 214px; }
+#map-view-large{ height: 500px; }
+
 /* design elements */
 #designs {
     position: absolute;
@@ -491,6 +494,7 @@ input[type="file"] {
 
 /* Cards */
 .main-bg-container{ background: url("../img/tabs-bg.jpg") top center no-repeat; }
+.main-bg-container.operator{background: url("../img/operator-bg.jpg") top center no-repeat; padding-top: 165px;}
 #main {
     padding-top: 6px;
 }
@@ -2032,6 +2036,7 @@ color:#fff;
 text-align:center;
 position:absolute;
 right:10px;
+z-index: 99;
 }
 
 .large-map-link a
@@ -2151,10 +2156,10 @@ position: relative;
 }
 
 /* Close button for Map Section */
-#map-close-btn{ position: absolute; color: #fff; right: 30px; top: 25px; }
+#map-close-btn{ position: absolute; color: #fff; right: 25px; top: 25px; z-index: 99; width: 30px; height: 30px; background-color: rgba(61, 6, 36, 0.5); text-align: center; line-height: 30px; }
 #map-close-btn:hover{ text-decoration: none; }
-#ask-form-close-btn{ color: #717073; }
-#ask-form-close-btn:hover{ color: #717073; text-decoration: none; }
+#ask-form-close-btn{ color: #3d0624; }
+#ask-form-close-btn:hover{ color: #3d0624; text-decoration: none; }
 
 .tabbable
 {
@@ -2201,7 +2206,7 @@ margin-left:20px;
 
 .slider-nav ul li
 {
-margin-right:50px;
+margin-right:12px;
 float:left;
 font-size:17px;
 padding-top:14px;
@@ -2213,6 +2218,7 @@ padding-bottom:14px;
 color:#3d0624;
 text-decoration:none;
 padding:0px 8px 5px 8px;
+text-transform: uppercase;
 }
 
 .slider-nav ul li a:hover
@@ -2253,8 +2259,8 @@ padding-bottom:8px;
 .slider-nav .addtocart-main
 {
 position:absolute;
-right:15px;
-width:220px;
+right:10px;
+/*width:220px;*/
 top:-10px;
 }
 

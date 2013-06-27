@@ -208,6 +208,23 @@ class PageAdminController extends Controller
 //        $this->createPageSnapshot($page);
         return new \Symfony\Component\HttpFoundation\Response($mediaObj->getProviderReference()); 
     }
+
+    public function storeMediaSettingsAction(){
+
+        $blockManager = $this->get('sonata.page.manager.block');
+        $block = $blockManager->findOneBy(array('id' => $this->getRequest()->get('blockId')));
+        $settigns = $block->getSettings();
+        if(!$settigns)
+        {
+            $settigns = array("media" => false,"orientation" => "left","title" => null,"content" => null,"context" => "default","format" => "default_big","mediaId" => null);
+        }
+        $settigns['url'] = $this->getRequest()->get('url');
+        $settigns['overlay_title'] = $this->getRequest()->get('overlay_title');
+        $settigns['desc'] = $this->getRequest()->get('desc');
+        $block->setSettings($settigns);
+        $blockManager->save($block);
+        return new \Symfony\Component\HttpFoundation\Response("success");
+    }
     
     public function blockGallerySaveAction(){
         $blockManager = $this->get('sonata.page.manager.block');
