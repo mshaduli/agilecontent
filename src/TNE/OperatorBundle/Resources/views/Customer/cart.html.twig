@@ -12,13 +12,15 @@ file that was distributed with this source code.
 
 {% block page_stylesheets %}
     {{ parent() }}
-<link rel="stylesheet" href="http://fast.fonts.com/cssapi/1a5d5164-616e-4355-a99a-4cbe2bd50933.css" type="text/css"/>
+
 <link rel="stylesheet" href="{{ asset('bundles/tneoperator/angular/app/css/app.css') }}" type="text/css" media="all" />
 
 <link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/font-awesome.min.css') }}" type="text/css" media="all" />
-<link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/theme-falls-creek.css') }}" type="text/css" media="all" />
+<link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/theme-rutherglen.css') }}" type="text/css" media="all" />
 <link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/select2.css') }}" type="text/css" media="all" />
 <link rel="stylesheet" href="{{ asset('bundles/tneoperator/angular/app/css/daterangepicker.css') }}" type="text/css" media="all" />
+
+    <link id="MonoTypeFontApiFontTracker" type="text/css" rel="stylesheet" href="http://fast.fonts.com/t/1.css?apiType=js&amp;projectid=1a5d5164-616e-4355-a99a-4cbe2bd50933">
 
 {% endblock %}
 
@@ -41,31 +43,43 @@ file that was distributed with this source code.
 {% render url('tne_operators_header') %}
 {#{% include 'TNEOperatorBundle:Default:header.html.twig' %}#}
 
-    <div id="main" class="container">
-        <div class=" hidden-phone">
-            <div class="span9">
-                <div id="search-tag" class="pull-left visible-desktop">Checkout <span>Your details</span></div>
-            </div>
-            <div class="span3 pull-right">
-                <span>1/4</span>
-                <!--<buttons-radio class="btn-group pull-right" data-toggle="buttons-radio" model='UIView' options='UIViewOptions' classes=""></buttons-radio>-->
-            </div>
+        
+        <div class="cart-page-heading-main">
+        
+        <div class="cart-page-inner-heading">
+            <!--<div id="search-tag" class="pull-left visible-desktop">Checkout <span>Your details</span></div>-->
+            <div style="float:left"><h1>Checkout <span class="small-desc">Your Cart</span></h1></div>
+           
+            
+            <div class="page-of">1<span class="total-page-of">/5</span></div>
+            
+                 
+        <div class="clear"></div>
         </div>
+        <div class="clear"></div>
+        </div>
+    <div id="main" class="container">
+        
         <div class="hidden-phone">
-            <div class="span12 divider"></div>
+           
         </div>
         <div class="" >
             <div id="main-pane" class="span9" >
                 <div class="checkout-panel clearfix">
 
                 <div class="checkout-header">
-                    <h1 class="pull-left"><i class="icon icon-edit"></i> instant confirm <span class="inner hidden-tablet ng-binding">{{ rooms| length }}</span></h1>
-                    <a href="#" class="collapse-btn pull-right" data-toggle="collapse">-</a>
+                    <h1 class="pull-left"><i class="icon icon-bolt"></i> instant confirm &nbsp; <span class="inner hidden-tablet ng-binding">{{ rooms| length }}</span></h1>
+                     
+                    <a href="#" class="collapse-btn pull-right" data-toggle="collapse"><img src="{{ asset('bundles/tneoperator/img/transparent-btn.png') }}" alt=""></a>
+                    
+                    <a href="#" class="info-icon-collapse pull-right" style="margin-right:10px; margin-top:10px;"><img src="{{ asset('bundles/tneoperator/img/transparent-btn.png') }}" alt="" width="23" height="23"></a>
                     <div class="clear"></div>
                 </div>
 
                 <div class="checkout-status">
-                    <h3>the following operators have</h3>
+                    
+                    <div class="close-btn"><a href="#"><img src="{{ asset('bundles/tneoperator/img/close-icon.png') }}" alt=""></a></div>
+                    <h3>The following operators have live booking enabled</h3>
                     <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
                 </div>
                 {% for room in rooms %}
@@ -76,41 +90,51 @@ file that was distributed with this source code.
                             {{ room.accommodation.name }}<br/>
                             ({{ room.accommodation.destination }})
                         <ul>
-                            <li>CHECK-IN <a href="#">{{ cart_data[room.id].start_date }} <i class="icon icon-pencil"></i> </a> </li>
-                            <li>CHECK-OUT <a href="#">{{ cart_data[room.id].end_date }} <i class="icon icon-pencil"></i> </a> </li>
+                            <li><div class="checkin-indiv">CHECK-IN</div> <a  href="{{ path('tne_operator_details',{ 'id': room.accommodation.id }) }}#{{ room.id }}"> {{ cart_data[room.id].start_date }} <i class="icon-large icon-pencil"></i> </a> </li>
+                            <li><div class="checkin-indiv">CHECK-OUT</div> <a  href="{{ path('tne_operator_details',{ 'id': room.accommodation.id }) }}#{{ room.id }}"> {{ cart_data[room.id].end_date }} <i class="icon-large icon-pencil"></i> </a> </li>
+
                             {#<li>room type <span>spa</span></li>#}
                         </ul>
                             </div>
                     </div>
                     <div class="span2 cart-thumb">
+                        
+                        <div class="rate">${{ cart_data[room.id].rate * cart_data[room.id].days }}</div>
+                        <div class="delete-link">
+                            <a href="{{ path('booking_remove_from_cart',{ 'id': room.id }) }}"><img src="{{ asset('bundles/tneoperator/img/delete-bin.jpg') }}"></a>
+                        </div>
                         {% if( room.file is not null ) %}
                             <img src="/uploads/rooms/{{ room.file }}" alt="">
                         {% else %}
                             <img src="{{ asset('bundles/tneoperator/img/noimg.jpg') }}" alt="">
                         {% endif %}
-                        <span class="cart-price">$ {{ cart_data[room.id].rate }}</span>
-                        <a href="{{ path('booking_remove_from_cart',{ 'id': room.id }) }}"><i class="icon icon-bar">Remove from cart</i> </a>
                     </div>
                 </div>
                {% endfor %}
-                <div class="total-charge clearfix"><h2 class="pull-left">total to be charged</h2> <span class="pull-right">$ {{ total_rate }}</span></div>
+                <div class="total-charge clearfix"><h2 class="pull-left">total to be charged</h2> <span class="pull-right">${{ total_rate }}</span></div>
             </div>
             <div class="checkout-panel clearfix">
                 <div class="checkout-header">
-                    <h1 class="pull-left"><i class="icon icon-edit"></i> instant confirm <span class="inner hidden-tablet ng-binding"></span></h1>
-                    <a href="#" class="collapse-btn pull-right" data-toggle="collapse">-</a>
+                    <h1 class="pull-left"><i class="icon icon-time"></i> instant confirm &nbsp; <span class="inner hidden-tablet ng-binding">5</span></h1>
+                    <a href="#" class="expand-btn pull-right" ><img src="{{ asset('bundles/tneoperator/img/transparent-btn.png') }}" alt=""></a>
+                    <a href="#" class="info-icon-expand pull-right" style="margin-right:10px; margin-top:10px;"><img src="{{ asset('bundles/tneoperator/img/transparent-btn.png') }}" alt="" width="23" height="23"></a>
+                    
                     <div class="clear"></div>
                 </div>
             </div>
             <div class="checkout-panel clearfix">
                 <div class="checkout-header">
-                    <h1 class="pull-left"><i class="icon icon-edit"></i> instant confirm <span class="inner hidden-tablet ng-binding"></span></h1>
-                    <a href="#" class="collapse-btn pull-right" data-toggle="collapse">-</a>
+                    <h1 class="pull-left"><i class="icon icon-share"></i> instant confirm &nbsp; <span class="inner hidden-tablet ng-binding">4</span></h1>
+                    <a href="#" class="expand-btn pull-right"><img src="{{ asset('bundles/tneoperator/img/transparent-btn.png') }}" alt=""></a>
+                    
+                    <a href="#" class="info-icon-expand pull-right" style="margin-right:10px; margin-top:10px;"><img src="{{ asset('bundles/tneoperator/img/transparent-btn.png') }}" alt="" width="23" height="23"></a>
                     <div class="clear"></div>
                 </div>
             </div>
-           <div class="proceed-payment-btn"> <a href="{{ path('booking_new') }}">Proceed to Details Page</a></div>
+           <div class="proceed-payment-main"><div class="proceed-payment-btn"> <a href="{{ path('booking_new') }}">Proceed to Details Page</a></div></div>
             </div>
+                
+                <div class="span2 right-proceed-btn-main"><div class="right-proceed-payment-btn"> <a href="/app_dev.php/booking/new">Proceed to Details Page</a></div></div>
 
 
         </div>

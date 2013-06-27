@@ -16,7 +16,7 @@ file that was distributed with this source code.
 <link rel="stylesheet" href="{{ asset('bundles/tneoperator/angular/app/css/app.css') }}" type="text/css" media="all" />
 
 <link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/font-awesome.min.css') }}" type="text/css" media="all" />
-<link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/theme-falls-creek.css') }}" type="text/css" media="all" />
+<link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/theme-rutherglen.css') }}" type="text/css" media="all" />
 <link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/select2.css') }}" type="text/css" media="all" />
 <link rel="stylesheet" href="{{ asset('bundles/tneoperator/angular/app/css/daterangepicker.css') }}" type="text/css" media="all" />
 
@@ -41,22 +41,30 @@ file that was distributed with this source code.
 
 {#{% include 'TNEOperatorBundle:Default:header.html.twig' %}#}
     {% render url('tne_operators_header') %}
-
-    <div id="main" class="container">
-        <div class="row hidden-phone">
-            <div class="span9">
-                <div id="search-tag" class="pull-left visible-desktop">Order Confirmation</div>
-            </div>
-            <div class="span3 pull-right">
-                <span>4/4</span>
-                <!--<buttons-radio class="btn-group pull-right" data-toggle="buttons-radio" model='UIView' options='UIViewOptions' classes=""></buttons-radio>-->
-            </div>
+    
+    
+    <div class="cart-page-heading-main">
+        
+        <div class="cart-page-inner-heading">
+            <!--<div id="search-tag" class="pull-left visible-desktop">Checkout <span>Your details</span></div>-->
+            <div style="float:left"><h1>Checkout <span class="small-desc">Confirmation of Order</span></h1></div>
+           
+            
+            <div class="page-of">5<span class="total-page-of">/5</span></div>
+            
+                 
+        <div class="clear"></div>
         </div>
+        <div class="clear"></div>
+        </div>
+
+    <div id="main" class="container" style="margin-top:20px;">
+        
         <div class="row hidden-phone">
-            <div class="span12 divider"></div>
+            
         </div>
         <div class="row" >
-            <div id="main-pane" class="span9" >
+            <div id="main-pane" class="span9 cart-confirmation-main" >
                 <div class="checkout-panel clearfix">
 
 
@@ -64,9 +72,20 @@ file that was distributed with this source code.
 
                 <div class="cart-rooms row">
                     <div class="span7">
-                        <div class="inner-padding">
-                            Hi {{ order.firstname }} {{ order.lastname }}, <br/>
-                        <h2>Your Order Number is {{ order.id }}</h2>
+                        <div class="inner-padding cart-confirmation">
+                            
+                             <div class="cart-orderer-name">Hi {{ order.firstname }} {{ order.lastname }},</div>
+                            
+                            <div class="order-thankyou-msg">THANK YOU FOR ORDERING</div>
+                            
+                           
+                            
+                            
+                        <h2>Your Order Number is <span class="cart-page-order-no">{{ order.id }}</span></h2>
+                        
+                        <div class="confirmation-order-msg">You will receive a detailed order confirmation mail shortly. Please review it carefully.</div>
+                        
+                        <div class="confirmation-order-msg">If you have any questions about your order please [ACTION]</div>
 
 
 
@@ -81,10 +100,59 @@ file that was distributed with this source code.
 
             </div>
 
-            <div id="side-pane" class="span3 hidden-phone">
-
-            </div>
+          
         </div>
+                
+       <div class="clear"></div>         
+       <div class="cart-pod" >
+         
+           <h1><i class="icon icon-share"></i>REMEMBER TO  BOOK THESE OFF SITE</h1>
+               
+               <div class="order-confirmation-botoom">
+               
+               
+               <div class="order-confirmation-left-pod">
+               <div class="pod-img"><img src="{{ asset('bundles/tneoperator/img/pod-img.jpg') }}" alt=""></div>
+               <div class="pod-img-content-main">
+               <div class="pod-img-content">RESORT ENTRY<br>
+               <span class="pod-img-conteint-small">RUTHERGLEN</span>
+               </div>
+               
+                       
+                 <div class="pod-btn"><a href="#">BUY</a></div>
+                 
+                 <div class="clear"></div>
+               </div>
+               
+               
+               </div>
+               
+               <div class="order-confirmation-right-pod">
+               
+               <div class="pod-img"><img src="{{ asset('bundles/tneoperator/img/pod-img.jpg') }}" alt=""></div>
+               <div class="pod-img-content-main">
+               <div class="pod-img-content">RESORT ENTRY<br>
+               <span class="pod-img-conteint-small">RUTHERGLEN</span>
+               </div>
+               
+                       
+                 <div class="pod-btn"><a href="#">BUY</a></div>
+                 
+                 <div class="clear"></div>
+               </div>
+               
+               </div>
+               
+               </div>
+               
+         <div class="clear"></div>
+         
+         
+        </div> 
+       
+        <div style="width:970px; margin:auto; margin-bottom:40px;">
+       <div class="proceed-payment-btn"> <a href="/app_dev.php/booking/new">TAKE ME TO THE HOME PAGE</a></div>
+       </div>
 
 
 

@@ -83,10 +83,11 @@ SearchApp.directive('radio', function() {
 SearchApp.directive('tabs', function() {
     return {
         restrict: 'E',
-        scope: { model: '=', options:'=', classes:'@', count:'@', operators:'='},
+        scope: { model: '=', options:'=', classes:'@', count:'@', operators:'=', toggleCalendar:'&'},
         controller: function($scope){
             $scope.activate = function(option){
                 $scope.model = option;
+                $scope.toggleCalendar({selectedOption:option.name});
             };
         },
         template: '<a class="btn {[{classes}]}" '+
@@ -284,7 +285,7 @@ SearchApp.directive('resultsList', function(){
             '</li>' +
             '</ul>' +
             '<div>' +
-            '<br/><br/><br/><br/><button class="btn btn-full" ng-click="showMoreItems()">Show me more</button>' +
+            '<br/><br/><br/><br/><button class="btn-full" ng-click="showMoreItems()">Show me more</button>' +
             '</div>'
     };
 });
@@ -295,6 +296,7 @@ SearchApp.directive('resultsGrid', function(){
         scope: {
             loading: '=',
             operators: '=',
+            currentView: '=',
             sort: '=',
             dates: '='
         },
@@ -361,6 +363,10 @@ SearchApp.directive('resultsGrid', function(){
                  });
             };
 
+            $scope.isAccommodation = function(){
+                return $scope.currentView.name == 'Accommodation';
+            }
+
         },
         template: '' +
             '<div id="loaderG" ng-show="loading">' +
@@ -368,7 +374,7 @@ SearchApp.directive('resultsGrid', function(){
                 '<div id="blockG_2" class="loader_blockG"></div>' +
                 '<div id="blockG_3" class="loader_blockG"></div>' +
             '</div>'+
-            '<table class="table table-bordered table-hover">' +
+            '<table class="table table-bordered table-hover" ng-show="!loading && isAccommodation()">' +
                 '<thead>' +
                     '<tr>' +
                         '<th></th>' +
@@ -390,8 +396,9 @@ SearchApp.directive('resultsGrid', function(){
                 '</tbody>' +
 
             '</table>' +
+            '<div style="text-align: center; margin-top: 100px" ng-show="!loading && !isAccommodation()">No Results</div>' +
             '<div>' +
-                '<br/><br/><br/><br/><button class="btn btn-full" ng-click="showMoreItems()">Show me more</button>' +
+                '<br/><br/><br/><br/><button class="btn btn-full" ng-click="showMoreItems()" ng-show="!loading && isAccommodation()">Show me more</button>' +
             '</div>',
         link: function(scope, element, attrs){
             scope.$watch('dates',function(){
@@ -759,6 +766,24 @@ function SearchController($scope, $http, $q, $filter, $timeout)
         else
         {
             $scope.filters.classifications.splice(cIndex, 1);
+        }
+    }
+
+    $scope.toggleCalendar = function(selectedOption){
+        console.log(selectedOption);
+        if(selectedOption != 'Accommodation'){
+            $timeout(function(){
+                $scope.$apply(function(){
+                    $scope.UIViewOptions = ['List','Map'];
+                });
+            });
+        }
+        else {
+            $timeout(function(){
+                $scope.$apply(function(){
+                    $scope.UIViewOptions = ['List','Calendar','Map'];
+                });
+            });
         }
     }
 
