@@ -225,6 +225,14 @@ class Event
         return $this->media;
     }
     
+    public function getSingleMedia()
+    {
+        if(count($this->media)>0)
+            $media = $this->media[0];
+        else 
+            $media = null;
+        return $media;
+    }
     public function setMedia($media)
     {
         $this->media = $media;

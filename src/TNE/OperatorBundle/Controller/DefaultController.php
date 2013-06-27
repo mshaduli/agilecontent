@@ -476,5 +476,13 @@ EOD;
         }
         return new JsonResponse($operators);
     }
-
+    
+    public function homepageEventsAction()
+    {           
+        $em = $this->get('doctrine.orm.entity_manager');
+        $events = $em->createQuery('SELECT e FROM TNEOperatorBundle:Event e WHERE e.destination = :city')->setParameter('city', "rutherglen")->getResult();                
+        
+        return $this->render('TNEOperatorBundle:Default:homepage_events.html.twig', array('events'=> $events));
+    }
+    
 }
