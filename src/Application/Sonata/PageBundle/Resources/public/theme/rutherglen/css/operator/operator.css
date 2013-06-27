@@ -105,7 +105,7 @@ a:hover {
 }
 #panel0 ul.bar a span.entypo, #panel0 ul.bar a span.entypo-social {
 	font-size: 40px;
-	line-height: 32px;
+	line-height: 16px;
 }
 #panel0 ul.bar a span.icon-facebook {
 	right: -28px;
@@ -605,6 +605,14 @@ a:hover {
 .opaque10 {
 	opacity: 1;
 	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+}
+
+
+
+.footer-fix .cms-block.cms-container.cms-container-root
+{
+    float:left;
+   
 }
 
 
