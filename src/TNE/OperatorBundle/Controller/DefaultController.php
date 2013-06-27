@@ -30,7 +30,7 @@ class DefaultController extends Controller
                     ->getOneOrNullResult();
 
 
-        return $this->render('TNEOperatorBundle:Default:header.html.twig', array('site' => $site, 'home_page' => $homePage, 'settings' => $menu->getSettings()));
+        return $this->render('TNEOperatorBundle:Default:header.desktop.html.twig', array('site' => $site, 'home_page' => $homePage, 'settings' => $menu->getSettings()));
     }
     public function searchAction()
     {

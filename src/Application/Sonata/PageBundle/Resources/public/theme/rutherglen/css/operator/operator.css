@@ -24,6 +24,7 @@ a:hover {
 	background-color: white;
 	z-index: 1;
 	position: fixed;
+    top: 0;
 }
 
 /* footer */
@@ -46,7 +47,7 @@ a:hover {
 	padding: 0;
 	margin-bottom: 10px;
 }
-#panel0 .logo a {
+#panel0 .logo h1 > a {
     display: block;
     text-indent: -9000px;	
 	width: 356px;
@@ -147,6 +148,7 @@ a:hover {
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
+    border: none !important;
 }
 
 #headerDrop {
@@ -616,6 +618,29 @@ a:hover {
 	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
 }
 
+#desktopNav{
+    position: absolute;
+    right: 0;
+    top: 39px;
+}
+.btn-menu{
+    display: inline-block !important;
+    margin-left: 6px;
+    padding: 0 !important;
+    width: 34px;
+    height: 38px;
+    line-height: 38px;
+    margin-top: -6px;
+    text-align: center;
+}
+.btn-menu:hover, .btn-menu.on{
+    background-color: #363636 !important;
+    border-radius: 4px !important;
+    padding: 0 !important;
+    width: 34px;
+    height: 38px;
+}
+
 
 
 .footer-fix .cms-block.cms-container.cms-container-root
@@ -703,6 +728,7 @@ a:hover {
 		display: block!important;
 	}
 	*/
+
 }
 
 
