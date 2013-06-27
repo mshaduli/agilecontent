@@ -77,15 +77,13 @@ file that was distributed with this source code.
                                 </div>
 
                             {% endif %}
-                            <div class="sonata-media-block-feature-media-container">
-                                <div class="sonata-media-block-feature-media-container-{{ settings.orientation }}">
+
                                     {% if media %}
                                         {% media media, settings.format %}
                                     {% else %}
                                         <img title="" src="/uploads/default.jpeg" width="820" height="615">
                                     {% endif %}
-                                </div>
-                            </div>
+
                             <div class="container">
                                 <div class="carousel-caption">
                                     <div>
@@ -132,27 +130,6 @@ file that was distributed with this source code.
         </div>
 
     </div>
-
-    {#<div class="sonata-media-block-feature-media-container">#}
-
-        {#<div class="sonata-media-block-feature-media-container-{{ settings.orientation }}">#}
-            {#{% if media %}#}
-                {#{% media media, settings.format %}#}
-            {#{% else %}#}
-                {#<img title="" src="/uploads/default.jpeg" width="820" height="615">#}
-            {#{% endif %}#}
-        {#</div>#}
-
-        {#{% if settings.title %}#}
-            {#<h3 class="sonata-media-block-feature-media-title">{{ settings.title }}</h3>#}
-        {#{% endif %}#}
-
-        {#<div class="sonata-media-block-feature-media-content">#}
-            {#{{ settings.content }}#}
-        {#</div>#}
-
-        {#<div style="clear: both"></div>#}
-    {#</div>#}
 
     <script type="text/javascript">
         function save_media_settings_{{ block.id }}(){

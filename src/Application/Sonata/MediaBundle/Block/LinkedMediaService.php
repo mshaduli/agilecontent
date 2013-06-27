@@ -70,8 +70,9 @@ class LinkedMediaService extends BaseFeaturedMediaService
         $settings = array_merge($this->getDefaultSettings(), $block->getSettings());
 
         $media = $settings['mediaId'];
+        $template = $settings['template'];
 
-        return $this->renderResponse('ApplicationSonataMediaBundle:Block:block_linked_media.html.twig', array(
+        return $this->renderResponse('ApplicationSonataMediaBundle:Block:block_linked_media_'.$template.'.html.twig', array(
             'media'     => $media,
             'block'     => $block,
             'settings'  => $settings
