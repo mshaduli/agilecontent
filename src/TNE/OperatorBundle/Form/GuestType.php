@@ -22,7 +22,7 @@ class GuestType extends AbstractType
             ->add('postcode')
             ->add('state')
             ->add('country')
-            ->add('comments')
+            ->add('comments', 'textarea')
 //            ->add('customer')
         ;
     }

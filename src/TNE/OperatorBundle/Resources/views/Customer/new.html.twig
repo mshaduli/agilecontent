@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="{{ asset('bundles/tneoperator/angular/app/css/app.css') }}" type="text/css" media="all" />
 
 <link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/font-awesome.min.css') }}" type="text/css" media="all" />
-<link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/theme-falls-creek.css') }}" type="text/css" media="all" />
+<link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/theme-rutherglen.css') }}" type="text/css" media="all" />
 <link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/theme-falls-creek1.css') }}" type="text/css" media="all" />
 <link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/select2.css') }}" type="text/css" media="all" />
 <link rel="stylesheet" href="{{ asset('bundles/tneoperator/angular/app/css/daterangepicker.css') }}" type="text/css" media="all" />
@@ -157,7 +157,22 @@ $('#terms-close-btn').click(function(){
 {#{% include 'TNEOperatorBundle:Default:header.html.twig' %}#}
 {% render url('tne_operators_header') %}
 
-<div id="main" class="container" style="background:#FFFFFF;">
+<div class="cart-page-heading-main">
+        
+        <div class="cart-page-inner-heading">
+            <!--<div id="search-tag" class="pull-left visible-desktop">Checkout <span>Your details</span></div>-->
+            <div style="float:left"><h1>Checkout <span class="small-desc">Your Cart</span></h1></div>
+           
+            
+            <div class="page-of">1<span class="total-page-of">/5</span></div>
+            
+                 
+        <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+        </div>
+
+<div id="main" class="container" style="background:#FFFFFF; margin-top:20px;">
     <form action="{{ path('booking_create') }}" method="post" {{ form_enctype(form) }}>  
         
 
