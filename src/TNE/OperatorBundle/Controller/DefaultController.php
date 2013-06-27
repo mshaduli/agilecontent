@@ -35,6 +35,7 @@ class DefaultController extends Controller
 
     public function footerAction()
     {
+
         $host = $this->getRequest()->getHost();
         $em =  $this->getDoctrine()->getManager();
         $site = $em->getRepository('ApplicationSonataPageBundle:Site')->findOneBy(array('host' => $host));
@@ -48,13 +49,20 @@ class DefaultController extends Controller
                     ->setParameter('page', $defaultPage)
                     ->setParameter('block_type', '%sonata.block.service.linkedmedia%')
                     ->getQuery()
-                    ->getOneOrNullResult();
-        print_r($linkedMedia);
-        die("IN");
-        $settings = $linked_media->getSettings();
-        $media = $em->getRepository('ApplicationSonataMediaBundle:Media')->findOneBy(array('id' => $settings['mediaId']));
+                    ->getResult(Query::HYDRATE_ARRAY);
 
-        return $this->render('TNEOperatorBundle:Default:footer.html.twig', array('media' => $media, 'settings' => $linked_media->getSettings()));
+        $media = array();
+        $result = array();
+        if($linkedMedia){
+            foreach($linkedMedia as $linkedMediaItem)
+            {
+                $settings = $linkedMediaItem['settings'];
+                $linkedMediaItem['media'] = $em->getRepository('ApplicationSonataMediaBundle:Media')->find($settings['mediaId']);
+                $result[] = $linkedMediaItem;
+            }
+        }
+
+        return $this->render('TNEOperatorBundle:Default:footer.html.twig', array('media' => $media, 'linkedMedias' => $result));
     }
 
     public function searchAction()

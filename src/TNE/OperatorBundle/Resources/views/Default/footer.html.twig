@@ -1,15 +1,18 @@
 <div class="whiteBg footer-fix">
-
     <div id="panel5" class="container"><!-- fifth panel -->
         <div class="row hidden-phone hidden-tablet"><!-- desktop footer -->
             <div class="span6"><!-- logos -->
-                <a href="{{ settings.url }}">
-                    {% if media %}
-                        {% media media, settings.format %}
-                    {% else %}
-                        <img title="" src="/uploads/default.jpeg">
-                    {% endif %}
-                </a>
+                {% if linkedMedias is defined %}
+                    {% for linkedMedia in linkedMedias %}
+                        <a href="{{ linkedMedia.settings.url }}">
+                            {% if linkedMedia.media %}
+                                {% media linkedMedia.media, linkedMedia.settings.format %}
+                            {% else %}
+                                <img title="" src="/uploads/default.jpeg">
+                            {% endif %}
+                        </a>
+                    {% endfor %}
+                {% endif %}
             </div>
             <div class="span4"><!-- TODO: needs wiring/caching from Twitter API -->
                 <h4>Twitter</h4>
