@@ -10,7 +10,7 @@ file that was distributed with this source code.
 #}
 {% extends 'ApplicationSonataPageBundle::rutherglen_base_layout.html.twig' %}
 
-    
+{% block bodyMain %} <body class="sonata-bc" id="home">   {%  endblock %}
 {% block page_container %}
 
 {% include 'ApplicationSonataPageBundle::rutherglen_header.html.twig' %}
@@ -27,22 +27,10 @@ file that was distributed with this source code.
                 <a class="mapsLink" href="#">getting to rutherglen</a>
             </div>
             <div class="span6 rightLinks">
-                <a href="#">
-                    <img src="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/panel2box.jpg') }}" alt="" />
-                    <h3>Our wine region</h3>
-                </a>
-                <a href="#">
-                    <img src="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/panel2box.jpg') }}" alt="" />
-                    <h3>Our wine region</h3>
-                </a>
-                <a href="#">
-                    <img src="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/panel2box.jpg') }}" alt="" />
-                    <h3>Our wine region</h3>
-                </a>
-                <a href="#">
-                    <img src="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/panel2box.jpg') }}" alt="" />
-                    <h3>Our wine region</h3>
-                </a>
+                {{ sonata_page_render_container('rightLink1', page) | sonata_page_render_custome_block([{'service':'sonata.block.service.linkedmedia','template':'tile'}]) }}
+                {{ sonata_page_render_container('rightLink2', page) | sonata_page_render_custome_block([{'service':'sonata.block.service.linkedmedia','template':'tile'}]) }}
+                {{ sonata_page_render_container('rightLink3', page) | sonata_page_render_custome_block([{'service':'sonata.block.service.linkedmedia','template':'tile'}]) }}
+                {{ sonata_page_render_container('rightLink4', page) | sonata_page_render_custome_block([{'service':'sonata.block.service.linkedmedia','template':'tile'}]) }}
                 <div class="clearfix"></div>
             </div>
         </div>
@@ -252,7 +240,7 @@ file that was distributed with this source code.
                         <div class="span12 myCarouselControl">
                             <div class="centerControl">
                                 <a data-slide="prev" href="#myCarousel" class="left"><span class="entypo chevron-thin-left"></span></a>
-                                <strong>SEE MORE EVENTS</strong>
+                                <strong style="margin-top:15px;">SEE MORE EVENTS</strong>
                                 <a data-slide="next" href="#myCarousel" class="right"><span class="entypo chevron-thin-right"></span></a>
                             </div>
                         </div>

@@ -1,10 +1,10 @@
 booking:
     pattern:  /
-    defaults: { _controller: "TNEOperatorBundle:Customer:index" }
+    defaults: { _controller: "TNEOperatorBundle:Customer:new" }
 
 booking_show:
     pattern:  /{id}/show
-    defaults: { _controller: "TNEOperatorBundle:Customer:show" }
+    defaults: { _controller: "TNEOperatorBundle:Customer:new" }
 
 booking_new:
     pattern:  /new
@@ -17,7 +17,7 @@ booking_create:
 
 booking_edit:
     pattern:  /{id}/edit
-    defaults: { _controller: "TNEOperatorBundle:Customer:edit" }
+    defaults: { _controller: "TNEOperatorBundle:Customer:new" }
 
 booking_update:
     pattern:  /{id}/update
@@ -26,7 +26,7 @@ booking_update:
 
 booking_delete:
     pattern:  /{id}/delete
-    defaults: { _controller: "TNEOperatorBundle:Customer:delete" }
+    defaults: { _controller: "TNEOperatorBundle:Customer:new" }
     requirements: { _method: post }
 
 booking_cart:
@@ -45,3 +45,6 @@ booking_order_confirmation:
     pattern:  /confimation
     defaults: { _controller: "TNEOperatorBundle:Customer:confirmation" }
 
+booking_planner:
+    pattern:  /planner
+    defaults: { _controller: "TNEOperatorBundle:Customer:planner" }
