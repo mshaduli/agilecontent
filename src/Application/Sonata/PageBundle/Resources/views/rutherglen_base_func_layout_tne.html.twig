@@ -14,7 +14,11 @@ file that was distributed with this source code.
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
         {% block page_stylesheets %}
-
+            <link rel="stylesheet" href="{{ asset('bundles/applicationsonatapage/theme/rutherglen/css/bootstrap.min.css') }}" type="text/css" media="all"  />
+            <link rel="stylesheet" href="{{ asset('bundles/applicationsonatapage/theme/rutherglen/css/bootstrap-responsive.min.css') }}" type="text/css" media="all"  />
+            <link rel="stylesheet" href="{{ asset('bundles/applicationsonatapage/theme/rutherglen/css/operator/operator.css') }}" type="text/css" media="all"  />
+            <link rel="stylesheet" href="{{ asset('bundles/applicationsonatapage/theme/rutherglen/css/fonts.css') }}" type="text/css" media="all"  />
+            <link rel="stylesheet" href="{{ asset('bundles/applicationsonatapage/theme/rutherglen/css/operator/nlform.css') }}" type="text/css" media="all"  />
             <link rel="stylesheet" href="{{ asset('bundles/applicationsonatapage/default.css') }}" type="text/css" media="all" />
             <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">            
             <link rel="stylesheet" href="{{ asset('bundles/applicationsonataadmin/css/custom-theme/jquery-ui-1.10.0.custom.css') }}" type="text/css" media="all" />
@@ -28,7 +32,6 @@ file that was distributed with this source code.
             <!--[if lt IE 9]>
                 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
             <![endif]-->
-            <script src="{{ asset('bundles/tneoperator/js/1a5d5164-616e-4355-a99a-4cbe2bd50933.js') }}" type="text/javascript"></script>
             <script src="{{ asset('bundles/sonatajquery/jquery-1.8.0.js') }}" type="text/javascript"></script>
             <script src="{{ asset('bundles/applicationsonataadmin/js/jquery-ui-1.10.0.custom.min.js') }}" type="text/javascript"></script>
             <script src="{{ asset('bundles/sonatajquery/jquery-ui-i18n.js') }}" type="text/javascript"></script>
@@ -42,9 +45,15 @@ file that was distributed with this source code.
     <body id="home">
         {% block content %}
         {% endblock %}
-            
+        {% block rutherglen_javascripts %}
+                 <script src="{{ asset('bundles/applicationsonatapage/theme/rutherglen/js/modernizr.min.js') }}" type="text/javascript"></script>
+                 <script src="{{ asset('bundles/applicationsonatapage/theme/rutherglen/js/tne.js') }}" type="text/javascript"></script>
+                 <script src="{{ asset('bundles/applicationsonatapage/theme/rutherglen/js/nlform.js') }}" type="text/javascript"></script>
+                 <script src="{{ asset('bundles/applicationsonatapage/theme/rutherglen/js/response.min.js') }}" type="text/javascript"></script>
+        {% endblock %}
         <script>
             $("select").select2({width: 'resolve'});        
         </script>
+        
     </body>
 </html>
