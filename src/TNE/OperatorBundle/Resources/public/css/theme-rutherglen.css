@@ -25,6 +25,8 @@
     text-shadow: none;
 }
 
+#map-view-small{ height: 214px; }
+#map-view-large{ height: 500px; }
 
 /* design elements */
 #designs {
@@ -2034,6 +2036,7 @@ color:#fff;
 text-align:center;
 position:absolute;
 right:10px;
+z-index: 99;
 }
 
 .large-map-link a
@@ -2153,10 +2156,10 @@ position: relative;
 }
 
 /* Close button for Map Section */
-#map-close-btn{ position: absolute; color: #fff; right: 30px; top: 25px; }
+#map-close-btn{ position: absolute; color: #fff; right: 25px; top: 25px; z-index: 99; width: 30px; height: 30px; background-color: rgba(61, 6, 36, 0.5); text-align: center; line-height: 30px; }
 #map-close-btn:hover{ text-decoration: none; }
-#ask-form-close-btn{ color: #717073; }
-#ask-form-close-btn:hover{ color: #717073; text-decoration: none; }
+#ask-form-close-btn{ color: #3d0624; }
+#ask-form-close-btn:hover{ color: #3d0624; text-decoration: none; }
 
 .tabbable
 {
