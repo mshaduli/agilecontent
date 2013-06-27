@@ -57,8 +57,11 @@ class DefaultController extends Controller
             foreach($linkedMedia as $linkedMediaItem)
             {
                 $settings = $linkedMediaItem['settings'];
-                $linkedMediaItem['media'] = $em->getRepository('ApplicationSonataMediaBundle:Media')->find($settings['mediaId']);
-                $result[] = $linkedMediaItem;
+                if($settings['mediaId'])
+                {
+                    $linkedMediaItem['media'] = $em->getRepository('ApplicationSonataMediaBundle:Media')->find($settings['mediaId']);
+                    $result[] = $linkedMediaItem;
+                }
             }
         }
 
@@ -509,5 +512,13 @@ EOD;
         }
         return new JsonResponse($operators);
     }
-
+    
+    public function homepageEventsAction()
+    {           
+        $em = $this->get('doctrine.orm.entity_manager');
+        $events = $em->createQuery('SELECT e FROM TNEOperatorBundle:Event e WHERE e.destination = :city')->setParameter('city', "rutherglen")->getResult();                
+        
+        return $this->render('TNEOperatorBundle:Default:homepage_events.html.twig', array('events'=> $events));
+    }
+    
 }

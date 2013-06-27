@@ -30,7 +30,7 @@ file that was distributed with this source code.
             <div class="row">
                 <div class="span12 clearfix">
                     <div class="padder">
-                        <h1>General Content this is a longer general content header</h1>
+                        {{ sonata_page_render_container('page-header', page) | sonata_page_render_custome_block([{'service':'sonata.block.service.text'}]) }}
                     </div>
                 </div>
             </div>
@@ -57,7 +57,7 @@ file that was distributed with this source code.
                 </ul>
             </div>
             <div class="span12">
-                <h2>This is an example of H2 that covers two lines of text and is optional</h2>
+                {{ sonata_page_render_container('page-header2', page) | sonata_page_render_custome_block([{'service':'sonata.block.service.text'}]) }}
             </div>
         </div>
     </div> <!-- /container -->
@@ -68,47 +68,14 @@ file that was distributed with this source code.
         <div class="row">
             <div class="span7 offset1">
                 <div class="padder">
-                    <p>
-                        Standard paragraph style. Aenean tellus justo, lobortis in commodo ut, gravida at orci. Suspendisse placerat mauris eu erat volutpat sit amet molestie ligula rutrum. Integer bibendum felis vel tortor ornare vel aliquet neque euismod. Proin nec massa at tellus feugiat molestie. Aliquam blandit metus quis turpis aliquet semper. Ut ullamcorper enim justo, ac viverra orci. Integer faucibus consequat augue facilisis aliquam. Donec cursus vehicula quam, quis consequat orci gravida id. Nunc auctor lectus in ipsum scelerisque dignissim ut sed lectus. Etiam in mi mauris. Suspendisse nec lorem eget sapien posuere malesuada. Nam vel urna turpis. Pellentesque vitae nisi at elit ullamcorper viverra non in nisl. Phasellus tempor fermentum quam eget porttitor. 
-                        <a href="#">This is an example of a link.</a>
-                    </p>
-                    <p>
-                        Ut eu neque mauris. In hac habitasse platea dictumst. Aliquam enim leo, faucibus vitae pulvinar nec, sagittis eu tortor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In velit enim, sollicitudin id euismod a, volutpat et sem.
-                    </p>
+                    {{ sonata_page_render_container('content-top-text', page) | sonata_page_render_custome_block([{'service':'sonata.block.service.text'}]) }}
                 </div>
                 <div id="gMapWrapper">
                     <div id="gMap"></div>
                     <div id="gMapOver" class="opaque9">Hiking trails in Rutherglen</div>
                 </div>
                 <div class="padder">
-                    <p>
-                        Pellentesque at lectus quam, id accumsan sapien. Ut erat urna, tempus quis ultricies porta, dictum nec nulla.
-                    </p>
-                    <blockquote>
-                        <span>&rdquo;</span>
-                        <div>
-                            <p>
-                                Pellentesque at lectus quam, id accumsan sapien. Ut erat urna, tempus quis ultricies porta, dictum nec nulla.
-                            </p>
-                            <small><cite title="Someone famous">Someone famous</cite></small>
-                        </div>
-                    </blockquote>
-                    <p class="clearBoth">
-                        Nulla nec ante elit, non porta est. Quisque sit amet ipsum ultrices augue posuere aliquam. Nullam semper mollis arcu, sed aliquam tortor elementum ut.
-                    </p>
-                    <h3>Heading 3</h3>
-                    <p>
-                        Nulla nec ante elit, non porta est. Quisque sit amet ipsum ultrices augue posuere aliquam. Nullam semper mollis arcu, sed aliquam tortor elementum ut.
-                    </p>
-
-                    <ul class="inline footer">
-                        <li>
-                            <a href="#"><span class="entypo share"></span></a>
-                        </li>
-                        <li>
-                            <a href="#"><span class="entypo print"></span></a>
-                        </li>
-                    </ul>
+                        {{ sonata_page_render_container('content-bottom-text', page) | sonata_page_render_custome_block([{'service':'sonata.block.service.text'}]) }}
                 </div>
                     
                 <form id="tabletSubscribe">
