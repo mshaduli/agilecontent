@@ -16,3 +16,4 @@ sonata_block:
         sonata.media.block.feature_media:
         sonata.block.service.taggedmedia:
         sonata.block.service.menu:
+        sonata.block.service.linkedmedia:

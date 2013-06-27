@@ -1,0 +1,68 @@
+<div class="whiteBg">
+
+        <div id="panel5" class="container"><!-- fifth panel -->
+            <div class="row hidden-phone hidden-tablet"><!-- desktop footer -->
+                <div class="span6"><!-- logos -->
+                    {{ sonata_page_render_container('FooterLogo1', page) | sonata_page_render_custome_block([{'service':'sonata.block.service.linkedmedia','template':'footer'}]) }}
+                    {{ sonata_page_render_container('FooterLogo2', page) | sonata_page_render_custome_block([{'service':'sonata.block.service.linkedmedia','template':'footer'}]) }}
+                    {{ sonata_page_render_container('FooterLogo3', page) | sonata_page_render_custome_block([{'service':'sonata.block.service.linkedmedia','template':'footer'}]) }}
+                </div>
+                <div class="span4"><!-- TODO: needs wiring/caching from Twitter API -->
+                    <h4>Twitter</h4>
+                    <h5>@rutherglenvic</h5>
+                    <p>
+                        Rutherglen Apex are again putting on a great evening of entertainment Sunday 9th June (Winery Walkabout weekend)&hellip; 
+                        <a href="#">http://fb.me/2DknP9P8S</a>
+                        <span>12 hours ago</span>
+                    </p>
+                    <ul class="inline clearfix">
+                        <li><a href="#">Reply |</a></li>
+                        <li><a href="#">Retweet |</a></li>
+                        <li><a href="#">Favourite</a></li>
+                    </ul>
+                </div>
+                <div class="span2">
+                    <h4>Subscribe</h4>
+                    <form>
+                        <label>Your name</label>
+                        <input type="text" placeholder="i.e James Raynor" />
+                        <label>Your email address</label>
+                        <input type="text" placeholder="i.e james@domain.com" />
+                        <input type="submit" value="stay informed" />
+                    </form>
+                </div>
+            </div><!-- row -->
+            <div class="row show1024 hidden-desktop"><!-- mobile footer -->
+                <ul class="nav nav-list">
+                    <li>
+                        <ul class="inline footerShare">
+                            <li>
+                                <a href="#" class="share">SHARE</a>
+                            </li>
+                            <!-- TODO: these need to be wired up to social networks  -->
+                            <li>
+                                <span class="icon-facebook"></span>
+                            </li>
+                            <li>
+                                <span class="icon-twitter"></span>
+                            </li>
+                            <li>
+                                <span class="icon-mail"></span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#">PLANNER</a></li>
+                    <li><a href="#">VISIT</a></li>
+                    <li><a href="#">ACCOMMODATION</a></li>
+                    <li><a href="#">FOOD &amp; WINE</a></li>
+                    <li><a href="#">EVENTS &amp; ATTRACTIONS</a></li>
+                    <li><a href="#">CONTACT</a></li>
+                </ul>
+                <ul class="inline">
+                    <li>&copy; 2013 Rutherglen |</li>
+                    <li><a href="#">Sitemap</a></li>
+                </ul>
+            </div><!-- row -->
+        </div> <!-- /container -->
+
+    </div>

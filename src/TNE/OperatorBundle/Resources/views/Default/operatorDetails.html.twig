@@ -12,7 +12,6 @@ file that was distributed with this source code.
 
 {% block page_stylesheets %}
     {{ parent() }}
-<link rel="stylesheet" href="http://fast.fonts.com/cssapi/1a5d5164-616e-4355-a99a-4cbe2bd50933.css" type="text/css"/>
 <link rel="stylesheet" href="{{ asset('bundles/tneoperator/angular/app/css/app.css') }}" type="text/css" media="all" />
 
 <link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/font-awesome.min.css') }}" type="text/css" media="all" />
@@ -172,7 +171,7 @@ $('#terms-close-btn').click(function(){
     <div>
        
        
-        <div style="background:url(img/banner-bg.png) center no-repeat; margin-top:50px;">
+<div  class="main-bg-container operator">
   
   <div class="span12" style="margin:auto; float:none">
   {% if operator is not null %}
@@ -497,19 +496,6 @@ $('#terms-close-btn').click(function(){
 
     $(document).ready(function(){
         {% if operator is not null %}
-        // Footer map
-        var footerMapOptions = {
-            zoom: 12,
-            center: new google.maps.LatLng({{ operator.latitude }},{{ operator.longitude }}),
-            disableDefaultUI: true,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        }
-        var footerMap = new google.maps.Map(document.getElementById("footerMap"), footerMapOptions);
-        var footerMarker = new google.maps.Marker({
-            position: new google.maps.LatLng({{ operator.latitude }},{{ operator.longitude }}),
-            map: footerMap,
-            icon: '/bundles/tneoperator/img/map/marker_blue.png'
-        });
 
         var smallMapOptions = {
             zoom: 8,
@@ -616,7 +602,7 @@ $('#terms-close-btn').click(function(){
 </script>
 <style type="text/css">
 .flex-viewport{
-    height: 600px;
+    height: 435px;
     }
 .map-address-popup
 {

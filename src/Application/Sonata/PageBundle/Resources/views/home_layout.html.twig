@@ -45,7 +45,7 @@ file that was distributed with this source code.
                     <a class="brand" href="{{ site.url }}">
                     <strong>{{ site.name }}</strong>
                     </a>
-                {{ sonata_page_render_container('menu', 'global') | sonata_page_render_custome_block(['sonata.block.service.menu']) }}
+                {{ sonata_page_render_container('menu', 'global') | sonata_page_render_custome_block([{'service':'sonata.block.service.menu'}]) }}
                 </div>
 
                 </div>
@@ -55,7 +55,7 @@ file that was distributed with this source code.
                 
               {% if page is defined %}
                 <div class="row">
-                    {{ sonata_page_render_container('content_top', page)  | sonata_page_render_custome_block(['sonata.block.service.text','sonata.media.block.feature_media']) }}
+                    {{ sonata_page_render_container('content_top', page)  | sonata_page_render_custome_block([{'service':'sonata.block.service.text'},{'service':'sonata.media.block.feature_media'}]) }}
                 </div>
             {% endif %}
 
@@ -72,11 +72,11 @@ file that was distributed with this source code.
                 {% endif %}
             </div>
                 <div class="row">
-                        {{ sonata_page_render_container('firstimage', page) | sonata_page_render_custome_block(['sonata.block.service.text','sonata.media.block.feature_media']) }}
+                        {{ sonata_page_render_container('firstimage', page) | sonata_page_render_custome_block([{'service':'sonata.block.service.text'},{'service':'sonata.media.block.feature_media'}]) }}
 
                </div>
                 <div class="row">
-                    {{ sonata_page_render_container('2image', page) | sonata_page_render_custome_block(['sonata.block.service.text','sonata.media.block.feature_media'])  }}
+                    {{ sonata_page_render_container('2image', page) | sonata_page_render_custome_block([{'service':'sonata.block.service.text'},{'service':'sonata.media.block.feature_media'}]) }}
 
                 </div>
                 
@@ -88,6 +88,13 @@ file that was distributed with this source code.
                     {{ sonata_page_render_container('gallery', page) }}
                         
                 </div>
+
+                <div class="row">
+                    {{ sonata_page_render_container('asasdasd', page) | sonata_page_render_custome_block([{'service':'sonata.block.service.linkedmedia','template':'hero'}]) }}
+                </div>
+            <div class="row">
+                {{ sonata_page_render_container('tesssssssttttt', page) | sonata_page_render_custome_block([{'service':'sonata.block.service.linkedmedia','template':'tile'}]) }}
+            </div>
                         
                 </div>
 

@@ -102,6 +102,7 @@ class PageAdmin extends Admin
     {
         $collection->add('blockMediaSave', 'blockMediaSave');
         $collection->add('blockGallerySave', 'blockGallerySave');
+        $collection->add('storeMediaSettings', 'storeMediaSettings');
         $collection->add('CKEditorSave', 'CKEditorSave'); 
     }    
 

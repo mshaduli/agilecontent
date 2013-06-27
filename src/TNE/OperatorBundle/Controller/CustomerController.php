@@ -22,6 +22,7 @@ class CustomerController extends Controller
      */
     public function indexAction()
     {
+        return $this->redirect($this->generateUrl('tne_operator_listing_search'));
 //        $em = $this->getDoctrine()->getManager();
 //
 //        $entities = $em->getRepository('TNEOperatorBundle:Customer')->findAll();
@@ -48,6 +49,7 @@ class CustomerController extends Controller
      */
     public function showAction($id)
     {
+        return $this->redirect($this->generateUrl('tne_operator_listing_search'));
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('TNEOperatorBundle:Customer')->find($id);
@@ -136,6 +138,7 @@ class CustomerController extends Controller
      */
     public function editAction($id)
     {
+        return $this->redirect($this->generateUrl('tne_operator_listing_search'));
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('TNEOperatorBundle:Customer')->find($id);
@@ -160,6 +163,7 @@ class CustomerController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
+        return $this->redirect($this->generateUrl('tne_operator_listing_search'));
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('TNEOperatorBundle:Customer')->find($id);
@@ -192,6 +196,7 @@ class CustomerController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
+        return $this->redirect($this->generateUrl('tne_operator_listing_search'));
         $form = $this->createDeleteForm($id);
         $form->bind($request);
 
@@ -212,6 +217,7 @@ class CustomerController extends Controller
 
     private function createDeleteForm($id)
     {
+
         return $this->createFormBuilder(array('id' => $id))
             ->add('id', 'hidden')
             ->getForm()
@@ -315,7 +321,9 @@ class CustomerController extends Controller
         $this->getRequest()->getSession()->remove('booking_id');
         return $this->render('TNEOperatorBundle:Customer:confirmation.html.twig', array('order' => $order));
         }
-        else{
+        else
+            
+            {
             return $this->redirect('/');
         }
 
