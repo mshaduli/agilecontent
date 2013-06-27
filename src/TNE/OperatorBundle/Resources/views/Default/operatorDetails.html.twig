@@ -486,7 +486,8 @@ $('#terms-close-btn').click(function(){
  {% endif %}
     </div>
 
-{% include 'TNEOperatorBundle:Default:footer.html.twig' %}
+{#{% include 'TNEOperatorBundle:Default:footer.html.twig' %}#}
+{% render url('tne_operators_footer') %}
 
     <div id="design"></div>
 </div>

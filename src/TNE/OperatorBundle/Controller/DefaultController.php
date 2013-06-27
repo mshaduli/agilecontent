@@ -32,6 +32,31 @@ class DefaultController extends Controller
 
         return $this->render('TNEOperatorBundle:Default:header.html.twig', array('site' => $site, 'home_page' => $homePage, 'settings' => $menu->getSettings()));
     }
+
+    public function footerAction()
+    {
+        $host = $this->getRequest()->getHost();
+        $em =  $this->getDoctrine()->getManager();
+        $site = $em->getRepository('ApplicationSonataPageBundle:Site')->findOneBy(array('host' => $host));
+        $defaultPage = $em->getRepository('ApplicationSonataPageBundle:Page')->findOneBy(array('site' => $site, 'routeName' => '_page_internal_global'));
+
+        $linkedMedia = $em->createQueryBuilder()
+                    ->select('b')
+                    ->from('ApplicationSonataPageBundle:Block', 'b')
+                    ->where('b.page = :page')
+                    ->andWhere('b.type LIKE :block_type')
+                    ->setParameter('page', $defaultPage)
+                    ->setParameter('block_type', '%sonata.block.service.linkedmedia%')
+                    ->getQuery()
+                    ->getOneOrNullResult();
+        print_r($linkedMedia);
+        die("IN");
+        $settings = $linked_media->getSettings();
+        $media = $em->getRepository('ApplicationSonataMediaBundle:Media')->findOneBy(array('id' => $settings['mediaId']));
+
+        return $this->render('TNEOperatorBundle:Default:footer.html.twig', array('media' => $media, 'settings' => $linked_media->getSettings()));
+    }
+
     public function searchAction()
     {
 
