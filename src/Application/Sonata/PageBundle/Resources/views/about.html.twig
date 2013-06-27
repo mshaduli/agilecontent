@@ -62,66 +62,7 @@ file that was distributed with this source code.
         </div>
     </div> <!-- /container -->
 
-    <div id="panelGeneral3" class="container solidBackground"><!-- first panel -->
-        <div class="row">
-            <div class="span12 clearfix">
-                
-                <div id="myCarousel" class="carousel slide">
-                  <!-- Carousel items -->
-                  <div class="carousel-inner">
-                    <div class="active item">
-                          <img 
-                            data-src0="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/slider2imgNew.jpg') }}" 
-                            data-src481="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/slider2imgNew.jpg') }}" 
-                            data-src1025="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/slider2imgNew.jpg') }}" 
-                            alt=""
-                        />
-                        <div class="carousel-caption">This is a caption for the image</div>
-                    </div>
-                    <div class="item">
-                          <img 
-                            data-src0="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/slider2imgNew.jpg') }}" 
-                            data-src481="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/slider2imgNew.jpg') }}" 
-                            data-src1025="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/slider2imgNew.jpg') }}" 
-                            alt=""
-                        />
-                        <div class="carousel-caption">This is a caption for the image</div>
-                    </div>
-                    <div class="item">
-                          <img 
-                            data-src0="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/slider2imgNew.jpg') }}" 
-                            data-src481="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/slider2imgNew.jpg') }}" 
-                            data-src1025="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/slider2imgNew.jpg') }}" 
-                            alt=""
-                        />
-                        <div class="carousel-caption">This is a caption for the image</div>
-                    </div>
-                  </div>
-                  <!-- Carousel nav -->
-                  <div id="carControl">
-                      <a class="carousel-control left" href="#myCarousel" data-slide="prev">
-                        <span class="entypo chevron-thin-right"></span>
-                      </a>
-                      <a class="carousel-control right" href="#myCarousel" data-slide="next">
-                        <span class="entypo chevron-thin-left"></span>
-                      </a>
-                    </div>
-                    <ol class="carousel-indicators">
-                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#myCarousel" data-slide-to="1"></li>
-                        <li data-target="#myCarousel" data-slide-to="2"></li>
-                    </ol>
-
-                    <ul class="inline">
-                        <li data-tag="tag1">Tag 1</li>
-                        <li data-tag="tag2">Tag 2</li>
-                    </ul>
-
-                </div>
-
-            </div>
-        </div>
-    </div> <!-- /container -->
+    {{ sonata_page_render_container('bannerGallery', page) | sonata_page_render_custome_block([{'service':'sonata.media.block.gallery'}]) }}
 
     <div id="panelGeneral3" class="container solidBackground"><!-- first panel -->
         <div class="row">
