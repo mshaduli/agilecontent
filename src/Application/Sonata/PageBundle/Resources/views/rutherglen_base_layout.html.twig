@@ -56,9 +56,9 @@ file that was distributed with this source code.
          
          
     </head>
-
-    <body class="sonata-bc" id="home">
-
+    {% block bodyMain %}
+    
+    {% endblock %}
         {% block page_top_bar %}
             {% if sonata_page.isEditor or (app.security and app.security.isGranted('ROLE_PREVIOUS_ADMIN')) %}
             

@@ -8,128 +8,213 @@ For the full copyright and license information, please view the LICENSE
 file that was distributed with this source code.
 
 #}
-{% extends 'ApplicationSonataPageBundle::base_func_layout.html.twig' %}
+{% extends 'ApplicationSonataPageBundle::rutherglen_base_layout.html.twig' %}
 
 {% block page_stylesheets %}
     {{ parent() }}
-<link rel="stylesheet" href="http://fast.fonts.com/cssapi/1a5d5164-616e-4355-a99a-4cbe2bd50933.css" type="text/css"/>
-<link rel="stylesheet" href="{{ asset('bundles/tneoperator/angular/app/css/app.css') }}" type="text/css" media="all" />
-
-<link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/font-awesome.min.css') }}" type="text/css" media="all" />
-<link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/theme-rutherglen.css') }}" type="text/css" media="all" />
-<link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/select2.css') }}" type="text/css" media="all" />
+<link rel="stylesheet" href="{{ asset('bundles/applicationsonatapage/theme/rutherglen/css/operator/general.css') }}" type="text/css" media="all"  />
 <!--<link rel="stylesheet" href="{#{ asset('bundles/sonatamedia/nivo-gallery/nivo-gallery.css') }#}" type="text/css" media="all" /> -->
 
 {% endblock %}
 
-{% block page_javascripts %}
-    {{ parent() }}
-    {{ vichgeo_include_js() }}
-        <script src="{{ asset('bundles/tneoperator/angular/app/lib/angular/angular.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('bundles/tneoperator/angular/app/lib/angular/angular-resource.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('bundles/tneoperator/angular/app/js/map.js') }}"></script>
-        <script src="{{ asset('bundles/tneoperator/angular/app/js/search.js') }}"></script>
-        <script src="{{ asset('bundles/tneoperator/js/select2.js') }}"></script>
-        
-{% endblock %}    
-
-
+{% block bodyMain %} <body class="general">   {%  endblock %}
 {% block page_container %}
         
 
-{% include 'TNEOperatorBundle:Default:content_header.html.twig' %}
-   <div class="page-title-div">
-    <div class="page-title">
-      {{ sonata_page_render_container('content-top', page) | sonata_page_render_custome_block([{'service':'sonata.block.service.text'}]) }}
-    </div>
-  </div>
-    <div id="main" class="container general-content-main">
-    <div class="row" >
-      <div class="fix-ie">
-        <div class="breadcrum-area-main">
-          <div class="general-content-mailarea"> <a href="#"><i class="content-share-icon"></i></a> <a href="#"><i class="content-mail-icon"></i></a> <a href="#"><i class="content-printer-icon"></i></a> </div>
-          <div class="breadcrumb"><a href="#">Home</a> / <a href="#">Section</a> / <a href="#">Page title Breadcrumbs</a></div>
-          <div class="general-content-page-heading2">
-             {{ sonata_page_render_container('heading', page) | sonata_page_render_custome_block([{'service':'sonata.block.service.text'}]) }}
-          </div>
-        </div>
-        <!-- New Markup for Operator Bundle -->
-        <div class="general-content-slider"> {{ sonata_page_render_container('bannerimage', page) | sonata_page_render_custome_block([{'service':'sonata.media.block.gallery'}]) }} </div>
-        <div class="content-temp-body">
-          <div class="content-temp-lft list-item span6 ">
-            {{ sonata_page_render_container('contenttop', page) | sonata_page_render_custome_block([{'service':'sonata.block.service.text'}]) }}
-            
-            <div class="map-inner">{{ sonata_page_render_container('mapimage', page) | sonata_page_render_custome_block([{'service':'sonata.media.block.feature_media'}]) }}</div>
-            {{ sonata_page_render_container('contenttwo', page) | sonata_page_render_custome_block([{'service':'sonata.block.service.text'}]) }}
-            
-            
-          </div>
-          <div class="content-temp-rgt span4">
-            <div class="featured-hotel-heading">Featured Accomodation</div>
-            <div class="feaured-hotel-block">
-              <div class="my-div card">
-                <div class="title ng-binding"><span>From</span> <br>
-                $124</div>
-                 {{ sonata_page_render_container('featuredhotel', page) | sonata_page_render_custome_block([{'service':'sonata.media.block.feature_media'}]) }}
-                <div>
-                  <div class="featured-accomodation-content">
-                    <div>
-                      <div class="hotel-area">BEECHWORTH</div>
-                      <div class="hotel-rating"><img src="{{'/bundles/tneoperator/img/blue-star.png'}}"><img src="{{'/bundles/tneoperator/img/blue-star.png'}}"><img src="{{'/bundles/tneoperator/img/blue-star.png'}}"><img src="{{'/bundles/tneoperator/img/blue-star.png'}}"></div>
-                      <div class="clear"></div>
-                    </div>
-                    <div class="hotel-name">Beechworth Ski Lodge</div>
-                    <div class="op-rooms"><a href="javascript:void(0)" class="btn btn-primary">ADD TO PLANNER</a></div>
-                    <div class="clear"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="medium-rectangle"><img src="{{'/bundles/tneoperator/img/medium-rectangle.jpg'}}"</div>
-          </div>
-          <div class="clear"></div>
-        </div>
-        <!-- end of row -->
-      </div>
-      <!-- end of operator rooms -->
-      <!-- end of operator -->
-    </div>
-  </div>
+{% include 'ApplicationSonataPageBundle::rutherglen_header.html.twig' %}
+   <!-- START GENERAL CONTENT -->
 
-{% include 'TNEOperatorBundle:Default:footer.html.twig' %}
+    <div class="whiteBg general">
+        <img src="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/generalHeader.jpg') }}" alt="" />
+        <div id="panelGeneral1" class="container"><!-- first panel -->
+            <div class="row">
+                <div class="span12 clearfix">
+                    <div class="padder">
+                        <h1>General Content this is a longer general content header</h1>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- /container -->
+    </div>
+
+    <div id="panelGeneral2" class="container solidBackground"><!-- first panel -->
+        <div class="row">
+            <div class="span10 clearfix">
+                <ul id="breadcrumb" class="breadcrumb">
+                    <li><a href="#">Home</a> <span class="divider">/</span></li>
+                    <li><a href="#">Section</a> <span class="divider">/</span></li>
+                    <li class="active">Page title</li>
+                </ul>
+            </div>
+            <div class="span2">
+                <ul class="inline">
+                    <li>
+                        <a href="#"><span class="entypo share"></span></a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="entypo print"></span></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="span12">
+                <h2>This is an example of H2 that covers two lines of text and is optional</h2>
+            </div>
+        </div>
+    </div> <!-- /container -->
+
+    <div id="panelGeneral3" class="container solidBackground"><!-- first panel -->
+        <div class="row">
+            <div class="span12 clearfix">
+                
+                <div id="myCarousel" class="carousel slide">
+                  <!-- Carousel items -->
+                  <div class="carousel-inner">
+                    <div class="active item">
+                          <img 
+                            data-src0="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/slider2imgNew.jpg') }}" 
+                            data-src481="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/slider2imgNew.jpg') }}" 
+                            data-src1025="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/slider2imgNew.jpg') }}" 
+                            alt=""
+                        />
+                        <div class="carousel-caption">This is a caption for the image</div>
+                    </div>
+                    <div class="item">
+                          <img 
+                            data-src0="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/slider2imgNew.jpg') }}" 
+                            data-src481="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/slider2imgNew.jpg') }}" 
+                            data-src1025="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/slider2imgNew.jpg') }}" 
+                            alt=""
+                        />
+                        <div class="carousel-caption">This is a caption for the image</div>
+                    </div>
+                    <div class="item">
+                          <img 
+                            data-src0="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/slider2imgNew.jpg') }}" 
+                            data-src481="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/slider2imgNew.jpg') }}" 
+                            data-src1025="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/slider2imgNew.jpg') }}" 
+                            alt=""
+                        />
+                        <div class="carousel-caption">This is a caption for the image</div>
+                    </div>
+                  </div>
+                  <!-- Carousel nav -->
+                  <div id="carControl">
+                      <a class="carousel-control left" href="#myCarousel" data-slide="prev">
+                        <span class="entypo chevron-thin-right"></span>
+                      </a>
+                      <a class="carousel-control right" href="#myCarousel" data-slide="next">
+                        <span class="entypo chevron-thin-left"></span>
+                      </a>
+                    </div>
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                    </ol>
+
+                    <ul class="inline">
+                        <li data-tag="tag1">Tag 1</li>
+                        <li data-tag="tag2">Tag 2</li>
+                    </ul>
+
+                </div>
+
+            </div>
+        </div>
+    </div> <!-- /container -->
+
+    <div id="panelGeneral3" class="container solidBackground"><!-- first panel -->
+        <div class="row">
+            <div class="span7 offset1">
+                <div class="padder">
+                    <p>
+                        Standard paragraph style. Aenean tellus justo, lobortis in commodo ut, gravida at orci. Suspendisse placerat mauris eu erat volutpat sit amet molestie ligula rutrum. Integer bibendum felis vel tortor ornare vel aliquet neque euismod. Proin nec massa at tellus feugiat molestie. Aliquam blandit metus quis turpis aliquet semper. Ut ullamcorper enim justo, ac viverra orci. Integer faucibus consequat augue facilisis aliquam. Donec cursus vehicula quam, quis consequat orci gravida id. Nunc auctor lectus in ipsum scelerisque dignissim ut sed lectus. Etiam in mi mauris. Suspendisse nec lorem eget sapien posuere malesuada. Nam vel urna turpis. Pellentesque vitae nisi at elit ullamcorper viverra non in nisl. Phasellus tempor fermentum quam eget porttitor. 
+                        <a href="#">This is an example of a link.</a>
+                    </p>
+                    <p>
+                        Ut eu neque mauris. In hac habitasse platea dictumst. Aliquam enim leo, faucibus vitae pulvinar nec, sagittis eu tortor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In velit enim, sollicitudin id euismod a, volutpat et sem.
+                    </p>
+                </div>
+                <div id="gMapWrapper">
+                    <div id="gMap"></div>
+                    <div id="gMapOver" class="opaque9">Hiking trails in Rutherglen</div>
+                </div>
+                <div class="padder">
+                    <p>
+                        Pellentesque at lectus quam, id accumsan sapien. Ut erat urna, tempus quis ultricies porta, dictum nec nulla.
+                    </p>
+                    <blockquote>
+                        <span>&rdquo;</span>
+                        <div>
+                            <p>
+                                Pellentesque at lectus quam, id accumsan sapien. Ut erat urna, tempus quis ultricies porta, dictum nec nulla.
+                            </p>
+                            <small><cite title="Someone famous">Someone famous</cite></small>
+                        </div>
+                    </blockquote>
+                    <p class="clearBoth">
+                        Nulla nec ante elit, non porta est. Quisque sit amet ipsum ultrices augue posuere aliquam. Nullam semper mollis arcu, sed aliquam tortor elementum ut.
+                    </p>
+                    <h3>Heading 3</h3>
+                    <p>
+                        Nulla nec ante elit, non porta est. Quisque sit amet ipsum ultrices augue posuere aliquam. Nullam semper mollis arcu, sed aliquam tortor elementum ut.
+                    </p>
+
+                    <ul class="inline footer">
+                        <li>
+                            <a href="#"><span class="entypo share"></span></a>
+                        </li>
+                        <li>
+                            <a href="#"><span class="entypo print"></span></a>
+                        </li>
+                    </ul>
+                </div>
+                    
+                <form id="tabletSubscribe">
+                    <div>Subscribe</div>
+                    <input id="tabletSubscribeEmail" placeholder="Enter email address.." />
+                    <input type="submit" />
+                </form>
+
+            </div>
+            <div class="span4">
+                <div class="padder">
+
+                    <div id="featuredAccom">
+                        <h4>Featured Accommodation</h4>
+                        <div class="imgWrap">
+                            <img src="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/featuredAccom.jpg') }}" alt="" />
+                            <div>
+                                <small>FROM</small>
+                                &#36;124
+                            </div>
+                        </div>
+                        <div class="featuredWrap">
+                            <h5>Rutherglen</h5>
+                            <ul class="inline">
+                                <li><span class="entypo star on"></span></li>
+                                <li><span class="entypo star on"></span></li>
+                                <li><span class="entypo star on"></span></li>
+                                <li><span class="entypo star on"></span></li>
+                                <li><span class="entypo star"></span></li>
+                            </ul>
+                            <h6>Rutherglen Wine BnB</h6>
+                            <button id="featuredAdd" name="featuredAdd">ADD TO PLANNER</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div> <!-- /container -->
+
+    <!-- END GENERAL CONTENT -->
+
+{% include 'ApplicationSonataPageBundle::rutherglen_footer.html.twig' %}
 
     <div id="design"></div>
 
         
-<script>
-    $(document).ready(function(){
-
-        // Footer map
-        var footerMapOptions = {
-            zoom: 12,
-            center: new google.maps.LatLng(-36.86424, 147.282715),
-            disableDefaultUI: true,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        }
-        var footerMap = new google.maps.Map(document.getElementById("footerMap"), footerMapOptions);
-        var footerMarker = new google.maps.Marker({
-            position: new google.maps.LatLng(-36.86424, 147.282715),
-            map: footerMap,
-            icon: '/bundles/tneoperator/img/map/marker_blue.png'
-        });
-
-        // Init date picker
-        var $filterDate = $('#filterDate');
-        $filterDate.datepicker();
-        $('#filterDateBtn').click(function(){
-            $filterDate.datepicker( "show" );
-        });
-
-        // Init the filters
-        $("#filterTags").select2({ containerCssClass : "search-filter" });
-
-        //angular.bootstrap(document, [{'service':'SearchApp'}]);
-    });
-</script>
   
 {% endblock %}
