@@ -25,6 +25,7 @@
     text-shadow: none;
 }
 
+
 /* design elements */
 #designs {
     position: absolute;
@@ -491,6 +492,7 @@ input[type="file"] {
 
 /* Cards */
 .main-bg-container{ background: url("../img/tabs-bg.jpg") top center no-repeat; }
+.main-bg-container.operator{background: url("../img/operator-bg.jpg") top center no-repeat; padding-top: 165px;}
 #main {
     padding-top: 6px;
 }
@@ -2201,7 +2203,7 @@ margin-left:20px;
 
 .slider-nav ul li
 {
-margin-right:50px;
+margin-right:12px;
 float:left;
 font-size:17px;
 padding-top:14px;
@@ -2213,6 +2215,7 @@ padding-bottom:14px;
 color:#3d0624;
 text-decoration:none;
 padding:0px 8px 5px 8px;
+text-transform: uppercase;
 }
 
 .slider-nav ul li a:hover
@@ -2253,8 +2256,8 @@ padding-bottom:8px;
 .slider-nav .addtocart-main
 {
 position:absolute;
-right:15px;
-width:220px;
+right:10px;
+/*width:220px;*/
 top:-10px;
 }
 

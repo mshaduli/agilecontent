@@ -1,0 +1,305 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+{% extends 'ApplicationSonataPageBundle::rutherglen_base_layout.html.twig' %}
+
+    
+{% block page_container %}
+
+{% include 'ApplicationSonataPageBundle::rutherglen_header.html.twig' %}
+
+    {{ sonata_page_render_container('BannerImage', page) | sonata_page_render_custome_block([{'service':'sonata.block.service.linkedmedia','template':'hero'}]) }}
+
+    <div id="panel2" class="container"> <!-- second panel -->
+
+        <div class="row">
+            <div class="span6">
+                <div id="leafClip" class="hidden-phone"></div>
+                {{ sonata_page_render_container('content-top', page) | sonata_page_render_custome_block([{'service':'sonata.block.service.text'}]) }}
+
+                <a class="mapsLink" href="#">getting to rutherglen</a>
+            </div>
+            <div class="span6 rightLinks">
+                <a href="#">
+                    <img src="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/panel2box.jpg') }}" alt="" />
+                    <h3>Our wine region</h3>
+                </a>
+                <a href="#">
+                    <img src="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/panel2box.jpg') }}" alt="" />
+                    <h3>Our wine region</h3>
+                </a>
+                <a href="#">
+                    <img src="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/panel2box.jpg') }}" alt="" />
+                    <h3>Our wine region</h3>
+                </a>
+                <a href="#">
+                    <img src="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/panel2box.jpg') }}" alt="" />
+                    <h3>Our wine region</h3>
+                </a>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+    </div> <!-- /container -->
+
+    <div class="container"><!-- third panel -->
+
+        <div class="row">
+            <div class="span12 clearfix">
+                
+                <div id="panel3" class="container-fluid">
+                    <h2>Events at Rutherglen</h2>
+                    <div class="row-fluid">
+                        <div class="carousel slide" id="myCarousel">
+                            <div class="carousel-inner">
+                              <div class="item active">
+                                    <ul class="thumbnails">
+                                        <!-- IE8 may not like the hyperlinks below but I don't have time to test -->
+                                        <li class="span4">
+                                            <a href="#">
+                                                <!-- opacity controlled by CMS class can be opaque1-10 -->
+                                                <div class="thumbnail opaque5">
+                                                    <img src="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/slider2imgNew.jpg') }}" alt="" />
+                                                </div>
+                                                <div class="caption">
+                                                    <dl>
+                                                        <dt>The Sweet Cycle</dt>
+                                                        <dd>Sat 18 May 2013</dd>
+                                                        <dd class="hidden-phone">
+                                                            <p>
+                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin laoreet nisi at sapien ullamcorper vel mattis orc
+                                                            </p>
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="readMore">read more</div>
+                                            </a>
+                                        </li>
+                                        <li class="span4">
+                                            <a href="#">
+                                                <div class="thumbnail"> 
+                                                    <img src="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/slider2imgNew.jpg') }}" alt="" />
+                                                </div>
+                                                <div class="caption">
+                                                    <dl>
+                                                        <dt>The Sweet Cycle</dt>
+                                                        <dd>Sat 18 May 2013</dd>
+                                                        <dd class="hidden-phone">
+                                                            <p>
+                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin laoreet nisi at sapien ullamcorper vel mattis orc
+                                                            </p>
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="readMore">read more</div>
+                                            </a>
+                                        </li>
+                                        <li class="span4">
+                                            <a href="#">
+                                                <div class="thumbnail">
+                                                    <img src="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/slider2imgNew.jpg') }}" alt="" />
+                                                </div>
+                                                <div class="caption">
+                                                    <dl>
+                                                        <dt>The Sweet Cycle</dt>
+                                                        <dd>Sat 18 May 2013</dd>
+                                                        <dd class="hidden-phone">
+                                                            <p>
+                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin laoreet nisi at sapien ullamcorper vel mattis orc
+                                                            </p>
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="readMore">read more</div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                              </div>
+                              <div class="item">
+                                    <ul class="thumbnails">
+                                        <li class="span4">
+                                            <a href="#">
+                                                <div class="thumbnail">
+                                                    <img src="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/slider2imgNew.jpg') }}" alt="" />
+                                                </div>
+                                                <div class="caption">
+                                                    <dl>
+                                                        <dt>The Sweet Cycle</dt>
+                                                        <dd>Sat 18 May 2013</dd>
+                                                        <dd class="hidden-phone">
+                                                            <p>
+                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin laoreet nisi at sapien ullamcorper vel mattis orc
+                                                            </p>
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="readMore">read more</div>
+                                            </a>
+                                        </li>
+                                        <li class="span4">
+                                            <a href="#">
+                                                <div class="thumbnail">
+                                                    <img src="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/slider2imgNew.jpg') }}" alt="" />                                                    
+                                                </div>
+                                                <div class="caption">
+                                                    <dl>
+                                                        <dt>The Sweet Cycle</dt>
+                                                        <dd>Sat 18 May 2013</dd>
+                                                        <dd class="hidden-phone">
+                                                            <p>
+                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin laoreet nisi at sapien ullamcorper vel mattis orc
+                                                            </p>
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="readMore">read more</div>
+                                            </a>
+                                        </li>
+                                        <li class="span4">
+                                            <a href="#">
+                                                <div class="thumbnail">
+                                                    <img src="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/slider2imgNew.jpg') }}" alt="" />                                                    
+                                                </div>
+                                                <div class="caption">
+                                                    <dl>
+                                                        <dt>The Sweet Cycle</dt>
+                                                        <dd>Sat 18 May 2013</dd>
+                                                        <dd class="hidden-phone">
+                                                            <p>
+                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin laoreet nisi at sapien ullamcorper vel mattis orc
+                                                            </p>
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="readMore">read more</div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                              </div>
+                              <div class="item">
+                                    <ul class="thumbnails">
+                                        <li class="span4">
+                                            <a href="#">
+                                                <div class="thumbnail">
+                                                    <img src="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/slider2imgNew.jpg') }}" alt="" />
+                                                </div>
+                                                <div class="caption">
+                                                    <dl>
+                                                        <dt>The Sweet Cycle</dt>
+                                                        <dd>Sat 18 May 2013</dd>
+                                                        <dd class="hidden-phone">
+                                                            <p>
+                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin laoreet nisi at sapien ullamcorper vel mattis orc
+                                                            </p>
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="readMore">read more</div>
+                                            </a>
+                                        </li>
+                                        <li class="span4">
+                                            <a href="#">
+                                                <div class="thumbnail">
+                                                    <img src="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/slider2imgNew.jpg') }}" alt="" />
+                                                </div>
+                                                <div class="caption">
+                                                    <dl>
+                                                        <dt>The Sweet Cycle</dt>
+                                                        <dd>Sat 18 May 2013</dd>
+                                                        <dd class="hidden-phone">
+                                                            <p>
+                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin laoreet nisi at sapien ullamcorper vel mattis orc
+                                                            </p>
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="readMore">read more</div>
+                                            </a>
+                                        </li>
+                                        <li class="span4">
+                                            <a href="#">
+                                                <div class="thumbnail">
+                                                    <img src="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/slider2imgNew.jpg') }}" alt="" />
+                                                </div>
+                                                <div class="caption">
+                                                    <dl>
+                                                        <dt>The Sweet Cycle</dt>
+                                                        <dd>Sat 18 May 2013</dd>
+                                                        <dd class="hidden-phone">
+                                                            <p>
+                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin laoreet nisi at sapien ullamcorper vel mattis orc
+                                                            </p>
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="readMore">read more</div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                              </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span12 myCarouselControl">
+                            <div class="centerControl">
+                                <a data-slide="prev" href="#myCarousel" class="left"><span class="entypo chevron-thin-left"></span></a>
+                                <strong>SEE MORE EVENTS</strong>
+                                <a data-slide="next" href="#myCarousel" class="right"><span class="entypo chevron-thin-right"></span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                </diV>
+            </div>
+        </div>
+
+    </div> <!-- /container -->
+
+    <div id="panel4" class="container"><!-- fourth panel -->
+        <div class="row">
+            <div class="span12">
+                <h2>More to see and do</h2>
+            </div>
+            <div class="span3">
+                <a href="#">
+                    <img src="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/panel4box.jpg') }}" alt="" />
+                    <h3>Tuileries</h3>
+                    <span>READ MORE</span>
+                </a>  
+            </div>
+            <div class="span3">
+                <a href="#">
+                    <img src="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/panel4box.jpg') }}" alt="" />
+                    <h3>Boobs, Bikes &amp; Bubbles</h3>
+                    <span>READ MORE</span>
+                </a>  
+            </div>
+            <div class="span3">
+                <a href="#">
+                    <img src="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/panel4box.jpg') }}" alt="" />
+                    <h3>Scion Vineyard &amp; Winery</h3>
+                    <span>READ MORE</span>
+                </a>  
+            </div>
+            <div class="span3">
+                <a href="#">
+                    <img src="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/panel4box.jpg') }}" alt="" />
+                    <h3>Jones Vineyard &amp; Cafe </h3>
+                    <span>READ MORE</span>
+                </a>  
+            </div>
+        </div><!-- row -->
+    </div> <!-- /container -->
+    
+{% include 'ApplicationSonataPageBundle::rutherglen_footer.html.twig' %}
+            
+{% endblock %}

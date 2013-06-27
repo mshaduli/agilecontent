@@ -52,7 +52,8 @@ sonata_page:
     default_template: default
     templates:
 #        default: { path: 'ApplicationSonataPageBundle::layout.html.twig', name: 'default' }
-        home: { path: 'ApplicationSonataPageBundle::home_layout.html.twig', name: 'Home Template' }
+#        home: { path: 'ApplicationSonataPageBundle::home_layout.html.twig', name: 'Home Template' }
+        home-rutherglen: { path: 'ApplicationSonataPageBundle::rutherglen_home_layout.html.twig', name: 'Rutherglen Home Template' }
 #        gallery: { path: 'ApplicationSonataPageBundle::gallery_layout.html.twig', name: 'gallery' }
 #        map: { path: 'ApplicationSonataPageBundle::layout_map.html.twig', name: 'map' }
         content: { path: 'ApplicationSonataPageBundle::about.html.twig', name: 'Content Template' }
