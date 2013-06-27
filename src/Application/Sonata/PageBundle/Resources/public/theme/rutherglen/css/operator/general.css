@@ -323,6 +323,9 @@ body.general p a {
 	font-weight: bold;
 	border: 2px solid #3d0624;
 }
+.imgWrap img{
+    width:100%;
+}
 
 
 /* mobile */
@@ -433,7 +436,7 @@ body.general p a {
 	#panelGeneral3 form input[type=submit]{
 		text-indent: -99999px;
 		float: right;
-		text-indent
+		/*text-indent*/
 		display: block;
 		width: 82px;
 		height: 78px;
@@ -864,7 +867,7 @@ body.planner .featuredLinks ul.inline li a span {
 	#panelGeneral3 form input[type=submit]{
 		text-indent: -99999px;
 		float: right;
-		text-indent
+		/*text-indent*/
 		display: block;
 		width: 82px;
 		height: 78px;
