@@ -22,7 +22,7 @@ file that was distributed with this source code.
                     {% if app.security.token and app.security.isGranted('ROLE_SONATA_ADMIN') %}
                         <li>
                             <a href="#" class="toggleDesktop btn btn-inverse btn-menu" ><i class="icon-pencil icon-white"></i></a>
-                            <a href="#" class="btn btn-inverse btn-menu" id="sync_menu"><i class="icon-refresh icon-white"></i></a>
+                            <button class="btn btn-inverse btn-menu" id="sync_menu"><i class="icon-refresh icon-white"></i></button>
                         </li>
                     {% endif %}
                 </ul>
