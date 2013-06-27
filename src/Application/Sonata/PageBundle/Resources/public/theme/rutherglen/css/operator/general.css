@@ -1,0 +1,450 @@
+/* desktop */
+body.general {
+	background: #f0f0f0 none;
+}
+.whiteBg.general {
+	padding-top: 122px;
+}
+.whiteBg.general img:first-child {
+	height: auto;
+}
+#panelGeneral1 {
+	/* testing filler */
+	min-height: 20px;
+}
+#panelGeneral1 .span12 {
+	background-color: #fff;
+}
+#panelGeneral1 .span12 div {
+	padding: 35px 0 20px 20px;
+}
+#panelGeneral1 h1 {
+	font-size: 42px;
+	font-weight: normal;
+  	font-family: "Bembo MT Pro";
+  	color: #3d0624;
+  	line-height: 48px;
+}
+
+.container.solidBackground {
+	background-color: #fff;
+}
+ul#breadcrumb {
+	padding: 0;
+	margin: 25px 20px 0;
+	list-style: none;
+	background-color: #fff;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+}
+ul#breadcrumb a, .breadcrumb>li>.divider, .breadcrumb>.active {
+	color: #717073;
+	font-size: 13px;
+}
+#panelGeneral2 ul.inline {
+	float: right;
+	margin: 13px 10px 0 0;
+}
+#panelGeneral2 ul.inline li a {
+	color: #535254;
+	background-color: #f0f0f0;
+	height: 25px;
+	width: 35px;
+	display: block;
+	padding: 15px 0 0 5px;
+	font-size: 26px;
+	line-height: 24px;
+}
+#panelGeneral2 h2 {
+	color: #3d0624;
+	font-size: 28px;
+	font-family: "Univers LT W01 45 Light";
+	margin: 7px 20px 0;
+	max-width: 600px;
+	clear: both;
+}
+
+#panelGeneral3 #myCarousel {
+	margin-top: 15px;
+	margin-bottom: 60px;
+}
+#panelGeneral3 .carousel-inner>.item>img, .carousel-inner>.item>a>img {
+	width: 100%;
+}
+#panelGeneral3 #carControl {
+	position: absolute;
+	right: 85px;
+	bottom: 50px;
+}
+#panelGeneral3 .carousel-control {
+	position: absolute;
+	top: auto;
+	width: 40px;
+	height: 40px;
+	margin-top: -20px;
+	font-size: 60px;
+	font-weight: 100;
+	line-height: 30px;
+	color: #3d0624;
+	text-align: center;
+	background: #f1f0ea;
+	border: 0 none;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+	opacity: .9;
+	filter: alpha(opacity=90);
+}
+#panelGeneral3 .carousel-control.right {
+	right: 5px;
+}
+#panelGeneral3 .carousel-control span {
+	font-size: 42px;
+}
+#panelGeneral3 .carousel-indicators {
+	top: auto;
+	right: auto;
+	z-index: 1;
+	margin: 0;
+	list-style: none;
+	width: 200px;
+	height: 40px;
+	position: absolute;
+	bottom: -60px;
+	left: 48%;
+}
+#panelGeneral3 .carousel-indicators li {
+	display: block;
+	float: left;
+	width: 20px;
+	height: 20px;
+	margin-left: 20px;
+	text-indent: -999px;
+	background-color: #f1f0f1;
+	border-radius: 0;
+}
+#panelGeneral3 .carousel-indicators li.active {
+	background-color: #3d0624;
+}
+#panelGeneral3 .inline {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	display: block;
+}
+#panelGeneral3 .inline li {
+	background-color: #3d0624;
+	color: #fff;
+	margin: 0 0 0 10px;
+	padding: 4px 15px 2px;
+}
+#panelGeneral3 .carousel-caption {
+	font-size: 14px;
+	font-family: "Univers LT W10 55 Roman";
+	background: #fff;
+	color: #717073;
+	position: absolute;
+	bottom: 15px;
+	right: 5px;
+	padding: 10px 20px;
+	position: absolute;
+	right: auto;
+	bottom: 30px;
+	left: 20px;
+}
+#panelGeneral3 .span7 div.padder {
+	padding: 20px 80px 0 0;
+}
+#panelGeneral3 .span4 div.padder {
+	padding: 10px 20px 0 0;
+}
+body.general p {
+  font-size: 15px;
+  font-family: "Univers LT W10 55 Roman";
+  color: #717073;
+  line-height: 1.6;
+  font-weight: normal;
+}
+#gMapWrapper {
+	position: relative;
+}
+#gMap {
+	background: transparent url(../../../img/operator-rutherglen/map.png) no-repeat 0 0;
+	width: 100%;
+	height: 345px;
+	margin-top: 45px;
+	margin-bottom: 30px;
+}
+#gMapOver{
+  font-size: 14px;
+  font-family: "Univers LT W10 55 Roman";
+  background-color: #fff;
+  color: #717073;
+  position: absolute;
+  bottom: 15px;
+  right: 85px;
+  padding: 10px 20px;
+}
+
+#panelGeneral3 blockquote {
+	border-left: none;
+	padding: 0;
+	margin: 0 0 20px 0;
+	float: left;
+}
+
+#panelGeneral3 blockquote span, #panelGeneral3 blockquote div {
+	float: left;
+}
+#panelGeneral3 blockquote span {
+	font-size: 60px;
+	color: #c0c0c1;
+	display: block;
+	line-height: 66px;
+	margin: 0 5px 0 0;
+}
+#panelGeneral3 blockquote div {
+	position: relative;
+	width: 300px;
+	padding: 0 0 40px 0;
+}
+#panelGeneral3 blockquote p {
+	font-family: "Univers LT W10 55 Roman";
+	background-color: #3d0624;
+	display: block;
+	color: #fff !important;
+	padding: 10px;
+	font-size: 21px;
+}
+#panelGeneral3 blockquote small {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	clear: both;
+}
+.clearBoth {
+	clear: both;
+}
+#panelGeneral3 h3 {
+	color: #3d0624;
+	font-size: 18px;
+	font-weight: bold;
+}
+body.general p a {
+	color: #727321;
+}
+#panelGeneral3 .inline.footer {
+	display: none;
+}
+#panelGeneral3 form {
+	display: none;	
+}
+
+#panel5 {
+	margin-top: 45px;
+}
+
+#featuredAccom h4 {
+	font-family: "Bembo W01";
+	font-size: 24px;
+	color: #3d0624;
+}
+#featuredAccom .imgWrap {
+	position: relative;
+}
+#featuredAccom .imgWrap img {
+	height: 100%;
+}
+#featuredAccom .imgWrap div {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: #3d0624;
+	color: #fff;
+	font-size: 24px;
+  	font-family: "Univers LT W10 55 Roman";
+  	min-width: 80px;
+  	text-align: center;
+  	padding: 0 0 10px 0;
+}
+#featuredAccom .imgWrap div small {
+	display: block;
+	font-size: 13px;
+	margin: 10px 0 5px;
+}
+#featuredAccom .featuredWrap {
+	border: 1px solid #3d0624;
+	padding: 20px;
+}
+#featuredAccom h5, #featuredAccom h6 {
+	font-family: "Univers LT W10 55 Roman";
+	font-size: 15px;
+	color: #717073;
+	font-weight: normal;
+}
+#featuredAccom h5 {
+	float: left;
+	text-transform: uppercase; 
+}
+#featuredAccom ul.inline {
+	position: relative;
+	top: auto;
+	right: auto;
+	float: right;
+}
+#featuredAccom ul.inline li {
+	float: left;
+	color: #a9a8a9;
+	background-color: #fff;
+	margin: 8px 1px 0 0;
+	padding: 0;
+	font-size: 20px;
+}
+#featuredAccom ul.inline li span.on {
+	color: #717073;
+}
+#featuredAccom h6 {
+	font-weight: bold;
+	clear: both;
+}
+#featuredAccom button {
+	width: 100%;
+	text-align: center;
+	margin: 0 auto;
+	text-transform: uppercase;
+	cursor: pointer;
+	position: relative;
+	background: transparent;
+	color: #3d0624;
+	margin: 10px 0 0 0;
+	padding: 5px 5px;
+	font-size: 18px;
+	font-weight: bold;
+	border: 2px solid #3d0624;
+}
+
+
+/* mobile */
+@media (max-width: 1024px) {
+	#panelGeneral3 .span4 {
+		display: none !important;
+		width: 0 !important;
+	}
+	.padder {
+		padding: 15px;
+	}
+	#panelGeneral3 .span7 div.padder {
+		padding: 30px 20px 0 20px;
+	}
+	.whiteBg.general {
+		padding-top: 92px;
+	}
+	.whiteBg.general img:first-child {
+		display: none;
+	}
+	#panelGeneral1 .span12 div {
+		padding: 35px 0 20px 20px;
+		background-color: #f0f0f0;
+	}
+	#panelGeneral1 h1 {
+	  	background-color: #f0f0f0;
+	}
+	#panelGeneral2 {
+		display: none;
+	}
+	#panelGeneral3 #myCarousel { display: none;}
+	#panelGeneral3 .span7 p:first-child {
+  		font-size: 24px;
+  		font-family: "Univers LT W10 55 Roman";
+  		color: #3d0624;
+  		font-weight: bold;
+  		line-height: 1.25;
+	}
+	#gMap {
+		width: 100%;
+	}
+	#gMapOver {
+		display: none;
+	}
+	#panelGeneral3 .inline.footer {
+		position: relative;
+		top: 0;
+		right: 0;
+		display: block;
+		width: 180px;
+		margin: 0 auto 15px;
+	}
+	#panelGeneral3 .inline.footer li {
+		background-color: #f0f0f0;
+		color: #535254;
+		margin: 0 0 0 10px;
+		padding: 4px 15px 2px;
+	}
+
+	#panelGeneral3 ul.inline.footer li a {
+		color: #535254;
+		background-color: #f0f0f0;
+		height: 25px;
+		width: 35px;
+		display: block;
+		padding: 10px 0 10px 7px;
+		font-size: 26px;
+		line-height: 24px;
+	}
+	#panelGeneral3 blockquote small {
+		right: 5px;
+	}
+
+	#panelGeneral3 form {
+		display: block;	
+	}
+	#panelGeneral3 form div {
+		font-family: "Bembo W01";
+		font-size: 30px;
+		height: 35px;
+		padding: 35px 20px 20px 20px;
+		background: #f0f0f0;
+		color: #3d0624;
+	}
+	#panelGeneral3 form #tabletSubscribeEmail {
+		float: left;
+		width: auto;
+		margin: 0 auto;
+		color: #3d0624;
+		margin: 26px 0 0 10px;
+		padding: 5px 5px;
+		font-size: 16px;
+		font-weight: bold;
+		border: 1px solid #3d0624;
+	}
+	#panelGeneral3 form #tabletSubscribeEmail::-webkit-input-placeholder { /* WebKit browsers */
+		color: #3d0624;
+	}
+	#panelGeneral3 form #tabletSubscribeEmail:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+	    color: #3d0624;
+	}
+	#panelGeneral3 form #tabletSubscribeEmail::-moz-placeholder { /* Mozilla Firefox 19+ */
+	    color: #3d0624;
+	}
+	#panelGeneral3 form #tabletSubscribeEmail:-ms-input-placeholder { /* Internet Explorer 10+ */
+	    color: #3d0624;
+	}
+	#panelGeneral3 form input[type=submit]{
+		text-indent: -99999px;
+		float: right;
+		text-indent
+		display: block;
+		width: 82px;
+		height: 78px;
+		border: 0 none;
+		background: transparent url(../../../img/operator-rutherglen/tabletSub.png) no-repeat 0 0;
+	}
+
+}
+
+@media (max-width: 1024px) and (min-width: 768px) {
+	.span7 {
+		width: auto;
+	}
+}
