@@ -299,6 +299,46 @@ class CustomerController extends Controller
         return $this->render('TNEOperatorBundle:Customer:cart.html.twig', array('rooms' => $rooms,'cart_data'=> $room_cart,'total_rate' => $total));
     }
 
+
+
+    public function plannerAction()
+    {
+        $cart = $this->getRequest()->getSession()->get('booking_data');
+
+        if(count($cart) == 0)
+        {
+            return $this->redirect($this->generateUrl('tne_operator_listing_search'));
+        }
+
+
+        $total = 0;
+        $rooms = array();
+        $em = $this->getDoctrine()->getManager();
+        foreach ($cart as $room)
+        {
+
+            $roomObj = $em->getRepository('TNEOperatorBundle:AccommodationRoom')->find($room['room_id']);
+
+            $qry = "SELECT sum(rate) as rate FROM  `AccommodationRoomCalendar` ARC WHERE accommodation_room_id =".$room['room_id']."
+                    AND `date` BETWEEN '".date('Y-m-d', strtotime(str_replace('/','-',$room['start_date'])))."'
+                    AND '".date('Y-m-d', strtotime(str_replace('/','-',$room['end_date'])))."'";
+            $roomStmt = $em->getConnection()->prepare($qry);
+            $roomStmt->execute();
+            $rate= $roomStmt->fetchAll();
+            $room_rate = is_null($rate[0]['rate'])?$roomObj->getAccommodation()->getAtdwRateFrom():$rate[0]['rate'];
+            $start_d = strtotime(str_replace('/','-',$room['start_date']));
+            $end_d = strtotime(str_replace('/','-',$room['end_date']));
+            $diff_millsec = $end_d-$start_d;
+            $days = ($diff_millsec/60/60/24)+1;
+            $room_cart [$room['room_id']]=  array('start_date' => $room['start_date'], 'end_date' => $room['end_date'],'rate' => $room_rate, 'days' => $days);
+            $rooms[]=$roomObj;
+            $total +=$room_rate;
+
+        }
+
+        return $this->render('TNEOperatorBundle:Customer:planner.html.twig', array('rooms' => $rooms,'cart_data'=> $room_cart,'total_rate' => $total));
+    }
+
     public function removeFromCartAction()
     {
         $session = $this->getRequest()->getSession();

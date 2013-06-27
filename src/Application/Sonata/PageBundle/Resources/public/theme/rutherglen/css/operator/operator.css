@@ -24,6 +24,7 @@ a:hover {
 	background-color: white;
 	z-index: 1;
 	position: fixed;
+    top: 0;
 }
 
 /* footer */
@@ -37,12 +38,16 @@ a:hover {
 .container {
 	z-index: 10000;
 }
+
+#panel10{
+    position: relative !important;
+}
 #panel0 .logo, #panel0 .logo h1 {
 	height: 112px;
 	padding: 0;
 	margin-bottom: 10px;
 }
-#panel0 .logo a {
+#panel0 .logo h1 > a {
     display: block;
     text-indent: -9000px;	
 	width: 356px;
@@ -64,6 +69,11 @@ a:hover {
 	margin: 0 10px 0 0;
 	width: 590px;
 	float: right;
+}
+
+#desktopMenu {
+    right: 0;
+    top: 67px;
 }
 .lt-ie9 #panel0 ul.bar {
 	background: url(../../img/headerUL.png) no-repeat 0 0;
@@ -105,7 +115,7 @@ a:hover {
 }
 #panel0 ul.bar a span.entypo, #panel0 ul.bar a span.entypo-social {
 	font-size: 40px;
-	line-height: 32px;
+	line-height: 16px;
 }
 #panel0 ul.bar a span.icon-facebook {
 	right: -28px;
@@ -138,6 +148,7 @@ a:hover {
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
+    border: none !important;
 }
 
 #headerDrop {
@@ -607,6 +618,37 @@ a:hover {
 	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
 }
 
+#desktopNav{
+    position: absolute;
+    right: 0;
+    top: 39px;
+}
+.btn-menu{
+    display: inline-block !important;
+    margin-left: 6px;
+    padding: 0 !important;
+    width: 34px;
+    height: 38px;
+    line-height: 38px;
+    margin-top: -6px;
+    text-align: center;
+}
+.btn-menu:hover, .btn-menu.on{
+    background-color: #363636 !important;
+    border-radius: 4px !important;
+    padding: 0 !important;
+    width: 34px;
+    height: 38px;
+}
+
+
+
+.footer-fix .cms-block.cms-container.cms-container-root
+{
+    float:left;
+   
+}
+
 
 
 /* END Desktop */
@@ -686,6 +728,7 @@ a:hover {
 		display: block!important;
 	}
 	*/
+
 }
 
 

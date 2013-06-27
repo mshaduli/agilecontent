@@ -1,0 +1,106 @@
+<div id="whiteBgTop">
+
+    <div id="panel0" class="container" style="position: relative;">
+
+        <div class="row">
+            <div class="span4 logo">
+                <h1><a href="/" title="Rutherglen">Rutherglen</a></h1>
+                <a class="toggleMenu showTablet" href="#"><span class="entypo list"></span></a>
+                <a class="search showTablet" href="#"><span class="entypo search"></span></a>
+            </div>
+            <div class="span8">
+                <ul class="inline bar">
+                    <li class="hidden-phone hidden-tablet"><a href="#">weather<span class="climacon sun"></span></a></li>
+                    <li class="show1024 hidden-desktop"><a href="#">NOW <strong>3.4&deg;</strong>C</a></li>
+                    <li class="hidden-phone hidden-tablet"><a href="#" class="toggleDesktopShare">share<span class="entypo share"></span></a></li><!-- TODO: conect to addThis API -->
+                    <li class="wide">
+                        <a href="#" class="toggleDesktop">connect
+                            <span class="icon-facebook"></span>
+                            <span class="icon-twitter"></span>
+                            <span class="icon-mail"></span>
+                        </a>
+                    </li>
+                    <li class="hidden-phone hidden-tablet"><a href="#" class="toggleDesktop">search</a></li>
+                    <li class="lastLi">
+                        <a href="#" class="last">planner
+                            <span class="entypo cart show1024 hidden-tablet hidden-desktop"></span>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+
+        <div id="desktopMenu" class="row">
+            <ul id="desktopNav" class="inline nav clearfix hidden-phone">
+                {% if settings.content.items is defined %}
+                    {% set menu = settings.content.items %}
+                    {% include "ApplicationSonataPageBundle:Block:nav_item.desktop.html.twig" with {'links':menu } only %}
+                {% endif %}
+            </ul>
+
+            {# Desktop Main Menu Ends #}
+            <!-- MOBILE NAV STARTS -->
+            <ul id="mobileNav" class="inline nav toggle clearfix">
+                {% if settings.content.items is defined %}
+                    {% set menu = settings.content.items %}
+                    {% include "ApplicationSonataPageBundle:Block:nav_item.mobile.html.twig" with {'links':menu } only %}
+                {% endif %}
+            </ul>
+            <!-- MOBILE NAV ENDS -->
+            <!-- DESKTOP STARTS -->
+            <div id="headerDrop" class="clearfix">
+                {% if settings.content.items is defined %}
+                    {% set menu = settings.content.items %}
+                    {% include "ApplicationSonataPageBundle:Block:sub_nav_item.desktop.html.twig" with {'links':menu } only %}
+                {% endif %}
+
+            </div>
+            <!-- DESKTOP ENDS -->
+        </div>
+
+
+
+
+    </div><!-- container -->
+</div>
+<script type="text/javascript">
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId: '268338333304765', // App ID
+            status: true, // check login status
+            cookie: true, // enable cookies to allow the server to access the session
+            xfbml: true  // parse XFBML
+        });
+    };
+
+    (function(d) {
+        var js, id = 'facebook-jssdk';
+        if (d.getElementById(id)) {
+            return;
+        }
+        js = d.createElement('script');
+        js.id = id;
+        js.async = true;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        d.getElementsByTagName('head')[0].appendChild(js);
+    }(document));
+
+    function fbShare()
+    {
+        FB.ui(
+                {
+                    method: 'feed',
+                    name: 'test',
+                    picture: location.protocol+'//'+location.host+'/'+'/images/facebook-promo.jpg',
+                    caption: '',
+                    description: 'Rutherglen Home page',
+                    link: location.protocol+'//'+location.host,
+                    show_error: true
+                },
+        function(response) {
+        }
+        );
+    }
+</script>
+

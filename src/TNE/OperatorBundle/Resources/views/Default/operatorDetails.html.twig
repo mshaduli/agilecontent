@@ -177,7 +177,7 @@ $('#terms-close-btn').click(function(){
   {% if operator is not null %}
   <div id="operator-slider">
         
-        <div class="slider-thumb-nav-img"><img src="{{ asset('bundles/tneoperator/img/slider-thumb-img.png') }}"></div>
+        <div class="slider-thumb-nav-img"><i class="icon-large icon-th-large"></i></div>
         
         <div class="slider-nav" style="z-index:1000;">
           
@@ -283,13 +283,13 @@ $('#terms-close-btn').click(function(){
               <div class="contact-heading">ASK A QUESTION <a href="javascript:void(0)" id="ask-form-close-btn" style="float:right;"><i class="icon-remove"></i></a></div>
               <form action="#" method="post" id="ask-question-form">
               	<div class="alert alert-success" style="display:none;" id="ask-success-msg">Your Form Sucessfully submited.</div>
-                <div class="input-append">
+                <div class="input-append" style="display: block;">
                   <div>
                     <div class="contact-textfield">
                       <label>NAME</label>
                       <input type="text" id="askname" name="askname" class="span2">
                     </div>
-                    <div class="contact-textfield" style="margin-right:0px;">
+                    <div class="contact-textfield">
                       <label>EMAIL</label>
                       <input type="text" id="askemail" name="askemail" class="span2">
                       <!--<div class="alert alert-error">alert message</div>-->
@@ -301,7 +301,7 @@ $('#terms-close-btn').click(function(){
                       <label>PHONE</label>
                       <input type="text" id="askphone" name="askphone" class="span2">
                     </div>
-                    <div class="contact-textfield2" style="margin-right:0px;">
+                    <div class="contact-textfield2">
                       <label>CONTACT ME BY</label>
                       <div class="select-box-part" style="z-index:1000; padding-bottom:1px;">
                         <select name="Items1" id="Items1">
@@ -314,7 +314,7 @@ $('#terms-close-btn').click(function(){
                     <div class="clear"></div>
                   </div>
                   <div>
-                    <div class="contact-textfield2" style="margin-right:0px;">
+                    <div class="contact-textfield2">
                       <label>SUBJECT</label>
                       <div class="select-box-part" style="z-index:999; padding-bottom:1px;">
                         <select name="Items2" id="Items2">
@@ -398,7 +398,7 @@ $('#terms-close-btn').click(function(){
          
          <div id="grid">
              <results-grid operators="operators" loading="loading" limit="9" page="9" days="6" dates="filters.dates"></results-grid>
-                </div>
+         </div>
          
          
          </div>
@@ -486,7 +486,8 @@ $('#terms-close-btn').click(function(){
  {% endif %}
     </div>
 
-{% include 'TNEOperatorBundle:Default:footer.html.twig' %}
+{#{% include 'TNEOperatorBundle:Default:footer.html.twig' %}#}
+{% render url('tne_operators_footer') %}
 
     <div id="design"></div>
 </div>
