@@ -45,3 +45,6 @@ booking_order_confirmation:
     pattern:  /confimation
     defaults: { _controller: "TNEOperatorBundle:Customer:confirmation" }
 
+booking_planner:
+    pattern:  /planner
+    defaults: { _controller: "TNEOperatorBundle:Customer:planner" }

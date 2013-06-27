@@ -278,7 +278,7 @@ SearchApp.directive('resultsList', function(){
             '</div>' +
             '<div>' +
             '<a href="#" class="btn btn-wishlist"><i class="icon-star icon-white"></i></a>' +
-            '<a href="/app_dev.php/operators/{[{operator.id}]}" class="btn btn-primary">More</a>' +
+            '<a href="baseurl+/operators/{[{operator.id}]}" class="btn btn-primary">More</a>' +
             '</div>' +
             '</div>' +
             '</div>' +
@@ -354,7 +354,7 @@ SearchApp.directive('resultsGrid', function(){
             $scope.addToCart = function(room){
 
                 var dates = $scope.dates.split(' to ');
-                $http.get('/app_dev.php/booking/addToCart?room_id='+room.room_id+"&start_date="+dates[0]+"&end_date="+dates[1])
+                $http.get(baseurl+'/booking/addToCart?room_id='+room.room_id+"&start_date="+dates[0]+"&end_date="+dates[1])
                  .success(function(data) {
                     alert(data.status);
                         $('div#header-top ul.nav li a').filter(':contains(Cart)').html('Cart ('+data.count+')');
@@ -624,7 +624,7 @@ angular.module('SearchApp.filters', []).
 
 function SearchController($scope, $http, $q, $filter, $timeout)
 {
-    $scope.operatorUrl = '/app_dev.php/operators';
+    $scope.operatorUrl = baseurl+'/operators';
     $scope.UIViewOptions = ['List','Calendar','Map'];
     $scope.UIView = 'List';
 
@@ -657,13 +657,13 @@ function SearchController($scope, $http, $q, $filter, $timeout)
 
     $scope.isMapElementHidden = false;
 
-    $http.get('/app_dev.php/operators/destinations').success(function(data) {
+    $http.get(baseurl+'/operators/destinations').success(function(data) {
         $scope.destinations = data;
     }).error(function(){
         console.log('destinations not loaded');
     });
 
-    $http.get('/app_dev.php/operators/classifications').success(function(data) {
+    $http.get(baseurl+'/operators/classifications').success(function(data) {
         var tempCls = [];
         $scope.classifications = data;
         angular.forEach(data, function(cls){
@@ -707,15 +707,15 @@ function SearchController($scope, $http, $q, $filter, $timeout)
 
         if($scope.filters.OperatorView.name == 'Accommodation')
         {
-            $scope.operatorUrl = '/app_dev.php/operators';
+            $scope.operatorUrl = baseurl+'/operators';
         }
         else if ($scope.filters.OperatorView.name == 'Events')
         {
-            $scope.operatorUrl = '/app_dev.php/operators/events';
+            $scope.operatorUrl = baseurl+'/operators/events';
         }
         else if ($scope.filters.OperatorView.name == 'Attractions')
         {
-            $scope.operatorUrl = '/app_dev.php/operators/attractions';
+            $scope.operatorUrl = baseurl+'/operators/attractions';
         }
 
         if($scope.destinations.length > 0)
@@ -845,7 +845,7 @@ function createMarker(operator, $filter) {
                     '</div>' +
                     '<div>' +
                         '<a href="#" class="btn btn-wishlist"><i class="icon-star"></i></a>' +
-                        '<a href="/app_dev.php/operators/'+operator.id+'" class="btn btn-primary">More</a>' +
+                        '<a href="baseurl+/operators/'+operator.id+'" class="btn btn-primary">More</a>' +
                     '</div>' +
                  '</div>' +
             '</div>'
