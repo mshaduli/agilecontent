@@ -16,7 +16,7 @@ file that was distributed with this source code.
 <link rel="stylesheet" href="{{ asset('bundles/tneoperator/angular/app/css/app.css') }}" type="text/css" media="all" />
 
 <link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/font-awesome.min.css') }}" type="text/css" media="all" />
-<link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/theme-falls-creek.css') }}" type="text/css" media="all" />
+<link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/theme-rutherglen.css') }}" type="text/css" media="all" />
 <link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/select2.css') }}" type="text/css" media="all" />
 <!--<link rel="stylesheet" href="{#{ asset('bundles/sonatamedia/nivo-gallery/nivo-gallery.css') }#}" type="text/css" media="all" /> -->
 
@@ -40,7 +40,7 @@ file that was distributed with this source code.
 {% include 'TNEOperatorBundle:Default:content_header.html.twig' %}
    <div class="page-title-div">
     <div class="page-title">
-      {{ sonata_page_render_container('pagetitle', page) | sonata_page_render_custome_block(['sonata.block.service.text']) }}
+      {{ sonata_page_render_container('content-top', page) | sonata_page_render_custome_block([{'service':'sonata.block.service.text'}]) }}
     </div>
   </div>
     <div id="main" class="container general-content-main">
@@ -50,17 +50,17 @@ file that was distributed with this source code.
           <div class="general-content-mailarea"> <a href="#"><i class="content-share-icon"></i></a> <a href="#"><i class="content-mail-icon"></i></a> <a href="#"><i class="content-printer-icon"></i></a> </div>
           <div class="breadcrumb"><a href="#">Home</a> / <a href="#">Section</a> / <a href="#">Page title Breadcrumbs</a></div>
           <div class="general-content-page-heading2">
-             {{ sonata_page_render_container('heading', page) | sonata_page_render_custome_block(['sonata.block.service.text']) }}
+             {{ sonata_page_render_container('heading', page) | sonata_page_render_custome_block([{'service':'sonata.block.service.text'}]) }}
           </div>
         </div>
         <!-- New Markup for Operator Bundle -->
-        <div class="general-content-slider"> {{ sonata_page_render_container('bannerimage', page) | sonata_page_render_custome_block(['sonata.media.block.gallery']) }} </div>
+        <div class="general-content-slider"> {{ sonata_page_render_container('bannerimage', page) | sonata_page_render_custome_block([{'service':'sonata.media.block.gallery'}]) }} </div>
         <div class="content-temp-body">
           <div class="content-temp-lft list-item span6 ">
-            {{ sonata_page_render_container('contenttop', page) | sonata_page_render_custome_block(['sonata.block.service.text']) }}
+            {{ sonata_page_render_container('contenttop', page) | sonata_page_render_custome_block([{'service':'sonata.block.service.text'}]) }}
             
-            <div class="map-inner">{{ sonata_page_render_container('mapimage', page) | sonata_page_render_custome_block(['sonata.media.block.feature_media']) }}</div>
-            {{ sonata_page_render_container('contenttwo', page) | sonata_page_render_custome_block(['sonata.block.service.text']) }}
+            <div class="map-inner">{{ sonata_page_render_container('mapimage', page) | sonata_page_render_custome_block([{'service':'sonata.media.block.feature_media'}]) }}</div>
+            {{ sonata_page_render_container('contenttwo', page) | sonata_page_render_custome_block([{'service':'sonata.block.service.text'}]) }}
             
             
           </div>
@@ -70,7 +70,7 @@ file that was distributed with this source code.
               <div class="my-div card">
                 <div class="title ng-binding"><span>From</span> <br>
                 $124</div>
-                 {{ sonata_page_render_container('featuredhotel', page) | sonata_page_render_custome_block(['sonata.media.block.feature_media']) }}
+                 {{ sonata_page_render_container('featuredhotel', page) | sonata_page_render_custome_block([{'service':'sonata.media.block.feature_media'}]) }}
                 <div>
                   <div class="featured-accomodation-content">
                     <div>
@@ -128,7 +128,7 @@ file that was distributed with this source code.
         // Init the filters
         $("#filterTags").select2({ containerCssClass : "search-filter" });
 
-        //angular.bootstrap(document, ['SearchApp']);
+        //angular.bootstrap(document, [{'service':'SearchApp'}]);
     });
 </script>
   

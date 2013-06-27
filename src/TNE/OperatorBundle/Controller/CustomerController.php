@@ -2,7 +2,6 @@
 
 namespace TNE\OperatorBundle\Controller;
 
-use Faker\Provider\DateTime;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -23,6 +22,7 @@ class CustomerController extends Controller
      */
     public function indexAction()
     {
+        return $this->redirect($this->generateUrl('tne_operator_listing_search'));
 //        $em = $this->getDoctrine()->getManager();
 //
 //        $entities = $em->getRepository('TNEOperatorBundle:Customer')->findAll();
@@ -49,6 +49,7 @@ class CustomerController extends Controller
      */
     public function showAction($id)
     {
+        return $this->redirect($this->generateUrl('tne_operator_listing_search'));
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('TNEOperatorBundle:Customer')->find($id);
@@ -70,6 +71,12 @@ class CustomerController extends Controller
      */
     public function newAction()
     {
+        $cart = $this->getRequest()->getSession()->get('booking_data');
+        if(count($cart) == 0)
+        {
+            return $this->redirect($this->generateUrl('tne_operator_listing_search'));
+        }
+
         $entity = new Customer();
         $form   = $this->createForm(new CustomerType(), $entity);
 
@@ -131,6 +138,7 @@ class CustomerController extends Controller
      */
     public function editAction($id)
     {
+        return $this->redirect($this->generateUrl('tne_operator_listing_search'));
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('TNEOperatorBundle:Customer')->find($id);
@@ -155,6 +163,7 @@ class CustomerController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
+        return $this->redirect($this->generateUrl('tne_operator_listing_search'));
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('TNEOperatorBundle:Customer')->find($id);
@@ -187,6 +196,7 @@ class CustomerController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
+        return $this->redirect($this->generateUrl('tne_operator_listing_search'));
         $form = $this->createDeleteForm($id);
         $form->bind($request);
 
@@ -207,6 +217,7 @@ class CustomerController extends Controller
 
     private function createDeleteForm($id)
     {
+
         return $this->createFormBuilder(array('id' => $id))
             ->add('id', 'hidden')
             ->getForm()
@@ -252,8 +263,14 @@ class CustomerController extends Controller
 
     public function cartAction()
     {
-
        $cart = $this->getRequest()->getSession()->get('booking_data');
+
+        if(count($cart) == 0)
+        {
+            return $this->redirect($this->generateUrl('tne_operator_listing_search'));
+        }
+
+
         $total = 0;
         $rooms = array();
         $em = $this->getDoctrine()->getManager();
@@ -268,9 +285,12 @@ class CustomerController extends Controller
             $roomStmt = $em->getConnection()->prepare($qry);
             $roomStmt->execute();
             $rate= $roomStmt->fetchAll();
-            $room_rate = $rate[0]['rate'] == ""?$roomObj->getAccommodation()->getAtdwRateFrom():$rate[0]['rate'];
-
-            $room_cart [$room['room_id']]=  array('start_date' => $room['start_date'], 'end_date' => $room['end_date'],'rate' => $room_rate);
+            $room_rate = is_null($rate[0]['rate'])?$roomObj->getAccommodation()->getAtdwRateFrom():$rate[0]['rate'];
+            $start_d = strtotime(str_replace('/','-',$room['start_date']));
+            $end_d = strtotime(str_replace('/','-',$room['end_date']));
+            $diff_millsec = $end_d-$start_d;
+            $days = ($diff_millsec/60/60/24)+1;
+            $room_cart [$room['room_id']]=  array('start_date' => $room['start_date'], 'end_date' => $room['end_date'],'rate' => $room_rate, 'days' => $days);
             $rooms[]=$roomObj;
             $total +=$room_rate;
 
@@ -292,19 +312,19 @@ class CustomerController extends Controller
     public function confirmationAction()
     {
 
-        //if($this->getRequest()->getSession()->get('booking_id'))
+        if($this->getRequest()->getSession()->get('booking_id'))
         {
 
 
-        //$this->getRequest()->getSession()->remove('booking_data');
+        $this->getRequest()->getSession()->remove('booking_data');
         $order = $this->getDoctrine()->getManager()->getRepository('TNEOperatorBundle:Customer')->find($this->getRequest()->getSession()->get('booking_id'));
-        //$this->getRequest()->getSession()->remove('booking_id');
+        $this->getRequest()->getSession()->remove('booking_id');
         return $this->render('TNEOperatorBundle:Customer:confirmation.html.twig', array('order' => $order));
         }
-        //else
+        else
             
             {
-            //return $this->redirect('/');
+            return $this->redirect('/');
         }
 
     }
