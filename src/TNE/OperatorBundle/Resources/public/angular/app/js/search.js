@@ -258,8 +258,10 @@ SearchApp.directive('resultsList', function(){
             '<ul class="cards">' +
             '<li ng-repeat="operator in operators | limitTo: itemsLimit()">' +
             '<div class="card">' +
-            '<div class="title">{[{operator.name}]}</div>' +
+            
             '<div class="thumbnail">' +
+            '<div class="thumbnail-inner"><img ng-src="{[{operator.image}]}" /></div>' +
+            '<div class="title">{[{operator.name}]}</div>' +
             '<div class="info-bar">' +
             '<div class="info-content clearfix">' +
             '<div class="pull-left"><img src="/bundles/tneoperator/img/design-tripadvisor.png" width="99" height="17" /></div>' +
@@ -267,9 +269,9 @@ SearchApp.directive('resultsList', function(){
             '</div>' +
             '</div>' +
 //                            '<div class="tag tag-special"><i class="icon-heart"></i> Special</div>' +
-            '<div class="thumbnail-inner"><img ng-src="{[{operator.image}]}" /></div>' +
             '</div>' +
             '<div class="content">' +
+            '<div class="divider"></div>' +
             '<div class="content-group"> From <span class="price pull-right label-important">${[{ operator.min_rate }]}</span></div>' +
             '<div class="divider"></div>' +
             '<div class="content-group clearfix">' +
@@ -278,14 +280,15 @@ SearchApp.directive('resultsList', function(){
             '</div>' +
             '<div>' +
             '<a href="#" class="btn btn-wishlist"><i class="icon-star icon-white"></i></a>' +
-            '<a href="baseurl+/operators/{[{operator.id}]}" class="btn btn-primary">More</a>' +
+            '<a href="/app_dev.php/operators/{[{operator.id}]}" class="btn btn-primary">ADD TO PLANNER</a>' +
+
             '</div>' +
             '</div>' +
             '</div>' +
             '</li>' +
             '</ul>' +
             '<div>' +
-            '<br/><br/><br/><br/><button class="btn-full" ng-click="showMoreItems()">Show me more</button>' +
+            '<br/><button class="btn-full" ng-click="showMoreItems()">Show me more</button>' +
             '</div>'
     };
 });
@@ -398,7 +401,7 @@ SearchApp.directive('resultsGrid', function(){
             '</table>' +
             '<div style="text-align: center; margin-top: 100px" ng-show="!loading && !isAccommodation()">No Results</div>' +
             '<div>' +
-                '<br/><br/><br/><br/><button class="btn btn-full" ng-click="showMoreItems()" ng-show="!loading && isAccommodation()">Show me more</button>' +
+                '<br/><button class="btn btn-full" ng-click="showMoreItems()" ng-show="!loading && isAccommodation()">Show me more</button>' +
             '</div>',
         link: function(scope, element, attrs){
             scope.$watch('dates',function(){
@@ -823,12 +826,11 @@ function createMarker(operator, $filter) {
         $('#markerdetail').show();
         $('#markerdetail').html(
             '<div class="card">' +
-                '<button type="button" class="close" data-dismiss="alert">×</button>' +
-                '<div class="title">' + operator.name + '</div>' +
-                '<div class="content-top">' +
-                    '<div class="content-group"><span class="label-important">2</span> Nights from <span class="price pull-right label-important">$'+ operatorRate +'</span></div>' +
-                '</div>' +
+                '<button type="button" class="close" data-dismiss="alert"><i class="icon-large icon-remove"></i></button>' +
+                
                 '<div class="thumbnail">' +
+                    '<div class="thumbnail-inner"><img src="'+operator.image+'"></div>' +
+                    '<div class="title">' + operator.name + '</div>' +
                     '<div class="info-bar">' +
                         '<div class="info-content clearfix">' +
                         '<div class="pull-left"><img src="/bundles/tneoperator/img/design-tripadvisor.png" width="99" height="17" /></div>' +
@@ -836,16 +838,20 @@ function createMarker(operator, $filter) {
                         '</div>' +
                     '</div>' +
 //                    '<div class="tag tag-special"><i class="icon-heart"></i> Special</div>' +
-                    '<div class="thumbnail-inner"><img src="'+operator.image+'"></div>' +
                 '</div>' +
                 '<div class="content">' +
+                    '<div class="divider"></div>' +
+                    '<div class="content-top">' +
+                    '<div class="content-group"><span class="label-important">2</span> Nights from <span class="price pull-right label-important">$'+ operatorRate +'</span></div>' +
+                    '</div>' +                    
+                    '<div class="divider"></div>' +
                     '<div class="content-group clearfix">' +
                         '<div class="pull-right distance"><i class="icon-bolt"></i> <div>'+ operatorDistance +'</div></div>' +
                         '<span>'+ operator.destination + '<br/>' + operator.type +'</span>' +
                     '</div>' +
                     '<div>' +
                         '<a href="#" class="btn btn-wishlist"><i class="icon-star"></i></a>' +
-                        '<a href="baseurl+/operators/'+operator.id+'" class="btn btn-primary">More</a>' +
+                        '<a href="/app_dev.php/operators/'+operator.id+'" class="btn btn-primary">ADD TO PLANNER</a>' +
                     '</div>' +
                  '</div>' +
             '</div>'
