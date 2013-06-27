@@ -292,17 +292,19 @@ class CustomerController extends Controller
     public function confirmationAction()
     {
 
-        if($this->getRequest()->getSession()->get('booking_id'))
+        //if($this->getRequest()->getSession()->get('booking_id'))
         {
 
 
-        $this->getRequest()->getSession()->remove('booking_data');
+        //$this->getRequest()->getSession()->remove('booking_data');
         $order = $this->getDoctrine()->getManager()->getRepository('TNEOperatorBundle:Customer')->find($this->getRequest()->getSession()->get('booking_id'));
-        $this->getRequest()->getSession()->remove('booking_id');
+        //$this->getRequest()->getSession()->remove('booking_id');
         return $this->render('TNEOperatorBundle:Customer:confirmation.html.twig', array('order' => $order));
         }
-        else{
-            return $this->redirect('/');
+        //else
+            
+            {
+            //return $this->redirect('/');
         }
 
     }
