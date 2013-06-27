@@ -26,9 +26,6 @@ services:
         class:        Application\Sonata\PageBundle\Block\TaggedMediaBlockService
         arguments:    ['sonata.block.service.taggedmedia', "@templating", "@service_container", "@sonata.media.manager.media"]
         tags:
-<<<<<<< HEAD
-            -  { name: sonata.block, agile_content_sidebar_title: "RichText", agile_content_sidebar_class: "sidebar_block ui-draggable" , agile_content_sidebar_data_template: "text-block-template" }        
-=======
             -  { name: sonata.block }
 
     sonata.block.service.linkedmedia:
@@ -36,7 +33,6 @@ services:
         arguments:    ['sonata.block.service.linkedmedia', "@templating", "@service_container", "@sonata.media.manager.media"]
         tags:
             -  { name: sonata.block }
->>>>>>> 60328a7ed6eace12c75620a7d333d3ebac37ca92
 
     sonata.block.service.menu:
         class:        Application\Sonata\PageBundle\Block\MenuBlockService
@@ -44,11 +40,11 @@ services:
         tags:
             -  { name: sonata.block, agile_content_sidebar_title: "Nav", agile_content_sidebar_class: "sidebar_block ui-draggable" }
 
-    sonata.block.service.desktop.menu:
-            class:        Application\Sonata\PageBundle\Block\DesktopMenuBlockService
-            arguments:    ['sonata.block.service.menu', "@templating", '@doctrine.orm.entity_manager']
-            tags:
-                -  { name: sonata.block, agile_content_sidebar_title: "Nav", agile_content_sidebar_class: "sidebar_block ui-draggable" }
+#    sonata.block.service.desktop.menu:
+#            class:        Application\Sonata\PageBundle\Block\DesktopMenuBlockService
+#            arguments:    ['sonata.block.service.menu', "@templating", '@doctrine.orm.entity_manager']
+#            tags:
+#                -  { name: sonata.block, agile_content_sidebar_title: "Nav", agile_content_sidebar_class: "sidebar_block ui-draggable" }
             
     pageurl.twig.extension:
         class: Application\Sonata\PageBundle\Twig\Extension\PageUrlTwigExtension

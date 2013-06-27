@@ -96,6 +96,15 @@ class CustomPageExtension extends \Twig_Extension
                      'overlay_title' => "",
                      'template' => $value['template']
                  ));
+             elseif($value['service'] == 'sonata.block.service.menu'){
+                 $newblock->setSettings(
+                 array(
+                     'content' => array(
+                         'items' => array()
+                      ),
+                     'template' => isset($value['template'])?$value['template']:''
+                 ));
+             }
             $newblock->setEnabled(1);
             $newblock->setPosition(1);
             $this->blockmanager->save($newblock);

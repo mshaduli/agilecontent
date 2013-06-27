@@ -47,9 +47,12 @@ class DefaultController extends Controller
     
     public function addMenuAction(Request $request) 
     {      
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $block = $em->getRepository('ApplicationSonataPageBundle:Block')->find($request->request->get('block_id'));
-        $settings = array('content' => array('items' => $request->request->get('content')));
+        $settings = array(
+                           'content' => array('items' => $request->request->get('content')),
+                           'template' => $request->request->get('template')
+                          );
         $block->setSettings($settings);
         $em->persist($block);
         $em->flush();
@@ -58,7 +61,7 @@ class DefaultController extends Controller
     
     public function pageUrlAction($page_id) 
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $page = $em->getRepository('ApplicationSonataPageBundle:Page')->find($page_id);
         
         $url = $this->generateUrl($page);

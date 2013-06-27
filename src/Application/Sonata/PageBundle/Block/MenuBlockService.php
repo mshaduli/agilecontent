@@ -70,8 +70,9 @@ class MenuBlockService extends BaseBlockService implements BlockServiceInterface
         $pages = $qb->getQuery()
                         ->getArrayResult();
         if ($block->getEnabled()) {
+            $template_prefix = ($settings['template'] != '')?$settings['template'].'.':'';
             $response = $this->renderResponse(
-                    'SonataPageBundle:Block:block_menu.html.twig', 
+                    'SonataPageBundle:Block:block_menu.'.$template_prefix.'html.twig',
                     array(
                         'page'      => $currentPage,
                         'block'     => $block,
@@ -114,7 +115,8 @@ class MenuBlockService extends BaseBlockService implements BlockServiceInterface
     public function getDefaultSettings()
     {
     return array(
-        'content' => array('items' => array())
+        'content' => array('items' => array()),
+        'template' => ''
     );
     }
 

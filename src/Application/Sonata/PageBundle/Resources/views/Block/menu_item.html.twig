@@ -1,10 +1,12 @@
 {% for link in links %}
-    <li class="{% if link.items is defined %} parent collapsed {% endif %}" data-id="{{ link.id }}" data-name="{{ link.name }}"  data-class="{{ link.classAttr }}"  data-pageid="{{ link.pageId }}" >
+    <li class="{% if link.items is defined %} parent collapsed {% endif %}" data-id="{{ link.id }}" data-name="{{ link.name }}" data-class="{{ link.classAttr }}" data-pageid="{{ link.pageId }}"
+        {% if link.summaryTitle is defined %} data-summary-title="{{ link.summaryTitle }}" {% endif  %}
+        {% if link.summaryDesc is defined %} data-summary-desc="{{ link.summaryDesc }}" {% endif  %}>
         <a href="#" class="caption ui-droppable" rel="{{ link.id }}">{{ link.name }}</a>
         <span class="cmds">
-            <span class="callback op1 icon-plus"></span> 
-            <span class="callback op2 icon-pencil"></span>
-            <span class="callback op3 icon-trash"></span>
+            <span class="callback op1 icon-plus">Add</span>
+            <span class="callback op2 icon-pencil">Edit</span>
+            <span class="callback op3 icon-trash">Delete</span>
 	</span>
         {% if link.items is defined %}
             <ul style="display: none;">

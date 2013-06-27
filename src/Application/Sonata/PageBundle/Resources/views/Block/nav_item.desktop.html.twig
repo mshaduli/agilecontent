@@ -1,0 +1,6 @@
+{% for link in links %}
+    <li>
+        <a href="{%if link.pageId is empty %}#{% else %}{{ path(page(link.pageId)) }}{% endif %}" class="toggleDesktop">{{ link.name }}</a>
+    </li>
+{% endfor %}
+
