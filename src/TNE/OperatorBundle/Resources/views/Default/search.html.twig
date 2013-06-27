@@ -44,7 +44,7 @@ file that was distributed with this source code.
     <div id="main" class="container">
         <div class="row hidden-phone">
             <div class="span6">
-                <tabs class="btn-group" data-toggle="buttons-radio" model='filters.OperatorView' operators="operators" options='OperatorViewOptions' classes=""></tabs>
+                <tabs class="btn-group" data-toggle="buttons-radio" model='filters.OperatorView' operators="operators" options='OperatorViewOptions' classes="" toggle-calendar="toggleCalendar(selectedOption)"></tabs>
             </div>
             <div class="span3">
                 <!--<div class="pull-right">
@@ -74,7 +74,7 @@ file that was distributed with this source code.
                 </div>
 
                 <div id="grid" ng-show="UIView=='Calendar'">
-                    <results-grid operators="operators" loading="loading" limit="9" page="9" days="6" dates="filters.dates"></results-grid>
+                    <results-grid operators="operators" loading="loading" limit="9" page="9" days="6" dates="filters.dates" current-view="filters.OperatorView"></results-grid>
                 </div>
 
             </div>
