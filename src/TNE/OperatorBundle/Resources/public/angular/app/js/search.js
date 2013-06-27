@@ -660,13 +660,13 @@ function SearchController($scope, $http, $q, $filter, $timeout)
 
     $scope.isMapElementHidden = false;
 
-    $http.get(baseurl+'/operators/destinations').success(function(data) {
+    $http.get('/operators/destinations').success(function(data) {
         $scope.destinations = data;
     }).error(function(){
         console.log('destinations not loaded');
     });
 
-    $http.get(baseurl+'/operators/classifications').success(function(data) {
+    $http.get('/operators/classifications').success(function(data) {
         var tempCls = [];
         $scope.classifications = data;
         angular.forEach(data, function(cls){

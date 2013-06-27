@@ -220,8 +220,13 @@ $('#MoveResults').val(data);
                                         name:$(this).attr("data-name"),
                                         classAttr: $(this).attr("data-class"),
                                         pageId: $(this).attr("data-pageid"),
-                                        items: base.parseTree(subtree),
+                                        items: base.parseTree(subtree)
                                     };
+
+                                    if($(this).attr("data-summary-title") !== undefined && $(this).attr("data-summary-desc") !== undefined ){
+                                        item['summaryTitle'] = $(this).attr("data-summary-title");
+                                        item['summaryDesc'] = $(this).attr("data-summary-desc");
+                                    }
                                     
                                     tags.push(item);
                                 }	
@@ -232,6 +237,11 @@ $('#MoveResults').val(data);
                                         classAttr: $(this).attr("data-class"),
                                         pageId: $(this).attr("data-pageid")
                                     };
+                                    if($(this).attr("data-summary-title") !== undefined && $(this).attr("data-summary-desc") !== undefined ){
+                                        item['summaryTitle'] = $(this).attr("data-summary-title");
+                                        item['summaryDesc'] = $(this).attr("data-summary-desc");
+                                    }
+
                                     tags.push(item);
                                 }
 					

@@ -37,6 +37,10 @@ a:hover {
 .container {
 	z-index: 10000;
 }
+
+#panel10{
+    position: relative !important;
+}
 #panel0 .logo, #panel0 .logo h1 {
 	height: 112px;
 	padding: 0;
@@ -64,6 +68,11 @@ a:hover {
 	margin: 0 10px 0 0;
 	width: 590px;
 	float: right;
+}
+
+#desktopMenu {
+    right: 0;
+    top: 67px;
 }
 .lt-ie9 #panel0 ul.bar {
 	background: url(../../img/headerUL.png) no-repeat 0 0;

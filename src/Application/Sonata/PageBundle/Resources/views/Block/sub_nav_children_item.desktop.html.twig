@@ -1,0 +1,10 @@
+{% for link in links %}
+    <dl>
+        <dt><h3>{{ link.name }}</h3></dt>
+        {% if link.items is defined %}
+            {% for item in link.items %}
+                <dd><a href="{%if link.pageId is empty %}#{% else %}{{ path(page(link.pageId)) }}{% endif %}">{{ link.name }}</a></dd>
+            {% endfor %}
+        {% endif %}
+    </dl>
+{% endfor %}
