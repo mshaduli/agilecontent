@@ -35,37 +35,62 @@ file that was distributed with this source code.
     </div>
     <!--<div class="modal fade" id="myModal_{#{ block.id }#}" style="width:80%;height:80%;overflow: scroll; left: 30%; display: none;"></div> -->
     {% endif %}
-        
-    
-        
-   <div class="container">
-      <div id="sonata-media-block-gallery-{{ block.id }}" class="carousel slide">
-        <div class="carousel-inner">
-          {% for element in elements %}
-                {% if(loop.first) %}
-                    <div class="item active">
-                {% else %}
+
+
+    <div id="panelGeneral3" class="container solidBackground"><!-- first panel -->
+        <div class="row">
+            <div class="span12 clearfix">
+                <div id="sonata-media-block-gallery-{{ block.id }}" class="carousel slide">
+                    <!-- Carousel items -->
+
+                    <div class="carousel-inner">
+                        {% for element in elements %}
+                        {% if(loop.first) %}
+                        <div class="item active">
+                            {% else %}
                             <div class="item">
-                {% endif %}
-                        {% if element.type == 'image' %}
+                                {% endif %}
+                                {% if element.type == 'image' %}
                                     {% media element.media, settings.format %}
-                        {% elseif element.type == 'video' %}
-                            {% media element.media, settings.format %}
-                        {% endif %}
-                        <div class="carousel-caption">
-                          <p>{{ element.caption }}</p>
-                        </div>
+                                {% elseif element.type == 'video' %}
+                                    {% media element.media, settings.format %}
+                                {% endif %}
+                                <div class="carousel-caption">{{ element.caption }}</div>
+                            </div>
+                            {% else %}
+                                {# no elements #}
+                            {% endfor %}
+
                     </div>
-            {% else %}
-                    {# no elements #}
-         {% endfor %}                
+                    <!-- Carousel nav -->
+
+                    {% if elements|length > 1 %}
+                        <div id="carControl">
+                            <a class="carousel-control left" href="#sonata-media-block-gallery-{{ block.id }}" data-slide="prev">
+                                <span class="entypo chevron-thin-right"></span>
+                            </a>
+                            <a class="carousel-control right" href="#sonata-media-block-gallery-{{ block.id }}" data-slide="next">
+                                <span class="entypo chevron-thin-left"></span>
+                            </a>
+                        </div>
+                    {% endif %}
+                    <ol class="carousel-indicators">
+                        <li data-target="#sonata-media-block-gallery-{{ block.id }}" data-slide-to="0" class="active"></li>
+                        <li data-target="#sonata-media-block-gallery-{{ block.id }}" data-slide-to="1"></li>
+                        <li data-target="#sonata-media-block-gallery-{{ block.id }}" data-slide-to="2"></li>
+                    </ol>
+
+                    {#<ul class="inline">#}
+                        {#<li data-tag="tag1">Tag 1</li>#}
+                        {#<li data-tag="tag2">Tag 2</li>#}
+                    {#</ul>#}
+
+                </div>
+
+            </div>
         </div>
-          {% if elements|length > 1 %}
-            <a class="carousel-control left" href="#sonata-media-block-gallery-{{ block.id }}" data-slide="prev">&lsaquo;</a>
-            <a class="carousel-control right" href="#sonata-media-block-gallery-{{ block.id }}" data-slide="next">&rsaquo;</a>
-          {% endif %}
-      </div>
-    </div>
+    </div> <!-- /container -->
+</div>
 
     {% if sonata_page.isEditor or app.security and app.security.isGranted('ROLE_PREVIOUS_ADMIN') %}
 

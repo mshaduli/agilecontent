@@ -102,8 +102,7 @@ OperatorApp.directive('resultsGrid', function() {
                             '<div>{[{operator.name}]} ({[{operator.destination}]})<div data-score="4" class="star pull-right"></div></div>' +
                         '</td>' +
                         '<td ng-repeat="day in days" ng-class="day.class"><span class="price">{[{ getRoomRateForDate(operator, day.date) }]}</span></td>' +
-                        '<td><a class="btn btn-link btn-off" href="#"><i class="icon-star"></i></a></td>' +
-                        '<td><a class="btn btn-link btn-success {[{ cartIcon(operator) }]}" href="#" ng-click="addToCart(operator)"><i class="icon-ok"></i></a></td>' +
+                        '<td colspan="2"><a class="btn btn-link {[{ cartIcon(operator) }]}" href="#" ng-click="addToCart(operator)"><i class="icon-shopping-cart"></i> ADD</a></td>' +
                     '</tr>' +
                 '</tbody>' +
             '</table>' +
