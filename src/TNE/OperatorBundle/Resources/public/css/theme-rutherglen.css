@@ -890,7 +890,8 @@ input[type="file"] {
 #grid .table-bordered tr > td:first-child{
     border-left: none;
 }
-
+#grid tr td:last-child{ width: 110px; }
+#grid .btn-link{ color: #3d0624; }
 #grid .btn-full {
     min-height: 63px;
     line-height: 63px;
