@@ -46,7 +46,7 @@ class GalleryBlockService extends BaseGalleryBlockService
 
         $gallery = $settings['galleryId'];
 
-        return $this->renderResponse('ApplicationSonataMediaBundle:Block:block_gallery.html.twig', array(
+        return $this->renderResponse('ApplicationSonataMediaBundle:Block:block_gallery_rutherglen.html.twig', array(
             'gallery'   => $gallery,
             'block'     => $block,
             'settings'  => $settings,
