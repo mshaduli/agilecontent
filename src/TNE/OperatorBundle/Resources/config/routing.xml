@@ -44,4 +44,7 @@
     <route id="tne_operators_header" pattern="/operator/header">
         <default key="_controller">TNEOperatorBundle:Default:header</default>
     </route>
+    <route id="tne_operators_footer" pattern="/operator/footer">
+        <default key="_controller">TNEOperatorBundle:Default:footer</default>
+    </route>
 </routes>

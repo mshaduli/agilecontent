@@ -1,72 +1,75 @@
-    <footer id="footer">
-        <div id="footerNav">
-            <div class="navbar container visible-phone">
-                <ul class="nav">
-                    <li class="share">
-                        <span class="hide-tablet">Share </span><a href="#" class="btn btn-link"><i class="icon-facebook icon-large"></i></a> <a href="#" class="btn btn-link"><i class="icon-twitter icon-large"></i></a> <a href="#" class="btn btn-link"><i class="icon-google-plus icon-large"></i></a> <a href="#" class="btn btn-link"><i class="icon-envelope icon-large"></i></a>
-                    </li>
-                    <li class="divider-vertical"></li>
-                    <li>
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Your Trip</a>
-                    </li>
-                    <li class="divider-vertical"></li>
-                    <li>
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">The Resort</a>
-                    </li>
-                    <li class="divider-vertical"></li>
-                    <li>
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Activities</a>
-                    </li>
-                    <li class="divider-vertical"></li>
-                    <li>
-                        <a href="#">News</a>
-                    </li>
-                    <li class="divider-vertical"></li>
-                    <li>
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Corporate</a>
-                    </li>
-                    <li class="divider-vertical"></li>
-                    <li>
-                        <a href="#">News</a>
-                    </li>
-                    <li class="divider-vertical"></li>
-                    <li class="copyright">
-                        &copy; 2013 Falls Creek Resort Management
-                    </li>
+<div class="whiteBg footer-fix">
+    <div id="panel5" class="container"><!-- fifth panel -->
+        <div class="row hidden-phone hidden-tablet"><!-- desktop footer -->
+            <div class="span6"><!-- logos -->
+                {% if linkedMedias is defined %}
+                    {% for linkedMedia in linkedMedias %}
+                        <a href="{{ linkedMedia.settings.url }}">
+                            {% if linkedMedia.media %}
+                                {% media linkedMedia.media, linkedMedia.settings.format %}
+                            {% else %}
+                                <img title="" src="/uploads/default.jpeg">
+                            {% endif %}
+                        </a>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="span4"><!-- TODO: needs wiring/caching from Twitter API -->
+                <h4>Twitter</h4>
+                <h5>@rutherglenvic</h5>
+                <p>
+                    Rutherglen Apex are again putting on a great evening of entertainment Sunday 9th June (Winery Walkabout weekend)&hellip;
+                    <a href="#">http://fb.me/2DknP9P8S</a>
+                    <span>12 hours ago</span>
+                </p>
+                <ul class="inline clearfix">
+                    <li><a href="#">Reply |</a></li>
+                    <li><a href="#">Retweet |</a></li>
+                    <li><a href="#">Favourite</a></li>
                 </ul>
             </div>
-            <div class="container hidden-phone">
-                <div class="row">
-                    <div class="span5">
-                        <ul class="footer-logos clearfix">
-                            <li class="ruther-frames"><a href="#">Rurherglen-full of frames</a></li>
-                            <li class="ruther-indigo"><a href="#">Rutherglen-indigo</a></li>
-                            <li class="ruther-wine"><a href="#">Rutherglen-winemakers</a></li>
-                        </ul>
-                    </div>
-                    <div class="span4 twitter-feed">
-                        <h2>Twitter</h2>
-                        <h4><a href="#">@rutherglenvic</a></h4>
-                        <p>Rutherglen Apex are again putting on a great evening of entertainment Sunday 9th June (Winery Walkabout weekend)... <a href="#">http://fb.me/2DknP9P8S</a></p>
-                        <a href="#">Replay</a> | <a href="#">Retweet</a> | <a href="#">Favorite</a>
-                    </div>
-                    <div class="span3">
-                        <form method="" action="" id="subscribe-form">
-                            <h2>Subscribe</h2>
-                            <p>
-                                <label for="">Your Name</label>
-                                <input type="text" id="sub-name" name="sub-name" placeholder="i.e James Raynor">
-                            </p>
-                            <p>
-                                <label for="">Your Email Address</label>
-                                <input type="text" id="sub-email" name="sub-email" placeholder="i.e james@domain.com">
-                            </p>
-                            <p><button type="submit">stay informed</button></p>
-                        </form>
-                    </div>
-                </div>
-            </div>    
-        </div>
+            <div class="span2">
+                <h4>Subscribe</h4>
+                <form>
+                    <label>Your name</label>
+                    <input type="text" placeholder="i.e James Raynor" />
+                    <label>Your email address</label>
+                    <input type="text" placeholder="i.e james@domain.com" />
+                    <input type="submit" value="stay informed" />
+                </form>
+            </div>
+        </div><!-- row -->
+        <div class="row show1024 hidden-desktop"><!-- mobile footer -->
+            <ul class="nav nav-list">
+                <li>
+                    <ul class="inline footerShare">
+                        <li>
+                            <a href="#" class="share">SHARE</a>
+                        </li>
+                        <!-- TODO: these need to be wired up to social networks  -->
+                        <li>
+                            <span class="icon-facebook"></span>
+                        </li>
+                        <li>
+                            <span class="icon-twitter"></span>
+                        </li>
+                        <li>
+                            <span class="icon-mail"></span>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="#">PLANNER</a></li>
+                <li><a href="#">VISIT</a></li>
+                <li><a href="#">ACCOMMODATION</a></li>
+                <li><a href="#">FOOD &amp; WINE</a></li>
+                <li><a href="#">EVENTS &amp; ATTRACTIONS</a></li>
+                <li><a href="#">CONTACT</a></li>
+            </ul>
+            <ul class="inline">
+                <li>&copy; 2013 Rutherglen |</li>
+                <li><a href="#">Sitemap</a></li>
+            </ul>
+        </div><!-- row -->
+    </div> <!-- /container -->
 
-        <!--<div id="footerMap" class="hidden-phone" />-->
-    </footer>
+</div>

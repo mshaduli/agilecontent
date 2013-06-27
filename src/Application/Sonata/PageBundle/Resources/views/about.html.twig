@@ -124,7 +124,7 @@ file that was distributed with this source code.
                     <div id="featuredAccom">
                         <h4>Featured Accommodation</h4>
                         <div class="imgWrap">
-                            <img src="{{ asset('bundles/applicationsonatapage/theme/rutherglen/img/uploaded/featuredAccom.jpg') }}" alt="" />
+                            {{ sonata_page_render_container('featuredAccom', page) | sonata_page_render_custome_block([{'service':'sonata.media.block.feature_media'}]) }}
                             <div>
                                 <small>FROM</small>
                                 &#36;124
