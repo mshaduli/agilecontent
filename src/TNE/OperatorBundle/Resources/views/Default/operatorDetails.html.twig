@@ -494,19 +494,6 @@ $('#terms-close-btn').click(function(){
 <script>
     $(document).ready(function(){
         {% if operator is not null %}
-        // Footer map
-        var footerMapOptions = {
-            zoom: 12,
-            center: new google.maps.LatLng({{ operator.latitude }},{{ operator.longitude }}),
-            disableDefaultUI: true,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        }
-        var footerMap = new google.maps.Map(document.getElementById("footerMap"), footerMapOptions);
-        var footerMarker = new google.maps.Marker({
-            position: new google.maps.LatLng({{ operator.latitude }},{{ operator.longitude }}),
-            map: footerMap,
-            icon: '/bundles/tneoperator/img/map/marker_blue.png'
-        });
         
         var smallMapOptions = {
             zoom: 8,
