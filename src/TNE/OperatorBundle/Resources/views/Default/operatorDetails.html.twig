@@ -42,7 +42,7 @@ file that was distributed with this source code.
         <script src="{{ asset('bundles/tneoperator/js/jquery-datepicker.js') }}"></script>
         <script src="{{ asset('bundles/tneoperator/js/jquery.validate.min.js') }}"></script>
         <script src="{{ asset('bundles/tneoperator/js/additional-methods.min.js') }}"></script>
-        <script src="{{ asset('bundles/tneoperator/angular/app/js/operator_grid.js') }}"></script>
+        <script src="{{ asset('bundles/tneoperator/angular/app/js/operator.js') }}"></script>
         
         <script>
 $(function() {
@@ -493,6 +493,8 @@ $('#terms-close-btn').click(function(){
 </div>
         
 <script>
+
+
     $(document).ready(function(){
         {% if operator is not null %}
         // Footer map
@@ -508,7 +510,7 @@ $('#terms-close-btn').click(function(){
             map: footerMap,
             icon: '/bundles/tneoperator/img/map/marker_blue.png'
         });
-        
+
         var smallMapOptions = {
             zoom: 8,
             center: new google.maps.LatLng({{ operator.latitude }},{{ operator.longitude }}),
@@ -521,16 +523,20 @@ $('#terms-close-btn').click(function(){
             map: smallMap,
             icon: '/bundles/tneoperator/img/map/marker_blue.png'
         });
-$("#terms_conditions").click(function(){
-   $("#top-tab-block").hide();
-   $("#terms-section").show();
-});
 
-$(".large-map-link").click(function(){
-$("#top-tab-block").hide();
-$(".map-section").show();
-    showLargeMap();
-});
+        $("#terms_conditions").click(function(){
+           $("#top-tab-block").hide();
+           $("#terms-section").show();
+        });
+
+        $(".large-map-link").click(function(){
+        $("#top-tab-block").hide();
+        $(".map-section").show();
+            showLargeMap();
+        });
+
+
+
 
     });
     

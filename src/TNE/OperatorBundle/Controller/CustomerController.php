@@ -2,7 +2,6 @@
 
 namespace TNE\OperatorBundle\Controller;
 
-use Faker\Provider\DateTime;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -70,6 +69,12 @@ class CustomerController extends Controller
      */
     public function newAction()
     {
+        $cart = $this->getRequest()->getSession()->get('booking_data');
+        if(count($cart) == 0)
+        {
+            return $this->redirect($this->generateUrl('tne_operator_listing_search'));
+        }
+
         $entity = new Customer();
         $form   = $this->createForm(new CustomerType(), $entity);
 
@@ -252,8 +257,14 @@ class CustomerController extends Controller
 
     public function cartAction()
     {
-
        $cart = $this->getRequest()->getSession()->get('booking_data');
+
+        if(count($cart) == 0)
+        {
+            return $this->redirect($this->generateUrl('tne_operator_listing_search'));
+        }
+
+
         $total = 0;
         $rooms = array();
         $em = $this->getDoctrine()->getManager();
@@ -268,9 +279,12 @@ class CustomerController extends Controller
             $roomStmt = $em->getConnection()->prepare($qry);
             $roomStmt->execute();
             $rate= $roomStmt->fetchAll();
-            $room_rate = $rate[0]['rate'] == ""?$roomObj->getAccommodation()->getAtdwRateFrom():$rate[0]['rate'];
-
-            $room_cart [$room['room_id']]=  array('start_date' => $room['start_date'], 'end_date' => $room['end_date'],'rate' => $room_rate);
+            $room_rate = is_null($rate[0]['rate'])?$roomObj->getAccommodation()->getAtdwRateFrom():$rate[0]['rate'];
+            $start_d = strtotime(str_replace('/','-',$room['start_date']));
+            $end_d = strtotime(str_replace('/','-',$room['end_date']));
+            $diff_millsec = $end_d-$start_d;
+            $days = ($diff_millsec/60/60/24)+1;
+            $room_cart [$room['room_id']]=  array('start_date' => $room['start_date'], 'end_date' => $room['end_date'],'rate' => $room_rate, 'days' => $days);
             $rooms[]=$roomObj;
             $total +=$room_rate;
 

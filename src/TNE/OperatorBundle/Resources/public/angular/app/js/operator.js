@@ -40,7 +40,6 @@ OperatorApp.directive('resultsGrid', function() {
             };
 
             $scope.classForDate = function(date){
-                $scope.dates = "24/06/2013 to 30/06/2013";
                 var dates = $scope.dates.split(' to ');
                 var range = moment().range(moment(dates[0], 'DD/MM/YYYY'), moment(dates[1], 'DD/MM/YYYY'));
                 var inputDate = moment(date, 'DD/MM/YYYY');
@@ -192,3 +191,42 @@ function OperatorController($scope, $http, $q, $filter, $timeout)
     });
 
 }
+
+
+
+$(document).ready(function(){
+    /**
+     * Add to cart functionality for each room in Operator details page
+     */
+    $("a[id^=a_]").click(function(event){
+        var room_id = $(event.currentTarget).attr('id').replace('a_room_','');
+        var max_capacity = $('#max_capacity_'+room_id).val();
+        var start_date =  $('#start_date_'+room_id).val();
+        var end_date =  $('#end_date_'+room_id).val();
+        if(new Date(formatDate(start_date)) == 'Invalid Date')
+        {
+            alert('Invalid Date');
+            return;
+        }
+        if(new Date(formatDate(end_date)) == 'Invalid Date' || new Date(formatDate(end_date)) < new Date(formatDate(start_date)) )
+        {
+            alert('Invalid Date');
+            return;
+        }
+        $.ajax({
+            url: "/app_dev.php/booking/addToCart",
+            data: {room_id:room_id,start_date:start_date,end_date:end_date,max_capacity:max_capacity},
+            success:function(data){
+                alert(data.status);
+                $('div#header-top ul.nav li a').filter(':contains(Cart)').html('Cart ('+data.count+')');
+            }
+        });
+    });
+
+    function formatDate(date)
+    {
+        var dateAry = date.split('/');
+        return dateAry[1]+'/'+dateAry[0]+'/'+dateAry[2];
+    }
+});
+

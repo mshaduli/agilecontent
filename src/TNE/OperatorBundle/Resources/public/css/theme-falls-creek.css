@@ -2562,7 +2562,7 @@ z-index:1001 !important;
 {
     font-size:16px;
     color:#444;
-    padding-bottom:4px;
+    /*padding-bottom:4px;*/
 
 }
 
@@ -2619,9 +2619,9 @@ z-index:1001 !important;
     border:1px #b9b9b9 solid;
     margin-right:0px;
 }
-.lft-from.country input
+.rgt-from.country input
 {
-    width:230px;
+    width:317px;
     border-radius:0px;
     border:1px #b9b9b9 solid;
     margin-right:0px;
@@ -2630,7 +2630,7 @@ z-index:1001 !important;
 {
     float:left;
     margin-right:15px;
-    margin-top: 9px;
+    /*margin-top: 9px;*/
 }
 
 .phone-area-code input
