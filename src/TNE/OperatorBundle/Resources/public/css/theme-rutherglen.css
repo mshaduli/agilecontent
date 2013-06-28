@@ -29,6 +29,11 @@
 #map-view-small{ height: 214px; }
 #map-view-large{ height: 500px; }
 
+/* hashir updated */
+#panel3 .carousel .thumbnail.opaque5{
+    max-height: 278px;
+}
+
 /* design elements */
 #designs {
     position: absolute;
