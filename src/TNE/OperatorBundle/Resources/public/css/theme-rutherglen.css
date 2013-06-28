@@ -1,5 +1,7 @@
 /* CSS Document */
 
+@import url("http://fast.fonts.com/t/1.css?apiType=css&projectid=1a5d5164-616e-4355-a99a-4cbe2bd50933");
+
 @font-face {
     font-family: 'swiss_721roman';
     src: url('../font/swiss_721_extended-webfont.eot');
@@ -9,6 +11,312 @@
     url('../font/swiss_721_extended-webfont.svg#swiss_721roman') format('svg');
     font-weight: normal;
     font-style: normal;
+}
+
+@font-face{
+font-family:"Bembo W01";
+src:url("Fonts/e5488079-e286-434f-a7a2-47bdf487a905.eot?#iefix");
+src:url("Fonts/e5488079-e286-434f-a7a2-47bdf487a905.eot?#iefix") format("eot"),url("Fonts/b30aa007-b477-43cc-81eb-d34f48807cb5.woff") format("woff"),url("Fonts/f75d5781-c9d6-4a95-b024-72e1ac96a7e1.ttf") format("truetype"),url("Fonts/e8bd1ce0-6a1d-4c97-a49b-3e771cc9d5ec.svg#e8bd1ce0-6a1d-4c97-a49b-3e771cc9d5ec") format("svg");
+}
+@font-face{
+font-family:"Bembo MT W01 Bold";
+src:url("Fonts/1b63a7f7-850b-4bd2-acb5-b17a1030d4d6.eot?#iefix");
+src:url("Fonts/1b63a7f7-850b-4bd2-acb5-b17a1030d4d6.eot?#iefix") format("eot"),url("Fonts/70108a41-1350-4029-bb1d-8e21cb4de909.woff") format("woff"),url("Fonts/316765f3-6551-4836-9d77-77f93f015489.ttf") format("truetype"),url("Fonts/6d4aeabf-32df-4268-9fb9-f5484f9097ab.svg#6d4aeabf-32df-4268-9fb9-f5484f9097ab") format("svg");
+}
+@font-face{
+font-family:"BemboMTW01-BoldItalic";
+src:url("Fonts/8be93f51-7dad-45de-a63a-7da0bb3fe30d.eot?#iefix");
+src:url("Fonts/8be93f51-7dad-45de-a63a-7da0bb3fe30d.eot?#iefix") format("eot"),url("Fonts/705530aa-a3f8-4312-9dac-eb50ed974b71.woff") format("woff"),url("Fonts/74c80103-552c-4678-bfae-ac1405b0a463.ttf") format("truetype"),url("Fonts/6a2ac70b-f24c-4d19-85af-e2642baa475d.svg#6a2ac70b-f24c-4d19-85af-e2642baa475d") format("svg");
+}
+@font-face{
+font-family:"Bembo MT W01 Extra Bold";
+src:url("Fonts/799e4f23-26e4-4d3a-a354-c28e63239826.eot?#iefix");
+src:url("Fonts/799e4f23-26e4-4d3a-a354-c28e63239826.eot?#iefix") format("eot"),url("Fonts/980018a2-e3ae-4a1b-8ef9-b73248140ea6.woff") format("woff"),url("Fonts/85efc9ff-b0aa-4294-b7cc-7c2402926bbf.ttf") format("truetype"),url("Fonts/ee0c0187-ed62-4192-8d3d-4fa73d3645d6.svg#ee0c0187-ed62-4192-8d3d-4fa73d3645d6") format("svg");
+}
+@font-face{
+font-family:"BemboMTW01-ExtraBoldIta";
+src:url("Fonts/bd4f7c55-4258-4c41-a4e5-44007dddab7b.eot?#iefix");
+src:url("Fonts/bd4f7c55-4258-4c41-a4e5-44007dddab7b.eot?#iefix") format("eot"),url("Fonts/298e699b-8f11-4072-a175-e276f0ffb160.woff") format("woff"),url("Fonts/29e50d11-e2a8-4990-9b4e-9a556d7b4f61.ttf") format("truetype"),url("Fonts/e14bc710-43e3-4765-a373-234cd8a889ce.svg#e14bc710-43e3-4765-a373-234cd8a889ce") format("svg");
+}
+@font-face{
+font-family:"Bembo MT W01 Italic";
+src:url("Fonts/59730544-eaf2-4e85-b40c-3a1937804890.eot?#iefix");
+src:url("Fonts/59730544-eaf2-4e85-b40c-3a1937804890.eot?#iefix") format("eot"),url("Fonts/40023eb7-1ce9-487f-9c94-2dd2ae7022d3.woff") format("woff"),url("Fonts/de1c2983-6261-49d8-a943-8d7ceda898b1.ttf") format("truetype"),url("Fonts/1f53f4dc-ca15-462e-b829-98f0c696e1ad.svg#1f53f4dc-ca15-462e-b829-98f0c696e1ad") format("svg");
+}
+@font-face{
+font-family:"Bembo MT W01 Semibold";
+src:url("Fonts/688fabe9-0cfe-469f-baca-6e66f1959ef4.eot?#iefix");
+src:url("Fonts/688fabe9-0cfe-469f-baca-6e66f1959ef4.eot?#iefix") format("eot"),url("Fonts/a931fbc0-f12f-4dbb-a45e-1adbd3080938.woff") format("woff"),url("Fonts/b09add56-c350-4067-81ba-4c9d741cdb99.ttf") format("truetype"),url("Fonts/0e37fa2e-9534-4cd7-899a-551d26005630.svg#0e37fa2e-9534-4cd7-899a-551d26005630") format("svg");
+}
+@font-face{
+font-family:"BemboMTW01-SemiboldItal";
+src:url("Fonts/276f13e9-5cb5-482e-a0de-43b2c621670d.eot?#iefix");
+src:url("Fonts/276f13e9-5cb5-482e-a0de-43b2c621670d.eot?#iefix") format("eot"),url("Fonts/bb5c8c1a-4108-4d8a-ad38-4ca447521c60.woff") format("woff"),url("Fonts/e952c5ea-e1bc-4b78-8d53-774280257272.ttf") format("truetype"),url("Fonts/3ce763ac-0545-4f82-9d05-affe0686d0d7.svg#3ce763ac-0545-4f82-9d05-affe0686d0d7") format("svg");
+}
+@font-face{
+font-family:"BemboTitlingMTW01-Itali";
+src:url("Fonts/b38e92ed-81f0-411c-a3f9-e65645992e56.eot?#iefix");
+src:url("Fonts/b38e92ed-81f0-411c-a3f9-e65645992e56.eot?#iefix") format("eot"),url("Fonts/7adc504a-624a-4bfd-8833-17385df98b2c.woff") format("woff"),url("Fonts/ee3f9088-a986-4c19-a1d2-b35f6675019b.ttf") format("truetype"),url("Fonts/9e68a14e-86a4-41a3-8bd4-5d31045bcf5f.svg#9e68a14e-86a4-41a3-8bd4-5d31045bcf5f") format("svg");
+}
+@font-face{
+font-family:"Bembo Titling MT W01";
+src:url("Fonts/8eafa9fa-0a76-4311-9f00-b7c092c3b6b4.eot?#iefix");
+src:url("Fonts/8eafa9fa-0a76-4311-9f00-b7c092c3b6b4.eot?#iefix") format("eot"),url("Fonts/d999a86f-81fb-4677-8e6d-3d355c079167.woff") format("woff"),url("Fonts/66fedadc-6b20-4376-959e-1e6300a42227.ttf") format("truetype"),url("Fonts/9796fa95-f361-4cab-ad4a-abf198fe5ed3.svg#9796fa95-f361-4cab-ad4a-abf198fe5ed3") format("svg");
+}
+@font-face{
+font-family:"UniversLTW01-53Extended";
+src:url("Fonts/e90b5a92-17e5-4875-a46d-4bf20adb66e8.eot?#iefix");
+src:url("Fonts/e90b5a92-17e5-4875-a46d-4bf20adb66e8.eot?#iefix") format("eot"),url("Fonts/d2810795-22a0-44b6-b13c-7312ea475d48.woff") format("woff"),url("Fonts/c2eb9b46-a921-46b3-9c2b-113037bf7350.ttf") format("truetype"),url("Fonts/7a32f151-8355-48d4-b5d1-be3c2ffbd6ed.svg#7a32f151-8355-48d4-b5d1-be3c2ffbd6ed") format("svg");
+}
+@font-face{
+font-family:"UniversLTW01-53ExObl";
+src:url("Fonts/7f1f1495-e2e3-4b7d-9bde-dbafc696841a.eot?#iefix");
+src:url("Fonts/7f1f1495-e2e3-4b7d-9bde-dbafc696841a.eot?#iefix") format("eot"),url("Fonts/c51da66f-1942-40de-851d-1e51e1025361.woff") format("woff"),url("Fonts/1a233d08-0ec5-4daa-9c63-606969a4c55a.ttf") format("truetype"),url("Fonts/1a2e51bc-3bcd-4ef9-998e-6ba851e52024.svg#1a2e51bc-3bcd-4ef9-998e-6ba851e52024") format("svg");
+}
+@font-face{
+font-family:"Univers W01 63 Bold Ex";
+src:url("Fonts/c031d364-61db-4b59-99f5-09eeb240a700.eot?#iefix");
+src:url("Fonts/c031d364-61db-4b59-99f5-09eeb240a700.eot?#iefix") format("eot"),url("Fonts/117029bb-8ac2-4137-94e9-3cfd354bedc7.woff") format("woff"),url("Fonts/866c5e2b-437a-4b02-86b5-978886920ad3.ttf") format("truetype"),url("Fonts/622149ee-ce25-451e-bdd8-ac0beec13460.svg#622149ee-ce25-451e-bdd8-ac0beec13460") format("svg");
+}
+@font-face{
+font-family:"UniversW01-63BoldExObl";
+src:url("Fonts/354397cb-bb29-49f5-9dad-1f901569225a.eot?#iefix");
+src:url("Fonts/354397cb-bb29-49f5-9dad-1f901569225a.eot?#iefix") format("eot"),url("Fonts/ded6ba2c-d01d-4ee3-9050-98dda049a21f.woff") format("woff"),url("Fonts/c5501c0c-7710-4377-8378-dec756b91df2.ttf") format("truetype"),url("Fonts/e3a9cbeb-1a58-44e7-899c-cbac01f22588.svg#e3a9cbeb-1a58-44e7-899c-cbac01f22588") format("svg");
+}
+@font-face{
+font-family:"Univers W01 73 Black Ex";
+src:url("Fonts/2f2b5148-738a-4ba3-9149-8c548b755579.eot?#iefix");
+src:url("Fonts/2f2b5148-738a-4ba3-9149-8c548b755579.eot?#iefix") format("eot"),url("Fonts/644059d1-ab97-415b-8967-0077b993eb2e.woff") format("woff"),url("Fonts/2bbe68e2-34c6-4900-be92-e39ed2289a6b.ttf") format("truetype"),url("Fonts/3a3fa643-fe37-47d2-bcbc-b3442fc9c037.svg#3a3fa643-fe37-47d2-bcbc-b3442fc9c037") format("svg");
+}
+@font-face{
+font-family:"UniversW01-73BlackExObl";
+src:url("Fonts/81c9d940-38c2-45d6-a7cc-23083b79ff76.eot?#iefix");
+src:url("Fonts/81c9d940-38c2-45d6-a7cc-23083b79ff76.eot?#iefix") format("eot"),url("Fonts/fd66efca-9237-4e9c-bde0-6c304328ec8e.woff") format("woff"),url("Fonts/d989ceb7-ee34-4cbf-afd8-b4038ccbfea2.ttf") format("truetype"),url("Fonts/354ad93f-0bc9-46aa-9fdb-e2daba16bbe8.svg#354ad93f-0bc9-46aa-9fdb-e2daba16bbe8") format("svg");
+}
+@font-face{
+font-family:"UniversW01-93ExtraBlack";
+src:url("Fonts/db3b5c15-fbd9-46fd-b082-f7d2e924cd12.eot?#iefix");
+src:url("Fonts/db3b5c15-fbd9-46fd-b082-f7d2e924cd12.eot?#iefix") format("eot"),url("Fonts/60ee2fc1-ee58-4aaa-8ce6-f1b6ba9da55d.woff") format("woff"),url("Fonts/b58a3902-e475-497b-aa04-1b43e177747c.ttf") format("truetype"),url("Fonts/6a8c2617-46a9-4b01-abe4-45a1b6b59879.svg#6a8c2617-46a9-4b01-abe4-45a1b6b59879") format("svg");
+}
+@font-face{
+font-family:"UniversW01-93ExtraBkExO";
+src:url("Fonts/996ed30f-ed7a-4011-8c14-aab2b839e751.eot?#iefix");
+src:url("Fonts/996ed30f-ed7a-4011-8c14-aab2b839e751.eot?#iefix") format("eot"),url("Fonts/7757d20c-6c39-4619-a2f8-7644c667d1dd.woff") format("woff"),url("Fonts/cb768035-ae79-4387-a0d9-701880149791.ttf") format("truetype"),url("Fonts/a8bbdf85-2b21-4292-8853-dbcb8cece416.svg#a8bbdf85-2b21-4292-8853-dbcb8cece416") format("svg");
+}
+@font-face{
+font-family:"UniversLTW01-39ThinUltr";
+src:url("Fonts/e9312bcd-a9fe-409e-970e-6c579bfa40a1.eot?#iefix");
+src:url("Fonts/e9312bcd-a9fe-409e-970e-6c579bfa40a1.eot?#iefix") format("eot"),url("Fonts/feb9b5cd-71e3-443b-833b-08ca93e742e3.woff") format("woff"),url("Fonts/8f20e48e-c36a-49e6-a17d-491fd26dd8a1.ttf") format("truetype"),url("Fonts/37f470a6-d151-4f0c-81aa-b715fdb67e7b.svg#37f470a6-d151-4f0c-81aa-b715fdb67e7b") format("svg");
+}
+@font-face{
+font-family:"Univers LT W01 45 Light";
+src:url("Fonts/2b61512c-069e-4111-bb23-9a918f94a74d.eot?#iefix");
+src:url("Fonts/2b61512c-069e-4111-bb23-9a918f94a74d.eot?#iefix") format("eot"),url("Fonts/ecf89914-1896-43f6-a0a0-fe733d1db6e7.woff") format("woff"),url("Fonts/7628f343-8c36-4707-9559-8feb86c0462f.ttf") format("truetype"),url("Fonts/11b816e7-d678-48dd-bc75-560de9c19049.svg#11b816e7-d678-48dd-bc75-560de9c19049") format("svg");
+}
+@font-face{
+font-family:"UniversLTW01-45LightObl";
+src:url("Fonts/63bd7ad7-ab01-47e6-8cba-e2298391f89b.eot?#iefix");
+src:url("Fonts/63bd7ad7-ab01-47e6-8cba-e2298391f89b.eot?#iefix") format("eot"),url("Fonts/e77f713a-7f78-4d74-b299-5ca4242176b9.woff") format("woff"),url("Fonts/90e56276-5fa2-4640-be25-8f42f40e4e8b.ttf") format("truetype"),url("Fonts/ffbd82f1-3d16-4dfc-8a55-df71c332b658.svg#ffbd82f1-3d16-4dfc-8a55-df71c332b658") format("svg");
+}
+@font-face{
+font-family:"UniversLTW01-47LightCn";
+src:url("Fonts/296c59c2-74b0-41c1-bcfd-23d22a713f86.eot?#iefix");
+src:url("Fonts/296c59c2-74b0-41c1-bcfd-23d22a713f86.eot?#iefix") format("eot"),url("Fonts/609beecf-8d23-4a8c-bbf5-d22ee8db2fc9.woff") format("woff"),url("Fonts/a6595b8d-d4a3-4f01-bf21-0b53617d4b1c.ttf") format("truetype"),url("Fonts/1cd9ef2f-b358-4d39-8628-6481d9e1c8ce.svg#1cd9ef2f-b358-4d39-8628-6481d9e1c8ce") format("svg");
+}
+@font-face{
+font-family:"UniversLTW01-47LightCnO";
+src:url("Fonts/fdfeee3b-73cf-40fc-9d11-f05ad57d4674.eot?#iefix");
+src:url("Fonts/fdfeee3b-73cf-40fc-9d11-f05ad57d4674.eot?#iefix") format("eot"),url("Fonts/d35821cc-c3b0-4c4a-b25c-4d2e6e4ace3f.woff") format("woff"),url("Fonts/dd492f60-93ca-43bd-8f01-5b10260cf005.ttf") format("truetype"),url("Fonts/16ac32a0-c6e8-4e7b-8753-9b6ddfb10c48.svg#16ac32a0-c6e8-4e7b-8753-9b6ddfb10c48") format("svg");
+}
+@font-face{
+font-family:"UniversLTW01-49LightUlt";
+src:url("Fonts/6bba7e28-1748-401d-91dc-6998ac60e165.eot?#iefix");
+src:url("Fonts/6bba7e28-1748-401d-91dc-6998ac60e165.eot?#iefix") format("eot"),url("Fonts/be7ea3ea-e09b-451e-b97c-362668d31c5b.woff") format("woff"),url("Fonts/6227e606-f97b-4dc5-a971-14169ff750df.ttf") format("truetype"),url("Fonts/5fbe907d-e311-40df-a30c-b22f1f47d80b.svg#5fbe907d-e311-40df-a30c-b22f1f47d80b") format("svg");
+}
+@font-face{
+font-family:"UniversLTW01-55Oblique";
+src:url("Fonts/783e01cd-5eb8-41d7-a380-a18673f2983b.eot?#iefix");
+src:url("Fonts/783e01cd-5eb8-41d7-a380-a18673f2983b.eot?#iefix") format("eot"),url("Fonts/90c17e08-290d-4eba-ab33-77c81c1f559d.woff") format("woff"),url("Fonts/d93b9eab-632d-4aaf-b7fa-5c17060d62fc.ttf") format("truetype"),url("Fonts/caa7a31a-310f-4020-8311-89816a31472f.svg#caa7a31a-310f-4020-8311-89816a31472f") format("svg");
+}
+@font-face{
+font-family:"Univers LT W01 55 Roman";
+src:url("Fonts/b5c30ea8-0700-4fd2-aa12-cc45074693a9.eot?#iefix");
+src:url("Fonts/b5c30ea8-0700-4fd2-aa12-cc45074693a9.eot?#iefix") format("eot"),url("Fonts/7b95cb9a-a288-4405-97a0-13095f56a903.woff") format("woff"),url("Fonts/c7481806-4ea4-40db-a623-7bc352bbbe43.ttf") format("truetype"),url("Fonts/ac8280da-3de5-456d-bd77-8f01665452a9.svg#ac8280da-3de5-456d-bd77-8f01665452a9") format("svg");
+}
+@font-face{
+font-family:"UniversLTW01-57Condense 723818";
+src:url("Fonts/6fc47523-fa84-47de-b974-533db32eacd8.eot?#iefix");
+src:url("Fonts/6fc47523-fa84-47de-b974-533db32eacd8.eot?#iefix") format("eot"),url("Fonts/34e6ea2e-62b2-49c9-b5e6-128fddfd9f6c.woff") format("woff"),url("Fonts/01a871ba-586f-4d5e-8924-d4ec3b44f723.ttf") format("truetype"),url("Fonts/5ebb44ef-5450-4b20-9612-66b2a127178b.svg#5ebb44ef-5450-4b20-9612-66b2a127178b") format("svg");
+}
+@font-face{
+font-family:"UniversLTW01-57Condense 723821";
+src:url("Fonts/aefefc4e-9cb8-4e8e-8599-dda705456734.eot?#iefix");
+src:url("Fonts/aefefc4e-9cb8-4e8e-8599-dda705456734.eot?#iefix") format("eot"),url("Fonts/1eaf27c0-f4de-4273-9f4c-1b3236ad2f3c.woff") format("woff"),url("Fonts/9b913baf-b1f0-47d2-8c76-42f59650058f.ttf") format("truetype"),url("Fonts/0abcce12-2274-4ee7-b6d5-0066b5f5f670.svg#0abcce12-2274-4ee7-b6d5-0066b5f5f670") format("svg");
+}
+@font-face{
+font-family:"UniversLTW01-59UltraCn";
+src:url("Fonts/9ff12269-014c-4b72-a738-a0d7ddbce820.eot?#iefix");
+src:url("Fonts/9ff12269-014c-4b72-a738-a0d7ddbce820.eot?#iefix") format("eot"),url("Fonts/7cc7234f-05ac-4109-8b8a-93f13c489739.woff") format("woff"),url("Fonts/6c4a7455-816a-41fb-8c03-dd71dcbbc686.ttf") format("truetype"),url("Fonts/383b7b06-99d7-4749-85ac-bf144981cfce.svg#383b7b06-99d7-4749-85ac-bf144981cfce") format("svg");
+}
+@font-face{
+font-family:"Univers LT W01 65 Bold";
+src:url("Fonts/db1c462f-8890-4a11-9de5-36872279e20a.eot?#iefix");
+src:url("Fonts/db1c462f-8890-4a11-9de5-36872279e20a.eot?#iefix") format("eot"),url("Fonts/b993da84-c1f6-474a-8f00-8aa797b3de8f.woff") format("woff"),url("Fonts/58403ef6-4c15-4280-b4b6-9acf50804f4f.ttf") format("truetype"),url("Fonts/9178e351-95c5-4913-9eeb-fd0645a18c2d.svg#9178e351-95c5-4913-9eeb-fd0645a18c2d") format("svg");
+}
+@font-face{
+font-family:"UniversLTW01-65BoldObli";
+src:url("Fonts/1e70cef5-4838-4826-a99f-e182b86fe21d.eot?#iefix");
+src:url("Fonts/1e70cef5-4838-4826-a99f-e182b86fe21d.eot?#iefix") format("eot"),url("Fonts/322d336b-2d02-42f6-a24f-200c98b82a7c.woff") format("woff"),url("Fonts/32ed3859-e789-4a3f-96fd-b67231f1929f.ttf") format("truetype"),url("Fonts/6d63e0ba-5ef0-4803-9fbe-686603f3771d.svg#6d63e0ba-5ef0-4803-9fbe-686603f3771d") format("svg");
+}
+@font-face{
+font-family:"UniversLTW01-67BoldCn";
+src:url("Fonts/076b8d7a-91b5-4c89-86a1-546b980072c7.eot?#iefix");
+src:url("Fonts/076b8d7a-91b5-4c89-86a1-546b980072c7.eot?#iefix") format("eot"),url("Fonts/21decb60-b395-4de2-bd04-e38eb2a56d2f.woff") format("woff"),url("Fonts/091058d4-36b2-43f6-80d3-16c88e098061.ttf") format("truetype"),url("Fonts/827d22bc-e38b-4ccf-8a21-1f9aaa76e402.svg#827d22bc-e38b-4ccf-8a21-1f9aaa76e402") format("svg");
+}
+@font-face{
+font-family:"UniversLTW01-67BoldCnOb";
+src:url("Fonts/6881ee98-4e9b-4409-9695-e5b0118c7c84.eot?#iefix");
+src:url("Fonts/6881ee98-4e9b-4409-9695-e5b0118c7c84.eot?#iefix") format("eot"),url("Fonts/53f66cd7-168f-4c66-9514-9dd103c763a0.woff") format("woff"),url("Fonts/774a1d99-085d-4249-8c2c-0ce23fa975a6.ttf") format("truetype"),url("Fonts/056a520c-7f4a-4b3a-8465-a841cfe0b6b3.svg#056a520c-7f4a-4b3a-8465-a841cfe0b6b3") format("svg");
+}
+@font-face{
+font-family:"Univers LT W01 75 Black";
+src:url("Fonts/8ad2e453-ea69-411d-b93b-1fa328724687.eot?#iefix");
+src:url("Fonts/8ad2e453-ea69-411d-b93b-1fa328724687.eot?#iefix") format("eot"),url("Fonts/b23ec90b-9f99-46a0-85f7-d1e820dbf851.woff") format("woff"),url("Fonts/249aeedc-8e38-41c9-874e-bba9a33fd5e4.ttf") format("truetype"),url("Fonts/67e5d6e8-25e6-4556-99f8-ced41b2b7aae.svg#67e5d6e8-25e6-4556-99f8-ced41b2b7aae") format("svg");
+}
+@font-face{
+font-family:"UniversLTW01-75BlackObl";
+src:url("Fonts/718ad7a7-b7ca-45a8-830a-907da5e651db.eot?#iefix");
+src:url("Fonts/718ad7a7-b7ca-45a8-830a-907da5e651db.eot?#iefix") format("eot"),url("Fonts/01caa063-563a-4276-937f-3d297625b7ae.woff") format("woff"),url("Fonts/793a86e8-08cd-4cf0-8a85-28a0f570de88.ttf") format("truetype"),url("Fonts/392a8a89-035c-4023-929e-5d59237a6eb4.svg#392a8a89-035c-4023-929e-5d59237a6eb4") format("svg");
+}
+@font-face{
+font-family:"UniversLTW01-85ExtraBla";
+src:url("Fonts/6c794dfe-0229-4817-8cbb-34d5288eeda7.eot?#iefix");
+src:url("Fonts/6c794dfe-0229-4817-8cbb-34d5288eeda7.eot?#iefix") format("eot"),url("Fonts/c2b85969-35ac-408e-a4e3-bdd7ac909637.woff") format("woff"),url("Fonts/617c45fe-9a7f-4660-9cd0-e7f4a097ec0d.ttf") format("truetype"),url("Fonts/6054f584-27b3-440f-b6e1-31c4af1f277a.svg#6054f584-27b3-440f-b6e1-31c4af1f277a") format("svg");
+}
+@font-face{
+font-family:"UniversLTW01-85ExtraBkO";
+src:url("Fonts/2530da3d-f1d7-442e-bfb0-b19fcba664c8.eot?#iefix");
+src:url("Fonts/2530da3d-f1d7-442e-bfb0-b19fcba664c8.eot?#iefix") format("eot"),url("Fonts/5a2f9593-12c2-4112-862e-1aa0a4f425eb.woff") format("woff"),url("Fonts/e87c22ca-a657-4c8a-88f2-5933aab9d95c.ttf") format("truetype"),url("Fonts/03d2c5f3-b690-4467-a028-47a5c2e659ce.svg#03d2c5f3-b690-4467-a028-47a5c2e659ce") format("svg");
+}
+@font-face{
+font-family:"UniversLTW10-39ThinUltr";
+src:url("Fonts/2d67917e-dc61-45f4-87ba-8c48c7e2ad7e.eot?#iefix");
+src:url("Fonts/2d67917e-dc61-45f4-87ba-8c48c7e2ad7e.eot?#iefix") format("eot"),url("Fonts/47433474-b9a7-41c0-8a3d-1bcd7731a44a.woff") format("woff"),url("Fonts/e797cce6-f053-45b8-9375-22df513ad838.ttf") format("truetype"),url("Fonts/842f0f08-586d-4e64-849a-3a075c0bc7ea.svg#842f0f08-586d-4e64-849a-3a075c0bc7ea") format("svg");
+}
+@font-face{
+font-family:"Univers LT W10 45 Light";
+src:url("Fonts/4f0a410b-3d92-4612-9c7b-704206eca3b7.eot?#iefix");
+src:url("Fonts/4f0a410b-3d92-4612-9c7b-704206eca3b7.eot?#iefix") format("eot"),url("Fonts/817eaa9f-57f7-4906-8997-dd0b6b0209b2.woff") format("woff"),url("Fonts/ef60a5d5-3fa8-45e7-ad58-7507b646df0e.ttf") format("truetype"),url("Fonts/af931ed4-a6e9-46cf-8f5e-e3ee804ae773.svg#af931ed4-a6e9-46cf-8f5e-e3ee804ae773") format("svg");
+}
+@font-face{
+font-family:"UniversLTW10-45LightObl";
+src:url("Fonts/f11ad046-c61d-4f44-b361-3c3ee12b6704.eot?#iefix");
+src:url("Fonts/f11ad046-c61d-4f44-b361-3c3ee12b6704.eot?#iefix") format("eot"),url("Fonts/5b217ce0-406a-419e-837b-90f8288f61ed.woff") format("woff"),url("Fonts/2107cd94-3942-4b44-8107-d354d4b4d112.ttf") format("truetype"),url("Fonts/9e59d0aa-3be1-4a8f-b1bf-a041b40fcb90.svg#9e59d0aa-3be1-4a8f-b1bf-a041b40fcb90") format("svg");
+}
+@font-face{
+font-family:"UniversLTW10-47LightCn";
+src:url("Fonts/9a4527a5-1fbc-4086-a5b5-061b360f6eda.eot?#iefix");
+src:url("Fonts/9a4527a5-1fbc-4086-a5b5-061b360f6eda.eot?#iefix") format("eot"),url("Fonts/30b0116b-5b6c-417a-acfc-3016403130c2.woff") format("woff"),url("Fonts/6289fea5-f46f-4294-add5-cfe1c32ee3b3.ttf") format("truetype"),url("Fonts/687976a2-063b-43ef-863c-a41dca947511.svg#687976a2-063b-43ef-863c-a41dca947511") format("svg");
+}
+@font-face{
+font-family:"UniversLTW10-47LightCnO";
+src:url("Fonts/042e7220-07f7-4f06-93dc-c5b8c6d6f27e.eot?#iefix");
+src:url("Fonts/042e7220-07f7-4f06-93dc-c5b8c6d6f27e.eot?#iefix") format("eot"),url("Fonts/dd87c153-9699-4e3b-9e82-9905a3b2204a.woff") format("woff"),url("Fonts/e7fc04ac-c320-45c1-8cf2-1d2ad73dd41e.ttf") format("truetype"),url("Fonts/37852ea0-6c16-48f5-86de-8fe084feeab4.svg#37852ea0-6c16-48f5-86de-8fe084feeab4") format("svg");
+}
+@font-face{
+font-family:"UniversLTW10-49LightUlt";
+src:url("Fonts/8fce5f27-dbd8-450a-9b06-fec297a45c5c.eot?#iefix");
+src:url("Fonts/8fce5f27-dbd8-450a-9b06-fec297a45c5c.eot?#iefix") format("eot"),url("Fonts/1a15bd27-128e-46ec-93f7-89f7abb4e375.woff") format("woff"),url("Fonts/a8b32e9f-0807-4ad0-b696-137496323fb1.ttf") format("truetype"),url("Fonts/4737e3eb-b6d3-48d2-ac21-25fb520849fe.svg#4737e3eb-b6d3-48d2-ac21-25fb520849fe") format("svg");
+}
+@font-face{
+font-family:"UniversLTW10-55Oblique";
+src:url("Fonts/0ca44be1-a55d-44bf-87d4-61a172e8ceee.eot?#iefix");
+src:url("Fonts/0ca44be1-a55d-44bf-87d4-61a172e8ceee.eot?#iefix") format("eot"),url("Fonts/e1fed69d-01bc-4357-9903-5a430c1b2e7c.woff") format("woff"),url("Fonts/127ba2dd-6a44-4e18-8328-d415ee69c3c6.ttf") format("truetype"),url("Fonts/9c690aa0-a742-4e11-b571-8a68302a8f24.svg#9c690aa0-a742-4e11-b571-8a68302a8f24") format("svg");
+}
+@font-face{
+font-family:"Univers LT W10 55 Roman";
+src:url("Fonts/51483fc1-da59-4223-a632-cb12950e03a6.eot?#iefix");
+src:url("Fonts/51483fc1-da59-4223-a632-cb12950e03a6.eot?#iefix") format("eot"),url("Fonts/2335ee1c-e8df-415c-aba9-387b8dc8f955.woff") format("woff"),url("Fonts/387d36e0-6062-47b6-9b02-3c7b592a6b9b.ttf") format("truetype"),url("Fonts/3f5c7518-9c93-4204-b15b-ce95732d6402.svg#3f5c7518-9c93-4204-b15b-ce95732d6402") format("svg");
+}
+@font-face{
+font-family:"UniversLTW10-57Condense 726510";
+src:url("Fonts/b7636ea0-01f0-4352-8ff8-b5f11e0dfa27.eot?#iefix");
+src:url("Fonts/b7636ea0-01f0-4352-8ff8-b5f11e0dfa27.eot?#iefix") format("eot"),url("Fonts/c98ca561-0304-42f7-b2a8-15d1d5905772.woff") format("woff"),url("Fonts/95276e84-681a-4eee-88f0-55418c8bfdfe.ttf") format("truetype"),url("Fonts/b056f04c-c973-414a-8298-b50112338039.svg#b056f04c-c973-414a-8298-b50112338039") format("svg");
+}
+@font-face{
+font-family:"UniversLTW10-57Condense 726513";
+src:url("Fonts/e1b5940e-264c-4bff-a604-fd4599cfb389.eot?#iefix");
+src:url("Fonts/e1b5940e-264c-4bff-a604-fd4599cfb389.eot?#iefix") format("eot"),url("Fonts/006117b9-aa01-40f8-b2ac-9962c146f1b0.woff") format("woff"),url("Fonts/3e6d11d2-4a5b-438c-84ba-c69f121be6c0.ttf") format("truetype"),url("Fonts/908a34b6-a4c0-4360-86ab-dc18b7a1f923.svg#908a34b6-a4c0-4360-86ab-dc18b7a1f923") format("svg");
+}
+@font-face{
+font-family:"UniversLTW10-59UltraCn";
+src:url("Fonts/96fc156e-68b0-49e3-a12c-7834e25794e0.eot?#iefix");
+src:url("Fonts/96fc156e-68b0-49e3-a12c-7834e25794e0.eot?#iefix") format("eot"),url("Fonts/af1ced60-c84b-4677-ad77-21d48031d4ec.woff") format("woff"),url("Fonts/6c45a9db-7455-4a31-9da7-46e7d3d354d4.ttf") format("truetype"),url("Fonts/2a07a982-092c-45fd-b7c7-cfc5319cc4e6.svg#2a07a982-092c-45fd-b7c7-cfc5319cc4e6") format("svg");
+}
+@font-face{
+font-family:"Univers LT W10 65 Bold";
+src:url("Fonts/1402938c-97a0-4d68-a6ed-969ee0b8114c.eot?#iefix");
+src:url("Fonts/1402938c-97a0-4d68-a6ed-969ee0b8114c.eot?#iefix") format("eot"),url("Fonts/e9cbe1a0-7477-4278-9e9b-447ee8d39cf3.woff") format("woff"),url("Fonts/a71b570b-3fc1-461a-af8b-1f1971da09f8.ttf") format("truetype"),url("Fonts/42f6fae1-50c8-4734-93cb-dda87707ca4f.svg#42f6fae1-50c8-4734-93cb-dda87707ca4f") format("svg");
+}
+@font-face{
+font-family:"UniversLTW10-65BoldObli";
+src:url("Fonts/60ad1bd4-b636-4b08-aa3f-3a92fd27d679.eot?#iefix");
+src:url("Fonts/60ad1bd4-b636-4b08-aa3f-3a92fd27d679.eot?#iefix") format("eot"),url("Fonts/2a68f703-e864-4303-81fc-7c12b99e03ee.woff") format("woff"),url("Fonts/f2697ccf-8b79-4446-89a3-faab957d634f.ttf") format("truetype"),url("Fonts/dc7cbf01-0525-4ea3-a8fb-67c65bd65c95.svg#dc7cbf01-0525-4ea3-a8fb-67c65bd65c95") format("svg");
+}
+@font-face{
+font-family:"UniversLTW10-67BoldCn";
+src:url("Fonts/de8453e9-b2a6-4554-bf75-5f0ff5a2e236.eot?#iefix");
+src:url("Fonts/de8453e9-b2a6-4554-bf75-5f0ff5a2e236.eot?#iefix") format("eot"),url("Fonts/e6c2f397-706a-4224-9c0a-069effd9da88.woff") format("woff"),url("Fonts/528d0fca-b028-48b5-8003-f010575e8949.ttf") format("truetype"),url("Fonts/c52f6cb2-23c6-46b1-b6c5-e0a1da3e577c.svg#c52f6cb2-23c6-46b1-b6c5-e0a1da3e577c") format("svg");
+}
+@font-face{
+font-family:"UniversLTW10-67BoldCnOb";
+src:url("Fonts/09ef9ccf-538f-4b90-878e-8c8b374e8fed.eot?#iefix");
+src:url("Fonts/09ef9ccf-538f-4b90-878e-8c8b374e8fed.eot?#iefix") format("eot"),url("Fonts/2cd7a4de-15b1-4378-acf7-90ab9765ebf0.woff") format("woff"),url("Fonts/cf972c71-0183-47d0-ad9f-3f3b71d40d82.ttf") format("truetype"),url("Fonts/bb5914e5-cc9e-4a16-96a9-51179efa96ce.svg#bb5914e5-cc9e-4a16-96a9-51179efa96ce") format("svg");
+}
+@font-face{
+font-family:"Univers LT W10 75 Black";
+src:url("Fonts/755a2fb6-a9d2-45ee-ac5d-642a5971af0e.eot?#iefix");
+src:url("Fonts/755a2fb6-a9d2-45ee-ac5d-642a5971af0e.eot?#iefix") format("eot"),url("Fonts/acf98bb2-eb76-460a-b1e1-0cacfc0d0ef4.woff") format("woff"),url("Fonts/046c1b67-86b1-48e2-8c6c-74acbafeff46.ttf") format("truetype"),url("Fonts/b47a966e-2f71-464b-bfc4-73d890f0ace1.svg#b47a966e-2f71-464b-bfc4-73d890f0ace1") format("svg");
+}
+@font-face{
+font-family:"UniversLTW10-75BlackObl";
+src:url("Fonts/1a84ca25-cc00-4381-a342-0bb2da698669.eot?#iefix");
+src:url("Fonts/1a84ca25-cc00-4381-a342-0bb2da698669.eot?#iefix") format("eot"),url("Fonts/e48be8dc-77cc-4a64-8369-08339e5872cc.woff") format("woff"),url("Fonts/d4af6067-ef69-41c5-aa35-385e71c0454a.ttf") format("truetype"),url("Fonts/e5929149-6963-478c-9342-54d1ab4c2e52.svg#e5929149-6963-478c-9342-54d1ab4c2e52") format("svg");
+}
+@font-face{
+font-family:"UniversLTW10-85ExtraBla";
+src:url("Fonts/4ea8084a-0bce-43f3-a8ff-8a34d5ed9963.eot?#iefix");
+src:url("Fonts/4ea8084a-0bce-43f3-a8ff-8a34d5ed9963.eot?#iefix") format("eot"),url("Fonts/18a10805-c2c2-4992-935b-bfdb21412005.woff") format("woff"),url("Fonts/23aa9819-1848-4e89-8758-f0bb7933ebc8.ttf") format("truetype"),url("Fonts/b7ccfbfa-3100-47d1-b3fc-198b9e58f077.svg#b7ccfbfa-3100-47d1-b3fc-198b9e58f077") format("svg");
+}
+@font-face{
+font-family:"UniversLTW10-85ExtraBkO";
+src:url("Fonts/6eabc380-b5f2-4a74-9814-9c2d4212bc79.eot?#iefix");
+src:url("Fonts/6eabc380-b5f2-4a74-9814-9c2d4212bc79.eot?#iefix") format("eot"),url("Fonts/756c317e-a9a0-4166-bc68-6c93972e6412.woff") format("woff"),url("Fonts/bc5f3118-edb6-4a13-9ea6-55127799ce35.ttf") format("truetype"),url("Fonts/85e0fe58-d78b-4de3-9fd7-4282e2327b6b.svg#85e0fe58-d78b-4de3-9fd7-4282e2327b6b") format("svg");
+}
+@font-face{
+font-family:"Bembo Infant MT W01";
+src:url("Fonts/aab5b079-0171-4271-ae49-885cbeb14688.eot?#iefix");
+src:url("Fonts/aab5b079-0171-4271-ae49-885cbeb14688.eot?#iefix") format("eot"),url("Fonts/7411b818-e961-42e9-b546-31e4ced5a6db.woff") format("woff"),url("Fonts/29d2b488-5ba3-43b5-b64a-af545a228931.ttf") format("truetype"),url("Fonts/87e65962-369c-4e10-b99f-aae17dd3e6b1.svg#87e65962-369c-4e10-b99f-aae17dd3e6b1") format("svg");
+}
+@font-face{
+font-family:"BemboInfantMTW01-Bold";
+src:url("Fonts/394dad9c-b25c-4d84-9c58-0ef47cbc2929.eot?#iefix");
+src:url("Fonts/394dad9c-b25c-4d84-9c58-0ef47cbc2929.eot?#iefix") format("eot"),url("Fonts/7b4f3dfb-abda-477d-b66a-5f6989585de4.woff") format("woff"),url("Fonts/eb240394-bbad-4ec2-91cb-c32db53dbd26.ttf") format("truetype"),url("Fonts/acea2912-ce15-46ed-9b41-8570e35464d5.svg#acea2912-ce15-46ed-9b41-8570e35464d5") format("svg");
+}
+@font-face{
+font-family:"BemboInfantMTW01-BoldIt";
+src:url("Fonts/53341270-93aa-4258-ab9c-ca133865637b.eot?#iefix");
+src:url("Fonts/53341270-93aa-4258-ab9c-ca133865637b.eot?#iefix") format("eot"),url("Fonts/ac6863d2-bad4-4107-a309-e4280bcd0c2c.woff") format("woff"),url("Fonts/02879c28-361a-4906-911c-9efffb00123e.ttf") format("truetype"),url("Fonts/d696e152-8118-4117-bb83-748147ebf9f1.svg#d696e152-8118-4117-bb83-748147ebf9f1") format("svg");
+}
+@font-face{
+font-family:"BemboInfantMTW01-Italic";
+src:url("Fonts/9ca1d2b3-46ff-40a7-a32b-ce327e1739eb.eot?#iefix");
+src:url("Fonts/9ca1d2b3-46ff-40a7-a32b-ce327e1739eb.eot?#iefix") format("eot"),url("Fonts/5b3ce724-5fed-4e71-a329-ebf8839ee2d8.woff") format("woff"),url("Fonts/1cbfa288-a2c8-4d29-b6f5-85fa661e9ea0.ttf") format("truetype"),url("Fonts/63563b15-7956-4b1a-9859-b6c5354b78a3.svg#63563b15-7956-4b1a-9859-b6c5354b78a3") format("svg");
+}
+@font-face{
+font-family:"Swiss 721 W01 Extended";
+src:url("Fonts/7c78f7cd-458a-4c95-9405-02e8c70a53d0.eot?#iefix");
+src:url("Fonts/7c78f7cd-458a-4c95-9405-02e8c70a53d0.eot?#iefix") format("eot"),url("Fonts/c97d6d8b-c9b8-4792-9c5d-2cd017dc9d06.woff") format("woff"),url("Fonts/f8faf30e-6940-4ad6-bd94-7ebef532aae5.ttf") format("truetype"),url("Fonts/235b21c3-0f4b-4c05-8298-c66d23376f10.svg#235b21c3-0f4b-4c05-8298-c66d23376f10") format("svg");
 }
 
 #footer{ background-color: #fafafa; }
@@ -58,7 +366,7 @@
 
 body {
 /*    background-color: #fff;*/
-    background-color: #fff;
+    background-color: #fafafa;
     color: #535254;
     font-size: 13px;
     background-image: none;
@@ -67,7 +375,7 @@ body {
 body,
 input,
 .ui-widget {
-    font-family: 'swiss_721roman';
+    font-family:"Univers LT W10 55 Roman";
 }
 
 .muted {
@@ -156,6 +464,7 @@ input[type="file"] {
     border-radius: 6px 6px 0 0;
     text-transform: uppercase;
     margin-top: 28px;
+    font-size: 16px;
 }
 
 .btn-group .btn.active {
@@ -399,7 +708,7 @@ input[type="file"] {
     padding: 3px 10px;
 /*    background: none repeat scroll 0 0 #FFFFFF;*/
     color: #3d0624;
-    font-size: 13px;
+    font-size: 16px;
     font-weight: normal;
     line-height: 43px;
     text-align: left;
@@ -524,10 +833,10 @@ input[type="file"] {
     top: -5px;
     left: 0px;
     right: 0;
-    min-height: 40px;
+    min-height: 44px;
     background-color: #3d0624;
     color: #FFFFFF;
-    font-size: 18px;
+    font-size: 20px;
 /*    margin-right: 10px;*/
 /*    margin-left: -8px;*/
     padding: 10px;
@@ -621,12 +930,13 @@ input[type="file"] {
 /*    margin-top: 50px;*/
 }
 
-.card .price{ color: #000; }
+.card .price{ color: #000; letter-spacing: -1px; }
 
 .card .content .btn-primary {
     color: #3d0624;
     display: block;
-    font-weight: bold;
+    font-size: 18px;
+    font-family:"Univers LT W01 65 Bold";
 /*    margin-left: 50px;*/
     border: 2px solid #3d0624;
     background-color: #fafafa;
@@ -645,7 +955,7 @@ input[type="file"] {
 
 .card .content-group {
     line-height: 23px;
-    margin-bottom: 5px;
+/*    margin-bottom: 5px;*/
     padding: 5px;
 }
 
@@ -912,6 +1222,7 @@ input[type="file"] {
     min-height: 63px;
     line-height: 63px;
     font-size: 30px;
+    font-family:"Univers LT W01 55 Roman";
     text-transform: uppercase;
     transition: all 0.4s ease-out;
     -moz-transition: all 0.4s ease-out;
@@ -989,9 +1300,10 @@ input[type="file"] {
 .checkbox > a,
 .checkbox > a:hover,
 .checkbox > a:focus {
-    color: #717073;
+    color: #232323;
     text-decoration: none;
     padding-left: 10px;
+    font-size: 15px;
 }
 
 .checkbox > div a,
@@ -1059,8 +1371,8 @@ input[type="file"] {
 	padding: 10px;
 /*	width: 96%;*/
 }
-#operator-slider .slider-caption h2{ font-family: 'Univers LT W01 65 Bold'; font-size: 40px; font-weight: normal; margin: 0; line-height: 1.3em; }
-#operator-slider .slider-caption h2 span a{ font-size: 19px; color: rgba(255, 255, 255, 0.5); }
+#operator-slider .slider-caption h2{ font-family: 'Univers LT W01 65 Bold'; text-indent: 18px; font-size: 38px; font-weight: normal; margin: 0; line-height: 1.3em; }
+#operator-slider .slider-caption h2 span a{ font-family: "Univers LT W01 45 Light"; font-size: 28px; text-transform: uppercase; color: rgba(255, 255, 255, 0.5); }
 #operator-slider .slider-caption:after{
 	display: none;
 	content: "";
@@ -1075,7 +1387,12 @@ input[type="file"] {
 	border-bottom: 10px solid #0e669c;
 }
 
-.op-section-header{ font-size: 40px; line-height: 1.2em; color: #501e39; text-transform: uppercase; margin-bottom: 12px; }
+.op-section-header{ font-size: 40px; font-family:"Bembo W01"; line-height: 1.2em; color: #501e39; text-transform: capitalize
+                       
+                       
+                       
+                       
+                       ; margin-bottom: 12px; }
 .op-rooms{ background-color: #fff; position: relative; padding-top: 36px; }
 .op-rooms-header{ position: absolute; font-size: 22px; color: #fff; background-color: #3d0624; min-height: 57px; line-height: 57px; left: 0; right: 0; top: 0; padding-left: 12px; padding-right: 12px; z-index:1000;}
 .op-rooms-header .op-rooms-price{ font-size: 14px; color: rgba(255, 255, 255, 0.5); line-height: 1em; margin-top: 18px; margin-right: 18px;}
@@ -1117,7 +1434,7 @@ input[type="file"] {
 .op-rooms-details p{ font-size: 15px; }
 .op-rooms-capacity{ color: rgba(61, 6, 36, 0.5); text-align: right; padding: 18px 0; padding-top: 12px; }
 .op-rooms-capacity span{ font-size: 20px; color: #3d0624; display: inline-block; padding-left: 6px; position: relative; top: 2px; }
-.op-rooms .btn-primary{ display: block; border-color: #3d0624; border-width: 2px; color: #3d0624; padding-top: 6px; padding-bottom: 6px; }
+.op-rooms .btn-primary{ font-family:"Univers LT W01 65 Bold"; display: block; border-color: #3d0624; border-width: 2px; color: #3d0624; padding-top: 6px; padding-bottom: 6px; }
 .op-rooms .btn-primary .icon{ color: #4c0010; }
 .contact-form-left .btn-primary{ display: block; border-color: #0076c0; color: #0076c0; padding-top: 6px; padding-bottom: 6px; }
 
@@ -1680,14 +1997,14 @@ margin-bottom:70px;
 {
 background:#fff;
 padding:13px 20px 20px 20px;
-font-family: 'swiss_721roman';
+/*font-family: 'swiss_721roman';*/
 margin-bottom:70px;
 
 }
-
+#top-tab-block{ margin-top: 18px !important; }
 .common-block h1
 {
-font-family: 'swiss_721roman';
+/*font-family: 'swiss_721roman';*/
 font-size:40px;
 color:#3d0624;
 margin:0px;
@@ -1868,7 +2185,7 @@ width:99px;
 {
 float:left;
 width:115px;
-font-family: 'swiss_721roman';
+/*font-family: 'swiss_721roman';*/
 font-size:14px;
 color:#999999;
 padding-top:10px;
@@ -1880,7 +2197,7 @@ margin-right:75px;
 {
 float:left;
 width:104px;
-font-family: 'swiss_721roman';
+/*font-family: 'swiss_721roman';*/
 font-size:14px;
 color:#999999;
 padding-top:10px;
@@ -1890,7 +2207,7 @@ margin-right:75px;
 {
 float:left;
 width:150px;
-font-family: 'swiss_721roman';
+/*font-family: 'swiss_721roman';*/
 font-size:14px;
 color:#999999;
 padding-top:10px;
@@ -1901,7 +2218,7 @@ text-align:center;
 .nights-from .value, .min-nights .value, .check-in-out .value
 {
 text-align:center;
-font-family: 'swiss_721roman';
+/*font-family: 'swiss_721roman';*/
 font-size:22px;
 color:#333;
 }
@@ -1911,7 +2228,7 @@ color:#333;
 {
 float:left;
 width:115px;
-font-family: 'swiss_721roman';
+/*font-family: 'swiss_721roman';*/
 font-size:14px;
 color:#999999;
 padding-top:10px;
@@ -1967,7 +2284,7 @@ padding-bottom:5px;
 
 .info-default-rgt h3
 {
-font-family: 'swiss_721roman';
+/*font-family: 'swiss_721roman';*/
 font-size:14px;
 color:#999999;
 margin:0px;
@@ -2040,7 +2357,7 @@ text-decoration:underline;
 
 .large-map-link
 {
-font-family: 'swiss_721roman';
+/*font-family: 'swiss_721roman';*/
 font-size:14px;
 color:#fff;
 text-align:center;
@@ -2056,7 +2373,7 @@ width:170px;
 display:block;
 padding:5px 0px 5px 0px;
 color:#fff;
-font-family: 'swiss_721roman';
+/*font-family: 'swiss_721roman';*/
 }
 
 .contact-heading
@@ -2065,7 +2382,7 @@ padding-bottom:6px;
 border-bottom:1px #333 solid;
 color:#0076c0;
 font-size:18px;
-font-family: 'swiss_721roman';
+/*font-family: 'swiss_721roman';*/
 margin-bottom:10px;
 }
 
@@ -2219,7 +2536,7 @@ z-index:1100;
 margin:0px;
 padding:0px;
 list-style:none;
-margin-left:20px;
+margin-left:10px;
 }
 
 .slider-nav ul li
@@ -2272,7 +2589,7 @@ padding-bottom:8px;
 }
 
 
-.slider-nav .btn-primary{ font-family: 'Univers LT W01 65 Bold'; font-size: 16px; display: block; border-color: #3d0624; background:#fff; color: #3d0624; font-size:18px; padding-top: 6px; padding-bottom: 6px; float:left; width:150px; }
+.slider-nav .btn-primary{ font-family: 'Univers LT W01 65 Bold'; font-size: 16px; display: block; border-color: #3d0624; border-width: 2px; background:#fff; color: #3d0624; font-size:18px; padding-top: 6px; padding-bottom: 6px; float:left; width:150px; }
 
 .slider-nav .btn-primary:hover{ background:#fff; color:#3d0624}
 
@@ -2334,7 +2651,7 @@ right:34px;
 {
 position:absolute;
 right:67px;
-top:8px;
+top:30px;
 z-index:101;
 cursor:pointer;
 color: rgba(255, 255, 255, 0.5);
@@ -2360,9 +2677,9 @@ margin-bottom:6px !important;
 #operator-slider .flex-direction-nav .flex-prev
 {
 left:37px !important;
-top:-48px !important;
+top:-28px !important;
 }
-
+#operator-slider .flex-direction-nav .flex-next{ top: -28px !important; }
 .my-slider
 {
 width:1170px;
@@ -3292,19 +3609,19 @@ float:left;
         font-size: 16px;
     }
     .nav-header {
-        font-size: 14px;
+/*        font-size: 14px;*/
     }
     .btn-group .btn {
         padding: 0px 37px;
     }
     .btn {
-        font-size: 14px;
+        font-size: 15px;
     }
     label, input, button, select, textarea {
-        font-size: 14px;
+        font-size: 15px;
     }
     body {
-        font-size: 14px;
+        font-size: 15px;
     }
 
     #main-pane {
@@ -3838,7 +4155,7 @@ height:75px;
         min-width: 320px;
         background-color: #efefef;
     }
-
+    .main-bg-container{ background-image: none; margin-top: 90px; }
     .nav-collapse-phone,
     .nav-collapse-phone.collapse {
         height: 0;
@@ -3866,6 +4183,7 @@ height:75px;
         padding: 5px 10px;
 
     }
+    .card .info-bar .info-content img{ width: auto; }
 
     #footerNav {
         position: relative;
