@@ -38,6 +38,7 @@ sonata_page:
         - fos_js_routing_js
         - tne_room_calender
         - tne_operators_add_to_cart
+        - tne_operator_details_events
 
     ignore_uri_patterns:
         - admin(.*)         # ignore admin route, ie route containing 'admin'

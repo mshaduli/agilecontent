@@ -29,6 +29,12 @@
 #map-view-small{ height: 214px; }
 #map-view-large{ height: 500px; }
 
+/* hashir updated */
+#panel3 .carousel .thumbnail.opaque5{
+    max-height: 278px;
+}
+
+
 /* design elements */
 #designs {
     position: absolute;
@@ -1906,6 +1912,12 @@ font-size:22px;
 color:#333;
 }
 
+.nights-from .value-events, .min-nights .value-events, .check-in-out .value-events
+{
+font-family: 'swiss_721roman';
+font-size:14px;
+color:#333;
+}
 
 .my-social
 {
