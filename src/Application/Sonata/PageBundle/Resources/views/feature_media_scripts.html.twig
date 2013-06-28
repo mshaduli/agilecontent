@@ -85,15 +85,29 @@
                         dataType: "html"
                 }).done(function(obj){
                     var mediaItems = obj.split(',');
-                    $('#cms-block-'+blockid_back).find('.carousel-inner').html(" ");
+                    $('#general-header-slider-'+blockid_back+' .flex-viewport ul').html('');
                     $(mediaItems).each(function(k,v){
                         if((mediaItems.length-1) == k)
-                        {   
-                            $('#cms-block-'+blockid_back).find('.carousel-inner').append('<div class="item active"><img title="0afa817207502074343e6547d9b959928c93ab8d.jpeg" src="'+v+'" width="820" height="615"><div class="carousel-caption"><p></p></div></div>');
+                        {
+                            $('#general-header-slider-'+blockid_back+ ' .flex-viewport ul').append('<li><img title="IMG_3620.JPG" src="'+v+'"/></li>');
                         }else{
-                            $('#cms-block-'+blockid_back).find('.carousel-inner').append('<div class="item"><img title="0afa817207502074343e6547d9b959928c93ab8d.jpeg" src="'+v+'" width="820" height="615"><div class="carousel-caption"><p></p></div></div>');
+                            $('#general-header-slider-'+blockid_back+ ' .flex-viewport ul').append('<li><img title="IMG_3620.JPG" src="'+v+'"/></li>');
                         }
                     });
+
+                    document.location.reload(true);
+                    return true;
+
+//                    var mediaItems = obj.split(',');
+//                    $('#cms-block-'+blockid_back).find('.carousel-inner').html(" ");
+//                    $(mediaItems).each(function(k,v){
+//                        if((mediaItems.length-1) == k)
+//                        {
+//                            $('#cms-block-'+blockid_back).find('.carousel-inner').append('<div class="item active"><img title="0afa817207502074343e6547d9b959928c93ab8d.jpeg" src="'+v+'" width="820" height="615"><div class="carousel-caption"><p></p></div></div>');
+//                        }else{
+//                            $('#cms-block-'+blockid_back).find('.carousel-inner').append('<div class="item"><img title="0afa817207502074343e6547d9b959928c93ab8d.jpeg" src="'+v+'" width="820" height="615"><div class="carousel-caption"><p></p></div></div>');
+//                        }
+//                    });
                     //document.location.reload(true);
                     return true;
                 });
