@@ -1906,6 +1906,12 @@ font-size:22px;
 color:#333;
 }
 
+.nights-from .value-events, .min-nights .value-events, .check-in-out .value-events
+{
+font-family: 'swiss_721roman';
+font-size:14px;
+color:#333;
+}
 
 .my-social
 {
