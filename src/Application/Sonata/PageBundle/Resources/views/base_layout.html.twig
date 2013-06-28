@@ -25,8 +25,8 @@ file that was distributed with this source code.
 
         {% block page_javascripts %}
             <script type="text/javascript">
-                var environment = {{ app.environment }};
-                var baseurl = ({{ app.environment }} == "dev")?'app_dev.php':'app.php';
+                var environment = '{{ app.environment }}';
+                var baseurl = ( environment == "dev")?'app_dev.php':'app.php';
             </script>
             <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
             <!--[if lt IE 9]>

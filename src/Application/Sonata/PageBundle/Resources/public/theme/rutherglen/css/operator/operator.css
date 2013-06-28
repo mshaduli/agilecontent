@@ -659,7 +659,7 @@ a:hover {
 	#panel0 ul.nav li a {
 		font-size: 16px;
 	}
-	#panel0 .logo a {
+	#panel0 .logo h1 > a {
 		background-image: url(../../img/1200/logo.png)
 	}
 
@@ -836,7 +836,7 @@ a:hover {
 		margin: 16px 0 10px 10px;
 		height: 65px;
 	}
-	#panel0 .logo a {
+	#panel0 .logo h1 > a {
 		background: transparent url(../../img/768/logo.png) no-repeat left center;
 		width: 161px;
 	}

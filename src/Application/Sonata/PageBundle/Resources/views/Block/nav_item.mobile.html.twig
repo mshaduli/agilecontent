@@ -1,6 +1,6 @@
 {% for link in links %}
     <li>
-        <a href="{%if link.pageId is empty %}#{% else %}{{ path(page(link.pageId)) }}{% endif %}">{{ link.name }}</a>
+        <a href="{%if link.pageId is empty %}#{% else %}{{ path(page(link.pageId)) }}{% endif %}" class="{% if link.items is defined %}parent{% endif %}">{{ link.name }}</a>
         {% if link.summary is defined %}
             <ul class="hidden-phone">
                 <li><h2>{{ link.summary.title }}</h2></li>

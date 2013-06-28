@@ -12,7 +12,22 @@ file that was distributed with this source code.
 {% extends sonata_block.templates.block_base %}
 
 {% block block %}
-<link rel="stylesheet" href="{{ asset('/bundles/applicationsonatapage/sitemap/sitemapTree.css') }}" type="text/css" media="all">
+{% if app.security.token and app.security.isGranted('ROLE_SONATA_ADMIN') %}
+    <link rel="stylesheet" href="{{ asset('/bundles/applicationsonatapage/sitemap/sitemapTree.css') }}" type="text/css" media="all">
+{% endif %}
+<style type="text/css">
+    #whiteBgTop {
+        {% if app.security.token and app.security.isGranted('ROLE_SONATA_ADMIN') %}
+            top: auto !important;
+        {% endif %}
+
+        z-index: 10001 !important;
+    }
+
+    #panel0 ul.nav > li > .parent {
+        background-position: right !important;
+    }
+</style>
                 {# Desktop Main Menu Starts #}
                 <ul id="desktopNav" class="inline nav clearfix hidden-phone">
                     {% if settings.content.items is defined %}
@@ -221,15 +236,15 @@ function loadTree(){
 			}else if($(e.target).hasClass('op2')){
                             editNode($(e.target).closest('li'));
 			}
-                        else{
-                            if(confirm('Are you sure! This will delete the selected node and all its children')){
-                                $(e.target).closest('li').remove();
-                            }
-                            else{
-                                return false;
-                            }
+            else{
+                if(confirm('Are you sure! This will delete the selected node and all its children')){
+                    $(e.target).closest('li').remove();
+                }
+                else{
+                    return false;
+                }
                             
-                        }
+            }
 		},itemMoved: function(csv){
 		},dirClick: function(node){
 			console.log(node.find('>a').text() + " > " + (node.hasClass('collapsed') ? ' closed' : ' opened'));
