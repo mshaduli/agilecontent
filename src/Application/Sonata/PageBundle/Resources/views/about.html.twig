@@ -71,7 +71,9 @@ file that was distributed with this source code.
                     {{ sonata_page_render_container('content-top-text', page) | sonata_page_render_custome_block([{'service':'sonata.block.service.text'}]) }}
                 </div>
                 <div id="gMapWrapper">
-                    <div id="gMap"></div>
+                    <div id="gMap">
+                        {{ sonata_page_render_container('mapImage', page) | sonata_page_render_custome_block([{'service':'sonata.media.block.feature_media'}]) }}
+                    </div>
                     <div id="gMapOver" class="opaque9">Hiking trails in Rutherglen</div>
                 </div>
                 <div class="padder">
@@ -90,13 +92,7 @@ file that was distributed with this source code.
 
                     <div id="featuredAccom">
                         <h4>Featured Accommodation</h4>
-                        <div class="imgWrap">
-                            {{ sonata_page_render_container('featuredAccom', page) | sonata_page_render_custome_block([{'service':'sonata.media.block.feature_media'}]) }}
-                            <div>
-                                <small>FROM</small>
-                                &#36;124
-                            </div>
-                        </div>
+                        {{ sonata_page_render_container('featuredAccom', page) | sonata_page_render_custome_block([{'service':'sonata.block.service.linkedmedia','template':'featureaccom'}]) }}
                         <div class="featuredWrap">
                             <h5>Rutherglen</h5>
                             <ul class="inline">
