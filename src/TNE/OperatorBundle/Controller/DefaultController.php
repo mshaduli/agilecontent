@@ -29,8 +29,10 @@ class DefaultController extends Controller
                     ->getQuery()
                     ->getOneOrNullResult();
 
-
-        return $this->render('TNEOperatorBundle:Default:header.html.twig', array('site' => $site, 'home_page' => $homePage, 'settings' => $menu->getSettings()));
+        $settings =  ($menu != null)?$menu->getSettings():array();
+        //$template =  $settings['template'] == ''?'':'desktop.';
+        $template = '';
+        return $this->render('TNEOperatorBundle:Default:header.'.$template.'html.twig', array('site' => $site, 'home_page' => $homePage, 'settings' => $settings));
     }
 
     public function footerAction()

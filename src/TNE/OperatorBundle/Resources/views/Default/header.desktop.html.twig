@@ -58,7 +58,32 @@
             </div>
             <!-- DESKTOP ENDS -->
         </div>
-
+        <!-- filter options -->
+        <div id="header-filter">
+            <div class="navbar container">
+                <div class="visible-phone">
+                    <div id="tab1mobile" class="btn-group" data-toggle="buttons-radio">
+                        <a class="btn" data-toggle="collapse" data-target="#search-sort">
+                            Sort <span class="caret"></span>
+                        </a>
+                        <a href="#" class="btn active"><i class="icons-accom"></i> <div class="inner">123</div></a>
+                        <a href="#" class="btn" ><i class="icons-food"></i> <span class="inner">123</span></a>
+                        <a href="#" class="btn" ><i class="icons-events"></i> <span class="inner">123</span></a>
+                        <a class="btn" data-toggle="collapse" data-target="#search-filter">
+                            Filter <i class="icons-filter"></i>
+                        </a>
+                    </div>
+                    <ul id="search-sort" class="nav collapse">
+                        <li>
+                            <div class="input-append">
+                                <input class="span2" id="appendedInputButton4" type="text" value="Accomodation">
+                                <button class="btn" type="button"><i class="icon-reorder"></i></button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <top-filters dates="filters.dates" filter-by-dates="filterByDates(dates)"></top-filters>
+        </div>
 
 
 

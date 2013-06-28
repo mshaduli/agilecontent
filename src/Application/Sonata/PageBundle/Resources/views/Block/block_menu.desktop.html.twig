@@ -49,16 +49,6 @@ file that was distributed with this source code.
 
                     <div id="navContent{{ settings.content.items|length }}" class="navContent">
                         <div class="span12 borderTop"></div>
-
-                        <div class="span8">
-                            <ul id="PageTree" class="tree sortable">
-                                {% if settings.content.items is defined %}
-                                    {% set menu = settings.content.items %}
-                                    {% include "ApplicationSonataPageBundle:Block:menu_item.html.twig" with {'links':menu } only %}
-                                {% endif %}
-                            </ul>
-                            <a href="#" onclick="addNode(null)" style="color: #000;"><i class="icon-plus" style="margin-left: 42px; margin-top: -5px;"></i>Add Root</a>
-                        </div>
                         <div class="span4">
                             <div id="node-form" class="ui-helper-hidden" >
                                 <fieldset>
@@ -86,6 +76,16 @@ file that was distributed with this source code.
 
                             </div>
                         </div>
+                        <div class="span8">
+                            <ul id="PageTree" class="tree sortable">
+                                {% if settings.content.items is defined %}
+                                    {% set menu = settings.content.items %}
+                                    {% include "ApplicationSonataPageBundle:Block:menu_item.html.twig" with {'links':menu } only %}
+                                {% endif %}
+                            </ul>
+                            <a href="#" onclick="addNode(null)" style="color: #000;"><i class="icon-plus" style="margin-left: 42px; margin-top: -5px;"></i>Add Root</a>
+                        </div>
+
                         <div class="span12 borderBottom"></div>
 
                         {% endif %}
