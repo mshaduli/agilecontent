@@ -266,8 +266,8 @@ EOD;
                     }
                 }
             }
-            
-            
+
+            $result['operator_detail_action'] = '';
             $operatorMedia = $operator->getMedia()->first();
             $result['image'] = $this->getOperatorImage($operatorMedia);
             $result['rating'] = $operator->getRating();
@@ -332,6 +332,7 @@ EOD;
         {
             $operatorMedia =  $em->getRepository('TNEOperatorBundle:Attraction')->find($result['id'])->getMedia()->first();
             $result['image'] = $this->getOperatorImage($operatorMedia);
+            $result['operator_detail_action'] = 'attractions/';
             $operators []= $result;
         }
 
@@ -368,6 +369,7 @@ EOD;
         {
             $operatorMedia =  $em->getRepository('TNEOperatorBundle:Event')->find($result['id'])->getMedia()->first();
             $result['image'] = $this->getOperatorImage($operatorMedia);
+            $result['operator_detail_action'] = 'events/';
             $operators []= $result;
         }
 

@@ -248,7 +248,7 @@ SearchApp.directive('resultsList', function(){
             $scope.showMoreItems = function() {
                 pagesShown = pagesShown + 1;
             };
-            $scope.getDatesQueryString = function(){
+            $scope.getDatesQueryString = function($scope){
                 var dates = $('#filterDate').val().split(' to ');
                 return "s="+dates[0]+'&t='+dates[1];
             };
@@ -284,8 +284,7 @@ SearchApp.directive('resultsList', function(){
             '</div>' +
             '<div>' +
             '<a href="#" class="btn btn-wishlist"><i class="icon-star icon-white"></i></a>' +
-            '<a href="/app_dev.php/operators/{[{operator.id}]}?{[{ getDatesQueryString() }]}" class="btn btn-primary">ADD TO PLANNER</a>' +
-
+            '<a href="/app_dev.php/operators/{[{operator.operator_detail_action}]}{[{operator.id}]}?{[{ getDatesQueryString() }]}" class="btn btn-primary">More</a>' +
             '</div>' +
             '</div>' +
             '</div>' +
