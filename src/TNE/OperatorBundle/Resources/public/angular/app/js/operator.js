@@ -40,6 +40,7 @@ OperatorApp.directive('resultsGrid', function() {
             };
 
             $scope.classForDate = function(date){
+                $scope.dates = '27/06/2013 to 02/07/2013';
                 var dates = $scope.dates.split(' to ');
                 var range = moment().range(moment(dates[0], 'DD/MM/YYYY'), moment(dates[1], 'DD/MM/YYYY'));
                 var inputDate = moment(date, 'DD/MM/YYYY');
@@ -169,8 +170,10 @@ angular.module('OperatorApp.filters', []).
 function OperatorController($scope, $http, $q, $filter, $timeout)
 {
     $scope.operatorUrl = '/app_dev.php/operator/rooms';
+    $scope.dates = '27/06/2013 to 02/07/2013';
     var idAry = location.href.split('/');
-    var id = idAry[idAry.length-1];
+    var ids = idAry[5].split('?');
+    var id = ids[0];
     $http.get($scope.operatorUrl + "?id="+id).success(function(data) {
         $scope.loading = false;
         $scope.operators = data;

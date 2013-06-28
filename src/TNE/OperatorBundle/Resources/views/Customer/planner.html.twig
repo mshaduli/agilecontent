@@ -8,7 +8,7 @@ For the full copyright and license information, please view the LICENSE
 file that was distributed with this source code.
 
 #}
-{% extends 'ApplicationSonataPageBundle::base_func_layout_tne.html.twig' %}
+{% extends 'ApplicationSonataPageBundle::rutherglen_base_func_layout_tne.html.twig' %}
 
 {% block page_stylesheets %}
     {{ parent() }}
@@ -19,6 +19,7 @@ file that was distributed with this source code.
 <link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/theme-rutherglen.css') }}" type="text/css" media="all" />
 <link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/select2.css') }}" type="text/css" media="all" />
 <link rel="stylesheet" href="{{ asset('bundles/tneoperator/angular/app/css/daterangepicker.css') }}" type="text/css" media="all" />
+<link rel="stylesheet" href="{{ asset('bundles/applicationsonatapage/theme/rutherglen/css/operator/operator.css') }}" type="text/css" media="all"  />
 <link rel="stylesheet" href="{{ asset('bundles/applicationsonatapage/theme/rutherglen/css/operator/general.css') }}" type="text/css" media="all"  />
 <link rel="stylesheet" href="{{ asset('bundles/applicationsonatapage/theme/rutherglen/css/operator/fonts.css') }}" type="text/css" media="all"  />
 
@@ -49,15 +50,24 @@ file that was distributed with this source code.
 {#{% include 'TNEOperatorBundle:Default:header.html.twig' %}#}
 
         
-        <div class="planner-temp whiteBg themed general">
+        <!-- START PLANNER CONTENT -->
+
+    <div class="planner-temp whiteBg themed general">
         <div id="panelGeneral1" class="container"><!-- first panel -->
             <div class="row">
                 <div class="span12 clearfix">
                     <div class="padder">
                         <h1>My Planner</h1>
                         <!-- START TAB NAV -->
-                        <div class="tabbable"> <!-- Only required for left/right tabs -->
-                          <ul class="nav nav-tabs">
+                        <a href="#" class="right-sidebar">
+                            <span class="cartCount">3</span>
+                            <span class="entypo cart"></span>
+                        </a>
+                        <a class="btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="entypo triangle-down"></span>
+                        </a>
+                        <div id="tabMenu" class="tabbable"><!-- mob remove .tabbable -->
+                          <ul class="nav nav-tabs"><!-- mob remove .nav-tabs -->
                             <li class="active">
                                 <a href="#tab1" data-toggle="tab">ALL<span>123</span></a>
                             </li>
@@ -79,7 +89,7 @@ file that was distributed with this source code.
         </div> <!-- /container -->
         <img src="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/generalHeader.jpg" alt="" />
     </div>
-    
+
     <div id="panelPlanner0" class="container solidBackground"><!-- first panel -->
         <div class="row">
             <div class="span8 tabHolder">
@@ -87,174 +97,46 @@ file that was distributed with this source code.
 
                     <!-- START PANE -->
                     <div class="tab-pane fade in active" id="tab1">
-                        <div class="span4">
+                        <div class="span8">
                             <div class="padder">
 
                                 <!-- START ITEM -->
-                                <div class="imgWrap">
-                                    <img src="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/planner.jpg" alt="" />
-                                    <div class="popSourceBlock">
-                                        <div class="popWrapper">
-                                            <h7>FALLS CREEK</h7>
-                                            <h7>BED AND BREAKFAST</h7>
-                                            <ul class="inline">
-                                                <li><span class="entypo star on"></span></li>
-                                                <li><span class="entypo star on"></span></li>
-                                                <li><span class="entypo star on"></span></li>
-                                                <li><span class="entypo star on"></span></li>
-                                                <li><span class="entypo star"></span></li>
-                                                <li><img src="http://captechnix.com/scott/assets/img/operator-rutherglen/tripAdvisor.png" alt="place holder for trip advisor" /></li>
-                                            </ul>
-                                            <a class="closePop" href="#"></a>
-
-                                        </div>
-                                    </div>
-                                    <div class="featuredWrap">
-                                        <h5 class="opaque5">1@luxury cabins</h5>
-                                        <h6>Grand Deluxe Room</h6>
-                                        <a href="#" class="infoTrigger"><span class="entypo info"></a>
-                                    </div>
-                                    <div class="featuredDetails">
-                                        <div>IN <span>23/05</span> - OUT <span>27/05</span></div>
-                                        <div><span>2</span> NIGHTS <span>$439</span></div>
-
-                                        <div class="featuredLinks">
-                                            <ul class="inline">
-                                                <li><a href="#"><span class="entypo pencil"></span></a></li>
-                                                <li><a href="#"><span class="entypo share"></span></a></li>
-                                                <li><a href="#"><span class="entypo trash"></span></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="clearBoth"></div>
+                                {% for room in rooms %}
+                            <div class="imgWrap">
+                                {% if( room.file is not null ) %}
+                                    <img src="/uploads/rooms/{{ room.file }}" alt="">
+                                {% else %}
+                                    <img src="{{ asset('bundles/tneoperator/img/dummy_370_250.png') }}" alt="">
+                                {% endif %}
+                                <div class="featuredWrap">
+                                    <h5 class="opaque5">{{ room.accommodation.name }}</h5>
+                                    <h6>{{ room.name }}</h6>
+                                    <a href="#" class="infoTrigger"><span class="entypo info"></a>
                                 </div>
-                                <!-- END ITEM -->
+                                <div class="featuredDetails">
+                                    <div>IN <span>{{ cart_data[room.id].start_date | replace({'/': '-'}) | date('d/m') 
 
+}} </span> - OUT <span>{{ cart_data[room.id].end_date  | replace({'/': '-'}) | date('d/m') }} </span></div>
+                                    <div><span>{{ cart_data[room.id].days }}</span> NIGHTS <span>${{ cart_data
 
-                                <!-- START ITEM -->
-                                <div class="imgWrap">
-                                    <img src="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/planner.jpg" alt="" />
-                                    <div class="popSourceBlock">
-                                        <div class="popWrapper">
-                                            <h7>FALLS CREEK</h7>
-                                            <h7>BED AND BREAKFAST</h7>
-                                            <ul class="inline">
-                                                <li><span class="entypo star on"></span></li>
-                                                <li><span class="entypo star on"></span></li>
-                                                <li><span class="entypo star on"></span></li>
-                                                <li><span class="entypo star on"></span></li>
-                                                <li><span class="entypo star"></span></li>
-                                                <li><img src="http://captechnix.com/scott/assets/img/operator-rutherglen/tripAdvisor.png" alt="place holder for trip advisor" /></li>
-                                            </ul>
-                                            <a class="closePop" href="#"></a>
+[room.id].rate }}</span></div>
 
-                                        </div>
+                                    <div class="featuredLinks">
+                                        <ul class="inline">
+                                            <li><a href="{{ path('tne_operator_details',{ 'id': room.accommodation.id 
+
+}) }}#{{ room.id }}"><span class="entypo pencil"></span></a></li>
+                                            <li><a href="#"><span class="entypo share"></span></a></li>
+                                            <li><a href="{{ path('booking_remove_from_cart',{ 'id': room.id }) 
+
+}}"><span class="entypo trash"></span></a></li>
+                                        </ul>
                                     </div>
-                                    <div class="featuredWrap">
-                                        <h5 class="opaque5">@luxury cabins</h5>
-                                        <h6>Grand Deluxe Room</h6>
-                                        <a href="#" class="infoTrigger"><span class="entypo info"></a>
-                                    </div>
-                                    <div class="featuredDetails">
-                                        <div>IN <span>23/05</span> - OUT <span>27/05</span></div>
-                                        <div><span>2</span> NIGHTS <span>$439</span></div>
-
-                                        <div class="featuredLinks">
-                                            <ul class="inline">
-                                                <li><a href="#"><span class="entypo pencil"></span></a></li>
-                                                <li><a href="#"><span class="entypo share"></span></a></li>
-                                                <li><a href="#"><span class="entypo trash"></span></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="clearBoth"></div>
                                 </div>
-                                <!-- END ITEM -->
-                                        
+                                <div class="clearBoth"></div>
                             </div>
-                        </div>
-                        <div class="span4">
-                            <div class="padder">
-
-
-                                <!-- START ITEM -->
-                                <div class="imgWrap">
-                                    <img src="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/planner.jpg" alt="" />
-                                    <div class="popSourceBlock">
-                                        <div class="popWrapper">
-                                            <h7>FALLS CREEK</h7>
-                                            <h7>BED AND BREAKFAST</h7>
-                                            <ul class="inline">
-                                                <li><span class="entypo star on"></span></li>
-                                                <li><span class="entypo star on"></span></li>
-                                                <li><span class="entypo star on"></span></li>
-                                                <li><span class="entypo star on"></span></li>
-                                                <li><span class="entypo star"></span></li>
-                                                <li><img src="http://captechnix.com/scott/assets/img/operator-rutherglen/tripAdvisor.png" alt="place holder for trip advisor" /></li>
-                                            </ul>
-                                            <a class="closePop" href="#"></a>
-
-                                        </div>
-                                    </div>
-                                    <div class="featuredWrap">
-                                        <h5 class="opaque5">@luxury cabins</h5>
-                                        <h6>Grand Deluxe Room</h6>
-                                        <a href="#" class="infoTrigger"><span class="entypo info"></a>
-                                    </div>
-                                    <div class="featuredDetails">
-                                        <div>IN <span>23/05</span> - OUT <span>27/05</span></div>
-                                        <div><span>2</span> NIGHTS <span>$439</span></div>
-
-                                        <div class="featuredLinks">
-                                            <ul class="inline">
-                                                <li><a href="#"><span class="entypo pencil"></span></a></li>
-                                                <li><a href="#"><span class="entypo share"></span></a></li>
-                                                <li><a href="#"><span class="entypo trash"></span></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="clearBoth"></div>
-                                </div>
-                                <!-- END ITEM -->
-
-                                <!-- START ITEM -->
-                                <div class="imgWrap">
-                                    <img src="http://captechnix.com/scott/assets/img/operator-rutherglen/uploaded/planner.jpg" alt="" />
-                                    <div class="popSourceBlock">
-                                        <div class="popWrapper">
-                                            <h7>FALLS CREEK</h7>
-                                            <h7>BED AND BREAKFAST</h7>
-                                            <ul class="inline">
-                                                <li><span class="entypo star on"></span></li>
-                                                <li><span class="entypo star on"></span></li>
-                                                <li><span class="entypo star on"></span></li>
-                                                <li><span class="entypo star on"></span></li>
-                                                <li><span class="entypo star"></span></li>
-                                                <li><img src="http://captechnix.com/scott/assets/img/operator-rutherglen/tripAdvisor.png" alt="place holder for trip advisor" /></li>
-                                            </ul>
-                                            <a class="closePop" href="#"></a>
-
-                                        </div>
-                                    </div>
-                                    <div class="featuredWrap">
-                                        <h5 class="opaque5">@luxury cabins</h5>
-                                        <h6>Grand Deluxe Room</h6>
-                                        <a href="#" class="infoTrigger"><span class="entypo info"></a>
-                                    </div>
-                                    <div class="featuredDetails">
-                                        <div>IN <span>23/05</span> - OUT <span>27/05</span></div>
-                                        <div><span>2</span> NIGHTS <span>$439</span></div>
-
-                                        <div class="featuredLinks">
-                                            <ul class="inline">
-                                                <li><a href="#"><span class="entypo pencil"></span></a></li>
-                                                <li><a href="#"><span class="entypo share"></span></a></li>
-                                                <li><a href="#"><span class="entypo trash"></span></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="clearBoth"></div>
-                                </div>
+                        {% endfor %}
+                                
                                 <!-- END ITEM -->
 
                             </div>
@@ -264,7 +146,7 @@ file that was distributed with this source code.
 
                     <!-- START PANE -->
                     <div class="tab-pane fade" id="tab2">
-                        <div class="span4">
+                        <div class="span8">
                             <div class="padder">
 
                                 <!-- START ITEM -->
@@ -280,7 +162,7 @@ file that was distributed with this source code.
                                                 <li><span class="entypo star on"></span></li>
                                                 <li><span class="entypo star on"></span></li>
                                                 <li><span class="entypo star"></span></li>
-                                                <li><img src="http://captechnix.com/scott/assets/img/operator-rutherglen/tripAdvisor.png" alt="place holder for trip advisor" /></li>
+                                                <li><img src=".http://captechnix.com/scott/assets/img/operator-rutherglen/tripAdvisor.png" alt="place holder for trip advisor" /></li>
                                             </ul>
                                             <a class="closePop" href="#"></a>
 
@@ -348,10 +230,7 @@ file that was distributed with this source code.
                                 </div>
                                 <!-- END ITEM -->
                                         
-                            </div>
-                        </div>
-                        <div class="span4">
-                            <div class="padder">
+                            
 
 
                                 <!-- START ITEM -->
@@ -440,7 +319,7 @@ file that was distributed with this source code.
                     <!-- END PANE -->
                     <!-- START PANE -->
                     <div class="tab-pane fade" id="tab3">
-                        <div class="span4">
+                        <div class="span8">
                             <div class="padder">
 
                                 <!-- START ITEM -->
@@ -524,10 +403,6 @@ file that was distributed with this source code.
                                 </div>
                                 <!-- END ITEM -->
                                         
-                            </div>
-                        </div>
-                        <div class="span4">
-                            <div class="padder">
 
 
                                 <!-- START ITEM -->
@@ -616,7 +491,7 @@ file that was distributed with this source code.
                     <!-- END PANE -->
                     <!-- START PANE -->
                     <div class="tab-pane fade" id="tab4">
-                        <div class="span4">
+                        <div class="span8">
                             <div class="padder">
 
                                 <!-- START ITEM -->
@@ -699,11 +574,6 @@ file that was distributed with this source code.
                                     <div class="clearBoth"></div>
                                 </div>
                                 <!-- END ITEM -->
-                                        
-                            </div>
-                        </div>
-                        <div class="span4">
-                            <div class="padder">
 
 
                                 <!-- START ITEM -->
@@ -812,13 +682,20 @@ file that was distributed with this source code.
                     </dl>
 
                     <h3>ENQUIRY</h3>
-                    <dl>
-                        <dt>Luxury Cabins</dt>
-                        <dd>23/5 - 27/6</dd>
-                        <dd><a class="trash" href="#"><span class="entypo trash"></span></a></dd>
-                    </dl>
+                   {% for room in rooms %}
+                            <dl>
+                                <dt>{{ room.name }}</dt>
+                                <dd>{{ cart_data[room.id].start_date | replace({'/': '-'}) | date('d/m') }} - {{ 
 
-                    <a href="#" class="button cancel">CLEAR CART</a>
+cart_data[room.id].end_date | replace({'/': '-'}) | date('d/m') }}</dd>
+                                <dd><a href="{{ path('booking_remove_from_cart',{ 'id': room.id }) }}"><span 
+
+class="entypo trash"></span></a></dd>
+                            </dl>
+                    {% endfor %}
+
+
+                    <a href="{{ path('booking_clear_cart') }}" class="button cancel">CLEAR CART</a>
                     <a href="#" class="button">PROCEED TO CHECK-OUT</a>
 
                 </div>
@@ -826,6 +703,8 @@ file that was distributed with this source code.
             <!-- END SIDEBAR -->
         </div>
     </div>
+
+    <!-- END PLANNER CONTENT -->
 
 {% include 'TNEOperatorBundle:Default:footer.html.twig' %}
 

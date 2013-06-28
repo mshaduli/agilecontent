@@ -248,6 +248,10 @@ SearchApp.directive('resultsList', function(){
             $scope.showMoreItems = function() {
                 pagesShown = pagesShown + 1;
             };
+            $scope.getDatesQueryString = function($scope){
+                var dates = $('#filterDate').val().split(' to ');
+                return "s="+dates[0]+'&t='+dates[1];
+            };
         },
         template: '' +
             '<div id="loaderG" ng-show="loading">' +
@@ -280,8 +284,7 @@ SearchApp.directive('resultsList', function(){
             '</div>' +
             '<div>' +
             '<a href="#" class="btn btn-wishlist"><i class="icon-star icon-white"></i></a>' +
-            '<a href="/app_dev.php/operators/{[{operator.id}]}" class="btn btn-primary">ADD TO PLANNER</a>' +
-
+            '<a href="/app_dev.php/operators/{[{operator.operator_detail_action}]}{[{operator.id}]}?{[{ getDatesQueryString() }]}" class="btn btn-primary">More</a>' +
             '</div>' +
             '</div>' +
             '</div>' +
@@ -660,13 +663,13 @@ function SearchController($scope, $http, $q, $filter, $timeout)
 
     $scope.isMapElementHidden = false;
 
-    $http.get('/operators/destinations').success(function(data) {
+    $http.get(baseurl+'/operators/destinations').success(function(data) {
         $scope.destinations = data;
     }).error(function(){
         console.log('destinations not loaded');
     });
 
-    $http.get('/operators/classifications').success(function(data) {
+    $http.get(baseurl+'/operators/classifications').success(function(data) {
         var tempCls = [];
         $scope.classifications = data;
         angular.forEach(data, function(cls){

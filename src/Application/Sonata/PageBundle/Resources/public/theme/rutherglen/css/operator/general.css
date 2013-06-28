@@ -2,8 +2,8 @@
 body.general {
 	background: #f0f0f0 none;
 }
-.whiteBg.general {
-	padding-top: 122px;
+.planner-temp.whiteBg.general {
+	padding-top: 0px;
 }
 .whiteBg.general img:first-child {
 	height: auto;
@@ -170,7 +170,7 @@ body.general p {
 	position: relative;
 }
 #gMap {
-	background: transparent url(../../../img/operator-rutherglen/map.png) no-repeat 0 0;
+	background: transparent url(../../img/operator-rutherglen/map.png) no-repeat 0 0;
 	width: 100%;
 	height: 345px;
 	margin-top: 45px;
@@ -324,131 +324,6 @@ body.general p a {
 	border: 2px solid #3d0624;
 }
 
-
-/* mobile */
-@media (max-width: 1024px) {
-	#panelGeneral3 .span4 {
-		display: none !important;
-		width: 0 !important;
-	}
-	.padder {
-		padding: 15px;
-	}
-	#panelGeneral3 .span7 div.padder {
-		padding: 30px 20px 0 20px;
-	}
-	.whiteBg.general {
-		padding-top: 92px;
-	}
-	.whiteBg.general img:first-child {
-		display: none;
-	}
-	#panelGeneral1 .span12 div {
-		padding: 35px 0 20px 20px;
-		background-color: #f0f0f0;
-	}
-	#panelGeneral1 h1 {
-	  	background-color: #f0f0f0;
-	}
-	#panelGeneral2 {
-		display: none;
-	}
-	#panelGeneral3 #myCarousel { display: none;}
-	#panelGeneral3 .span7 p:first-child {
-  		font-size: 24px;
-  		font-family: "Univers LT W10 55 Roman";
-  		color: #3d0624;
-  		font-weight: bold;
-  		line-height: 1.25;
-	}
-	#gMap {
-		width: 100%;
-	}
-	#gMapOver {
-		display: none;
-	}
-	#panelGeneral3 .inline.footer {
-		position: relative;
-		top: 0;
-		right: 0;
-		display: block;
-		width: 180px;
-		margin: 0 auto 15px;
-	}
-	#panelGeneral3 .inline.footer li {
-		background-color: #f0f0f0;
-		color: #535254;
-		margin: 0 0 0 10px;
-		padding: 4px 15px 2px;
-	}
-
-	#panelGeneral3 ul.inline.footer li a {
-		color: #535254;
-		background-color: #f0f0f0;
-		height: 25px;
-		width: 35px;
-		display: block;
-		padding: 10px 0 10px 7px;
-		font-size: 26px;
-		line-height: 24px;
-	}
-	#panelGeneral3 blockquote small {
-		right: 5px;
-	}
-
-	#panelGeneral3 form {
-		display: block;	
-	}
-	#panelGeneral3 form div {
-		font-family: "Bembo W01";
-		font-size: 30px;
-		height: 35px;
-		padding: 35px 20px 20px 20px;
-		background: #f0f0f0;
-		color: #3d0624;
-	}
-	#panelGeneral3 form #tabletSubscribeEmail {
-		float: left;
-		width: auto;
-		margin: 0 auto;
-		color: #3d0624;
-		margin: 26px 0 0 10px;
-		padding: 5px 5px;
-		font-size: 16px;
-		font-weight: bold;
-		border: 1px solid #3d0624;
-	}
-	#panelGeneral3 form #tabletSubscribeEmail::-webkit-input-placeholder { /* WebKit browsers */
-		color: #3d0624;
-	}
-	#panelGeneral3 form #tabletSubscribeEmail:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-	    color: #3d0624;
-	}
-	#panelGeneral3 form #tabletSubscribeEmail::-moz-placeholder { /* Mozilla Firefox 19+ */
-	    color: #3d0624;
-	}
-	#panelGeneral3 form #tabletSubscribeEmail:-ms-input-placeholder { /* Internet Explorer 10+ */
-	    color: #3d0624;
-	}
-	#panelGeneral3 form input[type=submit]{
-		text-indent: -99999px;
-		float: right;
-		text-indent
-		display: block;
-		width: 82px;
-		height: 78px;
-		border: 0 none;
-		background: transparent url(../../../img/operator-rutherglen/tabletSub.png) no-repeat 0 0;
-	}
-
-}
-
-@media (max-width: 1024px) and (min-width: 768px) {
-	.span7 {
-		width: auto;
-	}
-}
-
 /* Planner */
 body.planner {
 	background: #f0f0f0 none;
@@ -477,6 +352,7 @@ body.planner #panelGeneral1 .span12 .tabbable {
 	padding: 0;
 	background-color: transparent;
 	z-index: 5;
+	display: block;
 }
 body.planner #panelGeneral1 .span12 .tabbable .nav-tabs>li>a {
 	background-color: #fff;
@@ -506,15 +382,17 @@ body.planner #panelGeneral1 .span12 .tabbable .nav-tabs>li.active>a span {
 	background-color: #fff;
 	color: #3d0624;
 }
-body.planner .tab-pane .span4 {
+body.planner .tab-pane .span8 {
 	height: 0;
+	display: none;
 	color: #535254;
 }
-body.planner .tab-pane.active .span4 {
+body.planner .tab-pane.active .span8 {
 	height: auto;
+	display: block;
 }
 body.planner .tab-pane div.padder {
-	padding: 20px 0 0 20px;
+	padding: 20px 0 0 10px;
 }
 
 body.planner .imgWrap {
@@ -598,8 +476,13 @@ body.planner .featuredDetails div:first-child span {
 	font-size: 18px;
 }
 body.planner .imgWrap {
+	/* this cause the mobile nav to get hidden
 	position: relative;
+	*/
 	margin-bottom: 20px;
+	max-width: 370px;
+	float: left;
+	margin-left: 10px;
 }
 body.planner .popover {
 	min-width: 90%;
@@ -676,6 +559,7 @@ body.planner .featuredLinks ul.inline li a span {
 	font-size: 18px;
 	line-height: 18px;
   	font-family: "Univers LT W10 55 Roman";
+  	margin-top: 20px;
 }
 
 #sideBar .sideBarWrapper dl, 
@@ -733,28 +617,19 @@ body.planner .featuredLinks ul.inline li a span {
 	color: #dc422a;
 	border: 2px solid #dc422a;
 }
-
-.planner-temp.whiteBg.general {
-	padding-top: 0px;
-       
-      
+#tabMenu, #panelGeneral1 .btn-navbar, #panelGeneral1 .right-sidebar {
+	display: none;
 }
 
-.planner-temp .nav-tabs li{
+.planner-temp .nav-tabs li
+{
     margin-left:0px;
 }
-
-.planner-temp .nav{
-    margin-bottom:12px;
-}
-
-.planner-temp .nav-tabs{
+.planner-temp .nav-tabs
+{
+    margin-bottom:13px;
     border:none;
 }
-
-
-
-
 
 /* mobile */
 @media (max-width: 1024px) {
@@ -769,7 +644,8 @@ body.planner .featuredLinks ul.inline li a span {
 		padding: 30px 20px 0 20px;
 	}
 	.whiteBg.general {
-		padding-top: 92px;
+		padding-top: 90px;
+		height: 60px;
 	}
 	.whiteBg.general img:first-child {
 		display: none;
@@ -777,6 +653,9 @@ body.planner .featuredLinks ul.inline li a span {
 	#panelGeneral1 .span12 div {
 		padding: 35px 0 20px 20px;
 		background-color: #f0f0f0;
+	}
+	body.planner #panelGeneral1 h1 {
+		display: none;
 	}
 	#panelGeneral1 h1 {
 	  	background-color: #f0f0f0;
@@ -864,7 +743,7 @@ body.planner .featuredLinks ul.inline li a span {
 	#panelGeneral3 form input[type=submit]{
 		text-indent: -99999px;
 		float: right;
-		text-indent
+		
 		display: block;
 		width: 82px;
 		height: 78px;
@@ -880,6 +759,130 @@ body.planner .featuredLinks ul.inline li a span {
 		display: block;
 		float: right;
 		margin-top: 10px;
+	}
+
+	/* planner nav */
+	#panel0 .row:first-child, #panel0.container {
+		height: 88px;
+	}
+	#panel0.container {
+		z-index: 5;
+	}
+	#panelGeneral1 {
+		z-index: 1;
+	}
+	#panelGeneral1 .span12 {
+		background-color: #3d0624;
+	}
+	#panelGeneral1 .span12 div {
+		padding: 0;
+	}
+	#tabMenu, #panelGeneral1 .btn-navbar, #panelGeneral1 .right-sidebar {
+		float: right;
+		cursor: pointer;
+		margin: 0;
+		padding: 0;
+		background-color: #3d0624;
+		display: block;
+	}
+	#panelGeneral1 .btn-navbar, #panelGeneral1 .right-sidebar {
+		width: 60px;
+		height: 60px;
+		display: block;
+	}
+	#panelGeneral1 .btn-navbar {
+		font-size: 17px;
+		line-height: 74px;
+	}
+	#panelGeneral1 .btn-navbar span {
+		position: relative;
+		left: 10px;
+	}
+	#panelGeneral1 .right-sidebar {
+		font-size: 20px;
+		line-height: 74px;
+		position: relative;
+	}
+	#panelGeneral1 .right-sidebar span.cartCount {
+	  border-radius: 8px;
+	  background-color: rgb( 112, 143, 28 );
+	  box-shadow: 1px 1.732px 2px 0px rgb( 0, 0, 0 );
+	  position: absolute;
+	  left: 30px;
+	  top: 13px;
+	  width: 15px;
+	  height: 15px;
+	  font-family: "Univers LT W10 55 Roman";
+	  font-size: 24px;
+	  padding: 10px;
+	  z-index: 100;
+	  line-height: 20px;
+	}
+
+	#panelGeneral1 .btn-navbar span, #panelGeneral1 .right-sidebar span {
+		cursor: pointer;
+		z-index: 100;
+	}
+	#panelGeneral1 #tabMenu {
+		float: right;
+		margin: 0;
+		padding: 0;
+		background-color: #3d0624;
+		clear: none;
+		width: 60%;
+		min-height: 60px;
+	}
+	#tabMenu .btn-navbar {
+		background: transparent url(../../img/operator-rutherglen/tabletSub.png) no-repeat 0 0;	
+	}
+	#tabMenu.nav-collapse .nav {
+		margin: 0;
+	}
+	#tabMenu.nav-collapse .nav li  {
+		height: 0;
+		display: none;
+	}
+	#tabMenu.nav-collapse .nav>li>a, #tabMenu.nav-collapse .dropdown-menu a {
+		padding: 23px 0 17px 0;
+		max-height: 60px;
+		color: #fff;
+		text-align: center;
+		font-size: 24px;
+	}
+	#tabMenu.nav-collapse .nav>li>a:hover, #tabMenu.nav-collapse .dropdown-menu a:hover {
+		color: #3d0624;
+		-webkit-border-radius: 0;
+		-moz-border-radius: 0;
+		border-radius: 0;
+	}
+	#tabMenu.nav-collapse .nav li.active {
+		height: 60px;
+		display: block;
+	}
+	#tabMenu.in .nav li {
+		height: 60px;
+		display: block;
+	}
+	#tabMenu .nav>li a span {
+		background-color: #fff;
+		color: #3d0624;
+		font-family: "Univers LT W10 55 Roman";
+		font-size: 13px;
+		margin: 0 0 0 15px;
+		padding: 5px 5px 4px 4px;
+		position: relative;
+		bottom: 5px;
+	}
+	#tabMenu .nav>li a:hover span {
+		background: #3d0624;
+		color: #fff;
+	}
+	
+	body.planner .imgWrap {
+		width: 100%;
+	}
+	body.planner .whiteBg.themed img {
+		height: 0;
 	}
 
 }
@@ -902,6 +905,39 @@ body.planner .featuredLinks ul.inline li a span {
 		float: right !important;
 		clear: none !important;
 	}
+	body.planner .imgWrap {
+		max-width: 290px;
+	}
+}
+
+@media (max-width: 768px) {
+	#panelGeneral1 .right-sidebar span.cartCount {
+		left: 20px;
+	}
+	#panelGeneral1 .right-sidebar span {
+		position: relative;
+		right: 10px;
+	}
+}
+
+@media (max-width: 1024px) and (min-width: 768px) {
+	.tabHolder .span8 {
+		width: 100%;
+	}
+	body.planner .imgWrap {
+		max-width: 350px;
+	}
+}
+@media (max-width: 768px) {
+	.tabHolder .span8 {
+		width: 100%;
+	}
+	body.planner .imgWrap {
+		max-width: 100%;
+	}
+	body.planner .tab-pane div.padder {
+		padding: 20px 30px 0 10px;
+	}
 }
 
 @media (max-width: 1024px) and (min-width: 768px) {
@@ -913,5 +949,13 @@ body.planner .featuredLinks ul.inline li a span {
 	}
 	.tabHolder .span4 {
 		width: 350px;
+	}
+}
+@media (max-width: 320px) {
+	#tabMenu.nav-collapse .nav>li>a, #tabMenu.nav-collapse .dropdown-menu a {
+		font-size: 14px;
+	}
+	#tabMenu .nav>li a span {
+		bottom: 0;
 	}
 }

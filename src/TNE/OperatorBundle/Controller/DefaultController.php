@@ -30,7 +30,7 @@ class DefaultController extends Controller
                     ->getOneOrNullResult();
 
 
-        return $this->render('TNEOperatorBundle:Default:header.desktop.html.twig', array('site' => $site, 'home_page' => $homePage, 'settings' => $menu->getSettings()));
+        return $this->render('TNEOperatorBundle:Default:header.html.twig', array('site' => $site, 'home_page' => $homePage, 'settings' => $menu->getSettings()));
     }
 
     public function footerAction()
@@ -266,8 +266,8 @@ EOD;
                     }
                 }
             }
-            
-            
+
+            $result['operator_detail_action'] = '';
             $operatorMedia = $operator->getMedia()->first();
             $result['image'] = $this->getOperatorImage($operatorMedia);
             $result['rating'] = $operator->getRating();
@@ -332,6 +332,7 @@ EOD;
         {
             $operatorMedia =  $em->getRepository('TNEOperatorBundle:Attraction')->find($result['id'])->getMedia()->first();
             $result['image'] = $this->getOperatorImage($operatorMedia);
+            $result['operator_detail_action'] = 'attractions/';
             $operators []= $result;
         }
 
@@ -368,6 +369,7 @@ EOD;
         {
             $operatorMedia =  $em->getRepository('TNEOperatorBundle:Event')->find($result['id'])->getMedia()->first();
             $result['image'] = $this->getOperatorImage($operatorMedia);
+            $result['operator_detail_action'] = 'events/';
             $operators []= $result;
         }
 
@@ -521,4 +523,14 @@ EOD;
         return $this->render('TNEOperatorBundle:Default:homepage_events.html.twig', array('events'=> $events));
     }
     
+    public function eventDetailsAction($id)
+    {   
+        $em = $this->get('doctrine.orm.entity_manager');
+        $operator = $em->getRepository('TNEOperatorBundle:Event')->find($id);
+        $opObj = ($operator)?$operator:null;
+        return $this->render('TNEOperatorBundle:Default:eventDetails.html.twig', array(
+            'operator'     => $opObj
+        ));
+
+    }
 }
