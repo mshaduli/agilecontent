@@ -10,6 +10,11 @@ file that was distributed with this source code.
 #}
 {% extends 'ApplicationSonataPageBundle::rutherglen_base_layout.html.twig' %}
 
+{% block flexsliderjs %}
+    {{ parent() }}
+{% endblock %}
+{% block flexslidercss %}
+{%  %}
 {% block bodyMain %} <body class="sonata-bc" id="home">   {%  endblock %}
 {% block page_container %}
 

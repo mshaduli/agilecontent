@@ -30,7 +30,7 @@ class DefaultController extends Controller
                     ->getOneOrNullResult();
 
 
-        return $this->render('TNEOperatorBundle:Default:header.desktop.html.twig', array('site' => $site, 'home_page' => $homePage, 'settings' => $menu->getSettings()));
+        return $this->render('TNEOperatorBundle:Default:header.html.twig', array('site' => $site, 'home_page' => $homePage, 'settings' => $menu->getSettings()));
     }
 
     public function footerAction()
@@ -57,8 +57,11 @@ class DefaultController extends Controller
             foreach($linkedMedia as $linkedMediaItem)
             {
                 $settings = $linkedMediaItem['settings'];
-                $linkedMediaItem['media'] = $em->getRepository('ApplicationSonataMediaBundle:Media')->find($settings['mediaId']);
-                $result[] = $linkedMediaItem;
+                if($settings['mediaId'])
+                {
+                    $linkedMediaItem['media'] = $em->getRepository('ApplicationSonataMediaBundle:Media')->find($settings['mediaId']);
+                    $result[] = $linkedMediaItem;
+                }
             }
         }
 

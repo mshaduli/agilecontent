@@ -261,6 +261,43 @@ class CustomerController extends Controller
     }
 
 
+    public function addEventAction()
+    {
+//        $this->getRequest()->getSession()->remove('booking_data');
+        $event_data = array();
+        $event_data_refined = array();
+        if($this->getRequest()->isXmlHttpRequest())
+        {
+
+            $session = $this->getRequest()->getSession();
+
+            $_data['accommodation_id'] = $this->getRequest()->get('accommodation_id');
+            $_data['start_date'] = $this->getRequest()->get('start_date');
+            $_data['end_date'] = $this->getRequest()->get('end_date');
+
+            if(is_null($session->get('event_data')))
+            {
+
+                $event_data[0] = $_data;
+            }
+            else
+            {
+                $event_data = $session->get('booking_data');
+                array_push($event_data,$_data);
+            }
+            foreach($event_data as $event)
+            {
+                $booking_data_refined [$event['accommodation_id']]= $event;
+
+
+            }
+            $session->set('booking_data',$event_data_refined);
+        }
+//        $session->remove('booking_data');
+        return new JsonResponse(array("status"=> "Added to cart successfully","count"=>count($event_data_refined)));
+    }
+
+
     public function cartAction()
     {
        $cart = $this->getRequest()->getSession()->get('booking_data');
@@ -325,11 +362,14 @@ class CustomerController extends Controller
             $roomStmt = $em->getConnection()->prepare($qry);
             $roomStmt->execute();
             $rate= $roomStmt->fetchAll();
-            $room_rate = is_null($rate[0]['rate'])?$roomObj->getAccommodation()->getAtdwRateFrom():$rate[0]['rate'];
+
             $start_d = strtotime(str_replace('/','-',$room['start_date']));
             $end_d = strtotime(str_replace('/','-',$room['end_date']));
             $diff_millsec = $end_d-$start_d;
             $days = ($diff_millsec/60/60/24)+1;
+
+            $room_rate = is_null($rate[0]['rate'])?($roomObj->getAccommodation()->getAtdwRateFrom()* $days):$rate[0]['rate'];
+
             $room_cart [$room['room_id']]=  array('start_date' => $room['start_date'], 'end_date' => $room['end_date'],'rate' => $room_rate, 'days' => $days);
             $rooms[]=$roomObj;
             $total +=$room_rate;
@@ -345,8 +385,15 @@ class CustomerController extends Controller
         $booking_data = $session->get('booking_data');
         unset($booking_data[$this->getRequest()->get('id')]);
         $session->set('booking_data',$booking_data);
-        return $this->redirect($this->generateUrl('booking_cart'));
+        return $this->redirect($this->generateUrl('booking_planner'));
 
+    }
+
+    public function clearCartAction()
+    {
+        $this->getRequest()->getSession()->remove('booking_data');
+        $this->getRequest()->getSession()->remove('booking_id');
+        return $this->redirect($this->generateUrl('tne_operator_listing_search'));
     }
 
     public function confirmationAction()

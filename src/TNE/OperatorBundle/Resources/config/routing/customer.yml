@@ -48,3 +48,7 @@ booking_order_confirmation:
 booking_planner:
     pattern:  /planner
     defaults: { _controller: "TNEOperatorBundle:Customer:planner" }
+
+booking_clear_cart:
+    pattern:  /clear-cart
+    defaults: { _controller: "TNEOperatorBundle:Customer:clearCart" }

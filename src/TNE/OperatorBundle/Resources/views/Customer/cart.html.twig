@@ -99,7 +99,7 @@ file that was distributed with this source code.
                     </div>
                     <div class="span2 cart-thumb">
                         
-                        <div class="rate">${{ cart_data[room.id].rate * cart_data[room.id].days }}</div>
+                        <div class="rate">${{ cart_data[room.id].rate }}</div>
                         <div class="delete-link">
                             <a href="{{ path('booking_remove_from_cart',{ 'id': room.id }) }}"><img src="{{ asset('bundles/tneoperator/img/delete-bin.jpg') }}"></a>
                         </div>
