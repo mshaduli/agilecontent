@@ -1,0 +1,611 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+{% extends 'ApplicationSonataPageBundle::base_func_layout_tne.html.twig' %}
+
+{% block page_stylesheets %}
+    {{ parent() }}
+<link rel="stylesheet" href="{{ asset('bundles/tneoperator/angular/app/css/app.css') }}" type="text/css" media="all" />
+
+<link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/font-awesome.min.css') }}" type="text/css" media="all" />
+<link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/theme-rutherglen.css') }}" type="text/css" media="all" />
+<link rel="stylesheet" href="{{ asset('bundles/tneoperator/css/select2.css') }}" type="text/css" media="all" />
+<link rel="stylesheet" href="{{ asset('bundles/tneoperator/angular/app/css/daterangepicker.css') }}" type="text/css" media="all" />
+
+
+    <link href="{{ asset('bundles/tneoperator/css/flexslider.css') }}" type="text/css" rel="stylesheet" media="all" >
+    <link href="{{ asset('bundles/tneoperator/css/flexslider2.css') }}" type="text/css" rel="stylesheet" media="all" >
+    
+{% endblock %}
+
+{% block page_javascripts %}
+    {{ parent() }}
+    {{ vichgeo_include_js() }}
+        <script src="{{ asset('bundles/tneoperator/angular/app/lib/angular/angular.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/tneoperator/angular/app/lib/angular/angular-resource.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/tneoperator/angular/app/js/daterangepicker.js') }}"></script>
+        <script src="{{ asset('bundles/tneoperator/angular/app/js/moment.min.js') }}"></script>
+        <script src="{{ asset('bundles/tneoperator/angular/app/js/moment-range.js') }}"></script>
+        <script src="{{ asset('bundles/tneoperator/angular/app/js/map.js') }}"></script>
+        <script src="{{ asset('bundles/tneoperator/js/select2.js') }}"></script>
+        
+        <script src="{{ asset('bundles/tneoperator/js/jquery.selectbox-0.5.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/tneoperator/js/jquery.flexslider.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/tneoperator/js/jquery-datepicker.js') }}"></script>
+        <script src="{{ asset('bundles/tneoperator/js/jquery.validate.min.js') }}"></script>
+        <script src="{{ asset('bundles/tneoperator/js/additional-methods.min.js') }}"></script>
+        <script src="{{ asset('bundles/tneoperator/angular/app/js/operator.js') }}"></script>
+        
+        <script>
+$(function() {
+$( ".datepicker" ).datepicker({
+showOn: "button",
+buttonImage: "{{ asset('bundles/tneoperator/img/btn-datepicker.png') }}",
+buttonImageOnly: true
+});
+
+
+
+
+});
+</script>
+
+<!-- Place in the <head>, after the three links -->
+<script type="text/javascript" charset="utf-8">
+      $(window).load(function() {
+        $('.flexslider').flexslider({
+			controlNav: 'thumbnails',
+			animation:'slide',
+		});
+		 //$('.flexslider').flexslider({
+			//controlNav: 'thumbnails'
+		//});
+      });
+</script>
+<script>
+$(document).ready(function(){
+$(".contact-btn").click(function(){
+$(".info-default-lft").hide();
+$(".contact-form-left").show();
+
+})
+
+$("#slider-map").click(function(){
+$("#top-tab-block").hide();
+$("#availability-section").hide();
+$(".map-section").show();
+$("#slider-map").addClass('active');
+$("#slider-info").removeClass('active');
+$("#slider-availability").removeClass('active');
+$("#slider-contact").removeClass('active');
+ showLargeMap();
+})
+
+$("#slider-info").click(function(){
+$(".map-section").hide();
+$("#availability-section").hide();
+$("#top-tab-block").show();
+$('.info-default-lft').show();
+$(".contact-form-left").hide();
+$("#slider-info").addClass('active');
+$("#slider-map").removeClass('active');
+$("#slider-availability").removeClass('active');
+$("#slider-contact").removeClass('active');
+})
+
+
+$("#slider-availability").click(function(){
+$(".map-section").hide();
+$("#top-tab-block").hide();
+$("#availability-section").show();
+$("#slider-availability").addClass('active');
+$("#slider-info").removeClass('active');
+$("#slider-map").removeClass('active');
+$("#slider-contact").removeClass('active');
+})
+
+$("#slider-contact").click(function(){
+	$(".map-section").hide();
+	$("#top-tab-block").show();
+	$('.info-default-lft').hide();
+	$(".contact-form-left").show();
+	$("#availability-section").hide();
+	$("#slider-contact").addClass('active');
+	$("#slider-availability").removeClass('active');
+	$("#slider-info").removeClass('active');
+	$("#slider-map").removeClass('active');
+})
+
+
+$(".slider-thumb-nav-img").click(function(){
+$(".show-thumb-nav").slideToggle();
+})
+
+
+$('#map-close-btn').click(function(){
+	$(".map-section").hide();
+	$("#top-tab-block").show();
+})
+
+$('#ask-form-close-btn').click(function(){
+	$('.info-default-lft').show();
+	$('.contact-form-left').hide();
+})
+
+$('#terms-close-btn').click(function(){
+	$(".terms-section").hide();
+	$("#top-tab-block").show();
+})
+
+});
+
+</script>
+
+
+
+
+
+
+<script type="text/javascript">
+	$(document).ready(function() {
+	$('#Items1').selectbox();
+	$('#Items2').selectbox();
+	});
+</script>
+{% endblock %}    
+    
+{% block content %}
+
+<div ng-app="OperatorApp" ng-controller="OperatorController">
+    
+
+{#{% include 'TNEOperatorBundle:Default:header.html.twig' %}#}
+{% render url('tne_operators_header') %}
+    <div>
+       
+       
+<div  class="main-bg-container operator">
+  
+  <div class="span12" style="margin:auto; float:none">
+  {% if operator is not null %}
+  <div id="operator-slider">
+        
+        <div class="slider-thumb-nav-img"><i class="icon-large icon-th-large"></i></div>
+        
+        <div class="slider-nav" style="z-index:1000;">
+          
+          <ul>
+              <li><a href="javascript:void(0)" id="slider-info" class="active">Info</a></li>
+              <li><a href="javascript:void(0)" id="slider-availability">Availability</a></li>
+              <li class="visible-phone"><a href="javascript:void(0)" id="slider-contact">Contact</a></li>
+              <li><a href="javascript:void(0)" id="slider-map" >Map</a></li>
+          </ul>
+          
+          
+           <div class="addtocart-main hidden-phone">
+              <div class="star"><a href="#"><img src="{{ asset('bundles/tneoperator/img/star.png') }}"></a></div>
+              <div class="massage-addtocart"> <a href="#" class="btn btn-primary">VIEW ROOMS</a> </div>
+            </div>
+          
+          </div>
+        
+        
+         <div class="slider-caption">
+         	<h2 class="pull-left">Quay West Resort & Spa <span><a href="#">FALLS CREEK</a></span></h2>
+            <div class="addtocart-main visible-phone pull-right">
+            <div class="star"><a href="#"><i class="icon-star"></i></a></div>
+            <div class="massage-addtocart"> <a href="#" class="btn btn-primary">ROOMS</a> </div>
+            </div>
+         </div>
+         <div class="flexslider">
+          <ul class="slides">
+            {% for media in operator.media %}                  
+                <li> <img src="{% path media.mediaItem, 'big' %}" alt="{{ media.AltText }}" data-thumb="{% path media.mediaItem, 'small' %}" />
+                  <p class="flex-caption">{{ media.AltText }} <span><a href="#"> site name needs to be changed</a></span></p>
+                </li>
+            {% endfor %}
+            
+          </ul>
+        </div>
+         
+         
+         
+         
+          </div>
+  {% endif %}
+  </div>
+  
+  <div class="clear"></div>
+  </div>
+{% if operator is not null %}
+<div id="main" class="container">
+    <div class="row hidden-phone">
+      <div class="span6">
+        <tabs class="btn-group" data-toggle="buttons-radio" model='filters.OperatorView' operators="operators" options='OperatorViewOptions' classes=""></tabs>
+      </div>
+      <div class="span3">
+        <!--<div class="pull-right">
+                    Sort by <select id="sort">
+                             <option value="">Relevance</option>
+                             <option value="">Distance</option>
+                             <option value="">Price</option>
+                         </select>
+                </div>   -->
+      </div>
+      <div class="span3 pull-right">
+        <buttons-radio class="btn-group pull-right" data-toggle="buttons-radio" model='UIView' options='UIViewOptions' classes=""></buttons-radio>
+      </div>
+    </div>
+    <div class="row" >
+      <div class="span12">
+        <!-- New Markup for Operator Bundle -->
+        
+        <div class="common-block" id="top-tab-block" style="margin-top:40px;">
+          <div class="info-default-lft-main">
+            <div class="info-default-lft">
+              <div class="tripadvisor-area">
+                <div class="icon-bolt-new"><img src="{{ asset('bundles/tneoperator/img/icon-bolt.png') }}"></div>
+                <div class="icon-tripadvison"><img src="{{ asset('bundles/tneoperator/img/design-tripadvisor.png') }}"></div>
+                <div class="clear"></div>
+              </div>
+              <div class="nights-from">NIGHTS FROM
+                <div class="value">$</div>
+              </div>
+              <div class="min-nights">MIN. NIGHTS
+                <div class="value">1</div>
+              </div>
+              <div class="check-in-out">CHECK-IN/OUT
+                <div class="value">17:00/10:00</div>
+              </div>
+              <div class="my-social" >
+                <ul class="nav">
+                  <li class="social">SOCIAL
+                    <div class="clear"></div>
+                    <a class="btn btn-link" target="_blank" href="https://twitter.com/intent/tweet?url={{ app.request.host }}&text={{ operator.description |slice(0,50) }}..."><i class="icon-large icon-twitter"></i></a>
+                    <a class="btn btn-link" href="javascript:sharetofb(this);"><i class="icon-large icon-facebook"></i></a>
+                    <a target="_blank" href="https://plus.google.com/share?url={{ app.request.host }}"><i class="icon-large icon-google-plus"></i></a>
+                    <a target="_blank" href="http://pinterest.com/pin/create/button/?url={{ app.request.host }}&description={{ operator.description |slice(0,50) }}...&media="><i class="icon-large icon-pinterest"></i></a> </li>
+                </ul>
+              </div>
+              <div class="clear"></div>
+              <div class="top-info-content">
+                  {{ operator.description|raw }}
+              </div>
+            </div>
+            <div class="contact-form-left">
+              <div class="contact-heading">ASK A QUESTION <a href="javascript:void(0)" id="ask-form-close-btn" style="float:right;"><i class="icon-remove"></i></a></div>
+              <form action="#" method="post" id="ask-question-form">
+              	<div class="alert alert-success" style="display:none;" id="ask-success-msg">Your Form Sucessfully submited.</div>
+                <div class="input-append" style="display: block;">
+                  <div>
+                    <div class="contact-textfield">
+                      <label>NAME</label>
+                      <input type="text" id="askname" name="askname" class="span2">
+                    </div>
+                    <div class="contact-textfield">
+                      <label>EMAIL</label>
+                      <input type="text" id="askemail" name="askemail" class="span2">
+                      <!--<div class="alert alert-error">alert message</div>-->
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+                  <div>
+                    <div class="contact-textfield">
+                      <label>PHONE</label>
+                      <input type="text" id="askphone" name="askphone" class="span2">
+                    </div>
+                    <div class="contact-textfield2">
+                      <label>CONTACT ME BY</label>
+                      <div class="select-box-part" style="z-index:1000; padding-bottom:1px;">
+                        <select name="Items1" id="Items1">
+                          <option value="option1">Phone or Email?</option>
+                          <option value="9am-5pm">Phone</option>
+                          <option value="After 5pm">Email</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+                  <div>
+                    <div class="contact-textfield2">
+                      <label>SUBJECT</label>
+                      <div class="select-box-part" style="z-index:999; padding-bottom:1px;">
+                        <select name="Items2" id="Items2">
+                          <option value="option1">What is your question regarding?</option>
+                          <option value="9am-5pm">Question1</option>
+                          <option value="After 5pm">Question2</option>
+                          <option value="After 6pm">Question3</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+                  <div>
+                    <div class="contact-txtarea" style="margin-right:0px;">
+                      <label>SUBJECT</label>
+                      <textarea name="askmessage" id="askmessage" cols="" rows=""></textarea>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <button type="submit" class="btn btn-primary">Send</button>
+              </form>
+            </div>
+          </div>
+          <div class="info-default-rgt hidden-phone">
+            <div class="map-info">
+              <div class="large-map-link"><a href="javascript:void(0)">VIEW LARGE MAP</a></div>
+              <div id="map-view-small"></div>
+             </div> 
+            <div class="contact-main-default">
+              <div class="clearfix">	
+                  <h3 class="pull-left">CONTACT</h3>
+                  <a href="javascript:void(0)" class="address-minimize-btn pull-right" data-toggle="collapse" data-target="#minimize-address"><i class="icon-large icon-plus"></i><i class="icon-large icon-minus"></i></a>
+              </div>
+              <div id="minimize-address" class="in collapse">
+                  <div class="contact-indiv-content">
+                    <div class="contact-lft-content">Tel</div>
+                    <div class="contact-rgt-content"></div>
+                    <div class="clear"></div>
+                  </div>
+                  <div class="contact-indiv-content">
+                    <div class="contact-lft-content">Fax</div>
+                    <div class="contact-rgt-content">(+61) 3 5732 8099</div>
+                    <div class="clear"></div>
+                  </div>
+                  <div class="contact-indiv-content">
+                    <div class="contact-lft-content">Web</div>
+                    <div class="contact-rgt-content"></div>
+                    <div class="clear"></div>
+                  </div>
+              </div>
+              <div class="contact-indiv-content">
+                <div class="contact-lft-content">Facebook</div>
+                <div class="contact-rgt-content"></div>
+                <div class="clear"></div>
+              </div>
+              <div class="contact-indiv-content">
+                <div class="contact-lft-content">twitter</div>
+                <div class="contact-rgt-content"></div>
+                <div class="clear"></div>
+              </div>
+            </div>
+            <div class="contact-main-default">
+              <h3>ADDRESS</h3>
+              <div>{{ operator.address}}</div>
+            </div>
+            <div class="op-rooms">
+              <div class="ask-question contact-btn"><a href="javascript:void(0)" class="btn btn-primary"><i class="icon-large icon-question-sign"></i> ASK A QUESTION</a></div>
+              <div class="ask-question"><a href="javascript:void(0)" class="btn btn-primary"><i class="icon-large icon-download-alt"></i> VIEW BROCHURE</a></div>
+              <div class="terms-condition"><a href="#">FACILITIES</a>&nbsp; &nbsp; <a href="javascript:void(0)" id="terms_conditions">TERMS AND CONDITIONS</a></div>
+            </div>
+          </div>
+          <div class="clear"></div>
+        </div>
+        
+        
+        
+         <div class="common-block" id="availability-section">
+         
+         
+         <div id="grid">
+             <results-grid operators="operators" loading="loading" limit="9" page="9" days="6" dates="filters.dates"></results-grid>
+         </div>
+         
+         
+         </div>
+        
+        
+        <div class="common-block map-section"><a href="javascript:void(0)" id="map-close-btn"><i class="icon-large icon-remove"></i></a>
+            <div id="map-view-large"  ></div>
+        </div>
+        
+        <div class="common-block terms-section" id="terms-section" style="display: none"><a href="javascript:void(0)" id="terms-close-btn" class="pull-right"><i class="icon-large icon-remove"></i></a>
+            <div id="terms-view-large">
+               
+            </div>
+        </div>
+        
+        <div class="op-section-header">our rooms</div>
+        <!-- Rooms Section Hidden in Phone -->
+              
+        
+        <!-- end of row -->
+      </div>
+      <!-- end of operator rooms -->
+      <!-- end of operator -->
+    </div>
+  </div>
+ {% else %}
+        <div id="main" class="container">
+            <div class="row hidden-phone">
+                <div class="span6">
+                  <tabs class="btn-group" data-toggle="buttons-radio" model='filters.OperatorView' operators="operators" options='OperatorViewOptions' classes=""></tabs>
+                </div>
+                <div class="span3">
+                  <!--<div class="pull-right">
+                              Sort by <select id="sort">
+                                       <option value="">Relevance</option>
+                                       <option value="">Distance</option>
+                                       <option value="">Price</option>
+                                   </select>
+                          </div>   -->
+                </div>
+                <div class="span3 pull-right">
+                  <buttons-radio class="btn-group pull-right" data-toggle="buttons-radio" model='UIView' options='UIViewOptions' classes=""></buttons-radio>
+                </div>
+              </div>
+            <div class="row" >
+                <div class="span12">
+                    {{ "Operator data unavailable" }}
+                </div>
+            </div>
+        </div>
+ {% endif %}
+    </div>
+
+{#{% include 'TNEOperatorBundle:Default:footer.html.twig' %}#}
+{% render url('tne_operators_footer') %}
+
+    <div id="design"></div>
+</div>
+        
+<script>
+
+
+    $(document).ready(function(){
+        {% if operator is not null %}
+
+        var smallMapOptions = {
+            zoom: 8,
+            center: new google.maps.LatLng({{ operator.latitude }},{{ operator.longitude }}),
+            disableDefaultUI: true,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var smallMap = new google.maps.Map(document.getElementById("map-view-small"), smallMapOptions);
+        var smallMarker = new google.maps.Marker({
+            position: new google.maps.LatLng({{ operator.latitude }},{{ operator.longitude }}),
+            map: smallMap,
+            icon: '/bundles/tneoperator/img/map/marker_blue.png'
+        });
+
+        $("#terms_conditions").click(function(){
+           $("#top-tab-block").hide();
+           $("#terms-section").show();
+        });
+
+        $(".large-map-link").click(function(){
+        $("#top-tab-block").hide();
+        $(".map-section").show();
+            showLargeMap();
+        });
+
+
+
+
+    });
+    
+    function showLargeMap(){
+        var mapViewOptions = {
+            zoom: 8,
+            center: new google.maps.LatLng({{ operator.latitude }},{{ operator.longitude }}),
+            disableDefaultUI: true,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var mapViewLarge = new google.maps.Map(document.getElementById("map-view-large"), mapViewOptions);
+        var mapViewLargeMarker = new google.maps.Marker({
+            position: new google.maps.LatLng({{ operator.latitude }},{{ operator.longitude }}),
+            map: mapViewLarge,
+            icon: '/bundles/tneoperator/img/map/marker_blue.png'
+        });
+        
+/*        var contentString = '<div id="content" class="map-address-popup">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
+      '<div id="bodyContent">'+
+      'test'+
+      '</div>'+
+      '</div>';
+
+  var infowindow = new google.maps.InfoWindow({
+      content: contentString,
+      disableAutoPan: true
+  });
+  
+  google.maps.event.addListener(mapViewLargeMarker, 'click', function() {
+    infowindow.open(mapViewLarge,mapViewLargeMarker);
+  });
+  */
+    }        
+    
+    function sharetofb(obj){
+    
+        FB.ui(
+                {
+                    method: 'feed',
+                    name: '{{ operator.name }}',
+                    
+                    caption: '{{ operator.name }}',
+                    description: '{{ operator.description |replace("'","") | slice(0,50) }}...',
+                    link: location.href,
+                    show_error: true
+                },
+        function(response) {
+        }
+        );
+    }
+    {% endif %}
+</script>
+    
+<script>
+	$('#ask-question-form').validate({
+		rules:{
+			askname:{
+				required: true
+			},
+			askemail:{
+				email: true,
+				required: true
+			},
+			askmessage:{
+				required: true,
+				minlength: 10
+			}
+		},
+		 submitHandler: function(form) {
+		 	$('#ask-success-msg').css({display: 'block'});
+	 	    
+	    }
+	});
+</script>
+<style type="text/css">
+.flex-viewport{
+    height: 435px;
+    }
+.map-address-popup
+{
+position:absolute;
+z-index:1000;
+width:383px;
+background:#fff;
+top:50px;
+left:50px;
+box-shadow: 0px 0px 4px #333;
+}
+
+
+.map-address-popup h1
+{
+background:#0076c0;
+font-size:17px;
+color:#fff;
+padding:12px 20px;
+margin:0px;
+font-weight:normal;
+}
+
+
+.map-address-popup #bodyContent
+{
+padding:15px 20px;
+font-size:15px;
+font-weight:normal;
+
+}
+
+.map-address-popup .op-rooms
+{
+padding-top:15px;
+margin-bottom:0px;
+}
+    </style>
+{% endblock %}
