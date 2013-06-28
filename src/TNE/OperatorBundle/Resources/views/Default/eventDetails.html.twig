@@ -179,26 +179,11 @@ $('#terms-close-btn').click(function(){
         
         <div class="slider-thumb-nav-img"><i class="icon-large icon-th-large"></i></div>
         
-        <div class="slider-nav" style="z-index:1000;">
-          
-          <ul>
-              <li><a href="javascript:void(0)" id="slider-info" class="active">Info</a></li>
-              <li><a href="javascript:void(0)" id="slider-availability">Availability</a></li>
-              <li class="visible-phone"><a href="javascript:void(0)" id="slider-contact">Contact</a></li>
-              <li><a href="javascript:void(0)" id="slider-map" >Map</a></li>
-          </ul>
-          
-          
-           <div class="addtocart-main hidden-phone">
-              <div class="star"><a href="#"><img src="{{ asset('bundles/tneoperator/img/star.png') }}"></a></div>
-              <div class="massage-addtocart"> <a href="#" class="btn btn-primary">VIEW ROOMS</a> </div>
-            </div>
-          
-          </div>
+      
         
         
          <div class="slider-caption">
-         	<h2 class="pull-left">Quay West Resort & Spa <span><a href="#">FALLS CREEK</a></span></h2>
+         	<h2 class="pull-left"> {{ operator.name}} <span><a href="#"> {{ operator.destination}}</a></span></h2>
             <div class="addtocart-main visible-phone pull-right">
             <div class="star"><a href="#"><i class="icon-star"></i></a></div>
             <div class="massage-addtocart"> <a href="#" class="btn btn-primary">ROOMS</a> </div>
@@ -255,14 +240,14 @@ $('#terms-close-btn').click(function(){
                 <div class="icon-tripadvison"><img src="{{ asset('bundles/tneoperator/img/design-tripadvisor.png') }}"></div>
                 <div class="clear"></div>
               </div>
-              <div class="nights-from">NIGHTS FROM
-                <div class="value">$</div>
+              <div class="nights-from">START DATE
+                <div class="value-events"> {{ operator.startDate | date('d-m-Y') }} </div>
               </div>
-              <div class="min-nights">MIN. NIGHTS
-                <div class="value">1</div>
+              <div class="min-nights">END DATE
+                <div class="value-events"> {{ operator.endDate | date('d-m-Y') }} </div>
               </div>
-              <div class="check-in-out">CHECK-IN/OUT
-                <div class="value">17:00/10:00</div>
+              <div class="check-in-out">FREQUENCY
+                <div class="value-events"> {{ operator.frequency }} </div>
               </div>
               <div class="my-social" >
                 <ul class="nav">
@@ -345,44 +330,13 @@ $('#terms-close-btn').click(function(){
               <div class="large-map-link"><a href="javascript:void(0)">VIEW LARGE MAP</a></div>
               <div id="map-view-small"></div>
              </div> 
-            <div class="contact-main-default">
-              <div class="clearfix">	
-                  <h3 class="pull-left">CONTACT</h3>
-                  <a href="javascript:void(0)" class="address-minimize-btn pull-right" data-toggle="collapse" data-target="#minimize-address"><i class="icon-large icon-plus"></i><i class="icon-large icon-minus"></i></a>
-              </div>
-              <div id="minimize-address" class="in collapse">
-                  <div class="contact-indiv-content">
-                    <div class="contact-lft-content">Tel</div>
-                    <div class="contact-rgt-content"></div>
-                    <div class="clear"></div>
-                  </div>
-                  <div class="contact-indiv-content">
-                    <div class="contact-lft-content">Fax</div>
-                    <div class="contact-rgt-content">(+61) 3 5732 8099</div>
-                    <div class="clear"></div>
-                  </div>
-                  <div class="contact-indiv-content">
-                    <div class="contact-lft-content">Web</div>
-                    <div class="contact-rgt-content"></div>
-                    <div class="clear"></div>
-                  </div>
-              </div>
-              <div class="contact-indiv-content">
-                <div class="contact-lft-content">Facebook</div>
-                <div class="contact-rgt-content"></div>
-                <div class="clear"></div>
-              </div>
-              <div class="contact-indiv-content">
-                <div class="contact-lft-content">twitter</div>
-                <div class="contact-rgt-content"></div>
-                <div class="clear"></div>
-              </div>
-            </div>
+            
             <div class="contact-main-default">
               <h3>ADDRESS</h3>
               <div>{{ operator.address}}</div>
             </div>
             <div class="op-rooms">
+              <div class="ask-question contact-btn"><a href="javascript:void(0)" class="btn btn-primary"><i class="icon-large icon-question-sign"></i> ADD TO PLANNER </a></div>
               <div class="ask-question contact-btn"><a href="javascript:void(0)" class="btn btn-primary"><i class="icon-large icon-question-sign"></i> ASK A QUESTION</a></div>
               <div class="ask-question"><a href="javascript:void(0)" class="btn btn-primary"><i class="icon-large icon-download-alt"></i> VIEW BROCHURE</a></div>
               <div class="terms-condition"><a href="#">FACILITIES</a>&nbsp; &nbsp; <a href="javascript:void(0)" id="terms_conditions">TERMS AND CONDITIONS</a></div>
@@ -413,15 +367,7 @@ $('#terms-close-btn').click(function(){
                
             </div>
         </div>
-        
-        <div class="op-section-header">our rooms</div>
-        <!-- Rooms Section Hidden in Phone -->
-              
-        
-        <!-- end of row -->
-      </div>
-      <!-- end of operator rooms -->
-      <!-- end of operator -->
+               
     </div>
   </div>
  {% else %}
@@ -452,7 +398,6 @@ $('#terms-close-btn').click(function(){
  {% endif %}
     </div>
 
-{#{% include 'TNEOperatorBundle:Default:footer.html.twig' %}#}
 {% render url('tne_operators_footer') %}
 
     <div id="design"></div>
