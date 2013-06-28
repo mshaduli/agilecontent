@@ -348,7 +348,7 @@ class CustomerController extends Controller
         $booking_data = $session->get('booking_data');
         unset($booking_data[$this->getRequest()->get('id')]);
         $session->set('booking_data',$booking_data);
-        return $this->redirect($this->generateUrl('booking_cart'));
+        return $this->redirect($this->generateUrl('booking_planner'));
 
     }
 
