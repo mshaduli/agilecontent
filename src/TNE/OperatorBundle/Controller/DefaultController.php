@@ -30,8 +30,44 @@ class DefaultController extends Controller
                     ->getOneOrNullResult();
 
 
-        return $this->render('TNEOperatorBundle:Default:header.html.twig', array('site' => $site, 'home_page' => $homePage, 'settings' => $menu->getSettings()));
+        return $this->render('TNEOperatorBundle:Default:header.desktop.html.twig', array('site' => $site, 'home_page' => $homePage, 'settings' => $menu->getSettings()));
     }
+
+    public function footerAction()
+    {
+
+        $host = $this->getRequest()->getHost();
+        $em =  $this->getDoctrine()->getManager();
+        $site = $em->getRepository('ApplicationSonataPageBundle:Site')->findOneBy(array('host' => $host));
+        $defaultPage = $em->getRepository('ApplicationSonataPageBundle:Page')->findOneBy(array('site' => $site, 'routeName' => '_page_internal_global'));
+
+        $linkedMedia = $em->createQueryBuilder()
+                    ->select('b')
+                    ->from('ApplicationSonataPageBundle:Block', 'b')
+                    ->where('b.page = :page')
+                    ->andWhere('b.type LIKE :block_type')
+                    ->setParameter('page', $defaultPage)
+                    ->setParameter('block_type', '%sonata.block.service.linkedmedia%')
+                    ->getQuery()
+                    ->getResult(Query::HYDRATE_ARRAY);
+
+        $media = array();
+        $result = array();
+        if($linkedMedia){
+            foreach($linkedMedia as $linkedMediaItem)
+            {
+                $settings = $linkedMediaItem['settings'];
+                if($settings['mediaId'])
+                {
+                    $linkedMediaItem['media'] = $em->getRepository('ApplicationSonataMediaBundle:Media')->find($settings['mediaId']);
+                    $result[] = $linkedMediaItem;
+                }
+            }
+        }
+
+        return $this->render('TNEOperatorBundle:Default:footer.html.twig', array('media' => $media, 'linkedMedias' => $result));
+    }
+
     public function searchAction()
     {
 
@@ -476,5 +512,13 @@ EOD;
         }
         return new JsonResponse($operators);
     }
-
+    
+    public function homepageEventsAction()
+    {           
+        $em = $this->get('doctrine.orm.entity_manager');
+        $events = $em->createQuery('SELECT e FROM TNEOperatorBundle:Event e WHERE e.destination = :city')->setParameter('city', "rutherglen")->getResult();                
+        
+        return $this->render('TNEOperatorBundle:Default:homepage_events.html.twig', array('events'=> $events));
+    }
+    
 }

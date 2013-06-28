@@ -13,37 +13,18 @@ file that was distributed with this source code.
 
 {% block block %}
 <link rel="stylesheet" href="{{ asset('/bundles/applicationsonatapage/sitemap/sitemapTree.css') }}" type="text/css" media="all">
-    {% if app.security.token and app.security.isGranted('ROLE_SONATA_ADMIN') %}
-        <div id="editMenu" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3 id="myModalLabel">Edit Menu</h3>
-            </div>
-            <div class="modal-body">
-
-
-
-
-
-
-            </div>
-            <div class="modal-footer">
-                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                <button class="btn btn-inverse" id="sync_menu">Save changes</button>
-            </div>
-
-
-        </div>
-
-    {% endif %}
                 {# Desktop Main Menu Starts #}
                 <ul id="desktopNav" class="inline nav clearfix hidden-phone">
                     {% if settings.content.items is defined %}
                         {% set menu = settings.content.items %}
                         {% include "ApplicationSonataPageBundle:Block:nav_item.desktop.html.twig" with {'links':menu } only %}
                     {% endif %}
-                    <li><a href="#" class="toggleDesktop btn" ><i class="icon-pencil"></i></a><a href="" class="btn btn-inverse" id="sync_menu"><i class="icon-refresh"></i></a></li>
-
+                    {% if app.security.token and app.security.isGranted('ROLE_SONATA_ADMIN') %}
+                        <li>
+                            <a href="#" class="toggleDesktop btn btn-inverse btn-menu" ><i class="icon-pencil icon-white"></i></a>
+                            <button class="btn btn-inverse btn-menu" id="sync_menu"><i class="icon-refresh icon-white"></i></button>
+                        </li>
+                    {% endif %}
                 </ul>
 
                 {# Desktop Main Menu Ends #}
@@ -64,6 +45,8 @@ file that was distributed with this source code.
                         {% set menu = settings.content.items %}
                         {% include "ApplicationSonataPageBundle:Block:sub_nav_item.desktop.html.twig" with {'links':menu } only %}
                     {% endif %}
+                    {% if app.security.token and app.security.isGranted('ROLE_SONATA_ADMIN') %}
+
                     <div id="navContent{{ settings.content.items|length }}" class="navContent">
                         <div class="span12 borderTop"></div>
 
@@ -104,6 +87,8 @@ file that was distributed with this source code.
                             </div>
                         </div>
                         <div class="span12 borderBottom"></div>
+
+                        {% endif %}
                     </div>
                 </div>
                 <!-- DESKTOP ENDS -->

@@ -3,9 +3,9 @@
         <div id="panel5" class="container"><!-- fifth panel -->
             <div class="row hidden-phone hidden-tablet"><!-- desktop footer -->
                 <div class="span6"><!-- logos -->
-                    {{ sonata_page_render_container('FooterLogo1', page) | sonata_page_render_custome_block([{'service':'sonata.block.service.linkedmedia','template':'footer'}]) }}
-                    {{ sonata_page_render_container('FooterLogo2', page) | sonata_page_render_custome_block([{'service':'sonata.block.service.linkedmedia','template':'footer'}]) }}
-                    {{ sonata_page_render_container('FooterLogo3', page) | sonata_page_render_custome_block([{'service':'sonata.block.service.linkedmedia','template':'footer'}]) }}
+                    {{ sonata_page_render_container('FooterLogo1', 'global') | sonata_page_render_custome_block([{'service':'sonata.block.service.linkedmedia','template':'footer'}]) }}
+                    {{ sonata_page_render_container('FooterLogo2', 'global') | sonata_page_render_custome_block([{'service':'sonata.block.service.linkedmedia','template':'footer'}]) }}
+                    {{ sonata_page_render_container('FooterLogo3', 'global') | sonata_page_render_custome_block([{'service':'sonata.block.service.linkedmedia','template':'footer'}]) }}
                 </div>
                 <div class="span4"><!-- TODO: needs wiring/caching from Twitter API -->
                     <h4>Twitter</h4>

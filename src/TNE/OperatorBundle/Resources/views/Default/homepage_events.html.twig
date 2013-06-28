@@ -1,0 +1,70 @@
+   <div class="row">
+            <div class="span12 clearfix">
+                
+                <div id="panel3" class="container-fluid">
+                    <h2>Events at Rutherglen</h2>
+                    <div class="row-fluid">
+                        <div class="carousel slide" id="myCarousel">
+                            <div class="carousel-inner">
+                              {% set cnt=0 %}
+                              {% for event in events %}
+                                    
+                                    {% if loop.index0 is divisibleby(3) %}
+                                    <div class="item
+                                        {% if cnt is sameas(0) %} active {% set cnt = 1 %}
+                                        {%  else %}
+                                            {% set cnt = cnt+3 %}
+                                        {% endif %}">
+                                    
+                                      <ul class="thumbnails">
+                                    
+                                    {% endif %}
+                                          <!-- IE8 may not like the hyperlinks below but I don't have time to test -->
+                                          
+                                            <li class="span4">
+                                              <a href="#">
+                                                  <!-- opacity controlled by CMS class can be opaque1-10 -->
+                                                  <div class="thumbnail opaque5">
+                                                      <img src="{% if event.singleMedia is null %} {{ '/bundles/tneoperator/img/noimg.jpg' }} {% else %} {% path event.singleMedia.mediaItem, 'big' %}   {% endif %}" alt="" />
+                                                  </div>
+                                                  <div class="caption">
+                                                      <dl>
+                                                          <dt>{{ event.name | slice(0, 20) }}</dt>
+                                                          <dd>{{ event.startDate | date('D d M Y') }}</dd>
+                                                          <dd class="hidden-phone">
+                                                              <p>
+                                                              {{ event.description | slice(0, 120)}}
+                                                              </p>
+                                                          </dd>
+                                                      </dl>
+                                                  </div>
+                                                  <div class="readMore">read more</div>
+                                              </a>
+                                          </li>
+                                         
+                               {% if loop.index0 is divisibleby(cnt) %}
+                                      {% if cnt is sameas(1) %}    
+                                          {% set cnt = 2 %}
+                                      {% else %}
+                                      </ul>
+                                </div>
+                                    {% endif %}
+                               {% endif %}
+                              {% endfor %}
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span12 myCarouselControl">
+                            <div class="centerControl">
+                                <a data-slide="prev" href="#myCarousel" class="left"><span class="entypo chevron-thin-left"></span></a>
+                                <strong>SEE MORE EVENTS</strong>
+                                <a data-slide="next" href="#myCarousel" class="right"><span class="entypo chevron-thin-right"></span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                </diV>
+            </div>
+        </div>
