@@ -810,7 +810,7 @@ input[type="file"] {
 }
 
 /* Cards */
-.main-bg-container{ background: url("../img/tabs-bg.jpg") top center no-repeat; margin-top: 120px; }
+/*.main-bg-container{ background: url("../img/tabs-bg.jpg") top center no-repeat; margin-top: 120px; }*/
 .main-bg-container.operator{background: url("../img/operator-bg.jpg") top center no-repeat; padding-top: 165px;}
 #main {
     padding-top: 6px;
