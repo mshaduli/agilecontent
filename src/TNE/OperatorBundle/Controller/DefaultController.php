@@ -523,4 +523,14 @@ EOD;
         return $this->render('TNEOperatorBundle:Default:homepage_events.html.twig', array('events'=> $events));
     }
     
+    public function eventDetailsAction($id)
+    {   
+        $em = $this->get('doctrine.orm.entity_manager');
+        $operator = $em->getRepository('TNEOperatorBundle:Event')->find($id);
+        $opObj = ($operator)?$operator:null;
+        return $this->render('TNEOperatorBundle:Default:eventDetails.html.twig', array(
+            'operator'     => $opObj
+        ));
+
+    }
 }

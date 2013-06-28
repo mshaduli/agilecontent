@@ -37,57 +37,29 @@ file that was distributed with this source code.
     {% endif %}
 
 
-    <div id="panelGeneral3" class="container solidBackground"><!-- first panel -->
+    <div id="panelGeneral3" class="container solidBackground" style="padding-bottom:50px;"><!-- first panel -->
         <div class="row">
             <div class="span12 clearfix">
-                <div id="sonata-media-block-gallery-{{ block.id }}" class="carousel slide">
-                    <!-- Carousel items -->
+                <div>
 
-                    <div class="carousel-inner">
-                        {% for element in elements %}
-                        {% if(loop.first) %}
-                        <div class="item active">
-                            {% else %}
-                            <div class="item">
-                                {% endif %}
-                                {% if element.type == 'image' %}
-                                    {% media element.media, settings.format %}
-                                {% elseif element.type == 'video' %}
-                                    {% media element.media, settings.format %}
-                                {% endif %}
-                                <div class="carousel-caption">{{ element.caption }}</div>
-                            </div>
+                    <div class="flexslider inner-slides" id="general-header-slider-{{ block.id }}">
+                        <ul class="slides">
+
+                            {% for element in elements %}
+                                <li>  <p class="flex-caption">{{ element.caption }}</p>
+                                    {% if element.type == 'image' %}
+                                        {% media element.media, settings.format %}
+                                    {% elseif element.type == 'video' %}
+                                        {% media element.media, settings.format %}
+                                    {% endif %}
+
+                                </li>
                             {% else %}
                                 {# no elements #}
                             {% endfor %}
-
-                    </div>
-                    <!-- Carousel nav -->
-
-                    {% if elements|length > 1 %}
-                        <div id="carControl">
-                            <a class="carousel-control left" href="#sonata-media-block-gallery-{{ block.id }}" data-slide="prev">
-                                <span class="entypo chevron-thin-right"></span>
-                            </a>
-                            <a class="carousel-control right" href="#sonata-media-block-gallery-{{ block.id }}" data-slide="next">
-                                <span class="entypo chevron-thin-left"></span>
-                            </a>
-                        </div>
-                    {% endif %}
-                    <ol class="carousel-indicators">
-                        <li data-target="#sonata-media-block-gallery-{{ block.id }}" data-slide-to="0" class="active"></li>
-                        <li data-target="#sonata-media-block-gallery-{{ block.id }}" data-slide-to="1"></li>
-                        <li data-target="#sonata-media-block-gallery-{{ block.id }}" data-slide-to="2"></li>
-                    </ol>
-
-                    {#<ul class="inline">#}
-                        {#<li data-tag="tag1">Tag 1</li>#}
-                        {#<li data-tag="tag2">Tag 2</li>#}
-                    {#</ul>#}
-
+                        </ul>
+                    </div><!-- end of flex slider -->
                 </div>
-
-            </div>
         </div>
     </div> <!-- /container -->
 </div>
@@ -99,12 +71,15 @@ file that was distributed with this source code.
         <div class="modal fade" id="myModal_{{ block.id }}" style="width:80%;height:80%;overflow: scroll; left: 30%; display: none;"></div> -->
         
     {% endif %}
-    
-<script>
-      $(document).ready(function(){
-        $('.carousel').carousel({
-          interval: 4000
+
+    <script type="text/javascript" charset="utf-8">
+        $(window).load(function() {
+            $('#general-header-slider-{{ block.id }}').flexslider({
+
+                animation:'slide'
+
+            });
+
         });
-      });
     </script>
 {% endblock %}
